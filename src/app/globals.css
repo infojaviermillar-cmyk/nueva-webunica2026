@@ -1,0 +1,233 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  /* Webunica Identity Palette - Purple & Vibrant Green */
+  --brand-purple: hsl(282 44% 47%);   /* Webunica Purple #8E44AD */
+  --brand-green: hsl(145 63% 49%);   /* Webunica Green #2ECC71 */
+  --brand-blue: hsl(199 89% 48%);    /* Complementary Shopify Blue */
+  --brand-soft: hsl(282 44% 97%);    /* Ultra Light Purple for backgrounds */
+
+  /* Light Mode (Webunica Premium) */
+  --background: hsl(0 0% 100%);      /* Pure White */
+  --foreground: hsl(282 44% 15%);    /* Deep Purple for text */
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(282 44% 15%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(282 44% 15%);
+  
+  --primary: hsl(282 44% 47%);       /* Purple Base */
+  --primary-foreground: hsl(0 0% 100%);
+  
+  --secondary: hsl(145 63% 49%);     /* Webunica Green */
+  --secondary-foreground: hsl(282 44% 15%);
+  
+  --muted: hsl(282 20% 98%);
+  --muted-foreground: hsl(282 10% 40%);
+  --accent: hsl(145 63% 96%);
+  --accent-foreground: hsl(282 44% 47%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(282 10% 90%);
+  --input: hsl(282 10% 90%);
+  --ring: hsl(282 44% 47%);
+}
+
+.dark {
+  /* Premium Dark Mode (Indigo accent) */
+  --background: hsl(240 76.5% 3.3%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(240 52.9% 6.7%);
+  --card-foreground: hsl(0 0% 100%);
+  --popover: hsl(240 56.5% 9%);
+  --popover-foreground: hsl(0 0% 100%);
+  
+  --primary: hsl(173.6 60% 56.9%); /* Swap to Coral for better visibility on dark */
+  --primary-foreground: hsl(0 0% 100%);
+  
+  --secondary: hsl(251.9 100% 26.7%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(240 43.3% 11.8%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
+  --accent: hsl(240 43.3% 11.8%);
+  --accent-foreground: hsl(0 0% 100%);
+  --border: hsl(240 35.5% 18.2%);
+  --input: hsl(240 35.5% 18.2%);
+  --ring: hsl(173.6 60% 56.9%);
+}
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-green: var(--brand-green);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-soft: var(--brand-soft);
+  
+  --radius-lg: 1.5rem;
+  --radius-md: 1rem;
+  --radius-sm: 0.5rem;
+}
+
+@layer base {
+  :root {
+    --announcement-height: 0px;
+  }
+  
+  body.has-announcement-bar {
+    --announcement-height: 50px;
+    padding-top: var(--announcement-height) !important;
+  }
+
+  @media (max-width: 767px) {
+    body.has-announcement-bar {
+      --announcement-height: 40px;
+    }
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased transition-colors duration-300;
+    line-height: 1.6;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(142, 68, 173, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(46, 204, 113, 0.05) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(52, 152, 219, 0.03) 0px, transparent 50%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Grain Texture (Impeccable Design) */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.04;
+    z-index: 9999;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight text-foreground font-bold;
+    line-height: 1.1;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, hsl(282 44% 47%) 0%, hsl(145 63% 49%) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-gradient {
+  background: linear-gradient(135deg, hsl(282 44% 47%) 0%, hsl(145 63% 49%) 50%, hsl(199 89% 48%) 100%);
+  background-size: 200% 200%;
+  animation: dynamic-gradient 10s ease infinite;
+}
+
+@keyframes dynamic-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.brand-glow {
+  box-shadow: 0 0 20px rgba(142, 68, 173, 0.15);
+}
+
+.glass {
+  @apply bg-background/60 backdrop-blur-xl border border-foreground/5;
+}
+
+.bg-grid-pattern {
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .glass {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Premium Form Styles */
+.form-label {
+  @apply text-base font-bold text-brand-indigo mb-2 block;
+}
+
+.form-input-premium {
+  @apply w-full bg-muted/40 border-border/60 h-16 rounded-2xl pr-6 pl-14 font-bold text-base transition-all focus:bg-background focus:ring-4 focus:ring-brand-indigo/10;
+}
+
+::placeholder {
+  @apply text-muted-foreground/60 font-medium;
+}
+
+.hero-bg-custom {
+  background-image: 
+    linear-gradient(120deg, rgba(253, 250, 243, 0.9) 0%, rgba(245, 243, 255, 0.9) 100%),
+    url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  background-size: cover;
+  background-position: center center;
+}
+
+/* Organic Leaf Decoration (Nature/Warmth) */
+.leaf-decor {
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  background-color: currentColor;
+}
+
+/* Scrollbar Hide Utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
