@@ -48,7 +48,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative px-6 pt-32 pb-20 lg:pt-48 lg:pb-32 bg-white">
         <FloatingShapes />
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-50 border border-violet-100 mb-8">

@@ -23,7 +23,19 @@ export default function FloatingShapes() {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 select-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 select-none">
+      {/* Línea Circular 1: Trazo fino superior */}
+      <div 
+        className="absolute -top-10 left-1/4 w-[400px] h-[400px] border border-violet-500/10 rounded-full will-change-transform"
+        style={{ transform: `translate3d(0, ${scrollY * 0.2}px, 0)` }}
+      />
+
+      {/* Línea Circular 2: Trazo fino inferior */}
+      <div 
+        className="absolute top-[60%] -right-20 w-[500px] h-[500px] border border-zinc-950/5 rounded-full bill-change-transform"
+        style={{ transform: `translate3d(0, ${scrollY * 0.1}px, 0)` }}
+      />
+
       {/* Esfera 1: Violeta Superior Izquierda (Lenta) */}
       <div 
         className="absolute -top-20 -left-20 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[120px] will-change-transform"
