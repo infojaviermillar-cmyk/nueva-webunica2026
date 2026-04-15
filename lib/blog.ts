@@ -1,5 +1,6 @@
-import { createClient } from '@/lib/supabase/server';
+import { supabase } from '@/lib/supabase/client';
 import { cache } from 'react';
+import { revalidatePath } from 'next/cache';
 
 export type BlogPost = {
   id: string;
@@ -32,7 +33,6 @@ export type BlogCategory = {
  * Obtiene todos los posts publicados
  */
 export const getPublishedPosts = cache(async () => {
-  const supabase = await createClient();
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*, category:blog_categories(name, slug)')
@@ -51,7 +51,6 @@ export const getPublishedPosts = cache(async () => {
  * Obtiene un post por su slug
  */
 export const getPostBySlug = cache(async (slug: string) => {
-  const supabase = await createClient();
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*, category:blog_categories(name, slug)')
@@ -70,7 +69,6 @@ export const getPostBySlug = cache(async (slug: string) => {
  * Obtiene todas las categorías
  */
 export const getCategories = cache(async () => {
-  const supabase = await createClient();
   const { data, error } = await supabase
     .from('blog_categories')
     .select('*')
@@ -88,7 +86,6 @@ export const getCategories = cache(async () => {
  * Obtiene posts por categoría
  */
 export const getPostsByCategory = cache(async (categorySlug: string) => {
-  const supabase = await createClient();
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*, category:blog_categories(name, slug)')

@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '@/lib/supabase/server';
+import { supabase } from '@/lib/supabase/client';
 import { revalidatePath } from 'next/cache';
 
 export async function saveBlogPost(postData: {
@@ -14,8 +14,6 @@ export async function saveBlogPost(postData: {
   status?: 'draft' | 'published';
   cover_image?: string;
 }) {
-  const supabase = await createClient();
-
   // 1. Verificar si el slug ya existe
   const { data: existing } = await supabase
     .from('blog_posts')
