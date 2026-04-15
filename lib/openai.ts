@@ -11,51 +11,74 @@ export type GeneratedPost = {
   content: string;
   seo_title: string;
   seo_description: string;
+  cover_image_alt: string;
+  cover_image_prompt: string; // Prompt used for DALL-E image generation
 };
 
 /**
- * Genera un artículo de blog SEO-optimizado basado en un tema/keywords
+ * Genera un artículo de blog SEO-optimizado con imagen de portada
  */
-export async function generateBlogPost(topic: string, keywords: string[]): Promise<GeneratedPost> {
+export async function generateBlogPost(topic: string, keywords: string[]): Promise<GeneratedPost & { cover_image: string }> {
   const prompt = `
-    Actúa como un experto en SEO y Redacción de Contenidos Técnicos para Webunica.cl, una agencia líder en desarrollo Shopify y Next.js en Chile.
+    Actúa como experto SEO y redactor técnico para Webunica.cl, agencia líder en Shopify y Next.js en Chile.
     
-    TEMA DEL ARTÍCULO: ${topic}
+    TEMA: ${topic}
     PALABRAS CLAVE: ${keywords.join(', ')}
     
-    INSTRUCCIONES:
-    1. Genera un artículo de blog de al menos 1000 palabras en formato HTML (solo etiquetas de contenido como <p>, <h2>, <h3>, <ul>, <li>, <strong>, <em>).
-    2. El tono debe ser profesional, experto y persuasivo (enfocado a conversión).
-    3. Asegura una densidad natural de las palabras clave.
-    4. Estructura el contenido con subtítulos (H2, H3) que incluyan variantes de las palabras clave.
-    5. Incluye una introducción atractiva y una conclusión con un Call to Action hacia los servicios de Webunica.
-    6. Genera también metadatos específicos para SEO.
+    REGLAS:
+    1. Artículo de mínimo 1000 palabras en HTML (solo <p>, <h2>, <h3>, <ul>, <li>, <strong>, <em>, <blockquote>).
+    2. Incluir al menos 3 subtítulos H2 con variantes de las words clave.
+    3. Tono profesional y persuasivo, orientado a conversión hacia Webunica.cl.
+    4. Intro atractiva + conclusión con CTA hacia servicios de Webunica.
+    5. Densidad natural de keywords (sin keyword stuffing).
     
-    RESPONDE ÚNICAMENTE EN FORMATO JSON con la siguiente estructura:
+    RESPONDE ÚNICAMENTE EN JSON:
     {
-      "title": "Título H1 atractivo",
-      "slug": "url-amigable-del-post",
-      "excerpt": "Resumen corto de 150 caracteres para la lista de blogs",
-      "content": "Contenido completo en HTML",
-      "seo_title": "Título SEO (máx 60 caracteres)",
-      "seo_description": "Meta descripción SEO (máx 160 caracteres)"
+      "title": "Título H1 atractivo con keyword principal",
+      "slug": "url-amigable-seo",
+      "excerpt": "Resumen de 150 chars máx para listing",
+      "content": "<p>HTML del artículo...</p>",
+      "seo_title": "Título SEO (máx 60 chars)",
+      "seo_description": "Meta descripción SEO (máx 160 chars) con keyword + CTA",
+      "cover_image_alt": "Alt descriptivo SEO para imagen (máx 120 chars)",
+      "cover_image_prompt": "Prompt en inglés para DALL-E 3: modern flat design illustration of [tema], Chilean tech startup, purple and green brand colors, clean background, no text"
     }
   `;
 
+  // 1. Generamos el texto del artículo
+  const textResponse = await openai.chat.completions.create({
+    model: 'gpt-4o',
+    messages: [{ role: 'user', content: prompt }],
+    response_format: { type: 'json_object' },
+    temperature: 0.7,
+  });
+
+  const textContent = textResponse.choices[0].message.content;
+  if (!textContent) throw new Error('No se generó contenido de texto');
+
+  const postData = JSON.parse(textContent) as GeneratedPost;
+
+  // 2. Generamos la imagen de portada con DALL-E 3
+  let cover_image = '';
   try {
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o', // Usamos el modelo más capaz para SEO
-      messages: [{ role: 'user', content: prompt }],
-      response_format: { type: 'json_object' },
-      temperature: 0.7,
+    const imageResponse = await openai.images.generate({
+      model: 'dall-e-3',
+      prompt: postData.cover_image_prompt || 
+        `Modern flat design illustration about "${topic}" for a web development agency in Chile. Purple #8B5CF6 and green #10B981 brand colors, minimalist, professional, no text in image.`,
+      n: 1,
+      size: '1792x1024', // Landscape para imagen de portada de blog
+      quality: 'standard',
     });
-
-    const content = response.choices[0].message.content;
-    if (!content) throw new Error('No se generó contenido');
-
-    return JSON.parse(content) as GeneratedPost;
-  } catch (error) {
-    console.error('Error in OpenAI generation:', error);
-    throw new Error('Fallo al generar el artículo. Verifica tu API Key.');
+    cover_image = imageResponse.data[0]?.url || '';
+  } catch (imgError) {
+    console.warn('[openai] DALL-E generation failed, using placeholder:', imgError);
+    // Fallback: imagen genérica de Unsplash con query relevante
+    const query = encodeURIComponent(keywords[0] || topic);
+    cover_image = `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80`;
   }
+
+  return {
+    ...postData,
+    cover_image,
+  };
 }

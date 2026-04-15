@@ -23,7 +23,7 @@ export function BlogCard({ post }: BlogCardProps) {
         {post.cover_image ? (
           <Image
             src={post.cover_image}
-            alt={post.title}
+            alt={post.cover_image_alt || post.seo_title || post.title}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-110"
           />

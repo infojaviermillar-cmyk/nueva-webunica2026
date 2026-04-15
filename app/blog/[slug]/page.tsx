@@ -95,7 +95,7 @@ export default async function PostPage({ params }: PostPageProps) {
           <div className="relative aspect-[21/9] rounded-[3rem] overflow-hidden shadow-2xl shadow-brand-purple/10 border-8 border-white">
             <Image
               src={post.cover_image}
-              alt={post.title}
+              alt={post.cover_image_alt || post.seo_title || post.title}
               fill
               className="object-cover"
               priority

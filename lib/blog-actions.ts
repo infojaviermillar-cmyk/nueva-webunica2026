@@ -10,11 +10,14 @@ export async function saveBlogPost(postData: {
   excerpt: string;
   seo_title: string;
   seo_description: string;
+  cover_image?: string;
+  cover_image_alt?: string;
   category_id?: string;
   status?: 'draft' | 'published';
-  cover_image?: string;
 }) {
-  // 1. Verificar si el slug ya existe
+  if (!supabase) throw new Error('Base de datos no disponible. Configura las variables NEXT_PUBLIC_SUPABASE_URL y NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+
+  // Verificar slug duplicado
   const { data: existing } = await supabase
     .from('blog_posts')
     .select('id')
@@ -22,30 +25,25 @@ export async function saveBlogPost(postData: {
     .maybeSingle();
 
   if (existing) {
-    // Si existe, le agregamos un timestamp para que sea único
     postData.slug = `${postData.slug}-${Date.now().toString().slice(-4)}`;
   }
 
-  // 2. Insertar el post
   const { data, error } = await supabase
     .from('blog_posts')
     .insert([
       {
         ...postData,
-        status: postData.status || 'published', // Por defecto publicado si viene de la IA
-        published_at: postData.status === 'published' || !postData.status ? new Date().toISOString() : null,
+        status: postData.status || 'published',
+        published_at: new Date().toISOString(),
       },
     ])
     .select()
     .single();
 
-  if (error) {
-    console.error('Error saving post:', error);
-    throw new Error(`Error al guardar: ${error.message}`);
-  }
+  if (error) throw new Error(`Error al guardar: ${error.message}`);
 
   revalidatePath('/blog');
   revalidatePath(`/blog/${data.slug}`);
-  
+
   return { success: true, post: data };
 }
