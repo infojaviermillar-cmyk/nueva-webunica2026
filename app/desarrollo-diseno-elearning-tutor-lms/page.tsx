@@ -1,144 +1,135 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
+import FAQSection from '@/components/sections/faq-section';
 
 export const metadata = {
-  title: 'Desarrollo de Plataformas E-learning Tutor LMS | Webunica',
-  description: 'Crea tu propia academia online con Tutor LMS. Diseñamos plataformas educativas profesionales para cursos, capacitaciones y universidades corporativas.',
-  keywords: 'tutor lms chile, plataforma e-learning, academia online profesionales, diseño web educativo, moodle alternativo',
+  title: 'Diseño y Desarrollo de Plataformas E-learning con Tutor LMS | Webunica',
+  description: 'Creamos academias online profesionales para expertos y empresas. Gestión de cursos, cuestionarios, certificados y venta automatizada con Tutor LMS y WordPress.',
+  keywords: 'crear academia online chile, desarrollo elearning tutor lms, plataforma venta cursos online, diseño web academias digitales',
 };
 
-export default function ELearningPage() {
+export default function ElearningPage() {
+  const elearningFaqs = [
+    {
+      question: "¿Qué funciones incluye el sistema de E-learning?",
+      answer: "Nuestras academias incluyen gestión completa de cursos, lecciones en video o texto, sistemas de cuestionarios (quizzes), entrega de certificados automáticos al terminar el curso y un panel de control para el profesor y el alumno."
+    },
+    {
+      question: "¿Puedo vender mis cursos de forma 100% automática?",
+      answer: "Sí. Integramos pasarelas de pago locales para que el alumno compre el curso y reciba sus accesos de forma instantánea, sin que tú tengas que intervenir manualmente en el proceso."
+    },
+    {
+      question: "¿Cuántos alumnos puede soportar la plataforma?",
+      answer: "Utilizamos arquitecturas optimizadas y servidores de alto rendimiento que permiten escalar desde unos pocos alumnos hasta miles de usuarios simultáneos sin pérdida de velocidad."
+    },
+    {
+      question: "¿Es compatible la academia con dispositivos móviles?",
+      answer: "Absolutamente. Los alumnos pueden estudiar desde su celular, tablet o computador con una interfaz adaptada (Responsive Design) que facilita el aprendizaje en cualquier lugar."
+    }
+  ];
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Desarrollo Academias Online Tutor LMS",
+    "name": "Desarrollo de Plataformas E-learning Tutor LMS",
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Webunica",
-      "image": "https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp"
+      "name": "Webunica"
     },
-    "description": "Plataformas educativas modernas y fáciles de usar para vender cursos online o capacitar personal.",
+    "description": "Creación de academias digitales personalizadas para la venta y gestión de formación online.",
     "areaServed": "CL"
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white font-sans antialiased">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Header />
       
-      <main className="pt-[25vh]">
-        {/* Hero Section */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-32">
-          <div className="flex flex-col items-center text-center mb-20 max-w-4xl mx-auto">
-            <span className="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wide text-indigo-600 uppercase bg-indigo-50 rounded-full">
-              Educación Digital del Siglo XXI
-            </span>
-            <h1 className="text-5xl lg:text-[5.5rem] font-extrabold tracking-tight text-zinc-900 leading-[1.0] mb-8">
-              Tu Conocimiento, <span className="text-indigo-600">Convertido en Academia</span>
-            </h1>
-            <p className="text-xl text-zinc-600 leading-relaxed max-w-2xl mx-auto mb-10">
-              Creamos plataformas LMS con Tutor LMS Pro que te permiten vender tus cursos de forma profesional, con certificados, exámenes e integraciones de pago locales.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
-              <Link
-                href="/cotizador-en-linea-desarrollo-web"
-                className="px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-center hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-100"
-              >
-                Solicitar Demostración
-              </Link>
-              <Link
-                href="/contacto-desarrollo-diseno-web"
-                className="px-8 py-4 bg-white border-2 border-zinc-100 text-zinc-900 rounded-2xl font-bold text-center hover:border-zinc-300 transition-all"
-              >
-                Ver Ejemplo en Vivo
-              </Link>
-            </div>
-          </div>
-          
-          <div className="relative max-w-6xl mx-auto">
-             <div className="absolute -inset-10 bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 rounded-[4rem] blur-3xl -z-10" />
-             <div className="rounded-[3rem] overflow-hidden border border-zinc-100 shadow-[0_20px_50px_rgba(79,70,229,0.15)]">
-               <Image 
-                src="/portfolio_elearning_premium_1776264477769.png"
-                alt="LMS Dashboard Showcase"
-                width={1200}
-                height={700}
-                className="w-full h-auto"
-               />
-             </div>
-          </div>
-        </section>
-
-        {/* Course Features */}
-        <section className="bg-zinc-900 py-32 text-white overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-              <div>
-                <h2 className="text-4xl lg:text-5xl font-bold mb-8 leading-tight">Potencia tus <br/><span className="text-indigo-400">cursos online</span></h2>
-                <ul className="space-y-6">
-                  {[
-                    'Generación automática de certificados con tu marca.',
-                    'Exámenes y cuestionarios avanzados para tus alumnos.',
-                    'Drip Content: libera contenido por goteo programado.',
-                    'Múltiples instructores y reportes de ganancias.',
-                    'Integración completa con Webpay y Mercado Pago.'
-                  ].map((text, i) => (
-                    <li key={i} className="flex gap-4 items-start">
-                      <div className="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center flex-shrink-0 mt-1">
-                        <span className="text-xs font-bold text-white">✓</span>
-                      </div>
-                      <p className="text-lg text-zinc-300">{text}</p>
-                    </li>
-                  ))}
-                </ul>
+      <main className="pt-32 pb-20">
+        {/* Creative Hero Section */}
+        <section className="max-w-7xl mx-auto px-6 py-20 lg:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-indigo-500 uppercase bg-indigo-50 rounded-full border border-indigo-100">
+                Lidera el Conocimiento Digital
+              </span>
+              <h1 className="text-6xl lg:text-[6rem] font-black tracking-tighter leading-[0.9] mb-10 text-zinc-900 uppercase">
+                TU ACADEMIA <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">SIN LÍMITES</span>
+              </h1>
+              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed font-light">
+                Diseñamos ecosistemas de aprendizaje de alta gama con **Tutor LMS**. Escala tu conocimiento y automatiza tus ingresos con una plataforma que ama a tus alumnos.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                 <a 
+                  href="https://calendly.com/javiermillar/reunion-webunica" 
+                  target="_blank"
+                  className="px-10 py-5 bg-indigo-600 text-white rounded-2xl font-bold text-center hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-200"
+                 >
+                    Consultoría de Lanzamiento
+                 </a>
               </div>
-              <div className="grid grid-cols-2 gap-6">
-                 <div className="space-y-6">
-                    <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl h-64 flex flex-col justify-end">
-                       <p className="text-4xl font-bold mb-2 text-indigo-400">+500</p>
-                       <p className="text-zinc-400">Alumnos concurrentes por plataforma</p>
-                    </div>
-                    <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl h-48 flex flex-col justify-end">
-                       <p className="text-4xl font-bold mb-2 text-indigo-400">100%</p>
-                       <p className="text-zinc-400">Autogestionable</p>
-                    </div>
-                 </div>
-                 <div className="space-y-6 pt-12">
-                    <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl h-48 flex flex-col justify-end">
-                       <p className="text-4xl font-bold mb-2 text-indigo-400">4K</p>
-                       <p className="text-zinc-400">Video Hosting seguro</p>
-                    </div>
-                    <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl h-64 flex flex-col justify-end">
-                       <p className="text-4xl font-bold mb-2 text-indigo-400">0%</p>
-                       <p className="text-zinc-400">Comisiones por ventas</p>
-                    </div>
-                 </div>
+            </div>
+            <div className="relative group">
+              <div className="absolute -inset-10 bg-indigo-50 rounded-full blur-[100px] -z-10" />
+              <div className="rounded-[3rem] overflow-hidden border border-zinc-100 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] bg-white p-4">
+                <Image 
+                  src="/portfolio_elearning_premium_1776264477769.png"
+                  alt="E-learning Platform Dashboard Showcase"
+                  width={800}
+                  height={800}
+                  className="w-full h-auto rounded-[2rem] transform group-hover:scale-105 transition-transform duration-1000"
+                />
               </div>
             </div>
           </div>
         </section>
 
-        {/* CTA */}
+        {/* Feature Highlights */}
+        <section className="bg-zinc-50 py-32 border-y border-zinc-100 px-6">
+           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { t: 'Video Streaming Pro', d: 'Integración con Vimeo o YouTube para una reproducción fluida sin distracciones.' },
+                { t: 'Certificados PRO', d: 'Generación automática de diplomas personalizados en PDF al finalizar los cursos.' },
+                { t: 'Múltiples Instructores', d: 'Permite que otros expertos suban sus cursos y compartan ingresos automáticamente.' },
+                { t: 'App Desktop & Mobile', d: 'Tus cursos disponibles en todos los dispositivos con una experiencia de app nativa.' }
+              ].map((f, i) => (
+                <div key={i} className="bg-white p-8 rounded-3xl border border-zinc-200 hover:border-indigo-300 transition-all group">
+                   <h3 className="text-lg font-bold mb-3 text-zinc-900">{f.t}</h3>
+                   <p className="text-zinc-500 text-sm leading-relaxed">{f.d}</p>
+                </div>
+              ))}
+           </div>
+        </section>
+
+        {/* FAQ Section */}
+        <div className="mt-20">
+          <FAQSection 
+            faqs={elearningFaqs}
+            title="Dudas sobre Academias Online"
+            description="Todo lo que necesitas saber antes de digitalizar tu conocimiento."
+            ctaTitle="¿Convertimos tu pasión en un negocio escalable?"
+            ctaDescription="Agenda una reunión para planificar la estructura de tu academia y el flujo de ventas automatizado."
+            ctaLabel="Agendar Consultoría E-learning"
+          />
+        </div>
+
+        {/* CTA Case Study */}
         <section className="py-32">
-           <div className="max-w-3xl mx-auto text-center px-6">
-              <h2 className="text-3xl lg:text-5xl font-bold text-zinc-900 mb-8">Empieza tu academia hoy mismo</h2>
-              <p className="text-xl text-zinc-600 mb-12">No pierdas más tiempo. Somos expertos en Tutor LMS y podemos montar tu plataforma en tiempo récord para que empieces a facturar tus conocimientos.</p>
-              <Link
-                href="/cotizador-en-linea-desarrollo-web"
-                className="inline-block px-12 py-6 bg-indigo-600 text-white rounded-2xl font-bold text-xl hover:bg-indigo-500 transition-all shadow-2xl shadow-indigo-200"
+           <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-5xl font-extrabold mb-10 text-zinc-900 tracking-tight">Tu conocimiento merece una <br/>Plataforma de Élite</h2>
+              <p className="text-xl text-zinc-500 mb-12 italic font-serif">No te conformes con soluciones de suscripción lentas. Construye tu propio activo comercial.</p>
+              <a 
+                href="https://calendly.com/javiermillar/reunion-webunica" 
+                target="_blank"
+                className="inline-block px-12 py-6 bg-indigo-600 text-white font-bold text-lg rounded-2xl hover:bg-indigo-700 transition-all shadow-2xl"
               >
-                Cotizar Proyecto Académico
-              </Link>
+                Solicitar Estructura de Academia
+              </a>
            </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }
