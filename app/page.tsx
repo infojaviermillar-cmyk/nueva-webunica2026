@@ -26,16 +26,16 @@ export default function Home() {
     <main className="min-h-screen font-sans antialiased text-zinc-900">
       {/* Hero Section */}
       <section className="relative px-6 pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full -z-10" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-violet-600/5 blur-[120px] rounded-full -z-10" />
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 mb-8">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-xs font-bold uppercase tracking-widest text-emerald-700">Digital Agency 2026</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-50 border border-violet-100 mb-8">
+                <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-widest text-violet-700">Digital Agency 2026</span>
               </div>
-              <h1 className="text-6xl lg:text-[7.5rem] font-black tracking-tighter leading-[0.85] mb-10 text-zinc-950">
-                INGENIERÍA <br/>DE <span className="text-emerald-500 font-serif italic lowercase font-light">Crecimiento</span>
+              <h1 className="text-6xl lg:text-[7.5rem] font-black tracking-tighter leading-[0.85] mb-10 text-zinc-950 uppercase">
+                INGENIERÍA <br/>DE <span className="text-violet-600 font-serif italic lowercase font-light">Crecimiento</span>
               </h1>
               <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed font-light text-pretty">
                 Llevamos tu presencia digital al estándar de las grandes ligas. Desarrollo Full-stack impulsado por **Next.js**, diseño boutique y estrategias SEO de alto impacto.
@@ -51,17 +51,17 @@ export default function Home() {
               </div>
             </div>
             <div className="lg:col-span-5 relative">
-              <div className="bg-emerald-50 rounded-[3rem] p-10 lg:p-14 relative group overflow-hidden">
+              <div className="bg-violet-50 rounded-[3rem] p-10 lg:p-14 relative group overflow-hidden">
                 <div className="flex justify-between items-center mb-10">
                   <div className="text-4xl">🚀</div>
-                  <div className="text-xs font-bold text-emerald-600 bg-emerald-100 px-4 py-1.5 rounded-full uppercase">High Performance</div>
+                  <div className="text-xs font-bold text-violet-600 bg-violet-200/50 px-4 py-1.5 rounded-full uppercase tracking-widest">High Performance</div>
                 </div>
                 <h3 className="text-3xl font-bold mb-6 text-zinc-900 leading-tight tracking-tight uppercase">Donde la velocidad se cruza con el negocio</h3>
                 <p className="text-zinc-500 font-light leading-relaxed mb-8">
                   No hacemos sitios web informativos. Construimos activos digitales escalables que cargan en menos de 1 segundo.
                 </p>
                 <div className="h-1.5 w-full bg-zinc-200 rounded-full overflow-hidden">
-                   <div className="h-full bg-emerald-500 w-[98%] group-hover:w-full transition-all duration-1000" />
+                   <div className="h-full bg-violet-600 w-[98%] group-hover:w-full transition-all duration-1000 shadow-[0_0_10px_rgba(139,92,246,0.5)]" />
                 </div>
                 <div className="flex justify-between mt-3 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
                    <span>Performance</span>
@@ -82,20 +82,20 @@ export default function Home() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Link href="/desarrollo-tiendas-shopify-chile" className="p-10 bg-white border border-zinc-100 rounded-[2.5rem] hover:border-emerald-300 transition-all group shadow-sm hover:shadow-xl">
-              <div className="w-16 h-16 bg-[#95bf47]/10 text-[#95bf47] rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform">🛍️</div>
+            <Link href="/desarrollo-tiendas-shopify-chile" className="p-10 bg-white border border-zinc-100 rounded-[2.5rem] hover:border-violet-300 transition-all group shadow-sm hover:shadow-xl">
+              <div className="w-16 h-16 bg-violet-50 text-violet-600 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform shadow-inner">🛍️</div>
               <h3 className="text-2xl font-bold mb-4">Experto Shopify</h3>
               <p className="text-zinc-500 font-light leading-relaxed">Diseño y optimización de e-commerce sobre la plataforma más potente del mundo.</p>
             </Link>
             
-            <Link href="/desarrollo-web-nextjs-saas-custom" className="p-10 bg-white border border-zinc-100 rounded-[2.5rem] hover:border-emerald-300 transition-all group shadow-sm hover:shadow-xl">
-               <div className="w-16 h-16 bg-blue-500/10 text-blue-500 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform">⚡</div>
+            <Link href="/desarrollo-web-nextjs-saas-custom" className="p-10 bg-white border border-zinc-100 rounded-[2.5rem] hover:border-violet-300 transition-all group shadow-sm hover:shadow-xl">
+               <div className="w-16 h-16 bg-violet-50 text-violet-600 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform shadow-inner">⚡</div>
                <h3 className="text-2xl font-bold mb-4">Next.js & SaaS</h3>
                <p className="text-zinc-500 font-light leading-relaxed">Software a medida y plataformas escalables con arquitectura Next.js Full-stack.</p>
             </Link>
 
-            <Link href="/diseno-themes-shopify-personalizados-adobe-xd" className="p-10 bg-white border border-zinc-100 rounded-[2.5rem] hover:border-emerald-300 transition-all group shadow-sm hover:shadow-xl">
-               <div className="w-16 h-16 bg-zinc-900/10 text-zinc-950 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform">🎨</div>
+            <Link href="/diseno-themes-shopify-personalizados-adobe-xd" className="p-10 bg-white border border-zinc-100 rounded-[2.5rem] hover:border-violet-300 transition-all group shadow-sm hover:shadow-xl">
+               <div className="w-16 h-16 bg-violet-50 text-violet-600 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform shadow-inner">🎨</div>
                <h3 className="text-2xl font-bold mb-4">Themes Shopify XD</h3>
                <p className="text-zinc-500 font-light leading-relaxed">Diseño boutique en Adobe XD transformado en temas Liquid 100% propietarios.</p>
             </Link>
@@ -116,7 +116,7 @@ export default function Home() {
       {/* Professional Call to Action */}
       <section className="py-32 px-6">
         <div className="max-w-5xl mx-auto bg-zinc-950 rounded-[4rem] p-12 lg:p-24 text-center text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 blur-[100px] rounded-full" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/10 blur-[100px] rounded-full" />
           <h2 className="text-4xl lg:text-7xl font-bold mb-10 tracking-tighter uppercase leading-[0.9]">
             Es hora de <br/><span className="text-zinc-400 italic font-serif lowercase font-light">Dominar</span> Google
           </h2>
@@ -126,7 +126,7 @@ export default function Home() {
           <a 
             href="https://calendly.com/javiermillar/reunion-webunica" 
             target="_blank"
-            className="inline-block px-12 py-6 bg-emerald-500 text-white font-bold text-lg rounded-2xl hover:bg-emerald-600 transition-all shadow-xl shadow-emerald-500/20"
+            className="inline-block px-12 py-6 bg-violet-600 text-white font-bold text-lg rounded-2xl hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/30"
           >
             Iniciar mi Transformación Digital
           </a>
