@@ -165,6 +165,10 @@ export default function Header() {
                 Portafolio
               </Link>
               
+              <Link href="/blog" className={`${textColor} ${hoverColor} font-bold transition-all text-xs uppercase tracking-widest`}>
+                Blog
+              </Link>
+              
               <Link href="/contacto" className={`${textColor} ${hoverColor} font-bold transition-all text-xs uppercase tracking-widest`}>
                 Contacto
               </Link>
@@ -209,6 +213,7 @@ export default function Header() {
               </div>
             </div>
             <Link href="/portafolio" className="text-4xl font-black text-white uppercase tracking-tighter hover:text-violet-500 transition-colors">Portafolio</Link>
+            <Link href="/blog" className="text-4xl font-black text-white uppercase tracking-tighter hover:text-violet-500 transition-colors">Blog</Link>
             <Link href="/contacto" className="text-4xl font-black text-white uppercase tracking-tighter hover:text-violet-500 transition-colors">Contacto</Link>
           </nav>
 
