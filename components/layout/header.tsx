@@ -68,6 +68,10 @@ export default function Header() {
                     <div className="w-2 h-2 rounded-full bg-[#95bf47]"></div>
                     Tiendas Shopify
                   </Link>
+                  <Link href="/diseno-themes-shopify-personalizados-adobe-xd" className="px-6 py-4 text-sm font-bold text-zinc-700 hover:bg-zinc-50 hover:text-black transition-colors flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-zinc-400"></div>
+                    Shopify Themes (XD Design)
+                  </Link>
                   <Link href="/desarrollo-tienda-en-linea-woocommerce" className="px-6 py-4 text-sm font-bold text-zinc-700 hover:bg-purple-100/50 hover:text-purple-900 transition-colors flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-purple-500"></div>
                     WooCommerce Empresas

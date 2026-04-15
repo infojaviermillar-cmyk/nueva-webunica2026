@@ -50,6 +50,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/diseno-themes-shopify-personalizados-adobe-xd" className="text-sm text-zinc-400 hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-zinc-300 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 pb-1 inline-block">
+                  Diseño Shopify Adobe XD
+                </Link>
+              </li>
+              <li>
                 <Link href="/desarrollo-paginas-web-pymes-chile" className="text-sm text-zinc-400 hover:text-white transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-zinc-300 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 pb-1 inline-block">
                   Páginas Web PYMES
                 </Link>
