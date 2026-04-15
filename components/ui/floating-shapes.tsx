@@ -23,7 +23,7 @@ export default function FloatingShapes() {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 select-none">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 select-none">
       {/* Línea Circular 1: Trazo fino superior */}
       <div 
         className="absolute -top-10 left-1/4 w-[400px] h-[400px] border border-violet-500/10 rounded-full will-change-transform"

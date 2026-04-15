@@ -3,6 +3,7 @@ import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import FloatingShapes from '@/components/ui/floating-shapes';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -41,7 +42,8 @@ export default function RootLayout({
       lang="es"
       className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
     >
-      <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900">
+      <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
+        <FloatingShapes />
         <Header />
         <div className="flex-grow">
           {children}
