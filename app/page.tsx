@@ -22,8 +22,28 @@ export default function Home() {
     }
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Webunica",
+    "url": "https://webunica.cl",
+    "logo": "https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp",
+    "description": "Agencia de ingeniería web y expertos en Shopify en Chile. Especialistas en Next.js, SaaS y SEO Técnico.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "CL"
+    },
+    "sameAs": [
+      // Añadir redes sociales si las tienes
+    ]
+  };
+
   return (
     <main className="min-h-screen font-sans antialiased text-zinc-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero Section */}
       <section className="relative px-6 pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-violet-600/5 blur-[120px] rounded-full -z-10" />
@@ -62,17 +82,17 @@ export default function Home() {
               <div className="bg-violet-50 rounded-[3rem] p-10 lg:p-14 relative group overflow-hidden">
                 <div className="flex justify-between items-center mb-10">
                   <div className="text-4xl">🚀</div>
-                  <div className="text-xs font-bold text-violet-600 bg-violet-200/50 px-4 py-1.5 rounded-full uppercase tracking-widest">High Performance</div>
+                  <div className="text-xs font-bold text-violet-600 bg-violet-200/50 px-4 py-1.5 rounded-full uppercase tracking-widest">SEO Técnico Avanzado</div>
                 </div>
-                <h3 className="text-3xl font-bold mb-6 text-zinc-900 leading-tight tracking-tight uppercase">Donde la velocidad se cruza con el negocio</h3>
+                <h2 className="text-2xl font-black mb-6 text-zinc-900 leading-tight tracking-tight uppercase">Donde la velocidad impulsa los resultados</h2>
                 <p className="text-zinc-500 font-light leading-relaxed mb-8">
-                  No hacemos sitios web informativos. Construimos activos digitales escalables que cargan en menos de 1 segundo.
+                  No hacemos sitios web informativos. Construimos activos digitales escalables que cargan en menos de 1 segundo para un posicionamiento imbatible.
                 </p>
                 <div className="h-1.5 w-full bg-zinc-200 rounded-full overflow-hidden">
                    <div className="h-full bg-violet-600 w-[98%] group-hover:w-full transition-all duration-1000 shadow-[0_0_10px_rgba(139,92,246,0.5)]" />
                 </div>
                 <div className="flex justify-between mt-3 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                   <span>Performance</span>
+                   <span>Performance Lighthouse</span>
                    <span>98%</span>
                 </div>
               </div>
@@ -86,26 +106,26 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-end mb-20">
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-zinc-950 uppercase leading-none">
-              Soluciones <br/>de <span className="text-zinc-400">Élite</span>
+              Ingeniería <br/>Estratégica <span className="text-zinc-400">Full-Stack</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Link href="/desarrollo-tiendas-shopify-chile" className="p-10 bg-white border border-zinc-100 rounded-[2.5rem] hover:border-violet-300 transition-all group shadow-sm hover:shadow-xl">
               <div className="w-16 h-16 bg-violet-50 text-violet-600 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform shadow-inner">🛍️</div>
-              <h3 className="text-2xl font-bold mb-4">Experto Shopify</h3>
-              <p className="text-zinc-500 font-light leading-relaxed">Diseño y optimización de e-commerce sobre la plataforma más potente del mundo.</p>
+              <h3 className="text-2xl font-bold mb-4">Experto Shopify Chile</h3>
+              <p className="text-zinc-500 font-light leading-relaxed">Diseño y optimización de e-commerce sobre la plataforma más potente del mundo para marcas que escalan.</p>
             </Link>
             
             <Link href="/desarrollo-web-nextjs-saas-custom" className="p-10 bg-white border border-zinc-100 rounded-[2.5rem] hover:border-violet-300 transition-all group shadow-sm hover:shadow-xl">
                <div className="w-16 h-16 bg-violet-50 text-violet-600 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform shadow-inner">⚡</div>
-               <h3 className="text-2xl font-bold mb-4">Next.js & SaaS</h3>
-               <p className="text-zinc-500 font-light leading-relaxed">Software a medida y plataformas escalables con arquitectura Next.js Full-stack.</p>
+               <h3 className="text-2xl font-bold mb-4">Plataformas SaaS</h3>
+               <p className="text-zinc-500 font-light leading-relaxed">Software a medida y plataformas escalables con arquitectura Next.js y Supabase para alto tráfico.</p>
             </Link>
 
             <Link href="/diseno-themes-shopify-personalizados-adobe-xd" className="p-10 bg-white border border-zinc-100 rounded-[2.5rem] hover:border-violet-300 transition-all group shadow-sm hover:shadow-xl">
                <div className="w-16 h-16 bg-violet-50 text-violet-600 rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform shadow-inner">🎨</div>
-               <h3 className="text-2xl font-bold mb-4">Themes Shopify XD</h3>
-               <p className="text-zinc-500 font-light leading-relaxed">Diseño boutique en Adobe XD transformado en temas Liquid 100% propietarios.</p>
+               <h3 className="text-2xl font-bold mb-4">Diseño Web Boutique</h3>
+               <p className="text-zinc-500 font-light leading-relaxed">Interfaces diseñadas en Adobe XD transformadas en activos digitales 100% propietarios y veloces.</p>
             </Link>
           </div>
         </div>
@@ -114,11 +134,11 @@ export default function Home() {
       {/* FAQ Section Integrated */}
       <FAQSection 
         faqs={homeFaqs}
-        title="¿Por qué Webunica?"
-        description="Entiende por qué somos la opción preferida de las marcas que buscan dominio digital."
+        title="Ingeniería Web de Clase Mundial"
+        description="Entiende por qué somos la opción preferida de las marcas que buscan dominio digital y performance extrema."
         ctaTitle="¿Escalamos tu negocio?"
-        ctaDescription="Agenda una reunión conmigo para conocer tu proyecto y trazar el mapa de éxito digital."
-        ctaLabel="Agendar mi Reunión Inicial"
+        ctaDescription="Agenda una reunión técnica para conocer tu proyecto y trazar el mapa de éxito digital de tu marca."
+        ctaLabel="Agendar Consultoría Gratuita"
       />
 
       {/* Professional Call to Action */}
@@ -126,10 +146,10 @@ export default function Home() {
         <div className="max-w-5xl mx-auto bg-zinc-950 rounded-[4rem] p-12 lg:p-24 text-center text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/10 blur-[100px] rounded-full" />
           <h2 className="text-4xl lg:text-7xl font-bold mb-10 tracking-tighter uppercase leading-[0.9]">
-            Es hora de <br/><span className="text-zinc-400 italic font-serif lowercase font-light">Dominar</span> Google
+            Tu éxito en Google <br/><span className="text-zinc-400 italic font-serif lowercase font-light">empieza</span> ahora
           </h2>
           <p className="text-xl text-zinc-400 mb-12 max-w-lg mx-auto font-light leading-relaxed">
-            No pierdas más tiempo con sitios que nadie ve. Construyamos tu activo digital hoy.
+            Deja de perder tiempo con sitios que nadie ve. Construyamos tu activo digital hoy y domina tu industria.
           </p>
           <a 
             href="https://calendly.com/javiermillar/reunion-webunica" 

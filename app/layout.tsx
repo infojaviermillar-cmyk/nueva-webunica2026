@@ -15,13 +15,14 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Desarrollo Diseño Páginas Web Empresas',
-  description: 'Desarrollo Diseño Páginas Sitios Web Empresas, Tiendas en Línea, Ecommerce, Info +56984410379, Puerto Montt, Temuco, Concepción, Santiago',
+  title: 'Webunica | Agencia de Ingeniería Web y Expertos Shopify en Chile',
+  description: 'Agencia boutique de ingeniería web en Chile. Especialistas en desarrollo Next.js, plataformas SaaS escalables y optimización avanzada de tiendas Shopify para maximizar el ROI.',
+  keywords: 'agencia diseño web chile, desarrollo nextjs chile, expertos shopify chile, saas development, seo tecnico avanzado, webunica',
   openGraph: {
-    title: 'Desarrollo Diseño Páginas Web Empresas',
-    description: 'Desarrollo Diseño Páginas Sitios Web Empresas, Tiendas en Línea, Ecommerce, Info +56984410379, Puerto Montt, Temuco, Concepción, Santiago',
+    title: 'Webunica | Agencia de Ingeniería Web de Élite',
+    description: 'Expertos en desarrollo Next.js, SaaS y E-commerce Shopify de alto rendimiento en Chile.',
     url: 'https://webunica.cl',
-    siteName: 'WebUnica',
+    siteName: 'Webunica',
     locale: 'es_CL',
     type: 'website',
   },
