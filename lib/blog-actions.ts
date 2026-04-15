@@ -37,7 +37,7 @@ export async function saveBlogPost(postData: {
 
   // Verificar si el slug ya existe
   const { data: existing, error: existError } = await supabase
-    .from('blog_posts')
+    .from('webunica_blog_posts')
     .select('id')
     .eq('slug', insertData.slug)
     .maybeSingle();
@@ -51,7 +51,7 @@ export async function saveBlogPost(postData: {
   }
 
   const { data, error } = await supabase
-    .from('blog_posts')
+    .from('webunica_blog_posts')
     .insert([insertData])
     .select()
     .single();

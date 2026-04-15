@@ -35,8 +35,8 @@ export async function getPublishedPosts(): Promise<BlogPost[]> {
   if (!supabase) return [];
   try {
     const { data, error } = await supabase
-      .from('blog_posts')
-      .select('*, category:blog_categories(name, slug)')
+      .from('webunica_blog_posts')
+      .select('*, category:webunica_blog_categories(name, slug)')
       .eq('status', 'published')
       .order('published_at', { ascending: false });
 
@@ -55,8 +55,8 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
   if (!supabase) return null;
   try {
     const { data, error } = await supabase
-      .from('blog_posts')
-      .select('*, category:blog_categories(name, slug)')
+      .from('webunica_blog_posts')
+      .select('*, category:webunica_blog_categories(name, slug)')
       .eq('slug', slug)
       .maybeSingle();
 
@@ -75,7 +75,7 @@ export async function getCategories(): Promise<BlogCategory[]> {
   if (!supabase) return [];
   try {
     const { data, error } = await supabase
-      .from('blog_categories')
+      .from('webunica_blog_categories')
       .select('*')
       .order('name', { ascending: true });
 
@@ -94,8 +94,8 @@ export async function getPostsByCategory(categorySlug: string): Promise<BlogPost
   if (!supabase) return [];
   try {
     const { data, error } = await supabase
-      .from('blog_posts')
-      .select('*, category:blog_categories(name, slug)')
+      .from('webunica_blog_posts')
+      .select('*, category:webunica_blog_categories(name, slug)')
       .eq('status', 'published')
       .order('published_at', { ascending: false });
 
