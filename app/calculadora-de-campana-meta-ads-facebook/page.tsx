@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import MetaAdsCalculator from '@/components/calculators/meta-ads-calculator';
+import MetaAdsCalculator from '@/components/sections/meta-ads-calculator';
 import FAQSection from '@/components/sections/faq-section';
 
 export const metadata = {
