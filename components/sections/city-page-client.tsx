@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import ContactModal from '@/components/ui/contact-modal';
 import Link from 'next/link';
+import FloatingShapes from '@/components/ui/floating-shapes';
 
 interface CityPageClientProps {
   data: {
@@ -16,7 +17,7 @@ export default function CityPageClient({ data }: CityPageClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <>
+    <div className="relative overflow-hidden">
       <ContactModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
@@ -25,7 +26,7 @@ export default function CityPageClient({ data }: CityPageClientProps) {
 
       {/* White Corporate Hero */}
       <section className="relative px-6 py-20 lg:py-40 bg-zinc-50 border-b border-zinc-100">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-violet-600/5 blur-[120px] rounded-full" />
+        <FloatingShapes />
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-100 border border-violet-200 mb-8">
             <span className="w-2 h-2 rounded-full bg-violet-600 animate-pulse" />

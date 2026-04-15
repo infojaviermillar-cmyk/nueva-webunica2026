@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
+import FloatingShapes from '@/components/ui/floating-shapes';
 
 export default function Home() {
   const homeFaqs = [
@@ -39,14 +40,14 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen font-sans antialiased text-zinc-900">
+    <main className="min-h-screen font-sans antialiased text-zinc-900 overflow-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* Hero Section */}
-      <section className="relative px-6 pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-violet-600/5 blur-[120px] rounded-full -z-10" />
+      <section className="relative px-6 pt-32 pb-20 lg:pt-48 lg:pb-32 bg-white">
+        <FloatingShapes />
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7">
