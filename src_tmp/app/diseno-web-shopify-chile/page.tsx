@@ -1,1 +1,0 @@
-export default function Page() { return <main className="p-24"><h1 className="text-3xl font-bold uppercase">diseno web shopify chile</h1></main> }

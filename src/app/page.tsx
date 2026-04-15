@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function Home() {
+export default function Page() {
   return (
     <main className="flex min-h-screen flex-col bg-white">
       {/* Hero Section Container */}
