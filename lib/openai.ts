@@ -1,8 +1,15 @@
 import { OpenAI } from 'openai';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Inicializar perezosamente para no romper el build de Next.js si la variable no está en el entorno local
+let openaiInstance: OpenAI | null = null;
+function getOpenAI() {
+  if (!openaiInstance) {
+    openaiInstance = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY || 'dummy_key_for_build',
+    });
+  }
+  return openaiInstance;
+}
 
 export type GeneratedPost = {
   title: string;
@@ -45,6 +52,7 @@ export async function generateBlogPost(topic: string, keywords: string[]): Promi
     }
   `;
 
+  const openai = getOpenAI();
   // 1. Generamos el texto del artículo
   const textResponse = await openai.chat.completions.create({
     model: 'gpt-4o',
@@ -61,6 +69,7 @@ export async function generateBlogPost(topic: string, keywords: string[]): Promi
   // 2. Generamos la imagen de portada con DALL-E 3
   let cover_image = '';
   try {
+    const openai = getOpenAI();
     const imageResponse = await openai.images.generate({
       model: 'dall-e-3',
       prompt: postData.cover_image_prompt || 
