@@ -57,7 +57,7 @@ export default function SaaSPage() {
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">Next.js + Supabase + Vercel Stack</span>
               </div>
-              <h1 className="text-6xl lg:text-[6.5rem] font-black tracking-tighter leading-[0.9] mb-10 text-white">
+              <h1 className="text-4xl lg:text-[70px] font-black tracking-tighter leading-[0.9] mb-10 text-white uppercase">
                 TRANSFORMAMOS <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">CÓDIGO EN NEGOCIO</span>
               </h1>
               <p className="text-xl text-zinc-400 mb-12 max-w-xl leading-relaxed text-pretty">

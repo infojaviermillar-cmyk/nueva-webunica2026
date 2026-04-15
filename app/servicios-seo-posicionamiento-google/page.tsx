@@ -56,7 +56,7 @@ export default function SeoServicePage() {
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-widest text-emerald-400">Data-Driven Growth</span>
               </div>
-              <h1 className="text-6xl lg:text-8xl font-black tracking-tighter leading-[0.85] mb-10">
+              <h1 className="text-4xl lg:text-[70px] font-black tracking-tighter leading-[0.9] mb-10">
                 DOMINA <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 uppercase">Google</span>
               </h1>
               <p className="text-xl text-zinc-400 mb-12 max-w-xl leading-relaxed font-light">

@@ -34,7 +34,7 @@ export default function Home() {
                 <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-widest text-violet-700">Digital Agency 2026</span>
               </div>
-              <h1 className="text-6xl lg:text-[7.5rem] font-black tracking-tighter leading-[0.85] mb-10 text-zinc-950 uppercase">
+              <h1 className="text-4xl lg:text-[70px] font-black tracking-tighter leading-[0.9] mb-10 text-zinc-950 uppercase">
                 INGENIERÍA <br/>DE <span className="text-violet-600 font-serif italic lowercase font-light">Crecimiento</span>
               </h1>
               <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed font-light text-pretty">

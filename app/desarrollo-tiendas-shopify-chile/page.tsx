@@ -55,8 +55,8 @@ export default function ShopifyPage() {
               <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-[#95bf47] uppercase bg-[#95bf47]/10 rounded-full border border-[#95bf47]/20">
                 Shopify Expert Solutions
               </span>
-              <h1 className="text-6xl lg:text-[7.5rem] font-black tracking-tighter leading-[0.85] mb-10">
-                ESCALA TU <br/><span className="text-[#95bf47] uppercase">Ecommerce</span>
+              <h1 className="text-4xl lg:text-[70px] font-black tracking-tighter leading-[0.9] mb-10 uppercase">
+                ESCALA TU <br/><span className="text-[#95bf47]">Ecommerce</span>
               </h1>
               <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty font-light">
                 No construimos solo tiendas rápidas; creamos ecosistemas de venta automatizados en **Shopify** diseñados para maximizar tu retorno de inversión desde el primer día.
