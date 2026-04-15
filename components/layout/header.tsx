@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export function Header() {
+export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 

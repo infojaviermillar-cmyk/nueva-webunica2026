@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export function Footer() {
+export default function Footer() {
   return (
     <footer className="bg-zinc-950 border-t border-zinc-800/50 pt-16 pb-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
