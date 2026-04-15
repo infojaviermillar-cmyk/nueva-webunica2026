@@ -127,6 +127,6 @@ export default function CityPageClient({ data }: CityPageClientProps) {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }
