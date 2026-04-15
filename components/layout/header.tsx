@@ -60,6 +60,10 @@ export default function Header() {
               
               <div className="absolute top-[80%] left-1/2 -translate-x-1/2 mt-2 w-72 bg-white border border-zinc-100 rounded-3xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform group-hover:translate-y-2">
                 <div className="flex flex-col py-3">
+                  <Link href="/desarrollo-web-nextjs-saas-custom" className="px-6 py-4 text-sm font-bold text-zinc-700 bg-zinc-50 hover:bg-zinc-100 hover:text-black transition-colors flex items-center gap-3 border-b border-zinc-100">
+                    <div className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></div>
+                    Next.js & SaaS a Medida
+                  </Link>
                   <Link href="/desarrollo-tiendas-shopify-chile" className="px-6 py-4 text-sm font-bold text-zinc-700 hover:bg-[#a1fcd8]/30 hover:text-teal-900 transition-colors flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-[#95bf47]"></div>
                     Tiendas Shopify
