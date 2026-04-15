@@ -27,7 +27,8 @@ export default function Header() {
     '/desarrollo-web-nextjs-saas-custom',
     '/portafolio',
     '/servicios-seo-posicionamiento-google',
-    '/calculadora-de-campana-meta-ads-facebook'
+    '/calculadora-de-campana-meta-ads-facebook',
+    '/tienda-dropshipping-shopify-dropi'
   ];
 
   // Páginas con Hero CLARO (Texto Violeta)
@@ -39,8 +40,7 @@ export default function Header() {
     '/desarrollo-paginas-web-pymes-chile',
     '/diseno-themes-shopify-personalizados-adobe-xd',
     '/diseno-paginas-web-inmobiliaria',
-    '/desarrollo-pagina-web-funeraria',
-    '/tienda-dropshipping-shopify-dropi'
+    '/desarrollo-pagina-web-funeraria'
   ];
 
   const isDarkHero = darkPages.includes(pathname);
