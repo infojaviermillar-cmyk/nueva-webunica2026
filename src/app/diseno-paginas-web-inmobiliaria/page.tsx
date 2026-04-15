@@ -1,0 +1,1 @@
+export default function Page() { return <main className="p-24"><h1 className="text-3xl font-bold uppercase">diseno paginas web inmobiliaria</h1></main> }
