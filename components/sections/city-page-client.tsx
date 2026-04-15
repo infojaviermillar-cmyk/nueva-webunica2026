@@ -95,14 +95,37 @@ export default function CityPageClient({ data }: CityPageClientProps) {
           </div>
         </div>
 
-        <div className="mt-20 pt-20 border-t border-zinc-100 text-center">
-          <h3 className="text-2xl font-black uppercase tracking-tighter mb-8">¿Listo para dominar Google en {data.name}?</h3>
-          <button 
-              onClick={() => setIsModalOpen(true)}
-              className="px-12 py-6 bg-zinc-950 text-white rounded-[2rem] font-black uppercase tracking-widest text-xs hover:bg-zinc-800 transition-all shadow-2xl"
-            >
-              Iniciar Proyecto Gratis
-            </button>
+        <div className="mt-20 pt-20 border-t border-zinc-100">
+          <h3 className="text-xl font-black uppercase tracking-tighter mb-10 text-center">Nuestra Red Regional</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+             {[
+                { n: 'Santiago', s: 'santiago' },
+                { n: 'Concepción', s: 'concepcion' },
+                { n: 'Temuco', s: 'temuco' },
+                { n: 'Valdivia', s: 'valdivia' },
+                { n: 'Puerto Montt', s: 'puerto-montt' },
+                { n: 'Antofagasta', s: 'antofagasta' },
+                { n: 'La Serena', s: 'la-serena' },
+                { n: 'Punta Arenas', s: 'punta-arenas' },
+             ].filter(c => c.n !== data.name).slice(0, 4).map((c) => (
+                <Link 
+                  key={c.s} 
+                  href={`/diseno-paginas-web/${c.s}`}
+                  className="text-xs text-center py-3 border border-zinc-100 rounded-xl hover:bg-zinc-50 transition-all font-bold text-zinc-400 hover:text-violet-600"
+                >
+                  {c.n}
+                </Link>
+             ))}
+          </div>
+          <div className="text-center mt-12">
+            <h3 className="text-2xl font-black uppercase tracking-tighter mb-8">¿Listo para dominar Google en {data.name}?</h3>
+            <button 
+                onClick={() => setIsModalOpen(true)}
+                className="px-12 py-6 bg-zinc-950 text-white rounded-[2rem] font-black uppercase tracking-widest text-xs hover:bg-zinc-800 transition-all shadow-2xl"
+              >
+                Iniciar Proyecto Gratis
+              </button>
+          </div>
         </div>
       </section>
     </>

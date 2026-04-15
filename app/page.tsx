@@ -131,6 +131,45 @@ export default function Home() {
         </div>
       </section>
 
+      {/* National Coverage Hub */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-zinc-950 uppercase mb-4">
+              Presencia <span className="text-violet-600">Nacional</span>
+            </h2>
+            <p className="text-zinc-500 font-light max-w-2xl mx-auto">
+              Ingeniería web de élite disponible desde Arica hasta Punta Arenas. Encuentra tu solución local.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {[
+              { n: 'Santiago', s: 'santiago' },
+              { n: 'Concepción', s: 'concepcion' },
+              { n: 'Temuco', s: 'temuco' },
+              { n: 'Valdivia', s: 'valdivia' },
+              { n: 'Puerto Montt', s: 'puerto-montt' },
+              { n: 'Antofagasta', s: 'antofagasta' },
+              { n: 'Iquique', s: 'iquique' },
+              { n: 'La Serena', s: 'la-serena' },
+              { n: 'Rancagua', s: 'rancagua' },
+              { n: 'Osorno', s: 'osorno' },
+              { n: 'Ancud', s: 'ancud' },
+              { n: 'Punta Arenas', s: 'punta-arenas' },
+            ].map((c) => (
+              <Link 
+                key={c.s} 
+                href={`/diseno-paginas-web/${c.s}`}
+                className="p-4 border border-zinc-100 rounded-2xl text-center hover:border-violet-200 hover:bg-violet-50/50 transition-all group"
+              >
+                <span className="text-[10px] font-bold text-zinc-400 group-hover:text-violet-600 uppercase tracking-widest block mb-1">Diseño Web</span>
+                <span className="text-sm font-bold text-zinc-900">{c.n}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section Integrated */}
       <FAQSection 
         faqs={homeFaqs}
