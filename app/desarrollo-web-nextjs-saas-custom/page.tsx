@@ -1,3 +1,6 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
 
