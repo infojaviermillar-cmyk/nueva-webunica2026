@@ -65,7 +65,7 @@ export default function Home() {
               <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed font-light text-pretty">
                 Llevamos tu presencia digital al estándar de las grandes ligas. Desarrollo Full-stack impulsado por **Next.js**, diseño boutique y estrategias SEO de alto impacto.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <div className="flex flex-col sm:flex-row gap-4 mt-8 relative z-20">
                 <button 
                   onClick={() => openModal()}
                   className="px-10 py-6 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-[0.15em] text-[10px] flex items-center justify-center gap-3 hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/25 active:scale-95 group/btn"

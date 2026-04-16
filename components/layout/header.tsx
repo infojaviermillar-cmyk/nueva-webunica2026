@@ -190,11 +190,14 @@ export default function Header() {
               </a>
 
               <button 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`${textColor} lg:hidden relative z-[60] h-12 w-12 flex items-center justify-center rounded-full hover:bg-black/5 transition-all`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMobileMenuOpen(!isMobileMenuOpen);
+                }}
+                className={`${textColor} lg:hidden relative z-[100] h-12 w-12 flex items-center justify-center rounded-full hover:bg-black/5 transition-all outline-none`}
                 aria-label="Menu"
               >
-                <div className="relative w-6 h-5">
+                <div className="relative w-6 h-5 pointer-events-none">
                   <span className={`absolute left-0 w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'top-2 rotate-45' : 'top-0'}`} />
                   <span className={`absolute left-0 w-full h-0.5 bg-current top-2 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
                   <span className={`absolute left-0 w-full h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'top-2 -rotate-45' : 'top-4'}`} />
@@ -206,10 +209,10 @@ export default function Header() {
         </div>
       </header>
       {/* Modern Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-[50] lg:hidden transition-all duration-500 ${isMobileMenuOpen ? 'visible' : 'invisible'}`}>
+      <div className={`fixed inset-0 z-[80] lg:hidden transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         {/* Background Blur Overlay */}
         <div 
-          className={`absolute inset-0 bg-zinc-950/40 backdrop-blur-md transition-opacity duration-500 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0'}`}
+          className="absolute inset-0 bg-zinc-950/40 backdrop-blur-md"
           onClick={() => setIsMobileMenuOpen(false)}
         />
         
