@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
+import LeadButton from '@/components/ui/lead-button';
 
 export const metadata = {
   title: 'Diseño de Themes Shopify Personalizados en Adobe XD | Webunica',

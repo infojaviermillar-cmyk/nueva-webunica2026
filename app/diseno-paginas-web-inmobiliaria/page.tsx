@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
+import LeadButton from '@/components/ui/lead-button';
 
 export const metadata = {
   title: 'Diseño de Páginas Web para Inmobiliarias en Chile | Webunica',
@@ -63,13 +64,11 @@ export default function RealEstatePage() {
                 No arriesgues tus captaciones con un sitio web genérico. Creamos plataformas diseñadas para proyectar autoridad, facilitar la búsqueda y cerrar cierres más rápido.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a 
-                  href="https://calendly.com/javiermillar/reunion-webunica" 
-                  target="_blank"
+                <LeadButton 
                   className="px-10 py-5 bg-zinc-950 text-white rounded-2xl font-bold text-center hover:bg-zinc-800 transition-all shadow-2xl"
                 >
                   Agendar Reunión Técnica
-                </a>
+                </LeadButton>
                 <Link
                   href="/contacto"
                   className="px-10 py-5 bg-white border-2 border-zinc-100 text-zinc-900 rounded-2xl font-bold text-center hover:border-zinc-300 transition-all"
