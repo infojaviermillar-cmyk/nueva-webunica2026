@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
+import FeaturedBlogSection from '@/components/sections/featured-blog';
 
 export default function Home() {
   const homeFaqs = [
@@ -168,6 +169,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Featured Blog Carousel */}
+      <FeaturedBlogSection />
 
       {/* FAQ Section Integrated */}
       <FAQSection 
