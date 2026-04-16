@@ -71,9 +71,9 @@ export default function Home() {
                   className="px-10 py-6 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-[0.15em] text-[10px] flex items-center justify-center gap-3 hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/25 active:scale-95 group/btn"
                 >
                   <svg className="w-5 h-5 transition-transform group-hover/btn:rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
-                  Calcular Presupuesto
+                  Cotizar Gratis
                 </button>
                 <Link 
                   href="/portafolio" 
@@ -84,23 +84,25 @@ export default function Home() {
               </div>
             </div>
             <div className="lg:col-span-5 relative">
-              <div className="bg-violet-50 rounded-[3rem] p-10 lg:p-14 relative group overflow-hidden">
-                <div className="flex justify-between items-center mb-10">
-                  <div className="text-4xl">🚀</div>
-                  <div className="text-xs font-bold text-violet-600 bg-violet-200/50 px-4 py-1.5 rounded-full uppercase tracking-widest">SEO Técnico Avanzado</div>
+              <Link href="/servicios-seo-posicionamiento-google" className="block transform hover:scale-[1.02] transition-all">
+                <div className="bg-violet-50 rounded-[3rem] p-10 lg:p-14 relative group overflow-hidden">
+                  <div className="flex justify-between items-center mb-10">
+                    <div className="text-4xl">🚀</div>
+                    <div className="text-xs font-bold text-violet-600 bg-violet-200/50 px-4 py-1.5 rounded-full uppercase tracking-widest">SEO Técnico Avanzado</div>
+                  </div>
+                  <h2 className="text-2xl font-black mb-6 text-zinc-900 leading-tight tracking-tight uppercase">Donde la velocidad impulsa los resultados</h2>
+                  <p className="text-zinc-500 font-light leading-relaxed mb-8">
+                    No hacemos sitios web informativos. Construimos activos digitales escalables que cargan en menos de 1 segundo para un posicionamiento imbatible.
+                  </p>
+                  <div className="h-1.5 w-full bg-zinc-200 rounded-full overflow-hidden">
+                    <div className="h-full bg-violet-600 w-[98%] group-hover:w-full transition-all duration-1000 shadow-[0_0_10px_rgba(139,92,246,0.5)]" />
+                  </div>
+                  <div className="flex justify-between mt-3 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+                    <span>Performance Lighthouse</span>
+                    <span>98%</span>
+                  </div>
                 </div>
-                <h2 className="text-2xl font-black mb-6 text-zinc-900 leading-tight tracking-tight uppercase">Donde la velocidad impulsa los resultados</h2>
-                <p className="text-zinc-500 font-light leading-relaxed mb-8">
-                  No hacemos sitios web informativos. Construimos activos digitales escalables que cargan en menos de 1 segundo para un posicionamiento imbatible.
-                </p>
-                <div className="h-1.5 w-full bg-zinc-200 rounded-full overflow-hidden">
-                   <div className="h-full bg-violet-600 w-[98%] group-hover:w-full transition-all duration-1000 shadow-[0_0_10px_rgba(139,92,246,0.5)]" />
-                </div>
-                <div className="flex justify-between mt-3 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                   <span>Performance Lighthouse</span>
-                   <span>98%</span>
-                </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

@@ -73,7 +73,7 @@ export default function Header() {
             
             {/* Logo Oficial Webunica */}
             <div className="flex-shrink-0 flex items-center relative z-20">
-              <Link href="/" className="group block focus:outline-none">
+              <Link href="/" prefetch={false} className="group block focus:outline-none relative z-20">
                 <img 
                   src="https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp" 
                   alt="Webunica Agencia" 
@@ -86,7 +86,7 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-10 ml-16">
-              <Link href="/" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest relative z-20`}>
+              <Link href="/" prefetch={false} className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest relative z-20`}>
                 Inicio
               </Link>
               
@@ -217,7 +217,7 @@ export default function Header() {
         <div className={`absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl transition-transform duration-500 ease-out flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="flex-grow flex flex-col pt-32 px-10 pb-12 overflow-y-auto">
             <nav className="flex flex-col gap-8">
-              <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="group border-b border-zinc-100 pb-6">
+              <Link href="/" prefetch={false} onClick={() => setIsMobileMenuOpen(false)} className="group border-b border-zinc-100 pb-6">
                 <span className="text-sm font-bold text-violet-600 uppercase tracking-[0.2em] block mb-1 opacity-60">Home</span>
                 <span className="text-4xl font-black text-zinc-900 uppercase tracking-tighter group-hover:text-violet-600 transition-colors">Inicio</span>
               </Link>

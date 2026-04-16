@@ -133,7 +133,7 @@ export default function Footer() {
           </p>
           <ul className="flex gap-6">
             <li>
-              <Link href="/" className="text-sm text-zinc-400 hover:text-white transition-colors relative z-10">Inicio</Link>
+              <Link href="/" prefetch={false} className="text-sm text-zinc-400 hover:text-white transition-colors relative z-10">Inicio</Link>
             </li>
             <li>
               <Link href="/contacto" className="text-sm text-zinc-400 hover:text-white transition-colors relative z-10">Contacto</Link>
