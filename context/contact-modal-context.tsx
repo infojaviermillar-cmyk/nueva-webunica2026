@@ -26,11 +26,15 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
 
   const closeModal = () => setIsOpen(false);
 
-  const openWhatsApp = () => setIsWhatsAppOpen(true);
+  const openWhatsApp = () => {
+    console.log("Opening WhatsApp Modal...");
+    setIsWhatsAppOpen(true);
+  };
   const closeWhatsApp = () => setIsWhatsAppOpen(false);
 
   return (
     <ContactModalContext.Provider value={{ openModal, closeModal, openWhatsApp, closeWhatsApp }}>
+      <WhatsAppFloating onClick={openWhatsApp} />
       {children}
       <ContactModal 
         isOpen={isOpen} 
@@ -41,7 +45,6 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
         isOpen={isWhatsAppOpen}
         onClose={closeWhatsApp}
       />
-      <WhatsAppFloating onClick={openWhatsApp} />
     </ContactModalContext.Provider>
   );
 }
