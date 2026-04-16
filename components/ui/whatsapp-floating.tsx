@@ -10,7 +10,7 @@ interface WhatsAppFloatingProps {
 export default function WhatsAppFloating({ onClick }: WhatsAppFloatingProps) {
   return (
     <div 
-      className="fixed top-[150px] right-4 z-[999] group cursor-pointer"
+      className="fixed bottom-[100px] right-6 z-[999] group cursor-pointer"
       onClick={onClick}
     >
       {/* Label Tooltip (Show on hover) */}
