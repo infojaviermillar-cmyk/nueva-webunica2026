@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useContactModal } from '@/context/contact-modal-context';
 
 interface FAQ {
   question: string;
@@ -28,6 +29,7 @@ export default function FAQSection({
   ctaLabel = "Agendar Reunión"
 }: FAQSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { openModal } = useContactModal();
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -48,6 +50,7 @@ export default function FAQSection({
   };
 
   return (
+    <>
     <section className="py-24 bg-white overflow-hidden border-t border-zinc-100">
       <script
         type="application/ld+json"
@@ -113,23 +116,21 @@ export default function FAQSection({
                </p>
                
                <div className="flex flex-col gap-4">
-                 <a 
-                   href={ctaLink}
-                   target="_blank"
-                   rel="noreferrer"
+                 <button 
+                   onClick={() => openModal()}
                    className="inline-flex items-center justify-center px-10 py-5 bg-white text-zinc-950 font-bold text-lg rounded-2xl hover:bg-zinc-200 transition-all shadow-xl shadow-white/5 group"
                  >
                    {ctaLabel}
                    <svg className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
                    </svg>
-                 </a>
-                 <Link 
-                   href="/contacto"
-                   className="inline-flex items-center justify-center px-10 py-5 bg-white/5 border border-white/10 text-white font-bold text-lg rounded-2xl hover:bg-white/10 transition-all"
+                 </button>
+                 <button 
+                   onClick={() => openModal()}
+                   className="inline-flex items-center justify-center px-10 py-5 bg-white/5 border border-white/10 text-white font-bold text-lg rounded-2xl hover:bg-white/10 transition-all font-black uppercase tracking-widest text-xs"
                  >
-                   Enviar contacto
-                 </Link>
+                   Solicitar Cotización
+                 </button>
                </div>
 
                <div className="mt-12 flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/5">
@@ -145,5 +146,6 @@ export default function FAQSection({
         </div>
       </div>
     </section>
+  </>
   );
 }

@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
+import LeadButton from '@/components/ui/lead-button';
 
 export const metadata = {
   title: 'Expertos en Diseño de Tiendas Shopify en Chile | Webunica',
@@ -62,13 +62,11 @@ export default function ShopifyPage() {
                 No construimos solo tiendas rápidas; creamos ecosistemas de venta automatizados en **Shopify** diseñados para maximizar tu retorno de inversión desde el primer día.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                 <a 
-                  href="https://calendly.com/javiermillar/reunion-webunica" 
-                  target="_blank"
+                 <LeadButton 
                   className="px-10 py-5 bg-[#95bf47] text-white rounded-2xl font-bold text-center hover:bg-[#82a63d] transition-all shadow-xl shadow-[#95bf47]/20"
                  >
                     Sesión Estratégica Shopify
-                 </a>
+                 </LeadButton>
               </div>
             </div>
             <div className="relative group">
@@ -123,13 +121,11 @@ export default function ShopifyPage() {
         <section className="py-32 max-w-4xl mx-auto text-center px-6">
            <h2 className="text-5xl font-extrabold mb-10 tracking-tight">Vende a todo el Mundo hoy</h2>
            <p className="text-xl text-zinc-500 mb-12 italic font-serif leading-relaxed">Únete al ecosistema que mueve el e-commerce global con un diseño experto.</p>
-           <a 
-            href="https://calendly.com/javiermillar/reunion-webunica" 
-            target="_blank"
+           <LeadButton 
             className="inline-block px-12 py-6 bg-black text-white font-bold text-lg rounded-2xl hover:scale-105 transition-all shadow-2xl"
            >
               Lanzar mi Tienda Shopify
-           </a>
+           </LeadButton>
         </section>
       </main>
     </div>

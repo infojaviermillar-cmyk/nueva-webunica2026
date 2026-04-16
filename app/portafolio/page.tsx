@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import LeadButton from '@/components/ui/lead-button';
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('Todas');
@@ -258,13 +259,11 @@ export default function PortfolioPage() {
            <p className="text-lg text-zinc-500 mb-12 max-w-xl mx-auto font-light leading-relaxed">
               No importa si eres una gran marca o una PYME con ambición. Tenemos la ingeniería necesaria para escalar tus resultados.
            </p>
-           <a 
-            href="https://calendly.com/javiermillar/reunion-webunica" 
-            target="_blank"
+           <LeadButton 
             className="inline-block px-12 py-6 bg-zinc-950 text-white font-bold text-lg rounded-2xl hover:scale-105 transition-all shadow-xl"
            >
               Agendar mi Evaluación Gratuita
-           </a>
+           </LeadButton>
         </section>
       </main>
     </div>

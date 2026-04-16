@@ -3,10 +3,12 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useContactModal } from '@/context/contact-modal-context';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openModal } = useContactModal();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -177,9 +179,14 @@ export default function Header() {
 
             {/* CTA & Mobile Menu Toggle */}
             <div className="flex items-center gap-4">
-              <a href="tel:+56984410379" className={`hidden md:flex items-center gap-2 px-8 py-4 rounded-full font-black text-[10px] uppercase tracking-[0.15em] transition-all transform hover:scale-105 shadow-xl ${scrolled ? 'bg-violet-600 text-white hover:bg-violet-700' : (isDarkHero ? 'bg-white text-zinc-950 hover:bg-zinc-200' : 'bg-violet-600 text-white hover:bg-violet-700')}`}>
+              <button 
+                onClick={() => openModal()}
+                className={`hidden md:flex items-center gap-2 px-8 py-4 rounded-full font-black text-[10px] uppercase tracking-[0.15em] transition-all transform hover:scale-105 shadow-xl ${scrolled ? 'bg-violet-600 text-white hover:bg-violet-700' : (isDarkHero ? 'bg-white text-zinc-950 hover:bg-zinc-200' : 'bg-black text-white hover:bg-zinc-800')}`}>
+                Cotizar Proyecto
+              </button>
+              
+              <a href="tel:+56984410379" className={`hidden md:flex items-center gap-2 p-4 rounded-full font-black text-[10px] uppercase tracking-[0.15em] transition-all transform hover:scale-105 border ${scrolled ? 'border-violet-100 text-violet-600' : (isDarkHero ? 'border-white/20 text-white' : 'border-zinc-200 text-zinc-900')}`}>
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                Llamar Asesor
               </a>
 
               <button 
@@ -218,9 +225,15 @@ export default function Header() {
             <Link href="/contacto" className="text-4xl font-black text-white uppercase tracking-tighter hover:text-violet-500 transition-colors">Contacto</Link>
           </nav>
 
-          <div className="mt-auto pt-12 border-t border-zinc-900">
-            <a href="tel:+56984410379" className="flex items-center justify-center gap-3 w-full py-6 bg-violet-600 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-violet-500 transition-all shadow-lg shadow-violet-600/20">
-              Hablar con Webunica
+          <div className="mt-auto pt-12 border-t border-zinc-900 space-y-4">
+            <button 
+              onClick={() => { openModal(); setIsMobileMenuOpen(false); }}
+              className="flex items-center justify-center gap-3 w-full py-6 bg-violet-600 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-violet-500 transition-all shadow-lg shadow-violet-600/20"
+            >
+              Cotizar Proyecto Ahora
+            </button>
+            <a href="tel:+56984410379" className="flex items-center justify-center gap-3 w-full py-6 bg-zinc-900 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-zinc-800 transition-all">
+               Hablar con Asesor
             </a>
           </div>
         </div>

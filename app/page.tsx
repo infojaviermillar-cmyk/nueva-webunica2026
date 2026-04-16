@@ -1,9 +1,14 @@
+"use client";
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import FeaturedBlogSection from '@/components/sections/featured-blog';
+import ContactModal from '@/components/ui/contact-modal';
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const homeFaqs = [
     {
       question: "¿Por qué trabajar con Webunica en lugar de otras agencias?",
@@ -61,15 +66,15 @@ export default function Home() {
                 Llevamos tu presencia digital al estándar de las grandes ligas. Desarrollo Full-stack impulsado por **Next.js**, diseño boutique y estrategias SEO de alto impacto.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                <Link 
-                  href="/cotizador-en-linea-desarrollo-web" 
+                <button 
+                  onClick={() => setIsModalOpen(true)}
                   className="px-10 py-6 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-[0.15em] text-[10px] flex items-center justify-center gap-3 hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/25 active:scale-95 group/btn"
                 >
                   <svg className="w-5 h-5 transition-transform group-hover/btn:rotate-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
                   Calcular Presupuesto
-                </Link>
+                </button>
                 <Link 
                   href="/portafolio" 
                   className="px-10 py-6 bg-zinc-50 text-zinc-900 border border-zinc-200 rounded-[2rem] font-black uppercase tracking-[0.15em] text-[10px] flex items-center justify-center hover:bg-white hover:shadow-lg transition-all active:scale-95"
@@ -191,15 +196,19 @@ export default function Home() {
           <p className="text-xl text-zinc-400 mb-12 max-w-lg mx-auto font-light leading-relaxed">
             Deja de perder tiempo con sitios que nadie ve. Construyamos tu activo digital hoy y domina tu industria.
           </p>
-          <a 
-            href="https://calendly.com/javiermillar/reunion-webunica" 
-            target="_blank"
+          <button 
+            onClick={() => setIsModalOpen(true)}
             className="inline-block px-12 py-6 bg-violet-600 text-white font-bold text-lg rounded-2xl hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/30"
           >
             Iniciar mi Transformación Digital
-          </a>
+          </button>
         </div>
       </section>
+
+      <ContactModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </main>
   );
 }

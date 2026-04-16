@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
+import LeadButton from '@/components/ui/lead-button';
 
 export const metadata = {
   title: 'Desarrollo Full-Stack Next.js & SaaS a Medida en Chile | Webunica',
@@ -63,13 +64,11 @@ export default function SaaSPage() {
               <p className="text-xl text-zinc-400 mb-12 max-w-xl leading-relaxed text-pretty">
                 Desarrollo de software y plataformas SaaS a medida bajo estándares de ingeniería de élite. Velocidad extrema, arquitectura escalable y lógica de negocio compleja.
               </p>
-              <a 
-                href="https://calendly.com/javiermillar/reunion-webunica" 
-                target="_blank"
+              <LeadButton 
                 className="inline-block px-12 py-6 bg-white text-black font-bold text-lg rounded-2xl hover:bg-zinc-200 transition-all shadow-2xl shadow-white/5"
               >
                 Agendar Consultoría Técnica
-              </a>
+              </LeadButton>
             </div>
             <div className="relative">
               <div className="absolute -inset-10 bg-blue-500/10 rounded-full blur-[100px] -z-10" />

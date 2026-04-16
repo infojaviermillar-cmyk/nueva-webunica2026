@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import FloatingShapes from '@/components/ui/floating-shapes';
+import { ContactModalProvider } from '@/context/contact-modal-context';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -43,12 +44,14 @@ export default function RootLayout({
       className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
     >
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
-        <FloatingShapes />
-        <Header />
-        <div className="flex-grow">
-          {children}
-        </div>
-        <Footer />
+        <ContactModalProvider>
+          <FloatingShapes />
+          <Header />
+          <div className="flex-grow">
+            {children}
+          </div>
+          <Footer />
+        </ContactModalProvider>
       </body>
     </html>
   );

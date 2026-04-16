@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
+import LeadButton from '@/components/ui/lead-button';
 
 export const metadata = {
   title: 'Agencia de SEO Técnico y Posicionamiento Google Chile | Webunica',
@@ -63,13 +64,11 @@ export default function SeoServicePage() {
                 No arriesgues tu inversión con tácticas de ayer. Implementamos **SEO de Ingeniería** para asegurar que tu marca sea la primera respuesta de tus clientes.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
-                 <a 
-                  href="https://calendly.com/javiermillar/reunion-webunica" 
-                  target="_blank"
+                 <LeadButton 
                   className="px-12 py-5 bg-emerald-500 text-zinc-950 font-bold rounded-2xl hover:bg-emerald-400 transition-all shadow-xl shadow-emerald-500/20 text-center"
                  >
                     Auditoría SEO Express (Gratis)
-                 </a>
+                 </LeadButton>
               </div>
             </div>
             <div className="relative group">
@@ -169,13 +168,11 @@ export default function SeoServicePage() {
         <section className="py-32 text-center px-6">
            <h2 className="text-5xl font-black mb-10 uppercase tracking-tighter leading-none">Tu éxito en Google <br/>empieza con una <span className="text-emerald-500 italic font-serif lowercase font-light">Decisión</span></h2>
            <p className="text-xl text-zinc-500 mb-12 italic font-serif">Deja de ser invisible. Empieza a ser la primera opción.</p>
-           <a 
-            href="https://calendly.com/javiermillar/reunion-webunica" 
-            target="_blank"
+           <LeadButton 
             className="inline-block px-12 py-6 bg-white text-zinc-950 font-bold text-lg rounded-2xl hover:scale-105 transition-all shadow-2xl"
            >
               Solicitar Plan de Posicionamiento
-           </a>
+           </LeadButton>
         </section>
       </main>
     </div>

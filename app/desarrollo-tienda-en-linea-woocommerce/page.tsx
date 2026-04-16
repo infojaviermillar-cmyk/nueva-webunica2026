@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
+import LeadButton from '@/components/ui/lead-button';
 
 export const metadata = {
   title: 'Desarrollo de Tiendas Online WooCommerce en Chile | Webunica',
@@ -62,13 +62,11 @@ export default function WooCommercePage() {
                 Toma el control absoluto de tu negocio con **WooCommerce**. Potencia, escalabilidad y la libertad de ser el único dueño de tu éxito digital. Sin pagos mensuales por plataforma.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                 <a 
-                  href="https://calendly.com/javiermillar/reunion-webunica" 
-                  target="_blank"
+                 <LeadButton 
                   className="px-10 py-5 bg-purple-600 text-white rounded-2xl font-bold text-center hover:bg-purple-700 transition-all shadow-xl shadow-purple-100"
                  >
                     Planificar mi Ecommerce
-                 </a>
+                 </LeadButton>
               </div>
             </div>
             <div className="relative group">
@@ -123,13 +121,11 @@ export default function WooCommercePage() {
         <section className="py-32 max-w-4xl mx-auto text-center px-6">
            <h2 className="text-5xl font-extrabold mb-10 text-zinc-900 tracking-tight">Potencia Corporativa en tus Manos</h2>
            <p className="text-xl text-zinc-500 mb-12 italic font-serif">Escala sin límites y sin pagar de más por cada venta que logres.</p>
-           <a 
-            href="https://calendly.com/javiermillar/reunion-webunica" 
-            target="_blank"
+           <LeadButton 
             className="inline-block px-12 py-6 bg-zinc-950 text-white font-bold text-lg rounded-2xl hover:scale-105 transition-all shadow-2xl"
            >
               Iniciar mi Proyecto Ecommerce
-           </a>
+           </LeadButton>
         </section>
       </main>
     </div>
