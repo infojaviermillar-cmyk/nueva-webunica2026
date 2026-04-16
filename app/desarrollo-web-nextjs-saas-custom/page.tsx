@@ -74,7 +74,7 @@ export default function SaaSPage() {
               <div className="absolute -inset-10 bg-blue-500/10 rounded-full blur-[100px] -z-10" />
               <div className="bg-zinc-900 border border-white/10 rounded-[3rem] p-4 md:p-8 shadow-2xl relative overflow-hidden group">
                  <Image 
-                    src="/saas_dashboard_dark_minimalist_1776302026023.png"
+                    src="/saas_hero_new.png"
                     alt="Next.js SaaS Dashboard Architecture"
                     width={800}
                     height={800}
