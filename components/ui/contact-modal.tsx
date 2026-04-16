@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from 'react';
 import { createLead } from '@/lib/lead-actions';
 
 interface ContactModalProps {
