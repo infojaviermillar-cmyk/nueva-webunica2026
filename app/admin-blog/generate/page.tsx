@@ -14,11 +14,22 @@ function GeneratorForm() {
 
   const [topic, setTopic] = useState('');
   const [keywords, setKeywords] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+  const [categories, setCategories] = useState<any[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [generatedPost, setGeneratedPost] = useState<any>(null);
   const [error, setError] = useState('');
   const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    import('@/lib/blog-actions').then(m => {
+      m.getCategoriesAction().then(cats => {
+        setCategories(cats);
+        if (cats.length > 0) setCategoryId(cats[0].id);
+      }).catch(console.error);
+    });
+  }, []);
 
   // Pre-fill from URL params (coming from the topic list page)
   useEffect(() => {
@@ -76,7 +87,7 @@ function GeneratorForm() {
     setError('');
 
     try {
-      const response = await saveBlogPost(generatedPost);
+      const response = await saveBlogPost({ ...generatedPost, category_id: categoryId });
       if (response && response.success) {
         setSaved(true);
         setTimeout(() => router.push(`/blog/${response.post.slug}`), 1500);
@@ -154,6 +165,23 @@ function GeneratorForm() {
                     rows={3}
                     className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 transition-all font-medium text-sm resize-none"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Categoría del Blog</label>
+                  <select
+                    value={categoryId}
+                    onChange={(e) => setCategoryId(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 transition-all font-medium text-sm appearance-none"
+                  >
+                    {categories.length === 0 ? (
+                      <option disabled>Cargando categorías...</option>
+                    ) : (
+                      categories.map(cat => (
+                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      ))
+                    )}
+                  </select>
                 </div>
 
                 <button

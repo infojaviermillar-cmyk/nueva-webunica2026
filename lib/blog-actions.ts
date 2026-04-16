@@ -3,6 +3,12 @@
 import { supabase } from '@/lib/supabase/client';
 import { revalidatePath } from 'next/cache';
 
+export async function getCategoriesAction() {
+  if (!supabase) return [];
+  const { data } = await supabase.from('webunica_blog_categories').select('*').order('name');
+  return data || [];
+}
+
 export async function saveBlogPost(postData: {
   title: string;
   slug: string;
@@ -12,7 +18,7 @@ export async function saveBlogPost(postData: {
   seo_description?: string;
   cover_image?: string;
   cover_image_alt?: string;
-  cover_image_prompt?: string; // generado por openai pero NO en DB
+  cover_image_prompt?: string;
   category_id?: string;
   status?: 'draft' | 'published';
 }) {
