@@ -85,7 +85,7 @@ export default function Header() {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-10">
+            <nav className="hidden lg:flex items-center gap-10 ml-16">
               <Link href="/" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest`}>
                 Inicio
               </Link>
@@ -97,7 +97,7 @@ export default function Header() {
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
                 </button>
                 
-                <div className="absolute top-[80%] left-1/2 -translate-x-1/2 mt-2 w-80 bg-white/85 backdrop-blur-md border border-white/50 rounded-3xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform group-hover:translate-y-2">
+                <div className="absolute top-[80%] left-1/2 -translate-x-1/2 mt-2 w-80 bg-white border border-zinc-100 rounded-3xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform group-hover:translate-y-2">
                   <div className="flex flex-col py-3">
                     <Link href="/desarrollo-web-nextjs-saas-custom" className="px-6 py-3 text-[15px] font-bold text-zinc-700 hover:bg-violet-50 hover:text-violet-600 transition-colors flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-violet-600"></div>
@@ -152,7 +152,7 @@ export default function Header() {
                   Herramientas
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
                 </button>
-                <div className="absolute top-[80%] left-1/2 -translate-x-1/2 mt-2 w-72 bg-white/85 backdrop-blur-md border border-white/50 rounded-3xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform group-hover:translate-y-2">
+                <div className="absolute top-[80%] left-1/2 -translate-x-1/2 mt-2 w-72 bg-white border border-zinc-100 rounded-3xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform group-hover:translate-y-2">
                   <div className="flex flex-col py-3">
                     <Link href="/cotizador-en-linea-desarrollo-web" className="px-6 py-4 text-[15px] font-bold text-zinc-700 hover:bg-violet-50 hover:text-violet-600 transition-colors">
                       Calculadora Presupuesto Web
