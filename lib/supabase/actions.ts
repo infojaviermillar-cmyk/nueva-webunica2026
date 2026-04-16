@@ -3,6 +3,9 @@
 import { supabase } from './client';
 
 export async function saveLeadAction(email: string, selections: Record<string, string>, estimatedTotal: number) {
+  if (!supabase) {
+    return { success: false, error: 'DB no configurada' };
+  }
   try {
     const { data, error } = await supabase
       .from('leads')
