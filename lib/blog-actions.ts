@@ -76,3 +76,30 @@ export async function saveBlogPost(postData: {
 
   return { success: true, post: data };
 }
+
+export async function getAdminPosts() {
+  if (!supabase) return { success: false, error: 'DB no disponible' };
+  
+  const { data, error } = await supabase
+    .from('webunica_blog_posts')
+    .select('*, category:webunica_blog_categories(name, slug)')
+    .order('created_at', { ascending: false });
+
+  if (error) return { success: false, error: error.message };
+  return { success: true, posts: data };
+}
+
+export async function deleteBlogPost(id: string) {
+  if (!supabase) return { success: false, error: 'DB no disponible' };
+
+  const { error } = await supabase
+    .from('webunica_blog_posts')
+    .delete()
+    .eq('id', id);
+
+  if (error) return { success: false, error: error.message };
+  
+  revalidatePath('/blog');
+  revalidatePath('/admin/blog');
+  return { success: true };
+}
