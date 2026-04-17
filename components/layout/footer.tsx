@@ -78,7 +78,7 @@ export default function Footer() {
             100% { transform: translateX(-50%); }
           }
           .animate-marquee-horizontal {
-            animation: marquee-horizontal 58s linear infinite;
+            animation: marquee-horizontal 80s linear infinite;
           }
           .animate-marquee-horizontal:hover {
             animation-play-state: paused;
