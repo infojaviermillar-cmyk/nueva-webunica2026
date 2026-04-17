@@ -1,16 +1,18 @@
 import Link from 'next/link';
-import { getPublishedPosts } from '@/lib/blog';
+import { BlogPost } from '@/lib/blog';
 import { BlogCard } from '@/components/blog/blog-card';
 import { ArrowRight } from 'lucide-react';
 
-export default async function FeaturedBlogSection() {
-  // Solo obtenemos los últimos 5 o 6 posts publicados para el home
-  const allPosts = await getPublishedPosts();
-  const recentPosts = allPosts.slice(0, 6);
+interface FeaturedBlogSectionProps {
+  posts: BlogPost[];
+}
 
-  if (!recentPosts || recentPosts.length === 0) {
-    return null; // Si no hay posts no mostramos la sección
+export default function FeaturedBlogSection({ posts }: FeaturedBlogSectionProps) {
+  if (!posts || posts.length === 0) {
+    return null;
   }
+
+  const recentPosts = posts.slice(0, 6);
 
   return (
     <section className="py-32 bg-slate-50 overflow-hidden">

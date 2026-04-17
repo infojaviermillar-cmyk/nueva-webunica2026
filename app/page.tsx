@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import HomeClient from './home-client';
+import { getPublishedPosts } from '@/lib/blog';
 
 export const metadata: Metadata = {
   title: 'Agencia de Embudos de Venta y Desarrollo Web High-Performance | Webunica',
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
-  return <HomeClient />;
+export default async function Home() {
+  const posts = await getPublishedPosts();
+  return <HomeClient posts={posts} />;
 }

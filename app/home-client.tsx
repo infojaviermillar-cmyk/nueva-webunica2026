@@ -7,7 +7,9 @@ import FeaturedBlogSection from '@/components/sections/featured-blog';
 import { useContactModal } from '@/context/contact-modal-context';
 import LeadButton from '@/components/ui/lead-button';
 
-export default function HomeClient() {
+import { BlogPost } from '@/lib/blog';
+
+export default function HomeClient({ posts }: { posts: BlogPost[] }) {
   const { openModal } = useContactModal();
   
   const homeFaqs = [
@@ -256,7 +258,7 @@ export default function HomeClient() {
       </section>
 
       {/* Featured Blog */}
-      <FeaturedBlogSection />
+      <FeaturedBlogSection posts={posts} />
 
       {/* FAQ Section */}
       <FAQSection 
