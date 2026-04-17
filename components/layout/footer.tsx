@@ -9,12 +9,26 @@ export default function Footer() {
           
           {/* Brand Col */}
           <div className="flex flex-col gap-6 col-span-2 md:col-span-3 lg:col-span-1">
-            <Link href="/" className="group inline-block w-fit">
-              <img 
-                src="https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp" 
-                alt="Webunica Agencia" 
-                className="h-12 w-auto transition-[filter] duration-1000 grayscale group-hover:grayscale-0 brightness-0 invert opacity-90"
-              />
+            <Link href="/" className="group relative inline-block w-fit">
+              {/* Logo con Máscara de Degradado */}
+              <div className="relative h-9 w-[135px] overflow-hidden">
+                <img 
+                  src="https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp" 
+                  alt="Webunica Agencia" 
+                  className="h-full w-auto opacity-0"
+                />
+                <div 
+                  className="absolute inset-0 bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-600 transition-transform duration-700 group-hover:scale-110"
+                  style={{
+                    maskImage: 'url(https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp)',
+                    WebkitMaskImage: 'url(https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp)',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskSize: 'contain',
+                    WebkitMaskSize: 'contain'
+                  }}
+                />
+              </div>
             </Link>
             <p className="text-zinc-400 leading-relaxed text-sm">
               Agencia de desarrollo web y eCommerce en Chile. Creamos plataformas rápidas, escalables y orientadas a resultados comerciales.
