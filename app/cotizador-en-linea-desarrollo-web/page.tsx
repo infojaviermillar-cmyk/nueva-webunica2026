@@ -18,12 +18,12 @@ const getQuestions = (selections: Record<string, string>) => {
   const base = [
     {
       id: "project_type",
-      title: "¿Qué tipo de proyecto necesitas?",
+      title: "¿Qué tipo de sistema de ventas necesitas?",
       options: [
-        { id: "landing", label: "Landing Page (Una página)", price: 450000 },
-        { id: "corporate", label: "Sitio Web Corporativo", price: 850000 },
-        { id: "ecommerce", label: "Tienda Online (Ecommerce)", price: 1200000 },
-        { id: "lms", label: "Academia Online (Cursos)", price: 1500000 },
+        { id: "landing", label: "Embudo High-Ticket (Captura de Leads)", price: 450000 },
+        { id: "corporate", label: "Sistema de Ventas Corporativo B2B", price: 850000 },
+        { id: "ecommerce", label: "Ecosistema de Conversión E-commerce", price: 1200000 },
+        { id: "lms", label: "Embudo de Venta Infoproductos / Cursos", price: 1500000 },
       ]
     }
   ];
@@ -32,11 +32,11 @@ const getQuestions = (selections: Record<string, string>) => {
   if (selections["project_type"] === "ecommerce") {
     base.push({
       id: "ecommerce_platform",
-      title: "¿Qué plataforma prefieres para tu tienda?",
+      title: "¿En qué motor quieres procesar tus ventas?",
       options: [
-        { id: "shopify", label: "Shopify (Mensualidad baja, muy rápida)", price: 0 },
-        { id: "woocommerce", label: "WooCommerce (Sin comisión mensual, 100% tuya)", price: 0 },
-        { id: "other", label: "Otra / Necesito asesoría gratis", price: 0 },
+        { id: "shopify", label: "Shopify (Escalabilidad y Rapidez extrema)", price: 0 },
+        { id: "woocommerce", label: "WooCommerce (Control Total y Sin Comisiones)", price: 0 },
+        { id: "other", label: "Necesito Asesoría Estratégica", price: 0 },
       ]
     });
   }
@@ -45,20 +45,20 @@ const getQuestions = (selections: Record<string, string>) => {
   base.push(
     {
       id: "design_level",
-      title: "¿Qué nivel de diseño visual buscas?",
+      title: "¿Qué nivel de psicología visual aplicamos?",
       options: [
-        { id: "template", label: "Básico y Limpio (Basado en Estructura)", price: 0 },
-        { id: "custom", label: "Premium / A Medida (UI Avanzada)", price: 400000 },
-        { id: "wow", label: "Nivel Agencia (Animaciones y Experiencia WOW)", price: 800000 },
+        { id: "template", label: "Diseño Enfocado en Claridad y Función", price: 0 },
+        { id: "custom", label: "Branding Premium (Autoridad de Marca)", price: 400000 },
+        { id: "wow", label: "Experiencia Inmersiva (Efecto WOW de Conversión)", price: 800000 },
       ]
     },
     {
       id: "timeline",
-      title: "¿Con qué urgencia lo necesitas?",
+      title: "¿Cuándo quieres empezar a recibir prospectos?",
       options: [
-        { id: "relaxed", label: "Sin apuro (1-2 meses)", price: 0 },
-        { id: "normal", label: "Normal (3-4 semanas)", price: 150000 },
-        { id: "urgent", label: "¡Urgente! (Menos de 2 semanas)", price: 450000 },
+        { id: "relaxed", label: "Planificación Estratégica (1-2 meses)", price: 0 },
+        { id: "normal", label: "Lanzamiento Estándar (3-4 semanas)", price: 150000 },
+        { id: "urgent", label: "¡Despliegue de Emergencia! (Menos de 2 semanas)", price: 450000 },
       ]
     }
   );
@@ -134,45 +134,45 @@ export default function CotizadorPage() {
     switch(selections["project_type"]) {
       case "landing":
         return [
-          "Dominio y Hosting por 1 año",
-          "Diseño One-Page optimizado para conversiones",
-          "Formulario de captación de leads",
-          "Botón de WhatsApp directo",
-          "Diseño responsivo móvil y escritorio",
-          "SEO On-Page Básico"
+          "Diseño de Embudo de Ventas (Copywriting Persuasivo)",
+          "Lead Magnet & Captura de Prospectos",
+          "Optimización Meta Pixel & Google Ads",
+          "Integración con CRM o Email Marketing",
+          "Diseño responsivo enfocado en Clics (CTR)",
+          "Infraestructura de servidor de alta velocidad"
         ];
       case "corporate":
         return [
-          "Estructura Multi-página Completa (Inicio, Nosotros, Servicios)",
-          "Gestor de Contenidos Autoadministrable (WordPress)",
-          "Optimización de Velocidad y Core Web Vitals",
-          "Arquitectura SEO On-Page Avanzada",
-          "Integración Google Analytics 4",
-          "Servidor Dedicado o Cloud de alta métrica"
+          "Arquitectura B2B Estratégica (Generación de Confianza)",
+          "Sistema de Agendamiento o Calificación de Leads",
+          "Blog & Estrategia SEO para Autoridad de Marca",
+          "Analítica Avanzada de Comportamiento de Usuario",
+          "Automatización de Respuestas Comerciales",
+          "Soporte Estratégico de Crecimiento"
         ];
       case "ecommerce":
         return [
-          "Ecosistema Ecommerce Completo (Shopify o WooCommerce)",
-          "Pasarelas de pago automatizadas (Webpay, MercadoPago)",
-          "Integraciones logísticas (Starken, Chilexpress)",
-          "Diseño de carrito sin fricción (UX Data-Driven)",
-          "Gestión de Inventarios y Pedidos centralizada",
-          "Integración Meta Pixel / Conversiones API"
+          "Embudo de Venta Directa (Checkout Optimizado)",
+          "Recuperación de Carritos Abandonados",
+          "Upselling y Cross-selling automatizado",
+          "Gestión de Inventario & Logística (Webpay/Shopify)",
+          "Integración de Catálogo con Meta Ads / IG Shopping",
+          "Dashboard de ROI y Métricas de Venta"
         ];
       case "lms":
         return [
-          "Infraestructura E-Learning (Tutor LMS)",
-          "Sistemas de Alumnos, Profesores y Certificados",
-          "Pasarela de venta para suscripciones o pagos únicos",
-          "Aula virtual privada con video streaming seguro",
-          "Gamificación y seguimiento de progreso",
-          "Automatización de correos transaccionales"
+          "Embudo para Infoproductos y Membresías",
+          "Automatización de Secuencias Educativas",
+          "Pasarela de Pago Stripe / Webpay integrada",
+          "Gestión de Alumnos y Acceso Privado VIP",
+          "Sistema de Webinars o Video Marketing Interno",
+          "Reporting de Rentabilidad por Curso"
         ];
       default:
         return [
-          "Estructura SEO Básica",
-          "Integración de métodos de contacto",
-          "Soporte y Garantía técnica por 3 meses"
+          "Lógica de Conversión Estandarizada",
+          "Optimización de Canales de Contacto",
+          "Asesoría en Estratégica Digital"
         ];
     }
   };
@@ -207,9 +207,9 @@ export default function CotizadorPage() {
         
         <div className="text-center mb-12">
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#2d3748] mb-4 text-balance">
-            Calcula tu Presupuesto Web
+            Calcula tu Sistema de Ventas
           </h1>
-          <p className="text-zinc-600 text-lg">Descubre en menos de 1 minuto una estimación realista para tu proyecto.</p>
+          <p className="text-zinc-600 text-lg">No construyas solo una web; diseña una máquina de generación de leads y cierres.</p>
         </div>
 
         <div className="bg-white rounded-[2rem] shadow-2xl p-6 sm:p-10 md:p-14 border border-zinc-100 min-h-[450px] flex flex-col">
