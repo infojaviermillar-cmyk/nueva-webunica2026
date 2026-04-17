@@ -126,25 +126,16 @@ export default function Footer() {
 
         </div>
 
-        <div className="border-t border-zinc-800/50 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-col items-center md:items-start gap-2">
+        <div className="border-t border-zinc-800/50 pt-8 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
             <p className="text-zinc-500 text-sm">
               © {new Date().getFullYear()} WebUnica. Todos los derechos reservados.
             </p>
-            <div className="mt-1">
-              <span className="text-xl md:text-3xl font-caveat bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-400 select-none cursor-default hover:brightness-110 transition-all">
-                Desarrollo React por Javier Millar V.
-              </span>
-            </div>
+            <span className="text-xl md:text-2xl font-caveat bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-400 select-none cursor-default hover:brightness-110 transition-all">
+              Desarrollo React por Javier Millar V.
+            </span>
           </div>
-          <ul className="flex gap-6">
-            <li>
-              <Link href="/" prefetch={false} className="text-sm text-zinc-400 hover:text-white transition-colors relative z-10">Inicio</Link>
-            </li>
-            <li>
-              <Link href="/contacto" className="text-sm text-zinc-400 hover:text-white transition-colors relative z-10">Contacto</Link>
-            </li>
-          </ul>
+          
           <div className="flex gap-6">
             <Link href="/terminos-y-condiciones-de-servicios/" className="text-zinc-500 hover:text-white text-sm transition-colors">
               Términos
