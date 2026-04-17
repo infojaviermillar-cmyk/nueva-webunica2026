@@ -9,26 +9,19 @@ export default function Footer() {
           
           {/* Brand Col */}
           <div className="flex flex-col gap-6 col-span-2 md:col-span-3 lg:col-span-1">
-            <Link href="/" className="group relative inline-block w-fit">
-              {/* Logo con Máscara de Degradado */}
-              <div className="relative h-9 w-[135px] overflow-hidden">
-                <img 
-                  src="https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp" 
-                  alt="Webunica Agencia" 
-                  className="h-full w-auto opacity-0"
-                />
-                <div 
-                  className="absolute inset-0 bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-600 transition-transform duration-700 group-hover:scale-110"
-                  style={{
-                    maskImage: 'url(https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp)',
-                    WebkitMaskImage: 'url(https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp)',
-                    maskRepeat: 'no-repeat',
-                    WebkitMaskRepeat: 'no-repeat',
-                    maskSize: 'contain',
-                    WebkitMaskSize: 'contain'
-                  }}
-                />
-              </div>
+            <Link href="/" className="group relative block w-fit">
+              {/* Logo con Máscara de Degradado - Tamaño Reducido */}
+              <div 
+                className="h-7 w-[110px] bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-600 transition-transform duration-700 group-hover:scale-110"
+                style={{
+                  maskImage: 'url(https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp)',
+                  WebkitMaskImage: 'url(https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp)',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskSize: 'contain',
+                  WebkitMaskSize: 'contain'
+                }}
+              />
             </Link>
             <p className="text-zinc-400 leading-relaxed text-sm">
               Agencia de desarrollo web y eCommerce en Chile. Creamos plataformas rápidas, escalables y orientadas a resultados comerciales.
@@ -145,7 +138,7 @@ export default function Footer() {
             <p className="text-zinc-500 text-sm">
               © {new Date().getFullYear()} WebUnica. Todos los derechos reservados.
             </p>
-            <span className="text-xl md:text-2xl font-caveat bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-400 select-none cursor-default hover:brightness-110 transition-all">
+            <span className="text-lg md:text-xl font-caveat bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-400 select-none cursor-default hover:brightness-110 transition-all">
               Desarrollo React por Javier Millar V.
             </span>
           </div>
