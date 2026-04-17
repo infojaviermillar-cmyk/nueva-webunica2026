@@ -4,14 +4,15 @@
 -- ==========================================
 
 -- 1. TABLAS DE BLOG
-CREATE TABLE IF NOT EXISTS public.blog_categories (
+CREATE TABLE IF NOT EXISTS public.webunica_blog_categories (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name TEXT NOT NULL,
     slug TEXT UNIQUE NOT NULL,
+    description TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS public.blog_posts (
+CREATE TABLE IF NOT EXISTS public.webunica_blog_posts (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     title TEXT NOT NULL,
     slug TEXT UNIQUE NOT NULL,
@@ -19,12 +20,11 @@ CREATE TABLE IF NOT EXISTS public.blog_posts (
     excerpt TEXT,
     cover_image TEXT,
     cover_image_alt TEXT,
-    author TEXT DEFAULT 'Webunica Team',
-    category_id UUID REFERENCES public.blog_categories(id),
-    published BOOLEAN DEFAULT FALSE,
+    category_id UUID REFERENCES public.webunica_blog_categories(id),
+    status TEXT DEFAULT 'draft', -- 'draft' o 'published'
+    published_at TIMESTAMPTZ,
     seo_title TEXT,
     seo_description TEXT,
-    keywords TEXT[],
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -55,12 +55,12 @@ CREATE TABLE IF NOT EXISTS public.testimonials (
 );
 
 -- 4. ÍNDICES DE PERFORMANCE
-CREATE INDEX IF NOT EXISTS idx_blog_sh_slug ON public.blog_posts(slug);
+CREATE INDEX IF NOT EXISTS idx_blog_sh_slug ON public.webunica_blog_posts(slug);
 CREATE INDEX IF NOT EXISTS idx_leads_sh_created ON public.leads(created_at);
 CREATE INDEX IF NOT EXISTS idx_testimonials_sh_active ON public.testimonials(active);
 
--- 5. SEMILLAS
-INSERT INTO public.blog_categories (name, slug) VALUES 
+-- 5. SEMILLAS (Categorías Base)
+INSERT INTO public.webunica_blog_categories (name, slug) VALUES 
 ('Desarrollo Web', 'desarrollo-web'),
 ('E-commerce Shopify', 'ecommerce-shopify'),
 ('SEO y Marketing', 'seo-marketing')
