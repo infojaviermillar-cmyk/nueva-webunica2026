@@ -71,8 +71,8 @@ export default function ShopifyXDPage() {
               <h1 className="text-6xl lg:text-8xl font-light tracking-tight leading-[0.9] mb-10 text-zinc-950">
                 La Estética <br/><span className="font-serif italic text-zinc-500">como motor</span> <br/>de Ventas
               </h1>
-              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty">
-                Olvídate de las plantillas genéricas. Diseñamos tu tienda Shopify en **Adobe XD** junto a un equipo de especialistas en UX para asegurar que tu marca proyecte el valor que realmente tiene.
+              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty font-light">
+                Olvídate de las plantillas genéricas. Diseñamos tu tienda Shopify en <span className="text-violet-600 font-bold">Adobe XD</span> junto a un equipo de especialistas en UX para asegurar que tu marca proyecte el valor que realmente tiene.
               </p>
               <a 
                 href="https://calendly.com/javiermillar/reunion-webunica" 
@@ -136,8 +136,8 @@ export default function ShopifyXDPage() {
         <section className="py-32 max-w-7xl mx-auto px-6 lg:px-8 text-center border-t border-zinc-100">
            <div className="inline-block px-12 py-12 bg-zinc-50 rounded-[4rem] border border-zinc-100">
               <h3 className="text-3xl font-bold mb-6 text-zinc-900">Un equipo de diseñadores a tu servicio</h3>
-              <p className="text-zinc-500 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-                En Webunica no solo somos programadores. Colaboramos con expertos en **UX/UI Design** para optimizar la navegación de tu tienda, reducir el abandono de carrito y elevar el valor percibido de tus productos.
+              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty font-light">
+                En Webunica no solo somos programadores. Colaboramos con expertos en <span className="text-violet-600 font-bold">UX/UI Design</span> para optimizar la navegación de tu tienda, reducir el abandono de carrito y elevar el valor percibido de tus productos.
               </p>
               <div className="flex justify-center gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
                  <div className="flex flex-col items-center">

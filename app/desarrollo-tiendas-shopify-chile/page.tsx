@@ -138,7 +138,7 @@ export default function ShopifyPage() {
                 ESCALA TU <br/><span className="text-violet-600 font-serif italic lowercase font-light">Ecommerce</span>
               </h1>
               <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty font-light">
-                No construimos solo tiendas rápidas; creamos ecosistemas de venta automatizados en **Shopify** diseñados para maximizar tu retorno de inversión desde el primer día.
+                No construimos solo tiendas rápidas; creamos ecosistemas de venta automatizados en <span className="text-violet-600 font-bold">Shopify</span> diseñados para maximizar tu retorno de inversión desde el primer día.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
                  <LeadButton 

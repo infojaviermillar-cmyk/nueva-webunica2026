@@ -71,8 +71,8 @@ export default function ElearningPage() {
               <h1 className="text-6xl lg:text-[6rem] font-black tracking-tighter leading-[0.9] mb-10 text-zinc-900 uppercase">
                 TU ACADEMIA <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">SIN LÍMITES</span>
               </h1>
-              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed font-light">
-                Diseñamos ecosistemas de aprendizaje de alta gama con **Tutor LMS**. Escala tu conocimiento y automatiza tus ingresos con una plataforma que ama a tus alumnos.
+              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty font-light">
+                Diseñamos ecosistemas de aprendizaje de alta gama con <span className="text-violet-600 font-bold">Tutor LMS</span>. Escala tu conocimiento y automatiza tus ingresos con una plataforma que ama a tus alumnos.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                  <LeadButton 

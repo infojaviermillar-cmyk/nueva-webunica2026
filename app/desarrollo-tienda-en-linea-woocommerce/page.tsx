@@ -133,7 +133,7 @@ export default function WooCommercePage() {
                 VENTAS SIN <br/><span className="text-violet-600 font-serif italic lowercase font-light">Comisiones</span>
               </h1>
               <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty font-light">
-                Toma el control absoluto de tu negocio con **WooCommerce**. Potencia, escalabilidad y la libertad de ser el único dueño de tu éxito digital.
+                Toma el control absoluto de tu negocio con <span className="text-violet-600 font-bold">WooCommerce</span>. Potencia, escalabilidad y la libertad de ser el único dueño de tu éxito digital.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
                  <LeadButton 

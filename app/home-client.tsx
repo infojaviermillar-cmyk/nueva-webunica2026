@@ -116,7 +116,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
                 CONVERTIMOS <br/>TRÁFICO EN <span className="text-violet-600 font-serif italic lowercase font-light">Clientes</span>
               </h1>
               <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty font-light">
-                No te vendemos una página web. Construimos un **Sistema de Captación de Leads** de alto rendimiento diseñado para captar contactos, agendar reuniones y cerrar ventas automáticamente.
+                No te vendemos una página web. Construimos un <span className="text-violet-600 font-bold">Sistema de Captación de Leads</span> de alto rendimiento diseñado para captar contactos, agendar reuniones y cerrar ventas automáticamente.
               </p>
               <div className="flex flex-col sm:flex-row gap-6 mt-8 relative z-20">
                 <button 
@@ -289,7 +289,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
             Tu embudo <br/><span className="text-violet-400 italic font-serif lowercase font-light">empieza</span> ahora
           </h2>
           <p className="text-xl text-zinc-400 mb-12 max-w-lg mx-auto font-light leading-relaxed">
-            Obtén un **10% de DESCUENTO** en tu primer embudo al cotizar hoy. No pierdas más leads.
+            Obtén un <span className="text-violet-400 font-bold">10% de DESCUENTO</span> en tu primer embudo al cotizar hoy. No pierdas más leads.
           </p>
           <LeadButton 
             className="inline-block px-12 py-6 bg-violet-600 text-white font-black uppercase tracking-widest text-[11px] rounded-[2.5rem] hover:bg-violet-700 transition-all shadow-2xl shadow-violet-600/40 hover:scale-105 active:scale-95"

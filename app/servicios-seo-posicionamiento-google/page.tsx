@@ -61,7 +61,7 @@ export default function SeoServicePage() {
                 DOMINA <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 uppercase">Google</span>
               </h1>
               <p className="text-xl text-zinc-400 mb-12 max-w-xl leading-relaxed font-light">
-                No arriesgues tu inversión con tácticas de ayer. Implementamos **SEO de Ingeniería** para asegurar que tu marca sea la primera respuesta de tus clientes.
+                No arriesgues tu inversión con tácticas de ayer. Implementamos <span className="text-violet-500 font-bold">SEO de Ingeniería</span> para asegurar que tu marca sea la primera respuesta de tus clientes.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
                  <LeadButton 
@@ -130,7 +130,7 @@ export default function SeoServicePage() {
                     <span className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-4 block">Success Story</span>
                     <h2 className="text-4xl lg:text-6xl font-black mb-8 leading-[0.9] tracking-tighter uppercase">SoloCasasChile: <br/>Dominio Orgánico</h2>
                     <p className="text-lg text-zinc-600 mb-10 leading-relaxed">
-                       Implementamos un sistema de **Silos SEO e indexación instantánea** que permitió a SoloCasasChile capturar más de 10.000 búsquedas mensuales sin invertir un peso en publicidad pagada.
+                       Implementamos un sistema de <span className="text-violet-600 font-bold">Silos SEO e indexación instantánea</span> que permitió a SoloCasasChile capturar más de 10.000 búsquedas mensuales sin invertir un peso en publicidad pagada.
                     </p>
                     <div className="flex gap-12">
                        <div>
