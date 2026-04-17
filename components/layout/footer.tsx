@@ -21,8 +21,8 @@ export default function Footer() {
     { name: "Eros Consultora", type: "WordPress" },
     { name: "Dripco", type: "WordPress" },
     { name: "Preutem", type: "WordPress" },
-    { name: "SoloCasasChile", type: "WordPress" },
-    { name: "Kinelawen", type: "WordPress" },
+    { name: "SoloCasasChile", type: "Full Next.js" },
+    { name: "Kinelawen", type: "Shopify" },
     { name: "SpinMedical", type: "Shopify" },
     { name: "Librería Bazarte", type: "Shopify" },
     { name: "Altavista Chile", type: "Shopify" },
@@ -65,6 +65,8 @@ export default function Footer() {
                 </span>
                 {company.type === 'Shopify' ? (
                   <span className="bg-[#95bf47]/10 text-[#95bf47] text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider border border-[#95bf47]/20">Shopify</span>
+                ) : company.type === 'Full Next.js' ? (
+                  <span className="bg-violet-600/10 text-violet-600 text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider border border-violet-600/20">Full Next.js</span>
                 ) : (
                   <span className="bg-[#21759b]/10 text-[#21759b] text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider border border-[#21759b]/20">WordPress</span>
                 )}
