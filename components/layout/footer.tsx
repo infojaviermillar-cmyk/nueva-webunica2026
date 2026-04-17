@@ -127,9 +127,17 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-zinc-800/50 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-zinc-500 text-sm">
-            © {new Date().getFullYear()} WebUnica. Todos los derechos reservados.
-          </p>
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <p className="text-zinc-500 text-sm">
+              © {new Date().getFullYear()} WebUnica. Todos los derechos reservados.
+            </p>
+            <div className="mt-1">
+              <span className="text-xs text-zinc-600 mr-2 uppercase tracking-widest font-bold">Diseño y desarrollo por</span>
+              <span className="text-xl md:text-2xl font-serif italic bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-400 select-none cursor-default hover:brightness-110 transition-all">
+                Javier Millar 2026
+              </span>
+            </div>
+          </div>
           <ul className="flex gap-6">
             <li>
               <Link href="/" prefetch={false} className="text-sm text-zinc-400 hover:text-white transition-colors relative z-10">Inicio</Link>
