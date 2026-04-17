@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
 import ChecklistClient from '@/components/ui/checklist-client';
 import Link from 'next/link';
@@ -10,14 +10,13 @@ import { Suspense } from 'react';
 
 function ChecklistProContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
   const [rawText, setRawText] = useState<string>('');
   const [isPaid, setIsPaid] = useState(false);
 
   useEffect(() => {
-    async function checkAuth() {
+    async function checkAuthAndAccess() {
       if (!supabase) return;
       
       const { data: { user } } = await supabase.auth.getUser();
@@ -29,11 +28,18 @@ function ChecklistProContent() {
       
       setUser(user);
       
-      // Check for paid access (mock logic)
-      const hasToken = searchParams.get('token') === 'acceso-pro';
-      setIsPaid(hasToken);
+      // VALIDACIÓN REAL CONTRA LA BASE DE DATOS
+      const { data: accessData, error: accessError } = await supabase
+        .from('user_access')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('resource_id', 'cro-pro')
+        .single();
       
-      if (hasToken) {
+      const hasAccess = !!accessData && !accessError;
+      setIsPaid(hasAccess);
+      
+      if (hasAccess) {
         try {
           const response = await fetch('/listas-de-verificacion-shopify-cro-pro.txt');
           const text = await response.text();
@@ -46,8 +52,8 @@ function ChecklistProContent() {
       setLoading(false);
     }
     
-    checkAuth();
-  }, [router, searchParams]);
+    checkAuthAndAccess();
+  }, [router]);
 
   if (loading) {
     return (

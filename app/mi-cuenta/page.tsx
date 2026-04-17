@@ -50,6 +50,8 @@ export default function UserAccountPage() {
   }, []);
 
   async function checkProAccess(userId: string) {
+    if (!supabase) return;
+
     const { data } = await supabase
       .from('user_access')
       .select('id')
