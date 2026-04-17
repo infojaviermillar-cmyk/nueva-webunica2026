@@ -25,6 +25,7 @@ export default function UserAccountPage() {
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
   const [user, setUser] = useState<any>(null);
+  const [hasProAccess, setHasProAccess] = useState(false);
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -42,10 +43,22 @@ export default function UserAccountPage() {
         return;
       }
       setUser(user);
+      checkProAccess(user.id);
       loadTestimonials();
     }
     init();
   }, []);
+
+  async function checkProAccess(userId: string) {
+    const { data } = await supabase
+      .from('user_access')
+      .select('id')
+      .eq('user_id', userId)
+      .eq('resource_id', 'cro-pro')
+      .single();
+    
+    setHasProAccess(!!data);
+  }
 
   async function loadTestimonials() {
     setLoading(true);
@@ -132,21 +145,27 @@ export default function UserAccountPage() {
             {/* Pro Checklist Link */}
             <div 
               onClick={() => router.push('/listas-de-verificacion-shopify-cro-pro')}
-              className="bg-amber-50 border border-amber-100 rounded-[2.5rem] p-8 flex items-center justify-between hover:border-amber-300 hover:shadow-lg transition-all cursor-pointer group"
+              className={`${hasProAccess ? 'bg-white border-slate-200' : 'bg-amber-50 border-amber-100'} border rounded-[2.5rem] p-8 flex items-center justify-between hover:border-amber-300 hover:shadow-lg transition-all cursor-pointer group`}
             >
               <div className="flex items-center gap-6">
-                <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center shrink-0">
-                  <Zap className="w-7 h-7" />
+                <div className={`w-14 h-14 ${hasProAccess ? 'bg-emerald-100 text-emerald-600' : 'bg-amber-100 text-amber-600'} rounded-2xl flex items-center justify-center shrink-0`}>
+                  {hasProAccess ? <CheckCircle2 className="w-7 h-7" /> : <Zap className="w-7 h-7" />}
                 </div>
                 <div>
-                  <h3 className="text-lg font-black text-amber-900 leading-none mb-2">Auditoría CRO PRO</h3>
+                  <h3 className="text-lg font-black text-slate-900 leading-none mb-2">Auditoría CRO PRO</h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-amber-600">Requiere Desbloqueo</span>
-                    <Lock className="w-3 h-3 text-amber-600" />
+                    {hasProAccess ? (
+                      <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500">Acceso Habilitado</span>
+                    ) : (
+                      <>
+                        <span className="text-[10px] font-black uppercase tracking-widest text-amber-600">Requiere Desbloqueo</span>
+                        <Lock className="w-3 h-3 text-amber-600" />
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-amber-300 group-hover:text-amber-500 group-hover:translate-x-1 transition-all" />
+              <ArrowRight className={`w-5 h-5 ${hasProAccess ? 'text-slate-300 group-hover:text-emerald-500' : 'text-amber-300 group-hover:text-amber-500'} group-hover:translate-x-1 transition-all`} />
             </div>
           </div>
         </div>
