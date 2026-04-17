@@ -10,9 +10,9 @@ export default function Footer() {
           {/* Brand Col */}
           <div className="flex flex-col gap-6 col-span-2 md:col-span-3 lg:col-span-1">
             <Link href="/" className="group relative block w-fit">
-              {/* Logo con Máscara de Degradado - Tamaño Reducido */}
+              {/* Logo con Máscara de Degradado - Tamaño Optimizado (+30%) */}
               <div 
-                className="h-7 w-[110px] bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-600 transition-transform duration-700 group-hover:scale-110"
+                className="h-9 w-[143px] bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-600 transition-transform duration-700 group-hover:scale-110"
                 style={{
                   maskImage: 'url(/logo-webunica.png.webp)',
                   WebkitMaskImage: 'url(/logo-webunica.png.webp)',
