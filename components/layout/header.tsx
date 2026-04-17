@@ -22,6 +22,8 @@ export default function Header() {
     }
     getSession();
 
+    if (!supabase) return;
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
