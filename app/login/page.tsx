@@ -2,13 +2,24 @@ import React, { Suspense } from 'react';
 import { LoginForm } from './login-form';
 import { Loader2 } from 'lucide-react';
 import { Metadata } from 'next';
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Acceso Clientes | Webunica',
   description: 'Inicia sesión en tu panel de control de Webunica para gestionar tus testimonios y servicios.',
 };
 
-export default function LoginPage() {
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
+  const params = await searchParams;
+  const next = params.next || '/mi-cuenta';
+  
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (user) {
+    redirect(next);
+  }
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-6 relative overflow-hidden font-sans">
       {/* Background Decor */}

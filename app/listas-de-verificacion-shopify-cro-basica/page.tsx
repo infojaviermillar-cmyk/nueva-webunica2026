@@ -1,47 +1,65 @@
-import { createClient } from '@/lib/supabase/server';
-import { redirect } from 'next/navigation';
-import { promises as fs } from 'fs';
-import path from 'path';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase/client';
 import ChecklistClient from '@/components/ui/checklist-client';
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
 
-export const metadata = {
-  title: 'Checklist Shopify CRO Básica | WebUnica',
-  description: 'Auditoría interactiva básica de conversión para tiendas Shopify.'
-};
+export default function ChecklistBasicaPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
+  const [rawText, setRawText] = useState<string>('');
 
-export default async function ChecklistBasicaPage() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  useEffect(() => {
+    async function checkAuth() {
+      if (!supabase) return;
+      
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        router.push('/login?next=/listas-de-verificacion-shopify-cro-basica');
+        return;
+      }
+      
+      setUser(user);
+      
+      // Fetch the checklist content via public URL to avoid fs issues on client
+      try {
+        const response = await fetch('/listas-de-verificacion-shopify-cro-basica.txt');
+        const text = await response.text();
+        setRawText(text);
+      } catch (e) {
+        console.error("Error fetching checklist text", e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    checkAuth();
+  }, [router]);
 
-  // Route protected by middleware
-
-  const filePath = path.join(process.cwd(), 'public', 'listas-de-verificacion-shopify-cro-basica.txt');
-  let rawText = '';
-  try {
-    rawText = await fs.readFile(filePath, 'utf8');
-  } catch (e) {
-    rawText = 'Error cargando la lista. Verifica que el archivo exista en public.';
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-violet-600 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-slate-500 font-medium animate-pulse">Cargando recurso seguro...</p>
+        </div>
+      </div>
+    );
   }
 
+  if (!user) return null;
+
   return (
-    <>
-      <Header />
-      <div className="bg-slate-50 min-h-screen pt-28 pb-20">
-        <div className="container mx-auto px-6 mb-8 text-center">
-            <span className="inline-block px-4 py-2 rounded-full bg-violet-100 text-violet-700 font-bold text-xs uppercase tracking-widest mb-4">
-                Recurso Gratuito (Usuario Registrado)
-            </span>
-        </div>
-        <ChecklistClient 
-          title="Auditoría CRO Básica"
-          description="Detecta de forma rápida si tu tienda Shopify está perdiendo ventas por fricciones comunes. Marca tu avance y descubre oportunidades."
-          rawText={rawText}
-          storageKey="checklist-cro-basica-webunica"
-        />
-      </div>
-      <Footer />
-    </>
+    <main className="min-h-screen bg-slate-50 pt-20">
+      <ChecklistClient 
+        title="Checklist CRO Shopify Básica"
+        description="Optimiza los elementos fundamentales de tu tienda para empezar a convertir visitas en ventas."
+        rawText={rawText}
+        storageKey="cro-basic-checklist"
+      />
+    </main>
   );
 }
