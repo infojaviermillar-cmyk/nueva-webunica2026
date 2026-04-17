@@ -132,9 +132,8 @@ export default function Footer() {
               © {new Date().getFullYear()} WebUnica. Todos los derechos reservados.
             </p>
             <div className="mt-1">
-              <span className="text-xs text-zinc-600 mr-2 uppercase tracking-widest font-bold">Diseño y desarrollo por</span>
-              <span className="text-xl md:text-2xl font-serif italic bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-400 select-none cursor-default hover:brightness-110 transition-all">
-                Javier Millar 2026
+              <span className="text-xl md:text-3xl font-caveat bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-400 select-none cursor-default hover:brightness-110 transition-all">
+                Desarrollo React por Javier Millar V.
               </span>
             </div>
           </div>

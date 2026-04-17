@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
+import { Inter, Plus_Jakarta_Sans, Caveat } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
@@ -12,6 +12,11 @@ const inter = Inter({
 
 const plusJakarta = Plus_Jakarta_Sans({
   variable: '--font-plus-jakarta',
+  subsets: ['latin'],
+});
+
+const caveat = Caveat({
+  variable: '--font-caveat',
   subsets: ['latin'],
 });
 
@@ -40,7 +45,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${inter.variable} ${plusJakarta.variable} h-full antialiased`}
+      className={`${inter.variable} ${plusJakarta.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
         <ContactModalProvider>
