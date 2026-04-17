@@ -9,6 +9,8 @@ import LeadButton from '@/components/ui/lead-button';
 
 import { BlogPost } from '@/lib/blog';
 
+import TestimonialsSection from '@/components/sections/testimonials';
+
 export default function HomeClient({ posts }: { posts: BlogPost[] }) {
   const { openModal } = useContactModal();
   
@@ -183,6 +185,9 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
           </div>
         </div>
       </section>
+
+      {/* Social Proof: Testimonials */}
+      <TestimonialsSection />
 
       {/* Pricing Section - Funnels Packs */}
       <section id="pricing" className="py-32 bg-[#fcfcfc] border-y border-zinc-100 relative overflow-hidden">
