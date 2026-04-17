@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS public.webunica_blog_posts (
     excerpt TEXT,
     cover_image TEXT,
     cover_image_alt TEXT,
-    category_id UUID REFERENCES public.webunica_blog_categories(id),
-    status TEXT DEFAULT 'draft', -- 'draft' o 'published'
+    category_id UUID REFERENCES public.webunica_blog_categories(id) ON DELETE SET NULL,
+    status TEXT DEFAULT 'draft',
     published_at TIMESTAMPTZ,
     seo_title TEXT,
     seo_description TEXT,
@@ -59,9 +59,15 @@ CREATE INDEX IF NOT EXISTS idx_blog_sh_slug ON public.webunica_blog_posts(slug);
 CREATE INDEX IF NOT EXISTS idx_leads_sh_created ON public.leads(created_at);
 CREATE INDEX IF NOT EXISTS idx_testimonials_sh_active ON public.testimonials(active);
 
--- 5. SEMILLAS (Categorías Base)
+-- 5. SEMILLAS CON UUIDS ESPECÍFICOS (Para evitar errores de FK)
+INSERT INTO public.webunica_blog_categories (id, name, slug) VALUES 
+('c5c45ea3-b239-45a8-a017-8f98195b9ce2', 'Desarrollo Web', 'desarrollo-web'),
+('e8439594-13ae-4c4c-abd5-0cf37997d6e7', 'Diseño Web', 'diseno-web'),
+('a789bcba-60c7-4c36-a852-947239548471', 'E-commerce Shopify', 'ecommerce-shopify')
+ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, slug = EXCLUDED.slug;
+
+-- Categorías adicionales
 INSERT INTO public.webunica_blog_categories (name, slug) VALUES 
-('Desarrollo Web', 'desarrollo-web'),
-('E-commerce Shopify', 'ecommerce-shopify'),
-('SEO y Marketing', 'seo-marketing')
+('SEO y Marketing', 'seo-marketing'),
+('Web con IA', 'web-ia')
 ON CONFLICT (slug) DO NOTHING;
