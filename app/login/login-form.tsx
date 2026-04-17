@@ -24,7 +24,11 @@ export function LoginForm() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supabase) return;
+    if (!supabase) {
+      setError('Error de configuración: Supabase no está inicializado.');
+      setLoading(false);
+      return;
+    }
     
     setLoading(true);
     setError(null);
@@ -61,7 +65,11 @@ export function LoginForm() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!supabase) return;
+    if (!supabase) {
+      setError('Error de configuración: Supabase no está inicializado.');
+      setLoading(false);
+      return;
+    }
     
     setLoading(true);
     setError(null);

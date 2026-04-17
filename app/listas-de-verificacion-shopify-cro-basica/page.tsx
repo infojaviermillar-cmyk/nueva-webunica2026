@@ -15,10 +15,7 @@ export default async function ChecklistBasicaPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Protect route - requires login
-  if (!user) {
-    redirect('/login?next=/listas-de-verificacion-shopify-cro-basica');
-  }
+  // Route protected by middleware
 
   const filePath = path.join(process.cwd(), 'public', 'listas-de-verificacion-shopify-cro-basica.txt');
   let rawText = '';

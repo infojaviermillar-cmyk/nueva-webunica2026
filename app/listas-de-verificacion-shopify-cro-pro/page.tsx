@@ -20,9 +20,7 @@ export default async function ChecklistProPage({
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect('/login?next=/listas-de-verificacion-shopify-cro-pro');
-  }
+  // Route protected by middleware
 
   // Simulación de acceso PRO: En producción se debe verificar en base de datos si el usuario tiene una suscripción/compra activa
   const isPaid = searchParams?.token === 'acceso-pro';

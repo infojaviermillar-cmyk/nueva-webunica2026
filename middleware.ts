@@ -56,8 +56,11 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Protect /admin routes
-  if (request.nextUrl.pathname.startsWith('/admin') && !user) {
+  // Protect /admin and /listas-de-verificacion routes
+  const protectedPaths = ['/admin', '/listas-de-verificacion-shopify-cro-basica', '/listas-de-verificacion-shopify-cro-pro']
+  const isProtectedPath = protectedPaths.some(path => request.nextUrl.pathname.startsWith(path))
+
+  if (isProtectedPath && !user) {
     return NextResponse.redirect(new URL('/login?next=' + request.nextUrl.pathname, request.url))
   }
 
