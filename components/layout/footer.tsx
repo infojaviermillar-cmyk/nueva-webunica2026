@@ -3,11 +3,43 @@ import WhatsAppButton from '@/components/ui/whatsapp-button';
 
 export default function Footer() {
   const COMPANIES = [
-    "IPSDatax", "Reaprende", "Porta Francés", "Nutrasur", "Smarthing", 
-    "Radio Viaducto", "PPI Seguridad", "Librería Heros", "Compass Security", 
-    "Coding Dojo Latam", "Urbatec", "Delivery Temuco", "Bramanic", "Grupo Kefren", 
-    "Grúas Acer", "Eros Consultora", "Dripco", "Preutem",
-    "SoloCasasChile", "Kinelawen", "TerraAndes"
+    { name: "IPSDatax", type: "WordPress" },
+    { name: "Reaprende", type: "WordPress" },
+    { name: "Porta Francés", type: "WordPress" },
+    { name: "Nutrasur", type: "WordPress" },
+    { name: "Smarthing", type: "WordPress" },
+    { name: "Radio Viaducto", type: "WordPress" },
+    { name: "PPI Seguridad", type: "WordPress" },
+    { name: "Librería Heros", type: "WordPress" },
+    { name: "Compass Security", type: "WordPress" },
+    { name: "Coding Dojo Latam", type: "WordPress" },
+    { name: "Urbatec", type: "WordPress" },
+    { name: "Delivery Temuco", type: "WordPress" },
+    { name: "Bramanic", type: "WordPress" },
+    { name: "Grupo Kefren", type: "WordPress" },
+    { name: "Grúas Acer", type: "WordPress" },
+    { name: "Eros Consultora", type: "WordPress" },
+    { name: "Dripco", type: "WordPress" },
+    { name: "Preutem", type: "WordPress" },
+    { name: "SoloCasasChile", type: "WordPress" },
+    { name: "Kinelawen", type: "WordPress" },
+    { name: "SpinMedical", type: "Shopify" },
+    { name: "Librería Bazarte", type: "Shopify" },
+    { name: "Altavista Chile", type: "Shopify" },
+    { name: "Recovery Zone", type: "Shopify" },
+    { name: "Only Jeep", type: "Shopify" },
+    { name: "EvertSport", type: "Shopify" },
+    { name: "AntarctiCare", type: "Shopify" },
+    { name: "Divan Tienda", type: "Shopify" },
+    { name: "Chiletronics", type: "Shopify" },
+    { name: "PHY Waters", type: "Shopify" },
+    { name: "Tecno-Mobile", type: "Shopify" },
+    { name: "Tuupos", type: "Shopify" },
+    { name: "Anteros", type: "Shopify" },
+    { name: "Terra Andes", type: "Shopify" },
+    { name: "Serch", type: "Shopify" },
+    { name: "Sonnda", type: "Shopify" },
+    { name: "Fcastro.cl", type: "Shopify" }
   ];
   const marqueeItems = [...COMPANIES, ...COMPANIES, ...COMPANIES];
 
@@ -27,10 +59,15 @@ export default function Footer() {
           
           <div className="flex w-max animate-marquee-horizontal items-center">
             {marqueeItems.map((company, idx) => (
-              <div key={idx} className="flex px-10 items-center justify-center min-w-max">
+              <div key={idx} className="flex px-10 items-center justify-center min-w-max gap-3">
                 <span className="text-[#848484] font-black text-[22px] tracking-tighter">
-                  {company}
+                  {company.name}
                 </span>
+                {company.type === 'Shopify' ? (
+                  <span className="bg-[#95bf47]/10 text-[#95bf47] text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider border border-[#95bf47]/20">Shopify</span>
+                ) : (
+                  <span className="bg-[#21759b]/10 text-[#21759b] text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider border border-[#21759b]/20">WordPress</span>
+                )}
               </div>
             ))}
           </div>
