@@ -3,10 +3,11 @@ import WhatsAppButton from '@/components/ui/whatsapp-button';
 
 export default function Footer() {
   const COMPANIES = [
-    "SoloCasasChile", "Kinelawen", "TerraAndes", 
-    "Bloom Cosmetics", "Inmovalpo", "EduPro", 
-    "Decohome", "S-Lagos Constructora", "SaludDigital", 
-    "Agencify Ads", "PetitBoutique", "AltaVista"
+    "IPSDatax", "Reaprende", "Porta Francés", "Nutrasur", "Smarthing", 
+    "Radio Viaducto", "PPI Seguridad", "Librería Heros", "Compass Security", 
+    "Coding Dojo Latam", "Urbatec", "Delivery Temuco", "Bramanic", "Grupo Kefren", 
+    "Grúas Acer", "Eros Consultora", "Dripco", "Preutem",
+    "SoloCasasChile", "Kinelawen", "TerraAndes"
   ];
   const marqueeItems = [...COMPANIES, ...COMPANIES, ...COMPANIES];
 
