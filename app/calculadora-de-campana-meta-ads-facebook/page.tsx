@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import MetaAdsCalculator from '@/components/sections/meta-ads-calculator';
 import FAQSection from '@/components/sections/faq-section';
+import { Target, MousePointer2, ShoppingCart, TrendingUp } from 'lucide-react';
 
 export const metadata = {
   title: 'Calculadora de ROI y Presupuesto Meta Ads (Facebook & Instagram) | Webunica',
@@ -9,7 +10,31 @@ export const metadata = {
 };
 
 export default function MetaAdsCalculatorPage() {
+  const steps = [
+    {
+      icon: <Target className="w-6 h-6 text-blue-400" />,
+      title: "1. Define tu Inversión",
+      desc: "Ajusta el presupuesto mensual que planeas destinar a pauta publicitaria en Facebook e Instagram."
+    },
+    {
+      icon: <MousePointer2 className="w-6 h-6 text-purple-400" />,
+      title: "2. Métricas de Anuncio",
+      desc: "Ingresa el CPM (Costo por mil impresiones) y el CTR (Tasa de clics) promedio de tu industria."
+    },
+    {
+      icon: <ShoppingCart className="w-6 h-6 text-emerald-400" />,
+      title: "3. Conversión y Ticket",
+      desc: "Establece tu tasa de cierre en la web y cuánto gasta un cliente promedio en tu tienda."
+    },
+    {
+      icon: <TrendingUp className="w-6 h-6 text-orange-400" />,
+      title: "4. Proyecta tu ROAS",
+      desc: "La IA calcula tu Retorno de Inversión y te dice si tu campaña será rentable o no."
+    }
+  ];
+
   const metaFaqs = [
+// ... (rest of the FAQs)
     {
       question: "¿Qué tan precisas son las simulaciones de la calculadora?",
       answer: "Los cálculos se basan en fórmulas estándar de la industria publicitaria. Sin embargo, los resultados reales dependen de factores externos como la calidad de tus creativos, la oferta de tu producto y la competencia en el momento de la subasta."
@@ -39,6 +64,21 @@ export default function MetaAdsCalculatorPage() {
           <p className="text-zinc-400 text-lg lg:text-xl font-light max-w-2xl mx-auto">
             Ajusta los valores para proyectar la rentabilidad de tus campañas de Meta Ads. Los datos no mienten.
           </p>
+        </section>
+
+        {/* Step by Step Explanation */}
+        <section className="max-w-7xl mx-auto px-6 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((step, i) => (
+              <div key={i} className="p-8 bg-zinc-900/50 border border-white/5 rounded-[2rem] hover:border-white/10 transition-colors group">
+                <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  {step.icon}
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+                <p className="text-zinc-500 text-sm leading-relaxed">{step.desc}</p>
+              </div>
+            ))}
+          </div>
         </section>
 
         {/* Calculator Component */}

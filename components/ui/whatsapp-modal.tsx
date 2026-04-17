@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase/client';
+import { createLead } from '@/lib/lead-actions';
 
 interface WhatsAppModalProps {
   isOpen: boolean;
@@ -44,25 +44,18 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
 
     setLoading(true);
     try {
-      // 1. Guardar en Supabase
-      if (supabase) {
-        try {
-          const { error } = await supabase
-            .from('leads')
-            .insert([
-              {
-                name: formData.name,
-                email: formData.email,
-                project_type: formData.interest,
-                source: 'WhatsApp Funnel',
-                status: 'new'
-              }
-            ]);
+      // 1. Guardar en Supabase usando el Server Action
+      const result = await createLead({
+        name: formData.name,
+        email: formData.email,
+        phone: "", // No se solicita en este form simplificado
+        city: "",  // No se solicita en este form simplificado
+        project_type: formData.interest,
+        source: 'WhatsApp Funnel'
+      });
 
-          if (error) console.error('Supabase error:', error);
-        } catch (err) {
-          console.error('Error saving lead to Supabase:', err);
-        }
+      if (!result.success) {
+        console.error('Error saving lead:', result.error);
       }
 
       // 2. Redirigir a WhatsApp
