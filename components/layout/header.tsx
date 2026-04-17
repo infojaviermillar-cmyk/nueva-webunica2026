@@ -78,7 +78,7 @@ export default function Header() {
             <div className="flex-shrink-0 flex items-center relative z-20">
               <Link href="/" className="group block focus:outline-none cursor-pointer">
                 <img 
-                  src="https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp" 
+                  src="/logo-webunica.png.webp" 
                   alt="Webunica Agencia" 
                   className={`h-10 w-auto transition-all duration-500 group-hover:scale-105 ${isDarkHero && !scrolled ? 'violet-filter' : 'brightness-[0.1] opacity-100 gris-img'}`}
                   width={135}

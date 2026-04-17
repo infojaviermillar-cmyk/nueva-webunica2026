@@ -14,8 +14,8 @@ export default function Footer() {
               <div 
                 className="h-7 w-[110px] bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-600 transition-transform duration-700 group-hover:scale-110"
                 style={{
-                  maskImage: 'url(https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp)',
-                  WebkitMaskImage: 'url(https://webunica.cl/wp-content/uploads/2024/01/logo-webunica.png.webp)',
+                  maskImage: 'url(/logo-webunica.png.webp)',
+                  WebkitMaskImage: 'url(/logo-webunica.png.webp)',
                   maskRepeat: 'no-repeat',
                   WebkitMaskRepeat: 'no-repeat',
                   maskSize: 'contain',
