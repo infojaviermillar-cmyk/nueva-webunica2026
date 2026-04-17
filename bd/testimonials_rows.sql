@@ -1,0 +1,1 @@
+INSERT INTO "public"."testimonials" ("id", "quote", "author", "stars", "active", "created_at", "user_id") VALUES ('2c385c67-8cd8-4e93-95e6-706ff4d08e9a', 'Muy satisfecha con el trabajo de la agencia, serios y responsables. La implementación de nuestra tienda Shopify fue impecable.', 'Ana Maria - altavistachile.cl', 5, true, '2026-04-17 13:57:20.609881+00', null);

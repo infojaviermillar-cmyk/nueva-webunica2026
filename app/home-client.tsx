@@ -10,9 +10,16 @@ import LeadButton from '@/components/ui/lead-button';
 import { BlogPost } from '@/lib/blog';
 
 import TestimonialsSection from '@/components/sections/testimonials';
+import LeadResourceModal from '@/components/modals/lead-resource-modal';
+import { useState } from 'react';
 
 export default function HomeClient({ posts }: { posts: BlogPost[] }) {
   const { openModal } = useContactModal();
+  const [resourceModal, setResourceModal] = useState({ isOpen: false, name: '', slug: '' });
+  
+  const openResourceModal = (name: string, slug: string) => {
+    setResourceModal({ isOpen: true, name, slug });
+  };
   
   const homeFaqs = [
     {
@@ -266,9 +273,12 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
               <div className="text-3xl font-black text-slate-900 mb-8">
                 Gratis <span className="text-[11px] text-slate-400 font-bold uppercase tracking-widest block mt-2">Requiere Registro Gratuito</span>
               </div>
-              <Link href="/listas-de-verificacion-shopify-cro-basica" className="w-full py-4 rounded-xl font-bold text-white bg-slate-900 hover:bg-slate-800 transition-colors">
+              <button 
+                onClick={() => openResourceModal('Checklist CRO Básica', '/listas-de-verificacion-shopify-cro-basica')}
+                className="w-full py-4 rounded-xl font-bold text-white bg-slate-900 hover:bg-slate-800 transition-colors"
+              >
                 Descargar Lista Básica
-              </Link>
+              </button>
             </div>
 
             {/* Pro */}
@@ -347,6 +357,12 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
           </LeadButton>
         </div>
       </section>
+      <LeadResourceModal 
+        isOpen={resourceModal.isOpen} 
+        onClose={() => setResourceModal({ ...resourceModal, isOpen: false })}
+        resourceName={resourceModal.name}
+        resourceSlug={resourceModal.slug}
+      />
     </main>
   );
 }
