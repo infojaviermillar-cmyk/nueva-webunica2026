@@ -160,32 +160,6 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
-      {/* Main Philosophy Section */}
-      <section className="bg-zinc-950 py-32 rounded-[4rem] mx-4 relative overflow-hidden group">
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-transparent pointer-events-none" />
-        <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
-          <h2 className="text-4xl lg:text-6xl font-black text-white mb-10 tracking-tighter uppercase leading-[0.9]">
-            Tu sitio actual es un gasto. <br/><span className="text-violet-400 italic font-serif lowercase font-light">Un embudo es una inversión</span>
-          </h2>
-          <p className="text-xl text-zinc-400 mb-14 max-w-2xl mx-auto font-light leading-relaxed text-pretty">
-            La mayoría de las agencias venden "diseño". Nosotros vendemos resultados comerciales utilizando la tecnología web más rápida del mundo. Menos fuga de prospectos, más reuniones cerradas.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {[
-              { t: 'Captación Proactiva', d: 'Guía al cliente paso a paso sin distracciones.' },
-              { t: 'Automatización Seguimiento', d: 'Tus leads calificados llegan directo al CRM.' },
-              { t: 'Velocidad Insuperable', d: 'Next.js garantiza carga de milisegundos.' }
-            ].map((v, i) => (
-              <div key={i} className="text-left p-8 bg-white/5 border border-white/10 rounded-3xl">
-                <span className="text-violet-400 font-black mb-4 block">0{i+1}.</span>
-                <h3 className="text-lg font-bold text-white mb-2 uppercase">{v.t}</h3>
-                <p className="text-zinc-500 text-sm font-light leading-relaxed">{v.d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Social Proof: Testimonials */}
       <TestimonialsSection />
 
@@ -237,6 +211,32 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
                     Entrega estimada: {plan.time}
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Main Philosophy Section */}
+      <section className="bg-zinc-950 py-32 rounded-[4rem] mx-4 relative overflow-hidden group">
+        <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-transparent pointer-events-none" />
+        <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+          <h2 className="text-4xl lg:text-6xl font-black text-white mb-10 tracking-tighter uppercase leading-[0.9]">
+            Tu sitio actual es un gasto. <br/><span className="text-violet-400 italic font-serif lowercase font-light">Un embudo es una inversión</span>
+          </h2>
+          <p className="text-xl text-zinc-400 mb-14 max-w-2xl mx-auto font-light leading-relaxed text-pretty">
+            La mayoría de las agencias venden "diseño". Nosotros vendemos resultados comerciales utilizando la tecnología web más rápida del mundo. Menos fuga de prospectos, más reuniones cerradas.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {[
+              { t: 'Captación Proactiva', d: 'Guía al cliente paso a paso sin distracciones.' },
+              { t: 'Automatización Seguimiento', d: 'Tus leads calificados llegan directo al CRM.' },
+              { t: 'Velocidad Insuperable', d: 'Next.js garantiza carga de milisegundos.' }
+            ].map((v, i) => (
+              <div key={i} className="text-left p-8 bg-white/5 border border-white/10 rounded-3xl">
+                <span className="text-violet-400 font-black mb-4 block">0{i+1}.</span>
+                <h3 className="text-lg font-bold text-white mb-2 uppercase">{v.t}</h3>
+                <p className="text-zinc-500 text-sm font-light leading-relaxed">{v.d}</p>
               </div>
             ))}
           </div>
