@@ -50,8 +50,20 @@ export default function FuneralPage() {
       
       <main className="pt-[20vh]">
         {/* Hero Section */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-32 text-zinc-950">
-          <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-20">
+        <section className="relative max-w-7xl mx-auto px-6 lg:px-8 mb-32 text-zinc-950 overflow-hidden">
+          {/* Background Texture Overlay */}
+          <div className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none">
+            <Image 
+              src="/bg-01.jpg" 
+              alt="Background Texture" 
+              fill 
+              className="object-cover object-center" 
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white"></div>
+          </div>
+          
+          <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto mb-20">
             <span className="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wide text-zinc-400 uppercase bg-zinc-50 rounded-full border border-zinc-100">
               Dignidad y Memoria Eterna
             </span>

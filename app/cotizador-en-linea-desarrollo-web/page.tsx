@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { saveLeadAction } from '@/lib/supabase/actions';
 
@@ -189,7 +190,20 @@ export default function CotizadorPage() {
          <div className="w-[800px] h-[800px] bg-gradient-to-br from-[#a1fcd8] to-blue-200 rounded-full blur-3xl opacity-20"></div>
       </div>
 
-      <section className="container mx-auto px-4 py-16 lg:py-24 max-w-4xl relative z-10 flex-grow flex flex-col justify-center">
+      <section className="relative container mx-auto px-4 py-16 lg:py-24 max-w-4xl flex-grow flex flex-col justify-center overflow-hidden">
+        {/* Background Texture Overlay */}
+        <div className="absolute inset-0 z-0 opacity-[0.2] pointer-events-none">
+          <Image 
+            src="/bg-01.jpg" 
+            alt="Background Texture" 
+            fill 
+            className="object-cover object-center" 
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-zinc-50 via-transparent to-zinc-50"></div>
+        </div>
+        
+        <div className="relative z-10">
         
         <div className="text-center mb-12">
           <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#2d3748] mb-4 text-balance">

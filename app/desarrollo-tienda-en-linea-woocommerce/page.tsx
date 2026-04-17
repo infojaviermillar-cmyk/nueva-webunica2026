@@ -111,9 +111,20 @@ export default function WooCommercePage() {
       
       <main className="pt-20 lg:pt-32">
         {/* Professional Hero Section */}
-        <section className="max-w-7xl mx-auto px-6 py-20 lg:py-32 relative">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full -z-10 animate-pulse" />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32 overflow-hidden">
+          {/* Background Texture Overlay */}
+          <div className="absolute inset-0 z-0 opacity-[0.25] pointer-events-none">
+            <Image 
+              src="/bg-01.jpg" 
+              alt="Background Texture" 
+              fill 
+              className="object-cover object-center" 
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white"></div>
+          </div>
+          
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div data-aos="fade-right">
               <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-violet-600 uppercase bg-violet-50 rounded-full border border-violet-100 uppercase font-black">
                 Soluciones E-commerce de Alto Nivel

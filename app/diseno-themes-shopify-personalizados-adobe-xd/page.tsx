@@ -50,8 +50,20 @@ export default function ShopifyXDPage() {
       
       <main className="pt-32">
         {/* Aesthetic Hero Section */}
-        <section className="max-w-7xl mx-auto px-6 py-20 lg:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32 overflow-hidden">
+          {/* Background Texture Overlay */}
+          <div className="absolute inset-0 z-0 opacity-[0.25] pointer-events-none">
+            <Image 
+              src="/bg-01.jpg" 
+              alt="Background Texture" 
+              fill 
+              className="object-cover object-center" 
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#fcfcfc] via-transparent to-[#fcfcfc]"></div>
+          </div>
+          
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-zinc-400 uppercase border border-zinc-200 rounded-full">
                 Design-First Methodology
