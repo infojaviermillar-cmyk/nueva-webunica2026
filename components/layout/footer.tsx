@@ -2,8 +2,13 @@ import Link from 'next/link';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
 
 export default function Footer() {
-  const COMPANIES = ["SoloCasasChile", "Shopify Partners", "Vercel Next.js", "Kinelawen", "TerraAndes"];
-  const marqueeItems = [...COMPANIES, ...COMPANIES, ...COMPANIES, ...COMPANIES, ...COMPANIES];
+  const COMPANIES = [
+    "SoloCasasChile", "Kinelawen", "TerraAndes", 
+    "Bloom Cosmetics", "Inmovalpo", "EduPro", 
+    "Decohome", "S-Lagos Constructora", "SaludDigital", 
+    "Agencify Ads", "PetitBoutique", "AltaVista"
+  ];
+  const marqueeItems = [...COMPANIES, ...COMPANIES, ...COMPANIES];
 
   return (
     <>
