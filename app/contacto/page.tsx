@@ -12,7 +12,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative pt-40 pb-20 overflow-hidden bg-zinc-950 text-white rounded-b-[4rem]">
+      <section className="relative pt-[20vh] pb-20 overflow-hidden bg-zinc-950 text-white rounded-b-[4rem]">
          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-600/20 blur-[120px] rounded-full -z-10" />
          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-500/10 blur-[100px] rounded-full -z-10" />
          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">

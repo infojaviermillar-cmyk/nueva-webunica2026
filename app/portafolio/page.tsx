@@ -172,8 +172,8 @@ export default function PortfolioPage() {
 
   return (
     <div className="min-h-screen bg-white text-zinc-900 font-sans antialiased">
-      <main className="pt-32 pb-20">
-        <section className="relative px-6 py-20 lg:pt-32 lg:pb-48 overflow-hidden bg-zinc-950 text-white rounded-b-[4rem] lg:rounded-b-[6rem]">
+      <main className="pt-[20vh] pb-20">
+        <section className="relative px-6 py-20 lg:pb-48 overflow-hidden bg-zinc-950 text-white rounded-b-[4rem] lg:rounded-b-[6rem]">
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-violet-600/10 blur-[150px] rounded-full -z-10 animate-pulse" />
           <div className="absolute -bottom-48 -left-48 w-[600px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full -z-10" />
           <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center relative z-10">

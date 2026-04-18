@@ -106,7 +106,7 @@ export default function CityPage({ params }: { params: Params }) {
 
   return (
     <div className="min-h-screen bg-white text-zinc-900 font-sans antialiased">
-      <main className="pt-32 pb-20">
+      <main className="pt-[20vh] pb-20">
         <CityPageClient data={data} />
       </main>
     </div>
