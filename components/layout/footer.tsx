@@ -154,22 +154,12 @@ export default function Footer() {
               <h4 className="text-white font-semibold mb-6 uppercase tracking-wider text-xs">Recursos & Educación</h4>
               <ul className="space-y-4">
                 <li>
-                  <Link href="/comparacion-woocommerce-o-shopify-para-chile" className="text-sm font-bold text-emerald-400 hover:text-white transition-colors pb-1 inline-block">
-                    Shopify vs WooCommerce 👑
+                  <Link href="/recursos" className="text-sm font-bold text-emerald-400 hover:text-white transition-colors pb-1 inline-block">
+                    Centro de Conocimiento 📚
                   </Link>
                 </li>
                 <li>
-                  <Link href="/costos-asociados-a-tienda-shopify-chile" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
-                    Costos de Shopify en Chile
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/preguntas-frecuentes-sobre-tiendas-shopify-en-chile" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
-                    Preguntas Frecuentes Shopify
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/portafolio" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block mt-2 pt-2 border-t border-zinc-800">
+                  <Link href="/portafolio" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
                     Casos de Éxito
                   </Link>
                 </li>
