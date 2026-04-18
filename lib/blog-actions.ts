@@ -1,6 +1,7 @@
 'use server';
 
 import { supabase } from '@/lib/supabase/client';
+import { getSupabaseAdmin } from '@/lib/supabase/admin';
 import { revalidatePath } from 'next/cache';
 
 export async function getCategoriesAction() {
@@ -22,8 +23,9 @@ export async function saveBlogPost(postData: {
   category_id?: string;
   status?: 'draft' | 'published';
 }) {
-  if (!supabase) {
-    return { success: false, error: 'DB no disponible. Configura NEXT_PUBLIC_SUPABASE_URL y ANNON_KEY.' };
+  const adminClient = getSupabaseAdmin();
+  if (!adminClient) {
+    return { success: false, error: 'DB no disponible (Admin SDK).' };
   }
 
   // Sólo los campos que existen en la tabla blog_posts
@@ -42,7 +44,7 @@ export async function saveBlogPost(postData: {
   };
 
   // Verificar si el slug ya existe
-  const { data: existing, error: existError } = await supabase
+  const { data: existing, error: existError } = await adminClient
     .from('webunica_blog_posts')
     .select('id')
     .eq('slug', insertData.slug)
@@ -56,7 +58,7 @@ export async function saveBlogPost(postData: {
     insertData.slug = `${insertData.slug}-${Date.now().toString().slice(-4)}`;
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await adminClient
     .from('webunica_blog_posts')
     .insert([insertData])
     .select()
@@ -90,9 +92,8 @@ export async function getAdminPosts() {
 }
 
 export async function deleteBlogPost(id: string) {
-  if (!supabase) return { success: false, error: 'DB no disponible' };
-
-  const { error } = await supabase
+  const adminClient = getSupabaseAdmin();
+  const { error } = await adminClient
     .from('webunica_blog_posts')
     .delete()
     .eq('id', id);
