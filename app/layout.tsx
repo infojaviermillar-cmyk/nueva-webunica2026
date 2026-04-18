@@ -35,6 +35,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://webunica.cl',
   },
+  icons: {
+    icon: '/favicon.webp',
+  },
 };
 
 export default function RootLayout({
