@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/costos-asociados-a-tienda-shopify-chile',
     '/preguntas-frecuentes-sobre-tiendas-shopify-en-chile',
     '/comparacion-woocommerce-o-shopify-para-chile',
+    '/como-instalar-mercado-pago-en-shopify-paso-a-paso-guia-2025',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
