@@ -28,6 +28,20 @@ export default function Page() {
       ]
     },
     {
+      title: "WordPress y WooCommerce",
+      description: "Recuperación, optimización y mantenimiento de tiendas y catálogos en WP.",
+      color: "from-[#21759b]/20 to-transparent",
+      borderColor: "border-[#21759b]/30",
+      icon: "⚙️",
+      links: [
+        { title: "Urgencias: Reparar Sitio Web Caído", href: "/corregir-errores-pagina-web-wordpress", tag: "Express" },
+        { title: "Soporte Técnico Mensual y Backups", href: "/soporte-mensual-sitio-web-wordpress" },
+        { title: "Servicio de Modificaciones a Medida", href: "/servicio-modificacion-mantenimiento-wordpress" },
+        { title: "Guía de Optimización Paso a Paso", href: "/mantencion-optimizacion-sitio-web-wordpress-guia-paso-a-paso" },
+        { title: "Plugin Cotizador B2B para WooCommerce", href: "/plugin-cotizador-woocommerce-chile" },
+      ]
+    },
+    {
       title: "Marketing y Embudos",
       description: "Recursos para calcular el retorno de inversión de tus campañas publicitarias.",
       color: "from-blue-500/20 to-transparent",
