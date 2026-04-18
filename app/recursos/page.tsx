@@ -15,11 +15,16 @@ export default function Page() {
       borderColor: "border-emerald-500/30",
       icon: "🛒",
       links: [
+        { title: "Desarrollo de Tiendas Shopify", href: "/desarrollo-tiendas-shopify-en-chile", tag: "Servicio" },
+        { title: "Desarrollo de Themes a Medida", href: "/desarrollo-theme-shopify-chile", tag: "Servicio" },
         { title: "Shopify vs WooCommerce: La Batalla Final", href: "/comparacion-woocommerce-o-shopify-para-chile", tag: "Nuevo" },
         { title: "Los Costos Reales de Shopify en Chile", href: "/costos-asociados-a-tienda-shopify-chile" },
+        { title: "Comisiones: Mercado Pago vs Flow vs Pago Fácil", href: "/comisiones-plataformas-de-pago-para-shopify-chile" },
+        { title: "Apps Esenciales para Shopify Chile", href: "/aplicaciones-para-tiendas-shopify" },
+        { title: "Logística: Envíos con Starken y Courier locales", href: "/medios-de-transporte-shopify" },
+        { title: "Guía: Dropshipping Local con Dropi", href: "/tienda-dropshipping-shopify-y-dropi" },
+        { title: "Guía 2026: Cómo Instalar Mercado Pago", href: "/como-instalar-mercado-pago-en-shopify-paso-a-paso-guia-2025" },
         { title: "Preguntas Frecuentes sobre Shopify", href: "/preguntas-frecuentes-sobre-tiendas-shopify-en-chile" },
-        { title: "Guía 2026: Cómo Instalar Mercado Pago en Shopify", href: "/como-instalar-mercado-pago-en-shopify-paso-a-paso-guia-2025" },
-        { title: "Comisiones: Mercado Pago vs Flow vs Pago Fácil", href: "/comisiones-plataformas-de-pago-para-shopify-chile", tag: "Próximamente" },
       ]
     },
     {
