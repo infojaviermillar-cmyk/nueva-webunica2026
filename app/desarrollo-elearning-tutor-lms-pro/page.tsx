@@ -1,10 +1,17 @@
+import { Metadata } from 'next';
+import LMSLanding from '@/components/sections/lms-landing';
+
+export const metadata: Metadata = {
+  title: 'Consultoría y Alternativas a Tutor LMS Pro | Webunica',
+  description: 'Te asesoramos en la construcción de academias online. Por qué un sistema Next.js a medida supera con creces el rendimiento de Tutor LMS Pro.',
+};
+
 export default function Page() {
   return (
-    <main className="min-h-screen py-24 bg-zinc-950 flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl text-white font-bold mb-4">DESARROLLO ELEARNING TUTOR LMS PRO</h1>
-        <p className="text-zinc-400">Esta página está en proceso de rediseño.</p>
-      </div>
-    </main>
+    <LMSLanding 
+      heroTitle="¿Evaluando comprar la licencia de Tutor LMS Pro? Espera un segundo. Existe una arquitectura superior pensada en Retención y Experiencia."
+      competitorName="el ecosistema de plugins pagados"
+      focusText="Las licencias anuales de LMS para WordPress pueden sumar miles de dólares ocultos con el tiempo. Te ofrecemos ser dueño de la infraestructura completa con una base en código limpio y seguro."
+    />
   );
 }
