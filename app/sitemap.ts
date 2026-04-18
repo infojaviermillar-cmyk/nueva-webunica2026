@@ -19,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/blog',
     '/contacto',
     '/portafolio',
+    '/recursos',
     '/desarrollo-web-nextjs-saas-custom',
     '/desarrollo-tiendas-shopify-chile',
     '/servicios-seo-posicionamiento-google',
@@ -34,6 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/preguntas-frecuentes-sobre-tiendas-shopify-en-chile',
     '/comparacion-woocommerce-o-shopify-para-chile',
     '/como-instalar-mercado-pago-en-shopify-paso-a-paso-guia-2025',
+    '/comisiones-plataformas-de-pago-para-shopify-chile',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
