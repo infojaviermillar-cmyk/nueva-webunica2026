@@ -42,13 +42,17 @@ export default function Page() {
       ]
     },
     {
-      title: "Marketing y Embudos",
-      description: "Recursos para calcular el retorno de inversión de tus campañas publicitarias.",
+      title: "Recursos Descargables y Embudos",
+      description: "Recursos para calcular el retorno de inversión y checklists para auditar tu propio ecosistema digital.",
       color: "from-blue-500/20 to-transparent",
       borderColor: "border-blue-500/30",
       icon: "📈",
       links: [
-        { title: "Calculadora de Inversión Meta Ads", href: "/calculadora-de-campana-meta-ads-facebook" }
+        { title: "Calculadora de Inversión Meta Ads", href: "/calculadora-de-campana-meta-ads-facebook" },
+        { title: "Checklist de Posicionamiento SEO", href: "/check-list-posicionamiento-seo", tag: "PDF Gratis" },
+        { title: "Carta Gantt Lanzamiento E-Commerce", href: "/carta-gantt-proyecto-tienda-en-linea", tag: "Excel Gratis" },
+        { title: "Auditoría Shopify Básica (CRO)", href: "/listas-de-verificacion-shopify-cro-basica", tag: "Sistema" },
+        { title: "Auditoría Shopify Premium (CRO)", href: "/listas-de-verificacion-shopify-cro-pro", tag: "Pago" },
       ]
     }
   ];
