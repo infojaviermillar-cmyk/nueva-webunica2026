@@ -167,6 +167,42 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
+      {/* Impact Section: The '5 Years Ago' Wake-up Call */}
+      <section className="py-24 bg-zinc-950 relative overflow-hidden group">
+        <div className="absolute inset-0 bg-gradient-to-tr from-violet-900/20 via-transparent to-rose-900/10 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-1/2">
+              <div className="inline-block px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-500 text-[10px] font-black uppercase tracking-[0.2em] mb-8">
+                ⚠️ Alerta de Rendimiento
+              </div>
+              <h2 className="text-4xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-8">
+                ¡Tu página web actual de <span className="text-rose-500 italic font-serif lowercase font-light">5 años atrás</span> te está deteniendo!
+              </h2>
+            </div>
+            <div className="lg:w-1/2">
+              <p className="text-xl lg:text-2xl text-zinc-400 font-light leading-relaxed mb-10">
+                El mundo digital ha cambiado más en los últimos 24 meses que en la década pasada. Una web estática y lenta no es una "presencia online"... <span className="text-white font-bold">es un agujero negro</span> por donde se escapan tus prospectos, tu autoridad y tu facturación.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-8 items-start">
+                <div className="flex flex-col">
+                  <span className="text-4xl font-black text-white mb-2 tracking-tighter">7.4s</span>
+                  <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest leading-tight">Carga promedio <br/>web antigua</span>
+                </div>
+                <div className="w-px h-12 bg-zinc-800 hidden sm:block mt-2" />
+                <div className="flex flex-col">
+                  <span className="text-4xl font-black text-violet-500 mb-2 tracking-tighter">0.6s</span>
+                  <span className="text-[10px] font-black text-violet-400/60 uppercase tracking-widest leading-tight">Carga con <br/>Next.js 2026</span>
+                </div>
+              </div>
+              <p className="mt-12 text-zinc-500 text-sm italic font-medium">
+                "Cada segundo de carga extra destruye un 7% de tus conversiones."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Social Proof: Testimonials */}
       <TestimonialsSection />
 
