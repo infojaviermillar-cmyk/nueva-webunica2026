@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-zinc-950 pt-32 pb-24 overflow-hidden">
+    <main className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden">
       <section className="max-w-4xl mx-auto px-6 mb-20">
         <div className="flex items-center gap-3 mb-8">
           <div className="px-3 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] font-black uppercase tracking-widest rounded-full">

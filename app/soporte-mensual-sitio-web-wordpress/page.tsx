@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-zinc-950 pt-32 pb-24 overflow-hidden">
+    <main className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden">
       <section className="max-w-5xl mx-auto px-6 mb-24 text-center">
         <h1 className="text-4xl lg:text-7xl font-black text-white uppercase tracking-tighter mb-8 leading-[0.9]">
           Soporte Mensual para <span className="text-[#21759b] italic font-serif lowercase font-light">WordPress</span>
