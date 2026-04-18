@@ -109,7 +109,7 @@ export default function SaaSPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="pt-20 lg:pt-32">
+      <main className="pt-[20vh]">
         {/* Futuristic Hero Section */}
         <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-40 overflow-hidden">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/20 blur-[150px] rounded-full -z-10 animate-pulse" />

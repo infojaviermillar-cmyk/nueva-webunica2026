@@ -109,7 +109,7 @@ export default function WooCommercePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="pt-20 lg:pt-32">
+      <main className="pt-[20vh]">
         {/* Professional Hero Section */}
         <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32 overflow-hidden">
           {/* Background Texture Overlay */}

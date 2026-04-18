@@ -48,7 +48,7 @@ export default function SeoServicePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="pt-32 pb-20">
+      <main className="pt-[20vh] pb-20">
         {/* Tech Header Section */}
         <section className="max-w-7xl mx-auto px-6 py-20 lg:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">

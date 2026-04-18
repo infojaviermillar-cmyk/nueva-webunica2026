@@ -48,7 +48,7 @@ export default function PymesPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="pt-32 pb-20">
+      <main className="pt-[20vh] pb-20">
         {/* Pymes Hero */}
         <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32 overflow-hidden">
           {/* Background Texture Overlay */}
