@@ -30,6 +30,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tienda-dropshipping-shopify-dropi',
     '/cotizador-en-linea-desarrollo-web',
     '/calculadora-de-campana-meta-ads-facebook',
+    '/costos-asociados-a-tienda-shopify-chile',
+    '/preguntas-frecuentes-sobre-tiendas-shopify-en-chile',
+    '/comparacion-woocommerce-o-shopify-para-chile',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

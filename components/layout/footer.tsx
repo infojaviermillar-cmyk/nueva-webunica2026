@@ -151,21 +151,31 @@ export default function Footer() {
 
             {/* Links Col 2 */}
             <div>
-              <h4 className="text-white font-semibold mb-6 uppercase tracking-wider text-xs">Recursos</h4>
+              <h4 className="text-white font-semibold mb-6 uppercase tracking-wider text-xs">Recursos & Educación</h4>
               <ul className="space-y-4">
                 <li>
-                  <Link href="/portafolio" className="text-sm font-bold text-zinc-300 hover:text-white transition-colors pb-1 inline-block">
+                  <Link href="/comparacion-woocommerce-o-shopify-para-chile" className="text-sm font-bold text-emerald-400 hover:text-white transition-colors pb-1 inline-block">
+                    Shopify vs WooCommerce 👑
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/costos-asociados-a-tienda-shopify-chile" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Costos de Shopify en Chile
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/preguntas-frecuentes-sobre-tiendas-shopify-en-chile" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Preguntas Frecuentes Shopify
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/portafolio" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block mt-2 pt-2 border-t border-zinc-800">
                     Casos de Éxito
                   </Link>
                 </li>
                 <li>
-                  <Link href="/calculadora-de-campana-meta-ads-facebook/" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                  <Link href="/calculadora-de-campana-meta-ads-facebook" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
                     Calculadora Meta Ads
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/soporte-mensual-tienda-shopify/" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
-                    Soporte Shopify
                   </Link>
                 </li>
               </ul>
