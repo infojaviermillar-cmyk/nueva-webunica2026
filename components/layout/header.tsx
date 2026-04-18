@@ -88,6 +88,19 @@ export default function Header() {
         .group:hover .gris-img, .gris-img:hover {
           filter: grayscale(0);
         }
+
+        /* Animación de agitación (shake) sutil cada 20s */
+        @keyframes subtle-shake {
+          0%, 90%, 100% { transform: scale(1) rotate(0deg); }
+          91% { transform: scale(1.08) rotate(3deg); }
+          93% { transform: scale(1.08) rotate(-3deg); }
+          95% { transform: scale(1.08) rotate(3deg); }
+          97% { transform: scale(1.08) rotate(-3deg); }
+          99% { transform: scale(1.08) rotate(0deg); }
+        }
+        .animate-shake-20s {
+          animation: subtle-shake 20s infinite ease-in-out;
+        }
       `}</style>
       
       <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#f5f3ff]/70 backdrop-blur-lg backdrop-saturate-150 border-b border-white/60 shadow-lg shadow-violet-900/5 h-[95px]' : `h-[116px] ${isDarkHero ? 'bg-transparent' : 'bg-[#f5f3ff]/80 backdrop-blur-sm border-b border-white/30'}`} flex items-center`}>
@@ -248,14 +261,16 @@ export default function Header() {
 
             {/* CTA & Mobile Menu Toggle */}
             <div className="flex items-center gap-4">
-              <button 
-                onClick={() => openModal()}
-                className={`hidden md:flex items-center gap-2 px-6 py-3 rounded-full font-black text-[10px] uppercase tracking-[0.15em] transition-all transform hover:scale-105 shadow-lg ${scrolled ? 'bg-violet-600 text-white hover:bg-violet-700 shadow-violet-600/20' : (isDarkHero ? 'bg-white text-zinc-950 hover:bg-zinc-200' : 'bg-black text-white hover:bg-zinc-800')}`}>
-                Cotizar Proyecto
-              </button>
-              
-              <a href="tel:+56984410379" className={`hidden md:flex items-center gap-2 p-4 rounded-full font-black text-[10px] uppercase tracking-[0.15em] transition-all transform hover:scale-105 border ${scrolled ? 'border-violet-100 text-violet-600' : (isDarkHero ? 'border-white/20 text-white' : 'border-zinc-200 text-zinc-900')}`}>
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+              <a 
+                href="https://wa.me/56984410379" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`md:flex items-center gap-2 px-7 py-3 rounded-full font-black text-[11px] uppercase tracking-[0.15em] transition-all transform animate-shake-20s shadow-[0_10px_30px_rgba(124,58,237,0.3)] bg-violet-600 text-white hover:bg-violet-700 hover:scale-105 active:scale-95`}
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412 0 6.556-5.338 11.892-11.893 11.892-1.997 0-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143c1.589.943 3.259 1.44 4.968 1.441 5.4 0 9.792-4.392 9.792-9.792 0-2.618-1.02-5.079-2.872-6.932s-4.314-2.871-6.932-2.871c-5.4 0-9.791 4.391-9.791 9.791 0 1.763.47 3.485 1.363 4.991l-.993 3.626 3.71-.973zm11.238-6.111c.07.117.117.272.164.351.047.079.047.439-.117.772-.164.333-.941.666-1.293.743-.353.076-.84.14-1.293.129-.453-.012-.662-.129-2.185-.742-1.523-.614-2.483-2.145-2.553-2.261-.07-.117-.585-.778-.585-1.487 0-.709.351-1.057.515-1.234.164-.176.353-.223.47-.223h.334c.117 0 .273 0 .422.351.15.351.515 1.258.562 1.353.047.094.079.205.016.333-.063.129-.094.205-.188.311-.094.106-.199.237-.282.333-.094.094-.194.195-.084.382.11.188.489.805 1.049 1.303.719.639 1.32.838 1.503.932.183.094.288.079.397-.047.109-.126.468-.544.593-.728.125-.184.249-.155.421-.094s1.077.508 1.258.597z"/>
+                </svg>
+                Hablemos
               </a>
 
               <button 
@@ -350,14 +365,10 @@ export default function Header() {
             </nav>
 
             <div className="mt-auto pt-10 grid gap-4">
-              <button 
-                onClick={() => { openModal(); setIsMobileMenuOpen(false); }}
-                className="w-full py-4 bg-violet-600 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/20 active:scale-95"
-              >
-                Cotizar Proyecto
-              </button>
-              <a href="tel:+56984410379" className="w-full py-4 bg-zinc-900 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+              <a href="https://wa.me/56984410379" target="_blank" rel="noopener noreferrer" className="w-full py-4 bg-violet-600 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 shadow-xl shadow-violet-600/20 active:scale-95">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412 0 6.556-5.338 11.892-11.893 11.892-1.997 0-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143c1.589.943 3.259 1.44 4.968 1.441 5.4 0 9.792-4.392 9.792-9.792 0-2.618-1.02-5.079-2.872-6.932s-4.314-2.871-6.932-2.871c-5.4 0-9.791 4.391-9.791 9.791 0 1.763.47 3.485 1.363 4.991l-.993 3.626 3.71-.973zm11.238-6.111c.07.117.117.272.164.351.047.079.047.439-.117.772-.164.333-.941.666-1.293.743-.353.076-.84.14-1.293.129-.453-.012-.662-.129-2.185-.742-1.523-.614-2.483-2.145-2.553-2.261-.07-.117-.585-.778-.585-1.487 0-.709.351-1.057.515-1.234.164-.176.353-.223.47-.223h.334c.117 0 .273 0 .422.351.15.351.515 1.258.562 1.353.047.094.079.205.016.333-.063.129-.094.205-.188.311-.094.106-.199.237-.282.333-.094.094-.194.195-.084.382.11.188.489.805 1.049 1.303.719.639 1.32.838 1.503.932.183.094.288.079.397-.047.109-.126.468-.544.593-.728.125-.184.249-.155.421-.094s1.077.508 1.258.597z"/>
+                </svg>
                 Asesor Directo
               </a>
             </div>
