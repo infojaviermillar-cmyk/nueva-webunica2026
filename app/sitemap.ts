@@ -41,6 +41,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/tienda-dropshipping-shopify-y-dropi',
     '/aplicaciones-para-tiendas-shopify',
     '/medios-de-transporte-shopify',
+    '/corregir-errores-pagina-web-wordpress',
+    '/soporte-mensual-sitio-web-wordpress',
+    '/servicio-modificacion-mantenimiento-wordpress',
+    '/mantencion-optimizacion-sitio-web-wordpress-guia-paso-a-paso',
+    '/plugin-cotizador-woocommerce-chile',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
