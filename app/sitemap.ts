@@ -46,6 +46,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/servicio-modificacion-mantenimiento-wordpress',
     '/mantencion-optimizacion-sitio-web-wordpress-guia-paso-a-paso',
     '/plugin-cotizador-woocommerce-chile',
+    '/agencia-de-desarrollo-web-y-ecommerce-en-chile',
+    '/carta-gantt-proyecto-tienda-en-linea',
+    '/check-list-posicionamiento-seo',
+    '/listas-de-verificacion-shopify-cro-basica',
+    '/listas-de-verificacion-shopify-cro-pro',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
