@@ -51,6 +51,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/check-list-posicionamiento-seo',
     '/listas-de-verificacion-shopify-cro-basica',
     '/listas-de-verificacion-shopify-cro-pro',
+    '/lms-tutor-pro-wordpress',
+    '/preguntas-sobre-tutor-lms-pro',
+    '/desarrollo-diseno-elearning-moodle',
+    '/desarrollo-diseno-elearning-tutor-lms',
+    '/desarrollo-elearning-tutor-lms-pro',
+    '/plataforma-de-clases-en-linea-mas-popular-aprende-desde-cualquier-lugar',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
