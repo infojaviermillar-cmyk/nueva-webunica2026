@@ -36,6 +36,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/comparacion-woocommerce-o-shopify-para-chile',
     '/como-instalar-mercado-pago-en-shopify-paso-a-paso-guia-2025',
     '/comisiones-plataformas-de-pago-para-shopify-chile',
+    '/desarrollo-tiendas-shopify-en-chile',
+    '/desarrollo-theme-shopify-chile',
+    '/tienda-dropshipping-shopify-y-dropi',
+    '/aplicaciones-para-tiendas-shopify',
+    '/medios-de-transporte-shopify',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
