@@ -36,7 +36,7 @@ export default function Page() {
   ];
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-32 pb-24 overflow-hidden">
+    <main className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 mb-24 relative z-10">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/20 rounded-full blur-[120px] pointer-events-none -z-10" />

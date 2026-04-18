@@ -36,7 +36,7 @@ export default function Page() {
   ];
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-32 pb-24">
+    <main className="min-h-screen bg-zinc-950 pt-[20vh] pb-24">
       {/* Hero FAQ */}
       <section className="max-w-7xl mx-auto px-6 mb-20 text-center">
         <div className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
