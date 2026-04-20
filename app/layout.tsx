@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { ContactModalProvider } from '@/context/contact-modal-context';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -50,6 +51,7 @@ export default function RootLayout({
       lang="es"
       className={`${inter.variable} ${plusJakarta.variable} ${caveat.variable} h-full antialiased`}
     >
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
         <ContactModalProvider>
           <Header />
