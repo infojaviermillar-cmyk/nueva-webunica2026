@@ -143,10 +143,10 @@ export default function Header() {
                         E-commerce Profesional
                       </h4>
                       <div className="flex flex-col gap-1">
-                        <Link href="/desarrollo-tiendas-shopify-chile" className="group/item flex flex-col p-4 bg-zinc-50 rounded-[2.2rem] border-2 border-transparent hover:border-violet-500 hover:bg-violet-50 transition-all relative overflow-hidden mb-2">
+                        <Link href="/desarrollo-tiendas-shopify-en-chile" className="group/item flex flex-col p-4 bg-zinc-50 rounded-[2.2rem] border-2 border-transparent hover:border-violet-500 hover:bg-violet-50 transition-all relative overflow-hidden mb-2">
                           <div className="absolute top-0 right-0 px-3 py-1 bg-violet-600 text-[8px] font-black text-white uppercase rounded-bl-xl">Estrella</div>
-                          <span className="text-[15px] font-black text-zinc-950 group-hover/item:text-violet-600 transition-colors uppercase italic">Tiendas Shopify</span>
-                          <span className="text-[11px] text-zinc-500 font-medium leading-tight">Escala tu marca al mundo</span>
+                          <span className="text-[15px] font-black text-zinc-950 group-hover/item:text-violet-600 transition-colors uppercase italic">Tiendas Shopify Expert</span>
+                          <span className="text-[11px] text-zinc-500 font-medium leading-tight">Diseño y desarrollo pro en Chile</span>
                         </Link>
                         <Link href="/desarrollo-tienda-en-linea-woocommerce" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
                           <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Tienda WooCommerce</span>
