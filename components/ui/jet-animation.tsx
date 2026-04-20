@@ -22,84 +22,91 @@ const RocketSvg = ({ className }: { className: string }) => (
 
 export default function JetAnimation() {
   return (
-    <div className="absolute inset-0 z-0 flex rounded-[3rem] pointer-events-none items-end overflow-hidden pb-10">
+    <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden h-full w-full">
       <style>{`
-        @keyframes flyUp {
-          0% {
-            transform: translateY(200px);
-            opacity: 0;
-          }
-          3% { opacity: 1; }
-          90% { opacity: 1; }
-          100% {
-            transform: translateY(-800px);
-            opacity: 0;
-          }
+        @keyframes flyUpRight {
+          0% { transform: translateY(100px) translateX(0) scale(0.8); opacity: 0; }
+          15% { opacity: 1; }
+          70% { opacity: 1; }
+          100% { transform: translateY(-1100px) translateX(200px) scale(1.2); opacity: 0; }
+        }
+        @keyframes flyUpLeft {
+          0% { transform: translateY(100px) translateX(0) scale(0.8); opacity: 0; }
+          20% { opacity: 0.9; }
+          75% { opacity: 0.9; }
+          100% { transform: translateY(-1200px) translateX(-250px) scale(1.5); opacity: 0; }
+        }
+        @keyframes flyUpStraight {
+          0% { transform: translateY(150px) scale(0.6); opacity: 0; }
+          15% { opacity: 1; }
+          80% { opacity: 1; }
+          100% { transform: translateY(-1000px) scale(1.1); opacity: 0; }
         }
         @keyframes trailFade {
-          0% { opacity: 0; transform: scaleY(0.2); }
-          5% { opacity: 0.8; transform: scaleY(1); }
-          90% { opacity: 0.8; transform: scaleY(1); }
+          0% { opacity: 0; transform: scaleY(0); }
+          15% { opacity: 0.6; transform: scaleY(1); }
+          80% { opacity: 0.6; transform: scaleY(1); }
           100% { opacity: 0; transform: scaleY(0); }
         }
+
         .jet-wrapper {
           position: absolute;
-          bottom: -50px;
+          bottom: -100px;
         }
         
-        /* Different speeds, delays, and positions for infinite loop feel */
-        .jet-1 { left: 10%; animation: flyUp 4.2s linear infinite -1.5s; }
-        .jet-1-trail { animation: trailFade 4.2s linear infinite -1.5s; height: 70px; transform-origin: top; }
+        /* Drifting combinations */
+        .jet-1 { left: 15%; animation: flyUpRight 6.2s cubic-bezier(0.4, 0, 0.2, 1) infinite -1.5s; }
+        .jet-1-trail { animation: trailFade 6.2s cubic-bezier(0.4, 0, 0.2, 1) infinite -1.5s; height: 90px; transform-origin: top; }
         
-        .jet-2 { left: 35%; animation: flyUp 5.5s linear infinite -4.0s; }
-        .jet-2-trail { animation: trailFade 5.5s linear infinite -4.0s; height: 140px; transform-origin: top; }
+        .jet-2 { left: 40%; animation: flyUpLeft 8.5s cubic-bezier(0.3, 0.1, 0.3, 1) infinite -4.0s; }
+        .jet-2-trail { animation: trailFade 8.5s cubic-bezier(0.3, 0.1, 0.3, 1) infinite -4.0s; height: 160px; transform-origin: top; }
         
-        .jet-3 { left: 55%; animation: flyUp 4.8s linear infinite -2.2s; }
-        .jet-3-trail { animation: trailFade 4.8s linear infinite -2.2s; height: 100px; transform-origin: top; }
+        .jet-3 { left: 60%; animation: flyUpStraight 5.8s cubic-bezier(0.4, 0, 0.2, 1) infinite -2.2s; }
+        .jet-3-trail { animation: trailFade 5.8s cubic-bezier(0.4, 0, 0.2, 1) infinite -2.2s; height: 110px; transform-origin: top; }
         
-        .jet-4 { left: 75%; animation: flyUp 5.1s linear infinite -0.5s; }
-        .jet-4-trail { animation: trailFade 5.1s linear infinite -0.5s; height: 120px; transform-origin: top; }
+        .jet-4 { left: 80%; animation: flyUpRight 7.1s cubic-bezier(0.4, 0, 0.2, 1) infinite -0.5s; }
+        .jet-4-trail { animation: trailFade 7.1s cubic-bezier(0.4, 0, 0.2, 1) infinite -0.5s; height: 130px; transform-origin: top; }
         
-        .jet-5 { left: 90%; animation: flyUp 3.9s linear infinite -3.1s; }
-        .jet-5-trail { animation: trailFade 3.9s linear infinite -3.1s; height: 50px; transform-origin: top; }
+        .jet-5 { left: 85%; animation: flyUpLeft 6.9s cubic-bezier(0.4, 0, 0.2, 1) infinite -5.1s; }
+        .jet-5-trail { animation: trailFade 6.9s cubic-bezier(0.4, 0, 0.2, 1) infinite -5.1s; height: 80px; transform-origin: top; }
         
-        .jet-6 { left: 25%; animation: flyUp 4.5s linear infinite -0.8s; }
-        .jet-6-trail { animation: trailFade 4.5s linear infinite -0.8s; height: 80px; transform-origin: top; }
+        .jet-6 { left: 25%; animation: flyUpStraight 5.5s cubic-bezier(0.4, 0, 0.2, 1) infinite -3.8s; }
+        .jet-6-trail { animation: trailFade 5.5s cubic-bezier(0.4, 0, 0.2, 1) infinite -3.8s; height: 100px; transform-origin: top; }
       `}</style>
       
-      {/* Rocket 1 (Small) */}
+      {/* Rocket 1 (Small - drifts right) */}
       <div className="jet-wrapper jet-1 flex flex-col items-center">
-        <RocketSvg className="w-8 h-8 text-violet-400 drop-shadow-[0_0_10px_rgba(167,139,250,0.5)] -rotate-45" />
+        <RocketSvg className="w-10 h-10 text-violet-400 drop-shadow-[0_0_10px_rgba(167,139,250,0.5)] -rotate-45" />
         <div className="w-[2px] jet-1-trail bg-gradient-to-t from-transparent via-violet-400 to-violet-600 rounded-full mt-1"></div>
       </div>
 
-      {/* Rocket 2 (XLarge) */}
+      {/* Rocket 2 (XLarge - drifts left) */}
       <div className="jet-wrapper jet-2 flex flex-col items-center">
-        <RocketSvg className="w-20 h-20 text-indigo-500 drop-shadow-[0_0_20px_rgba(99,102,241,0.6)] -rotate-45" />
+        <RocketSvg className="w-24 h-24 text-indigo-500 drop-shadow-[0_0_20px_rgba(99,102,241,0.6)] -rotate-45" />
         <div className="w-[4px] jet-2-trail bg-gradient-to-t from-transparent via-indigo-400 to-indigo-600 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.6)] mt-2"></div>
       </div>
 
-      {/* Rocket 3 (Medium) */}
+      {/* Rocket 3 (Medium - straight) */}
       <div className="jet-wrapper jet-3 flex flex-col items-center">
-        <RocketSvg className="w-12 h-12 text-fuchsia-500 drop-shadow-[0_0_15px_rgba(217,70,239,0.5)] -rotate-45" />
+        <RocketSvg className="w-14 h-14 text-fuchsia-500 drop-shadow-[0_0_15px_rgba(217,70,239,0.5)] -rotate-45" />
         <div className="w-[3px] jet-3-trail bg-gradient-to-t from-transparent via-fuchsia-400 to-fuchsia-600 rounded-full mt-1.5"></div>
       </div>
 
-      {/* Rocket 4 (Large) */}
+      {/* Rocket 4 (Large - drifts right) */}
       <div className="jet-wrapper jet-4 flex flex-col items-center">
-        <RocketSvg className="w-16 h-16 text-purple-400 drop-shadow-[0_0_15px_rgba(192,132,252,0.5)] -rotate-45" />
+        <RocketSvg className="w-20 h-20 text-purple-400 drop-shadow-[0_0_15px_rgba(192,132,252,0.5)] -rotate-45" />
         <div className="w-[3px] jet-4-trail bg-gradient-to-t from-transparent via-purple-400 to-purple-600 rounded-full shadow-[0_0_12px_rgba(192,132,252,0.5)] mt-2"></div>
       </div>
 
-      {/* Rocket 5 (Tiny) */}
+      {/* Rocket 5 (Tiny - drifts left) */}
       <div className="jet-wrapper jet-5 flex flex-col items-center">
-        <RocketSvg className="w-6 h-6 text-violet-300 drop-shadow-[0_0_8px_rgba(196,181,253,0.5)] -rotate-45" />
+        <RocketSvg className="w-8 h-8 text-violet-300 drop-shadow-[0_0_8px_rgba(196,181,253,0.5)] -rotate-45" />
         <div className="w-[1.5px] jet-5-trail bg-gradient-to-t from-transparent via-violet-300 to-violet-500 rounded-full mt-1"></div>
       </div>
 
-      {/* Rocket 6 (Small-Medium) */}
+      {/* Rocket 6 (Small-Medium - straight) */}
       <div className="jet-wrapper jet-6 flex flex-col items-center">
-        <RocketSvg className="w-10 h-10 text-rose-500/80 drop-shadow-[0_0_12px_rgba(244,63,94,0.5)] -rotate-45" />
+        <RocketSvg className="w-12 h-12 text-rose-500/80 drop-shadow-[0_0_12px_rgba(244,63,94,0.5)] -rotate-45" />
         <div className="w-[2.5px] jet-6-trail bg-gradient-to-t from-transparent via-rose-400 to-rose-600 rounded-full mt-1"></div>
       </div>
     </div>
