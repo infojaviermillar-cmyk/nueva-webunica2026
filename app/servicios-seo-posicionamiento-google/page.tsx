@@ -154,6 +154,64 @@ export default function SeoServicePage() {
            </div>
         </section>
 
+        {/* SEO Pricing Section */}
+        <section id="pricing" className="py-32 bg-zinc-950 border-y border-white/5 relative">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 blur-[150px] rounded-full pointer-events-none" />
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-24">
+              <h2 className="text-4xl lg:text-7xl font-black tracking-tighter uppercase mb-6 text-white">Planes de Posicionamiento</h2>
+              <p className="text-xl text-zinc-500 font-light max-w-2xl mx-auto leading-relaxed">Estrategias basadas en datos para marcas que buscan el dominio real de Google.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+              {[
+                {
+                  name: "SEO GROWTH",
+                  price: "$450.000",
+                  highlight: "Foco en Tráfico y Visibilidad",
+                  features: ["Auditoría Técnica Mensual", "Optimización de 5 Keywords", "Estrategia Local SEO", "Reporte de Posicionamiento", "Soporte vía Email"],
+                  cta: "Obtener 10% Dto"
+                },
+                {
+                  name: "SEO PERFORMANCE",
+                  price: "$850.000",
+                  highlight: "Dominio y Conversión Máxima",
+                  features: ["Todo lo de GROWTH más:", "Optimización de 15 Keywords", "Creación de 4 Artículos SEO", "Linkbuilding Estratégico", "Soporte Prioritario", "Configuración GA4 Avanzada"],
+                  recommended: true,
+                  cta: "Obtener 10% Dto"
+                },
+                {
+                  name: "SEO ENTERPRISE",
+                  price: "Consultar",
+                  highlight: "Estrategias de Gran Escala",
+                  features: ["Consultoría 1 a 1", "Keywords Ilimitadas", "Estrategia Global Multi-idioma", "Desarrollo de Contenidos Elite", "PR Digital & Backlinks", "Dashboard en tiempo real"],
+                  cta: "Obtener 10% Dto"
+                }
+              ].map((p, i) => (
+                <div key={i} className={`relative p-10 lg:p-14 bg-zinc-900 rounded-[4rem] border-2 transition-all duration-500 hover:translate-y-[-10px] ${p.recommended ? 'border-emerald-500 shadow-2xl shadow-emerald-500/10' : 'border-white/5'}`}>
+                  {/* Descuento Badge */}
+                  <div className="absolute top-8 right-8 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-pulse">
+                    10% OFF
+                  </div>
+                  <h3 className="text-2xl font-black mb-2 uppercase text-white">{p.name}</h3>
+                  <p className="text-xs font-bold text-emerald-400 uppercase mb-8">{p.highlight}</p>
+                  <div className="text-5xl font-black mb-10 text-white">{p.price}<span className="text-sm text-zinc-500 font-light ml-2">/mes</span></div>
+                  <ul className="space-y-4 mb-12">
+                    {p.features.map((f, idx) => (
+                      <li key={idx} className="text-sm text-zinc-400 flex gap-3 font-light">
+                        <span className="text-emerald-500">✓</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <LeadButton className={`w-full py-5 rounded-2xl font-bold transition-all ${p.recommended ? 'bg-emerald-500 text-zinc-950 hover:bg-emerald-400' : 'bg-white text-zinc-950 hover:bg-zinc-200'}`}>
+                    {p.cta}
+                  </LeadButton>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <FAQSection 
           faqs={seoFaqs}

@@ -192,7 +192,11 @@ export default function ShopifyEnChilePage() {
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                  {plans.map((p, i) => (
-                   <div key={i} className={`p-10 lg:p-14 bg-white rounded-[4rem] border-2 transition-all hover:translate-y-[-10px] ${p.recommended ? 'border-violet-600 shadow-2xl shadow-violet-600/10' : 'border-zinc-100'}`}>
+                   <div key={i} className={`relative bg-white rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_rgba(124,58,237,0.1)] ${p.recommended ? 'border-violet-600 shadow-2xl shadow-violet-600/10' : 'border-zinc-100'}`}>
+                      {/* Descuento Badge */}
+                      <div className="absolute top-8 right-8 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-pulse">
+                        10% OFF
+                      </div>
                       <h3 className="text-2xl font-black mb-2 uppercase">{p.name}</h3>
                       <p className="text-xs font-bold text-violet-600 uppercase mb-8">{p.highlight}</p>
                       <div className="text-5xl font-black mb-10">{p.price}</div>
@@ -205,7 +209,7 @@ export default function ShopifyEnChilePage() {
                          ))}
                       </ul>
                       <LeadButton className={`w-full py-5 rounded-2xl font-bold ${p.recommended ? 'bg-violet-600 text-white' : 'bg-black text-white hover:bg-zinc-800'}`}>
-                        {p.cta}
+                        Obtener 10% Dto
                       </LeadButton>
                    </div>
                  ))}
