@@ -203,13 +203,6 @@ export default function SaaSPage() {
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                    </a>
                 </div>
-                <div className="lg:w-1/2 h-[500px] w-full bg-zinc-950 rounded-[3rem] border border-white/10 flex items-center justify-center relative overflow-hidden shadow-2xl group/case">
-                   <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-transparent group-hover/case:from-violet-600/20 transition-all duration-700" />
-                   <div className="relative z-10 text-center p-12 text-white transform group-hover/case:scale-105 transition-transform duration-700">
-                      <div className="text-6xl mb-6">🏘️</div>
-                      <h4 className="text-3xl font-black mb-4 uppercase tracking-tighter">PropTech SaaS Case</h4>
-                      <p className="text-zinc-400 max-w-sm mx-auto font-light">Gestionando miles de propiedades y usuarios en tiempo real sin latencia.</p>
-                   </div>
                 </div>
              </div>
           </div>
