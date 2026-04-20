@@ -6,6 +6,7 @@ import FAQSection from '@/components/sections/faq-section';
 import FeaturedBlogSection from '@/components/sections/featured-blog';
 import { useContactModal } from '@/context/contact-modal-context';
 import LeadButton from '@/components/ui/lead-button';
+import JetAnimation from '@/components/ui/jet-animation';
 
 import { BlogPost } from '@/lib/blog';
 
@@ -142,23 +143,30 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
                 </Link>
               </div>
             </div>
-            <div className="lg:col-span-5 relative">
-              <div className="bg-violet-50 rounded-[3rem] p-10 lg:p-14 relative group overflow-hidden border-2 border-violet-100 shadow-2xl shadow-violet-600/5 transition-all hover:scale-[1.02]">
-                <div className="flex justify-between items-center mb-10">
-                  <div className="text-4xl text-violet-600">📈</div>
-                  <div className="text-[10px] font-black text-violet-600 bg-white border border-violet-100 px-4 py-1.5 rounded-full uppercase tracking-[0.2em]">High Performance Funnel</div>
-                </div>
-                <h2 className="text-3xl font-black mb-6 text-zinc-950 leading-tight tracking-tighter uppercase">Donde la velocidad impulsa tu facturación</h2>
-                <p className="text-zinc-500 font-light leading-relaxed mb-8">
-                  Deja de pagar por páginas que solo informan. Construye un ecosistema diseñado para convertir cada visita en una oportunidad real de negocio.
-                </p>
-                <div className="space-y-4">
-                  <div className="h-1.5 w-full bg-zinc-200 rounded-full overflow-hidden">
-                    <div className="h-full bg-violet-600 w-[98%] animate-grow shadow-[0_0_15px_rgba(139,92,246,0.6)]" />
-                  </div>
-                  <div className="flex justify-between text-[10px] font-black text-zinc-400 uppercase tracking-widest">
-                    <span>Funnel Conversion Rate</span>
-                    <span className="text-violet-600">98% SCORE</span>
+            <div className="lg:col-span-5 relative h-full min-h-[500px] lg:min-h-0">
+              <div className="bg-zinc-950 rounded-[3rem] p-4 sm:p-8 lg:p-10 relative group overflow-hidden border border-white/10 shadow-2xl shadow-violet-900/20 transition-all hover:scale-[1.02] h-full flex flex-col justify-end">
+                <JetAnimation />
+                <div className="relative z-10 mt-32 sm:mt-48 lg:mt-auto">
+                  <div className="bg-white/5 backdrop-blur-xl p-6 sm:p-8 rounded-[2rem] border border-white/10 shadow-2xl transition-transform group-hover:translate-y-[-5px]">
+                    <div className="flex justify-between items-center mb-6">
+                      <div className="text-3xl filter drop-shadow-[0_0_10px_rgba(167,139,250,0.6)]">🚀</div>
+                      <div className="text-[10px] font-black text-violet-300 bg-violet-950/50 border border-violet-800/50 px-4 py-1.5 rounded-full uppercase tracking-[0.2em]">Escala tus Ventas</div>
+                    </div>
+                    <h2 className="text-2xl font-black mb-4 text-white leading-tight tracking-tighter uppercase drop-shadow-md">
+                      Donde la velocidad impulsa tu facturación
+                    </h2>
+                    <p className="text-zinc-400 font-light leading-relaxed text-sm mb-6">
+                      Con Webunica, el crecimiento de tu negocio despega. Construye un ecosistema diseñado para multiplicar tus ventas y oportunidades de negocio.
+                    </p>
+                    <div className="space-y-3">
+                      <div className="h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
+                        <div className="h-full bg-gradient-to-r from-violet-600 to-fuchsia-500 w-[98%] shadow-[0_0_15px_rgba(139,92,246,0.8)] animate-grow" />
+                      </div>
+                      <div className="flex justify-between text-[9px] font-black text-zinc-500 uppercase tracking-widest">
+                        <span>Crecimiento de Ventas</span>
+                        <span className="text-violet-400 animate-pulse">98% UP</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
