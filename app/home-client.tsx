@@ -132,7 +132,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
                   onClick={() => openModal()}
                   className="px-12 py-6 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-[0.15em] text-[10px] flex items-center justify-center gap-3 hover:bg-violet-700 transition-all shadow-2xl shadow-violet-600/30 scale-100 hover:scale-105 active:scale-95 group/btn"
                 >
-                  Agendar Consultoría de Ventas
+                  Agendar con 10% de Descuento
                 </button>
                 <Link 
                   href="/portafolio" 
@@ -218,6 +218,10 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {funnelPlans.map((plan, i) => (
               <div key={i} className={`relative bg-white rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_rgba(124,58,237,0.1)] ${plan.recommended ? 'border-violet-500' : 'border-zinc-100 hover:border-violet-200'}`}>
+                {/* Descuento Badge */}
+                <div className="absolute top-8 right-8 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-pulse z-20">
+                  10% OFF
+                </div>
                 {plan.recommended && (
                   <div className="absolute -top-6 left-1/2 -translate-x-1/2 px-6 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                     Impulso Máximo
@@ -248,7 +252,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
 
                 <div className="mt-auto space-y-4">
                   <LeadButton className={`w-full py-5 rounded-2xl font-bold text-center transition-all ${plan.recommended ? 'bg-violet-600 text-white shadow-xl shadow-violet-600/20 hover:bg-violet-700' : 'bg-zinc-950 text-white hover:bg-zinc-800'}`}>
-                    {plan.cta}
+                    Obtener 10% Dto
                   </LeadButton>
                   <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest text-center pt-4">
                     Entrega estimada: {plan.time}
