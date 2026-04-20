@@ -1,6 +1,7 @@
 'use server';
 
 import { supabase } from '@/lib/supabase/client';
+import { sendLeadNotification } from './mail-service';
 
 export async function createLead(leadData: {
   name: string;
@@ -33,6 +34,16 @@ export async function createLead(leadData: {
   if (error) {
     console.error('[createLead] Error:', error);
     return { success: false, error: error.message };
+  }
+
+  // Notificación automática si hay correo
+  if (leadData.email) {
+    await sendLeadNotification({
+      name: leadData.name,
+      email: leadData.email,
+      service: leadData.project_type,
+      phone: leadData.phone
+    });
   }
 
   return { success: true, lead: data };
