@@ -187,10 +187,10 @@ export default function SaaSPage() {
                             'Seguridad Supabase RLS',
                             '100% Speed Score Vercel'
                          ].map((item, i) => (
-                           <li key={i} className="flex gap-4 items-center text-sm">
-                              <span className="w-6 h-6 rounded-full bg-violet-600 flex items-center justify-center text-white text-[10px]">✓</span>
-                              {item}
-                           </li>
+                            <li key={i} className="flex gap-4 items-center text-sm">
+                               <span className="w-6 h-6 rounded-full bg-violet-600 flex items-center justify-center text-white text-[10px]">✓</span>
+                               {item}
+                            </li>
                          ))}
                       </ul>
                    </div>
@@ -202,7 +202,6 @@ export default function SaaSPage() {
                     Explorar el Proyecto
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                    </a>
-                </div>
                 </div>
              </div>
           </div>
@@ -220,12 +219,12 @@ export default function SaaSPage() {
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                  {plans.map((plan, i) => (
-                   <div key={i} className={`relative bg-zinc-900 rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:shadow-[0_40px_80px_rgba(124,58,237,0.2)] ${plan.recommended ? 'border-violet-500' : 'border-white/5 hover:border-violet-500/30'}`}>
-                      {/* Descuento Badge */}
-                      <div className="absolute top-8 right-8 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-pulse">
-                        10% OFF
-                      </div>
-                      {plan.recommended && (
+                    <div key={i} className={`relative bg-zinc-900 rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:shadow-[0_40px_80px_rgba(124,58,237,0.2)] ${plan.recommended ? 'border-violet-500' : 'border-white/5 hover:border-violet-500/30'}`}>
+                       {/* Descuento Badge */}
+                       <div className="absolute top-8 right-8 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-pulse">
+                         10% OFF
+                       </div>
+                       {plan.recommended && (
                         <div className="absolute -top-6 left-1/2 -translate-x-1/2 px-6 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                           Más Estratégico
                         </div>
@@ -290,9 +289,9 @@ export default function SaaSPage() {
                        Consultar por WhatsApp
                     </WhatsAppButton>
                     <a 
-                      href="https://calendly.com/javiermillar/reunion-webunica" 
-                      target="_blank" 
-                      className="px-12 py-6 bg-violet-600 text-white font-black uppercase tracking-widest text-[11px] rounded-[2rem] hover:scale-105 active:scale-95 transition-all w-full md:w-auto flex items-center justify-center gap-3 shadow-2xl shadow-violet-600/40"
+                       href="https://calendly.com/javiermillar/reunion-webunica" 
+                       target="_blank" 
+                       className="px-12 py-6 bg-violet-600 text-white font-black uppercase tracking-widest text-[11px] rounded-[2rem] hover:scale-105 active:scale-95 transition-all w-full md:w-auto flex items-center justify-center gap-3 shadow-2xl shadow-violet-600/40"
                     >
                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                        Agendar Sesión Técnica
