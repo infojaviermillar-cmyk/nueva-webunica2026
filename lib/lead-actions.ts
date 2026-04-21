@@ -15,21 +15,15 @@ export async function createLead(leadData: {
     return { success: false, error: 'DB no disponible' };
   }
 
-  const { data, error } = await supabase
-    .from('leads')
-    .insert([
-      {
-        name: leadData.name,
-        email: leadData.email,
-        phone: leadData.phone,
-        city: leadData.city,
-        project_type: leadData.project_type,
-        source: leadData.source || 'Modal de Contacto',
-        status: 'new'
-      }
-    ])
-    .select()
-    .single();
+  // Usamos RPC para evitar el bug de schema cache de PostgREST (PGRST204)
+  const { error } = await supabase.rpc('insert_lead', {
+    p_name: leadData.name,
+    p_email: leadData.email,
+    p_phone: leadData.phone,
+    p_city: leadData.city,
+    p_project_type: leadData.project_type,
+    p_source: leadData.source || 'Modal de Contacto',
+  });
 
   if (error) {
     console.error('[createLead] Error:', error);
@@ -46,5 +40,5 @@ export async function createLead(leadData: {
     });
   }
 
-  return { success: true, lead: data };
+  return { success: true };
 }
