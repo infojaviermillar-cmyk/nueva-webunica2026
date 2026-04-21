@@ -15,7 +15,7 @@ export default function PortfolioPage() {
       title: "SoloCasasChile.com",
       category: "Inmobiliaria",
       description: "Plataforma SaaS de gestión inmobiliaria con seguimiento de obra en tiempo real e integración de CRM.",
-      image: "/featured_solocasachile_tech.png",
+      image: "/publi-solocasas.png",
       link: "https://solocasaschile.com",
       tags: ["Next.js", "SaaS", "PropTech"],
       featured: true
