@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContactModal } from '@/context/contact-modal-context';
 import { supabase } from '@/lib/supabase/client';
-import { User, LogIn } from 'lucide-react';
+import { User, LogIn, ShoppingBag } from 'lucide-react';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -68,6 +68,7 @@ export default function Header() {
 
   const isDarkHero = darkPages.includes(pathname);
   const isLightHero = lightPages.includes(pathname);
+  const isShopifyLanding = pathname === '/landing-shopify-emd';
   
   const textColor = scrolled 
     ? 'text-zinc-900' 
@@ -111,22 +112,40 @@ export default function Header() {
             
             {/* Logo Oficial Webunica */}
             <div className="flex-shrink-0 flex items-center relative z-20">
-              <Link href="/" className="group block focus:outline-none cursor-pointer">
-                <img 
-                  src="/logo-webunica.png.webp" 
-                  alt="Webunica Agencia" 
-                  className={`h-10 w-auto transition-all duration-500 group-hover:scale-105 ${isDarkHero && !scrolled ? 'violet-filter' : 'brightness-[0.1] opacity-100 gris-img'}`}
-                  width={135}
-                  height={36}
-                />
-              </Link>
+              {isShopifyLanding ? (
+                <Link href="#inicio" className="group flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all border border-zinc-100">
+                  <span className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-900 mt-0.5">webunica</span>
+                  <div className="w-6 h-6 rounded-full bg-pink-50 flex items-center justify-center">
+                    <ShoppingBag className="w-3.5 h-3.5 text-pink-600" />
+                  </div>
+                </Link>
+              ) : (
+                <Link href="/" className="group block focus:outline-none cursor-pointer">
+                  <img 
+                    src="/logo-webunica.png.webp" 
+                    alt="Webunica Agencia" 
+                    className={`h-10 w-auto transition-all duration-500 group-hover:scale-105 ${isDarkHero && !scrolled ? 'violet-filter' : 'brightness-[0.1] opacity-100 gris-img'}`}
+                    width={135}
+                    height={36}
+                  />
+                </Link>
+              )}
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-10 ml-16 relative z-30">
-              <Link href="/" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>
-                Inicio
-              </Link>
+              {isShopifyLanding ? (
+                <>
+                  <Link href="#inicio" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>Inicio</Link>
+                  <Link href="#ventajas" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>Ventajas</Link>
+                  <Link href="#planes" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>Planes</Link>
+                  <Link href="#faq" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>FAQ</Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>
+                    Inicio
+                  </Link>
               
               {/* Servicios Dropdown */}
               <div className="relative group">
@@ -268,15 +287,17 @@ export default function Header() {
             {/* CTA & Mobile Menu Toggle */}
             <div className="flex items-center gap-4">
               <a 
-                href="https://wa.me/56984410379" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`hidden md:flex items-center gap-2 px-7 py-3 rounded-full font-black text-[11px] uppercase tracking-[0.15em] transition-all transform animate-shake-15s shadow-[0_10px_30px_rgba(124,58,237,0.3)] bg-violet-600 text-white hover:bg-violet-700 hover:scale-105 active:scale-95`}
+                href={isShopifyLanding ? "#planes" : "https://wa.me/56984410379"} 
+                target={isShopifyLanding ? undefined : "_blank"}
+                rel={isShopifyLanding ? undefined : "noopener noreferrer"}
+                className={`hidden md:flex items-center gap-2 px-7 py-3 rounded-full font-black text-[11px] uppercase tracking-[0.15em] transition-all transform animate-shake-15s shadow-[0_10px_30px_rgba(124,58,237,0.3)] ${isShopifyLanding ? 'bg-pink-600 text-white hover:bg-pink-700 shadow-pink-600/30' : 'bg-violet-600 text-white hover:bg-violet-700 hover:scale-105 active:scale-95'}`}
               >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412 0 6.556-5.338 11.892-11.893 11.892-1.997 0-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143c1.589.943 3.259 1.44 4.968 1.441 5.4 0 9.792-4.392 9.792-9.792 0-2.618-1.02-5.079-2.872-6.932s-4.314-2.871-6.932-2.871c-5.4 0-9.791 4.391-9.791 9.791 0 1.763.47 3.485 1.363 4.991l-.993 3.626 3.71-.973zm11.238-6.111c.07.117.117.272.164.351.047.079.047.439-.117.772-.164.333-.941.666-1.293.743-.353.076-.84.14-1.293.129-.453-.012-.662-.129-2.185-.742-1.523-.614-2.483-2.145-2.553-2.261-.07-.117-.585-.778-.585-1.487 0-.709.351-1.057.515-1.234.164-.176.353-.223.47-.223h.334c.117 0 .273 0 .422.351.15.351.515 1.258.562 1.353.047.094.079.205.016.333-.063.129-.094.205-.188.311-.094.106-.199.237-.282.333-.094.094-.194.195-.084.382.11.188.489.805 1.049 1.303.719.639 1.32.838 1.503.932.183.094.288.079.397-.047.109-.126.468-.544.593-.728.125-.184.249-.155.421-.094s1.077.508 1.258.597z"/>
-                </svg>
-                Hablemos
+                {!isShopifyLanding && (
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412 0 6.556-5.338 11.892-11.893 11.892-1.997 0-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143c1.589.943 3.259 1.44 4.968 1.441 5.4 0 9.792-4.392 9.792-9.792 0-2.618-1.02-5.079-2.872-6.932s-4.314-2.871-6.932-2.871c-5.4 0-9.791 4.391-9.791 9.791 0 1.763.47 3.485 1.363 4.991l-.993 3.626 3.71-.973zm11.238-6.111c.07.117.117.272.164.351.047.079.047.439-.117.772-.164.333-.941.666-1.293.743-.353.076-.84.14-1.293.129-.453-.012-.662-.129-2.185-.742-1.523-.614-2.483-2.145-2.553-2.261-.07-.117-.585-.778-.585-1.487 0-.709.351-1.057.515-1.234.164-.176.353-.223.47-.223h.334c.117 0 .273 0 .422.351.15.351.515 1.258.562 1.353.047.094.079.205.016.333-.063.129-.094.205-.188.311-.094.106-.199.237-.282.333-.094.094-.194.195-.084.382.11.188.489.805 1.049 1.303.719.639 1.32.838 1.503.932.183.094.288.079.397-.047.109-.126.468-.544.593-.728.125-.184.249-.155.421-.094s1.077.508 1.258.597z"/>
+                  </svg>
+                )}
+                {isShopifyLanding ? 'Ver Planes' : 'Hablemos'}
               </a>
 
               <button 
@@ -310,10 +331,19 @@ export default function Header() {
         <div className={`absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl transition-transform duration-500 ease-out flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="flex-grow flex flex-col pt-32 px-10 pb-12 overflow-y-auto">
             <nav className="flex flex-col gap-8">
-              <Link href="/" prefetch={false} onClick={() => setIsMobileMenuOpen(false)} className="group border-b border-zinc-100 pb-6">
-                <span className="text-sm font-bold text-violet-600 uppercase tracking-[0.2em] block mb-1 opacity-60">Home</span>
-                <span className="text-4xl font-black text-zinc-900 uppercase tracking-tighter group-hover:text-violet-600 transition-colors">Inicio</span>
-              </Link>
+              {isShopifyLanding ? (
+                <div className="flex flex-col gap-6">
+                  <Link href="#inicio" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">Inicio</Link>
+                  <Link href="#ventajas" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">Ventajas</Link>
+                  <Link href="#planes" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">Planes</Link>
+                  <Link href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">FAQ</Link>
+                </div>
+              ) : (
+                <>
+                  <Link href="/" prefetch={false} onClick={() => setIsMobileMenuOpen(false)} className="group border-b border-zinc-100 pb-6">
+                    <span className="text-sm font-bold text-violet-600 uppercase tracking-[0.2em] block mb-1 opacity-60">Home</span>
+                    <span className="text-4xl font-black text-zinc-900 uppercase tracking-tighter group-hover:text-violet-600 transition-colors">Inicio</span>
+                  </Link>
 
               <div className="space-y-8 pt-2">
                 <div>
@@ -368,14 +398,18 @@ export default function Header() {
                   <User className="w-4 h-4" />
                 </Link>
               </div>
+                </>
+              )}
             </nav>
 
             <div className="mt-auto pt-10 grid gap-4">
-              <a href="https://wa.me/56984410379" target="_blank" rel="noopener noreferrer" className="w-full py-4 bg-violet-600 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 shadow-xl shadow-violet-600/20 active:scale-95">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412 0 6.556-5.338 11.892-11.893 11.892-1.997 0-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143c1.589.943 3.259 1.44 4.968 1.441 5.4 0 9.792-4.392 9.792-9.792 0-2.618-1.02-5.079-2.872-6.932s-4.314-2.871-6.932-2.871c-5.4 0-9.791 4.391-9.791 9.791 0 1.763.47 3.485 1.363 4.991l-.993 3.626 3.71-.973zm11.238-6.111c.07.117.117.272.164.351.047.079.047.439-.117.772-.164.333-.941.666-1.293.743-.353.076-.84.14-1.293.129-.453-.012-.662-.129-2.185-.742-1.523-.614-2.483-2.145-2.553-2.261-.07-.117-.585-.778-.585-1.487 0-.709.351-1.057.515-1.234.164-.176.353-.223.47-.223h.334c.117 0 .273 0 .422.351.15.351.515 1.258.562 1.353.047.094.079.205.016.333-.063.129-.094.205-.188.311-.094.106-.199.237-.282.333-.094.094-.194.195-.084.382.11.188.489.805 1.049 1.303.719.639 1.32.838 1.503.932.183.094.288.079.397-.047.109-.126.468-.544.593-.728.125-.184.249-.155.421-.094s1.077.508 1.258.597z"/>
-                </svg>
-                Asesor Directo
+              <a href={isShopifyLanding ? "#planes" : "https://wa.me/56984410379"} target={isShopifyLanding ? undefined : "_blank"} rel={isShopifyLanding ? undefined : "noopener noreferrer"} className={`w-full py-4 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 shadow-xl active:scale-95 ${isShopifyLanding ? 'bg-pink-600 shadow-pink-600/20 hover:bg-pink-700' : 'bg-violet-600 shadow-violet-600/20 hover:bg-violet-700'}`}>
+                {!isShopifyLanding && (
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412 0 6.556-5.338 11.892-11.893 11.892-1.997 0-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143c1.589.943 3.259 1.44 4.968 1.441 5.4 0 9.792-4.392 9.792-9.792 0-2.618-1.02-5.079-2.872-6.932s-4.314-2.871-6.932-2.871c-5.4 0-9.791 4.391-9.791 9.791 0 1.763.47 3.485 1.363 4.991l-.993 3.626 3.71-.973zm11.238-6.111c.07.117.117.272.164.351.047.079.047.439-.117.772-.164.333-.941.666-1.293.743-.353.076-.84.14-1.293.129-.453-.012-.662-.129-2.185-.742-1.523-.614-2.483-2.145-2.553-2.261-.07-.117-.585-.778-.585-1.487 0-.709.351-1.057.515-1.234.164-.176.353-.223.47-.223h.334c.117 0 .273 0 .422.351.15.351.515 1.258.562 1.353.047.094.079.205.016.333-.063.129-.094.205-.188.311-.094.106-.199.237-.282.333-.094.094-.194.195-.084.382.11.188.489.805 1.049 1.303.719.639 1.32.838 1.503.932.183.094.288.079.397-.047.109-.126.468-.544.593-.728.125-.184.249-.155.421-.094s1.077.508 1.258.597z"/>
+                  </svg>
+                )}
+                {isShopifyLanding ? 'Ver Planes' : 'Asesor Directo'}
               </a>
             </div>
           </div>
