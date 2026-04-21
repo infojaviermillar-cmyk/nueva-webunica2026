@@ -1,46 +1,102 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { NextResponse, type NextRequest } from 'next/server'
 
-export function middleware(request: NextRequest) {
-  // Get the hostname from the request headers
+export async function middleware(request: NextRequest) {
+  // 1. Manejo de dominios para EMD (Desarrollo Shopify)
   const hostname = request.headers.get('host') || '';
-
-  // Check if it's the specific Exact Match Domain for Shopify
   if (
     hostname === 'desarrolloshopify.cl' || 
     hostname === 'www.desarrolloshopify.cl' ||
-    // Permite probarlo localmente pasándole un host falso en postman si fuera necesario
-    hostname.includes('desarrolloshopify') 
+    hostname.includes('desarrolloshopify')
   ) {
-    // Rewrite traffic so the URL remains desarrolloshopify.cl/ 
-    // but the app serves the hidden internal landing page.
     const url = request.nextUrl.clone();
-    
-    // Si están entrando al root (/) de desarrolloshopify.cl
     if (url.pathname === '/') {
       url.pathname = '/landing-shopify-emd';
       return NextResponse.rewrite(url);
     }
-    
-    // Opcional: si intentan entrar a sub-rutas, puedes redirigirlos al root del EMD o dejarlos pasar.
-    // Actualmente si entran a /contacto en desarrolloshopify.cl cargarían el contacto de webunica.
   }
 
-  // If not the target domain, continue normal execution for Webunica.cl
-  return NextResponse.next();
+  // 2. Manejo de autenticación global (Supabase)
+  let response = NextResponse.next({
+    request: {
+      headers: request.headers,
+    },
+  });
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (supabaseUrl && supabaseKey) {
+    const supabase = createServerClient(
+      supabaseUrl,
+      supabaseKey,
+      {
+        cookies: {
+          get(name: string) {
+            return request.cookies.get(name)?.value
+          },
+          set(name: string, value: string, options: CookieOptions) {
+            request.cookies.set({
+              name,
+              value,
+              ...options,
+            })
+            response = NextResponse.next({
+              request: {
+                headers: request.headers,
+              },
+            })
+            response.cookies.set({
+              name,
+              value,
+              ...options,
+            })
+          },
+          remove(name: string, options: CookieOptions) {
+            request.cookies.set({
+              name,
+              value: '',
+              ...options,
+            })
+            response = NextResponse.next({
+              request: {
+                headers: request.headers,
+              },
+            })
+            response.cookies.set({
+              name,
+              value,
+              ...options,
+            })
+          },
+        },
+      }
+    )
+
+    const { data: { user } } = await supabase.auth.getUser()
+
+    // Protect /admin routes
+    const protectedPaths = ['/admin', '/mi-cuenta']
+    const isProtectedPath = protectedPaths.some(path => request.nextUrl.pathname.startsWith(path))
+
+    if (isProtectedPath && !user) {
+      return NextResponse.redirect(new URL('/login?next=' + request.nextUrl.pathname, request.url))
+    }
+  }
+
+  return response;
 }
 
-// Opcional: Especificar en qué paths corre el middleware 
-// (en este caso lo dejamos amplio para capturar todo el host)
 export const config = {
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
-     * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - api (API routes)
+     * Feel free to modify this pattern to include more paths.
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
-};
+}
