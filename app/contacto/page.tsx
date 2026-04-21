@@ -135,6 +135,15 @@ export default function ContactPage() {
                    Ver fechas disponibles en Calendly
                    <Calendar className="w-5 h-5" />
                  </a>
+
+                 <Link
+                   href="/cotizador-en-linea-desarrollo-web"
+                   className="w-full inline-flex items-center justify-center gap-3 px-8 py-5 bg-zinc-900 text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-violet-600 transition-all mt-4 active:scale-95"
+                 >
+                   Cotizar mi proyecto
+                   <ArrowRight className="w-5 h-5" />
+                 </Link>
+
                  <p className="text-center text-[11px] text-slate-400 mt-6 font-medium">Reuniones realizadas por Google Meet / Zoom</p>
                </div>
             </div>
