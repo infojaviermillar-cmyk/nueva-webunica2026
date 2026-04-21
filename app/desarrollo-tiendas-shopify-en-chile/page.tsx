@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
+import FunnelAnimation from '@/components/ui/funnel-animation';
 
 export const metadata = {
   title: 'Desarrollo de Tiendas Shopify en Chile | Diseño Web Shopify 2026',
@@ -113,7 +114,7 @@ export default function ShopifyEnChilePage() {
               </div>
             </div>
             <div className="relative">
-               <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.1)] border border-zinc-100 transform rotate-1 hover:rotate-0 transition-transform duration-700">
+               <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.1)] border border-zinc-100 transform rotate-1 hover:rotate-0 transition-transform duration-700 mb-12">
                  <Image 
                    src="/shopify_hero_card.png"
                    alt="Shopify E-commerce Expert"
@@ -122,6 +123,10 @@ export default function ShopifyEnChilePage() {
                    priority
                    className="w-full h-auto"
                  />
+               </div>
+               
+               <div className="bg-zinc-50/80 rounded-[3rem] p-6 lg:p-8 border border-zinc-100">
+                 <FunnelAnimation type="ecommerce" />
                </div>
             </div>
           </div>

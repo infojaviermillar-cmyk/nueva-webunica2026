@@ -2,7 +2,11 @@
 
 import React from "react";
 
-export default function FunnelAnimation() {
+interface FunnelAnimationProps {
+  type?: 'lead' | 'ecommerce' | 'both';
+}
+
+export default function FunnelAnimation({ type = 'both' }: FunnelAnimationProps) {
   return (
     <div className="relative w-full flex flex-col justify-center lg:pl-10">
       <div className="relative group flex flex-col gap-10 lg:gap-14">
@@ -10,6 +14,7 @@ export default function FunnelAnimation() {
         {/* =========================================
             FUNNEL 1: LEAD GENERATION
         ========================================= */}
+        {(type === 'both' || type === 'lead') && (
         <div>
 
 
@@ -130,10 +135,12 @@ export default function FunnelAnimation() {
             </div>
           </div>
         </div>
+        )}
 
         {/* =========================================
             FUNNEL 2: E-COMMERCE (SHOPIFY)
         ========================================= */}
+        {(type === 'both' || type === 'ecommerce') && (
         <div>
 
 
@@ -229,6 +236,7 @@ export default function FunnelAnimation() {
             </p>
           </div>
         </div>
+        )}
 
       </div>
     </div>
