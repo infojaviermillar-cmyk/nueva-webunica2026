@@ -143,7 +143,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
                 </Link>
               </div>
             </div>
-            <div className="lg:col-span-5 relative h-full w-full pointer-events-auto min-h-[400px]">
+            <div className="lg:col-span-5 relative w-full pointer-events-auto min-h-[400px] flex items-center justify-center">
               <FunnelAnimation />
             </div>
           </div>
