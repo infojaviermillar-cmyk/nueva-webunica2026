@@ -48,32 +48,66 @@ export default function LMSLanding({ heroTitle, competitorName, focusText }: LMS
             <p className="text-zinc-500 font-light">Proyectos reales operando y escalando con tecnología veloz.</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 md:px-12 pb-12 w-full max-w-7xl mx-auto">
-             {[
-               { name: 'IPS Data X', badge: 'Cliente 2024', url: 'https://ipsdatax.com', img: '/elearning/ipsdatax.png', alt: 'Plataforma elearning corporativa IPS Data X' },
-               { name: 'Reaprende', url: 'https://reaprende.cl', img: '/elearning/resprende.png', alt: 'Sistema de clases en linea y academia Moodle moderna' },
-               { name: 'Me Capacito en Línea', url: 'https://mecapacitoenlinea.cl', img: '/elearning/mecapacito.png', alt: 'Desarrollo tutor lms elearning mecapacito' },
-               { name: 'Skillnest', url: 'https://www.skillnest.com/', img: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.skillnest.com%2F?w=1200', alt: 'Plataformas elearning personalizadas Skillnest' }
-             ].map((proj, i) => (
-                <a key={i} href={proj.url} target="_blank" rel="noreferrer" className="bg-zinc-900 border border-white/10 rounded-[2rem] overflow-hidden group hover:border-rose-500/50 transition-all hover:shadow-[0_0_30px_rgba(225,29,72,0.15)] flex flex-col">
-                     <div className="aspect-[16/10] relative overflow-hidden bg-zinc-950 border-b border-white/5">
-                        <img src={proj.img} alt={proj.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" loading="lazy" />
-                     </div>
-                     <div className="p-6 flex items-center justify-between">
-                        <div>
-                           <div className="flex items-center gap-3">
-                              <h3 className="font-bold text-lg uppercase tracking-wider text-rose-50">{proj.name}</h3>
-                              {proj.badge && <span className="text-[10px] uppercase font-black tracking-widest px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400">{proj.badge}</span>}
-                           </div>
-                           <p className="text-zinc-500 text-xs mt-1 font-mono">{proj.url.replace('https://', '').replace(/\/$/, '')}</p>
-                        </div>
-                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-rose-600 transition-colors">
-                           <span className="text-white">→</span>
-                        </div>
-                     </div>
-                </a>
-             ))}
+        <div className="overflow-hidden relative max-w-full w-full bg-zinc-900 border-y border-white/5 py-10 mt-12">
+          {/* Fades */}
+          <div className="absolute inset-y-0 left-0 w-24 md:w-32 bg-gradient-to-r from-zinc-900 to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-24 md:w-32 bg-gradient-to-l from-zinc-900 to-transparent z-10 pointer-events-none" />
+          
+          <div className="flex w-max animate-marquee-horizontal items-center">
+            {[
+              { name: 'ipsdatax.com', url: 'https://ipsdatax.com' },
+              { name: 'cursos.machicua.cl', url: 'https://cursos.machicua.cl' },
+              { name: 'capacitasur.cl', url: 'https://capacitasur.cl' },
+              { name: 'Reaprende.cl', url: 'https://reaprende.cl' },
+              { name: 'skillnest.la', url: 'https://skillnest.la' },
+              { name: 'educontable.cl', url: 'https://educontable.cl' },
+              { name: 'mecapacitoenlinea.cl', url: 'https://mecapacitoenlinea.cl' }
+            ].map((proj, idx) => (
+               <div key={idx} className="flex px-10 items-center justify-center min-w-max">
+                 <a 
+                   href={proj.url} 
+                   target="_blank" 
+                   rel="noreferrer" 
+                   className="text-zinc-500 font-bold text-2xl md:text-3xl tracking-tighter hover:text-white transition-colors"
+                 >
+                   {proj.name}
+                 </a>
+               </div>
+            ))}
+            {[
+              { name: 'ipsdatax.com', url: 'https://ipsdatax.com' },
+              { name: 'cursos.machicua.cl', url: 'https://cursos.machicua.cl' },
+              { name: 'capacitasur.cl', url: 'https://capacitasur.cl' },
+              { name: 'Reaprende.cl', url: 'https://reaprende.cl' },
+              { name: 'skillnest.la', url: 'https://skillnest.la' },
+              { name: 'educontable.cl', url: 'https://educontable.cl' },
+              { name: 'mecapacitoenlinea.cl', url: 'https://mecapacitoenlinea.cl' }
+            ].map((proj, idx) => (
+               <div key={`dup-${idx}`} className="flex px-10 items-center justify-center min-w-max">
+                 <a 
+                   href={proj.url} 
+                   target="_blank" 
+                   rel="noreferrer" 
+                   className="text-zinc-500 font-bold text-2xl md:text-3xl tracking-tighter hover:text-white transition-colors"
+                 >
+                   {proj.name}
+                 </a>
+               </div>
+            ))}
+          </div>
         </div>
+        <style>{`
+          @keyframes marquee-horizontal {
+             0% { transform: translateX(0); }
+             100% { transform: translateX(-50%); }
+          }
+          .animate-marquee-horizontal {
+             animation: marquee-horizontal 40s linear infinite;
+          }
+          .animate-marquee-horizontal:hover {
+             animation-play-state: paused;
+          }
+        `}</style>
       </section>
 
       {/* Comparison Reality Check */}
