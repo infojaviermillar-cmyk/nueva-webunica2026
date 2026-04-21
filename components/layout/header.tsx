@@ -282,6 +282,8 @@ export default function Header() {
                   <><LogIn className="w-3.5 h-3.5" /> Acceso</>
                 )}
               </Link>
+                </>
+              )}
             </nav>
 
             {/* CTA & Mobile Menu Toggle */}
