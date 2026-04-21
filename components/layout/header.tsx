@@ -7,7 +7,7 @@ import { useContactModal } from '@/context/contact-modal-context';
 import { supabase } from '@/lib/supabase/client';
 import { User, LogIn, ShoppingBag } from 'lucide-react';
 
-export default function Header() {
+export default function Header({ domain = '' }: { domain?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { openModal } = useContactModal();
@@ -68,7 +68,7 @@ export default function Header() {
 
   const isDarkHero = darkPages.includes(pathname);
   const isLightHero = lightPages.includes(pathname);
-  const isShopifyLanding = pathname === '/landing-shopify-emd';
+  const isShopifyLanding = pathname === '/landing-shopify-emd' || domain.includes('desarrolloshopify.cl');
   
   const textColor = scrolled 
     ? 'text-zinc-900' 

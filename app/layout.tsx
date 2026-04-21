@@ -41,11 +41,16 @@ export const metadata: Metadata = {
   },
 };
 
+import { headers } from 'next/headers';
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = headers();
+  const domain = headersList.get('host') || '';
+
   return (
     <html
       lang="es"
@@ -54,7 +59,7 @@ export default function RootLayout({
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
         <ContactModalProvider>
-          <Header />
+          <Header domain={domain} />
           <div className="flex-grow">
             {children}
           </div>
