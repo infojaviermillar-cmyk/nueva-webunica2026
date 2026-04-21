@@ -6,7 +6,7 @@ import FAQSection from '@/components/sections/faq-section';
 import FeaturedBlogSection from '@/components/sections/featured-blog';
 import { useContactModal } from '@/context/contact-modal-context';
 import LeadButton from '@/components/ui/lead-button';
-import JetAnimation from '@/components/ui/jet-animation';
+import FunnelAnimation from '@/components/ui/funnel-animation';
 
 import { BlogPost } from '@/lib/blog';
 
@@ -115,8 +115,6 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
           <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white"></div>
         </div>
 
-        <JetAnimation />
-
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 pointer-events-none">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 pointer-events-auto">
@@ -145,7 +143,9 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
                 </Link>
               </div>
             </div>
-            {/* El espacio derecho (lg:col-span-5) se deja intencionalmente vacío para que fluya la animación */}
+            <div className="lg:col-span-5 relative h-full w-full pointer-events-auto min-h-[400px]">
+              <FunnelAnimation />
+            </div>
           </div>
         </div>
       </section>
