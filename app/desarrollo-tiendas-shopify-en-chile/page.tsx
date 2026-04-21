@@ -183,6 +183,20 @@ export default function ShopifyEnChilePage() {
            </Link>
         </section>
 
+        {/* Checklist CRO Banner */}
+        <section className="bg-violet-600 py-20 px-6 mx-4 mb-32 rounded-[3rem] relative overflow-hidden">
+           <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay"></div>
+           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 blur-[100px] rounded-full pointer-events-none"></div>
+           <div className="max-w-4xl mx-auto text-center relative z-10">
+             <div className="inline-block px-4 py-1.5 bg-black/20 text-white border border-white/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 backdrop-blur-md">Herramienta Gratuita</div>
+             <h2 className="text-3xl lg:text-5xl font-black text-white mb-6 tracking-tight">¿Tu tienda Shopify está perdiendo ventas?</h2>
+             <p className="text-violet-200 text-lg mb-10 max-w-2xl mx-auto font-medium">Revisa gratis los puntos clave donde la mayoría de las tiendas en Chile pierden clientes con nuestra Auditoría CRO Básica.</p>
+             <Link href="/listas-de-verificacion-shopify-cro-basica" className="inline-block px-8 py-4 bg-white text-violet-900 font-black uppercase tracking-[0.1em] text-xs rounded-full hover:scale-105 transition-transform shadow-xl">
+               Ver Checklist CRO
+             </Link>
+           </div>
+        </section>
+
         {/* Pricing Section */}
         <section id="pricing" className="py-32 bg-zinc-50 border-y border-zinc-100">
            <div className="max-w-7xl mx-auto px-6">

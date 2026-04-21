@@ -225,6 +225,10 @@ export default function Header() {
                           <span className="block text-[13px] font-bold text-zinc-950 mb-1 group-hover/tool:text-violet-600">Cotizador Web Pro</span>
                           <span className="block text-[10px] text-zinc-500 leading-tight">Presupuesto estimado al instante</span>
                         </Link>
+                        <Link href="/listas-de-verificacion-shopify-cro-basica" className="group/tool block p-4 bg-white border border-zinc-100 rounded-2xl hover:border-violet-500 hover:shadow-xl transition-all">
+                          <span className="block text-[13px] font-bold text-zinc-950 mb-1 group-hover/tool:text-violet-600">Checklist CRO Shopify</span>
+                          <span className="block text-[10px] text-zinc-500 leading-tight">Auditoría básica de conversión</span>
+                        </Link>
                         <div className="mt-4 p-4 bg-violet-600/5 rounded-2xl border border-violet-600/10">
                           <p className="text-[11px] text-violet-600 leading-relaxed font-bold">Insights técnicos en nuestro blog.</p>
                         </div>
