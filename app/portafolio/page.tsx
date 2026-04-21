@@ -8,17 +8,24 @@ import LeadButton from '@/components/ui/lead-button';
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('Todas');
 
-  const categories = ['Todas', 'Shopify', 'Inmobiliaria', 'SaaS', 'PYMES'];
+  const categories = ['Todas', 'Shopify', 'SaaS', 'PYMES'];
 
   const projects = [
     {
       title: "SoloCasasChile.com",
-      category: "Inmobiliaria",
+      category: "SaaS",
       description: "Plataforma SaaS de gestión inmobiliaria con seguimiento de obra en tiempo real e integración de CRM.",
       image: "/publi-solocasas.png",
       link: "https://solocasaschile.com",
-      tags: ["Next.js", "SaaS", "PropTech"],
-      featured: true
+      tags: ["Next.js", "SaaS", "PropTech"]
+    },
+    {
+      title: "Pymee.org",
+      category: "SaaS",
+      description: "Plataforma SaaS de gestión empresarial para PYMES. Herramientas digitales integradas para optimizar operaciones y escalar negocios en Latinoamérica.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpymee.org%2F?w=1200",
+      link: "https://pymee.org/",
+      tags: ["SaaS", "PYMES", "Gestión"]
     },
     {
       title: "Kinelawen",
@@ -208,9 +215,9 @@ export default function PortfolioPage() {
                 href={project.link}
                 target="_blank"
                 rel="noreferrer"
-                className={`group flex flex-col h-full bg-white rounded-[3rem] overflow-hidden border border-zinc-100 hover:border-zinc-300 transition-all hover:shadow-2xl ${project.featured ? 'lg:col-span-2 lg:flex-row' : ''}`}
+                className="group flex flex-col h-full bg-white rounded-[3rem] overflow-hidden border border-zinc-100 hover:border-zinc-300 transition-all hover:shadow-2xl"
               >
-                <div className={`relative overflow-hidden ${project.featured ? 'lg:w-1/2 h-[400px] lg:h-auto' : 'aspect-[16/10]'}`}>
+                <div className="relative overflow-hidden aspect-[16/10]">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -224,7 +231,7 @@ export default function PortfolioPage() {
                   </div>
                 </div>
 
-                <div className={`p-10 flex flex-col justify-between ${project.featured ? 'lg:w-1/2' : 'flex-grow'}`}>
+                <div className="p-10 flex flex-col justify-between flex-grow">
                   <div>
                     <div className="flex flex-wrap gap-2 mb-6">
                       {project.tags?.map(tag => (
@@ -233,7 +240,7 @@ export default function PortfolioPage() {
                         </span>
                       ))}
                     </div>
-                    <h3 className={`font-black tracking-tighter leading-none mb-4 uppercase ${project.featured ? 'text-4xl lg:text-5xl' : 'text-3xl'}`}>
+                    <h3 className="font-black tracking-tighter leading-none mb-4 uppercase text-3xl">
                       {project.title}
                     </h3>
                     <p className="text-zinc-500 font-light leading-relaxed mb-8">
