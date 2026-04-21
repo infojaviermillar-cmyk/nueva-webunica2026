@@ -5,6 +5,10 @@ export const metadata: Metadata = {
   title: 'Desarrollo de Plataformas E-Learning y LMS a Medida en Chile | Webunica',
   description: 'Creamos plataformas e-learning y LMS personalizadas con Next.js para academias, empresas y creadores de cursos en Chile. Alternativa profesional a Tutor LMS, LearnDash y Moodle. Consulta sin costo.',
   keywords: [
+    'plataformas elearning',
+    'sistema clases en linea',
+    'plataforma moodle',
+    'tutor lms elearning',
     'desarrollo elearning chile',
     'plataforma lms a medida',
     'crear academia online chile',

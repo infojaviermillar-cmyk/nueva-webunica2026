@@ -48,17 +48,16 @@ export default function LMSLanding({ heroTitle, competitorName, focusText }: LMS
             <p className="text-zinc-500 font-light">Proyectos reales operando y escalando con tecnología veloz.</p>
         </div>
         
-        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 pb-12 w-full scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 md:px-12 pb-12 w-full max-w-7xl mx-auto">
              {[
-               { name: 'IPS Data X', badge: 'Cliente 2024', url: 'https://ipsdatax.com', img: '/elearning/ipsdatax.png' },
-               { name: 'Reaprende', url: 'https://reaprende.cl', img: '/elearning/resprende.png' },
-               { name: 'Me Capacito en Línea', url: 'https://mecapacitoenlinea.cl', img: '/elearning/mecapacito.png' },
-               { name: 'Skillnest', url: 'https://www.skillnest.com/', img: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.skillnest.com%2F?w=1200' },
-               { name: 'Educontable', url: 'https://educontable.cl', img: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Feducontable.cl%2F?w=1200' }
+               { name: 'IPS Data X', badge: 'Cliente 2024', url: 'https://ipsdatax.com', img: '/elearning/ipsdatax.png', alt: 'Plataforma elearning corporativa IPS Data X' },
+               { name: 'Reaprende', url: 'https://reaprende.cl', img: '/elearning/resprende.png', alt: 'Sistema de clases en linea y academia Moodle moderna' },
+               { name: 'Me Capacito en Línea', url: 'https://mecapacitoenlinea.cl', img: '/elearning/mecapacito.png', alt: 'Desarrollo tutor lms elearning mecapacito' },
+               { name: 'Skillnest', url: 'https://www.skillnest.com/', img: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.skillnest.com%2F?w=1200', alt: 'Plataformas elearning personalizadas Skillnest' }
              ].map((proj, i) => (
-                <a key={i} href={proj.url} target="_blank" rel="noreferrer" className="snap-center shrink-0 w-[85vw] md:w-[600px] bg-zinc-900 border border-white/10 rounded-[2rem] overflow-hidden group hover:border-rose-500/50 transition-all hover:shadow-[0_0_30px_rgba(225,29,72,0.15)] flex flex-col">
+                <a key={i} href={proj.url} target="_blank" rel="noreferrer" className="bg-zinc-900 border border-white/10 rounded-[2rem] overflow-hidden group hover:border-rose-500/50 transition-all hover:shadow-[0_0_30px_rgba(225,29,72,0.15)] flex flex-col">
                      <div className="aspect-[16/10] relative overflow-hidden bg-zinc-950 border-b border-white/5">
-                        <img src={proj.img} alt={proj.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" loading="lazy" />
+                        <img src={proj.img} alt={proj.alt} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" loading="lazy" />
                      </div>
                      <div className="p-6 flex items-center justify-between">
                         <div>
@@ -82,8 +81,10 @@ export default function LMSLanding({ heroTitle, competitorName, focusText }: LMS
         <div className="bg-zinc-900 border border-white/5 rounded-[4rem] p-10 lg:p-20 relative overflow-hidden">
            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-rose-600/10 rounded-full blur-[100px] pointer-events-none" />
            <div className="text-center mb-16 relative z-10">
-             <h2 className="text-3xl lg:text-5xl font-black uppercase tracking-tight mb-4">¿Por qué estamos re-inventando el E-Learning?</h2>
-             <p className="text-zinc-500 font-light">{focusText}</p>
+             <h2 className="text-3xl lg:text-5xl font-black uppercase tracking-tight mb-4">¿Por qué estamos re-inventando las plataformas E-Learning?</h2>
+             <p className="text-zinc-500 font-light max-w-3xl mx-auto">
+                {focusText} Ya sea que busques migrar una <strong>plataforma moodle</strong> pesada, mejorar un <strong>tutor lms elearning</strong> que se cae constantemente, o construir un robusto <strong>sistema de clases en línea</strong>, necesitas tecnología que escale sin sorpresas.
+             </p>
            </div>
            
            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
