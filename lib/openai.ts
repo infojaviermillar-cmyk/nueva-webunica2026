@@ -82,9 +82,41 @@ export async function generateBlogPost(topic: string, keywords: string[], source
       size: '1792x1024', // Landscape para imagen de portada de blog
       quality: 'standard',
     });
-    cover_image = imageResponse.data?.[0]?.url || '';
+    
+    const tempUrl = imageResponse.data?.[0]?.url;
+    
+    if (tempUrl) {
+      // DALL-E URLs caducan en 60 mins. Debemos descargarla y guardarla permanentemente.
+      const imgRes = await fetch(tempUrl);
+      const imgBuffer = await imgRes.arrayBuffer();
+
+      const { getSupabaseAdmin } = await import('./supabase/admin');
+      const adminClient = getSupabaseAdmin();
+      
+      const fileName = `${postData.slug.substring(0,40)}-${Date.now()}.png`;
+
+      // Subimos a Supabase Storage (Bucket "blog")
+      const { error } = await adminClient.storage
+        .from('blog')
+        .upload(fileName, Buffer.from(imgBuffer), { contentType: 'image/png', upsert: true });
+
+      if (error) {
+        // Fallback: intentar crear el bucket si no existe
+        if (error.message.toLowerCase().includes('bucket not found') || error.message.toLowerCase().includes('not found')) {
+            await adminClient.storage.createBucket('blog', { public: true });
+            await adminClient.storage.from('blog').upload(fileName, Buffer.from(imgBuffer), { contentType: 'image/png', upsert: true });
+        } else {
+            console.error('[openai] Error subiendo imagen a Supabase Storage:', error);
+            throw error; // Ir al catch
+        }
+      }
+
+      // Obtener URL pública
+      const { data: pubData } = adminClient.storage.from('blog').getPublicUrl(fileName);
+      cover_image = pubData.publicUrl;
+    }
   } catch (imgError) {
-    console.warn('[openai] DALL-E generation failed, using placeholder:', imgError);
+    console.warn('[openai] DALL-E generation or upload failed, using placeholder:', imgError);
     // Fallback: imagen genérica de Unsplash con query relevante
     const query = encodeURIComponent(keywords[0] || topic);
     cover_image = `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80`;
