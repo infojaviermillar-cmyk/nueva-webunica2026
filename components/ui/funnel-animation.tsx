@@ -11,13 +11,7 @@ export default function FunnelAnimation() {
             FUNNEL 1: LEAD GENERATION
         ========================================= */}
         <div>
-          <div className="flex justify-between items-center mb-6 lg:mb-8">
-            <h3 className="text-xs sm:text-sm font-black text-violet-600 tracking-[0.1em] uppercase drop-shadow-sm">SISTEMA CAPTACIÓN DE LEADS</h3>
-            <div className="text-[8px] sm:text-[9px] font-black text-violet-600 bg-violet-50/80 border border-violet-100/50 px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-2 backdrop-blur-sm shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse shadow-[0_0_8px_rgba(139,92,246,0.8)]"></span>
-              B2B / Servicios
-            </div>
-          </div>
+
 
           <div className="relative">
             {/* Track Line Background */}
@@ -141,13 +135,7 @@ export default function FunnelAnimation() {
             FUNNEL 2: E-COMMERCE (SHOPIFY)
         ========================================= */}
         <div>
-          <div className="flex justify-between items-center mb-6 lg:mb-8">
-            <h3 className="text-xs sm:text-sm font-black text-rose-500 tracking-[0.1em] uppercase drop-shadow-sm">SISTEMA E-COMMERCE SHOPIFY</h3>
-            <div className="text-[8px] sm:text-[9px] font-black text-rose-600 bg-rose-50/80 border border-rose-100/50 px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-2 backdrop-blur-sm shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse shadow-[0_0_8px_rgba(244,63,94,0.8)]"></span>
-              Ventas
-            </div>
-          </div>
+
 
           <div className="relative pb-2">
             {/* Track Line Background */}
