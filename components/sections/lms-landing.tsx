@@ -50,10 +50,10 @@ export default function LMSLanding({ heroTitle, competitorName, focusText }: LMS
         
         <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 pb-12 w-full scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
              {[
-               { name: 'IPS Data X', url: 'https://ipsdatax.com', img: '/elearning/ipsdatax.png' },
+               { name: 'IPS Data X', badge: 'Cliente 2024', url: 'https://ipsdatax.com', img: '/elearning/ipsdatax.png' },
                { name: 'Reaprende', url: 'https://reaprende.cl', img: '/elearning/resprende.png' },
                { name: 'Me Capacito en Línea', url: 'https://mecapacitoenlinea.cl', img: '/elearning/mecapacito.png' },
-               { name: 'Skillnest', url: 'https://skillnest.la', img: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fskillnest.la%2F?w=1200' },
+               { name: 'Skillnest', url: 'https://www.skillnest.com/', img: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.skillnest.com%2F?w=1200' },
                { name: 'Educontable', url: 'https://educontable.cl', img: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Feducontable.cl%2F?w=1200' }
              ].map((proj, i) => (
                 <a key={i} href={proj.url} target="_blank" rel="noreferrer" className="snap-center shrink-0 w-[85vw] md:w-[600px] bg-zinc-900 border border-white/10 rounded-[2rem] overflow-hidden group hover:border-rose-500/50 transition-all hover:shadow-[0_0_30px_rgba(225,29,72,0.15)] flex flex-col">
@@ -62,8 +62,11 @@ export default function LMSLanding({ heroTitle, competitorName, focusText }: LMS
                      </div>
                      <div className="p-6 flex items-center justify-between">
                         <div>
-                           <h3 className="font-bold text-lg uppercase tracking-wider text-rose-50">{proj.name}</h3>
-                           <p className="text-zinc-500 text-xs mt-1 font-mono">{proj.url.replace('https://', '')}</p>
+                           <div className="flex items-center gap-3">
+                              <h3 className="font-bold text-lg uppercase tracking-wider text-rose-50">{proj.name}</h3>
+                              {proj.badge && <span className="text-[10px] uppercase font-black tracking-widest px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400">{proj.badge}</span>}
+                           </div>
+                           <p className="text-zinc-500 text-xs mt-1 font-mono">{proj.url.replace('https://', '').replace(/\/$/, '')}</p>
                         </div>
                         <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-rose-600 transition-colors">
                            <span className="text-white">→</span>
