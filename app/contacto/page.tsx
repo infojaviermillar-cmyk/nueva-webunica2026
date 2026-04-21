@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Mail, Phone, MapPin, Calendar, Clock, ArrowRight } from 'lucide-react';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
+import LeadButton from '@/components/ui/lead-button';
 
 // Note: Metadata cannot be exported from client components. 
 // Handled by layout or parent for title/description if needed.
@@ -136,13 +137,12 @@ export default function ContactPage() {
                    <Calendar className="w-5 h-5" />
                  </a>
 
-                 <Link
-                   href="/cotizador-en-linea-desarrollo-web"
+                 <LeadButton
                    className="w-full inline-flex items-center justify-center gap-3 px-8 py-5 bg-zinc-900 text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-violet-600 transition-all mt-4 active:scale-95"
                  >
                    Cotizar mi proyecto
                    <ArrowRight className="w-5 h-5" />
-                 </Link>
+                 </LeadButton>
 
                  <p className="text-center text-[11px] text-slate-400 mt-6 font-medium">Reuniones realizadas por Google Meet / Zoom</p>
                </div>

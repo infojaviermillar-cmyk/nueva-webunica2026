@@ -41,6 +41,39 @@ export default function LMSLanding({ heroTitle, competitorName, focusText }: LMS
         </div>
       </section>
 
+      {/* Portfolio Carousel section */}
+      <section className="mb-32 relative z-10 w-full overflow-hidden">
+        <div className="text-center mb-12">
+            <h2 className="text-3xl font-black uppercase tracking-tight text-white mb-4">Ejemplos de Plataformas Creadas</h2>
+            <p className="text-zinc-500 font-light">Proyectos reales operando y escalando con tecnología veloz.</p>
+        </div>
+        
+        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 pb-12 w-full scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+             {[
+               { name: 'IPS Data X', url: 'https://ipsdatax.com', img: '/elearning/ipsdatax.png' },
+               { name: 'Reaprende', url: 'https://reaprende.cl', img: '/elearning/resprende.png' },
+               { name: 'Me Capacito en Línea', url: 'https://mecapacitoenlinea.cl', img: '/elearning/mecapacito.png' },
+               { name: 'Skillnest', url: 'https://skillnest.la', img: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fskillnest.la%2F?w=1200' },
+               { name: 'Educontable', url: 'https://educontable.cl', img: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Feducontable.cl%2F?w=1200' }
+             ].map((proj, i) => (
+                <a key={i} href={proj.url} target="_blank" rel="noreferrer" className="snap-center shrink-0 w-[85vw] md:w-[600px] bg-zinc-900 border border-white/10 rounded-[2rem] overflow-hidden group hover:border-rose-500/50 transition-all hover:shadow-[0_0_30px_rgba(225,29,72,0.15)] flex flex-col">
+                     <div className="aspect-[16/10] relative overflow-hidden bg-zinc-950 border-b border-white/5">
+                        <img src={proj.img} alt={proj.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" loading="lazy" />
+                     </div>
+                     <div className="p-6 flex items-center justify-between">
+                        <div>
+                           <h3 className="font-bold text-lg uppercase tracking-wider text-rose-50">{proj.name}</h3>
+                           <p className="text-zinc-500 text-xs mt-1 font-mono">{proj.url.replace('https://', '')}</p>
+                        </div>
+                        <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-rose-600 transition-colors">
+                           <span className="text-white">→</span>
+                        </div>
+                     </div>
+                </a>
+             ))}
+        </div>
+      </section>
+
       {/* Comparison Reality Check */}
       <section className="max-w-7xl mx-auto px-6 mb-32 relative z-10">
         <div className="bg-zinc-900 border border-white/5 rounded-[4rem] p-10 lg:p-20 relative overflow-hidden">
