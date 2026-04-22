@@ -473,38 +473,36 @@ export default function ShopifyEmdLandingPage() {
               }
             `}} />
             
-            <div className="w-full overflow-hidden relative">
-              <div className="absolute left-0 top-0 bottom-0 w-8 lg:w-16 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-8 lg:w-16 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
+            <div className="max-w-7xl mx-auto relative pt-8 pb-16">
               
-              <div className="flex overflow-x-auto pb-16 pt-8 snap-x snap-mandatory scrollbar-hide relative" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                <div className="relative inline-flex items-start min-w-max px-8 lg:px-20">
-                  
-                  {/* Horizontal connecting line */}
-                  <div className="absolute top-10 left-20 right-20 h-1.5 bg-zinc-100 rounded-full overflow-hidden z-0">
-                     <div className="absolute top-0 bottom-0 w-48 bg-gradient-to-r from-transparent via-pink-500 to-transparent animate-scan-horizontal" />
-                  </div>
+              {/* Líneas horizontales de conexión (2 filas en escritorio) */}
+              <div className="hidden lg:block absolute top-[4.5rem] left-[8%] right-[8%] h-1.5 bg-zinc-100 rounded-full z-0 overflow-hidden">
+                 <div className="absolute top-0 bottom-0 w-48 bg-gradient-to-r from-transparent via-pink-500 to-transparent animate-scan-horizontal" />
+              </div>
+              <div className="hidden lg:block absolute top-[19.5rem] left-[8%] right-[8%] h-1.5 bg-zinc-100 rounded-full z-0 overflow-hidden">
+                 <div className="absolute top-0 bottom-0 w-48 bg-gradient-to-r from-transparent via-pink-500 to-transparent animate-scan-horizontal" style={{ animationDelay: '3s' }} />
+              </div>
 
-                  {processSteps.map((step, i) => (
-                    <div key={i} className="relative flex flex-col items-center w-[220px] group snap-center flex-shrink-0 z-10">
-                      
-                      {/* Central Icon */}
-                      <div className="w-20 h-20 bg-white border-[5px] border-pink-50 rounded-full flex flex-col items-center justify-center group-hover:border-pink-500 group-hover:scale-110 transition-all duration-300 shadow-sm relative cursor-default">
-                        {/* Active ping effect on hover */}
-                        <div className="absolute inset-0 rounded-full bg-pink-400 opacity-0 group-hover:opacity-20 group-hover:animate-ping transition-opacity duration-300" />
-                        <span className="text-pink-600 group-hover:text-pink-700 transition-colors z-10">{step.icon}</span>
-                      </div>
-
-                      {/* Content Card */}
-                      <div className="mt-8 text-center px-4">
-                        <div className="text-pink-300 font-bold text-xs mb-2 tracking-widest">PASO {step.step}</div>
-                        <h4 className="font-black text-zinc-900 mb-3 uppercase tracking-wide text-sm group-hover:text-pink-600 transition-colors">{step.name}</h4>
-                        <p className="text-zinc-500 font-light text-xs leading-relaxed">{step.desc}</p>
-                      </div>
-                      
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-y-16 gap-x-6 relative z-10">
+                {processSteps.map((step, i) => (
+                  <div key={i} className="relative flex flex-col items-center group w-full">
+                    
+                    {/* Central Icon */}
+                    <div className="w-20 h-20 bg-white border-[5px] border-pink-50 rounded-full flex flex-col items-center justify-center group-hover:border-pink-500 group-hover:scale-110 transition-all duration-300 shadow-sm relative cursor-default shrink-0">
+                      {/* Active ping effect on hover */}
+                      <div className="absolute inset-0 rounded-full bg-pink-400 opacity-0 group-hover:opacity-20 group-hover:animate-ping transition-opacity duration-300" />
+                      <span className="text-pink-600 group-hover:text-pink-700 transition-colors z-10">{step.icon}</span>
                     </div>
-                  ))}
-                </div>
+
+                    {/* Content Card */}
+                    <div className="mt-6 text-center px-4 w-full">
+                      <div className="text-pink-400 font-black text-[10px] mb-2 tracking-widest uppercase">Paso {step.step}</div>
+                      <h4 className="font-black text-zinc-900 mb-2 uppercase tracking-wide text-sm group-hover:text-pink-600 transition-colors">{step.name}</h4>
+                      <p className="text-zinc-500 font-light text-xs leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+                    </div>
+                    
+                  </div>
+                ))}
               </div>
             </div>
           </div>
