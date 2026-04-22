@@ -113,10 +113,13 @@ export default function Header({ domain = '' }: { domain?: string }) {
             {/* Logo Oficial Webunica */}
             <div className="flex-shrink-0 flex items-center relative z-20">
               {isShopifyLanding ? (
-                <Link href="#inicio" className="group flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all border border-zinc-100">
-                  <span className="text-[11px] font-black uppercase tracking-[0.2em] text-zinc-900 mt-0.5">webunica</span>
-                  <div className="w-6 h-6 rounded-full bg-pink-50 flex items-center justify-center">
-                    <ShoppingBag className="w-3.5 h-3.5 text-pink-600" />
+                <Link href="#inicio" className="group flex items-center gap-3 bg-white px-5 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all border border-zinc-100">
+                  <div className="flex flex-col leading-none">
+                    <span className="text-[14px] font-black uppercase tracking-tighter text-zinc-950">desarrolloshopify</span>
+                    <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-pink-600">de webunica.cl</span>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-pink-50 flex items-center justify-center group-hover:bg-pink-100 transition-all">
+                    <ShoppingBag className="w-4 h-4 text-pink-600" />
                   </div>
                 </Link>
               ) : (
