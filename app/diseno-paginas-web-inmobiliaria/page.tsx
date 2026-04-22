@@ -38,6 +38,10 @@ export default function RealEstatePage() {
       answer: "Configuramos ruteo inteligente: cada vez que alguien consulta por una propiedad, recibes un correo o un mensaje de WhatsApp con el link exacto de la propiedad interesada, facilitando el cierre de la venta."
     },
     {
+      question: "¿Cómo funciona la integración con OpenAI y Redes Sociales?",
+      answer: "En nuestro Plan Pro, utilizamos la API de OpenAI para generar automáticamente descripciones persuasivas y fichas técnicas de tus propiedades. Además, conectamos tu sistema con Facebook e Instagram para que cada nueva propiedad se publique automáticamente en tus perfiles, ahorrándote horas de trabajo manual."
+    },
+    {
       question: "¿El sitio se ve bien en celulares?",
       answer: "Absolutamente. El 80% de las búsquedas de propiedades comienzan en un móvil. Nuestros diseños son 'Mobile-First', garantizando una navegación fluida y rápida desde cualquier smartphone."
     }
@@ -69,13 +73,13 @@ export default function RealEstatePage() {
       highlight: "Máximo Rendimiento & SEO",
       desc: "Un verdadero embudo de ventas inmobiliario. Velocidad de carga < 1s y arquitectura SEO superior.",
       features: [
-        "Desarrollo High-Performance con Next.js",
-        "Software Inmobiliaria a medida",
+        "Todo lo de Inmo BASE +",
+        "Generación de descripciones con IA (OpenAI)",
+        "Conexión automatizada con Facebook e Instagram",
+        "Publicación automática de nuevas propiedades",
         "Velocidad de carga instantánea (SEO Edge)",
         "Embudos de captación de propiedades",
-        "Dashboard de analítica avanzada",
         "Integración con CRM (Hubspot/Salesforce)",
-        "Automatización de marketing (Emails)",
         "SEO técnico avanzado (Estructura Schema)",
         "Soporte Prioritario 6 meses"
       ],
