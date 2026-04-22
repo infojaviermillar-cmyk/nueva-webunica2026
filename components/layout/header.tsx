@@ -231,6 +231,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                           <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Funerarias & Obituarios</span>
                           <span className="text-[11px] text-zinc-500 font-medium">Software de gestión y homenajes</span>
                         </Link>
+                        <Link href="/diseno-paginas-web-odontologia" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
+                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Clínicas Dentales</span>
+                          <span className="text-[11px] text-zinc-500 font-medium">Captación de pacientes y agendas</span>
+                        </Link>
                       </div>
                     </div>
 
@@ -408,6 +412,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/desarrollo-pagina-web-funeraria" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       Funerarias
+                    </Link>
+                    <Link href="/diseno-paginas-web-odontologia" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      Odontología
                     </Link>
                   </div>
                 </div>
