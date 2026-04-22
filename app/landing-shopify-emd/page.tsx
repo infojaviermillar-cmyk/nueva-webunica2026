@@ -88,6 +88,23 @@ export default function ShopifyEmdLandingPage() {
 
   const plans = [
     {
+      name: "Shopify AJUSTE",
+      price: "$290.000",
+      highlight: "🔧 Para tiendas ya creadas",
+      desc: "Ideal para tiendas que necesitan mejorar imagen, orden comercial y confianza visual.",
+      features: [
+        "Revisión visual general de la tienda",
+        "Mejora de home, menú, banners y jerarquía",
+        "Ajustes en ficha de producto",
+        "Mejora de textos clave y llamados a la acción",
+        "Optimización básica de experiencia mobile",
+        "Revisión de apps instaladas",
+        "Ajustes de confianza visual en carrito/checkout",
+        "Hasta cierta cantidad de cambios definidos",
+        "Tiempo de entrega: 5 a 10 días hábiles"
+      ]
+    },
+    {
       name: "Shopify PRENDE",
       price: "$580.000",
       highlight: "🌟 Ideal para emprendedores que inician",
@@ -376,12 +393,12 @@ export default function ShopifyEmdLandingPage() {
 
         {/* 7. Planes de Desarrollo */}
         <section id="planes" className="py-32 bg-white">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-[90rem] mx-auto px-6">
              <div className="text-center mb-20">
                 <span className="text-[10px] font-black uppercase tracking-widest text-pink-600 mb-4 block">Inversión</span>
                 <h2 className="text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 text-zinc-950">Nuestros Planes</h2>
              </div>
-             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                {plans.map((p, i) => (
                  <div key={i} className={`relative bg-zinc-50 rounded-[3rem] p-10 flex flex-col transition-all duration-300 ${p.recommended ? 'border-2 border-pink-600 shadow-2xl shadow-pink-600/10 scale-100 lg:scale-105 z-10' : 'border border-zinc-200'}`}>
                     {p.recommended && (

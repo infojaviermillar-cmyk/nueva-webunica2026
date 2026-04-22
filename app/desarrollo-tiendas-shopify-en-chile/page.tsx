@@ -51,6 +51,25 @@ export default function ShopifyEnChilePage() {
 
   const plans = [
     {
+      name: "Shopify AJUSTE",
+      price: "$290.000",
+      highlight: "🔧 Para tiendas ya creadas",
+      desc: "Ideal para tiendas que necesitan mejorar imagen, orden comercial y confianza visual.",
+      features: [
+        "Revisión visual general de la tienda",
+        "Mejora de home, menú, banners y jerarquía",
+        "Ajustes en ficha de producto",
+        "Mejora de textos clave y llamados a la acción",
+        "Optimización básica de experiencia mobile",
+        "Revisión de apps instaladas",
+        "Ajustes de confianza visual en carrito/checkout",
+        "Hasta cierta cantidad de cambios definidos",
+        "Tiempo de entrega: 5 a 10 días hábiles"
+      ],
+      time: "2 Semanas",
+      cta: "Cotizar sin costo"
+    },
+    {
       name: "Shopify PRENDE",
       price: "$580.000",
       highlight: "🌟 Ideal para emprendedores que inician",
@@ -241,7 +260,7 @@ export default function ShopifyEnChilePage() {
                  <h2 className="text-4xl lg:text-7xl font-black tracking-tighter uppercase mb-6 text-zinc-950">Inversión Shopify</h2>
                  <p className="text-xl text-zinc-500 font-light">Desarrollo profesional para negocios que no juegan a vender.</p>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
                  {plans.map((p, i) => (
                    <div key={i} className={`relative bg-white rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_rgba(124,58,237,0.1)] ${p.recommended ? 'border-violet-600 shadow-2xl shadow-violet-600/10' : 'border-zinc-100'}`}>
                       {/* Descuento Badge */}
