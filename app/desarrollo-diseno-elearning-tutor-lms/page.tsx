@@ -101,7 +101,6 @@ export default function TutorLMSPage() {
       desc: "La solución completa para academias que necesitan múltiples instructores y herramientas de marketing.",
       features: [
         "Todo lo del Plan Academia, más:",
-        "Licencia Tutor LMS Pro Incluida",
         "Sistema Multi-instructor (Marketplace)",
         "Cuestionarios avanzados y tareas",
         "Integración con Sence (Opcional)",
@@ -304,6 +303,181 @@ export default function TutorLMSPage() {
                 </div>
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-rose-500/20 blur-[80px] rounded-full" />
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Qué está incluido section */}
+        <section className="py-32 bg-zinc-950 border-y border-white/5">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-6xl font-black mb-6 tracking-tighter uppercase">Qué está incluido</h2>
+              <p className="text-zinc-500 font-light max-w-2xl mx-auto">
+                Obtén más de 100 funciones listas para usar con la suscripción a Tutor LMS Pro.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {/* Creación de cursos */}
+              <div className="space-y-6">
+                <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Creación de cursos</h3>
+                <ul className="space-y-3">
+                  {[
+                    "Creador de cursos intuitivo", "Estudio de IA", "Cursos ilimitados", "Banco de contenidos",
+                    "Curso de regalo", "Protección del contenido del curso", "Compatibilidad con video nativo, YouTube y Vimeo",
+                    "Paquete de cursos", "Filtrado de cursos", "Curso público", "Curso protegido con contraseña",
+                    "Exportación/importación de cursos", "Contenido del curso de goteo", "Vista previa del curso",
+                    "Requisitos previos del curso", "Anexo del curso"
+                  ].map((f, i) => (
+                    <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
+                      <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Cuestionarios y Monetización */}
+              <div className="space-y-6">
+                <div className="space-y-6 mb-12">
+                   <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Cuestionarios poderosos</h3>
+                   <ul className="space-y-3">
+                     {[
+                       "Creador de cuestionarios avanzado", "Múltiples tipos de cuestionarios", "Informe detallado del cuestionario",
+                       "Exportación/importación de cuestionarios"
+                     ].map((f, i) => (
+                       <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
+                         <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
+                         {f}
+                       </li>
+                     ))}
+                   </ul>
+                </div>
+                
+                <div className="space-y-6 mb-12">
+                  <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Monetización</h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Asignación de ganancias y comisiones", "Opción de venta de un solo curso", "Membresía para todo el sitio",
+                      "Inscripciones manuales"
+                    ].map((f, i) => (
+                      <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
+                        <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="space-y-6">
+                  <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">E-Commerce Nativo</h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Compra única", "Suscripciones integradas", "Afiliación", "Gestión de cupones",
+                      "Gestión de impuestos", "Gestión de pedidos", "Proceso de pago optimizado", "Salida como invitado"
+                    ].map((f, i) => (
+                      <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
+                        <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Estudiantes e Instructores */}
+              <div className="space-y-6">
+                <div className="space-y-6 mb-12">
+                   <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Estudiantes e instructores</h3>
+                   <ul className="space-y-3">
+                     {[
+                       "Estudiantes e instructores ilimitados", "Paneles de control personalizados", "Comunicación directa",
+                       "Preparado para múltiples instructores", "Calificación automatizada", "Cuaderno para instructores"
+                     ].map((f, i) => (
+                       <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
+                         <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
+                         {f}
+                       </li>
+                     ))}
+                   </ul>
+                </div>
+
+                <div className="space-y-6 mb-12">
+                  <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Certificados personalizados</h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Creador de certificados drag & drop", "Certificados con marca blanca", "Certificados ilimitados"
+                    ].map((f, i) => (
+                      <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
+                        <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="space-y-6">
+                  <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Análisis avanzado</h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Informes y análisis detallados", "Análisis de ganancias", "Informe detallado del curso",
+                      "Opción de exportación de análisis"
+                    ].map((f, i) => (
+                      <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
+                        <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Second row of grid */}
+              <div className="space-y-6">
+                <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Aprendizaje en tiempo real</h3>
+                <ul className="space-y-3">
+                  {[
+                    "Integración con Zoom", "Integración con Google Meet", "Integración con Google Classroom"
+                  ].map((f, i) => (
+                    <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
+                      <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="space-y-6">
+                <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Comunicaciones</h3>
+                <ul className="space-y-3">
+                  {[
+                    "Preguntas y respuestas (Q&A)", "Comentarios sobre la lección", "Notificaciones push",
+                    "Opción de anuncio", "Notificaciones en todo el sitio", "Correos electrónicos personalizables",
+                    "Plantillas de correo prediseñadas", "Calendario de eventos"
+                  ].map((f, i) => (
+                    <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
+                      <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="space-y-6">
+                <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Autenticación</h3>
+                <ul className="space-y-3">
+                  {[
+                    "Autenticación de dos factores (2FA)", "Protección contra el fraude", "Gestionar sesiones activas",
+                    "Verificación de correo electrónico"
+                  ].map((f, i) => (
+                    <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
+                      <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
             </div>
           </div>
         </section>
