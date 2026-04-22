@@ -29,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/diseno-paginas-web-inmobiliaria',
     '/desarrollo-pagina-web-funeraria',
     '/tienda-dropshipping-shopify-dropi',
-    '/cotizador-en-linea-desarrollo-web',
+
     '/calculadora-de-campana-meta-ads-facebook',
     '/costos-asociados-a-tienda-shopify-chile',
     '/preguntas-frecuentes-sobre-tiendas-shopify-en-chile',

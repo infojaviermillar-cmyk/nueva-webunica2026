@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import LeadButton from '@/components/ui/lead-button';
 
 export default function PortfolioPage() {
   return (
@@ -111,9 +112,9 @@ export default function PortfolioPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-8">¿Listo para ser el próximo gran proyecto?</h2>
           <p className="text-zinc-400 text-lg mb-10">Agenda una llamada estratégica hoy mismo y descubramos cómo escalar tu negocio con un ecosistema digital potente.</p>
-          <Link href="/cotizador-en-linea-desarrollo-web" className="inline-block bg-[#a1fcd8] hover:bg-[#8AEFBA] text-zinc-900 font-bold px-8 py-4 rounded-xl text-lg transition-colors">
+          <LeadButton className="inline-block bg-[#a1fcd8] hover:bg-[#8AEFBA] text-zinc-900 font-bold px-8 py-4 rounded-xl text-lg transition-colors">
             Cotizar mi Proyecto
-          </Link>
+          </LeadButton>
         </div>
       </section>
     </main>
