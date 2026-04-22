@@ -62,34 +62,64 @@ export default function ShopifyEmdLandingPage() {
 
   const plans = [
     {
-      name: "Plan Inicial",
-      desc: "Ideal para marcas que están comenzando.",
+      name: "Shopify PRENDE",
+      price: "$580.000",
+      highlight: "🌟 Ideal para emprendedores que inician",
+      desc: "Perfecto para emprendedores que dan sus primeros pasos en el comercio digital. Lanza tu tienda con imagen profesional y optimizada para vender.",
       features: [
-        "Configuración de theme gratuito",
-        "Hasta X colecciones principales",
-        "Pasarelas de pago y envíos base",
-        "Configuración de páginas legales"
+        "Configuración completa de tienda Shopify",
+        "Conexión de dominio + validación de correo",
+        "Instalación de plantilla premium Envato / Shopify",
+        "Cargamos hasta 70 productos por ti o migración",
+        "Certificado SSL y Panel administrador",
+        "1 Medio de pago (Mercado Pago, PayPal, Flow o Ventipay)",
+        "Multicourier (Shipit/Sendu) o tarifa única",
+        "Integración Bluexpress, Starken, etc.",
+        "Variaciones de producto (talla, color, etc.)",
+        "Redes sociales y Botón de WhatsApp",
+        "App propia datos de facturación",
+        "Soporte técnico 3 meses y hasta 3 cambios",
+        "Tiempo de entrega: Hasta 4 semanas"
       ]
     },
     {
-      name: "Plan Profesional",
-      desc: "Para negocios que buscan destacar y escalar.",
+      name: "Shopify FULL",
+      price: "$780.000",
+      originalPrice: "$980.000",
+      highlight: "⚙️ Para negocios en crecimiento",
+      desc: "Automatiza, optimiza y escala tus ventas. Para negocios que necesitan mayor capacidad de productos y herramientas de marketing.",
       recommended: true,
       features: [
-        "Instalación y personalización de Theme Premium",
-        "Diseño de banners y gráficas principales",
-        "Optimización de fichas de producto para conversión",
-        "Instalación de apps de marketing (Reseñas, WhatsApp)"
+        "Todo lo del Plan Prende, más:",
+        "Capacidad para hasta 120 productos",
+        "Diseño personalizado por secciones",
+        "Integración Google Analytics y Facebook Pixel",
+        "Optimización SEO Básica (Títulos, H2, Textos)",
+        "Ajustes avanzados de estructura y navegación",
+        "Chat en vivo opcional (Tawk.to o WhatsApp)",
+        "Newsletter y formulario de suscripción",
+        "Capacitación personalizada con videos",
+        "Correos de carritos abandonados automáticos"
       ]
     },
     {
-      name: "Plan Avanzado",
-      desc: "Soluciones a medida con funciones complejas.",
+      name: "Shopify PRO",
+      price: "$1.200.000",
+      originalPrice: "$1.400.000",
+      highlight: "🚀 Para marcas que desean escalar",
+      desc: "Solución completa y profesional. Integraciones complejas, estrategias de conversión avanzadas y diseño a medida.",
       features: [
-        "Diseño UX/UI personalizado",
-        "Automatizaciones de correos y carritos abandonados",
-        "Integraciones con sistemas externos (Inventarios/ERP)",
-        "Soporte prioritario post-lanzamiento"
+        "Todo lo del Plan FULL, más:",
+        "Carga o migración de hasta 300 productos",
+        "Integración ERP/Bsale (requiere evaluación)",
+        "Marketing automatizado (Mailchimp/Klaviyo)",
+        "Configuración Google Ads y Meta Ads",
+        "Configuración completa de Analytics 4",
+        "Plantilla ultra personalizada a medida",
+        "Páginas optimizadas para campañas",
+        "Integraciones externas (Calendly, CRM, Zapier)",
+        "Soporte técnico preferente + auditoría final",
+        "Tiempo estimado: Hasta 8 semanas"
       ]
     }
   ];
@@ -333,8 +363,19 @@ export default function ShopifyEmdLandingPage() {
                         Recomendado
                       </div>
                     )}
-                    <h3 className="text-2xl font-black mb-3 uppercase text-zinc-900">{p.name}</h3>
-                    <p className="text-sm text-zinc-500 font-light mb-8 h-10">{p.desc}</p>
+                    <h3 className="text-2xl font-black mb-2 uppercase text-zinc-900">{p.name}</h3>
+                    <p className="text-xs font-bold text-pink-600 uppercase mb-4">{p.highlight}</p>
+                    <div className="mb-4">
+                      {p.originalPrice && (
+                        <span className="text-sm text-zinc-400 line-through mr-2 font-medium">{p.originalPrice}</span>
+                      )}
+                      <span className="text-4xl font-black text-zinc-900">{p.price}</span>
+                      <span className="text-sm text-zinc-500 font-medium ml-1">+ iva</span>
+                    </div>
+                    <div className="flex items-center gap-2 mb-6 text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg w-fit border border-emerald-100">
+                      <span className="text-xs font-black uppercase tracking-widest">💳 6 cuotas sin interés</span>
+                    </div>
+                    <p className="text-sm text-zinc-500 font-light mb-8 min-h-[40px]">{p.desc}</p>
                     <div className="flex-grow">
                       <ul className="space-y-4 mb-10">
                         {p.features.map((f, idx) => (
