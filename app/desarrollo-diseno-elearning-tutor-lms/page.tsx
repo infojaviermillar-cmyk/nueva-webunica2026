@@ -158,7 +158,7 @@ export default function TutorLMSPage() {
               
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
                 <LeadButton className="px-10 py-5 bg-rose-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-rose-700 transition-all shadow-xl shadow-rose-600/20 active:scale-95 text-center">
-                  Comenzar mi proyecto
+                  Comenzar con 10% Dto
                 </LeadButton>
                 <WhatsAppButton className="px-10 py-5 bg-emerald-500 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-emerald-600 transition-all shadow-xl shadow-emerald-500/20 active:scale-95 text-center">
                   Hablar con un experto
@@ -520,7 +520,7 @@ export default function TutorLMSPage() {
                       </ul>
                       
                       <LeadButton className={`w-full py-5 rounded-2xl font-bold uppercase tracking-widest text-[11px] transition-all ${p.recommended ? 'bg-rose-600 text-white shadow-lg shadow-rose-600/30' : 'bg-zinc-950 text-white hover:bg-zinc-800'}`}>
-                        {p.cta}
+                        {p.cta} - 10% Dto
                       </LeadButton>
                    </div>
                  ))}
@@ -558,7 +558,7 @@ export default function TutorLMSPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <LeadButton className="px-12 py-6 bg-white text-rose-600 rounded-full font-black uppercase tracking-widest text-[11px] shadow-xl hover:scale-105 transition-all">
-                    Solicitar Propuesta
+                    Solicitar con 10% Dto
                   </LeadButton>
                   <WhatsAppButton className="px-12 py-6 bg-zinc-950 text-white rounded-full font-black uppercase tracking-widest text-[11px] shadow-xl hover:scale-105 transition-all">
                     Consultar por WhatsApp
