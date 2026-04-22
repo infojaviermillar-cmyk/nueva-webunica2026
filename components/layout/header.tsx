@@ -351,6 +351,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
                   </Link>
 
               <div className="space-y-8 pt-2">
+                {/* E-commerce */}
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 block mb-4">E-commerce</span>
                   <div className="grid gap-3">
@@ -358,13 +359,22 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       Tiendas Shopify
                     </Link>
-                    <Link href="/desarrollo-tienda-en-linea-woocommerce" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3 transition-colors">
+                    <Link href="/desarrollo-tienda-en-linea-woocommerce" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       WooCommerce
+                    </Link>
+                    <Link href="/tienda-dropshipping-shopify-dropi" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      Dropshipping
+                    </Link>
+                    <Link href="/diseno-themes-shopify-personalizados-adobe-xd" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      Shopify Themes
                     </Link>
                   </div>
                 </div>
 
+                {/* Desarrollo & SEO */}
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 block mb-4">Desarrollo & SEO</span>
                   <div className="grid gap-3">
@@ -382,6 +392,44 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     </Link>
                   </div>
                 </div>
+
+                {/* Especialidades */}
+                <div>
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 block mb-4">Especialidades</span>
+                  <div className="grid gap-3">
+                    <Link href="/desarrollo-diseno-elearning-tutor-lms" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      Academias LMS
+                    </Link>
+                    <Link href="/diseno-paginas-web-inmobiliaria" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      Inmobiliarias
+                    </Link>
+                    <Link href="/desarrollo-pagina-web-funeraria" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      Funerarias
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Herramientas */}
+                <div>
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 block mb-4">Herramientas</span>
+                  <div className="grid gap-3">
+                    <Link href="/recursos" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-blue-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                      Centro de Recursos
+                    </Link>
+                    <Link href="/calculadora-de-campana-meta-ads-facebook" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-blue-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                      Calculadora Meta
+                    </Link>
+                    <Link href="/listas-de-verificacion-shopify-cro-basica" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-blue-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                      Checklist CRO
+                    </Link>
+                  </div>
+                </div>
               </div>
 
               <Link href="/portafolio" onClick={() => setIsMobileMenuOpen(false)} className="group mt-2 border-t border-zinc-100 pt-6 pb-6 border-b">
@@ -390,10 +438,6 @@ export default function Header({ domain = '' }: { domain?: string }) {
               </Link>
 
               <div className="flex flex-col gap-6 mt-2">
-                <Link href="/recursos" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-widest flex justify-between items-center">
-                  Recursos
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                </Link>
                 <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-widest flex justify-between items-center">
                   Blog
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
