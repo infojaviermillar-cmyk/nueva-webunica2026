@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
-import { ShoppingBag, MonitorSmartphone, Rocket, Star, CheckCircle2, ShoppingCart, Search, Zap, ShieldCheck, Box, HelpCircle, ArrowRight, LayoutTemplate } from 'lucide-react';
+import { ShoppingBag, MonitorSmartphone, Rocket, Star, CheckCircle2, ShoppingCart, Search, Zap, ShieldCheck, Box, HelpCircle, ArrowRight, LayoutTemplate, MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Palette, Puzzle } from 'lucide-react';
 
 export const metadata = {
   title: 'Desarrollo de Tiendas Shopify Chile | Diseño, Planes y Costos',
@@ -51,16 +51,16 @@ export default function ShopifyEmdLandingPage() {
   ];
 
   const processSteps = [
-    { step: "01", name: "Descripción", desc: "El cliente describe su proyecto y necesidades." },
-    { step: "02", name: "Reunión", desc: "Se genera una reunión estratégica." },
-    { step: "03", name: "Cotización", desc: "Elaboramos y presentamos la propuesta comercial." },
-    { step: "04", name: "Aprobación", desc: "El cliente acepta la cotización." },
-    { step: "05", name: "Flujo", desc: "Se presenta el flujo de desarrollo del proyecto." },
-    { step: "06", name: "Contenido", desc: "El cliente envía el contenido (textos, imágenes)." },
-    { step: "07", name: "Diseño", desc: "Se desarrolla el theme o se adapta el diseño." },
-    { step: "08", name: "Revisión", desc: "Se revisan las funciones de la tienda." },
-    { step: "09", name: "Componentes", desc: "Se agregan componentes y apps finales." },
-    { step: "10", name: "Finalización", desc: "Se entrega la tienda. (De 1 a 6 semanas en total)." }
+    { step: "01", name: "Descripción", desc: "El cliente describe su proyecto y necesidades.", icon: <MessageSquare className="w-6 h-6" /> },
+    { step: "02", name: "Reunión", desc: "Se genera una reunión estratégica.", icon: <Users className="w-6 h-6" /> },
+    { step: "03", name: "Cotización", desc: "Elaboramos y presentamos la propuesta comercial.", icon: <FileSignature className="w-6 h-6" /> },
+    { step: "04", name: "Aprobación", desc: "El cliente acepta la cotización.", icon: <ThumbsUp className="w-6 h-6" /> },
+    { step: "05", name: "Flujo", desc: "Se presenta el flujo de desarrollo del proyecto.", icon: <Route className="w-6 h-6" /> },
+    { step: "06", name: "Contenido", desc: "El cliente envía el contenido (textos, imágenes).", icon: <UploadCloud className="w-6 h-6" /> },
+    { step: "07", name: "Diseño", desc: "Se desarrolla el theme o se adapta el diseño.", icon: <Palette className="w-6 h-6" /> },
+    { step: "08", name: "Revisión", desc: "Se revisan las funciones de la tienda.", icon: <Search className="w-6 h-6" /> },
+    { step: "09", name: "Componentes", desc: "Se agregan componentes y apps finales.", icon: <Puzzle className="w-6 h-6" /> },
+    { step: "10", name: "Finalización", desc: "Se entrega la tienda. (De 1 a 6 semanas en total).", icon: <Rocket className="w-6 h-6" /> }
   ];
 
   const sitemap = [
@@ -462,44 +462,49 @@ export default function ShopifyEmdLandingPage() {
               <p className="text-lg text-zinc-500 font-light">Paso a paso hacia el lanzamiento.</p>
             </div>
             <style dangerouslySetInnerHTML={{__html: `
-              @keyframes scanLine {
-                0% { top: -10%; opacity: 0; }
+              @keyframes scanLineHorizontal {
+                0% { left: -10%; opacity: 0; }
                 10% { opacity: 1; }
                 90% { opacity: 1; }
-                100% { top: 100%; opacity: 0; }
+                100% { left: 100%; opacity: 0; }
               }
-              .animate-scan {
-                animation: scanLine 6s linear infinite;
+              .animate-scan-horizontal {
+                animation: scanLineHorizontal 6s linear infinite;
               }
             `}} />
-            <div className="max-w-5xl mx-auto relative py-10">
-              {/* Animated vertical line */}
-              <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-1 bg-zinc-100 transform lg:-translate-x-1/2 rounded-full overflow-hidden">
-                <div className="absolute left-0 w-full h-32 bg-gradient-to-b from-transparent via-pink-500 to-transparent animate-scan" />
-              </div>
+            
+            <div className="w-full overflow-hidden relative">
+              <div className="absolute left-0 top-0 bottom-0 w-8 lg:w-16 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-8 lg:w-16 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
               
-              <div className="space-y-12">
-                {processSteps.map((step, i) => (
-                  <div key={i} className={`relative flex items-center lg:justify-between w-full group ${i % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}>
-                    
-                    {/* Empty space for alternating layout on desktop */}
-                    <div className="hidden lg:block w-[45%]" />
-
-                    {/* Central Icon */}
-                    <div className="absolute left-8 lg:left-1/2 transform -translate-x-1/2 w-14 h-14 bg-white border-4 border-pink-50 rounded-full flex items-center justify-center z-10 group-hover:border-pink-500 group-hover:scale-125 transition-all duration-500 shadow-md">
-                      <span className="text-pink-600 font-black text-sm">{step.step}</span>
-                    </div>
-
-                    {/* Content Card */}
-                    <div className="w-full lg:w-[45%] pl-24 lg:pl-0">
-                      <div className={`bg-white p-6 lg:p-8 rounded-3xl border border-zinc-100 shadow-sm group-hover:shadow-2xl group-hover:border-pink-200 transition-all duration-300 transform group-hover:-translate-y-1 ${i % 2 === 0 ? 'lg:text-left' : 'lg:text-right'}`}>
-                        <h4 className="font-black text-zinc-900 mb-2 uppercase tracking-wide text-lg">{step.name}</h4>
-                        <p className="text-zinc-500 font-light text-sm leading-relaxed">{step.desc}</p>
-                      </div>
-                    </div>
-                    
+              <div className="flex overflow-x-auto pb-16 pt-8 snap-x snap-mandatory scrollbar-hide relative" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <div className="relative inline-flex items-start min-w-max px-8 lg:px-20">
+                  
+                  {/* Horizontal connecting line */}
+                  <div className="absolute top-10 left-20 right-20 h-1.5 bg-zinc-100 rounded-full overflow-hidden z-0">
+                     <div className="absolute top-0 bottom-0 w-48 bg-gradient-to-r from-transparent via-pink-500 to-transparent animate-scan-horizontal" />
                   </div>
-                ))}
+
+                  {processSteps.map((step, i) => (
+                    <div key={i} className="relative flex flex-col items-center w-[220px] group snap-center flex-shrink-0 z-10">
+                      
+                      {/* Central Icon */}
+                      <div className="w-20 h-20 bg-white border-[5px] border-pink-50 rounded-full flex flex-col items-center justify-center group-hover:border-pink-500 group-hover:scale-110 transition-all duration-300 shadow-sm relative cursor-default">
+                        {/* Active ping effect on hover */}
+                        <div className="absolute inset-0 rounded-full bg-pink-400 opacity-0 group-hover:opacity-20 group-hover:animate-ping transition-opacity duration-300" />
+                        <span className="text-pink-600 group-hover:text-pink-700 transition-colors z-10">{step.icon}</span>
+                      </div>
+
+                      {/* Content Card */}
+                      <div className="mt-8 text-center px-4">
+                        <div className="text-pink-300 font-bold text-xs mb-2 tracking-widest">PASO {step.step}</div>
+                        <h4 className="font-black text-zinc-900 mb-3 uppercase tracking-wide text-sm group-hover:text-pink-600 transition-colors">{step.name}</h4>
+                        <p className="text-zinc-500 font-light text-xs leading-relaxed">{step.desc}</p>
+                      </div>
+                      
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
