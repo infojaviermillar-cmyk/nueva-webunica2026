@@ -140,9 +140,6 @@ export default function ShopifyEmdLandingPage() {
       desc: "Automatiza, optimiza y escala tus ventas. Para negocios que necesitan mayor capacidad de productos y herramientas de marketing.",
       recommended: true,
       features: [
-        "Todo lo del Plan Prende, más:",
-        "Capacidad para hasta 120 productos",
-        "Diseño personalizado por secciones",
         "Integración Google Analytics y Facebook Pixel",
         "Optimización SEO Básica (Títulos, H2, Textos)",
         "Ajustes avanzados de estructura y navegación",
@@ -170,6 +167,48 @@ export default function ShopifyEmdLandingPage() {
         "Integraciones externas (Calendly, CRM, Zapier)",
         "Soporte técnico preferente + auditoría final",
         "Tiempo estimado: Hasta 8 semanas"
+      ]
+    }
+  ];
+
+  const dropshippingPlans = [
+    {
+      name: "DROPI Básico",
+      price: "$580.000",
+      originalPrice: "$650.000",
+      highlight: "📦 Dropshipping Automatizado",
+      desc: "Inicia tu negocio sin stock propio con la mejor integración de Chile: Shopify + Dropi.",
+      features: [
+        "Desarrollo Tienda Dropshipping Dropi",
+        "Configuración completa Shopify",
+        "Dominio + Validación correo",
+        "Plantilla Premium incluida",
+        "Carga hasta 70 productos Dropi",
+        "Sincronización total con Dropi",
+        "Pago Contra Entrega o Tradicional",
+        "Certificado SSL + Panel Admin",
+        "1 Medio de Pago (Webpay/MercadoPago)",
+        "Envíos Bluexpress (vía Dropi)",
+        "WhatsApp + Redes Sociales",
+        "Soporte 3 meses (3 cambios)",
+        "Entrega: Hasta 4 semanas"
+      ]
+    },
+    {
+      name: "DROPI Pro",
+      price: "$780.000",
+      originalPrice: "$980.000",
+      highlight: "🚀 Dropshipping de Alto Vuelo",
+      desc: "Escala tu tienda dropshipping con optimización de conversión y mayor catálogo.",
+      features: [
+        "Todo lo de DROPI Básico +",
+        "Carga hasta 250 productos Dropi",
+        "Optimización de Conversión (CRO)",
+        "Configuración de Upselling/Cross-selling",
+        "SEO de categorías avanzado",
+        "Integración avanzada de Apps",
+        "Soporte Prioritario",
+        "Entrega: Hasta 5 semanas"
       ]
     }
   ];
@@ -555,7 +594,45 @@ export default function ShopifyEmdLandingPage() {
           </div>
         </section>
 
-        {/* 9. Ecosistema de Aplicaciones */}
+         {/* 8. Planes Dropshipping Dropi */}
+         <section className="py-32 bg-zinc-50 rounded-[4rem] mx-4 mb-32 border border-zinc-100">
+           <div className="max-w-[90rem] mx-auto px-6">
+              <div className="text-center mb-20">
+                 <span className="text-[10px] font-black uppercase tracking-widest text-purple-600 mb-4 block">Especializado</span>
+                 <h2 className="text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 text-zinc-950">Planes Dropshipping Dropi</h2>
+                 <p className="text-lg text-zinc-500 font-light max-w-2xl mx-auto">La solución definitiva para vender en Chile sin manejar inventario físico.</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                {dropshippingPlans.map((p, i) => (
+                  <div key={i} className={`relative bg-white rounded-[3rem] p-12 flex flex-col border border-zinc-100 shadow-xl hover:shadow-2xl transition-all duration-500`}>
+                     <div className="absolute top-10 right-10 bg-emerald-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full animate-pulse">
+                       10% DESCUENTO
+                     </div>
+                     <h3 className="text-3xl font-black mb-2 uppercase text-zinc-900">{p.name}</h3>
+                     <p className="text-sm font-bold text-purple-600 uppercase mb-6">{p.highlight}</p>
+                     <div className="mb-8">
+                       <div className="text-sm text-zinc-400 line-through font-medium mb-1">{p.originalPrice} + iva</div>
+                       <span className="text-5xl font-black text-zinc-900">{p.price}</span>
+                       <span className="text-sm text-zinc-500 font-medium ml-1">+ iva</span>
+                     </div>
+                     <ul className="space-y-4 mb-12 flex-grow">
+                       {p.features.map((f, idx) => (
+                         <li key={idx} className="flex items-start gap-3 text-sm text-zinc-600 font-medium">
+                           <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                           {f}
+                         </li>
+                       ))}
+                     </ul>
+                     <LeadButton className="w-full py-5 bg-purple-600 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-purple-700 shadow-xl shadow-purple-600/20 active:scale-95 transition-all">
+                       Obtener 10% Descuento
+                     </LeadButton>
+                  </div>
+                ))}
+              </div>
+           </div>
+         </section>
+
+         {/* 9. Ecosistema de Aplicaciones */}
         <section className="py-32 bg-zinc-950 text-white rounded-[4rem] mx-4 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(219,39,119,0.15),transparent)] pointer-events-none" />
           <div className="max-w-7xl mx-auto px-6 relative z-10">

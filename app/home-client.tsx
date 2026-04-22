@@ -99,6 +99,40 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
     }
   ];
 
+  const dropshippingPlans = [
+    {
+      name: "Dropi Básico",
+      price: "$580.000",
+      original: "$650.000",
+      highlight: "Inicia sin stock propio",
+      features: [
+        "Desarrollo Tienda Shopify + Dropi",
+        "Carga 70 productos iniciales",
+        "Sincronización automática stock",
+        "Pago Contra Entrega configurado",
+        "Diseño High-Performance",
+        "Soporte 3 meses (3 cambios)"
+      ],
+      time: "4 semanas"
+    },
+    {
+      name: "Dropi Avanzado",
+      price: "$780.000",
+      original: "$980.000",
+      highlight: "Escalado y Conversión",
+      features: [
+        "Todo lo del Plan Básico, más:",
+        "Carga 250 productos iniciales",
+        "Optimización de Conversión (CRO)",
+        "Estrategia Upselling automatizada",
+        "SEO avanzado de categorías",
+        "Soporte Prioritario"
+      ],
+      time: "5 semanas",
+      recommended: true
+    }
+  ];
+
   return (
     <main className="min-h-screen font-sans antialiased text-zinc-900 overflow-x-hidden">
       {/* Hero Section - Funnel Focus */}
@@ -240,6 +274,54 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
                   <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest text-center pt-4">
                     Entrega estimada: {plan.time}
                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+     </section>
+
+      {/* Dropshipping Section - Home Expansion */}
+      <section className="py-32 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-24">
+            <span className="text-xs font-black tracking-[0.3em] text-pink-600 uppercase mb-4 block">E-commerce Dropshipping</span>
+            <h2 className="text-4xl lg:text-7xl font-black tracking-tighter uppercase mb-10 text-zinc-950">Vende sin Stock</h2>
+            <p className="text-xl text-zinc-500 max-w-3xl mx-auto font-light leading-relaxed">Configuramos tu ecosistema <strong className="text-zinc-950">Shopify + Dropi</strong> para que solo te preocupes de escalar tus ventas.</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
+            {dropshippingPlans.map((plan, i) => (
+              <div key={i} className={`relative bg-zinc-50 rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] shadow-sm hover:shadow-2xl ${plan.recommended ? 'border-pink-500' : 'border-zinc-100 hover:border-pink-200'}`}>
+                <div className="absolute top-8 right-8 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-pulse z-20">
+                  10% OFF
+                </div>
+                <div className="mb-10">
+                  <h3 className="text-2xl font-black text-zinc-900 mb-2 uppercase">{plan.name}</h3>
+                  <p className="text-xs font-bold text-pink-500 uppercase tracking-wider mb-6">{plan.highlight}</p>
+                  <div className="text-sm text-zinc-400 line-through font-medium mb-1">{plan.original} + IVA</div>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-5xl font-black tracking-tight">{plan.price}</span>
+                    <span className="text-zinc-400 font-bold">+ IVA</span>
+                  </div>
+                </div>
+
+                <ul className="space-y-4 mb-12">
+                  {plan.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-4 text-sm text-zinc-600 font-light">
+                      <div className="w-5 h-5 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-3 h-3 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                      </div>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+
+                <LeadButton className={`w-full py-5 rounded-2xl font-bold text-center transition-all ${plan.recommended ? 'bg-pink-600 text-white shadow-xl shadow-pink-600/20 hover:bg-pink-700' : 'bg-zinc-950 text-white hover:bg-zinc-800'}`}>
+                  Obtener 10% Dto
+                </LeadButton>
+                <div className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest text-center pt-4">
+                  Entrega: {plan.time}
                 </div>
               </div>
             ))}

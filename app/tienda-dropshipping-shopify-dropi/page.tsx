@@ -184,6 +184,90 @@ export default function DropshippingPage() {
            </div>
         </section>
 
+        {/* Dropshipping Plans */}
+        <section id="planes" className="py-32 max-w-7xl mx-auto px-6">
+           <div className="text-center mb-20">
+              <span className="text-[10px] font-black uppercase tracking-widest text-purple-500 mb-4 block">Inversión Inteligente</span>
+              <h2 className="text-4xl lg:text-7xl font-black mb-6 uppercase tracking-tighter">Planes <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Dropi Chile</span></h2>
+              <p className="text-xl text-zinc-500 font-light">Estructuras diseñadas para vender sin stock y escalar rápido.</p>
+           </div>
+           
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {[
+                {
+                  name: "Dropshipping Básico",
+                  price: "$580.000",
+                  original: "$650.000",
+                  highlight: "Ideal para iniciar",
+                  features: [
+                    "Desarrollo Tienda Dropshipping Dropi",
+                    "Configuración completa Shopify",
+                    "Dominio + Validación correo",
+                    "Plantilla Premium Envato / Shopify",
+                    "Carga hasta 70 productos desde Dropi",
+                    "Sincronización plataforma Dropi",
+                    "Pago por entrega o Tradicional",
+                    "Certificado SSL y Panel administrador",
+                    "1 Medio de pago (Webpay/Flow/Etc)",
+                    "Integración Bluexpress (Dropi)",
+                    "Categorías y Colecciones",
+                    "WhatsApp + Redes Sociales",
+                    "Soporte 3 meses (3 cambios)",
+                    "Entrega: Hasta 4 semanas"
+                  ]
+                },
+                {
+                  name: "Dropshipping Avanzado",
+                  price: "$780.000",
+                  original: "$980.000",
+                  highlight: "Para escalar volumen",
+                  features: [
+                    "Todo lo del Plan Básico +",
+                    "Carga hasta 250 productos Dropi",
+                    "Optimización de Conversión (CRO)",
+                    "Estrategia de Upselling integrada",
+                    "Configuración de Pixel y Analytics",
+                    "Diseño de Banners personalizados",
+                    "SEO de categorías avanzado",
+                    "Soporte prioritario",
+                    "Capacitación de escalado Ads",
+                    "Entrega: Hasta 5 semanas"
+                  ],
+                  recommended: true
+                }
+              ].map((p, i) => (
+                <div key={i} className={`relative p-10 lg:p-14 rounded-[4rem] border transition-all duration-500 ${p.recommended ? 'bg-white text-zinc-950 border-purple-500 shadow-2xl scale-105 z-10' : 'bg-zinc-900 text-white border-white/5 hover:border-purple-500/30'}`}>
+                   <div className="absolute top-10 right-10 bg-emerald-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full animate-pulse">
+                      10% DESCUENTO
+                   </div>
+                   <h3 className="text-3xl font-black mb-2 uppercase tracking-tight">{p.name}</h3>
+                   <p className={`text-xs font-bold uppercase mb-8 ${p.recommended ? 'text-purple-600' : 'text-purple-400'}`}>{p.highlight}</p>
+                   
+                   <div className="mb-10">
+                      <div className={`text-sm line-through font-medium mb-1 opacity-50`}>{p.original} + iva</div>
+                      <div className="flex items-baseline gap-2">
+                         <span className="text-5xl font-black">{p.price}</span>
+                         <span className="text-sm opacity-50 font-medium">+ iva</span>
+                      </div>
+                   </div>
+
+                   <ul className="space-y-4 mb-12">
+                      {p.features.map((f, idx) => (
+                        <li key={idx} className={`flex items-start gap-3 text-sm font-medium ${p.recommended ? 'text-zinc-600' : 'text-zinc-400'}`}>
+                           <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                           {f}
+                        </li>
+                      ))}
+                   </ul>
+
+                   <LeadButton className={`w-full py-5 rounded-3xl font-black uppercase tracking-widest text-[11px] transition-all ${p.recommended ? 'bg-purple-600 text-white hover:bg-purple-700 shadow-xl shadow-purple-600/20' : 'bg-white text-black hover:bg-zinc-200 shadow-xl shadow-white/5'}`}>
+                      Obtener 10% Descuento
+                   </LeadButton>
+                </div>
+              ))}
+           </div>
+        </section>
+
         {/* FAQ Section */}
         <div className="rounded-[4rem] bg-white text-zinc-950 mx-4 overflow-hidden mt-20">
           <FAQSection 
