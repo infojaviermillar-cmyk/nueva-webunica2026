@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
+import LeadButton from '@/components/ui/lead-button';
 import { ShoppingBag, MonitorSmartphone, Rocket, Star, CheckCircle2, ShoppingCart, Search, Zap, ShieldCheck, Box, HelpCircle, ArrowRight, LayoutTemplate } from 'lucide-react';
 
 export const metadata = {
@@ -386,12 +387,11 @@ export default function ShopifyEmdLandingPage() {
                         ))}
                       </ul>
                     </div>
-                    <a 
-                      href="#cotizar" 
+                    <LeadButton 
                       className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[11px] text-center transition-colors shadow-md active:scale-95 ${p.recommended ? 'bg-pink-600 text-white hover:bg-pink-700 shadow-pink-600/30' : 'bg-zinc-900 text-white hover:bg-zinc-800'}`}
                     >
-                      Cotizar este plan
-                    </a>
+                      Obtener 10% Dto
+                    </LeadButton>
                  </div>
                ))}
              </div>
