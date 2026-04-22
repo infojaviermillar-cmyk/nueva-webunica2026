@@ -75,8 +75,8 @@ export default function TutorLMSPage() {
   const plans = [
     {
       name: "LMS ACADEMIA",
-      price: "$480.000",
-      originalPrice: "$550.000",
+      price: "$580.000",
+      originalPrice: "$680.000",
       highlight: "🎓 Para marcas personales y expertos",
       desc: "Todo lo necesario para lanzar tu primer curso con una imagen profesional y pagos automáticos.",
       features: [
@@ -113,7 +113,7 @@ export default function TutorLMSPage() {
     },
     {
       name: "LMS ENTERPRISE",
-      price: "Desde $1.5M",
+      price: "$1.200.000",
       highlight: "🏢 Corporativo y Medida",
       desc: "Plataformas robustas para empresas que requieren integraciones complejas y miles de alumnos.",
       features: [
