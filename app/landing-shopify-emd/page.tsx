@@ -83,6 +83,10 @@ export default function ShopifyEmdLandingPage() {
     {
       question: "¿Se integra con pagos en Chile?",
       answer: "Absolutamente. Configuramos Mercado Pago, Webpay (vía integraciones) y otros métodos locales para asegurar cobros exitosos."
+    },
+    {
+      question: "¿Qué requisitos pide la Cámara de Comercio de Santiago (CCS)?",
+      answer: "La CCS exige transparencia total en la información: identificación clara de la empresa, términos y condiciones visibles, políticas de devolución explícitas y protocolos de seguridad de datos. Cumplir con estos requisitos no solo te da el Sello de Confianza, sino que protege legalmente tu operación."
     }
   ];
 
@@ -598,13 +602,69 @@ export default function ShopifyEmdLandingPage() {
                   <div className="w-12 h-12 bg-emerald-600/20 rounded-xl flex items-center justify-center text-emerald-500 font-black">🛡️</div>
                   <div className="text-[10px] font-black bg-emerald-600 text-white px-2 py-0.5 rounded uppercase">Confianza</div>
                 </div>
-                <h4 className="font-bold text-white mb-4">Social Proof</h4>
-                <p className="text-zinc-400 font-light text-sm leading-relaxed mb-6">Reseñas de clientes con fotos, integración con Instagram Shopping y sellos de seguridad dinámicos para el checkout.</p>
+                <h4 className="font-bold text-white mb-4">Confianza y Normativa CCS</h4>
+                <p className="text-zinc-400 font-light text-sm leading-relaxed mb-6">Configuramos tu tienda bajo los estándares de la <strong>Cámara de Comercio de Santiago (CCS)</strong>, asegurando términos legales y buenas prácticas comerciales.</p>
                 <div className="flex flex-wrap gap-2 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Loox</span>
-                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Judge.me</span>
-                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Gorgias</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Sello CCS</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Términos y Condiciones</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Normativa SII</span>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 10. Logística y Despacho Chile */}
+        <section className="py-32 bg-white relative">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div className="relative order-2 lg:order-1">
+                <div className="absolute inset-0 bg-pink-600/5 blur-[100px] rounded-full" />
+                <div className="relative grid grid-cols-2 gap-4">
+                   <div className="p-8 bg-zinc-50 rounded-3xl border border-zinc-100 flex flex-col items-center text-center">
+                      <div className="w-12 h-12 mb-4"><img src="/shipit-logo.png" alt="Shipit" className="w-full h-full object-contain grayscale opacity-50" /></div>
+                      <h5 className="font-bold text-zinc-900 text-sm">Shipit</h5>
+                      <p className="text-[10px] text-zinc-500 mt-2">Multicourier líder en Chile</p>
+                   </div>
+                   <div className="p-8 bg-zinc-50 rounded-3xl border border-zinc-100 flex flex-col items-center text-center transform translate-y-8">
+                      <div className="w-12 h-12 mb-4"><img src="/sendu-logo.png" alt="Sendu" className="w-full h-full object-contain grayscale opacity-50" /></div>
+                      <h5 className="font-bold text-zinc-900 text-sm">Sendu</h5>
+                      <p className="text-[10px] text-zinc-500 mt-2">Optimización de última milla</p>
+                   </div>
+                   <div className="p-8 bg-zinc-50 rounded-3xl border border-zinc-100 flex flex-col items-center text-center">
+                      <div className="w-12 h-12 mb-4 text-2xl">🚚</div>
+                      <h5 className="font-bold text-zinc-900 text-sm">Bluexpress</h5>
+                      <p className="text-[10px] text-zinc-500 mt-2">Cobertura nacional total</p>
+                   </div>
+                   <div className="p-8 bg-zinc-50 rounded-3xl border border-zinc-100 flex flex-col items-center text-center transform translate-y-8">
+                      <div className="w-12 h-12 mb-4 text-2xl">📦</div>
+                      <h5 className="font-bold text-zinc-900 text-sm">Starken / Correos</h5>
+                      <p className="text-[10px] text-zinc-500 mt-2">Los clásicos que no fallan</p>
+                   </div>
+                </div>
+              </div>
+              <div className="order-1 lg:order-2">
+                <span className="text-[10px] font-black uppercase tracking-widest text-pink-600 mb-4 block">Operaciones</span>
+                <h2 className="text-4xl lg:text-5xl font-black tracking-tighter uppercase mb-6 text-zinc-950">
+                  Logística de <br/><span className="text-pink-600 italic">Clase Mundial</span>
+                </h2>
+                <p className="text-lg text-zinc-500 font-light mb-8 leading-relaxed">
+                  Automatizamos tus despachos integrando tu tienda con los mejores operadores de Chile. Olvídate de escribir etiquetas a mano.
+                </p>
+                <ul className="space-y-4">
+                  {[
+                    "Cálculo de tarifas en tiempo real según la comuna.",
+                    "Impresión masiva de etiquetas de despacho.",
+                    "Envío automático del número de seguimiento al cliente.",
+                    "Integración directa con Shipit, Sendu y Envia.com.",
+                    "Configuración de retiros en tienda y delivery propio."
+                  ].map((text, i) => (
+                    <li key={i} className="flex gap-3 text-sm text-zinc-600 font-medium">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                      {text}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
