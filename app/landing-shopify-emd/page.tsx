@@ -423,38 +423,7 @@ export default function ShopifyEmdLandingPage() {
           </div>
         </section>
 
-        {/* 8. Ecosistema de Aplicaciones */}
-        <section className="py-32 bg-zinc-950 text-white rounded-[4rem] mx-4 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(219,39,119,0.15),transparent)] pointer-events-none" />
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase mb-6">
-                  Ecosistema de <span className="text-pink-500">Aplicaciones</span>
-                </h2>
-                <p className="text-lg text-zinc-400 font-light mb-10">
-                  No instalamos apps por instalar; elegimos las que realmente impulsan tu negocio y se pagan solas.
-                </p>
-              </div>
-              <div className="grid gap-6">
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
-                  <h4 className="font-bold text-pink-400 uppercase tracking-widest text-xs mb-2">Ventas</h4>
-                  <p className="text-zinc-300 font-light text-sm">Upsells, descuentos por volumen, recuperación de carritos abandonados.</p>
-                </div>
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
-                  <h4 className="font-bold text-pink-400 uppercase tracking-widest text-xs mb-2">Confianza</h4>
-                  <p className="text-zinc-300 font-light text-sm">Reseñas de clientes con fotos, sellos de seguridad dinámicos.</p>
-                </div>
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
-                  <h4 className="font-bold text-pink-400 uppercase tracking-widest text-xs mb-2">Operaciones</h4>
-                  <p className="text-zinc-300 font-light text-sm">Facturación automática (Bsale), rastreo de envíos, chat multiagente integrado.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 9. Proceso de Trabajo */}
+        {/* Proceso de Trabajo */}
         <section className="py-32 bg-white">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-20">
@@ -507,6 +476,39 @@ export default function ShopifyEmdLandingPage() {
             </div>
           </div>
         </section>
+
+        {/* 8. Ecosistema de Aplicaciones */}
+        <section className="py-32 bg-zinc-950 text-white rounded-[4rem] mx-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(219,39,119,0.15),transparent)] pointer-events-none" />
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase mb-6">
+                  Ecosistema de <span className="text-pink-500">Aplicaciones</span>
+                </h2>
+                <p className="text-lg text-zinc-400 font-light mb-10">
+                  No instalamos apps por instalar; elegimos las que realmente impulsan tu negocio y se pagan solas.
+                </p>
+              </div>
+              <div className="grid gap-6">
+                <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
+                  <h4 className="font-bold text-pink-400 uppercase tracking-widest text-xs mb-2">Ventas</h4>
+                  <p className="text-zinc-300 font-light text-sm">Upsells, descuentos por volumen, recuperación de carritos abandonados.</p>
+                </div>
+                <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
+                  <h4 className="font-bold text-pink-400 uppercase tracking-widest text-xs mb-2">Confianza</h4>
+                  <p className="text-zinc-300 font-light text-sm">Reseñas de clientes con fotos, sellos de seguridad dinámicos.</p>
+                </div>
+                <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
+                  <h4 className="font-bold text-pink-400 uppercase tracking-widest text-xs mb-2">Operaciones</h4>
+                  <p className="text-zinc-300 font-light text-sm">Facturación automática (Bsale), rastreo de envíos, chat multiagente integrado.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
 
         {/* 10. Estructura recomendada */}
         <section className="py-32 bg-zinc-50">

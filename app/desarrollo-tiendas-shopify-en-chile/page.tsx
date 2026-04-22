@@ -4,6 +4,7 @@ import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
 import FunnelAnimation from '@/components/ui/funnel-animation';
+import { MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Palette, Search, Puzzle, Rocket } from 'lucide-react';
 
 export const metadata = {
   title: 'Desarrollo de Tiendas Shopify en Chile | Diseño Web Shopify 2026',
@@ -12,6 +13,19 @@ export const metadata = {
 };
 
 export default function ShopifyEnChilePage() {
+  const processSteps = [
+    { step: "01", name: "Descripción", desc: "El cliente describe su proyecto y necesidades.", icon: <MessageSquare className="w-6 h-6" /> },
+    { step: "02", name: "Reunión", desc: "Se genera una reunión estratégica.", icon: <Users className="w-6 h-6" /> },
+    { step: "03", name: "Cotización", desc: "Elaboramos y presentamos la propuesta comercial.", icon: <FileSignature className="w-6 h-6" /> },
+    { step: "04", name: "Aprobación", desc: "El cliente acepta la cotización.", icon: <ThumbsUp className="w-6 h-6" /> },
+    { step: "05", name: "Flujo", desc: "Se presenta el flujo de desarrollo del proyecto.", icon: <Route className="w-6 h-6" /> },
+    { step: "06", name: "Contenido", desc: "El cliente envía el contenido (textos, imágenes).", icon: <UploadCloud className="w-6 h-6" /> },
+    { step: "07", name: "Diseño", desc: "Se desarrolla el theme o se adapta el diseño.", icon: <Palette className="w-6 h-6" /> },
+    { step: "08", name: "Revisión", desc: "Se revisan las funciones de la tienda.", icon: <Search className="w-6 h-6" /> },
+    { step: "09", name: "Componentes", desc: "Se agregan componentes y apps finales.", icon: <Puzzle className="w-6 h-6" /> },
+    { step: "10", name: "Finalización", desc: "Se entrega la tienda. (De 1 a 6 semanas en total).", icon: <Rocket className="w-6 h-6" /> }
+  ];
+
   const shopifyFaqs = [
     {
       question: "¿Cuánto cobra Shopify por vender en Chile?",
@@ -263,6 +277,61 @@ export default function ShopifyEnChilePage() {
               </div>
            </div>
         </section>
+
+        {/* Proceso de Trabajo */}
+        <section className="py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-20">
+              <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase text-zinc-950 mb-6">Proceso de Trabajo</h2>
+              <p className="text-lg text-zinc-500 font-light">Paso a paso hacia el lanzamiento.</p>
+            </div>
+            <style dangerouslySetInnerHTML={{__html: `
+              @keyframes scanLineHorizontal {
+                0% { left: -10%; opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { left: 100%; opacity: 0; }
+              }
+              .animate-scan-horizontal {
+                animation: scanLineHorizontal 6s linear infinite;
+              }
+            `}} />
+            
+            <div className="max-w-7xl mx-auto relative pt-8 pb-16">
+              
+              {/* Líneas horizontales de conexión (2 filas en escritorio) */}
+              <div className="hidden lg:block absolute top-[4.5rem] left-[8%] right-[8%] h-1.5 bg-zinc-100 rounded-full z-0 overflow-hidden">
+                 <div className="absolute top-0 bottom-0 w-48 bg-gradient-to-r from-transparent via-violet-500 to-transparent animate-scan-horizontal" />
+              </div>
+              <div className="hidden lg:block absolute top-[19.5rem] left-[8%] right-[8%] h-1.5 bg-zinc-100 rounded-full z-0 overflow-hidden">
+                 <div className="absolute top-0 bottom-0 w-48 bg-gradient-to-r from-transparent via-violet-500 to-transparent animate-scan-horizontal" style={{ animationDelay: '3s' }} />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-y-16 gap-x-6 relative z-10">
+                {processSteps.map((step, i) => (
+                  <div key={i} className="relative flex flex-col items-center group w-full">
+                    
+                    {/* Central Icon */}
+                    <div className="w-20 h-20 bg-white border-[5px] border-violet-50 rounded-full flex flex-col items-center justify-center group-hover:border-violet-500 group-hover:scale-110 transition-all duration-300 shadow-sm relative cursor-default shrink-0">
+                      {/* Active ping effect on hover */}
+                      <div className="absolute inset-0 rounded-full bg-violet-400 opacity-0 group-hover:opacity-20 group-hover:animate-ping transition-opacity duration-300" />
+                      <span className="text-violet-600 group-hover:text-violet-700 transition-colors z-10">{step.icon}</span>
+                    </div>
+
+                    {/* Content Card */}
+                    <div className="mt-6 text-center px-4 w-full">
+                      <div className="text-violet-400 font-black text-[10px] mb-2 tracking-widest uppercase">Paso {step.step}</div>
+                      <h4 className="font-black text-zinc-900 mb-2 uppercase tracking-wide text-sm group-hover:text-violet-600 transition-colors">{step.name}</h4>
+                      <p className="text-zinc-500 font-light text-xs leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+                    </div>
+                    
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
 
         {/* FAQ */}
         <div className="pb-32">
