@@ -150,48 +150,14 @@ export default function ShopifyEmdLandingPage() {
             {/* Mockup CSS representation */}
             <div className="relative z-10 hidden lg:block">
               <div className="absolute inset-0 bg-gradient-to-tr from-pink-500 to-rose-400 rounded-full blur-[80px] opacity-20 animate-pulse" />
-              <div className="relative bg-white border border-zinc-100 rounded-3xl shadow-[0_40px_100px_rgba(0,0,0,0.08)] overflow-hidden aspect-[4/3] flex flex-col transform rotate-2 hover:rotate-0 transition-transform duration-700">
-                {/* Browser bar */}
-                <div className="h-10 bg-zinc-50 border-b border-zinc-100 flex items-center px-4 gap-2">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-rose-400" />
-                    <div className="w-3 h-3 rounded-full bg-amber-400" />
-                    <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                  </div>
-                  <div className="mx-auto h-5 w-1/2 bg-white rounded-md border border-zinc-200 flex items-center justify-center">
-                    <span className="text-[8px] text-zinc-400 font-medium font-mono">tutienda.com</span>
-                  </div>
-                </div>
-                {/* Store UI mockup */}
-                <div className="flex-grow bg-zinc-50 p-6 flex flex-col gap-6">
-                  <div className="h-32 w-full bg-gradient-to-r from-pink-100 to-pink-50 rounded-xl border border-pink-100 flex items-center justify-center">
-                    <span className="text-pink-600/40 font-black text-2xl uppercase tracking-widest">Store Hero</span>
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                    {[1,2,3].map((i) => (
-                      <div key={i} className="bg-white rounded-lg p-3 border border-zinc-100 shadow-sm flex flex-col gap-2">
-                        <div className="w-full aspect-square bg-zinc-100 rounded-md" />
-                        <div className="h-2 w-3/4 bg-zinc-200 rounded" />
-                        <div className="h-2 w-1/2 bg-pink-200 rounded mt-1" />
-                        <div className="h-6 w-full bg-zinc-900 rounded mt-2" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                {/* Mobile mockup floating */}
-                <div className="absolute -bottom-8 -left-8 w-40 h-72 bg-zinc-900 rounded-[2rem] border-[6px] border-zinc-800 shadow-2xl flex flex-col overflow-hidden transform -rotate-6">
-                  <div className="h-4 w-1/3 bg-zinc-800 mx-auto rounded-b-xl" />
-                  <div className="flex-grow p-3 flex flex-col gap-3">
-                    <div className="h-20 w-full bg-zinc-800 rounded-xl" />
-                    <div className="h-3 w-1/2 bg-zinc-700 rounded" />
-                    <div className="grid grid-cols-2 gap-2">
-                      <div className="aspect-square bg-zinc-800 rounded-lg" />
-                      <div className="aspect-square bg-zinc-800 rounded-lg" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
+              <Image
+                src="/tecno.png"
+                alt="Tienda Shopify Profesional"
+                width={800}
+                height={600}
+                className="relative w-full h-auto object-contain transform rotate-2 hover:rotate-0 transition-transform duration-700 z-10"
+                priority
+              />
               <div className="absolute -bottom-6 -right-6 bg-white shadow-xl px-6 py-4 rounded-3xl border border-zinc-100 flex items-center gap-4 z-20">
                  <ShoppingBag className="w-6 h-6 text-pink-600" />
                  <div>
