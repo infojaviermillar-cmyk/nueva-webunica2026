@@ -94,19 +94,24 @@ export default function Footer() {
             
             {/* Brand Col */}
             <div className="flex flex-col gap-6 col-span-2 md:col-span-3 lg:col-span-1">
-              <Link href="/" className="group relative block w-fit">
-                <div 
-                  className="h-9 w-[143px] bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-600 transition-transform duration-700 group-hover:scale-110"
-                  style={{
-                    maskImage: 'url(/logo-webunica.png.webp)',
-                    WebkitMaskImage: 'url(/logo-webunica.png.webp)',
-                    maskRepeat: 'no-repeat',
-                    WebkitMaskRepeat: 'no-repeat',
-                    maskSize: 'contain',
-                    WebkitMaskSize: 'contain'
-                  }}
-                />
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link href="/" className="group relative block w-fit">
+                  <div 
+                    className="h-9 w-[143px] bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-600 transition-transform duration-700 group-hover:scale-110"
+                    style={{
+                      maskImage: 'url(/logo-webunica.png.webp)',
+                      WebkitMaskImage: 'url(/logo-webunica.png.webp)',
+                      maskRepeat: 'no-repeat',
+                      WebkitMaskRepeat: 'no-repeat',
+                      maskSize: 'contain',
+                      WebkitMaskSize: 'contain'
+                    }}
+                  />
+                </Link>
+                <div className="px-2 py-1 bg-[#95bf47]/10 border border-[#95bf47]/20 rounded text-[8px] font-black text-[#95bf47] uppercase tracking-widest">
+                  Shopify Partner
+                </div>
+              </div>
               <p className="text-zinc-400 leading-relaxed text-sm">
                 Agencia de desarrollo web y eCommerce en Chile. Creamos plataformas rápidas, escalables y orientadas a resultados comerciales.
               </p>

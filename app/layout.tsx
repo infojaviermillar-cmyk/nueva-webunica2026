@@ -3,6 +3,7 @@ import { Inter, Plus_Jakarta_Sans, Caveat } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import FloatingWhatsApp from '@/components/layout/floating-whatsapp';
 import { ContactModalProvider } from '@/context/contact-modal-context';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
@@ -64,6 +65,7 @@ export default async function RootLayout({
             {children}
           </div>
           <Footer />
+          <FloatingWhatsApp />
         </ContactModalProvider>
       </body>
     </html>

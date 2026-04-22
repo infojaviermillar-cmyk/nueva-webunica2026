@@ -4,7 +4,7 @@ import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
 import FunnelAnimation from '@/components/ui/funnel-animation';
-import { MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Palette, Search, Puzzle, Rocket } from 'lucide-react';
+import { MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Palette, Search, Puzzle, Rocket, LayoutTemplate, ShoppingBag } from 'lucide-react';
 
 export const metadata = {
   title: 'Desarrollo de Tiendas Shopify en Chile | Diseño Web Shopify 2026',
@@ -49,6 +49,14 @@ export default function ShopifyEnChilePage() {
     }
   ];
 
+  const sitemap = [
+    { title: "Inicio (Home)", desc: "Tu vitrina principal." },
+    { title: "Colecciones", desc: "Segmentación lógica de productos." },
+    { title: "Ficha de Producto", desc: "Información clara, fotos de calidad y CTA." },
+    { title: "Nosotros", desc: "Genera conexión y confianza." },
+    { title: "Ayuda/FAQ", desc: "Resuelve dudas antes de la compra." }
+  ];
+
   const plans = [
     {
       name: "Shopify AJUSTE",
@@ -74,6 +82,7 @@ export default function ShopifyEnChilePage() {
     {
       name: "Shopify PRENDE",
       price: "$580.000",
+      originalPrice: "$650.000",
       highlight: "🌟 Ideal para emprendedores que inician",
       desc: "Perfecto para emprendedores que dan sus primeros pasos en el comercio digital. Lanza tu tienda con imagen profesional y optimizada para vender.",
       features: [
@@ -143,44 +152,66 @@ export default function ShopifyEnChilePage() {
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-zinc-900 overflow-x-hidden">
       <main className="pt-32">
-        {/* Modern Shopify Hero */}
-        <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-40">
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-violet-600/5 blur-[120px] rounded-full -z-10" />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-block px-4 py-1.5 mb-8 text-[10px] font-black tracking-[0.2em] text-violet-600 uppercase bg-violet-50 rounded-full border border-violet-100">
-                Shopify Expert Chile 2026
+        {/* 1. Hero Principal - Estilo EMD */}
+        <section id="inicio" className="relative pt-20 pb-32 lg:pt-32 lg:pb-40 overflow-hidden">
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-violet-600/5 blur-[120px] rounded-full pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3" />
+          
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative z-10 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-violet-50 border border-violet-100 rounded-full">
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
+                </span>
+                <span className="text-[10px] font-black tracking-[0.2em] text-violet-600 uppercase">Shopify Partner Chile</span>
               </div>
-              <h1 className="text-5xl lg:text-[90px] font-black tracking-tighter leading-[0.8] mb-10 uppercase text-zinc-950">
-                Desarrollo de <br/><span className="text-violet-600 italic font-serif lowercase font-light">Tiendas Shopify</span> en Chile
+              
+              <h1 className="text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950">
+                Desarrollo de Tiendas <span className="text-violet-600 italic font-serif lowercase font-light">Shopify</span>
               </h1>
-              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed font-light">
-                No hacemos sitios web, construimos herramientas de venta. Expertos en escalar marcas chilenas mediante arquitectura <span className="font-bold text-zinc-950 underline decoration-violet-500">Shopify de alto rendimiento</span>.
+              
+              <p className="text-lg lg:text-xl text-zinc-500 mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+                Diseño, Themes, Costos, Planes y Apps. Creamos tiendas Shopify profesionales, pensadas para vender, con diseño atractivo, configuración técnica, personalización de themes, integración de aplicaciones y estructura lista para crecer.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6">
-                <LeadButton className="px-10 py-5 bg-violet-600 text-white rounded-2xl font-bold hover:bg-violet-700 transition-all shadow-2xl shadow-violet-600/30 scale-100 hover:scale-105 active:scale-95">
-                  Cotizar mi Proyecto
+              
+              <div className="inline-block px-4 py-2 mb-10 bg-zinc-100 rounded-lg text-sm font-bold text-zinc-700 italic border-l-4 border-violet-500 shadow-sm">
+                “Diseño + desarrollo + estrategia comercial”
+              </div>
+
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
+                <LeadButton className="px-8 py-4 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/20 active:scale-95 text-center flex items-center justify-center gap-2">
+                  Solicitar cotización
                 </LeadButton>
-                <WhatsAppButton className="px-10 py-5 bg-white border border-zinc-200 text-zinc-900 rounded-2xl font-bold hover:bg-zinc-50 transition-all flex items-center justify-center gap-2">
-                   Hablar con un Experto
+                <a 
+                  href="#pricing"
+                  className="px-8 py-4 bg-white text-zinc-900 border-2 border-zinc-200 rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:border-zinc-900 transition-all active:scale-95 text-center flex items-center justify-center gap-2"
+                >
+                  Ver planes
+                </a>
+                <WhatsAppButton className="px-8 py-4 bg-emerald-500 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-emerald-600 transition-all shadow-xl shadow-emerald-500/20 active:scale-95 text-center flex items-center justify-center gap-2">
+                  Hablar por WhatsApp
                 </WhatsAppButton>
               </div>
             </div>
-            <div className="relative">
-               <div className="rounded-[4rem] overflow-hidden shadow-[0_50px_100px_rgba(0,0,0,0.1)] border border-zinc-100 transform rotate-1 hover:rotate-0 transition-transform duration-700 mb-12">
-                 <Image 
-                   src="/shopify_hero_card.png"
-                   alt="Shopify E-commerce Expert"
-                   width={800}
-                   height={800}
-                   priority
-                   className="w-full h-auto"
-                 />
-               </div>
-               
-               <div className="bg-zinc-50/80 rounded-[3rem] p-6 lg:p-8 border border-zinc-100">
-                 <FunnelAnimation type="ecommerce" />
-               </div>
+            
+            {/* Mockup CSS representation */}
+            <div className="relative z-10 hidden lg:block">
+              <div className="absolute inset-0 bg-gradient-to-tr from-violet-500 to-indigo-400 rounded-full blur-[80px] opacity-20 animate-pulse" />
+              <Image
+                src="/tecno.png"
+                alt="Tienda Shopify Profesional"
+                width={800}
+                height={600}
+                className="relative w-full h-auto object-contain transform rotate-2 hover:rotate-0 transition-transform duration-700 z-10"
+                priority
+              />
+              <div className="absolute -bottom-6 -right-6 bg-white shadow-xl px-6 py-4 rounded-3xl border border-zinc-100 flex items-center gap-4 z-20">
+                 <ShoppingBag className="w-6 h-6 text-violet-600" />
+                 <div>
+                   <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 block leading-tight">Shopify</span>
+                   <span className="text-sm font-bold text-zinc-900">Partner Certificado</span>
+                 </div>
+              </div>
             </div>
           </div>
         </section>
@@ -255,6 +286,41 @@ export default function ShopifyEnChilePage() {
            </div>
         </section>
 
+        {/* Por qué elegir Shopify */}
+        <section className="py-32 bg-white relative overflow-hidden">
+          <div className="absolute top-1/2 left-0 w-64 h-64 bg-violet-600/5 blur-[100px] rounded-full -translate-x-1/2" />
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-20">
+              <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase text-zinc-950 mb-6">¿Por qué elegir <span className="text-violet-600">Shopify</span>?</h2>
+              <p className="text-lg text-zinc-500 font-light max-w-2xl mx-auto">La plataforma líder mundial para e-commerce, optimizada para escalar tu negocio sin límites técnicos.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-zinc-50 p-10 rounded-[3rem] border border-zinc-100 hover:shadow-xl transition-all">
+                <div className="w-14 h-14 bg-violet-100 rounded-2xl flex items-center justify-center text-violet-600 mb-6">
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                </div>
+                <h3 className="text-xl font-bold mb-4">Velocidad y Estabilidad</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed font-light">Hosting de clase mundial incluido. Tu tienda siempre activa y rápida, incluso en días de alta demanda como CyberDay.</p>
+              </div>
+              <div className="bg-zinc-50 p-10 rounded-[3rem] border border-zinc-100 hover:shadow-xl transition-all">
+                <div className="w-14 h-14 bg-violet-100 rounded-2xl flex items-center justify-center text-violet-600 mb-6">
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                </div>
+                <h3 className="text-xl font-bold mb-4">Seguridad Total</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed font-light">Cumplimiento PCI DSS nivel 1. Los datos de tus clientes y tus transacciones están protegidos por los más altos estándares de seguridad.</p>
+              </div>
+              <div className="bg-zinc-50 p-10 rounded-[3rem] border border-zinc-100 hover:shadow-xl transition-all">
+                <div className="w-14 h-14 bg-violet-100 rounded-2xl flex items-center justify-center text-violet-600 mb-6">
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 00-2 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                </div>
+                <h3 className="text-xl font-bold mb-4">Escalabilidad Sin Límites</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed font-light">Desde tu primer pedido hasta miles por hora. Shopify crece contigo sin necesidad de migrar de plataforma ni preocuparte por el servidor.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Pricing Section */}
         <section id="pricing" className="py-32 bg-zinc-50 border-y border-zinc-100">
            <div className="max-w-7xl mx-auto px-6">
@@ -299,6 +365,90 @@ export default function ShopifyEnChilePage() {
                  ))}
               </div>
            </div>
+        </section>
+
+        {/* Ecosistema de Aplicaciones */}
+        <section className="py-32 bg-zinc-950 text-white rounded-[4rem] mx-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(124,58,237,0.15),transparent)] pointer-events-none" />
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-20">
+              <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase mb-6">
+                Ecosistema de <span className="text-violet-500 underline decoration-violet-500/30">Aplicaciones</span>
+              </h2>
+              <p className="text-lg text-zinc-400 font-light max-w-2xl mx-auto">
+                No instalamos apps por instalar; elegimos las que realmente impulsan tu negocio y se pagan solas mediante automatización y eficiencia.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-all">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-violet-600/20 rounded-xl flex items-center justify-center text-violet-500 font-black">$$</div>
+                  <div className="text-[10px] font-black bg-violet-600 text-white px-2 py-0.5 rounded uppercase">Ventas</div>
+                </div>
+                <h4 className="font-bold text-white mb-4">Conversión Avanzada</h4>
+                <p className="text-zinc-400 font-light text-sm leading-relaxed mb-6">Maximizamos el ticket promedio con estrategias de Upselling, descuentos por volumen y recuperación inteligente de carritos.</p>
+                <div className="flex flex-wrap gap-2 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Klaviyo</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Rebuy</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Vitals</span>
+                </div>
+              </div>
+              
+              <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-all">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-indigo-600/20 rounded-xl flex items-center justify-center text-indigo-500 font-black">⚙️</div>
+                  <div className="text-[10px] font-black bg-indigo-600 text-white px-2 py-0.5 rounded uppercase">Operaciones</div>
+                </div>
+                <h4 className="font-bold text-white mb-4">Logística y Pagos</h4>
+                <p className="text-zinc-400 font-light text-sm leading-relaxed mb-6">Sincronización automática de inventario, facturación electrónica con SII y seguimiento de envíos en tiempo real.</p>
+                <div className="flex flex-wrap gap-2 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Bsale</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Shipit</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Starken</span>
+                </div>
+              </div>
+
+              <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-all">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center text-blue-500 font-black">🛡️</div>
+                  <div className="text-[10px] font-black bg-blue-600 text-white px-2 py-0.5 rounded uppercase">Confianza</div>
+                </div>
+                <h4 className="font-bold text-white mb-4">Social Proof</h4>
+                <p className="text-zinc-400 font-light text-sm leading-relaxed mb-6">Reseñas de clientes con fotos, integración con Instagram Shopping y sellos de seguridad dinámicos para el checkout.</p>
+                <div className="flex flex-wrap gap-2 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Loox</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Judge.me</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Gorgias</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Estructura recomendada */}
+        <section className="py-32 bg-zinc-50">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-black tracking-tighter uppercase text-zinc-950 mb-6">Estructura Recomendada (Sitemap)</h2>
+              <p className="text-zinc-500 font-light">Una tienda profesional debe contar con las bases exactas de navegación.</p>
+            </div>
+            <div className="max-w-3xl mx-auto bg-white rounded-3xl border border-zinc-200 overflow-hidden shadow-sm">
+              {sitemap.map((item, i) => (
+                <div key={i} className="flex flex-col sm:flex-row items-start sm:items-center p-6 border-b border-zinc-100 last:border-0 hover:bg-zinc-50 transition-colors">
+                  <div className="w-full sm:w-1/3">
+                    <span className="font-bold text-zinc-900 flex items-center gap-2">
+                      <LayoutTemplate className="w-4 h-4 text-violet-500" />
+                      {item.title}
+                    </span>
+                  </div>
+                  <div className="w-full sm:w-2/3 mt-2 sm:mt-0 text-sm text-zinc-500 font-light">
+                    {item.desc}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* Proceso de Trabajo */}

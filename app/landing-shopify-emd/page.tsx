@@ -46,7 +46,7 @@ export default function ShopifyEmdLandingPage() {
 
   const themeTypes = [
     { type: "Gratuitos (Dawn, etc.)", ideal: "Emprendimientos iniciales", pros: "Sin costo de licencia, rápidos.", cons: "Personalización limitada." },
-    { type: "Premium", ideal: "Marcas en crecimiento", pros: "Funciones avanzadas, mejor UX.", cons: "Pago único de licencia." },
+    { type: "Premium (Envato)", ideal: "Marcas en crecimiento", pros: "Funciones avanzadas, mejor UX. (¡Incluido en nuestros planes!)", cons: "Pago único de licencia." },
     { type: "Personalizados", ideal: "Requerimientos únicos", pros: "Exclusividad total y flexibilidad.", cons: "Mayor tiempo de desarrollo." }
   ];
 
@@ -109,6 +109,7 @@ export default function ShopifyEmdLandingPage() {
     {
       name: "Shopify PRENDE",
       price: "$580.000",
+      originalPrice: "$650.000",
       highlight: "🌟 Ideal para emprendedores que inician",
       desc: "Perfecto para emprendedores que dan sus primeros pasos en el comercio digital. Lanza tu tienda con imagen profesional y optimizada para vender.",
       features: [
@@ -338,6 +339,41 @@ export default function ShopifyEmdLandingPage() {
           </div>
         </section>
 
+        {/* 4. Por qué elegir Shopify */}
+        <section className="py-32 bg-white relative overflow-hidden">
+          <div className="absolute top-1/2 left-0 w-64 h-64 bg-pink-600/5 blur-[100px] rounded-full -translate-x-1/2" />
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-20">
+              <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase text-zinc-950 mb-6">¿Por qué elegir <span className="text-pink-600">Shopify</span>?</h2>
+              <p className="text-lg text-zinc-500 font-light max-w-2xl mx-auto">La plataforma líder mundial para e-commerce, optimizada para escalar tu negocio sin límites técnicos.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-zinc-50 p-10 rounded-[3rem] border border-zinc-100 hover:shadow-xl transition-all">
+                <div className="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center text-pink-600 mb-6">
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                </div>
+                <h3 className="text-xl font-bold mb-4">Velocidad y Estabilidad</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed font-light">Hosting de clase mundial incluido. Tu tienda siempre activa y rápida, incluso en días de alta demanda como CyberDay.</p>
+              </div>
+              <div className="bg-zinc-50 p-10 rounded-[3rem] border border-zinc-100 hover:shadow-xl transition-all">
+                <div className="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center text-pink-600 mb-6">
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                </div>
+                <h3 className="text-xl font-bold mb-4">Seguridad Total</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed font-light">Cumplimiento PCI DSS nivel 1. Los datos de tus clientes y tus transacciones están protegidos por los más altos estándares de seguridad.</p>
+              </div>
+              <div className="bg-zinc-50 p-10 rounded-[3rem] border border-zinc-100 hover:shadow-xl transition-all">
+                <div className="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center text-pink-600 mb-6">
+                  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                </div>
+                <h3 className="text-xl font-bold mb-4">Escalabilidad Sin Límites</h3>
+                <p className="text-sm text-zinc-500 leading-relaxed font-light">Desde tu primer pedido hasta miles por hora. Shopify crece contigo sin necesidad de migrar de plataforma ni preocuparte por el servidor.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* 5. Themes Shopify */}
         <section className="py-32 bg-zinc-950 text-white relative">
           <div className="max-w-7xl mx-auto px-6">
@@ -393,6 +429,20 @@ export default function ShopifyEmdLandingPage() {
           </div>
         </section>
 
+        {/* 6. Checklist CRO Banner */}
+        <section className="bg-pink-600 py-20 px-6 mx-4 mb-32 rounded-[3rem] relative overflow-hidden">
+           <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay"></div>
+           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 blur-[100px] rounded-full pointer-events-none"></div>
+           <div className="max-w-4xl mx-auto text-center relative z-10">
+             <div className="inline-block px-4 py-1.5 bg-black/20 text-white border border-white/20 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 backdrop-blur-md">Herramienta Gratuita</div>
+             <h2 className="text-3xl lg:text-5xl font-black text-white mb-6 tracking-tight">¿Tu tienda Shopify está perdiendo ventas?</h2>
+             <p className="text-pink-100 text-lg mb-10 max-w-2xl mx-auto font-medium">Revisa gratis los puntos clave donde la mayoría de las tiendas en Chile pierden clientes con nuestra Auditoría CRO Básica.</p>
+             <Link href="/listas-de-verificacion-shopify-cro-basica" className="inline-block px-8 py-4 bg-white text-pink-600 font-black uppercase tracking-[0.1em] text-xs rounded-full hover:scale-105 transition-transform shadow-xl">
+               Ver Checklist CRO
+             </Link>
+           </div>
+        </section>
+
         {/* 7. Planes de Desarrollo */}
         <section id="planes" className="py-32 bg-white">
           <div className="max-w-[90rem] mx-auto px-6">
@@ -403,6 +453,9 @@ export default function ShopifyEmdLandingPage() {
              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                {plans.map((p, i) => (
                  <div key={i} className={`relative bg-zinc-50 rounded-[3rem] p-10 flex flex-col transition-all duration-300 ${p.recommended ? 'border-2 border-pink-600 shadow-2xl shadow-pink-600/10 scale-100 lg:scale-105 z-10' : 'border border-zinc-200'}`}>
+                    <div className="absolute top-8 right-8 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-pulse">
+                      10% OFF
+                    </div>
                     {p.recommended && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-pink-600 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
                         Recomendado
@@ -498,31 +551,59 @@ export default function ShopifyEmdLandingPage() {
           </div>
         </section>
 
-        {/* 8. Ecosistema de Aplicaciones */}
+        {/* 9. Ecosistema de Aplicaciones */}
         <section className="py-32 bg-zinc-950 text-white rounded-[4rem] mx-4 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(219,39,119,0.15),transparent)] pointer-events-none" />
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase mb-6">
-                  Ecosistema de <span className="text-pink-500">Aplicaciones</span>
-                </h2>
-                <p className="text-lg text-zinc-400 font-light mb-10">
-                  No instalamos apps por instalar; elegimos las que realmente impulsan tu negocio y se pagan solas.
-                </p>
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-20">
+              <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase mb-6">
+                Ecosistema de <span className="text-pink-500 underline decoration-pink-500/30">Aplicaciones</span>
+              </h2>
+              <p className="text-lg text-zinc-400 font-light max-w-2xl mx-auto">
+                No instalamos apps por instalar; elegimos las que realmente impulsan tu negocio y se pagan solas mediante automatización y eficiencia.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-all">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-pink-600/20 rounded-xl flex items-center justify-center text-pink-500 font-black">$$</div>
+                  <div className="text-[10px] font-black bg-pink-600 text-white px-2 py-0.5 rounded uppercase">Ventas</div>
+                </div>
+                <h4 className="font-bold text-white mb-4">Conversión Avanzada</h4>
+                <p className="text-zinc-400 font-light text-sm leading-relaxed mb-6">Maximizamos el ticket promedio con estrategias de Upselling, descuentos por volumen y recuperación inteligente de carritos.</p>
+                <div className="flex flex-wrap gap-2 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Klaviyo</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Rebuy</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Vitals</span>
+                </div>
               </div>
-              <div className="grid gap-6">
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
-                  <h4 className="font-bold text-pink-400 uppercase tracking-widest text-xs mb-2">Ventas</h4>
-                  <p className="text-zinc-300 font-light text-sm">Upsells, descuentos por volumen, recuperación de carritos abandonados.</p>
+              
+              <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-all">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-violet-600/20 rounded-xl flex items-center justify-center text-violet-500 font-black">⚙️</div>
+                  <div className="text-[10px] font-black bg-violet-600 text-white px-2 py-0.5 rounded uppercase">Operaciones</div>
                 </div>
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
-                  <h4 className="font-bold text-pink-400 uppercase tracking-widest text-xs mb-2">Confianza</h4>
-                  <p className="text-zinc-300 font-light text-sm">Reseñas de clientes con fotos, sellos de seguridad dinámicos.</p>
+                <h4 className="font-bold text-white mb-4">Logística y Pagos</h4>
+                <p className="text-zinc-400 font-light text-sm leading-relaxed mb-6">Sincronización automática de inventario, facturación electrónica con SII y seguimiento de envíos en tiempo real.</p>
+                <div className="flex flex-wrap gap-2 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Bsale</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Shipit</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Starken</span>
                 </div>
-                <div className="bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
-                  <h4 className="font-bold text-pink-400 uppercase tracking-widest text-xs mb-2">Operaciones</h4>
-                  <p className="text-zinc-300 font-light text-sm">Facturación automática (Bsale), rastreo de envíos, chat multiagente integrado.</p>
+              </div>
+
+              <div className="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-sm group hover:bg-white/10 transition-all">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-emerald-600/20 rounded-xl flex items-center justify-center text-emerald-500 font-black">🛡️</div>
+                  <div className="text-[10px] font-black bg-emerald-600 text-white px-2 py-0.5 rounded uppercase">Confianza</div>
+                </div>
+                <h4 className="font-bold text-white mb-4">Social Proof</h4>
+                <p className="text-zinc-400 font-light text-sm leading-relaxed mb-6">Reseñas de clientes con fotos, integración con Instagram Shopping y sellos de seguridad dinámicos para el checkout.</p>
+                <div className="flex flex-wrap gap-2 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Loox</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Judge.me</span>
+                  <span className="text-[9px] font-black border border-white/20 px-2 py-0.5 rounded">Gorgias</span>
                 </div>
               </div>
             </div>
