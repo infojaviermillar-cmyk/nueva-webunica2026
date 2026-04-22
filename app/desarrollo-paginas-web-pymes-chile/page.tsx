@@ -2,14 +2,72 @@ import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
+import { Metadata } from 'next';
+import { 
+  Monitor, 
+  Search, 
+  Smartphone, 
+  Code2, 
+  Layout, 
+  Settings, 
+  CheckCircle2,
+  ArrowRight,
+  TrendingUp,
+  Globe
+} from 'lucide-react';
 
-export const metadata = {
-  title: 'Diseño de Páginas Web para PYMES en Chile | Webunica',
-  description: 'Creamos sitios web profesionales y económicos para PYMES. Diseño rápido, optimizado para móviles y enfocado en generar contactos reales desde el primer día.',
-  keywords: 'paginas web pymes chile, diseño web economico santiago, crear sitio web profesional pymes, desarrollo web emprendedores',
+export const metadata: Metadata = {
+  title: 'Diseño de Páginas Web y Desarrollo para PYMES en Chile | Webunica',
+  description: 'Expertos en diseño de paginas web, desarrollo de paginas web y mejora sitio web. Creamos tu pagina wordpress profesional optimizada para Google.',
+  keywords: 'diseño de paginas web, desarrollo de paginas web, diseño sitio web, mejora sitio web, pagina wordpress, paginas web pymes chile',
 };
 
 export default function PymesPage() {
+  const plans = [
+    {
+      name: "Landing Express",
+      price: "Desde $190.000",
+      desc: "Ideal para campañas específicas o servicios únicos que necesitan conversión rápida.",
+      features: [
+        "Diseño de una sola sección (One Page)",
+        "Botón de WhatsApp directo",
+        "Optimización para móviles",
+        "Formulario de contacto",
+        "Entrega en 5 días"
+      ],
+      cta: "Empezar Landing",
+      popular: false
+    },
+    {
+      name: "Web Corporativa",
+      price: "Desde $350.000",
+      desc: "La mejor opción para PYMES que buscan profesionalizar su imagen completa.",
+      features: [
+        "Hasta 5 secciones internas",
+        "Diseño de sitio web a medida",
+        "Correos corporativos",
+        "Estructura SEO básica",
+        "Google Maps integrado"
+      ],
+      cta: "Elegir Corporativa",
+      popular: true
+    },
+    {
+      name: "Pyme WordPress Pro",
+      price: "Desde $550.000",
+      desc: "Sitio web avanzado con gestión de contenido y posicionamiento orgánico.",
+      features: [
+        "Pagina WordPress autogestionable",
+        "Blog de contenidos",
+        "SEO avanzado (Keywords)",
+        "Seguridad Anti-Hackeo",
+        "Capacitación de uso"
+      ],
+      cta: "Elegir WordPress Pro",
+      popular: false
+    }
+  ];
+
   const pymesFaqs = [
     {
       question: "¿Qué incluye el pack de diseño para PYMES?",
@@ -17,131 +75,185 @@ export default function PymesPage() {
     },
     {
       question: "¿Cuánto tiempo demora en estar lista mi web?",
-      answer: "Entendemos que el tiempo es dinero para una PYME. Por eso, una vez que tenemos todo tu material (textos y fotos), podemos tener tu sitio operativo en un plazo de entre 5 y 10 días hábiles."
+      answer: "Entendemos que el tiempo es dinero para una PYME. Por eso, una vez que tenemos todo tu material (textos y fotos), podemos tener tu sitio operativo en un plazo de entre 5 y 15 días hábiles dependiendo del plan."
     },
     {
       question: "¿Podré cambiar yo mismo los textos o fotos después?",
-      answer: "Sí. Entregamos sitios autogestionables fáciles de usar. Te daremos una breve capacitación para que puedas actualizar tus servicios, precios o fotos sin tener que pagarnos cada vez que quieras hacer un cambio."
+      answer: "Sí. Entregamos sitios autogestionables (especialmente en nuestra opción de pagina wordpress) fáciles de usar. Te daremos una capacitación para que puedas actualizar tus servicios sin depender de nosotros."
     },
     {
       question: "¿Cuáles son las opciones de pago?",
-      answer: "Ofrecemos flexibilidad para emprendedores. Puedes pagar el 50% al inicio y el 50% al finalizar el proyecto, o usar tarjetas de crédito para pagar en las cuotas que más te convengan."
+      answer: "Ofrecemos flexibilidad. Puedes pagar el 50% al inicio y el 50% al finalizar, o usar tarjetas de crédito vía Mercado Pago para pagar en cuotas."
     }
   ];
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Diseño Web para PYMES",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Webunica"
-    },
-    "description": "Servicios de creación de sitios web profesionales y accesibles para pequeñas y medianas empresas en Chile.",
-    "areaServed": "CL"
-  };
-
   return (
-    <div className="min-h-screen bg-white font-sans antialiased text-zinc-900">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
-      <main className="pt-[20vh] pb-20">
+    <div className="min-h-screen bg-white font-sans antialiased text-zinc-900 overflow-x-hidden">
+      <main className="pt-[10vh] pb-20">
         {/* Pymes Hero */}
-        <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32 overflow-hidden">
-          {/* Background Texture Overlay */}
-          <div className="absolute inset-0 z-0 opacity-[0.2] pointer-events-none">
-            <Image 
-              src="/bg-01.jpg" 
-              alt="Background Texture" 
-              fill 
-              className="object-cover object-center" 
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white"></div>
-          </div>
+        <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
           
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-zinc-400 uppercase bg-zinc-50 rounded-full border border-zinc-100">
-                Crecimiento Digital para Emprendedores
-              </span>
-              <h1 className="text-4xl lg:text-[7rem] font-black tracking-tighter leading-[0.9] mb-10 uppercase">
-                TU WEB <br/><span className="text-zinc-400">A OTRO NIVEL</span>
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-zinc-50 border border-zinc-100 rounded-full">
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                <span className="text-[10px] font-black tracking-[0.2em] text-zinc-500 uppercase">Expertos en Desarrollo Web</span>
+              </div>
+              
+              <h1 className="text-5xl lg:text-[100px] font-black tracking-tighter leading-[0.85] mb-10 uppercase text-zinc-950">
+                DISEÑO DE <br/><span className="text-blue-600">PÁGINAS WEB</span> <br/>PARA PYMES.
               </h1>
-              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed font-light text-pretty">
-                Llegó el momento de profesionalizar tu marca. Creamos sitios web que no solo se ven bien, sino que trabajan por ti las 24 horas captando nuevos clientes.
+              
+              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed font-light">
+                No necesitas solo una web, necesitas una herramienta que venda. Somos especialistas en <strong className="text-zinc-950">desarrollo de paginas web</strong> enfocadas en resultados reales para el mercado chileno.
               </p>
+              
               <div className="flex flex-col sm:flex-row gap-6">
-                 <LeadButton 
-                  className="px-12 py-5 bg-zinc-950 text-white font-bold rounded-2xl hover:bg-zinc-800 transition-all shadow-xl"
-                 >
-                    Consultoría de Digitalización
+                 <LeadButton className="px-12 py-5 bg-zinc-950 text-white font-black rounded-2xl hover:bg-zinc-800 transition-all shadow-xl uppercase tracking-widest text-xs flex items-center justify-center gap-2">
+                    Cotizar mi Sitio Web <ArrowRight className="w-4 h-4" />
                  </LeadButton>
               </div>
             </div>
-            <div className="relative group">
-               <div className="absolute -inset-10 bg-zinc-50 rounded-full blur-[100px] -z-10" />
-               <div className="rounded-[3rem] overflow-hidden border border-zinc-100 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] bg-white p-4">
+            
+            <div className="relative">
+               <div className="absolute -inset-10 bg-blue-50 rounded-full blur-[100px] -z-10" />
+               <div className="rounded-[3.5rem] overflow-hidden border-8 border-white shadow-2xl relative">
                  <Image 
                    src="/pymes_hero_new.png"
-                   alt="Diseño Web Profesional para Emprendedores"
+                   alt="Desarrollo de paginas web Chile"
                    width={1000}
                    height={1000}
                    priority
-                   quality={85}
-                   className="w-full h-auto rounded-[2rem] transform group-hover:scale-105 transition-transform duration-1000"
+                   className="w-full h-auto"
                  />
+                 <div className="absolute bottom-10 left-10 right-10 bg-white/90 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-xl hidden md:block">
+                    <div className="flex items-center gap-4 mb-2">
+                       <CheckCircle2 className="w-6 h-6 text-emerald-500" />
+                       <span className="font-bold text-zinc-900 uppercase text-sm">Mejora sitio web hoy</span>
+                    </div>
+                    <p className="text-zinc-500 text-xs font-light">Optimizado para SEO y conversión móvil en todo Chile.</p>
+                 </div>
                </div>
             </div>
           </div>
         </section>
 
-        {/* Tactical Features Grid */}
-        <section className="max-w-7xl mx-auto px-6 py-20 border-t border-zinc-50">
-           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {[
-                { t: 'Botón de WhatsApp', d: 'Recibe consultas directas a tu teléfono al instante.' },
-                { t: 'Diseño para Móviles', d: 'Tu web se verá perfecta en todos los smartphones.' },
-                { t: 'SEO Regional', d: 'Aparece cuando tus vecinos busquen tus servicios en Google.' },
-                { t: 'Correos Pro', d: 'Deja de usar gmail personal. Ten correos con tu nombre@tuempresa.cl.' },
-                { t: 'Mantenimiento Fácil', d: 'Cambia promociones tú mismo sin complicaciones técnicas.' },
-                { t: 'Seguridad SSL', d: 'Incluimos candado de seguridad para proteger a tus clientes.' }
-              ].map((f, i) => (
-                <div key={i} className="flex gap-6 group">
-                   <div className="w-12 h-12 rounded-2xl bg-zinc-50 flex items-center justify-center text-xl group-hover:bg-zinc-950 group-hover:text-white transition-all">✓</div>
-                   <div className="flex-1">
-                      <h3 className="text-xl font-bold mb-2">{f.t}</h3>
-                      <p className="text-zinc-500 text-sm leading-relaxed">{f.d}</p>
-                   </div>
+        {/* SEO Importance Section */}
+        <section className="py-32 bg-zinc-50 border-y border-zinc-100 relative overflow-hidden">
+           <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/5 blur-[100px] rounded-full" />
+           <div className="max-w-7xl mx-auto px-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                 <div className="order-2 lg:order-1">
+                    <div className="grid grid-cols-2 gap-4">
+                       <div className="p-8 bg-white rounded-3xl border border-zinc-100 shadow-sm flex flex-col items-center text-center">
+                          <Search className="w-8 h-8 text-blue-600 mb-4" />
+                          <h4 className="font-black text-zinc-950 uppercase text-xs mb-2">Visibilidad</h4>
+                          <p className="text-[10px] text-zinc-500 font-light">Aparece cuando busquen tus servicios.</p>
+                       </div>
+                       <div className="p-8 bg-white rounded-3xl border border-zinc-100 shadow-sm flex flex-col items-center text-center transform translate-y-8">
+                          <TrendingUp className="w-8 h-8 text-emerald-500 mb-4" />
+                          <h4 className="font-black text-zinc-950 uppercase text-xs mb-2">Conversión</h4>
+                          <p className="text-[10px] text-zinc-500 font-light">Convierte visitas en llamadas reales.</p>
+                       </div>
+                       <div className="p-8 bg-white rounded-3xl border border-zinc-100 shadow-sm flex flex-col items-center text-center">
+                          <Globe className="w-8 h-8 text-purple-600 mb-4" />
+                          <h4 className="font-black text-zinc-950 uppercase text-xs mb-2">Autoridad</h4>
+                          <p className="text-[10px] text-zinc-500 font-light">Una web pro genera confianza inmediata.</p>
+                       </div>
+                       <div className="p-8 bg-white rounded-3xl border border-zinc-100 shadow-sm flex flex-col items-center text-center transform translate-y-8">
+                          <Monitor className="w-8 h-8 text-amber-500 mb-4" />
+                          <h4 className="font-black text-zinc-950 uppercase text-xs mb-2">Multi-dispositivo</h4>
+                          <p className="text-[10px] text-zinc-500 font-light">Perfecto en PC, Tablet y Smartphones.</p>
+                       </div>
+                    </div>
+                 </div>
+                 <div className="order-1 lg:order-2">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-4 block">Estrategia SEO</span>
+                    <h2 className="text-4xl lg:text-5xl font-black tracking-tighter uppercase mb-8 text-zinc-950">
+                      ¿Por qué es vital aparecer <br/><span className="text-blue-600 italic">en Google?</span>
+                    </h2>
+                    <div className="space-y-6 text-lg text-zinc-500 font-light leading-relaxed">
+                      <p>
+                        Aparecer en los primeros resultados de búsqueda no es un lujo, es una necesidad. Cuando alguien busca <strong className="text-zinc-950">diseño de paginas web</strong> o <strong className="text-zinc-950">desarrollo de paginas web</strong>, el 90% de los usuarios no pasa de la primera página. 
+                      </p>
+                      <p>
+                        Un <strong className="text-zinc-950">diseño sitio web</strong> sin SEO es como un cartel publicitario en medio del desierto. En Webunica optimizamos tu arquitectura digital para que los algoritmos de Google te favorezcan y tus clientes te encuentren antes que a la competencia.
+                      </p>
+                      <p>
+                        Ya sea que necesites una <strong className="text-zinc-950">pagina wordpress</strong> dinámica o una plataforma a medida, nuestra <strong className="text-zinc-950">mejora sitio web</strong> garantiza que tu inversión se traduzca en tráfico calificado.
+                      </p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </section>
+
+        {/* Pricing Plans */}
+        <section className="py-32 max-w-7xl mx-auto px-6">
+           <div className="text-center mb-20">
+              <h2 className="text-4xl lg:text-6xl font-black mb-6 uppercase tracking-tighter">Planes que <span className="text-blue-600">Impulsan Pymes</span></h2>
+              <p className="text-xl text-zinc-500 font-light">Inversiones inteligentes para negocios que no paran de crecer.</p>
+           </div>
+           
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {plans.map((p, i) => (
+                <div key={i} className={`relative p-10 rounded-[3rem] border transition-all duration-500 ${p.popular ? 'bg-zinc-950 text-white border-zinc-800 scale-105 shadow-2xl' : 'bg-white text-zinc-900 border-zinc-100 hover:border-blue-500'}`}>
+                   {p.popular && <span className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-600 text-[10px] font-black uppercase rounded-full tracking-widest">El más elegido</span>}
+                   <h3 className="text-2xl font-black mb-2 uppercase tracking-tight">{p.name}</h3>
+                   <div className="text-3xl font-black mb-6 text-blue-500">{p.price}</div>
+                   <p className={`text-sm mb-8 font-light ${p.popular ? 'text-zinc-400' : 'text-zinc-500'}`}>{p.desc}</p>
+                   <ul className="space-y-4 mb-10">
+                      {p.features.map((f, idx) => (
+                        <li key={idx} className="flex items-center gap-3 text-xs font-bold uppercase tracking-wide">
+                           <CheckCircle2 className={`w-4 h-4 ${p.popular ? 'text-blue-400' : 'text-emerald-500'}`} />
+                           {f}
+                        </li>
+                      ))}
+                   </ul>
+                   <LeadButton className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] transition-all ${p.popular ? 'bg-white text-zinc-950 hover:bg-zinc-200' : 'bg-zinc-950 text-white hover:bg-zinc-800 shadow-xl shadow-zinc-200'}`}>
+                      {p.cta}
+                   </LeadButton>
                 </div>
               ))}
            </div>
         </section>
 
         {/* FAQ Section */}
-        <FAQSection 
-          faqs={pymesFaqs}
-          title="Dudas Comunes de Pymes"
-          description="Resolvemos las inquietudes más frecuentes para que des el paso hoy mismo."
-          ctaTitle="¿Profesionalizamos tu marca?"
-          ctaDescription="Agenda una breve llamada para definir la mejor estructura para tu sitio web según tu presupuesto."
-          ctaLabel="Agendar Llamada Pyme"
-        />
+        <div className="bg-zinc-50 rounded-[4rem] mx-4 py-20">
+          <FAQSection 
+            faqs={pymesFaqs}
+            title="Preguntas Frecuentes"
+            description="Todo lo que necesitas saber antes de empezar el desarrollo de tu sitio web."
+            ctaTitle="¿Profesionalizamos tu marca?"
+            ctaDescription="Obtén un 10% de descuento en cualquiera de nuestros planes contratando hoy mismo."
+            ctaLabel="Obtener 10% Descuento"
+          />
+        </div>
 
         {/* CTA Banner */}
-        <section className="py-32 bg-zinc-950 mx-4 rounded-[4rem] text-center text-white overflow-hidden relative">
-           <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 to-black pointer-events-none" />
-           <div className="relative z-10 max-w-3xl mx-auto px-6">
-              <h2 className="text-4xl lg:text-5xl font-extrabold mb-10 tracking-tight">Es hora de destacar en Google</h2>
-              <p className="text-xl text-zinc-500 mb-12 italic font-serif">Tu negocio merece una presentación que cierre ventas automáticamente.</p>
-              <LeadButton 
-                className="inline-block px-12 py-6 bg-white text-zinc-950 font-bold text-lg rounded-2xl hover:scale-105 transition-all shadow-2xl"
-              >
-                  Quiero mi Web Pyme
-              </LeadButton>
+        <section className="py-32 px-6">
+           <div className="max-w-6xl mx-auto bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[4rem] p-12 lg:p-24 text-center text-white relative overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
+              <div className="relative z-10">
+                <h2 className="text-4xl lg:text-6xl font-black mb-10 tracking-tight uppercase leading-[0.9]">
+                   ¿Listo para ser el <br/><span className="italic font-serif lowercase font-light text-blue-100">líder de tu nicho?</span>
+                </h2>
+                <p className="text-xl text-blue-100 mb-12 max-w-xl mx-auto font-light leading-relaxed">
+                   No dejes que tu competencia se lleve a tus clientes por tener un mejor <strong className="text-white">diseño de paginas web</strong>. Toma acción ahora.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                  <LeadButton className="px-12 py-6 bg-white text-blue-600 rounded-full font-black uppercase tracking-widest text-[11px] shadow-xl hover:scale-105 transition-all">
+                    Cotizar Desarrollo Web
+                  </LeadButton>
+                  <Link href="/contacto" className="px-12 py-6 border border-white/30 text-white rounded-full font-black uppercase tracking-widest text-[11px] hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                    Ver Portafolio
+                  </Link>
+                </div>
+              </div>
            </div>
         </section>
       </main>
