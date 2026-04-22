@@ -42,13 +42,13 @@ export default function ContactPage() {
               <div>
                 <h2 className="text-3xl font-black tracking-tighter text-zinc-900 mb-8 uppercase">Contacto Directo</h2>
                 <div className="space-y-6">
-                  <a href="mailto:hola@webunica.cl" className="flex items-start gap-5 group p-4 -ml-4 rounded-2xl hover:bg-slate-50 transition-colors">
+                  <a href="mailto:consultas@webunica.cl" className="flex items-start gap-5 group p-4 -ml-4 rounded-2xl hover:bg-slate-50 transition-colors">
                     <div className="w-14 h-14 bg-violet-50 text-violet-600 rounded-full flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-violet-600 group-hover:text-white transition-all">
                       <Mail className="w-6 h-6" />
                     </div>
                     <div>
                       <h3 className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-1">Email Principal</h3>
-                      <p className="text-lg font-bold text-zinc-900 group-hover:text-violet-600 transition-colors">hola@webunica.cl</p>
+                      <p className="text-lg font-bold text-zinc-900 group-hover:text-violet-600 transition-colors">consultas@webunica.cl</p>
                     </div>
                   </a>
                   

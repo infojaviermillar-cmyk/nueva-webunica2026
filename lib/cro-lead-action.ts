@@ -36,7 +36,7 @@ export async function saveCroLead(data: {
 
   // 2. Email to client with 15% discount offer
   await resend.emails.send({
-    from: 'Webunica <hola@webunica.cl>',
+    from: 'Webunica <consultas@webunica.cl>',
     to: data.email,
     subject: '🎯 Tu Análisis CRO Shopify + 15% descuento exclusivo',
     html: `

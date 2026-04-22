@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
+import LeadButton from '@/components/ui/lead-button';
 
 export default function Footer() {
   const COMPANIES = [
@@ -180,17 +181,22 @@ export default function Footer() {
             <div>
               <h4 className="text-white font-semibold mb-6 uppercase tracking-wider text-xs">Contacto</h4>
               <ul className="space-y-4">
-                <li className="flex items-start gap-3 text-zinc-400">
-                  <svg className="w-4 h-4 text-violet-500 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <a href="mailto:info@webunica.cl" className="text-sm hover:text-white transition-colors">info@webunica.cl</a>
+                <li className="flex flex-col gap-4 text-zinc-400">
+                  <div className="flex items-center gap-3">
+                    <svg className="w-4 h-4 text-violet-500 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <a href="mailto:consultas@webunica.cl" className="text-sm hover:text-white transition-colors">consultas@webunica.cl</a>
+                  </div>
+                  <LeadButton className="w-fit px-6 py-2.5 bg-violet-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-violet-700 transition-all shadow-lg shadow-violet-600/20">
+                    Cotizar Proyecto
+                  </LeadButton>
                 </li>
-                <li className="flex items-start gap-3 text-zinc-400">
+                <li className="flex items-start gap-3 text-zinc-400 pt-4">
                   <svg className="w-4 h-4 text-[#25d366] mt-1" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143c1.552.92 3.14 1.403 4.887 1.403 5.421 0 9.832-4.412 9.835-9.835.002-2.628-1.023-5.1-2.885-6.963-1.862-1.861-4.331-2.884-6.953-2.885-5.424 0-9.837 4.412-9.839 9.835-.001 1.83.524 3.614 1.517 5.176l-1.008 3.682 3.773-.99zm10.749-6.354c-.287-.144-1.701-.84-1.967-.936-.267-.096-.462-.144-.657.144-.195.288-.753.936-.922 1.129-.169.193-.338.216-.625.072-.287-.144-1.21-.447-2.305-1.423-.852-.76-1.427-1.7-1.593-1.987-.167-.287-.018-.443.126-.586.129-.129.287-.336.43-.504.144-.168.191-.288.287-.48.096-.192.048-.36-.024-.504-.072-.144-.657-1.585-.9-2.16-.234-.56-.475-.483-.655-.492-.17-.008-.364-.009-.558-.009s-.51.072-.776.36c-.267.288-1.018 1.008-1.018 2.459 0 1.45 1.056 2.855 1.203 3.048.147.193 2.078 3.174 5.035 4.453.703.305 1.252.487 1.68.623.709.226 1.354.194 1.864.118.57-.085 1.701-.696 1.944-1.368.243-.672.243-1.248.17-1.368-.073-.12-.267-.193-.554-.337z" /></svg>
                   <div className="flex flex-col gap-1">
-                    <WhatsAppButton className="text-sm hover:text-[#25d366] transition-colors">+56 9 8441 0379</WhatsAppButton>
                     <WhatsAppButton className="text-sm hover:text-[#25d366] transition-colors">+56 9 6619 8752</WhatsAppButton>
+                    <WhatsAppButton className="text-sm hover:text-[#25d366] transition-colors">+56 9 8441 0379</WhatsAppButton>
                   </div>
                 </li>
               </ul>

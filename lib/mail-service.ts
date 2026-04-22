@@ -12,7 +12,7 @@ export async function sendLeadNotification(leadData: {
   try {
     // 1. Email para el Cliente (Persuasivo)
     await resend.emails.send({
-      from: 'Webunica <hola@webunica.cl>',
+      from: 'Webunica <consultas@webunica.cl>',
       to: leadData.email,
       subject: `🎁 Tu beneficio Webunica: 10% para tu proyecto de ${leadData.service}`,
       html: `
