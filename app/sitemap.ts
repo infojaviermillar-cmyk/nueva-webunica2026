@@ -28,7 +28,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/diseno-themes-shopify-personalizados-adobe-xd',
     '/diseno-paginas-web-inmobiliaria',
     '/desarrollo-pagina-web-funeraria',
-    '/tienda-dropshipping-shopify-dropi',
 
     '/calculadora-de-campana-meta-ads-facebook',
     '/costos-asociados-a-tienda-shopify-chile',

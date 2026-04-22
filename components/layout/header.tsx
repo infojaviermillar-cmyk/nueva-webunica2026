@@ -176,7 +176,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
                           <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Tienda WooCommerce</span>
                           <span className="text-[11px] text-zinc-500 font-medium">B2B y Catálogos complejos</span>
                         </Link>
-                        <Link href="/tienda-dropshipping-shopify-dropi" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
+                        <Link href="/tienda-dropshipping-shopify-y-dropi" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
                           <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Dropshipping Shopi+Dropi</span>
                           <span className="text-[11px] text-zinc-500 font-medium">Automatización de ventas</span>
                         </Link>
@@ -363,7 +363,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       WooCommerce
                     </Link>
-                    <Link href="/tienda-dropshipping-shopify-dropi" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                    <Link href="/tienda-dropshipping-shopify-y-dropi" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       Dropshipping
                     </Link>
