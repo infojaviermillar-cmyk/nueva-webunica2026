@@ -225,12 +225,10 @@ export default function DropshippingPage() {
                     "Todo lo del Plan Básico +",
                     "Carga hasta 250 productos Dropi",
                     "Optimización de Conversión (CRO)",
-                    "Estrategia de Upselling integrada",
                     "Configuración de Pixel y Analytics",
                     "Diseño de Banners personalizados",
                     "SEO de categorías avanzado",
                     "Soporte prioritario",
-                    "Capacitación de escalado Ads",
                     "Entrega: Hasta 5 semanas"
                   ],
                   recommended: true

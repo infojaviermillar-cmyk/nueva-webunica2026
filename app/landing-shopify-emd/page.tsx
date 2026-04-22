@@ -204,7 +204,6 @@ export default function ShopifyEmdLandingPage() {
         "Todo lo de DROPI Básico +",
         "Carga hasta 250 productos Dropi",
         "Optimización de Conversión (CRO)",
-        "Configuración de Upselling/Cross-selling",
         "SEO de categorías avanzado",
         "Integración avanzada de Apps",
         "Soporte Prioritario",

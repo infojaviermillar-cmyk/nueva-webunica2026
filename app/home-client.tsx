@@ -124,7 +124,6 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
         "Todo lo del Plan Básico, más:",
         "Carga 250 productos iniciales",
         "Optimización de Conversión (CRO)",
-        "Estrategia Upselling automatizada",
         "SEO avanzado de categorías",
         "Soporte Prioritario"
       ],
