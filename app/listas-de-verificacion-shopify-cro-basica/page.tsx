@@ -229,7 +229,7 @@ export default function ChecklistCROPage() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
 
       {/* ── PROGRESS BAR — below site header, not covering it ─────────────── */}
-      <div className="sticky top-[108px] z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
+      <div className="sticky top-[68px] z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
         {/* Color bar */}
         <div className="h-1.5 bg-slate-100 w-full">
           <div

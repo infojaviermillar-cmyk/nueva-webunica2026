@@ -3,7 +3,6 @@ import { Inter, Plus_Jakarta_Sans, Caveat } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import AnnouncementBar from '@/components/layout/announcement-bar';
 import { ContactModalProvider } from '@/context/contact-modal-context';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
@@ -60,7 +59,6 @@ export default async function RootLayout({
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
         <ContactModalProvider>
-          <AnnouncementBar />
           <Header domain={domain} />
           <div className="flex-grow">
             {children}
