@@ -52,10 +52,12 @@ export default function ShopifyEnChilePage() {
   const plans = [
     {
       name: "Shopify AJUSTE",
-      price: "$290.000",
+      price: "$320.000",
+      originalPrice: "$337.000",
       highlight: "🔧 Para tiendas ya creadas",
       desc: "Ideal para tiendas que necesitan mejorar imagen, orden comercial y confianza visual.",
       features: [
+        "🎁 Plantilla Envato premium gratis",
         "Revisión visual general de la tienda",
         "Mejora de home, menú, banners y jerarquía",
         "Ajustes en ficha de producto",
