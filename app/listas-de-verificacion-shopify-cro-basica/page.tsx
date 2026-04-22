@@ -226,7 +226,7 @@ export default function ChecklistCROPage() {
     : 'from-emerald-400 to-green-500';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-[116px]">
 
       {/* ── PROGRESS BAR — below site header ───────────────────────────────── */}
       <div className="sticky top-[95px] lg:top-[116px] z-[60] bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
@@ -279,7 +279,7 @@ export default function ChecklistCROPage() {
       </div>
 
       {/* ── WIZARD CONTENT ─────────────────────────────────────────────────── */}
-      <div className="max-w-3xl mx-auto px-4 pt-10 pb-32">
+      <div className="max-w-3xl mx-auto px-4 pt-24 pb-32">
 
         {/* Back link */}
         <Link href="/desarrollo-tiendas-shopify-en-chile" className="inline-flex items-center gap-2 text-violet-600 font-bold text-sm mb-8 hover:underline group">
@@ -291,7 +291,7 @@ export default function ChecklistCROPage() {
         {!isResults && current && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-300">
             {/* Header */}
-            <div className="mb-8">
+            <div className="mb-12">
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-4xl">{current.emoji}</span>
                 <div>
