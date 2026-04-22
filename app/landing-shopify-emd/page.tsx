@@ -51,12 +51,16 @@ export default function ShopifyEmdLandingPage() {
   ];
 
   const processSteps = [
-    { step: "01", name: "Diagnóstico", desc: "Entendemos tus objetivos y audiencia." },
-    { step: "02", name: "Estructura", desc: "Definimos el mapa del sitio y flujo de compra." },
-    { step: "03", name: "Desarrollo", desc: "Configuración técnica y diseño visual." },
-    { step: "04", name: "Ajustes", desc: "Revisión de detalles y pruebas de navegación." },
-    { step: "05", name: "Lanzamiento", desc: "Tu tienda sale al mundo." },
-    { step: "06", name: "Soporte", desc: "Te acompañamos en los primeros días de operación." }
+    { step: "01", name: "Descripción", desc: "El cliente describe su proyecto y necesidades." },
+    { step: "02", name: "Reunión", desc: "Se genera una reunión estratégica." },
+    { step: "03", name: "Cotización", desc: "Elaboramos y presentamos la propuesta comercial." },
+    { step: "04", name: "Aprobación", desc: "El cliente acepta la cotización." },
+    { step: "05", name: "Flujo", desc: "Se presenta el flujo de desarrollo del proyecto." },
+    { step: "06", name: "Contenido", desc: "El cliente envía el contenido (textos, imágenes)." },
+    { step: "07", name: "Diseño", desc: "Se desarrolla el theme o se adapta el diseño." },
+    { step: "08", name: "Revisión", desc: "Se revisan las funciones de la tienda." },
+    { step: "09", name: "Componentes", desc: "Se agregan componentes y apps finales." },
+    { step: "10", name: "Finalización", desc: "Se entrega la tienda. (De 1 a 6 semanas en total)." }
   ];
 
   const sitemap = [
@@ -457,19 +461,46 @@ export default function ShopifyEmdLandingPage() {
               <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase text-zinc-950 mb-6">Proceso de Trabajo</h2>
               <p className="text-lg text-zinc-500 font-light">Paso a paso hacia el lanzamiento.</p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              {processSteps.map((step, i) => (
-                <div key={i} className="text-center relative">
-                  {i !== processSteps.length - 1 && (
-                    <div className="hidden lg:block absolute top-8 left-[60%] w-full h-[1px] bg-zinc-200" />
-                  )}
-                  <div className="w-16 h-16 mx-auto bg-pink-50 text-pink-600 font-black rounded-full flex items-center justify-center text-xl mb-4 relative z-10 border border-pink-100 shadow-sm">
-                    {step.step}
+            <style dangerouslySetInnerHTML={{__html: `
+              @keyframes scanLine {
+                0% { top: -10%; opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { top: 100%; opacity: 0; }
+              }
+              .animate-scan {
+                animation: scanLine 6s linear infinite;
+              }
+            `}} />
+            <div className="max-w-5xl mx-auto relative py-10">
+              {/* Animated vertical line */}
+              <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-1 bg-zinc-100 transform lg:-translate-x-1/2 rounded-full overflow-hidden">
+                <div className="absolute left-0 w-full h-32 bg-gradient-to-b from-transparent via-pink-500 to-transparent animate-scan" />
+              </div>
+              
+              <div className="space-y-12">
+                {processSteps.map((step, i) => (
+                  <div key={i} className={`relative flex items-center lg:justify-between w-full group ${i % 2 === 0 ? 'lg:flex-row-reverse' : ''}`}>
+                    
+                    {/* Empty space for alternating layout on desktop */}
+                    <div className="hidden lg:block w-[45%]" />
+
+                    {/* Central Icon */}
+                    <div className="absolute left-8 lg:left-1/2 transform -translate-x-1/2 w-14 h-14 bg-white border-4 border-pink-50 rounded-full flex items-center justify-center z-10 group-hover:border-pink-500 group-hover:scale-125 transition-all duration-500 shadow-md">
+                      <span className="text-pink-600 font-black text-sm">{step.step}</span>
+                    </div>
+
+                    {/* Content Card */}
+                    <div className="w-full lg:w-[45%] pl-24 lg:pl-0">
+                      <div className={`bg-white p-6 lg:p-8 rounded-3xl border border-zinc-100 shadow-sm group-hover:shadow-2xl group-hover:border-pink-200 transition-all duration-300 transform group-hover:-translate-y-1 ${i % 2 === 0 ? 'lg:text-left' : 'lg:text-right'}`}>
+                        <h4 className="font-black text-zinc-900 mb-2 uppercase tracking-wide text-lg">{step.name}</h4>
+                        <p className="text-zinc-500 font-light text-sm leading-relaxed">{step.desc}</p>
+                      </div>
+                    </div>
+                    
                   </div>
-                  <h4 className="font-bold text-zinc-900 mb-2 text-sm uppercase">{step.name}</h4>
-                  <p className="text-xs text-zinc-500 font-light leading-relaxed">{step.desc}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </section>
