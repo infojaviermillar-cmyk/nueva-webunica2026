@@ -43,12 +43,12 @@ export const metadata: Metadata = {
 
 import { headers } from 'next/headers';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headersList = headers();
+  const headersList = await headers();
   const domain = headersList.get('host') || '';
 
   return (
