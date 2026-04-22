@@ -13,14 +13,19 @@ export async function saveCroLead(data: {
 }) {
   // 1. Save lead to DB
   if (supabase) {
-    await supabase.rpc('insert_lead', {
-      p_name: 'CRO Checklist',
-      p_email: data.email,
-      p_phone: '',
-      p_city: '',
-      p_project_type: 'Auditoría CRO Shopify',
-      p_source: 'CRO Checklist - Básica',
-    }).catch((e: unknown) => console.error('[saveCroLead] DB error:', e));
+    try {
+      const { error: dbError } = await supabase.rpc('insert_lead', {
+        p_name: 'CRO Checklist',
+        p_email: data.email,
+        p_phone: '',
+        p_city: '',
+        p_project_type: 'Auditoría CRO Shopify',
+        p_source: 'CRO Checklist - Básica',
+      });
+      if (dbError) console.error('[saveCroLead] DB error:', dbError);
+    } catch (e) {
+      console.error('[saveCroLead] DB exception:', e);
+    }
   }
 
   const scoreLabel =
