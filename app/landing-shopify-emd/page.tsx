@@ -14,6 +14,27 @@ export const metadata = {
 };
 
 export default function ShopifyEmdLandingPage() {
+  const projects = [
+    { title: "Kinelawen", description: "Tienda Shopify con identidad limpia, navegación moderna y foco en experiencia de marca.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.kinelawen.com%2F?w=1200", link: "https://www.kinelawen.com/" },
+    { title: "SpinMedical", description: "Proyecto ecommerce con estructura profesional, catálogo claro y presentación visual de confianza.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fspinmedical.cl%2F?w=1200", link: "https://spinmedical.cl/" },
+    { title: "Librería Bazarte", description: "Ecommerce visualmente atractivo, preparado para exhibir productos y facilitar exploración por colecciones.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flibreriabazarte.cl%2F?w=1200", link: "https://libreriabazarte.cl/" },
+    { title: "Altavista Chile", description: "Tienda de look robusto, con enfoque en navegación eficiente y presencia visual consistente.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Faltavistachile.cl%2F?w=1200", link: "https://altavistachile.cl/" },
+    { title: "Recovery Zone", description: "Proyecto Shopify con diseño orientado a conversión y fichas de producto con buena lectura visual.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Frecoveryzone.cl%2F?w=1200", link: "https://recoveryzone.cl/" },
+    { title: "Only Jeep", description: "Tienda con carácter de nicho, buena jerarquía de colecciones y estética alineada al rubro automotor.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.onlyjeep.cl%2F?w=1200", link: "https://www.onlyjeep.cl/" },
+    { title: "EvertSport", description: "Diseño deportivo, moderno y preparado para destacar colecciones, ofertas y llamados a la acción.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Feversport.cl%2F?w=1200", link: "https://eversport.cl/" },
+    { title: "AntarctiCare", description: "Ecommerce con branding más refinado, visual pulido y una presentación clara del catálogo.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fantarcticare.cl%2F?w=1200", link: "https://antarcticare.cl/" },
+    { title: "Divan Tienda", description: "Proyecto con estilo comercial elegante, pensado para destacar productos y mantener orden visual.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fdivantienda.cl%2F?w=1200", link: "https://divantienda.cl/" },
+    { title: "Chiletronics", description: "Tienda tecnológica con estructura orientada a variedad de productos y lectura rápida del catálogo.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fchiletronics.cl%2F?w=1200", link: "https://chiletronics.cl/" },
+    { title: "PHY Waters", description: "Marca con enfoque visual fuerte, experiencia simple y espacio claro para beneficios de producto.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fphywaters.com%2F?w=1200", link: "https://phywaters.com/" },
+    { title: "Tecno-Mobile", description: "Catálogo tecnológico con look comercial claro, navegación rápida y enfoque en productos destacados.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftecno-mobile.cl%2F?w=1200", link: "https://tecno-mobile.cl/" },
+    { title: "Tuupos", description: "Proyecto Shopify con identidad propia, buena legibilidad y composición de bloques moderna.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftuupos.cl%2F?w=1200", link: "https://tuupos.cl/" },
+    { title: "Anteros", description: "Tienda enfocada en visual limpio, presencia de marca y una experiencia de exploración ordenada.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftienda.anteros.cl%2F?w=1200", link: "https://tienda.anteros.cl/" },
+    { title: "Terra Andes", description: "Proyecto con estética más corporativa y vitrina visual enfocada en credibilidad y presentación.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fterraandesplus.com%2F?w=1200", link: "https://terraandesplus.com/" },
+    { title: "Serch", description: "Diseño actual, orden visual sólido y estructura preparada para campañas y catálogo online.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.serch.cl%2F?w=1200", link: "https://www.serch.cl/" },
+    { title: "Sonnda", description: "Tienda con enfoque comercial, categorías claras y presentación robusta para productos técnicos.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fsonnda.cl%2F?w=1200", link: "https://sonnda.cl/" },
+    { title: "Fcastro.cl", description: "Nueva tienda Shopify en proceso, enfocada en categorías como sillas, mesas, escaleras, hogar y cocina.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ffcastrocl.myshopify.com%2F?w=1400", link: "https://fcastrocl.myshopify.com/" }
+  ];
+
   const features = [
     { title: "Configuración técnica", desc: "Dominio, checkout, notificaciones y analítica.", icon: <Zap className="w-6 h-6 text-pink-600" /> },
     { title: "Diseño & Branding", desc: "Adaptación de tu identidad de marca al entorno digital.", icon: <Star className="w-6 h-6 text-pink-600" /> },
@@ -484,18 +505,35 @@ export default function ShopifyEmdLandingPage() {
             <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase text-zinc-950 mb-6">Portafolio de Proyectos</h2>
             <p className="text-zinc-500 font-light mb-16 max-w-2xl mx-auto">Conoce cómo se ven las marcas que han confiado su comercio digital en nosotros.</p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Placeholder portafolio items */}
-              {[1,2,3].map((item) => (
-                <div key={item} className="group relative bg-zinc-100 rounded-[2rem] overflow-hidden aspect-[4/3] border border-zinc-200 flex items-center justify-center">
-                  <div className="text-zinc-300 font-black text-2xl uppercase tracking-widest">Proyecto {item}</div>
-                  <div className="absolute inset-0 bg-pink-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6">
-                    <h3 className="text-xl font-bold mb-2">Tienda Shopify {item}</h3>
-                    <p className="text-sm text-pink-100 mb-6 font-light">Desarrollo theme personalizado y migraciones.</p>
-                    <a href="#" className="px-6 py-2 bg-white text-pink-600 rounded-full text-xs font-black uppercase tracking-widest">Ver Proyecto</a>
-                  </div>
+            <div className="w-full overflow-hidden relative">
+              {/* Optional gradient fades for the edges */}
+              <div className="absolute left-0 top-0 bottom-0 w-12 lg:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 lg:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+              
+              <div className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <div className="grid grid-rows-2 grid-flow-col gap-6 px-4 lg:px-12">
+                  {projects.map((project, index) => (
+                    <a 
+                      key={index} 
+                      href={project.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group relative bg-zinc-100 rounded-[2rem] overflow-hidden w-[280px] lg:w-[350px] aspect-[4/3] border border-zinc-200 flex-shrink-0 snap-center shadow-sm hover:shadow-xl transition-all block"
+                    >
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-pink-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-white p-6 text-center">
+                        <h3 className="text-xl font-bold mb-2 uppercase tracking-tight">{project.title}</h3>
+                        <p className="text-sm text-pink-100 mb-6 font-light">{project.description}</p>
+                        <span className="px-6 py-2 bg-white text-pink-600 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">Ver Proyecto</span>
+                      </div>
+                    </a>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
