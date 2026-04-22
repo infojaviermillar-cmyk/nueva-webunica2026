@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         destination: '/desarrollo-paginas-web-pymes-chile',
         permanent: true,
       },
+      {
+        source: '/tienda-dropshipping-shopify-dropi',
+        destination: '/tienda-dropshipping-shopify-y-dropi',
+        permanent: true,
+      },
     ];
   },
   images: {
