@@ -411,8 +411,10 @@ export default function ShopifyEmdLandingPage() {
                     <h3 className="text-2xl font-black mb-2 uppercase text-zinc-900">{p.name}</h3>
                     <p className="text-xs font-bold text-pink-600 uppercase mb-4">{p.highlight}</p>
                     <div className="mb-4">
-                      {p.originalPrice && (
-                        <span className="text-sm text-zinc-400 line-through mr-2 font-medium">{p.originalPrice}</span>
+                      {p.originalPrice ? (
+                        <div className="text-sm text-zinc-400 line-through font-medium mb-1">{p.originalPrice} + iva</div>
+                      ) : (
+                        <div className="h-5 mb-1" />
                       )}
                       <span className="text-4xl font-black text-zinc-900">{p.price}</span>
                       <span className="text-sm text-zinc-500 font-medium ml-1">+ iva</span>
