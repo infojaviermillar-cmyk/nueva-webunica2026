@@ -245,9 +245,9 @@ export default function Header({ domain = '' }: { domain?: string }) {
                           <span className="block text-[13px] font-bold text-zinc-950 mb-1 group-hover/tool:text-violet-600">Calculadora Meta Ads</span>
                           <span className="block text-[10px] text-zinc-500 leading-tight">Retorno de inversión publicitaria</span>
                         </Link>
-                        <Link href="/cotizador-en-linea-desarrollo-web" className="group/tool block p-4 bg-white border border-zinc-100 rounded-2xl hover:border-violet-500 hover:shadow-xl transition-all">
-                          <span className="block text-[13px] font-bold text-zinc-950 mb-1 group-hover/tool:text-violet-600">Cotizador Web Pro</span>
-                          <span className="block text-[10px] text-zinc-500 leading-tight">Presupuesto estimado al instante</span>
+                        <Link href="/recursos" className="group/tool block p-4 bg-white border border-zinc-100 rounded-2xl hover:border-violet-500 hover:shadow-xl transition-all">
+                          <span className="block text-[13px] font-bold text-zinc-950 mb-1 group-hover/tool:text-violet-600">Centro de Recursos</span>
+                          <span className="block text-[10px] text-zinc-500 leading-tight">Herramientas y guías gratuitas</span>
                         </Link>
                         <Link href="/listas-de-verificacion-shopify-cro-basica" className="group/tool block p-4 bg-white border border-zinc-100 rounded-2xl hover:border-violet-500 hover:shadow-xl transition-all">
                           <span className="block text-[13px] font-bold text-zinc-950 mb-1 group-hover/tool:text-violet-600">Checklist CRO Shopify</span>
@@ -390,6 +390,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
               </Link>
 
               <div className="flex flex-col gap-6 mt-2">
+                <Link href="/recursos" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-widest flex justify-between items-center">
+                  Recursos
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                </Link>
                 <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-widest flex justify-between items-center">
                   Blog
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
