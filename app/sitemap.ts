@@ -22,6 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/recursos',
     '/desarrollo-web-nextjs-saas-custom',
     '/desarrollo-tiendas-shopify-chile',
+    '/diseno-web-shopify-chile',
     '/servicios-seo-posicionamiento-google',
     '/desarrollo-tienda-en-linea-woocommerce',
     '/desarrollo-paginas-web-pymes-chile',
