@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         destination: '/tienda-dropshipping-shopify-y-dropi',
         permanent: true,
       },
+      {
+        source: '/blog/como-crear-tienda-shopify-chile',
+        destination: '/blog/crear-tienda-shopify-chile-paso-a-paso',
+        permanent: true,
+      },
     ];
   },
   images: {
