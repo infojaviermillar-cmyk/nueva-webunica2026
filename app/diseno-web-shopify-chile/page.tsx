@@ -3,7 +3,7 @@ import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
-import { Palette, Layers, Code, Zap, Heart, ShieldCheck, ShoppingBag, ArrowRight, Layout, PencilRuler, CheckCircle2 } from 'lucide-react';
+import { Star, Palette, Layers, Code, Zap, Heart, ShieldCheck, ShoppingBag, ArrowRight, Layout, PencilRuler, CheckCircle2 } from 'lucide-react';
 
 export const metadata = {
   title: 'Diseño Shopify en Chile | Diseño de Tiendas Ecommerce Shopify',
@@ -166,7 +166,7 @@ export default function DisenoWebShopifyPage() {
                 </div>
                 <div>
                   <div className="flex gap-1 mb-1">
-                    {[1,2,3,4,5].map(i => <Zap key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />)}
+                    {[1,2,3,4,5].map(i => <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />)}
                   </div>
                   <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Empresas confían en nosotros</p>
                 </div>

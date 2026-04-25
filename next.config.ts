@@ -52,6 +52,12 @@ const nextConfig: NextConfig = {
         hostname: 'webunica.cl',
         pathname: '/**',
       },
+      {
+        // Pravatar for avatars
+        protocol: 'https',
+        hostname: 'i.pravatar.cc',
+        pathname: '/**',
+      },
     ],
   },
 } as any;
