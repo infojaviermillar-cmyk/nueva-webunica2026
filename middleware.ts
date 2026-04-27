@@ -22,11 +22,8 @@ export default async function middleware(request: NextRequest) {
 
   // 2. Manejo de dominios para Diseño Shopify
   if (
-    hostname === 'diseñoshopify.cl' || 
-    hostname === 'www.diseñoshopify.cl' ||
-    hostname === 'xn--diseoshopify-thb.cl' ||
-    hostname === 'www.xn--diseoshopify-thb.cl' ||
-    hostname.includes('diseñoshopify')
+    hostname.includes('diseñoshopify') || 
+    hostname.includes('xn--diseoshopify-thb')
   ) {
     const url = request.nextUrl.clone();
     if (url.pathname === '/') {
