@@ -4,6 +4,8 @@ import { NextResponse, type NextRequest } from 'next/server'
 export default async function proxy(request: NextRequest) {
   // 1. Manejo de dominios para EMD (Desarrollo Shopify)
   const hostname = request.headers.get('host') || '';
+  
+  // 1. Manejo de dominios para EMD (Desarrollo Shopify)
   if (
     hostname === 'desarrolloshopify.cl' || 
     hostname === 'www.desarrolloshopify.cl' ||
@@ -12,6 +14,21 @@ export default async function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     if (url.pathname === '/') {
       url.pathname = '/landing-shopify-emd';
+      return NextResponse.rewrite(url);
+    }
+  }
+
+  // 2. Manejo de dominios para Diseño Shopify
+  if (
+    hostname === 'diseñoshopify.cl' || 
+    hostname === 'www.diseñoshopify.cl' ||
+    hostname === 'xn--diseoshopify-thb.cl' ||
+    hostname === 'www.xn--diseoshopify-thb.cl' ||
+    hostname.includes('diseñoshopify')
+  ) {
+    const url = request.nextUrl.clone();
+    if (url.pathname === '/') {
+      url.pathname = '/diseno-shopify-cl';
       return NextResponse.rewrite(url);
     }
   }

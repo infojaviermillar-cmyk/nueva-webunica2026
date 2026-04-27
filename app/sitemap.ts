@@ -58,6 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/desarrollo-diseno-elearning-tutor-lms',
     '/desarrollo-elearning-tutor-lms-pro',
     '/plataforma-de-clases-en-linea-mas-popular-aprende-desde-cualquier-lugar',
+    '/diseno-shopify-cl',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
