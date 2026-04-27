@@ -2,8 +2,10 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export default async function middleware(request: NextRequest) {
-  // 1. Manejo de dominios para EMD (Desarrollo Shopify)
-  const hostname = request.headers.get('host') || '';
+  // 1. Manejo de dominios para EMD (Desarrollo Shopify) y Diseño Shopify
+  const host = request.headers.get('host') || '';
+  const forwardedHost = request.headers.get('x-forwarded-host') || '';
+  const hostname = forwardedHost || host;
   
   // 1. Manejo de dominios para EMD (Desarrollo Shopify)
   if (
