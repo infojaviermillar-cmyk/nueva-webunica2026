@@ -3,6 +3,8 @@ import { Inter, Plus_Jakarta_Sans, Caveat } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import DisenoShopifyHeader from '@/components/layout/diseno-shopify-header';
+import DisenoShopifyFooter from '@/components/layout/diseno-shopify-footer';
 import FloatingWhatsApp from '@/components/layout/floating-whatsapp';
 import { ContactModalProvider } from '@/context/contact-modal-context';
 import { GoogleAnalytics } from '@next/third-parties/google';
@@ -51,6 +53,7 @@ export default async function RootLayout({
 }>) {
   const headersList = await headers();
   const domain = headersList.get('host') || '';
+  const isDisenoShopify = domain.includes('diseñoshopify') || domain.includes('xn--diseoshopify-dhb');
 
   return (
     <html
@@ -60,11 +63,11 @@ export default async function RootLayout({
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
         <ContactModalProvider>
-          <Header domain={domain} />
+          {isDisenoShopify ? <DisenoShopifyHeader /> : <Header domain={domain} />}
           <div className="flex-grow">
             {children}
           </div>
-          <Footer />
+          {isDisenoShopify ? <DisenoShopifyFooter /> : <Footer />}
           <FloatingWhatsApp />
         </ContactModalProvider>
       </body>

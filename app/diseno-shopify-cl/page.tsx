@@ -133,7 +133,7 @@ export default function DisenoShopifyLandingPage() {
       <div className="min-h-screen bg-white font-sans antialiased text-zinc-900 overflow-x-hidden">
         <main className="pt-32">
           {/* Hero Section */}
-          <section id="hero" className="relative pt-20 pb-32 lg:pt-32 lg:pb-40">
+          <section id="inicio" className="relative pt-20 pb-32 lg:pt-32 lg:pb-40">
             <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-pink-600/5 blur-[120px] rounded-full -z-10 translate-x-1/4 -translate-y-1/4" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full -z-10 -translate-x-1/4 translate-y-1/4" />
             
@@ -234,7 +234,7 @@ export default function DisenoShopifyLandingPage() {
           </section>
 
           {/* Liquid Programming Section */}
-          <section id="programacion-liquid" className="py-32 bg-white overflow-hidden">
+          <section id="liquid" className="py-32 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               <div className="order-2 lg:order-1">
                 <div className="bg-zinc-900 rounded-[3rem] p-10 shadow-2xl relative">
