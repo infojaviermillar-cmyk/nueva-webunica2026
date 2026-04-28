@@ -52,6 +52,10 @@ export default function DisenoWebShopifyPage() {
         "Mejora de home y banners",
         "Ajustes en ficha de producto",
         "Optimización mobile",
+        "Videollamada para explicar cómo funciona el diseño y Shopify",
+        "Botón de WhatsApp",
+        "Activación sistema de notificaciones",
+        "Recuperación de carritos abandonados",
         "Soporte técnico 1 mes"
       ],
       cta: "Obtener 10% Dto"

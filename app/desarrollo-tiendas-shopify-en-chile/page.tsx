@@ -74,6 +74,10 @@ export default function ShopifyEnChilePage() {
         "Revisión de apps instaladas",
         "Ajustes de confianza visual en carrito/checkout",
         "Hasta cierta cantidad de cambios definidos",
+        "Videollamada para explicar cómo funciona el diseño y Shopify",
+        "Botón de WhatsApp",
+        "Activación sistema de notificaciones",
+        "Recuperación de carritos abandonados",
         "Tiempo de entrega: 5 a 10 días hábiles"
       ],
       time: "2 Semanas",
