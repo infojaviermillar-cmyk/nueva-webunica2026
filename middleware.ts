@@ -23,7 +23,7 @@ export default async function middleware(request: NextRequest) {
   // 2. Manejo de dominios para Diseño Shopify
   if (
     hostname.includes('diseñoshopify') || 
-    hostname.includes('xn--diseoshopify-thb')
+    hostname.includes('xn--diseoshopify-dhb')
   ) {
     const url = request.nextUrl.clone();
     if (url.pathname === '/') {
