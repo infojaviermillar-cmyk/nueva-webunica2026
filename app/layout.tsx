@@ -5,6 +5,7 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import DisenoShopifyHeader from '@/components/layout/diseno-shopify-header';
 import DisenoShopifyFooter from '@/components/layout/diseno-shopify-footer';
+import DesarrolloShopifyFooter from '@/components/layout/desarrollo-shopify-footer';
 import FloatingWhatsApp from '@/components/layout/floating-whatsapp';
 import { ContactModalProvider } from '@/context/contact-modal-context';
 import { GoogleAnalytics } from '@next/third-parties/google';
@@ -54,6 +55,7 @@ export default async function RootLayout({
   const headersList = await headers();
   const domain = headersList.get('host') || '';
   const isDisenoShopify = domain.includes('diseñoshopify') || domain.includes('xn--diseoshopify-dhb');
+  const isDesarrolloShopify = domain.includes('desarrolloshopify.cl');
 
   return (
     <html
@@ -67,7 +69,7 @@ export default async function RootLayout({
           <div className="flex-grow">
             {children}
           </div>
-          {isDisenoShopify ? <DisenoShopifyFooter /> : <Footer />}
+          {isDisenoShopify ? <DisenoShopifyFooter /> : isDesarrolloShopify ? <DesarrolloShopifyFooter /> : <Footer />}
           <FloatingWhatsApp />
         </ContactModalProvider>
       </body>
