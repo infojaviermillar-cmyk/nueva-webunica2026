@@ -120,6 +120,51 @@ export default function DisenoShopifyLandingPage() {
     }
   ];
 
+  const portafolio = [
+    {
+      title: "Kinelawen",
+      description: "Tienda Shopify con identidad limpia, navegación moderna y foco en experiencia.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.kinelawen.com%2F?w=1200",
+      link: "https://www.kinelawen.com/",
+      tags: ["Salud", "Branding"]
+    },
+    {
+      title: "SpinMedical",
+      description: "Proyecto ecommerce con estructura profesional, catálogo claro y visual de confianza.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fspinmedical.cl%2F?w=1200",
+      link: "https://spinmedical.cl/",
+      tags: ["B2B / B2C"]
+    },
+    {
+      title: "Librería Bazarte",
+      description: "Ecommerce atractivo, preparado para exhibir productos y exploración por colecciones.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flibreriabazarte.cl%2F?w=1200",
+      link: "https://libreriabazarte.cl/",
+      tags: ["Retail", "Diseño"]
+    },
+    {
+      title: "Recovery Zone",
+      description: "Proyecto Shopify con diseño orientado a conversión y fichas de producto optimizadas.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Frecoveryzone.cl%2F?w=1200",
+      link: "https://recoveryzone.cl/",
+      tags: ["Deportes"]
+    },
+    {
+      title: "Only Jeep",
+      description: "Tienda de nicho, buena jerarquía de colecciones y estética del rubro automotor.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.onlyjeep.cl%2F?w=1200",
+      link: "https://www.onlyjeep.cl/",
+      tags: ["Automotriz"]
+    },
+    {
+      title: "Divan Tienda",
+      description: "Proyecto con estilo comercial elegante, pensado para destacar productos.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fdivantienda.cl%2F?w=1200",
+      link: "https://divantienda.cl/",
+      tags: ["Muebles", "Interiorismo"]
+    }
+  ];
+
   return (
     <>
       <script
@@ -324,6 +369,60 @@ export default function DisenoShopifyLandingPage() {
                     Diseños que transmiten profesionalismo y seguridad, reduciendo el abandono en el checkout.
                   </p>
                 </article>
+              </div>
+            </div>
+          </section>
+
+          {/* Portafolio Section */}
+          <section id="portafolio" className="py-32 bg-zinc-50 relative">
+            <div className="max-w-7xl mx-auto px-6">
+              <div className="text-center mb-16">
+                <span className="text-[10px] font-black uppercase tracking-widest text-pink-600 mb-4 block">Resultados</span>
+                <h2 className="text-4xl lg:text-5xl font-black tracking-tighter uppercase mb-6 text-zinc-950">
+                  Nuestro Portafolio
+                </h2>
+                <p className="text-lg text-zinc-500 font-light max-w-2xl mx-auto">
+                  Explora algunas de las tiendas Shopify que hemos diseñado y optimizado para el mercado chileno.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {portafolio.map((project, index) => (
+                  <a
+                    key={index}
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex flex-col h-full bg-white rounded-[3rem] overflow-hidden border border-zinc-100 hover:border-pink-200 transition-all hover:shadow-2xl"
+                  >
+                    <div className="relative overflow-hidden aspect-[16/10]">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-90 group-hover:opacity-100"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/20 to-transparent" />
+                    </div>
+
+                    <div className="p-8 flex flex-col justify-between flex-grow">
+                      <div>
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.tags?.map(tag => (
+                            <span key={tag} className="text-[9px] font-bold uppercase tracking-wider text-pink-600 bg-pink-50 border border-pink-100 px-2 py-1 rounded-full">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <h3 className="font-black tracking-tighter leading-none mb-3 uppercase text-2xl text-zinc-900 group-hover:text-pink-600 transition-colors">
+                          {project.title}
+                        </h3>
+                        <p className="text-zinc-500 font-light text-sm leading-relaxed mb-6">
+                          {project.description}
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                ))}
               </div>
             </div>
           </section>

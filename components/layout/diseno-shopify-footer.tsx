@@ -19,6 +19,8 @@ export default function DisenoShopifyFooter() {
             <Link href="#servicios" className="text-[11px] font-bold text-zinc-400 hover:text-white uppercase tracking-widest transition-colors">Servicios</Link>
             <Link href="#liquid" className="text-[11px] font-bold text-zinc-400 hover:text-white uppercase tracking-widest transition-colors">Liquid</Link>
             <Link href="#beneficios" className="text-[11px] font-bold text-zinc-400 hover:text-white uppercase tracking-widest transition-colors">Beneficios</Link>
+            <Link href="#portafolio" className="text-[11px] font-bold text-zinc-400 hover:text-white uppercase tracking-widest transition-colors">Portafolio</Link>
+            <Link href="#faq" className="text-[11px] font-bold text-zinc-400 hover:text-white uppercase tracking-widest transition-colors">FAQ</Link>
           </div>
         </div>
         <div className="border-t border-zinc-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-500 font-medium">

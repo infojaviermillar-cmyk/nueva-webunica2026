@@ -22,6 +22,7 @@ export default function DisenoShopifyHeader() {
     { label: 'Servicios', href: '#servicios' },
     { label: 'Liquid', href: '#liquid' },
     { label: 'Beneficios', href: '#beneficios' },
+    { label: 'Portafolio', href: '#portafolio' },
     { label: 'FAQ', href: '#faq' },
   ];
 
