@@ -9,41 +9,115 @@ import FeaturedBlogSection from '@/components/sections/featured-blog';
 import TestimonialsSection from '@/components/sections/testimonials';
 
 export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
+  const projects = [
+    { title: "Tecno-Mobile", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftecno-mobile.cl%2F?w=1200" },
+    { title: "Tuupos", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftuupos.cl%2F?w=1200" },
+    { title: "Terra Andes", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fterraandesplus.com%2F?w=1200" },
+    { title: "Chiletronics", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fchiletronics.cl%2F?w=1200" },
+    { title: "Canine Fight", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcaninefight.cl%2F?w=1200" },
+    { title: "SoloCasasChile", image: "/publi-solocasas.png" },
+    { title: "SpinMedical", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fspinmedical.cl%2F?w=1200" },
+    { title: "Librería Bazarte", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flibreriabazarte.cl%2F?w=1200" },
+  ];
+
   return (
     <main className="min-h-screen bg-white text-zinc-950 font-sans antialiased overflow-x-hidden">
       
       {/* Premium Hero Section */}
-      <section className="relative pt-[18vh] pb-32 lg:pb-52 overflow-hidden">
+      <section className="relative pt-[12vh] pb-32 lg:pb-40 overflow-hidden flex items-center min-h-[90vh]">
+        {/* Background Texture from Funnel Page */}
+        <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+          <Image 
+            src="/bg-01.jpg" 
+            alt="Background Texture" 
+            fill 
+            className="object-cover object-center" 
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/40 to-white"></div>
+        </div>
+
         {/* Abstract Background Elements */}
         <div className="absolute top-0 right-0 w-[1000px] h-[1000px] bg-blue-50/50 blur-[150px] rounded-full -z-10 pointer-events-none translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-[800px] h-[800px] bg-violet-50/50 blur-[120px] rounded-full -z-10 pointer-events-none -translate-x-1/2 translate-y-1/2" />
         
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 bg-zinc-50 border border-zinc-100 rounded-full animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-            </span>
-            <span className="text-[10px] font-black tracking-[0.25em] text-zinc-500 uppercase">Ingeniería Web de Élite 2026</span>
-          </div>
-          
-          <h1 className="text-6xl md:text-[120px] font-black tracking-tighter leading-[0.8] mb-12 uppercase text-zinc-950 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-            DISEÑO & <br/>
-            <span className="text-blue-600">DESARROLLO</span> <br/>
-            SITIOS WEB.
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-zinc-500 max-w-3xl mx-auto mb-16 font-light leading-relaxed animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-400">
-            No creamos páginas estáticas. Construimos ecosistemas digitales de alto rendimiento con <strong className="text-zinc-950 font-bold">Next.js</strong> y <strong className="text-zinc-950 font-bold">Shopify</strong> para marcas que exigen velocidad, diseño premium y resultados.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-in fade-in slide-in-from-bottom-16 duration-1000 delay-600">
-            <LeadButton className="px-14 py-7 bg-zinc-950 text-white font-black rounded-3xl hover:bg-zinc-800 transition-all shadow-2xl uppercase tracking-widest text-xs flex items-center gap-3 scale-100 hover:scale-105 active:scale-95 group">
-              Cotizar mi Proyecto <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </LeadButton>
-            <Link href="/portafolio" className="px-14 py-7 border border-zinc-200 text-zinc-950 font-black rounded-3xl hover:bg-zinc-50 transition-all uppercase tracking-widest text-xs">
-              Ver Portafolio de Éxito
-            </Link>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left: Content */}
+            <div className="text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 bg-white/80 backdrop-blur-sm border border-zinc-100 rounded-full">
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                <span className="text-[10px] font-black tracking-[0.25em] text-zinc-500 uppercase">Ingeniería Web de Élite 2026</span>
+              </div>
+              
+              <h1 className="text-6xl md:text-[90px] font-black tracking-tighter leading-[0.8] mb-12 uppercase text-zinc-950">
+                DISEÑO & <br/>
+                <span className="text-blue-600">DESARROLLO</span> <br/>
+                SITIOS WEB.
+              </h1>
+              
+              <p className="text-xl text-zinc-500 max-w-xl mb-16 font-light leading-relaxed">
+                No creamos páginas estáticas. Construimos ecosistemas digitales de alto rendimiento con <strong className="text-zinc-950 font-bold">Next.js</strong> y <strong className="text-zinc-950 font-bold">Shopify</strong> para marcas que exigen velocidad y resultados.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-6 items-center">
+                <LeadButton className="px-14 py-7 bg-zinc-950 text-white font-black rounded-3xl hover:bg-zinc-800 transition-all shadow-2xl uppercase tracking-widest text-xs flex items-center gap-3 scale-100 hover:scale-105 active:scale-95 group w-full sm:w-auto">
+                  Cotizar mi Proyecto <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </LeadButton>
+                <Link href="/portafolio" className="px-14 py-7 border border-zinc-200 text-zinc-950 font-black rounded-3xl hover:bg-zinc-50 transition-all uppercase tracking-widest text-xs w-full sm:w-auto text-center">
+                  Portafolio
+                </Link>
+              </div>
+            </div>
+
+            {/* Right: Vertical Scrolling Carousel */}
+            <div className="relative h-[600px] lg:h-[800px] hidden lg:flex gap-6 overflow-hidden">
+              <style jsx>{`
+                @keyframes scroll-vertical {
+                  0% { transform: translateY(0); }
+                  100% { transform: translateY(-50%); }
+                }
+                .scroll-container {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 1.5rem;
+                  animation: scroll-vertical 40s linear infinite;
+                }
+                .scroll-container:hover {
+                  animation-play-state: paused;
+                }
+              `}</style>
+              
+              <div className="flex-1 space-y-6">
+                <div className="scroll-container">
+                  {[...projects, ...projects].map((p, i) => (
+                    <div key={i} className="relative aspect-[3/4] w-full rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl group/card">
+                      <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity flex items-end p-8">
+                        <span className="text-white font-black uppercase text-xs tracking-widest">{p.title}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex-1 space-y-6 translate-y-20">
+                <div className="scroll-container" style={{ animationDirection: 'reverse' }}>
+                  {[...projects.reverse(), ...projects].map((p, i) => (
+                    <div key={i} className="relative aspect-[3/4] w-full rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl group/card">
+                      <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity flex items-end p-8">
+                        <span className="text-white font-black uppercase text-xs tracking-widest">{p.title}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
