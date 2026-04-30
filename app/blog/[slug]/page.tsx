@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getPostBySlug, getPublishedPosts } from '@/lib/blog';
 import { Calendar, Clock, User, ArrowLeft, Globe, Share2, Link as LinkIcon } from 'lucide-react';
+import LeadButton from '@/components/ui/lead-button';
 
 interface PostPageProps {
   params: Promise<{
@@ -129,24 +130,17 @@ export default async function PostPage({ params }: PostPageProps) {
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
 
-        {/* Right: Sidebar / Newsletter */}
+        {/* Right: Sidebar / Lead CTA */}
         <aside className="lg:w-96 lg:sticky lg:top-32 h-fit space-y-8">
            <div className="bg-brand-purple rounded-[2.5rem] p-10 text-white relative overflow-hidden shadow-xl shadow-brand-purple/20">
              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl" />
              <h3 className="text-2xl font-black tracking-tighter mb-4 relative z-10">¿Quieres vender más en Shopify?</h3>
              <p className="text-white/80 text-sm font-medium leading-relaxed mb-8 relative z-10">
-               Suscríbete a nuestra newsletter y recibe consejos exclusivos que no publicamos en el blog.
+               Agenda una consultoría técnica gratuita y descubre cómo podemos ayudarte a escalar tus ventas de forma real.
              </p>
-             <form className="space-y-4 relative z-10">
-                <input 
-                  type="email" 
-                  placeholder="Tu mejor email" 
-                  className="w-full bg-white/10 border border-white/20 rounded-2xl px-6 py-4 text-white placeholder:text-white/40 font-bold focus:outline-none focus:ring-2 focus:ring-white/50"
-                />
-                <button className="w-full bg-white text-brand-purple font-black rounded-2xl py-4 transition-transform active:scale-95">
-                  Suscribirme gratis
-                </button>
-             </form>
+             <LeadButton className="w-full bg-white text-brand-purple font-black rounded-2xl py-5 transition-all hover:scale-105 active:scale-95 shadow-lg relative z-10 uppercase tracking-widest text-xs">
+                Cotizar mi proyecto
+             </LeadButton>
            </div>
         </aside>
       </div>
