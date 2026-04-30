@@ -74,6 +74,94 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
       image: "/clientes/altavista.png",
       link: "https://altavistachile.cl/"
     },
+    { 
+      title: "Kinelawen", 
+      category: "Shopify",
+      tags: ["Salud", "Branding"],
+      description: "Tienda Shopify con identidad limpia y navegación moderna.",
+      image: "/clientes/kinelawen.png",
+      link: "https://www.kinelawen.com/"
+    },
+    { 
+      title: "Librería Bazarte", 
+      category: "Shopify",
+      tags: ["Retail", "Diseño"],
+      description: "Ecommerce visualmente atractivo para productos de diseño.",
+      image: "/clientes/libreria bazarte.png",
+      link: "https://libreriabazarte.cl/"
+    },
+    { 
+      title: "Recovery Zone", 
+      category: "Shopify",
+      tags: ["Deportes", "Conversión"],
+      description: "Proyecto orientado a conversión y lectura visual clara.",
+      image: "/clientes/recoveyzone.png",
+      link: "https://recoveryzone.cl/"
+    },
+    { 
+      title: "Only Jeep", 
+      category: "Shopify",
+      tags: ["Automotriz", "Repuestos"],
+      description: "Tienda con carácter de nicho y estética automotriz.",
+      image: "/clientes/onlyjeep.png",
+      link: "https://www.onlyjeep.cl/"
+    },
+    { 
+      title: "AntarctiCare", 
+      category: "Shopify",
+      tags: ["Premium", "Skincare"],
+      description: "Ecommerce con branding refinado y visual pulido.",
+      image: "/clientes/antarticare.png",
+      link: "https://antarcticare.cl/"
+    },
+    { 
+      title: "Divan Tienda", 
+      category: "Shopify",
+      tags: ["Muebles", "Interiorismo"],
+      description: "Estilo comercial elegante para destacar productos de hogar.",
+      image: "/clientes/divan.png",
+      link: "https://divantienda.cl/"
+    },
+    { 
+      title: "PHY Waters", 
+      category: "Shopify",
+      tags: ["Bienestar", "Ventas"],
+      description: "Marca con enfoque visual fuerte y experiencia simple.",
+      image: "/clientes/PHY Waters.png",
+      link: "https://phywaters.com/"
+    },
+    { 
+      title: "Anteros", 
+      category: "Shopify",
+      tags: ["Branding", "Ventas"],
+      description: "Tienda enfocada en visual limpio y presencia de marca.",
+      image: "/clientes/anteros.png",
+      link: "https://tienda.anteros.cl/"
+    },
+    { 
+      title: "Serch", 
+      category: "Shopify",
+      tags: ["Moda", "Accesorios"],
+      description: "Diseño actual y estructura sólida para catálogo online.",
+      image: "/clientes/serch.png",
+      link: "https://www.serch.cl/"
+    },
+    { 
+      title: "Sonnda", 
+      category: "Shopify",
+      tags: ["Técnico", "B2B"],
+      description: "Enfoque comercial y categorías claras para productos técnicos.",
+      image: "/clientes/sonnda.png",
+      link: "https://sonnda.cl/"
+    },
+    { 
+      title: "Pymee", 
+      category: "SaaS",
+      tags: ["SaaS", "Gestión"],
+      description: "Plataforma de gestión empresarial para PYMES.",
+      image: "/clientes/https___pymee.jfif",
+      link: "https://pymee.org/"
+    },
   ];
 
   return (
