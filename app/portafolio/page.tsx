@@ -14,10 +14,10 @@ export default function PortfolioPage() {
     {
       title: "Canine Fight",
       category: "Shopify",
-      description: "Tienda Shopify especializada en equipamiento táctico y deportivo para perros. Diseño agresivo, funcional y orientado a una comunidad de alto rendimiento.",
+      description: "Tienda Shopify de alto rendimiento para artículos deportivos y artes marciales. Una plataforma robusta diseñada para la comunidad de combate y entrenamiento intenso.",
       image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcaninefight.cl%2F?w=1200",
       link: "https://caninefight.cl/",
-      tags: ["Pets", "Táctico", "Deportes"]
+      tags: ["Artes Marciales", "Deportes", "Equipamiento"]
     },
     {
       title: "SoloCasasChile.com",
