@@ -167,14 +167,14 @@ export default function SeoServicePage() {
               {[
                 {
                   name: "SEO GROWTH",
-                  price: "$450.000",
+                  price: "$380.000 + IVA",
                   highlight: "Foco en Tráfico y Visibilidad",
                   features: ["Auditoría Técnica Mensual", "Optimización de 5 Keywords", "Estrategia Local SEO", "Reporte de Posicionamiento", "Soporte vía Email"],
                   cta: "Obtener 10% Dto"
                 },
                 {
                   name: "SEO PERFORMANCE",
-                  price: "$850.000",
+                  price: "$600.000 + IVA",
                   highlight: "Dominio y Conversión Máxima",
                   features: ["Todo lo de GROWTH más:", "Optimización de 15 Keywords", "Creación de 4 Artículos SEO", "Linkbuilding Estratégico", "Soporte Prioritario", "Configuración GA4 Avanzada"],
                   recommended: true,
