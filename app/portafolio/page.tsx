@@ -12,6 +12,14 @@ export default function PortfolioPage() {
 
   const projects = [
     {
+      title: "Canine Fight",
+      category: "Shopify",
+      description: "Tienda Shopify especializada en equipamiento táctico y deportivo para perros. Diseño agresivo, funcional y orientado a una comunidad de alto rendimiento.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcaninefight.cl%2F?w=1200",
+      link: "https://caninefight.cl/",
+      tags: ["Pets", "Táctico", "Deportes"]
+    },
+    {
       title: "SoloCasasChile.com",
       category: "SaaS",
       description: "Plataforma SaaS de gestión inmobiliaria con seguimiento de obra en tiempo real e integración de CRM.",
