@@ -10,21 +10,55 @@ import TestimonialsSection from '@/components/sections/testimonials';
 
 export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
   const projects = [
-    { title: "Tecno-Mobile", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftecno-mobile.cl%2F?w=1200" },
-    { title: "Tuupos", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftuupos.cl%2F?w=1200" },
-    { title: "Terra Andes", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fterraandesplus.com%2F?w=1200" },
-    { title: "Chiletronics", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fchiletronics.cl%2F?w=1200" },
-    { title: "Canine Fight", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcaninefight.cl%2F?w=1200" },
-    { title: "SoloCasasChile", image: "/publi-solocasas.png" },
-    { title: "SpinMedical", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fspinmedical.cl%2F?w=1200" },
-    { title: "Librería Bazarte", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flibreriabazarte.cl%2F?w=1200" },
+    { 
+      title: "Tecno-Mobile", 
+      category: "Shopify",
+      tags: ["Tecnología", "Gadgets"],
+      description: "Catálogo tecnológico con look comercial claro y navegación rápida.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftecno-mobile.cl%2F?w=1200" 
+    },
+    { 
+      title: "Tuupos", 
+      category: "Shopify",
+      tags: ["General Store", "Dropshipping"],
+      description: "Proyecto Shopify con identidad propia y bloques modernos.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftuupos.cl%2F?w=1200" 
+    },
+    { 
+      title: "Terra Andes", 
+      category: "Shopify",
+      tags: ["Alimentos", "Exportación"],
+      description: "Proyecto con estética corporativa y vitrina visual enfocada en credibilidad.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fterraandesplus.com%2F?w=1200" 
+    },
+    { 
+      title: "Chiletronics", 
+      category: "Shopify",
+      tags: ["Electrónica", "Retail"],
+      description: "Tienda tecnológica con estructura orientada a variedad de productos.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fchiletronics.cl%2F?w=1200" 
+    },
+    { 
+      title: "Canine Fight", 
+      category: "Shopify",
+      tags: ["Deportes", "Equipamiento"],
+      description: "Tienda de alto rendimiento para artículos de artes marciales.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcaninefight.cl%2F?w=1200" 
+    },
+    { 
+      title: "SoloCasasChile", 
+      category: "SaaS",
+      tags: ["Next.js", "PropTech"],
+      description: "Plataforma de gestión inmobiliaria con seguimiento en tiempo real.",
+      image: "/publi-solocasas.png" 
+    },
   ];
 
   return (
     <main className="min-h-screen bg-white text-zinc-950 font-sans antialiased overflow-x-hidden">
       
       {/* Premium Hero Section */}
-      <section className="relative pt-[12vh] pb-32 lg:pb-40 overflow-hidden flex items-center min-h-[90vh]">
+      <section className="relative pt-[10vh] pb-24 lg:pb-32 overflow-hidden flex items-center min-h-[95vh]">
         {/* Background Texture from Funnel Page */}
         <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
           <Image 
@@ -53,7 +87,7 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
                 <span className="text-[10px] font-black tracking-[0.25em] text-zinc-500 uppercase">Ingeniería Web de Élite 2026</span>
               </div>
               
-              <h1 className="text-6xl md:text-[90px] font-black tracking-tighter leading-[0.8] mb-12 uppercase text-zinc-950">
+              <h1 className="text-6xl md:text-[85px] font-black tracking-tighter leading-[0.8] mb-12 uppercase text-zinc-950">
                 DISEÑO & <br/>
                 <span className="text-blue-600">DESARROLLO</span> <br/>
                 SITIOS WEB.
@@ -73,8 +107,8 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
               </div>
             </div>
 
-            {/* Right: Vertical Scrolling Carousel */}
-            <div className="relative h-[600px] lg:h-[800px] hidden lg:flex gap-6 overflow-hidden">
+            {/* Right: Vertical Scrolling Carousel with Portfolio Cards */}
+            <div className="relative h-[700px] lg:h-[900px] hidden lg:flex gap-8 overflow-hidden">
               <style jsx>{`
                 @keyframes scroll-vertical {
                   0% { transform: translateY(0); }
@@ -83,34 +117,76 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
                 .scroll-container {
                   display: flex;
                   flex-direction: column;
-                  gap: 1.5rem;
-                  animation: scroll-vertical 40s linear infinite;
+                  gap: 2rem;
+                  animation: scroll-vertical 60s linear infinite;
                 }
                 .scroll-container:hover {
                   animation-play-state: paused;
                 }
               `}</style>
               
-              <div className="flex-1 space-y-6">
+              <div className="flex-1">
                 <div className="scroll-container">
                   {[...projects, ...projects].map((p, i) => (
-                    <div key={i} className="relative aspect-[3/4] w-full rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl group/card">
-                      <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity flex items-end p-8">
-                        <span className="text-white font-black uppercase text-xs tracking-widest">{p.title}</span>
+                    <div key={i} className="flex flex-col bg-white rounded-[3rem] overflow-hidden border border-zinc-100 shadow-2xl group/card w-full">
+                      <div className="relative aspect-[16/10] overflow-hidden">
+                         <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
+                         <div className="absolute top-4 left-4">
+                            <span className="px-4 py-1.5 bg-violet-600 text-white text-[9px] font-black uppercase rounded-full shadow-lg">
+                               {p.category}
+                            </span>
+                         </div>
+                      </div>
+                      <div className="p-8 pb-10">
+                         <div className="flex gap-2 mb-4">
+                            {p.tags.map(t => (
+                               <span key={t} className="text-[8px] font-black uppercase tracking-widest text-violet-600 bg-violet-50 px-3 py-1 rounded-full">{t}</span>
+                            ))}
+                         </div>
+                         <h3 className="text-2xl font-black text-zinc-950 uppercase mb-3 leading-none">{p.title}</h3>
+                         <p className="text-[11px] text-zinc-500 font-medium leading-relaxed mb-8 line-clamp-2">
+                            {p.description}
+                         </p>
+                         <div className="flex items-center justify-between pt-6 border-t border-zinc-50">
+                            <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 group-hover/card:text-zinc-950 transition-colors">Explorar Proyecto</span>
+                            <div className="w-10 h-10 rounded-full bg-violet-600 text-white flex items-center justify-center group-hover/card:translate-x-2 transition-transform">
+                               <ArrowRight className="w-4 h-4" />
+                            </div>
+                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="flex-1 space-y-6 translate-y-20">
+              <div className="flex-1 translate-y-32">
                 <div className="scroll-container" style={{ animationDirection: 'reverse' }}>
                   {[...projects.reverse(), ...projects].map((p, i) => (
-                    <div key={i} className="relative aspect-[3/4] w-full rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl group/card">
-                      <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity flex items-end p-8">
-                        <span className="text-white font-black uppercase text-xs tracking-widest">{p.title}</span>
+                    <div key={i} className="flex flex-col bg-white rounded-[3rem] overflow-hidden border border-zinc-100 shadow-2xl group/card w-full">
+                      <div className="relative aspect-[16/10] overflow-hidden">
+                         <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
+                         <div className="absolute top-4 left-4">
+                            <span className="px-4 py-1.5 bg-violet-600 text-white text-[9px] font-black uppercase rounded-full shadow-lg">
+                               {p.category}
+                            </span>
+                         </div>
+                      </div>
+                      <div className="p-8 pb-10">
+                         <div className="flex gap-2 mb-4">
+                            {p.tags.map(t => (
+                               <span key={t} className="text-[8px] font-black uppercase tracking-widest text-violet-600 bg-violet-50 px-3 py-1 rounded-full">{t}</span>
+                            ))}
+                         </div>
+                         <h3 className="text-2xl font-black text-zinc-950 uppercase mb-3 leading-none">{p.title}</h3>
+                         <p className="text-[11px] text-zinc-500 font-medium leading-relaxed mb-8 line-clamp-2">
+                            {p.description}
+                         </p>
+                         <div className="flex items-center justify-between pt-6 border-t border-zinc-50">
+                            <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 group-hover/card:text-zinc-950 transition-colors">Explorar Proyecto</span>
+                            <div className="w-10 h-10 rounded-full bg-violet-600 text-white flex items-center justify-center group-hover/card:translate-x-2 transition-transform">
+                               <ArrowRight className="w-4 h-4" />
+                            </div>
+                         </div>
                       </div>
                     </div>
                   ))}
