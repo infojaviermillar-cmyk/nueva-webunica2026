@@ -12,6 +12,38 @@ export default function PortfolioPage() {
 
   const projects = [
     {
+      title: "Tecno-Mobile",
+      category: "Shopify",
+      description: "Catálogo tecnológico con look comercial claro, navegación rápida y enfoque en productos destacados.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftecno-mobile.cl%2F?w=1200",
+      link: "https://tecno-mobile.cl/",
+      tags: ["Tecnología", "Gadgets"]
+    },
+    {
+      title: "Tuupos",
+      category: "Shopify",
+      description: "Proyecto Shopify con identidad propia, buena legibilidad y composición de bloques moderna.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftuupos.cl%2F?w=1200",
+      link: "https://tuupos.cl/",
+      tags: ["General Store", "Dropshipping"]
+    },
+    {
+      title: "Terra Andes",
+      category: "Shopify",
+      description: "Proyecto con estética más corporativa y vitrina visual enfocada en credibilidad y presentación.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fterraandesplus.com%2F?w=1200",
+      link: "https://terraandesplus.com/",
+      tags: ["Alimentos", "Exportación"]
+    },
+    {
+      title: "Chiletronics",
+      category: "Shopify",
+      description: "Tienda tecnológica con estructura orientada a variedad de productos y lectura rápida del catálogo.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fchiletronics.cl%2F?w=1200",
+      link: "https://chiletronics.cl/",
+      tags: ["Electrónica", "Retail"]
+    },
+    {
       title: "Canine Fight",
       category: "Shopify",
       description: "Tienda Shopify de alto rendimiento para artículos deportivos y artes marciales. Una plataforma robusta diseñada para la comunidad de combate y entrenamiento intenso.",
@@ -108,14 +140,6 @@ export default function PortfolioPage() {
       tags: ["Muebles", "Interiorismo"]
     },
     {
-      title: "Chiletronics",
-      category: "Shopify",
-      description: "Tienda tecnológica con estructura orientada a variedad de productos y lectura rápida del catálogo.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fchiletronics.cl%2F?w=1200",
-      link: "https://chiletronics.cl/",
-      tags: ["Electrónica", "Retail"]
-    },
-    {
       title: "PHY Waters",
       category: "Shopify",
       description: "Marca con enfoque visual fuerte, experiencia simple y espacio claro para beneficios de producto.",
@@ -124,36 +148,12 @@ export default function PortfolioPage() {
       tags: ["Bienestar", "Ventas"]
     },
     {
-      title: "Tecno-Mobile",
-      category: "Shopify",
-      description: "Catálogo tecnológico con look comercial claro, navegación rápida y enfoque en productos destacados.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftecno-mobile.cl%2F?w=1200",
-      link: "https://tecno-mobile.cl/",
-      tags: ["Tecnología", "Gadgets"]
-    },
-    {
-      title: "Tuupos",
-      category: "Shopify",
-      description: "Proyecto Shopify con identidad propia, buena legibilidad y composición de bloques moderna.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftuupos.cl%2F?w=1200",
-      link: "https://tuupos.cl/",
-      tags: ["General Store", "Dropshipping"]
-    },
-    {
       title: "Anteros",
       category: "Shopify",
       description: "Tienda enfocada en visual limpio, presencia de marca y una experiencia de exploración ordenada.",
       image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftienda.anteros.cl%2F?w=1200",
       link: "https://tienda.anteros.cl/",
       tags: ["Branding", "Ventas"]
-    },
-    {
-      title: "Terra Andes",
-      category: "Shopify",
-      description: "Proyecto con estética más corporativa y vitrina visual enfocada en credibilidad y presentación.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fterraandesplus.com%2F?w=1200",
-      link: "https://terraandesplus.com/",
-      tags: ["Alimentos", "Exportación"]
     },
     {
       title: "Serch",
