@@ -1,14 +1,14 @@
-"use client";
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, CheckCircle2, Monitor, Code2, Rocket, Globe, Zap, Heart, Trophy, Users } from 'lucide-react';
+import { ArrowRight, Monitor, Code2, Rocket, Zap } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
 import { BlogPost } from '@/lib/blog';
 import FeaturedBlogSection from '@/components/sections/featured-blog';
 import TestimonialsSection from '@/components/sections/testimonials';
+import HeroCarousel from '@/components/sections/hero-carousel';
+import MobileCarousel from '@/components/sections/mobile-carousel';
 
-export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
+export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const projects = [
     { 
       title: "Tecno-Mobile", 
@@ -169,7 +169,7 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
       
       {/* Premium Hero Section */}
       <section className="relative pt-[10vh] pb-24 lg:pb-32 overflow-hidden flex items-center min-h-[95vh]">
-        {/* Background Texture from Funnel Page */}
+        {/* Background Texture - OPTIMIZED */}
         <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
           <Image 
             src="/bg-01.jpg" 
@@ -177,6 +177,7 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
             fill 
             className="object-cover object-center" 
             priority
+            quality={60}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/40 to-white"></div>
         </div>
@@ -187,7 +188,7 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             
-            {/* Left: Content */}
+            {/* Left: Content - NOW SERVER RENDERED */}
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 mb-10 bg-white/80 backdrop-blur-sm border border-zinc-100 rounded-full">
                 <span className="flex h-2 w-2 relative">
@@ -216,114 +217,17 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
                 </Link>
               </div>
 
-              {/* Mobile Project Carousel (Horizontal) */}
-              <div className="mt-20 lg:hidden overflow-x-auto pb-8 -mx-6 px-6 no-scrollbar flex gap-6 snap-x snap-mandatory">
-                 {projects.map((p, i) => (
-                    <a key={i} href={p.link} target="_blank" rel="noopener noreferrer" className="min-w-[280px] snap-center bg-white rounded-[2.5rem] border border-zinc-100 shadow-xl overflow-hidden flex flex-col group/card hover:border-violet-200 transition-colors">
-                       <div className="relative aspect-[16/10] overflow-hidden">
-                          <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
-                       </div>
-                       <div className="p-6">
-                          <span className="text-[8px] font-black uppercase text-violet-600 bg-violet-50 px-2 py-0.5 rounded-full mb-2 inline-block">{p.category}</span>
-                          <h4 className="text-lg font-black text-zinc-950 uppercase group-hover/card:text-violet-600 transition-colors">{p.title}</h4>
-                       </div>
-                    </a>
-                 ))}
-              </div>
+              {/* Mobile Project Carousel (Horizontal Client Component) */}
+              <MobileCarousel projects={projects} />
             </div>
 
-            {/* Right: Vertical Scrolling Carousel with Portfolio Cards */}
-            <div className="relative h-[700px] lg:h-[900px] hidden lg:flex gap-8 overflow-hidden">
-              <style jsx>{`
-                @keyframes scroll-vertical {
-                  0% { transform: translateY(0); }
-                  100% { transform: translateY(-50%); }
-                }
-                .scroll-container {
-                  display: flex;
-                  flex-direction: column;
-                  gap: 2rem;
-                  animation: scroll-vertical 60s linear infinite;
-                }
-                .scroll-container:hover {
-                  animation-play-state: paused;
-                }
-              `}</style>
-              
-              <div className="flex-1">
-                <div className="scroll-container">
-                  {[...projects, ...projects].map((p, i) => (
-                    <a key={i} href={p.link} target="_blank" rel="noopener noreferrer" className="flex flex-col bg-white rounded-[3rem] overflow-hidden border border-zinc-100 shadow-2xl group/card w-full hover:border-violet-200 transition-all">
-                      <div className="relative aspect-[16/10] overflow-hidden">
-                         <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
-                         <div className="absolute top-4 left-4">
-                            <span className="px-4 py-1.5 bg-violet-600 text-white text-[9px] font-black uppercase rounded-full shadow-lg">
-                               {p.category}
-                            </span>
-                         </div>
-                      </div>
-                      <div className="p-8 pb-10 text-left">
-                         <div className="flex gap-2 mb-4">
-                            {p.tags.map(t => (
-                               <span key={t} className="text-[8px] font-black uppercase tracking-widest text-violet-600 bg-violet-50 px-3 py-1 rounded-full">{t}</span>
-                            ))}
-                         </div>
-                         <h3 className="text-2xl font-black text-zinc-950 uppercase mb-3 leading-none group-hover/card:text-violet-600 transition-colors">{p.title}</h3>
-                         <p className="text-[11px] text-zinc-500 font-medium leading-relaxed mb-8 line-clamp-2">
-                            {p.description}
-                         </p>
-                         <div className="flex items-center justify-between pt-6 border-t border-zinc-50">
-                            <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 group-hover/card:text-zinc-950 transition-colors">Explorar Proyecto</span>
-                            <div className="w-10 h-10 rounded-full bg-violet-600 text-white flex items-center justify-center group-hover/card:translate-x-2 transition-transform shadow-lg shadow-violet-500/20">
-                               <ArrowRight className="w-4 h-4" />
-                            </div>
-                         </div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex-1 translate-y-32">
-                <div className="scroll-container" style={{ animationDirection: 'reverse' }}>
-                  {[...projects.reverse(), ...projects].map((p, i) => (
-                    <a key={i} href={p.link} target="_blank" rel="noopener noreferrer" className="flex flex-col bg-white rounded-[3rem] overflow-hidden border border-zinc-100 shadow-2xl group/card w-full hover:border-violet-200 transition-all">
-                      <div className="relative aspect-[16/10] overflow-hidden">
-                         <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
-                         <div className="absolute top-4 left-4">
-                            <span className="px-4 py-1.5 bg-violet-600 text-white text-[9px] font-black uppercase rounded-full shadow-lg">
-                               {p.category}
-                            </span>
-                         </div>
-                      </div>
-                      <div className="p-8 pb-10 text-left">
-                         <div className="flex gap-2 mb-4">
-                            {p.tags.map(t => (
-                               <span key={t} className="text-[8px] font-black uppercase tracking-widest text-violet-600 bg-violet-50 px-3 py-1 rounded-full">{t}</span>
-                            ))}
-                         </div>
-                         <h3 className="text-2xl font-black text-zinc-950 uppercase mb-3 leading-none group-hover/card:text-violet-600 transition-colors">{p.title}</h3>
-                         <p className="text-[11px] text-zinc-500 font-medium leading-relaxed mb-8 line-clamp-2">
-                            {p.description}
-                         </p>
-                         <div className="flex items-center justify-between pt-6 border-t border-zinc-50">
-                            <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 group-hover/card:text-zinc-950 transition-colors">Explorar Proyecto</span>
-                            <div className="w-10 h-10 rounded-full bg-violet-600 text-white flex items-center justify-center group-hover/card:translate-x-2 transition-transform shadow-lg shadow-violet-500/20">
-                               <ArrowRight className="w-4 h-4" />
-                            </div>
-                         </div>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
+            {/* Right: Vertical Scrolling Carousel (Desktop Client Component) */}
+            <HeroCarousel projects={projects} />
           </div>
         </div>
       </section>
 
-      {/* Feature Bento Grid */}
+      {/* Feature Bento Grid - SERVER RENDERED */}
       <section className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Main Focus Card */}
@@ -382,14 +286,14 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
                 </Link>
               </div>
               <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                <Image src="/publi-solocasas.png" alt="Portfolio Preview" fill className="object-cover" />
+                <Image src="/clientes/publi-solocasas.png" alt="Portfolio Preview" fill className="object-cover" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Hub */}
+      {/* Services Hub - SERVER RENDERED */}
       <section className="py-32 bg-zinc-950 text-white rounded-[5rem] mx-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-transparent pointer-events-none" />
         
@@ -407,7 +311,7 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
             {[
               { title: 'Tiendas Shopify', link: '/desarrollo-tiendas-shopify-chile', desc: 'Líderes en e-commerce de alto rendimiento en Chile.', icon: '🛍️' },
               { title: 'Páginas PYMES', link: '/desarrollo-paginas-web-pymes-chile', desc: 'Presencia profesional y optimizada con planes a medida.', icon: '🏢' },
-              { title: 'SaaS & Custom', link: '/desarrollo-web-nextjs-saas-custom', desc: 'Software a medida escalable sobre Next.js y Supabase.', icon: '⚡' },
+              { title: 'SaaS & Custom', link: '/desarrollo-web-nextjs-saas-custom', desc: 'Software a medida escalable sobre Next.js and Supabase.', icon: '⚡' },
               { title: 'SEO Avanzado', link: '/servicios-seo-posicionamiento-google', desc: 'Dominio de Google mediante ingeniería de contenidos.', icon: '🚀' }
             ].map((s, i) => (
               <Link key={i} href={s.link} className="p-10 bg-white/5 border border-white/10 rounded-[3rem] hover:bg-white/10 hover:border-violet-500/50 transition-all group">
@@ -423,10 +327,7 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
-      {/* Trust & Testimonials */}
       <TestimonialsSection />
-
-      {/* Featured Insights */}
       <FeaturedBlogSection posts={posts} />
 
       {/* Final CTA */}
