@@ -70,7 +70,7 @@ export default async function RootLayout({
             {children}
           </div>
           {isDisenoShopify ? <DisenoShopifyFooter /> : isDesarrolloShopify ? <DesarrolloShopifyFooter /> : <Footer />}
-          <FloatingWhatsApp />
+          {/* Botón unificado en ContactModalProvider */}
         </ContactModalProvider>
       </body>
     </html>

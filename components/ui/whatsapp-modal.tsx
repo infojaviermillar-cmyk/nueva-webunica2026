@@ -27,12 +27,13 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
   const [formData, setFormData] = useState({
     interest: ALL_SERVICES[0],
     name: "",
-    email: ""
+    email: "",
+    phone: ""
   });
 
   useEffect(() => {
     if (!isOpen) {
-      setFormData({ interest: ALL_SERVICES[0], name: "", email: "" });
+      setFormData({ interest: ALL_SERVICES[0], name: "", email: "", phone: "" });
     }
   }, [isOpen]);
 
@@ -40,7 +41,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email) return;
+    if (!formData.name || !formData.email || !formData.phone) return;
 
     setLoading(true);
     try {
@@ -48,7 +49,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
       const result = await createLead({
         name: formData.name,
         email: formData.email,
-        phone: "", // No se solicita en este form simplificado
+        phone: formData.phone,
         city: "",  // No se solicita en este form simplificado
         project_type: formData.interest,
         source: 'WhatsApp Funnel'
@@ -59,7 +60,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
       }
 
       // 2. Redirigir a WhatsApp
-      const message = `¡Hola Webunica! 👋 Mi nombre es ${formData.name}. Estoy interesado en: ${formData.interest}. Mi correo es ${formData.email}. Me gustaría recibir más información y una cotización.`;
+      const message = `¡Hola Webunica! 👋 Mi nombre es ${formData.name}. Mi teléfono es ${formData.phone}. Estoy interesado en: ${formData.interest}. Mi correo es ${formData.email}. Me gustaría recibir más información y una cotización.`;
       const encodedMessage = encodeURIComponent(message);
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
       
@@ -138,6 +139,18 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
                 className="w-full bg-zinc-50 border border-zinc-100 rounded-2xl px-6 py-4 focus:outline-none focus:border-[#25d366] transition-all placeholder:text-zinc-300 text-zinc-950 font-bold"
                 placeholder="hola@empresa.cl"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-2 ml-4">WhatsApp / Teléfono</label>
+              <input 
+                required
+                type="tel" 
+                value={formData.phone}
+                onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                className="w-full bg-zinc-50 border border-zinc-100 rounded-2xl px-6 py-4 focus:outline-none focus:border-[#25d366] transition-all placeholder:text-zinc-300 text-zinc-950 font-bold"
+                placeholder="+56 9 ..."
               />
             </div>
 

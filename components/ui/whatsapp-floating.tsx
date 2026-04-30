@@ -10,7 +10,7 @@ interface WhatsAppFloatingProps {
 export default function WhatsAppFloating({ onClick }: WhatsAppFloatingProps) {
   return (
     <div 
-      className="fixed bottom-[100px] right-6 z-[999] group cursor-pointer"
+      className="fixed bottom-8 right-8 z-[999] group cursor-pointer"
       onClick={onClick}
     >
       {/* Label Tooltip (Show on hover) */}
@@ -28,19 +28,19 @@ export default function WhatsAppFloating({ onClick }: WhatsAppFloatingProps) {
           console.log("Floating button clicked");
           onClick();
         }}
-        className="relative bg-white border-2 border-zinc-100 p-1.5 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] hover:shadow-[0_25px_60px_rgba(124,58,237,0.3)] hover:scale-105 transition-all duration-500 flex items-center gap-3 active:scale-95 cursor-pointer touch-manipulation pointer-events-auto"
+        className="relative bg-white border-2 border-zinc-100 p-1.5 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] hover:shadow-[0_25px_60px_rgba(37,211,102,0.3)] hover:scale-105 transition-all duration-500 flex items-center gap-3 active:scale-95 cursor-pointer touch-manipulation pointer-events-auto"
         style={{ WebkitTapHighlightColor: 'transparent' }}
         aria-label="Contactar por WhatsApp"
       >
         <div className="relative w-14 h-14 rounded-2xl overflow-hidden shadow-inner flex-shrink-0 pointer-events-none">
           <Image 
-            src="/whatsapp-avatar.png"
-            alt="Asesor Webunica"
+            src="/javier-avatar.jpg"
+            alt="Javier Millar"
             fill
             sizes="56px"
             className="object-cover"
           />
-          <div className="absolute bottom-1 right-1 w-3 h-3 bg-[#25d366] rounded-full border-2 border-white animate-pulse" />
+          <div className="absolute bottom-1 right-1 w-3.5 h-3.5 bg-[#25d366] rounded-full border-2 border-white animate-pulse" />
         </div>
         
         <div className="hidden group-hover:block pr-6 animate-in slide-in-from-right-4 duration-500 pointer-events-none">
