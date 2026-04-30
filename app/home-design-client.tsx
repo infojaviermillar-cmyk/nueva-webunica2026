@@ -15,42 +15,56 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
       category: "Shopify",
       tags: ["Tecnología", "Gadgets"],
       description: "Catálogo tecnológico con look comercial claro y navegación rápida.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftecno-mobile.cl%2F?w=1200" 
+      image: "/clientes/Tecno-Mobile.png" 
     },
     { 
       title: "Tuupos", 
       category: "Shopify",
       tags: ["General Store", "Dropshipping"],
       description: "Proyecto Shopify con identidad propia y bloques modernos.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftuupos.cl%2F?w=1200" 
+      image: "/clientes/tuupos.png" 
     },
     { 
       title: "Terra Andes", 
       category: "Shopify",
       tags: ["Alimentos", "Exportación"],
       description: "Proyecto con estética corporativa y vitrina visual enfocada en credibilidad.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fterraandesplus.com%2F?w=1200" 
+      image: "/clientes/terranandes.png" 
     },
     { 
       title: "Chiletronics", 
       category: "Shopify",
       tags: ["Electrónica", "Retail"],
       description: "Tienda tecnológica con estructura orientada a variedad de productos.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fchiletronics.cl%2F?w=1200" 
+      image: "/clientes/Chiletronics.png" 
     },
     { 
       title: "Canine Fight", 
       category: "Shopify",
       tags: ["Deportes", "Equipamiento"],
       description: "Tienda de alto rendimiento para artículos de artes marciales.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcaninefight.cl%2F?w=1200" 
+      image: "/clientes/https___caninefight.jfif" 
     },
     { 
       title: "SoloCasasChile", 
       category: "SaaS",
       tags: ["Next.js", "PropTech"],
       description: "Plataforma de gestión inmobiliaria con seguimiento en tiempo real.",
-      image: "/publi-solocasas.png" 
+      image: "/clientes/publi-solocasas.png" 
+    },
+    { 
+      title: "SpinMedical", 
+      category: "Shopify",
+      tags: ["Salud", "B2B"],
+      description: "Proyecto ecommerce con estructura profesional y catálogo claro.",
+      image: "/clientes/Spinmedical.png" 
+    },
+    { 
+      title: "Altavista Chile", 
+      category: "Shopify",
+      tags: ["Outdoor", "Retail"],
+      description: "Tienda de look robusto con enfoque en navegación eficiente.",
+      image: "/clientes/altavista.png" 
     },
   ];
 
