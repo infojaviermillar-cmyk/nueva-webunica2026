@@ -1,21 +1,21 @@
 import { Metadata } from 'next';
-import HomeClient from './home-client';
+import HomeDesignClient from './home-design-client';
 import { getPublishedPosts } from '@/lib/blog';
 
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: 'Agencia de Embudos de Venta y Desarrollo Web High-Performance | Webunica',
-  description: 'Transformamos tu tráfico en ventas reales. Especialistas en embudos de venta de alto rendimiento, automatización comercial y diseño web estratégico en Chile.',
-  keywords: 'embudos de venta chile, captacion de leads, agencia embudos de venta, desarrollo web nextjs, automatizacion comercial, landing pages conversion',
+  title: 'Diseño de Páginas Web y Desarrollo de Sitios Web en Chile | Webunica',
+  description: 'Agencia de diseño web y desarrollo de sitios web de alto rendimiento. Especialistas en Next.js y Shopify para empresas que buscan resultados reales.',
+  keywords: 'diseño de paginas web, desarrollo de sitios web, agencia de diseño web, paginas web chile, diseño web profesional, desarrollo web nextjs',
   openGraph: {
-    title: 'Webunica | Embudos de Venta de Alto Rendimiento',
-    description: 'Sistema digital para atraer prospectos y convertir visitas en oportunidades reales de negocio.',
+    title: 'Webunica | Diseño y Desarrollo de Sitios Web de Élite',
+    description: 'Creamos experiencias digitales de alto rendimiento. Diseño web premium y desarrollo tecnológico para escalar tu negocio.',
     images: ['/og-home.png'],
   },
 };
 
 export default async function Home() {
   const posts = await getPublishedPosts();
-  return <HomeClient posts={posts} />;
+  return <HomeDesignClient posts={posts} />;
 }

@@ -194,6 +194,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                         Desarrollo & Posicionamiento
                       </h4>
                       <div className="flex flex-col gap-1">
+                        <Link href="/agencia-de-embudos-de-venta-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
+                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Embudos de Venta</span>
+                          <span className="text-[11px] text-zinc-500 font-medium">Sales Funnels de alta conversión</span>
+                        </Link>
                         <Link href="/desarrollo-web-nextjs-saas-custom" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
                           <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Next.js & SaaS a Medida</span>
                           <span className="text-[11px] text-zinc-500 font-medium">Software Web de Alto Vuelo</span>
@@ -207,7 +211,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
                         </Link>
                         <Link href="/desarrollo-paginas-web-pymes-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
                           <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Sitios Web Pymes</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Embudos para servicios locales</span>
+                          <span className="text-[11px] text-zinc-500 font-medium">Diseño optimizado para servicios locales</span>
                         </Link>
                       </div>
                     </div>
@@ -382,6 +386,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 block mb-4">Desarrollo & SEO</span>
                   <div className="grid gap-3">
+                    <Link href="/agencia-de-embudos-de-venta-chile" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      Embudos de Venta
+                    </Link>
                     <Link href="/desarrollo-web-nextjs-saas-custom" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       Next.js & SaaS
