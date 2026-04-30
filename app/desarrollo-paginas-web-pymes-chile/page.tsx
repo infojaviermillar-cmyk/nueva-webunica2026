@@ -125,6 +125,12 @@ export default function PymesPage() {
                  <LeadButton className="px-12 py-5 bg-zinc-950 text-white font-black rounded-2xl hover:bg-zinc-800 transition-all shadow-xl uppercase tracking-widest text-xs flex items-center justify-center gap-2">
                     Cotizar mi Sitio Web <ArrowRight className="w-4 h-4" />
                  </LeadButton>
+                 <a 
+                   href="#precios"
+                   className="px-12 py-5 border border-zinc-200 text-zinc-900 font-black rounded-2xl hover:bg-zinc-50 transition-all uppercase tracking-widest text-xs flex items-center justify-center gap-2"
+                 >
+                    Ver Planes
+                 </a>
               </div>
             </div>
             
@@ -216,19 +222,16 @@ export default function PymesPage() {
                    <h3 className="text-2xl font-black mb-2 uppercase tracking-tight">{p.name}</h3>
                    <div className="text-3xl font-black mb-6 text-blue-500">{p.price}</div>
                    <p className={`text-sm mb-8 font-light ${p.popular ? 'text-zinc-400' : 'text-zinc-500'}`}>{p.desc}</p>
-                   <ul className="space-y-4 mb-10">
+                   <ul className="space-y-4 mb-12">
                       {p.features.map((f, idx) => (
-                        <li key={idx} className="flex items-center gap-3 text-xs font-bold uppercase tracking-wide">
-                           <CheckCircle2 className={`w-4 h-4 ${p.popular ? 'text-blue-400' : 'text-emerald-500'}`} />
-                           {f}
-                        </li>
+                         <li key={idx} className="flex items-center gap-3 text-xs font-bold uppercase tracking-wide">
+                            <CheckCircle2 className={`w-4 h-4 ${p.popular ? 'text-blue-400' : 'text-emerald-500'}`} />
+                            {f}
+                         </li>
                       ))}
                    </ul>
-                   <LeadButton className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] transition-all ${p.popular ? 'bg-white text-zinc-950 hover:bg-zinc-200' : 'bg-zinc-950 text-white hover:bg-zinc-800 shadow-xl shadow-zinc-200'}`}>
-                      {p.cta}
-                   </LeadButton>
                    
-                   <LeadButton className={`w-full py-4 mt-3 rounded-2xl font-black uppercase tracking-widest text-[9px] border transition-all ${p.popular ? 'border-white/20 text-white hover:bg-white/10' : 'border-blue-500/20 text-blue-600 hover:bg-blue-50'}`}>
+                   <LeadButton className={`w-full py-6 rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-2xl transition-all ${p.popular ? 'bg-white text-zinc-950 hover:bg-zinc-200' : 'bg-blue-600 text-white hover:bg-blue-700 shadow-blue-500/20'}`}>
                       Obtener 10% de Descuento
                    </LeadButton>
                 </div>
