@@ -152,20 +152,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Trust Badges */}
-      <section className="border-t border-slate-100 py-12 bg-slate-50 pb-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <p className="text-center text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-8">Empresas que confiaron en nuestra ingeniería</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-             {/* Replace with actual partner logos if available, using text fallbacks for now */}
-             <span className="text-xl font-black text-slate-900 tracking-tighter">SoloCasasChile</span>
-             <span className="text-xl font-black text-slate-900 tracking-tighter">Shopify Partners</span>
-             <span className="text-xl font-black text-slate-900 tracking-tighter">Vercel Next.js</span>
-             <span className="text-xl font-black text-slate-900 tracking-tighter">Kinelawen</span>
-             <span className="text-xl font-black text-slate-900 tracking-tighter">TerraAndes</span>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
