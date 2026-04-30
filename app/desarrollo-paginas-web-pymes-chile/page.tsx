@@ -17,22 +17,26 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Diseño de Páginas Web y Desarrollo para PYMES en Chile | Webunica',
-  description: 'Expertos en diseño de paginas web, desarrollo de paginas web y mejora sitio web. Creamos tu pagina wordpress profesional optimizada para Google.',
-  keywords: 'diseño de paginas web, desarrollo de paginas web, diseño sitio web, mejora sitio web, pagina wordpress, paginas web pymes chile',
+  title: 'Diseño y Desarrollo de Páginas Web para PYMES en Chile | Webunica',
+  description: 'Expertos en diseño paginas web, desarrollo paginas web, diseño sitio web y desarrollo sitio web. Creamos tu pagina web optimizada para Google con SEO avanzado.',
+  keywords: 'diseño paginas web, desarrollo paginas web, diseño sitio web, desarrollo sitio web, pagina web optimizada, SEO paginas web, paginas web pymes chile',
 };
 
 export default function PymesPage() {
   const plans = [
     {
       name: "Landing Express",
-      price: "Desde $190.000",
+      price: "$230.000",
       desc: "Ideal para campañas específicas o servicios únicos que necesitan conversión rápida.",
       features: [
         "Diseño de una sola sección (One Page)",
+        "Optimización básica por página con Keywords",
+        "Análisis SEO de palabras claves inicial",
+        "Contenido optimizado con IA (Hasta 2.000 palabras)",
+        "2 Imágenes premium generadas con IA",
         "Botón de WhatsApp directo",
-        "Optimización para móviles",
         "Formulario de contacto",
+        "Pago en 6 cuotas sin interés",
         "Entrega en 5 días"
       ],
       cta: "Empezar Landing",
@@ -45,9 +49,12 @@ export default function PymesPage() {
       features: [
         "Hasta 5 secciones internas",
         "Diseño de sitio web a medida",
+        "Optimización SEO por página avanzada",
+        "Análisis SEO y Contenido optimizado con IA",
+        "5 Imágenes premium generadas con IA",
         "Correos corporativos",
-        "Estructura SEO básica",
-        "Google Maps integrado"
+        "Pago en 6 cuotas sin interés",
+        "Entrega en 10-15 días"
       ],
       cta: "Elegir Corporativa",
       popular: true
@@ -58,10 +65,12 @@ export default function PymesPage() {
       desc: "Sitio web avanzado con gestión de contenido y posicionamiento orgánico.",
       features: [
         "Pagina WordPress autogestionable",
-        "Blog de contenidos",
-        "SEO avanzado (Keywords)",
-        "Seguridad Anti-Hackeo",
-        "Capacitación de uso"
+        "Estrategia SEO Full (Arquitectura & Contenido)",
+        "Contenido optimizado con IA (Blog inicial)",
+        "10 Imágenes premium generadas con IA",
+        "Capacitación de uso avanzada",
+        "Pago en 6 cuotas sin interés",
+        "Soporte prioritario"
       ],
       cta: "Elegir WordPress Pro",
       popular: false
@@ -178,13 +187,13 @@ export default function PymesPage() {
                     </h2>
                     <div className="space-y-6 text-lg text-zinc-500 font-light leading-relaxed">
                       <p>
-                        Aparecer en los primeros resultados de búsqueda no es un lujo, es una necesidad. Cuando alguien busca <strong className="text-zinc-950">diseño de paginas web</strong> o <strong className="text-zinc-950">desarrollo de paginas web</strong>, el 90% de los usuarios no pasa de la primera página. 
+                        Aparecer en los primeros resultados de búsqueda no es un lujo, es una necesidad. Cuando alguien busca <strong className="text-zinc-950">diseño paginas web</strong> o <strong className="text-zinc-950">desarrollo paginas web</strong> en Chile, el 90% de los usuarios no pasa de la primera página. 
                       </p>
                       <p>
-                        Un <strong className="text-zinc-950">diseño sitio web</strong> sin SEO es como un cartel publicitario en medio del desierto. En Webunica optimizamos tu arquitectura digital para que los algoritmos de Google te favorezcan y tus clientes te encuentren antes que a la competencia.
+                        Un <strong className="text-zinc-950">diseño sitio web</strong> o un <strong className="text-zinc-950">desarrollo sitio web</strong> sin SEO es como un cartel publicitario en medio del desierto. En Webunica creamos cada <strong className="text-zinc-950">pagina web optimizada</strong> para que los algoritmos te favorezcan.
                       </p>
                       <p>
-                        Ya sea que necesites una <strong className="text-zinc-950">pagina wordpress</strong> dinámica o una plataforma a medida, nuestra <strong className="text-zinc-950">mejora sitio web</strong> garantiza que tu inversión se traduzca en tráfico calificado.
+                        Nuestra estrategia de <strong className="text-zinc-950">SEO paginas web</strong> garantiza que tu inversión se traduzca en tráfico calificado. Ya sea que necesites una plataforma autogestionable o un desarrollo a medida, garantizamos velocidad y autoridad.
                       </p>
                     </div>
                  </div>
@@ -193,10 +202,11 @@ export default function PymesPage() {
         </section>
 
         {/* Pricing Plans */}
-        <section className="py-32 max-w-7xl mx-auto px-6">
+        <section className="py-32 max-w-7xl mx-auto px-6" id="precios">
            <div className="text-center mb-20">
-              <h2 className="text-4xl lg:text-6xl font-black mb-6 uppercase tracking-tighter">Planes que <span className="text-blue-600">Impulsan Pymes</span></h2>
-              <p className="text-xl text-zinc-500 font-light">Inversiones inteligentes para negocios que no paran de crecer.</p>
+              <h2 className="text-4xl lg:text-6xl font-black mb-6 uppercase tracking-tighter">Planes de <span className="text-blue-600">Diseño y Desarrollo Sitio Web</span></h2>
+              <p className="text-xl text-zinc-500 font-light mb-2">Inversiones inteligentes para negocios que no paran de crecer.</p>
+              <p className="text-sm font-black text-blue-600 uppercase tracking-widest">Valores + IVA | Pago en 6 cuotas con tarjeta sin interés</p>
            </div>
            
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
