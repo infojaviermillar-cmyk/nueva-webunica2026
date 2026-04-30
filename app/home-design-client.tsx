@@ -15,56 +15,64 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
       category: "Shopify",
       tags: ["Tecnología", "Gadgets"],
       description: "Catálogo tecnológico con look comercial claro y navegación rápida.",
-      image: "/clientes/Tecno-Mobile.png" 
+      image: "/clientes/Tecno-Mobile.png",
+      link: "https://tecno-mobile.cl/"
     },
     { 
       title: "Tuupos", 
       category: "Shopify",
       tags: ["General Store", "Dropshipping"],
       description: "Proyecto Shopify con identidad propia y bloques modernos.",
-      image: "/clientes/tuupos.png" 
+      image: "/clientes/tuupos.png",
+      link: "https://tuupos.cl/"
     },
     { 
       title: "Terra Andes", 
       category: "Shopify",
       tags: ["Alimentos", "Exportación"],
       description: "Proyecto con estética corporativa y vitrina visual enfocada en credibilidad.",
-      image: "/clientes/terranandes.png" 
+      image: "/clientes/terranandes.png",
+      link: "https://terraandesplus.com/"
     },
     { 
       title: "Chiletronics", 
       category: "Shopify",
       tags: ["Electrónica", "Retail"],
       description: "Tienda tecnológica con estructura orientada a variedad de productos.",
-      image: "/clientes/Chiletronics.png" 
+      image: "/clientes/Chiletronics.png",
+      link: "https://chiletronics.cl/"
     },
     { 
       title: "Canine Fight", 
       category: "Shopify",
       tags: ["Deportes", "Equipamiento"],
       description: "Tienda de alto rendimiento para artículos de artes marciales.",
-      image: "/clientes/https___caninefight.jfif" 
+      image: "/clientes/https___caninefight.jfif",
+      link: "https://caninefight.cl/"
     },
     { 
       title: "SoloCasasChile", 
       category: "SaaS",
       tags: ["Next.js", "PropTech"],
       description: "Plataforma de gestión inmobiliaria con seguimiento en tiempo real.",
-      image: "/clientes/publi-solocasas.png" 
+      image: "/clientes/publi-solocasas.png",
+      link: "https://solocasaschile.com"
     },
     { 
       title: "SpinMedical", 
       category: "Shopify",
       tags: ["Salud", "B2B"],
       description: "Proyecto ecommerce con estructura profesional y catálogo claro.",
-      image: "/clientes/Spinmedical.png" 
+      image: "/clientes/Spinmedical.png",
+      link: "https://spinmedical.cl/"
     },
     { 
       title: "Altavista Chile", 
       category: "Shopify",
       tags: ["Outdoor", "Retail"],
       description: "Tienda de look robusto con enfoque en navegación eficiente.",
-      image: "/clientes/altavista.png" 
+      image: "/clientes/altavista.png",
+      link: "https://altavistachile.cl/"
     },
   ];
 
@@ -123,15 +131,15 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
               {/* Mobile Project Carousel (Horizontal) */}
               <div className="mt-20 lg:hidden overflow-x-auto pb-8 -mx-6 px-6 no-scrollbar flex gap-6 snap-x snap-mandatory">
                  {projects.map((p, i) => (
-                    <div key={i} className="min-w-[280px] snap-center bg-white rounded-[2.5rem] border border-zinc-100 shadow-xl overflow-hidden flex flex-col">
+                    <a key={i} href={p.link} target="_blank" rel="noopener noreferrer" className="min-w-[280px] snap-center bg-white rounded-[2.5rem] border border-zinc-100 shadow-xl overflow-hidden flex flex-col group/card hover:border-violet-200 transition-colors">
                        <div className="relative aspect-[16/10] overflow-hidden">
-                          <Image src={p.image} alt={p.title} fill className="object-cover" />
+                          <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
                        </div>
                        <div className="p-6">
                           <span className="text-[8px] font-black uppercase text-violet-600 bg-violet-50 px-2 py-0.5 rounded-full mb-2 inline-block">{p.category}</span>
-                          <h4 className="text-lg font-black text-zinc-950 uppercase">{p.title}</h4>
+                          <h4 className="text-lg font-black text-zinc-950 uppercase group-hover/card:text-violet-600 transition-colors">{p.title}</h4>
                        </div>
-                    </div>
+                    </a>
                  ))}
               </div>
             </div>
@@ -157,7 +165,7 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
               <div className="flex-1">
                 <div className="scroll-container">
                   {[...projects, ...projects].map((p, i) => (
-                    <div key={i} className="flex flex-col bg-white rounded-[3rem] overflow-hidden border border-zinc-100 shadow-2xl group/card w-full">
+                    <a key={i} href={p.link} target="_blank" rel="noopener noreferrer" className="flex flex-col bg-white rounded-[3rem] overflow-hidden border border-zinc-100 shadow-2xl group/card w-full hover:border-violet-200 transition-all">
                       <div className="relative aspect-[16/10] overflow-hidden">
                          <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
                          <div className="absolute top-4 left-4">
@@ -166,24 +174,24 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
                             </span>
                          </div>
                       </div>
-                      <div className="p-8 pb-10">
+                      <div className="p-8 pb-10 text-left">
                          <div className="flex gap-2 mb-4">
                             {p.tags.map(t => (
                                <span key={t} className="text-[8px] font-black uppercase tracking-widest text-violet-600 bg-violet-50 px-3 py-1 rounded-full">{t}</span>
                             ))}
                          </div>
-                         <h3 className="text-2xl font-black text-zinc-950 uppercase mb-3 leading-none">{p.title}</h3>
+                         <h3 className="text-2xl font-black text-zinc-950 uppercase mb-3 leading-none group-hover/card:text-violet-600 transition-colors">{p.title}</h3>
                          <p className="text-[11px] text-zinc-500 font-medium leading-relaxed mb-8 line-clamp-2">
                             {p.description}
                          </p>
                          <div className="flex items-center justify-between pt-6 border-t border-zinc-50">
                             <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 group-hover/card:text-zinc-950 transition-colors">Explorar Proyecto</span>
-                            <div className="w-10 h-10 rounded-full bg-violet-600 text-white flex items-center justify-center group-hover/card:translate-x-2 transition-transform">
+                            <div className="w-10 h-10 rounded-full bg-violet-600 text-white flex items-center justify-center group-hover/card:translate-x-2 transition-transform shadow-lg shadow-violet-500/20">
                                <ArrowRight className="w-4 h-4" />
                             </div>
                          </div>
                       </div>
-                    </div>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -191,7 +199,7 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
               <div className="flex-1 translate-y-32">
                 <div className="scroll-container" style={{ animationDirection: 'reverse' }}>
                   {[...projects.reverse(), ...projects].map((p, i) => (
-                    <div key={i} className="flex flex-col bg-white rounded-[3rem] overflow-hidden border border-zinc-100 shadow-2xl group/card w-full">
+                    <a key={i} href={p.link} target="_blank" rel="noopener noreferrer" className="flex flex-col bg-white rounded-[3rem] overflow-hidden border border-zinc-100 shadow-2xl group/card w-full hover:border-violet-200 transition-all">
                       <div className="relative aspect-[16/10] overflow-hidden">
                          <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" />
                          <div className="absolute top-4 left-4">
@@ -200,24 +208,24 @@ export default function HomeDesignClient({ posts }: { posts: BlogPost[] }) {
                             </span>
                          </div>
                       </div>
-                      <div className="p-8 pb-10">
+                      <div className="p-8 pb-10 text-left">
                          <div className="flex gap-2 mb-4">
                             {p.tags.map(t => (
                                <span key={t} className="text-[8px] font-black uppercase tracking-widest text-violet-600 bg-violet-50 px-3 py-1 rounded-full">{t}</span>
                             ))}
                          </div>
-                         <h3 className="text-2xl font-black text-zinc-950 uppercase mb-3 leading-none">{p.title}</h3>
+                         <h3 className="text-2xl font-black text-zinc-950 uppercase mb-3 leading-none group-hover/card:text-violet-600 transition-colors">{p.title}</h3>
                          <p className="text-[11px] text-zinc-500 font-medium leading-relaxed mb-8 line-clamp-2">
                             {p.description}
                          </p>
                          <div className="flex items-center justify-between pt-6 border-t border-zinc-50">
                             <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 group-hover/card:text-zinc-950 transition-colors">Explorar Proyecto</span>
-                            <div className="w-10 h-10 rounded-full bg-violet-600 text-white flex items-center justify-center group-hover/card:translate-x-2 transition-transform">
+                            <div className="w-10 h-10 rounded-full bg-violet-600 text-white flex items-center justify-center group-hover/card:translate-x-2 transition-transform shadow-lg shadow-violet-500/20">
                                <ArrowRight className="w-4 h-4" />
                             </div>
                          </div>
                       </div>
-                    </div>
+                    </a>
                   ))}
                 </div>
               </div>
