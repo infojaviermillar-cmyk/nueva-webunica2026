@@ -128,9 +128,14 @@ export default function Footer() {
               <p className="text-zinc-500 text-sm">
                 © {new Date().getFullYear()} WebUnica. Todos los derechos reservados.
               </p>
-              <span className="text-lg md:text-xl font-caveat bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-violet-600 to-indigo-400 select-none cursor-default hover:brightness-110 transition-all">
-                Desarrollo React por Javier Millar V.
-              </span>
+              <div className="flex items-center gap-3">
+                <p className="text-zinc-600 text-[9px] font-black uppercase tracking-[0.2em] hidden sm:block">INGENIERÍA POR</p>
+                <img 
+                  src="/avatar-footer.png" 
+                  alt="Javier Millar" 
+                  className="w-[50px] h-[50px] rounded-xl object-cover grayscale hover:grayscale-0 transition-all duration-500 border border-zinc-800"
+                />
+              </div>
             </div>
             
             <div className="flex gap-6">
