@@ -26,7 +26,7 @@ export default function PymesPage() {
   const plans = [
     {
       name: "Landing Express",
-      price: "$230.000",
+      price: "$240.000 + IVA",
       desc: "Ideal para campañas específicas o servicios únicos que necesitan conversión rápida.",
       features: [
         "Diseño de una sola sección (One Page)",
@@ -44,7 +44,7 @@ export default function PymesPage() {
     },
     {
       name: "Web Corporativa",
-      price: "Desde $350.000",
+      price: "$360.000 + IVA",
       desc: "La mejor opción para PYMES que buscan profesionalizar su imagen completa.",
       features: [
         "Hasta 5 secciones internas",
@@ -61,7 +61,7 @@ export default function PymesPage() {
     },
     {
       name: "Pyme WordPress Pro",
-      price: "Desde $550.000",
+      price: "$580.000 + IVA",
       desc: "Sitio web avanzado con gestión de contenido y posicionamiento orgánico.",
       features: [
         "Pagina WordPress autogestionable",
@@ -226,6 +226,10 @@ export default function PymesPage() {
                    </ul>
                    <LeadButton className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] transition-all ${p.popular ? 'bg-white text-zinc-950 hover:bg-zinc-200' : 'bg-zinc-950 text-white hover:bg-zinc-800 shadow-xl shadow-zinc-200'}`}>
                       {p.cta}
+                   </LeadButton>
+                   
+                   <LeadButton className={`w-full py-4 mt-3 rounded-2xl font-black uppercase tracking-widest text-[9px] border transition-all ${p.popular ? 'border-white/20 text-white hover:bg-white/10' : 'border-blue-500/20 text-blue-600 hover:bg-blue-50'}`}>
+                      Obtener 10% de Descuento
                    </LeadButton>
                 </div>
               ))}
