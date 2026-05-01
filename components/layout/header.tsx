@@ -70,7 +70,8 @@ export default function Header({ domain = '' }: { domain?: string }) {
     '/desarrollo-paginas-web-pymes-chile',
     '/diseno-themes-shopify-personalizados-adobe-xd',
     '/diseno-paginas-web-inmobiliaria',
-    '/desarrollo-pagina-web-funeraria'
+    '/desarrollo-pagina-web-funeraria',
+    '/complemento-sence-tutor-lms-pro'
   ];
 
   const isDarkHero = darkPages.includes(pathname);
@@ -164,8 +165,8 @@ export default function Header({ domain = '' }: { domain?: string }) {
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
                 </button>
                 
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[1120px] bg-white/95 backdrop-blur-xl border border-white/40 rounded-[3rem] shadow-[0_45px_100px_rgba(0,0,0,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform group-hover:translate-y-2 z-[100]">
-                  <div className="p-10 grid grid-cols-4 gap-8 relative z-10">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[1240px] bg-white/95 backdrop-blur-xl border border-white/40 rounded-[3rem] shadow-[0_45px_100px_rgba(0,0,0,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform group-hover:translate-y-2 z-[100]">
+                  <div className="p-10 grid grid-cols-5 gap-8 relative z-10">
                     
                     {/* Col 1: E-commerce */}
                     <div>
@@ -198,7 +199,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <div>
                       <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 mb-6 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-sm bg-violet-600"></span>
-                        Desarrollo & Posicionamiento
+                        Desarrollo & SEO
                       </h4>
                       <div className="flex flex-col gap-1">
                         <Link href="/agencia-de-embudos-de-venta-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
@@ -249,7 +250,24 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       </div>
                     </div>
 
-                    {/* Col 4: Herramientas */}
+                    {/* Col 4: Complementos Pro */}
+                    <div>
+                      <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 mb-6 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-sm bg-orange-500"></span>
+                        Complementos Pro
+                      </h4>
+                      <div className="flex flex-col gap-1">
+                        <Link href="/complemento-sence-tutor-lms-pro" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Plugin Sence Pro</span>
+                            <span className="text-[8px] bg-orange-500 text-white px-1.5 py-0.5 rounded font-black">NUEVO</span>
+                          </div>
+                          <span className="text-[11px] text-zinc-500 font-medium leading-tight">Cumplimiento Tutor LMS</span>
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Col 5: Herramientas */}
                     <div className="bg-zinc-50 -m-10 p-10 border-l border-zinc-100 flex flex-col">
                       <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 mb-6 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-sm bg-blue-600"></span>
@@ -431,6 +449,17 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/diseno-paginas-web-odontologia" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       Odontología
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Complementos Pro */}
+                <div>
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-500 block mb-4">Complementos Pro</span>
+                  <div className="grid gap-3">
+                    <Link href="/complemento-sence-tutor-lms-pro" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-orange-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+                      Plugin Sence Pro
                     </Link>
                   </div>
                 </div>
