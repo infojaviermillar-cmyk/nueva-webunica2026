@@ -250,9 +250,9 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
-      {/* Feature Bento Grid */}
-      <section className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <section className="py-32 bg-zinc-50 rounded-[4rem] mx-4 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           <div className="md:col-span-8 bg-zinc-950 rounded-[4rem] p-12 lg:p-16 text-white relative overflow-hidden group">
             <div className="relative z-10 h-full flex flex-col justify-between">
               <div>
