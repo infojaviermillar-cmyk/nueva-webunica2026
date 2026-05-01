@@ -19,7 +19,8 @@ import {
   Globe,
   CheckCircle2,
   Lock,
-  MousePointer2
+  MousePointer2,
+  TrendingUp
 } from 'lucide-react';
 
 export const metadata = {
