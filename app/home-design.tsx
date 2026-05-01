@@ -168,7 +168,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
     <main className="min-h-screen bg-white text-zinc-950 font-sans antialiased overflow-x-hidden">
       
       {/* Premium Hero Section */}
-      <section className="relative pt-[10vh] pb-24 lg:pb-32 overflow-hidden flex items-center min-h-[95vh]">
+      <section className="relative pt-[22vh] lg:pt-[10vh] pb-24 lg:pb-32 overflow-hidden flex items-start lg:items-center min-h-[100vh] lg:min-h-[95vh]">
         {/* Background Texture - OPTIMIZED */}
         <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
           <Image 
