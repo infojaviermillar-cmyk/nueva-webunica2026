@@ -5,29 +5,29 @@ import LeadButton from '@/components/ui/lead-button';
 
 const plans = [
   {
-    name: "Landing Express",
+    name: "Landing Express SEO",
     price: "$340.000",
-    desc: "Ideal para campañas específicas o servicios únicos que necesitan conversión rápida.",
+    desc: "Ideal para campañas específicas o servicios únicos que necesitan conversión rápida y visibilidad.",
     features: [
       "Diseño One Page de alto impacto",
-      "Google Analytics & Meta Pixel",
-      "Optimización SEO inicial",
+      "Google Analytics 4 & Meta Pixel",
+      "Optimización SEO avanzada",
       "Contenido optimizado con IA",
-      "Botón de WhatsApp directo",
+      "4 Imágenes Full HD con IA",
       "Entrega en 5 días hábiles"
     ],
     cta: "Empezar Landing",
     popular: false
   },
   {
-    name: "Web Corporativa",
+    name: "Web Corporativa SEO",
     price: "$360.000",
-    desc: "La mejor opción para PYMES que buscan profesionalizar su imagen completa.",
+    desc: "La mejor opción para PYMES que buscan profesionalizar su imagen completa con SEO técnico.",
     features: [
       "Hasta 5 secciones internas",
-      "Arquitectura de conversión",
-      "Optimización SEO avanzada",
-      "Correos corporativos",
+      "Arquitectura de conversión PRO",
+      "GA4 & Meta Pixel Profesional",
+      "8 Imágenes Full HD con IA",
       "Diseño 100% Mobile-First",
       "Entrega en 10-15 días"
     ],
@@ -35,16 +35,16 @@ const plans = [
     popular: true
   },
   {
-    name: "Pyme WordPress Pro",
+    name: "Pyme WordPress Pro SEO",
     price: "$580.000",
-    desc: "Sitio web avanzado con gestión de contenido y posicionamiento orgánico.",
+    desc: "Sitio web avanzado con gestión de contenido y estrategia SEO Full de dominio orgánico.",
     features: [
       "WordPress autogestionable",
-      "Estrategia SEO Full",
-      "Blog de contenidos inicial",
+      "Estrategia SEO Full (Silos)",
+      "GA4, Meta Pixel & API Conversiones",
+      "15 Imágenes Full HD con IA",
       "Capacitación de uso avanzada",
-      "Soporte técnico prioritario",
-      "Integración con Google Ads"
+      "Soporte técnico prioritario"
     ],
     cta: "Elegir WordPress Pro",
     popular: false
