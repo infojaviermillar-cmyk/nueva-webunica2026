@@ -130,11 +130,17 @@ export default function Footer() {
               </p>
             </div>
             
-            <div className="flex gap-6">
-              <Link href="/terminos-y-condiciones-de-servicios" className="text-zinc-500 hover:text-white text-sm transition-colors">
-                Términos y Condiciones
+            <div className="flex flex-wrap gap-x-8 gap-y-2">
+              <Link href="/terminos-y-condiciones-de-servicios" className="text-zinc-500 hover:text-white text-[11px] font-bold uppercase tracking-widest transition-colors">
+                Términos
               </Link>
-              <Link href="/licencia-productos/" className="text-zinc-500 hover:text-white text-sm transition-colors">
+              <Link href="/politica-de-privacidad" className="text-zinc-500 hover:text-white text-[11px] font-bold uppercase tracking-widest transition-colors">
+                Privacidad
+              </Link>
+              <Link href="/politica-de-devoluciones" className="text-zinc-500 hover:text-white text-[11px] font-bold uppercase tracking-widest transition-colors">
+                Devoluciones
+              </Link>
+              <Link href="/licencia-productos" className="text-zinc-500 hover:text-white text-[11px] font-bold uppercase tracking-widest transition-colors">
                 Licencias
               </Link>
             </div>

@@ -49,9 +49,11 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-black text-zinc-950 uppercase tracking-tight mb-4">5. Responsabilidades del Cliente</h2>
+              <h2 className="text-2xl font-black text-zinc-950 uppercase tracking-tight mb-4">5. Responsabilidades del Cliente y Contenido</h2>
               <p>
-                El cliente es responsable de proporcionar la información, contenidos y accesos necesarios para el desarrollo del proyecto en los tiempos acordados. Webunica no se hace responsable por retrasos causados por la falta de entrega de materiales por parte del cliente.
+                El cliente es responsable de proporcionar la información, contenidos, imágenes, videos y accesos necesarios para el desarrollo del proyecto. 
+                <strong className="text-zinc-950">Todo el contenido proporcionado por el cliente es de su exclusiva responsabilidad</strong>, liberando a Webunica de cualquier reclamación relacionada con derechos de autor, veracidad de la información o legalidad del material entregado. 
+                Webunica no se hace responsable por retrasos causados por la falta de entrega de materiales por parte del cliente.
               </p>
             </section>
 
