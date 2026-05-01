@@ -7,6 +7,7 @@ import FeaturedBlogSection from '@/components/sections/featured-blog';
 import TestimonialsSection from '@/components/sections/testimonials';
 import HeroCarousel from '@/components/sections/hero-carousel';
 import MobileCarousel from '@/components/sections/mobile-carousel';
+import HomeFAQ from '@/components/sections/home-faq';
 
 export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const projects = [
@@ -332,6 +333,9 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
           </div>
         </div>
       </section>
+
+      {/* FAQ Strategic Section */}
+      <HomeFAQ />
 
       <TestimonialsSection />
       <FeaturedBlogSection posts={posts} />
