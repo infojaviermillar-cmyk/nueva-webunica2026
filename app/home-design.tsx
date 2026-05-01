@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Monitor, Code2, Rocket, Zap } from 'lucide-react';
+import { ArrowRight, Smartphone, Code2, Rocket, Zap } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
 import { BlogPost } from '@/lib/blog';
 import FeaturedBlogSection from '@/components/sections/featured-blog';
@@ -256,13 +256,13 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
 
           {/* Secondary Focus Cards */}
           <div className="md:col-span-4 space-y-8">
-            <div className="bg-violet-600 rounded-[3.5rem] p-10 border border-violet-500 flex flex-col justify-between h-full group hover:bg-violet-700 transition-all relative overflow-hidden">
+            <div className="bg-violet-600 rounded-[3.5rem] p-10 border border-violet-500 flex flex-col justify-end h-full group hover:bg-violet-700 transition-all relative overflow-hidden min-h-[450px]">
                <div className="absolute inset-0 z-0 opacity-40 group-hover:scale-110 transition-transform duration-700">
                   <Image src="/mobile-mockup.png" alt="Mobile Design Mockup" fill className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-violet-900 via-violet-900/40 to-transparent"></div>
                </div>
                <div className="relative z-10">
-                  <Monitor className="w-10 h-10 text-white mb-8" />
+                  <Smartphone className="w-10 h-10 text-white mb-8" />
                   <h3 className="text-2xl font-black text-white uppercase tracking-tight leading-none mb-4">Diseño <br/>Mobile-First</h3>
                   <p className="text-violet-100 text-sm font-medium leading-relaxed">
                     El 90% de tu tráfico viene del móvil. Diseñamos experiencias fluidas e interactivas para smartphones.
