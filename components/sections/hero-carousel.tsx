@@ -9,8 +9,12 @@ interface HeroCarouselProps {
 }
 
 export default function HeroCarousel({ projects }: HeroCarouselProps) {
+  // Split projects into two distinct sets to avoid repetition side-by-side
+  const set1 = projects.filter((_, i) => i % 2 === 0);
+  const set2 = projects.filter((_, i) => i % 2 !== 0);
+
   return (
-    <div className="relative h-[700px] lg:h-[900px] hidden lg:flex gap-8 overflow-hidden">
+    <div className="relative h-[700px] lg:h-[900px] hidden lg:flex gap-8 overflow-hidden pr-4">
       <style jsx>{`
         @keyframes scroll-vertical {
           0% { transform: translateY(0); }
@@ -19,8 +23,8 @@ export default function HeroCarousel({ projects }: HeroCarouselProps) {
         .scroll-container {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
-          animation: scroll-vertical 60s linear infinite;
+          gap: 2.5rem;
+          animation: scroll-vertical 120s linear infinite;
         }
         .scroll-container:hover {
           animation-play-state: paused;
@@ -29,7 +33,7 @@ export default function HeroCarousel({ projects }: HeroCarouselProps) {
       
       <div className="flex-1">
         <div className="scroll-container">
-          {[...projects, ...projects].map((p, i) => (
+          {[...set1, ...set1].map((p, i) => (
             <a key={i} href={p.link} target="_blank" rel="noopener noreferrer" className="flex flex-col bg-white rounded-[3rem] overflow-hidden border border-zinc-100 shadow-2xl group/card w-full hover:border-violet-200 transition-all">
               <div className="relative aspect-[16/10] overflow-hidden">
                  <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" loading="lazy" />
@@ -63,7 +67,7 @@ export default function HeroCarousel({ projects }: HeroCarouselProps) {
 
       <div className="flex-1 translate-y-32">
         <div className="scroll-container" style={{ animationDirection: 'reverse' }}>
-          {[...projects.slice().reverse(), ...projects.slice().reverse()].map((p, i) => (
+          {[...set2, ...set2].map((p, i) => (
             <a key={i} href={p.link} target="_blank" rel="noopener noreferrer" className="flex flex-col bg-white rounded-[3rem] overflow-hidden border border-zinc-100 shadow-2xl group/card w-full hover:border-violet-200 transition-all">
               <div className="relative aspect-[16/10] overflow-hidden">
                  <Image src={p.image} alt={p.title} fill className="object-cover transition-transform duration-700 group-hover/card:scale-110" loading="lazy" />
