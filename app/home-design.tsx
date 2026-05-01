@@ -243,12 +243,12 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
               </div>
               <div className="mt-12 flex gap-8 border-t border-white/10 pt-8">
                 <div>
-                  <div className="text-3xl font-black text-white mb-1">100/100</div>
-                  <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Performance</div>
+                  <div className="text-3xl font-black text-white mb-1 uppercase italic tracking-tighter">Élite</div>
+                  <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Core Web Vitals</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-black text-white mb-1">0.4s</div>
-                  <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">LCP Score</div>
+                  <div className="text-3xl font-black text-white mb-1 uppercase italic tracking-tighter">Instant</div>
+                  <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Engine Speed</div>
                 </div>
               </div>
             </div>
@@ -256,12 +256,18 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
 
           {/* Secondary Focus Cards */}
           <div className="md:col-span-4 space-y-8">
-            <div className="bg-violet-50 rounded-[3.5rem] p-10 border border-violet-100 flex flex-col justify-between h-full group hover:bg-violet-100 transition-colors">
-              <Monitor className="w-10 h-10 text-violet-600 mb-8" />
-              <h3 className="text-2xl font-black text-zinc-900 uppercase tracking-tight leading-none mb-4">Diseño <br/>Mobile-First</h3>
-              <p className="text-violet-900/60 text-sm font-medium leading-relaxed">
-                El 90% de tu tráfico viene del móvil. Diseñamos experiencias fluidas e interactivas para smartphones.
-              </p>
+            <div className="bg-violet-600 rounded-[3.5rem] p-10 border border-violet-500 flex flex-col justify-between h-full group hover:bg-violet-700 transition-all relative overflow-hidden">
+               <div className="absolute inset-0 z-0 opacity-40 group-hover:scale-110 transition-transform duration-700">
+                  <Image src="/mobile-mockup.png" alt="Mobile Design Mockup" fill className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-violet-900 via-violet-900/40 to-transparent"></div>
+               </div>
+               <div className="relative z-10">
+                  <Monitor className="w-10 h-10 text-white mb-8" />
+                  <h3 className="text-2xl font-black text-white uppercase tracking-tight leading-none mb-4">Diseño <br/>Mobile-First</h3>
+                  <p className="text-violet-100 text-sm font-medium leading-relaxed">
+                    El 90% de tu tráfico viene del móvil. Diseñamos experiencias fluidas e interactivas para smartphones.
+                  </p>
+               </div>
             </div>
           </div>
 
