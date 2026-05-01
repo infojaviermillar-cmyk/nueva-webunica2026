@@ -155,7 +155,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
                 <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-widest text-violet-700 font-black">Performance Marketing Agency 2026</span>
               </div>
-              <h1 className="text-5xl lg:text-[85px] font-black tracking-tighter leading-[0.85] mb-10 text-zinc-950 uppercase">
+              <h1 className="text-[2.5rem] xs:text-5xl lg:text-[85px] font-black tracking-tighter leading-[0.85] mb-10 text-zinc-950 uppercase break-words">
                 CONVERTIMOS <br/>TRÁFICO EN <span className="text-violet-600 font-serif italic lowercase font-light">Clientes</span>
               </h1>
               <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty font-light">
@@ -164,13 +164,13 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
               <div className="flex flex-col sm:flex-row gap-6 mt-8 relative z-20">
                 <button 
                   onClick={() => openModal()}
-                  className="px-12 py-6 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-[0.15em] text-[10px] flex items-center justify-center gap-3 hover:bg-violet-700 transition-all shadow-2xl shadow-violet-600/30 scale-100 hover:scale-105 active:scale-95 group/btn"
+                  className="px-8 sm:px-12 py-6 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-[0.15em] text-[10px] flex items-center justify-center gap-3 hover:bg-violet-700 transition-all shadow-2xl shadow-violet-600/30 scale-100 hover:scale-105 active:scale-95 group/btn"
                 >
                   Agendar con 10% de Descuento
                 </button>
                 <Link 
                   href="/portafolio" 
-                  className="px-12 py-6 bg-zinc-50 text-zinc-900 border border-zinc-200 rounded-[2rem] font-black uppercase tracking-[0.15em] text-[10px] flex items-center justify-center hover:bg-white transition-all active:scale-95"
+                  className="px-6 sm:px-12 py-6 bg-zinc-50 text-zinc-900 border border-zinc-200 rounded-[2rem] font-black uppercase tracking-[0.15em] text-[10px] flex items-center justify-center hover:bg-white transition-all active:scale-95"
                 >
                   Casos de Éxito
                 </Link>
@@ -192,7 +192,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
               <div className="inline-block px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-500 text-[10px] font-black uppercase tracking-[0.2em] mb-8">
                 ⚠️ Alerta de Rendimiento
               </div>
-              <h2 className="text-4xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-8">
+              <h2 className="text-3xl xs:text-4xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-8 break-words">
                 ¡Tu página web actual de <span className="text-rose-500 italic font-serif lowercase font-light">5 años atrás</span> te está deteniendo!
               </h2>
             </div>

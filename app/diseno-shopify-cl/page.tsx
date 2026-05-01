@@ -193,7 +193,7 @@ export default function DisenoShopifyLandingPage() {
                     <span className="text-[10px] font-black tracking-[0.2em] text-zinc-600 uppercase">Expertos en Diseño Shopify Chile</span>
                   </div>
                   
-                  <h1 className="text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950">
+                  <h1 className="text-[2.4rem] xs:text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950 break-words">
                     Diseño para tiendas <span className="text-pink-600 italic font-serif lowercase font-light">Shopify</span> en Chile
                   </h1>
                 </header>

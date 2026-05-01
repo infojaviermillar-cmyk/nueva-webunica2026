@@ -81,7 +81,7 @@ export default function LeadResourceModal({ isOpen, onClose, resourceName, resou
                 <Mail className="w-8 h-8 text-violet-600" />
               </div>
               
-              <h2 className="text-3xl font-black text-slate-900 mb-4 leading-tight">
+              <h2 className="text-3xl font-black text-slate-900 mb-4 leading-tight pr-10">
                 Acceso Gratuito a la <br/> <span className="text-violet-600">{resourceName}</span>
               </h2>
               

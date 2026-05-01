@@ -245,7 +245,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
                 <span className="text-[10px] font-black tracking-[0.25em] text-zinc-500 uppercase">Ingeniería Web de Élite 2026</span>
               </div>
               
-              <h1 className="text-5xl md:text-6xl lg:text-[85px] font-black tracking-tighter leading-[0.8] mb-12 uppercase text-zinc-950">
+              <h1 className="text-[2.4rem] xs:text-5xl sm:text-5xl md:text-6xl lg:text-[85px] font-black tracking-tighter leading-[0.85] mb-12 uppercase text-zinc-950 break-words">
                 DISEÑO & <br/>
                 <span className="text-violet-600 font-black">DESARROLLO</span> <br/>
                 SITIOS WEB.
@@ -256,10 +256,10 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-6 items-center justify-center lg:justify-start">
-                <LeadButton className="px-14 py-7 bg-zinc-950 text-white font-black rounded-3xl hover:bg-zinc-800 transition-all shadow-2xl uppercase tracking-widest text-xs flex items-center gap-3 scale-100 hover:scale-105 active:scale-95 group w-full sm:w-auto">
+                <LeadButton className="px-8 sm:px-14 py-7 bg-zinc-950 text-white font-black rounded-3xl hover:bg-zinc-800 transition-all shadow-2xl uppercase tracking-widest text-xs flex items-center gap-3 scale-100 hover:scale-105 active:scale-95 group w-full sm:w-auto justify-center">
                   Cotizar mi Proyecto <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </LeadButton>
-                <Link href="/portafolio" className="px-14 py-7 border border-zinc-200 text-zinc-950 font-black rounded-3xl hover:bg-zinc-50 transition-all uppercase tracking-widest text-xs w-full sm:w-auto text-center">
+                <Link href="/portafolio" className="px-8 sm:px-14 py-7 border border-zinc-200 text-zinc-950 font-black rounded-3xl hover:bg-zinc-50 transition-all uppercase tracking-widest text-xs w-full sm:w-auto text-center">
                   Portafolio
                 </Link>
               </div>
