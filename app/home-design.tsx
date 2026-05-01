@@ -168,8 +168,51 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
     },
   ];
 
+  // Schema.org LocalBusiness structured data
+  const businessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Webunica",
+    "image": "https://webunica.cl/logo.png",
+    "@id": "https://webunica.cl",
+    "url": "https://webunica.cl",
+    "telephone": "+56912345678",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Providencia",
+      "addressLocality": "Santiago",
+      "addressRegion": "RM",
+      "postalCode": "7500000",
+      "addressCountry": "CL"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -33.4372,
+      "longitude": -70.6506
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "sameAs": [
+      "https://www.instagram.com/webunica.cl"
+    ]
+  };
+
   return (
     <main className="min-h-screen bg-white text-zinc-950 font-sans antialiased overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
+      />
       
       {/* Premium Hero Section */}
       <section className="relative pt-[22vh] lg:pt-[10vh] pb-24 lg:pb-32 overflow-hidden flex items-start lg:items-center min-h-[100vh] lg:min-h-[95vh]">
@@ -177,7 +220,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
         <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
           <Image 
             src="/bg-01.jpg" 
-            alt="Background Texture" 
+            alt="Agencia de Diseño Web Chile - Fondo Abstracto" 
             fill 
             className="object-cover object-center" 
             priority
