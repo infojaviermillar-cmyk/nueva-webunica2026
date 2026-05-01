@@ -6,14 +6,14 @@ import LeadButton from '@/components/ui/lead-button';
 const plans = [
   {
     name: "Landing Express",
-    price: "$240.000",
+    price: "$340.000",
     desc: "Ideal para campañas específicas o servicios únicos que necesitan conversión rápida.",
     features: [
       "Diseño One Page de alto impacto",
+      "Google Analytics & Meta Pixel",
       "Optimización SEO inicial",
       "Contenido optimizado con IA",
       "Botón de WhatsApp directo",
-      "Formulario de contacto pro",
       "Entrega en 5 días hábiles"
     ],
     cta: "Empezar Landing",
