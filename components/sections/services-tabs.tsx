@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ShoppingBag, Building2, Cpu, BarChart3, CheckCircle2 } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const serviceData = [
   {
@@ -69,6 +70,54 @@ const serviceData = [
   }
 ];
 
+function TabContent({ activeTab }: { activeTab: typeof serviceData[0] }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
+      {/* Text Content */}
+      <div>
+        <h3 className="text-3xl lg:text-4xl font-black text-zinc-950 uppercase tracking-tighter leading-none mb-8">
+          {activeTab.title}
+        </h3>
+        <p className="text-lg text-zinc-500 font-light leading-relaxed mb-10">
+          {activeTab.description}
+        </p>
+        
+        <ul className="space-y-4 mb-12">
+          {activeTab.features.map((feature, idx) => (
+            <li key={idx} className="flex items-center gap-3 text-xs font-bold text-zinc-700 uppercase tracking-wide">
+              <CheckCircle2 className="w-5 h-5 text-violet-600" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-col sm:flex-row gap-4">
+           <LeadButton className="px-10 py-5 bg-zinc-950 text-white font-black rounded-2xl hover:bg-violet-600 transition-all shadow-xl uppercase tracking-widest text-[10px]">
+              Consultar Servicio
+           </LeadButton>
+           <Link 
+             href={activeTab.link}
+             className="px-10 py-5 border border-zinc-200 text-zinc-950 font-black rounded-2xl hover:bg-white transition-all uppercase tracking-widest text-[10px] text-center"
+           >
+              Ver Detalles
+           </Link>
+        </div>
+      </div>
+
+      {/* Visual Content */}
+      <div className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white group">
+        <Image 
+          src={activeTab.image} 
+          alt={activeTab.title} 
+          fill 
+          className="object-cover transition-transform duration-700 group-hover:scale-110" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 to-transparent"></div>
+      </div>
+    </div>
+  );
+}
+
 export default function ServicesTabs() {
   const [activeTab, setActiveTab] = useState(serviceData[0]);
 
@@ -93,88 +142,76 @@ export default function ServicesTabs() {
         {/* Interactive Tabs Container */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           
-          {/* Left Menu (Tabs) */}
+          {/* Left Menu (Tabs) - Transformed for mobile responsiveness */}
           <div className="lg:col-span-4 space-y-4">
             {serviceData.map((service) => (
-              <button
-                key={service.id}
-                onClick={() => setActiveTab(service)}
-                className={`w-full p-8 rounded-[2.5rem] text-left transition-all duration-500 group relative flex items-center gap-6 ${
-                  activeTab.id === service.id 
-                  ? 'bg-zinc-950 text-white shadow-2xl shadow-zinc-950/20' 
-                  : 'bg-zinc-50 text-zinc-400 hover:bg-zinc-100'
-                }`}
-              >
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-500 ${
-                  activeTab.id === service.id ? 'bg-violet-600 text-white' : 'bg-zinc-200 text-zinc-500 group-hover:bg-violet-100 group-hover:text-violet-600'
-                }`}>
-                  {service.icon}
-                </div>
-                <div>
-                  <h3 className={`text-xl font-black uppercase tracking-tight transition-colors duration-500 ${
-                    activeTab.id === service.id ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-950'
+              <div key={service.id} className="block">
+                <button
+                  onClick={() => setActiveTab(service)}
+                  className={`w-full p-8 rounded-[2.5rem] text-left transition-all duration-500 group relative flex items-center gap-6 ${
+                    activeTab.id === service.id 
+                    ? 'bg-zinc-950 text-white shadow-2xl shadow-zinc-950/20' 
+                    : 'bg-zinc-50 text-zinc-400 hover:bg-zinc-100'
+                  }`}
+                >
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-500 ${
+                    activeTab.id === service.id ? 'bg-violet-600 text-white' : 'bg-zinc-200 text-zinc-500 group-hover:bg-violet-100 group-hover:text-violet-600'
                   }`}>
-                    {service.menuTitle}
-                  </h3>
-                  <div className={`h-1 bg-violet-600 transition-all duration-500 rounded-full mt-1 ${
-                    activeTab.id === service.id ? 'w-full opacity-100' : 'w-0 opacity-0'
-                  }`}></div>
+                    {service.icon}
+                  </div>
+                  <div>
+                    <h3 className={`text-xl font-black uppercase tracking-tight transition-colors duration-500 ${
+                      activeTab.id === service.id ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-950'
+                    }`}>
+                      {service.menuTitle}
+                    </h3>
+                    <div className={`h-1 bg-violet-600 transition-all duration-500 rounded-full mt-1 ${
+                      activeTab.id === service.id ? 'w-full opacity-100' : 'w-0 opacity-0'
+                    }`}></div>
+                  </div>
+                  {activeTab.id === service.id && (
+                    <ArrowRight className="w-5 h-5 ml-auto text-violet-400" />
+                  )}
+                </button>
+
+                {/* Mobile Content Accordion */}
+                <div className="lg:hidden">
+                  <AnimatePresence initial={false}>
+                    {activeTab.id === service.id && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-8 pb-4">
+                          <div className="bg-zinc-50 rounded-[3rem] p-8 border border-zinc-100">
+                             <TabContent activeTab={service} />
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-                {activeTab.id === service.id && (
-                  <ArrowRight className="w-5 h-5 ml-auto text-violet-400" />
-                )}
-              </button>
+              </div>
             ))}
           </div>
 
-          {/* Right Content Area */}
-          <div className="lg:col-span-8">
-            <div className="bg-zinc-50 rounded-[4rem] p-10 lg:p-16 border border-zinc-100 transition-all duration-700 animate-in fade-in slide-in-from-right-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
-                
-                {/* Text Content */}
-                <div>
-                  <h3 className="text-3xl lg:text-4xl font-black text-zinc-950 uppercase tracking-tighter leading-none mb-8">
-                    {activeTab.title}
-                  </h3>
-                  <p className="text-lg text-zinc-500 font-light leading-relaxed mb-10">
-                    {activeTab.description}
-                  </p>
-                  
-                  <ul className="space-y-4 mb-12">
-                    {activeTab.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-xs font-bold text-zinc-700 uppercase tracking-wide">
-                        <CheckCircle2 className="w-5 h-5 text-violet-600" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex flex-col sm:flex-row gap-4">
-                     <LeadButton className="px-10 py-5 bg-zinc-950 text-white font-black rounded-2xl hover:bg-violet-600 transition-all shadow-xl uppercase tracking-widest text-[10px]">
-                        Consultar Servicio
-                     </LeadButton>
-                     <Link 
-                       href={activeTab.link}
-                       className="px-10 py-5 border border-zinc-200 text-zinc-950 font-black rounded-2xl hover:bg-white transition-all uppercase tracking-widest text-[10px] text-center"
-                     >
-                        Ver Detalles
-                     </Link>
-                  </div>
-                </div>
-
-                {/* Visual Content */}
-                <div className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white group">
-                  <Image 
-                    src={activeTab.image} 
-                    alt={activeTab.title} 
-                    fill 
-                    className="object-cover transition-transform duration-700 group-hover:scale-110" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 to-transparent"></div>
-                </div>
-
-              </div>
+          {/* Right Content Area (Desktop Only) */}
+          <div className="hidden lg:block lg:col-span-8">
+            <div className="bg-zinc-50 rounded-[4rem] p-16 border border-zinc-100 transition-all duration-700">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeTab.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <TabContent activeTab={activeTab} />
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
 
@@ -184,3 +221,4 @@ export default function ServicesTabs() {
     </section>
   );
 }
+
