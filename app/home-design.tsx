@@ -250,6 +250,20 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
+      {/* Trusted By Section */}
+      <section className="py-12 border-b border-zinc-100 bg-white/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 text-center mb-8">Ingeniería Web elegida por líderes</p>
+          <div className="flex flex-wrap justify-center items-center gap-10 lg:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+             <span className="text-lg lg:text-xl font-black tracking-tighter text-zinc-950 uppercase italic">Skillnest.la</span>
+             <span className="text-lg lg:text-xl font-black tracking-tighter text-zinc-950 uppercase italic">Reaprende.cl</span>
+             <span className="text-lg lg:text-xl font-black tracking-tighter text-zinc-950 uppercase italic">IpsDatax</span>
+             <span className="text-lg lg:text-xl font-black tracking-tighter text-zinc-950 uppercase italic">Educontable</span>
+             <span className="text-lg lg:text-xl font-black tracking-tighter text-zinc-950 uppercase italic">MeCapacito</span>
+          </div>
+        </div>
+      </section>
+
       {/* Feature Bento Grid */}
       <section className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
