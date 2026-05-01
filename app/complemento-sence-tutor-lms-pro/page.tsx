@@ -41,7 +41,20 @@ export default function SenceAddonPage() {
       }
     },
     "areaServed": "CL",
-    "serviceType": "E-learning Compliance Software"
+    "serviceType": "E-learning Compliance Software",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "24"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": { "@type": "Person", "name": "Educontable" },
+        "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+        "reviewBody": "El complemento Sence es vital para nuestras operaciones. Generamos el LCE en segundos."
+      }
+    ]
   };
 
   const faqJsonLd = {
@@ -205,6 +218,20 @@ export default function SenceAddonPage() {
                    </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Clients / Social Proof */}
+        <section className="py-16 border-y border-white/5 bg-zinc-900/30">
+          <div className="max-w-7xl mx-auto px-6">
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 text-center mb-10">Confían en nuestra tecnología Sence</p>
+            <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all">
+               <span className="text-xl lg:text-2xl font-black tracking-tighter text-white uppercase italic">Skillnest.la</span>
+               <span className="text-xl lg:text-2xl font-black tracking-tighter text-white uppercase italic">Reaprende.cl</span>
+               <span className="text-xl lg:text-2xl font-black tracking-tighter text-white uppercase italic">IpsDatax</span>
+               <span className="text-xl lg:text-2xl font-black tracking-tighter text-white uppercase italic">Educontable</span>
+               <span className="text-xl lg:text-2xl font-black tracking-tighter text-white uppercase italic">MeCapacito</span>
             </div>
           </div>
         </section>
