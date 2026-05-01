@@ -250,9 +250,6 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
-      </section>
-
-
       {/* Feature Bento Grid */}
       <section className="py-24 max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
