@@ -364,7 +364,6 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
       {/* Final CTA */}
       <section className="py-32 px-6">
         <div className="max-w-6xl mx-auto bg-gradient-to-br from-violet-600 to-indigo-700 rounded-[5rem] p-12 lg:p-24 text-center text-white relative overflow-hidden shadow-3xl">
-          <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
           <div className="relative z-10">
             <h2 className="text-5xl lg:text-8xl font-black mb-10 tracking-tighter uppercase leading-[0.85]">
               Hagamos que tu marca <br/>sea <span className="italic font-serif lowercase font-light text-violet-100">Inolvidable.</span>
