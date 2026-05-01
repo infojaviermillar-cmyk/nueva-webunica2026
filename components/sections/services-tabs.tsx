@@ -19,7 +19,7 @@ const serviceData = [
       'Configuración de Pixel y Eventos Ads'
     ],
     image: '/tab-shopify.png',
-    link: '/desarrollo-tiendas-shopify-chile',
+    link: '/desarrollo-tiendas-shopify-en-chile',
     icon: <ShoppingBag className="w-6 h-6" />
   },
   {
