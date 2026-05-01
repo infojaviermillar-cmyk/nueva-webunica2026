@@ -25,17 +25,17 @@ export const metadata: Metadata = {
 export default function PymesPage() {
   const plans = [
     {
-      name: "Landing Express",
-      price: "$240.000 + IVA",
-      desc: "Ideal para campañas específicas o servicios únicos que necesitan conversión rápida.",
+      name: "Landing Express SEO",
+      price: "$340.000 + IVA",
+      desc: "Ideal para campañas específicas o servicios únicos que necesitan conversión rápida y visibilidad inmediata.",
       features: [
         "Diseño de una sola sección (One Page)",
-        "Optimización básica por página con Keywords",
+        "Optimización SEO avanzada con Keywords",
+        "Configuración Google Analytics 4 & Meta Pixel",
         "Análisis SEO de palabras claves inicial",
-        "Contenido optimizado con IA (Hasta 2.000 palabras)",
-        "2 Imágenes premium generadas con IA",
-        "Botón de WhatsApp directo",
-        "Formulario de contacto",
+        "Contenido optimizado con IA (Hasta 2.500 palabras)",
+        "4 Imágenes Full HD generadas con IA",
+        "Botón de WhatsApp directo y Formulario",
         "Pago en 6 cuotas sin interés",
         "Entrega en 5 días"
       ],
@@ -43,15 +43,16 @@ export default function PymesPage() {
       popular: false
     },
     {
-      name: "Web Corporativa",
+      name: "Web Corporativa SEO",
       price: "$360.000 + IVA",
-      desc: "La mejor opción para PYMES que buscan profesionalizar su imagen completa.",
+      desc: "La mejor opción para PYMES que buscan profesionalizar su imagen completa con SEO técnico.",
       features: [
         "Hasta 5 secciones internas",
         "Diseño de sitio web a medida",
+        "Google Analytics 4 & Meta Pixel PRO",
         "Optimización SEO por página avanzada",
         "Análisis SEO y Contenido optimizado con IA",
-        "5 Imágenes premium generadas con IA",
+        "8 Imágenes Full HD generadas con IA",
         "Correos corporativos",
         "Pago en 6 cuotas sin interés",
         "Entrega en 10-15 días"
@@ -60,14 +61,15 @@ export default function PymesPage() {
       popular: true
     },
     {
-      name: "Pyme WordPress Pro",
+      name: "Pyme WordPress Pro SEO",
       price: "$580.000 + IVA",
-      desc: "Sitio web avanzado con gestión de contenido y posicionamiento orgánico.",
+      desc: "Sitio web avanzado con gestión de contenido y estrategia SEO Full de dominio orgánico.",
       features: [
         "Pagina WordPress autogestionable",
         "Estrategia SEO Full (Arquitectura & Contenido)",
+        "Configuración GA4, Meta Pixel & API Conversiones",
         "Contenido optimizado con IA (Blog inicial)",
-        "10 Imágenes premium generadas con IA",
+        "15 Imágenes Full HD generadas con IA",
         "Capacitación de uso avanzada",
         "Pago en 6 cuotas sin interés",
         "Soporte prioritario"
