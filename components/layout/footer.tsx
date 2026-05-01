@@ -131,8 +131,8 @@ export default function Footer() {
             </div>
             
             <div className="flex gap-6">
-              <Link href="/terminos-y-condiciones-de-servicios/" className="text-zinc-500 hover:text-white text-sm transition-colors">
-                Términos
+              <Link href="/terminos-y-condiciones-de-servicios" className="text-zinc-500 hover:text-white text-sm transition-colors">
+                Términos y Condiciones
               </Link>
               <Link href="/licencia-productos/" className="text-zinc-500 hover:text-white text-sm transition-colors">
                 Licencias
