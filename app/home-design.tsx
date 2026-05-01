@@ -9,6 +9,7 @@ import HeroCarousel from '@/components/sections/hero-carousel';
 import MobileCarousel from '@/components/sections/mobile-carousel';
 import HomeFAQ from '@/components/sections/home-faq';
 import PricingPlans from '@/components/sections/pricing-plans';
+import ServicesTabs from '@/components/sections/services-tabs';
 
 export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const projects = [
@@ -301,39 +302,8 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
-      {/* Services Hub - SERVER RENDERED */}
-      <section className="py-32 bg-zinc-950 text-white rounded-[5rem] mx-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-transparent pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl mb-24">
-            <h2 className="text-5xl lg:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-8">
-              Nuestros Centros de <br/><span className="text-violet-500 italic font-serif lowercase font-light">Ingeniería</span>
-            </h2>
-            <p className="text-xl text-zinc-400 font-light leading-relaxed">
-              Desde pequeñas PYMES con gran ambición hasta corporaciones que buscan dominar su nicho global.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: 'Tiendas Shopify', link: '/desarrollo-tiendas-shopify-chile', desc: 'Líderes en e-commerce de alto rendimiento en Chile.', icon: '🛍️' },
-              { title: 'Páginas PYMES', link: '/desarrollo-paginas-web-pymes-chile', desc: 'Presencia profesional y optimizada con planes a medida.', icon: '🏢' },
-              { title: 'SaaS & Custom', link: '/desarrollo-web-nextjs-saas-custom', desc: 'Software a medida escalable sobre Next.js and Supabase.', icon: '⚡' },
-              { title: 'SEO Avanzado', link: '/servicios-seo-posicionamiento-google', desc: 'Dominio de Google mediante ingeniería de contenidos.', icon: '🚀' }
-            ].map((s, i) => (
-              <Link key={i} href={s.link} className="p-10 bg-white/5 border border-white/10 rounded-[3rem] hover:bg-white/10 hover:border-violet-500/50 transition-all group">
-                <div className="text-4xl mb-8 group-hover:scale-125 transition-transform origin-left">{s.icon}</div>
-                <h3 className="text-xl font-black uppercase mb-4 tracking-tight">{s.title}</h3>
-                <p className="text-zinc-500 text-sm font-light leading-relaxed mb-8">{s.desc}</p>
-                <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-violet-600 transition-colors">
-                  <ArrowRight className="w-4 h-4 text-white" />
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Interactive Services Section */}
+      <ServicesTabs />
 
       {/* Pricing Plans Section */}
       <PricingPlans />
