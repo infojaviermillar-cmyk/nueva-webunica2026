@@ -71,7 +71,8 @@ export default function Header({ domain = '' }: { domain?: string }) {
     '/diseno-themes-shopify-personalizados-adobe-xd',
     '/diseno-paginas-web-inmobiliaria',
     '/desarrollo-pagina-web-funeraria',
-    '/complemento-sence-tutor-lms-pro'
+    '/complemento-sence-tutor-lms-pro',
+    '/sistema-cotizaciones-intranet-wordpress'
   ];
 
   const isDarkHero = darkPages.includes(pathname);
@@ -263,6 +264,13 @@ export default function Header({ domain = '' }: { domain?: string }) {
                             <span className="text-[8px] bg-orange-500 text-white px-1.5 py-0.5 rounded font-black">NUEVO</span>
                           </div>
                           <span className="text-[11px] text-zinc-500 font-medium leading-tight">Cumplimiento Tutor LMS</span>
+                        </Link>
+                        <Link href="/sistema-cotizaciones-intranet-wordpress" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Cotizador & Intranet</span>
+                            <span className="text-[8px] bg-orange-500 text-white px-1.5 py-0.5 rounded font-black">NUEVO</span>
+                          </div>
+                          <span className="text-[11px] text-zinc-500 font-medium leading-tight">Gestión B2B y Descuentos</span>
                         </Link>
                       </div>
                     </div>
@@ -460,6 +468,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/complemento-sence-tutor-lms-pro" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-orange-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
                       Plugin Sence Pro
+                    </Link>
+                    <Link href="/sistema-cotizaciones-intranet-wordpress" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-orange-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+                      Cotizador & Intranet
                     </Link>
                   </div>
                 </div>
