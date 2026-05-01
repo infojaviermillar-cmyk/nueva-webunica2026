@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import HomeDesign from './home-design';
-import { getBlogPosts } from '@/lib/blog';
+import { getPublishedPosts } from '@/lib/blog';
 
 export const metadata: Metadata = {
   title: 'Webunica | Agencia de Diseño y Desarrollo Web de Élite',
@@ -8,6 +8,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const posts = await getBlogPosts();
+  const posts = await getPublishedPosts();
   return <HomeDesign posts={posts} />;
 }
