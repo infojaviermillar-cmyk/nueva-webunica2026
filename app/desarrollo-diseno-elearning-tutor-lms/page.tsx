@@ -16,36 +16,81 @@ import {
   MonitorPlay,
   PlayCircle,
   BarChart3,
-  Globe
+  Globe,
+  CheckCircle2,
+  Lock,
+  MousePointer2
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Crear Academia en Línea con Tutor LMS | Sistema E-Learning Profesional Chile',
-  description: 'Desarrollo de plataformas e-learning con Tutor LMS Pro. Instalación en VPS (AWS/DigitalOcean), streaming con Bunny.net y pagos locales (Webpay, Flow). ¡Crea tu curso en línea hoy!',
-  keywords: 'crear academia en linea, crear curso en linea, sistema elearning, tutor lms chile, plataforma cursos online, lms wordpress chile, webpay tutor lms',
+  title: 'Crear Academia Online con Tutor LMS Pro | Plataforma E-learning Chile 2026',
+  description: 'Desarrollamos tu academia online con Tutor LMS Pro. Integración con Webpay, streaming seguro Bunny.net y SEO avanzado para vender tus cursos en Chile y el mundo.',
+  keywords: 'crear academia en linea, crear curso en linea, sistema elearning chile, tutor lms pro beneficios, plataforma cursos online wordpress, lms wordpress chile, webpay tutor lms, academia online santiago',
 };
 
 export default function TutorLMSPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Desarrollo de Academias Online con Tutor LMS Pro",
+    "description": "Servicio profesional de creación y configuración de plataformas e-learning utilizando Tutor LMS Pro, con pagos locales e infraestructura VPS.",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Webunica",
+      "image": "https://webunica.cl/logo-webunica.png.webp",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Santiago",
+        "addressCountry": "CL"
+      }
+    },
+    "areaServed": "CL",
+    "serviceType": "E-learning Development"
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cuáles son los beneficios de Tutor LMS Pro para mi academia?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tutor LMS Pro ofrece una experiencia de usuario superior (UX tipo Netflix), constructor de cursos drag & drop, certificados automáticos, gestión avanzada de cuestionarios y reportes detallados de ventas y progreso de alumnos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo pagar en cuotas mi plataforma e-learning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí, en Webunica ofrecemos la facilidad de pagar hasta en 6 cuotas sin interés utilizando tarjetas de crédito a través de nuestras pasarelas de pago integradas."
+        }
+      }
+    ]
+  };
+
   const lmsFaqs = [
     {
-      question: "¿Por qué usar Tutor LMS en lugar de Moodle?",
-      answer: "Tutor LMS ofrece una experiencia de usuario (UX) moderna y amigable tanto para instructores como para alumnos, similar a Udemy o Coursera. Moodle es una herramienta robusta pero su interfaz es anticuada, compleja de administrar y requiere servidores muy potentes para funcionar con fluidez."
+      question: "¿Qué beneficios reales ofrece Tutor LMS Pro para mi negocio?",
+      answer: "Tutor LMS Pro transforma tu WordPress en una academia de clase mundial. Sus principales beneficios incluyen: Interfaz de usuario (UX) intuitiva que aumenta la retención de alumnos, sistema multi-instructor para crear un marketplace de cursos, reportes avanzados para toma de decisiones basadas en datos, y total compatibilidad con herramientas de marketing para escalar tus ventas."
     },
     {
-      question: "¿Es necesario un VPS para mi academia online?",
-      answer: "Sí, para una experiencia profesional recomendamos servidores VPS en DigitalOcean o AWS. A diferencia del hosting compartido, un VPS garantiza que los videos y la plataforma carguen instantáneamente, incluso con muchos alumnos conectados al mismo tiempo."
+      question: "¿Cómo protege Tutor LMS Pro mi contenido?",
+      answer: "Junto con Tutor LMS Pro, integramos Bunny.net para ofrecer streaming con seguridad DRM. Esto significa que tus cursos están protegidos contra descargas no autorizadas y copias ilegales, asegurando que tu propiedad intelectual esté siempre a salvo."
     },
     {
-      question: "¿Cómo funciona el streaming de video con Bunny.net?",
-      answer: "Integramos Bunny.net para que tus videos se reproduzcan sin interrupciones y estén protegidos contra descargas no autorizadas. Es mucho más económico y profesional que usar Vimeo o YouTube, asegurando que tu contenido sea exclusivo de tu academia."
+      question: "¿Es escalable si tengo miles de alumnos?",
+      answer: "Absolutamente. Al instalar Tutor LMS Pro sobre infraestructura VPS dedicada (AWS o DigitalOcean), tu academia puede soportar miles de usuarios simultáneos sin perder velocidad, algo imposible de lograr en un hosting tradicional compartido."
+    },
+    {
+      question: "¿Por qué Tutor LMS es mejor para el SEO que otras plataformas?",
+      answer: "A diferencia de plataformas cerradas como Teachable o Kajabi, Tutor LMS corre sobre WordPress, dándote control total sobre el SEO. Cada curso y lección puede ser optimizado semánticamente, permitiéndote posicionar tu academia de forma orgánica en los primeros resultados de Google."
     },
     {
       question: "¿Puedo vender mis cursos con Webpay o Mercado Pago?",
       answer: "Totalmente. Configuramos pasarelas de pago chilenas como Webpay (vía Flow o Transbank) y Mercado Pago para que tus alumnos paguen en cuotas y tú recibas el dinero directamente en tu cuenta bancaria."
-    },
-    {
-      question: "¿Cuentan con soporte para el plugin Sence?",
-      answer: "Sí, integramos plugins compatibles con la normativa Sence para que tu plataforma cumpla con los requisitos de asistencia, declaración jurada y log de actividades necesarios para la capacitación corporativa en Chile."
     }
   ];
 
@@ -74,53 +119,53 @@ export default function TutorLMSPage() {
 
   const plans = [
     {
-      name: "LMS ACADEMIA",
+      name: "LMS ACADEMIA SEO",
       price: "$580.000",
       originalPrice: "$680.000",
       highlight: "🎓 Para marcas personales y expertos",
-      desc: "Todo lo necesario para lanzar tu primer curso con una imagen profesional y pagos automáticos.",
+      desc: "Todo lo necesario para lanzar tu primer curso con una imagen profesional y SEO base.",
       features: [
-        "Instalación de WordPress + Tutor LMS",
-        "Diseño de Landing Page de Venta",
-        "Configuración de hasta 3 cursos iniciales",
-        "Integración Webpay (Flow o Mercado Pago)",
+        "Instalación de WordPress + Tutor LMS Pro",
+        "Diseño de Landing Page de Venta SEO",
+        "Google Analytics 4 & Meta Pixel",
+        "Integración Webpay (Hasta 6 Cuotas)",
         "Configuración Bunny.net (Video Seguro)",
         "Certificados automáticos para alumnos",
         "Optimización de velocidad (LCP < 2s)",
-        "Hosting VPS básico (DigitalOcean/Vultr)",
+        "Hosting VPS básico incluido",
         "Soporte por 3 meses"
       ],
       cta: "Empezar Academia"
     },
     {
-      name: "LMS BUSINESS",
+      name: "LMS BUSINESS SEO",
       price: "$780.000",
       originalPrice: "$920.000",
       highlight: "🚀 Para escuelas en crecimiento",
       recommended: true,
-      desc: "La solución completa para academias que necesitan múltiples instructores y herramientas de marketing.",
+      desc: "La solución completa para academias que buscan dominar el mercado con multi-instructores.",
       features: [
         "Todo lo del Plan Academia, más:",
         "Sistema Multi-instructor (Marketplace)",
         "Cuestionarios avanzados y tareas",
-        "Integración con Sence (Opcional)",
+        "Estrategia SEO Full (Silos de Contenido)",
         "Email Marketing automatizado",
         "App móvil básica (Web-view optimizada)",
-        "VPS de alto rendimiento",
+        "VPS de alto rendimiento dedicado",
         "Capacitación de administración total"
       ],
       cta: "Escalar mi Negocio"
     },
     {
-      name: "LMS ENTERPRISE",
+      name: "LMS ENTERPRISE SEO",
       price: "$1.200.000",
       highlight: "🏢 Corporativo y Medida",
       desc: "Plataformas robustas para empresas que requieren integraciones complejas y miles de alumnos.",
       features: [
-        "Todo lo del Plan Business, más:",
         "Infraestructura en AWS (Escalable)",
         "Integración con CRM / ERP",
-        "Desarrollo de funciones a medida",
+        "Cumplimiento Normativo Sence",
+        "Estrategia SEO de Ingeniería Avanzada",
         "Soporte 24/7 y mantenimiento preventivo",
         "Diseño UX/UI exclusivo desde cero",
         "Consultoría estratégica de E-Learning",
@@ -132,6 +177,15 @@ export default function TutorLMSPage() {
 
   return (
     <div className="min-h-screen bg-zinc-950 font-sans antialiased text-white overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
       <main className="pt-32">
         {/* Hero Section */}
         <section className="relative pt-20 pb-32 lg:pt-32 lg:pb-40 overflow-hidden">
@@ -149,19 +203,19 @@ export default function TutorLMSPage() {
               </div>
               
               <h1 className="text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase">
-                Crear tu <br/> <span className="text-rose-500 italic font-serif lowercase font-light">academia en línea</span> <br/> nunca fue tan fácil.
+                Crear tu <br/> <span className="text-rose-500 italic font-serif lowercase font-light">academia en línea</span> <br/> con Tutor LMS Pro.
               </h1>
               
-              <p className="text-lg lg:text-xl text-zinc-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
-                Olvídate de sistemas lentos y complicados. Implementamos tu <strong className="text-white">sistema e-learning</strong> con Tutor LMS Pro sobre servidores VPS de alta velocidad. El Netflix de tus cursos está a un click.
+              <p className="text-lg lg:text-xl text-zinc-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light text-pretty">
+                Desarrollamos tu <strong className="text-white">plataforma e-learning</strong> definitiva. Integración fluida de <strong className="text-white">Tutor LMS Pro</strong> sobre infraestructura VPS de élite. Velocidad, seguridad y posicionamiento SEO garantizados.
               </p>
               
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
                 <LeadButton className="px-10 py-5 bg-rose-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-rose-700 transition-all shadow-xl shadow-rose-600/20 active:scale-95 text-center">
-                  Comenzar con 10% Dto
+                  Lanzar Academia con 10% Dto
                 </LeadButton>
                 <WhatsAppButton className="px-10 py-5 bg-emerald-500 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-emerald-600 transition-all shadow-xl shadow-emerald-500/20 active:scale-95 text-center">
-                  Hablar con un experto
+                  Consultoría vía WhatsApp
                 </WhatsAppButton>
               </div>
             </div>
@@ -171,96 +225,150 @@ export default function TutorLMSPage() {
               <div className="bg-zinc-900 border border-white/10 rounded-[3rem] p-4 shadow-2xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent pointer-events-none" />
                 <div className="relative rounded-[2.5rem] overflow-hidden aspect-video bg-zinc-800 border border-white/5">
-                   {/* Placeholder for an actual image or graphic */}
-                   <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
-                        <PlayCircle className="w-20 h-20 text-rose-500 mx-auto mb-4 opacity-50" />
-                        <div className="space-y-2">
-                           <div className="h-2 w-32 bg-white/10 rounded-full mx-auto" />
-                           <div className="h-2 w-24 bg-white/5 rounded-full mx-auto" />
-                        </div>
-                      </div>
-                   </div>
                    <Image 
                      src="/tutor_lms_hero_new.png" 
-                     alt="Interfaz de Academia Online Tutor LMS" 
+                     alt="Interfaz de Academia Online Tutor LMS Pro - Webunica" 
                      width={800} 
                      height={450} 
-                     className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                     className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000"
                    />
+                   <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <PlayCircle className="w-16 h-16 text-rose-500" />
+                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Moodle vs Tutor LMS */}
-        <section className="py-32 bg-zinc-900/50">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-20">
-              <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase mb-6">Tutor LMS <span className="text-rose-500">vs</span> Moodle</h2>
-              <p className="text-zinc-400 font-light max-w-2xl mx-auto">La educación online cambió. No sigas usando herramientas del siglo pasado.</p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-10 rounded-[3rem] border border-white/5 bg-zinc-950/50">
-                <h3 className="text-xl font-bold mb-8 flex items-center gap-3 text-zinc-500 uppercase tracking-widest">
-                  <span className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-sm">✕</span> El Problema de Moodle
-                </h3>
-                <ul className="space-y-6">
-                  {[
-                    "Interfaz anticuada que ahuyenta a los alumnos.",
-                    "Administración extremadamente compleja y lenta.",
-                    "Consumo excesivo de recursos de servidor.",
-                    "Personalización visual muy limitada y costosa.",
-                    "Curva de aprendizaje frustrante para instructores."
-                  ].map((text, i) => (
-                    <li key={i} className="flex gap-4 items-start text-zinc-500 font-light text-sm">
-                      <span className="text-rose-500 font-bold mt-1">―</span>
-                      {text}
-                    </li>
-                  ))}
-                </ul>
+        {/* Pricing Section - Moved here as requested */}
+        <section id="pricing" className="py-32 bg-white rounded-[4rem] mx-4 text-zinc-900 relative overflow-hidden">
+           {/* Cuotas Highlight Badge */}
+           <div className="absolute top-10 right-10 rotate-12 z-20 hidden md:block">
+              <div className="bg-rose-600 text-white p-6 rounded-full shadow-2xl flex flex-col items-center justify-center w-32 h-32 border-4 border-white">
+                 <span className="text-[10px] font-black uppercase tracking-tighter">Paga hasta</span>
+                 <span className="text-3xl font-black">6</span>
+                 <span className="text-[8px] font-black uppercase tracking-widest text-rose-200">Cuotas sin interés</span>
               </div>
-              <div className="p-10 rounded-[3rem] border border-rose-500/20 bg-rose-500/5 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 blur-3xl rounded-full" />
-                <h3 className="text-xl font-bold mb-8 flex items-center gap-3 text-white uppercase tracking-widest">
-                  <span className="w-8 h-8 rounded-full bg-rose-500 flex items-center justify-center text-sm">✓</span> La Ventaja Tutor LMS
-                </h3>
-                <ul className="space-y-6">
-                  {[
-                    "Diseño moderno estilo Netflix (UX de alto nivel).",
-                    "Constructor de cursos 'Drag & Drop' intuitivo.",
-                    "Carga ultra rápida optimizada para móviles.",
-                    "Certificados dinámicos y gamificación nativa.",
-                    "Fácil integración con marketing y pagos locales."
-                  ].map((text, i) => (
-                    <li key={i} className="flex gap-4 items-start text-zinc-300 font-light text-sm">
-                      <span className="text-rose-500 font-bold mt-1">⚡</span>
-                      {text}
-                    </li>
-                  ))}
-                </ul>
+           </div>
+
+           <div className="max-w-7xl mx-auto px-6">
+              <div className="text-center mb-24">
+                 <div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 border border-rose-100 rounded-full mb-6">
+                    <CreditCard className="w-4 h-4 text-rose-500" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-rose-600">Financiamiento Flexible</span>
+                 </div>
+                 <h2 className="text-4xl lg:text-7xl font-black tracking-tighter uppercase mb-6 leading-none">Planes <br/> <span className="text-rose-600 italic font-serif lowercase font-light">Academia Pro</span></h2>
+                 <p className="text-xl text-zinc-500 font-light max-w-2xl mx-auto mb-8">Estructura tecnológica escalable para vender tus conocimientos sin límites geográficos.</p>
+                 <p className="text-xs font-black text-rose-500 uppercase tracking-widest">Aprovecha hasta 6 cuotas sin interés con todas las tarjetas Bancarias</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                 {plans.map((p, i) => (
+                   <div key={i} className={`relative bg-zinc-50 rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] flex flex-col h-full ${p.recommended ? 'border-rose-500 shadow-3xl shadow-rose-500/10' : 'border-transparent hover:border-rose-100'}`}>
+                      {p.recommended && (
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest">
+                          Recomendado SEO
+                        </div>
+                      )}
+                      
+                      <div className="mb-8">
+                        <h3 className="text-2xl font-black mb-1 uppercase tracking-tight text-zinc-950">{p.name}</h3>
+                        <p className="text-[10px] font-bold text-rose-600 uppercase mb-8 tracking-widest">{p.highlight}</p>
+                        
+                        <div className="mb-6">
+                          {p.originalPrice && (
+                            <div className="text-xs text-zinc-400 line-through font-medium mb-1">{p.originalPrice} + IVA</div>
+                          )}
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-4xl font-black text-zinc-950">{p.price}</span>
+                            <span className="text-[10px] text-zinc-500 font-bold uppercase ml-1">+ IVA</span>
+                          </div>
+                        </div>
+                        <p className="text-sm text-zinc-500 font-light leading-relaxed">{p.desc}</p>
+                      </div>
+
+                      <ul className="space-y-4 mb-12 flex-grow">
+                         {p.features.map((f, idx) => (
+                           <li key={idx} className="text-xs text-zinc-600 flex gap-3 font-medium">
+                              <CheckCircle2 className="w-5 h-5 text-rose-500 shrink-0" />
+                              {f}
+                           </li>
+                         ))}
+                      </ul>
+                      
+                      <LeadButton className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all shadow-xl ${p.recommended ? 'bg-rose-600 text-white shadow-rose-600/20 hover:bg-rose-700' : 'bg-zinc-950 text-white hover:bg-zinc-800'}`}>
+                        {p.cta} - 10% OFF
+                      </LeadButton>
+                   </div>
+                 ))}
+              </div>
+           </div>
+        </section>
+
+        {/* Benefits Focus: Why Tutor LMS Pro? */}
+        <section className="py-32 bg-zinc-950 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <div className="order-2 lg:order-1 relative">
+                <div className="absolute -inset-10 bg-rose-500/5 blur-[100px] rounded-full -z-10" />
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-zinc-900/50 p-8 rounded-[3rem] border border-white/5 flex flex-col items-center text-center group hover:border-rose-500/30 transition-all">
+                    <MousePointer2 className="w-10 h-10 text-rose-500 mb-4" />
+                    <h4 className="text-xs font-black uppercase mb-2">UX Netflix Style</h4>
+                    <p className="text-[10px] text-zinc-500 font-light">Tus alumnos amarán navegar en tus cursos.</p>
+                  </div>
+                  <div className="bg-zinc-900/50 p-8 rounded-[3rem] border border-white/5 flex flex-col items-center text-center group hover:border-rose-500/30 transition-all translate-y-8">
+                    <Lock className="w-10 h-10 text-rose-500 mb-4" />
+                    <h4 className="text-xs font-black uppercase mb-2">Anti-Piratería</h4>
+                    <p className="text-[10px] text-zinc-500 font-light">Streaming blindado con seguridad DRM.</p>
+                  </div>
+                  <div className="bg-zinc-900/50 p-8 rounded-[3rem] border border-white/5 flex flex-col items-center text-center group hover:border-rose-500/30 transition-all">
+                    <TrendingUp className="w-10 h-10 text-rose-500 mb-4" />
+                    <h4 className="text-xs font-black uppercase mb-2">SEO Nativo</h4>
+                    <p className="text-[10px] text-zinc-500 font-light">Posiciona tu academia en Google rápidamente.</p>
+                  </div>
+                  <div className="bg-zinc-900/50 p-8 rounded-[3rem] border border-white/5 flex flex-col items-center text-center group hover:border-rose-500/30 transition-all translate-y-8">
+                    <CreditCard className="w-10 h-10 text-rose-500 mb-4" />
+                    <h4 className="text-xs font-black uppercase mb-2">Venta Automática</h4>
+                    <p className="text-[10px] text-zinc-500 font-light">Recibe pagos 24/7 en tu cuenta bancaria.</p>
+                  </div>
+                </div>
+              </div>
+              <div className="order-1 lg:order-2">
+                 <span className="text-[10px] font-black uppercase tracking-widest text-rose-500 mb-4 block">Potencial Tutor LMS Pro</span>
+                 <h2 className="text-4xl lg:text-6xl font-black mb-8 tracking-tighter uppercase leading-[0.9]">Beneficios de <br/><span className="text-rose-500 italic">Ingeniería Pro</span></h2>
+                 <div className="space-y-6 text-lg text-zinc-400 font-light leading-relaxed">
+                    <p>
+                      <strong className="text-white">Tutor LMS Pro</strong> no es solo un plugin; es un motor de crecimiento educativo. Diseñado para ofrecer una experiencia fluida, permite que el foco sea el aprendizaje y no los problemas técnicos.
+                    </p>
+                    <p>
+                      Al implementar <strong className="text-white">plataformas e-learning</strong> con este sistema, garantizamos una arquitectura escalable. Podrás gestionar múltiples instructores, emitir certificados con marca blanca y analizar el progreso de tus alumnos con datos en tiempo real.
+                    </p>
+                    <p>
+                      Nuestra especialidad en <strong className="text-white">SEO para academias online</strong> asegura que cada curso sea una puerta de entrada para nuevos clientes orgánicos desde Google Chile.
+                    </p>
+                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Features & Tech Stack */}
+        {/* Features Technical Section */}
         <section className="py-32">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
               <div>
-                <h2 className="text-4xl lg:text-6xl font-black mb-8 tracking-tighter uppercase leading-tight">
-                  Tecnología de <br/><span className="text-rose-500">Vanguardia</span>
+                <h2 className="text-4xl lg:text-5xl font-black mb-8 tracking-tighter uppercase leading-tight">
+                  Stack Tecnológico <br/><span className="text-rose-500 italic">E-Learning 2026</span>
                 </h2>
                 <p className="text-xl text-zinc-400 mb-12 font-light leading-relaxed">
-                  Para <strong className="text-white">crear un curso en línea</strong> exitoso, la tecnología debe ser invisible. Nos encargamos de que todo funcione perfecto.
+                  Utilizamos las herramientas más potentes del mercado para que tu academia sea invencible.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                   {features.map((f, i) => (
                     <div key={i} className="group">
-                      <div className="mb-4 p-3 bg-white/5 rounded-2xl w-fit group-hover:bg-rose-500/20 transition-colors">
+                      <div className="mb-4 p-3 bg-white/5 rounded-2xl w-fit group-hover:bg-rose-500/20 transition-all">
                         {f.icon}
                       </div>
                       <h4 className="font-bold text-white mb-2 uppercase tracking-wider text-sm">{f.title}</h4>
@@ -277,8 +385,8 @@ export default function TutorLMSPage() {
                            <MonitorPlay className="w-8 h-8" />
                         </div>
                         <div>
-                           <h4 className="font-bold text-white uppercase text-sm mb-1">Streaming Bunny.net</h4>
-                           <p className="text-zinc-500 text-xs font-light">Video seguro y ultra rápido en todo Chile.</p>
+                           <h4 className="font-bold text-white uppercase text-sm mb-1">Bunny.net High-Speed</h4>
+                           <p className="text-zinc-500 text-xs font-light">Streaming sin buffering en todo el territorio nacional.</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-6">
@@ -286,8 +394,8 @@ export default function TutorLMSPage() {
                            <Globe className="w-8 h-8" />
                         </div>
                         <div>
-                           <h4 className="font-bold text-white uppercase text-sm mb-1">VPS DigitalOcean / AWS</h4>
-                           <p className="text-zinc-500 text-xs font-light">Servidores dedicados para tu academia.</p>
+                           <h4 className="font-bold text-white uppercase text-sm mb-1">VPS Dedicado AWS</h4>
+                           <p className="text-zinc-500 text-xs font-light">Infraestructura robusta para miles de alumnos simultáneos.</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-6">
@@ -295,251 +403,116 @@ export default function TutorLMSPage() {
                            <ShieldCheck className="w-8 h-8" />
                         </div>
                         <div>
-                           <h4 className="font-bold text-white uppercase text-sm mb-1">Certificación Sence</h4>
-                           <p className="text-zinc-500 text-xs font-light">Cumplimiento total para capacitación empresas.</p>
+                           <h4 className="font-bold text-white uppercase text-sm mb-1">Seguridad Avanzada</h4>
+                           <p className="text-zinc-500 text-xs font-light">Protección contra ataques DDoS y backups diarios.</p>
                         </div>
                       </div>
                    </div>
                 </div>
-                <div className="absolute -top-10 -right-10 w-40 h-40 bg-rose-500/20 blur-[80px] rounded-full" />
+                <div className="absolute -top-10 -right-10 w-40 h-40 bg-rose-500/10 blur-[80px] rounded-full" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Qué está incluido section */}
+        {/* Detailed Features section */}
         <section className="py-32 bg-zinc-950 border-y border-white/5">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-20">
-              <h2 className="text-4xl lg:text-6xl font-black mb-6 tracking-tighter uppercase">Qué está incluido</h2>
+            <div className="text-center mb-24">
+              <h2 className="text-4xl lg:text-6xl font-black mb-6 tracking-tighter uppercase leading-[0.9]">Funciones de <br/><span className="text-rose-500 italic">Clase Mundial</span></h2>
               <p className="text-zinc-500 font-light max-w-2xl mx-auto">
-                Obtén más de 100 funciones listas para usar con la suscripción a Tutor LMS Pro.
+                Implementamos más de 100 herramientas nativas para que tu única preocupación sea crear contenido.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-              {/* Creación de cursos */}
-              <div className="space-y-6">
-                <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Creación de cursos</h3>
-                <ul className="space-y-3">
-                  {[
-                    "Creador de cursos intuitivo", "Estudio de IA", "Cursos ilimitados", "Banco de contenidos",
-                    "Curso de regalo", "Protección del contenido del curso", "Compatibilidad con video nativo, YouTube y Vimeo",
-                    "Paquete de cursos", "Filtrado de cursos", "Curso público", "Curso protegido con contraseña",
-                    "Exportación/importación de cursos", "Contenido del curso de goteo", "Vista previa del curso",
-                    "Requisitos previos del curso", "Anexo del curso"
-                  ].map((f, i) => (
-                    <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
-                      <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Cuestionarios y Monetización */}
-              <div className="space-y-6">
-                <div className="space-y-6 mb-12">
-                   <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Cuestionarios poderosos</h3>
-                   <ul className="space-y-3">
-                     {[
-                       "Creador de cuestionarios avanzado", "Múltiples tipos de cuestionarios", "Informe detallado del cuestionario",
-                       "Exportación/importación de cuestionarios"
-                     ].map((f, i) => (
-                       <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
-                         <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
-                         {f}
-                       </li>
-                     ))}
-                   </ul>
-                </div>
-                
-                <div className="space-y-6 mb-12">
-                  <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Monetización</h3>
-                  <ul className="space-y-3">
-                    {[
-                      "Asignación de ganancias y comisiones", "Opción de venta de un solo curso", "Membresía para todo el sitio",
-                      "Inscripciones manuales"
-                    ].map((f, i) => (
-                      <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
-                        <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+              {/* Column 1 */}
+              <div className="space-y-12">
                 <div className="space-y-6">
-                  <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">E-Commerce Nativo</h3>
-                  <ul className="space-y-3">
-                    {[
-                      "Compra única", "Suscripciones integradas", "Afiliación", "Gestión de cupones",
-                      "Gestión de impuestos", "Gestión de pedidos", "Proceso de pago optimizado", "Salida como invitado"
-                    ].map((f, i) => (
-                      <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
-                        <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
-                        {f}
+                  <h3 className="text-rose-500 font-black uppercase tracking-[0.2em] text-xs border-l-4 border-rose-600 pl-4">Gestión Educativa</h3>
+                  <ul className="space-y-4">
+                    {["Creador Drag & Drop", "IA Content Studio", "Streaming Bunny.net", "Protección DRM", "Certificados Pro"].map((f, i) => (
+                      <li key={i} className="flex items-center gap-3 text-[11px] text-zinc-400 font-bold uppercase tracking-wide">
+                        <CheckCircle2 className="w-4 h-4 text-rose-500" /> {f}
                       </li>
                     ))}
                   </ul>
                 </div>
-              </div>
-
-              {/* Estudiantes e Instructores */}
-              <div className="space-y-6">
-                <div className="space-y-6 mb-12">
-                   <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Estudiantes e instructores</h3>
-                   <ul className="space-y-3">
-                     {[
-                       "Estudiantes e instructores ilimitados", "Paneles de control personalizados", "Comunicación directa",
-                       "Preparado para múltiples instructores", "Calificación automatizada", "Cuaderno para instructores"
-                     ].map((f, i) => (
-                       <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
-                         <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
-                         {f}
-                       </li>
-                     ))}
-                   </ul>
-                </div>
-
-                <div className="space-y-6 mb-12">
-                  <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Certificados personalizados</h3>
-                  <ul className="space-y-3">
-                    {[
-                      "Creador de certificados drag & drop", "Certificados con marca blanca", "Certificados ilimitados"
-                    ].map((f, i) => (
-                      <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
-                        <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
                 <div className="space-y-6">
-                  <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Análisis avanzado</h3>
-                  <ul className="space-y-3">
-                    {[
-                      "Informes y análisis detallados", "Análisis de ganancias", "Informe detallado del curso",
-                      "Opción de exportación de análisis"
-                    ].map((f, i) => (
-                      <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
-                        <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
-                        {f}
+                  <h3 className="text-rose-500 font-black uppercase tracking-[0.2em] text-xs border-l-4 border-rose-600 pl-4">Interacción</h3>
+                  <ul className="space-y-4">
+                    {["Foros de Debate", "Q&A en Vivo", "Anuncios Globales", "Notificaciones Push", "Emails Automatizados"].map((f, i) => (
+                      <li key={i} className="flex items-center gap-3 text-[11px] text-zinc-400 font-bold uppercase tracking-wide">
+                        <CheckCircle2 className="w-4 h-4 text-rose-500" /> {f}
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              {/* Second row of grid */}
-              <div className="space-y-6">
-                <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Aprendizaje en tiempo real</h3>
-                <ul className="space-y-3">
-                  {[
-                    "Integración con Zoom", "Integración con Google Meet", "Integración con Google Classroom"
-                  ].map((f, i) => (
-                    <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
-                      <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+              {/* Column 2 */}
+              <div className="space-y-12">
+                <div className="space-y-6">
+                  <h3 className="text-rose-500 font-black uppercase tracking-[0.2em] text-xs border-l-4 border-rose-600 pl-4">Evaluación</h3>
+                  <ul className="space-y-4">
+                    {["Quizzes Avanzados", "Sistema de Tareas", "Calificación Automática", "Reporte de Progreso", "Gamificación"].map((f, i) => (
+                      <li key={i} className="flex items-center gap-3 text-[11px] text-zinc-400 font-bold uppercase tracking-wide">
+                        <CheckCircle2 className="w-4 h-4 text-rose-500" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="space-y-6">
+                  <h3 className="text-rose-500 font-black uppercase tracking-[0.2em] text-xs border-l-4 border-rose-600 pl-4">Monetización</h3>
+                  <ul className="space-y-4">
+                    {["Pagos en 6 Cuotas", "Suscripciones Recurrentes", "Membresías VIP", "Códigos de Descuento", "Sistema de Afiliados"].map((f, i) => (
+                      <li key={i} className="flex items-center gap-3 text-[11px] text-zinc-400 font-bold uppercase tracking-wide">
+                        <CheckCircle2 className="w-4 h-4 text-rose-500" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              <div className="space-y-6">
-                <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Comunicaciones</h3>
-                <ul className="space-y-3">
-                  {[
-                    "Preguntas y respuestas (Q&A)", "Comentarios sobre la lección", "Notificaciones push",
-                    "Opción de anuncio", "Notificaciones en todo el sitio", "Correos electrónicos personalizables",
-                    "Plantillas de correo prediseñadas", "Calendario de eventos"
-                  ].map((f, i) => (
-                    <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
-                      <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+              {/* Column 3 */}
+              <div className="space-y-12">
+                <div className="space-y-6">
+                  <h3 className="text-rose-500 font-black uppercase tracking-[0.2em] text-xs border-l-4 border-rose-600 pl-4">Administración</h3>
+                  <ul className="space-y-4">
+                    {["Panel Multi-instructor", "Dashboard de Ganancias", "Exportación de Datos", "Seguridad 2FA", "Backups Automáticos"].map((f, i) => (
+                      <li key={i} className="flex items-center gap-3 text-[11px] text-zinc-400 font-bold uppercase tracking-wide">
+                        <CheckCircle2 className="w-4 h-4 text-rose-500" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="space-y-6">
+                  <h3 className="text-rose-500 font-black uppercase tracking-[0.2em] text-xs border-l-4 border-rose-600 pl-4">Sincronización</h3>
+                  <ul className="space-y-4">
+                    {["Google Meet / Zoom", "Google Classroom", "Calendario de Eventos", "Integración CRM", "API de Conversiones"].map((f, i) => (
+                      <li key={i} className="flex items-center gap-3 text-[11px] text-zinc-400 font-bold uppercase tracking-wide">
+                        <CheckCircle2 className="w-4 h-4 text-rose-500" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-
-              <div className="space-y-6">
-                <h3 className="text-rose-500 font-bold uppercase tracking-widest text-sm border-l-2 border-rose-500 pl-4">Autenticación</h3>
-                <ul className="space-y-3">
-                  {[
-                    "Autenticación de dos factores (2FA)", "Protección contra el fraude", "Gestionar sesiones activas",
-                    "Verificación de correo electrónico"
-                  ].map((f, i) => (
-                    <li key={i} className="flex items-center gap-3 text-xs text-zinc-400 font-light">
-                      <span className="w-4 h-4 rounded-full bg-rose-500/10 flex items-center justify-center text-[8px] text-rose-500">✓</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
             </div>
           </div>
-        </section>
-
-        {/* Pricing Section */}
-        <section id="pricing" className="py-32 bg-white rounded-[4rem] mx-4 text-zinc-900">
-           <div className="max-w-7xl mx-auto px-6">
-              <div className="text-center mb-24">
-                 <h2 className="text-4xl lg:text-7xl font-black tracking-tighter uppercase mb-6">Planes Academia</h2>
-                 <p className="text-xl text-zinc-500 font-light">Inversión transparente para un negocio escalable.</p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                 {plans.map((p, i) => (
-                   <div key={i} className={`relative bg-zinc-50 rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] ${p.recommended ? 'border-rose-500 shadow-2xl shadow-rose-500/10' : 'border-transparent'}`}>
-                      {p.recommended && (
-                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-rose-500 text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest">
-                          Más Popular
-                        </div>
-                      )}
-                      <h3 className="text-2xl font-black mb-2 uppercase">{p.name}</h3>
-                      <p className="text-xs font-bold text-rose-500 uppercase mb-6">{p.highlight}</p>
-                      
-                      <div className="mb-8">
-                        {p.originalPrice && (
-                          <div className="text-sm text-zinc-400 line-through font-medium mb-1">{p.originalPrice} + iva</div>
-                        )}
-                        <span className="text-4xl font-black text-zinc-950">{p.price}</span>
-                        <span className="text-sm text-zinc-500 font-medium ml-1">+ iva</span>
-                      </div>
-
-                      <p className="text-sm text-zinc-500 font-light mb-10 min-h-[40px]">{p.desc}</p>
-                      
-                      <ul className="space-y-4 mb-12">
-                         {p.features.map((f, idx) => (
-                           <li key={idx} className="text-sm text-zinc-600 flex gap-3">
-                              <span className="text-rose-500 font-bold">✓</span>
-                              {f}
-                           </li>
-                         ))}
-                      </ul>
-                      
-                      <LeadButton className={`w-full py-5 rounded-2xl font-bold uppercase tracking-widest text-[11px] transition-all ${p.recommended ? 'bg-rose-600 text-white shadow-lg shadow-rose-600/30' : 'bg-zinc-950 text-white hover:bg-zinc-800'}`}>
-                        {p.cta} - 10% Dto
-                      </LeadButton>
-                   </div>
-                 ))}
-              </div>
-           </div>
         </section>
 
         {/* Stats Section */}
         <section className="py-32">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
             {[
-              { val: '100%', lab: 'Control de Contenido' },
-              { val: '0%', lab: 'Comisiones por Venta' },
-              { val: '24/7', lab: 'Acceso Alumnos' },
-              { val: '∞', lab: 'Escalabilidad' }
+              { val: '100%', lab: 'Control Total' },
+              { val: '0%', lab: 'Comisiones Externas' },
+              { val: '24/7', lab: 'Venta Automática' },
+              { val: '6', lab: 'Cuotas sin Interés' }
             ].map((s, i) => (
               <div key={i}>
-                <div className="text-4xl lg:text-6xl font-black text-rose-500 mb-2 tracking-tighter">{s.val}</div>
-                <div className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">{s.lab}</div>
+                <div className="text-4xl lg:text-7xl font-black text-rose-500 mb-2 tracking-tighter uppercase">{s.val}</div>
+                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">{s.lab}</div>
               </div>
             ))}
           </div>
@@ -547,21 +520,21 @@ export default function TutorLMSPage() {
 
         {/* CTA Final */}
         <section className="py-32 px-6">
-           <div className="max-w-4xl mx-auto bg-gradient-to-r from-rose-600 to-orange-500 rounded-[3rem] p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl">
+           <div className="max-w-4xl mx-auto bg-gradient-to-r from-rose-600 to-orange-500 rounded-[4rem] p-12 lg:p-24 text-center relative overflow-hidden shadow-3xl">
               <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
               <div className="relative z-10">
-                <h2 className="text-3xl lg:text-5xl font-black text-white mb-8 tracking-tight uppercase leading-tight">
-                  ¿Listo para lanzar tu <br/> <span className="italic font-serif lowercase font-light text-rose-100">primera academia?</span>
+                <h2 className="text-3xl lg:text-6xl font-black text-white mb-10 tracking-tight uppercase leading-[0.85]">
+                   ¿Transformamos tu <br/> <span className="italic font-serif lowercase font-light text-rose-100">conocimiento en ingresos?</span>
                 </h2>
-                <p className="text-rose-100/80 text-lg mb-12 max-w-xl mx-auto font-light">
-                  No dejes que la tecnología te detenga. Nosotros construimos la plataforma, tú pones el conocimiento.
+                <p className="text-rose-100/80 text-xl mb-14 max-w-xl mx-auto font-light leading-relaxed">
+                  Obtén tu academia online profesional con <strong className="text-white">Tutor LMS Pro</strong> y paga en cuotas. Tu libertad financiera comienza con tu primer curso.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                  <LeadButton className="px-12 py-6 bg-white text-rose-600 rounded-full font-black uppercase tracking-widest text-[11px] shadow-xl hover:scale-105 transition-all">
-                    Solicitar con 10% Dto
+                  <LeadButton className="px-14 py-7 bg-white text-rose-600 rounded-full font-black uppercase tracking-widest text-[11px] shadow-2xl hover:scale-105 transition-all">
+                    Solicitar mi Academia -10% Dto
                   </LeadButton>
-                  <WhatsAppButton className="px-12 py-6 bg-zinc-950 text-white rounded-full font-black uppercase tracking-widest text-[11px] shadow-xl hover:scale-105 transition-all">
-                    Consultar por WhatsApp
+                  <WhatsAppButton className="px-14 py-7 bg-zinc-950 text-white rounded-full font-black uppercase tracking-widest text-[11px] shadow-2xl hover:scale-105 transition-all">
+                    Hablar con un Experto
                   </WhatsAppButton>
                 </div>
               </div>
@@ -573,7 +546,7 @@ export default function TutorLMSPage() {
            <FAQSection 
              faqs={lmsFaqs} 
              title="Dudas sobre E-Learning"
-             description="Resolvemos las dudas técnicas más comunes para que lances con confianza."
+             description="Resolvemos tus inquietudes sobre Tutor LMS Pro, pagos y tecnología educativa."
            />
         </div>
       </main>
