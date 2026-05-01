@@ -10,6 +10,7 @@ import MobileCarousel from '@/components/sections/mobile-carousel';
 import HomeFAQ from '@/components/sections/home-faq';
 import PricingPlans from '@/components/sections/pricing-plans';
 import ServicesTabs from '@/components/sections/services-tabs';
+import WorkProcess from '@/components/sections/work-process';
 
 export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const projects = [
@@ -304,6 +305,9 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
 
       {/* Interactive Services Section */}
       <ServicesTabs />
+
+      {/* Work Process Section */}
+      <WorkProcess />
 
       {/* Pricing Plans Section */}
       <PricingPlans />
