@@ -219,7 +219,7 @@ export default function TutorLMSPage() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
                 </span>
-                <span className="text-[10px] font-black tracking-[0.2em] text-rose-400 uppercase">Expertos en E-Learning Chile</span>
+                <span className="text-[14px] font-black tracking-[0.2em] text-rose-400 uppercase">Expertos en E-Learning Chile</span>
               </div>
               
               <h1 className="text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase">
@@ -264,7 +264,7 @@ export default function TutorLMSPage() {
         {/* Clients / Social Proof */}
         <section className="py-16 border-y border-white/5 bg-zinc-900/30">
           <div className="max-w-7xl mx-auto px-6">
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 text-center mb-10">Confían en nuestra ingeniería E-Learning</p>
+            <p className="text-[14px] font-black uppercase tracking-[0.3em] text-zinc-500 text-center mb-10">Confían en nuestra ingeniería E-Learning</p>
             <div className="flex flex-wrap justify-center items-center gap-12 lg:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all">
                <span className="text-xl lg:text-2xl font-black tracking-tighter text-white uppercase italic">Skillnest.la</span>
                <span className="text-xl lg:text-2xl font-black tracking-tighter text-white uppercase italic">Reaprende.cl</span>
@@ -280,7 +280,7 @@ export default function TutorLMSPage() {
            {/* Cuotas Highlight Badge */}
            <div className="absolute top-10 right-10 rotate-12 z-20 hidden md:block">
               <div className="bg-rose-600 text-white p-6 rounded-full shadow-2xl flex flex-col items-center justify-center w-32 h-32 border-4 border-white">
-                 <span className="text-[10px] font-black uppercase tracking-tighter">Paga hasta</span>
+                 <span className="text-[14px] font-black uppercase tracking-tighter">Paga hasta</span>
                  <span className="text-3xl font-black">6</span>
                  <span className="text-[8px] font-black uppercase tracking-widest text-rose-200">Cuotas sin interés</span>
               </div>
@@ -290,7 +290,7 @@ export default function TutorLMSPage() {
               <div className="text-center mb-24">
                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 border border-rose-100 rounded-full mb-6">
                     <CreditCard className="w-4 h-4 text-rose-500" />
-                    <span className="text-[10px] font-black uppercase tracking-widest text-rose-600">Financiamiento Flexible</span>
+                    <span className="text-[14px] font-black uppercase tracking-widest text-rose-600">Financiamiento Flexible</span>
                  </div>
                  <h2 className="text-4xl lg:text-7xl font-black tracking-tighter uppercase mb-6 leading-none">Planes <br/> <span className="text-rose-600 italic font-serif lowercase font-light">Academia Pro</span></h2>
                  <p className="text-xl text-zinc-500 font-light max-w-2xl mx-auto mb-8">Estructura tecnológica escalable para vender tus conocimientos sin límites geográficos.</p>
@@ -301,14 +301,14 @@ export default function TutorLMSPage() {
                  {plans.map((p, i) => (
                    <div key={i} className={`relative bg-zinc-50 rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] flex flex-col h-full ${p.recommended ? 'border-rose-500 shadow-3xl shadow-rose-500/10' : 'border-transparent hover:border-rose-100'}`}>
                       {p.recommended && (
-                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest">
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[14px] font-black px-6 py-2 rounded-full uppercase tracking-widest">
                           Recomendado SEO
                         </div>
                       )}
                       
                       <div className="mb-8">
                         <h3 className="text-2xl font-black mb-1 uppercase tracking-tight text-zinc-950">{p.name}</h3>
-                        <p className="text-[10px] font-bold text-rose-600 uppercase mb-8 tracking-widest">{p.highlight}</p>
+                        <p className="text-[14px] font-bold text-rose-600 uppercase mb-8 tracking-widest">{p.highlight}</p>
                         
                         <div className="mb-6">
                           {p.originalPrice && (
@@ -316,7 +316,7 @@ export default function TutorLMSPage() {
                           )}
                           <div className="flex items-baseline gap-1">
                             <span className="text-4xl font-black text-zinc-950">{p.price}</span>
-                            <span className="text-[10px] text-zinc-500 font-bold uppercase ml-1">+ IVA</span>
+                            <span className="text-[14px] text-zinc-500 font-bold uppercase ml-1">+ IVA</span>
                           </div>
                         </div>
                         <p className="text-sm text-zinc-500 font-light leading-relaxed">{p.desc}</p>
@@ -331,7 +331,7 @@ export default function TutorLMSPage() {
                          ))}
                       </ul>
                       
-                      <LeadButton className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all shadow-xl ${p.recommended ? 'bg-rose-600 text-white shadow-rose-600/20 hover:bg-rose-700' : 'bg-zinc-950 text-white hover:bg-zinc-800'}`}>
+                      <LeadButton className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[14px] transition-all shadow-xl ${p.recommended ? 'bg-rose-600 text-white shadow-rose-600/20 hover:bg-rose-700' : 'bg-zinc-950 text-white hover:bg-zinc-800'}`}>
                         {p.cta} - 10% OFF
                       </LeadButton>
                    </div>
@@ -350,27 +350,27 @@ export default function TutorLMSPage() {
                   <div className="bg-zinc-900/50 p-8 rounded-[3rem] border border-white/5 flex flex-col items-center text-center group hover:border-rose-500/30 transition-all">
                     <MousePointer2 className="w-10 h-10 text-rose-500 mb-4" />
                     <h4 className="text-xs font-black uppercase mb-2">UX Netflix Style</h4>
-                    <p className="text-[10px] text-zinc-500 font-light">Tus alumnos amarán navegar en tus cursos.</p>
+                    <p className="text-[14px] text-zinc-500 font-light">Tus alumnos amarán navegar en tus cursos.</p>
                   </div>
                   <div className="bg-zinc-900/50 p-8 rounded-[3rem] border border-white/5 flex flex-col items-center text-center group hover:border-rose-500/30 transition-all translate-y-8">
                     <Lock className="w-10 h-10 text-rose-500 mb-4" />
                     <h4 className="text-xs font-black uppercase mb-2">Anti-Piratería</h4>
-                    <p className="text-[10px] text-zinc-500 font-light">Streaming blindado con seguridad DRM.</p>
+                    <p className="text-[14px] text-zinc-500 font-light">Streaming blindado con seguridad DRM.</p>
                   </div>
                   <div className="bg-zinc-900/50 p-8 rounded-[3rem] border border-white/5 flex flex-col items-center text-center group hover:border-rose-500/30 transition-all">
                     <TrendingUp className="w-10 h-10 text-rose-500 mb-4" />
                     <h4 className="text-xs font-black uppercase mb-2">SEO Nativo</h4>
-                    <p className="text-[10px] text-zinc-500 font-light">Posiciona tu academia en Google rápidamente.</p>
+                    <p className="text-[14px] text-zinc-500 font-light">Posiciona tu academia en Google rápidamente.</p>
                   </div>
                   <div className="bg-zinc-900/50 p-8 rounded-[3rem] border border-white/5 flex flex-col items-center text-center group hover:border-rose-500/30 transition-all translate-y-8">
                     <CreditCard className="w-10 h-10 text-rose-500 mb-4" />
                     <h4 className="text-xs font-black uppercase mb-2">Venta Automática</h4>
-                    <p className="text-[10px] text-zinc-500 font-light">Recibe pagos 24/7 en tu cuenta bancaria.</p>
+                    <p className="text-[14px] text-zinc-500 font-light">Recibe pagos 24/7 en tu cuenta bancaria.</p>
                   </div>
                 </div>
               </div>
               <div className="order-1 lg:order-2">
-                 <span className="text-[10px] font-black uppercase tracking-widest text-rose-500 mb-4 block">Potencial Tutor LMS Pro</span>
+                 <span className="text-[14px] font-black uppercase tracking-widest text-rose-500 mb-4 block">Potencial Tutor LMS Pro</span>
                  <h2 className="text-4xl lg:text-6xl font-black mb-8 tracking-tighter uppercase leading-[0.9]">Beneficios de <br/><span className="text-rose-500 italic">Ingeniería Pro</span></h2>
                  <div className="space-y-6 text-lg text-zinc-400 font-light leading-relaxed">
                     <p>
@@ -546,7 +546,7 @@ export default function TutorLMSPage() {
             ].map((s, i) => (
               <div key={i}>
                 <div className="text-4xl lg:text-7xl font-black text-rose-500 mb-2 tracking-tighter uppercase">{s.val}</div>
-                <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500">{s.lab}</div>
+                <div className="text-[14px] font-black uppercase tracking-[0.25em] text-zinc-500">{s.lab}</div>
               </div>
             ))}
           </div>
