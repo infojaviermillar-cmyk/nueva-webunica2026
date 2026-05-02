@@ -302,6 +302,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                           <span className="block text-[13px] font-bold text-zinc-950 mb-1 group-hover/tool:text-violet-600">Logística y Envíos</span>
                           <span className="block text-[10px] text-zinc-500 leading-tight">Shipit, Sendu, Bluexpress, Starken</span>
                         </Link>
+                        <Link href="/integracion-erp-shopify-chile" className="group/tool block p-4 bg-white border border-zinc-100 rounded-2xl hover:border-violet-500 hover:shadow-xl transition-all">
+                          <span className="block text-[13px] font-bold text-zinc-950 mb-1 group-hover/tool:text-violet-600">Integración ERP Shopify</span>
+                          <span className="block text-[10px] text-zinc-500 leading-tight">Bsale, Obuma, Defontana, Kame</span>
+                        </Link>
                         <div className="mt-4 p-4 bg-violet-600/5 rounded-2xl border border-violet-600/10">
                           <p className="text-[11px] text-violet-600 leading-relaxed font-bold">Insights técnicos en nuestro blog.</p>
                         </div>
@@ -507,6 +511,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/empresas-de-transporte-y-envios-para-shopify-chile" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-blue-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
                       Envíos & Logística
+                    </Link>
+                    <Link href="/integracion-erp-shopify-chile" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-blue-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                      Integración ERP
                     </Link>
                   </div>
                 </div>

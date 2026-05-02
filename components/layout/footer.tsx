@@ -103,6 +103,11 @@ export default function Footer() {
                     Empresas de Envíos Shopify
                   </Link>
                 </li>
+                <li>
+                  <Link href="/integracion-erp-shopify-chile" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Sistemas ERP para Shopify
+                  </Link>
+                </li>
               </ul>
             </div>
 

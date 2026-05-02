@@ -61,7 +61,7 @@ export default function ShopifyEnChilePage() {
     },
     {
       question: "¿Cómo funciona la Facturación Electrónica con el SII?",
-      answer: "Integramos apps como Obuma o Bsale que emiten boletas y facturas automáticamente al realizar la venta, cumpliendo con toda la normativa tributaria del SII en Chile."
+      answer: "Integramos el checkout de Shopify con tu ERP mediante un conector para emitir boletas y facturas automáticamente al realizar la venta. Trabajamos con Bsale, Obuma, Defontana y Laudus. Revisa nuestra comparativa 'Sistemas ERP para Shopify Chile' en el menú de Herramientas."
     },
     {
       question: "¿Puedo migrar mi tienda desde Jumpseller o WooCommerce?",
