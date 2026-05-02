@@ -93,11 +93,11 @@ export default function DropshippingPage() {
       />
       <main className="pt-[22vh] lg:pt-[12vh] pb-20">
         {/* Animated Hero Section */}
-        <section className="relative px-6 py-20 lg:py-40 overflow-hidden">
+        <section className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600/5 blur-[150px] rounded-full -z-10 animate-pulse" />
           <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-pink-600/5 blur-[120px] rounded-full -z-10" />
           
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-zinc-100 border border-zinc-200 rounded-full">
                 <span className="flex h-2 w-2 relative">
@@ -107,11 +107,11 @@ export default function DropshippingPage() {
                 <span className="text-[10px] font-black tracking-[0.2em] text-purple-600 uppercase">E-commerce Automatizado</span>
               </div>
               
-              <h1 className="text-[2.8rem] xs:text-5xl sm:text-6xl lg:text-[100px] font-black tracking-tighter leading-[0.85] mb-10 uppercase text-zinc-950 break-words">
+              <h1 className="text-[2.2rem] xs:text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950 break-words">
                 DOMINA EL <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-amber-600">DROPSHIPPING</span> <br/>EN CHILE.
               </h1>
               
-              <p className="text-xl text-zinc-600 mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+              <p className="text-lg lg:text-xl text-zinc-600 mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
                 La forma más rápida de <strong className="text-zinc-950">vender sin stock</strong>. Creamos tu <strong className="text-zinc-950">tienda dropshipping</strong> profesional conectando Shopify con <strong className="text-zinc-950">Dropi Chile</strong> para una logística 100% automática.
               </p>
               

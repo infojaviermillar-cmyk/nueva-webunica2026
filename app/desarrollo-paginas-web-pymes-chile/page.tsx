@@ -100,12 +100,12 @@ export default function PymesPage() {
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-zinc-900 overflow-x-hidden">
-      <main className="pt-[10vh] pb-20">
+      <main className="pt-[22vh] lg:pt-[12vh] pb-20">
         {/* Pymes Hero */}
-        <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32">
+        <section className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
           
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-zinc-50 border border-zinc-100 rounded-full">
                 <span className="flex h-2 w-2 relative">
@@ -115,11 +115,11 @@ export default function PymesPage() {
                 <span className="text-[10px] font-black tracking-[0.2em] text-zinc-500 uppercase">Expertos en Desarrollo Web</span>
               </div>
               
-              <h1 className="text-5xl lg:text-[100px] font-black tracking-tighter leading-[0.85] mb-10 uppercase text-zinc-950">
+              <h1 className="text-[2.2rem] xs:text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950 break-words">
                 DISEÑO DE <br/><span className="text-blue-600">PÁGINAS WEB</span> <br/>PARA PYMES.
               </h1>
               
-              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed font-light">
+              <p className="text-lg lg:text-xl text-zinc-500 mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
                 No necesitas solo una web, necesitas una herramienta que venda. Somos especialistas en <strong className="text-zinc-950">desarrollo de paginas web</strong> enfocadas en resultados reales para el mercado chileno.
               </p>
               

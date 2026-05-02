@@ -109,9 +109,9 @@ export default function WooCommercePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="pt-[20vh]">
+      <main className="pt-[22vh] lg:pt-[12vh]">
         {/* Professional Hero Section */}
-        <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32 overflow-hidden">
+        <section className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
           {/* Background Texture Overlay */}
           <div className="absolute inset-0 z-0 opacity-[0.25] pointer-events-none">
             <Image 
@@ -124,15 +124,15 @@ export default function WooCommercePage() {
             <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white"></div>
           </div>
           
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-right">
               <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-violet-600 uppercase bg-violet-50 rounded-full border border-violet-100 uppercase font-black">
                 Soluciones E-commerce de Alto Nivel
               </span>
-              <h1 className="text-6xl lg:text-[7.5rem] font-black tracking-tighter leading-[0.85] mb-10 text-zinc-950 uppercase">
+              <h1 className="text-[2.2rem] xs:text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950 break-words">
                 VENTAS SIN <br/><span className="text-violet-600 font-serif italic lowercase font-light">Comisiones</span>
               </h1>
-              <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty font-light">
+              <p className="text-lg lg:text-xl text-zinc-500 mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
                 Toma el control absoluto de tu negocio con <span className="text-violet-600 font-bold">WooCommerce</span>. Potencia, escalabilidad y la libertad de ser el único dueño de tu éxito digital.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">

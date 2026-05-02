@@ -109,20 +109,20 @@ export default function SaaSPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="pt-[20vh]">
+      <main className="pt-[22vh] lg:pt-[12vh]">
         {/* Futuristic Hero Section */}
-        <section className="relative max-w-7xl mx-auto px-6 py-20 lg:py-40 overflow-hidden">
+        <section className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/20 blur-[150px] rounded-full -z-10 animate-pulse" />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-right">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8">
                 <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
                 <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">Next.js 16 + Supabase + Vercel Stack</span>
               </div>
-              <h1 className="text-5xl lg:text-[90px] font-black tracking-tighter leading-[0.85] mb-10 text-white uppercase">
+              <h1 className="text-[2.2rem] xs:text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-white break-words">
                 TRANSFORMAMOS <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-blue-500 to-emerald-400 font-serif italic lowercase font-light">Código en Negocio</span>
               </h1>
-              <p className="text-xl text-zinc-400 mb-12 max-w-xl leading-relaxed text-pretty font-light">
+              <p className="text-lg lg:text-xl text-zinc-400 mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
                 Desarrollo de software y plataformas SaaS a medida bajo estándares de ingeniería de élite. Velocidad extrema, arquitectura escalable y lógica de negocio compleja.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
