@@ -61,7 +61,7 @@ export default async function AdminDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-32 pb-20">
+    <div className="min-h-screen bg-slate-50 pt-[22vh] lg:pt-[12vh] pb-20">
       <div className="container mx-auto px-6 max-w-7xl">
         
         {/* Welcome Header */}

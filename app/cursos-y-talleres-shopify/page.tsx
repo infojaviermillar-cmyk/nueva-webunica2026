@@ -68,7 +68,7 @@ export default function CoursesPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-32 pb-24 font-sans">
+    <main className="min-h-screen bg-slate-50 pt-[22vh] lg:pt-40 pb-24 font-sans">
       
       {/* Hero Section */}
       <section className="max-w-4xl mx-auto px-6 mb-20 text-center">

@@ -279,7 +279,7 @@ export default function ChecklistCROPage() {
       </div>
 
       {/* ── WIZARD CONTENT ─────────────────────────────────────────────────── */}
-      <div className="max-w-3xl mx-auto px-4 pt-24 pb-32">
+      <div className="max-w-3xl mx-auto px-4 pt-[22vh] lg:pt-[12vh] pb-32">
 
         {/* Back link */}
         <Link href="/desarrollo-tiendas-shopify-en-chile" className="inline-flex items-center gap-2 text-violet-600 font-bold text-sm mb-8 hover:underline group">

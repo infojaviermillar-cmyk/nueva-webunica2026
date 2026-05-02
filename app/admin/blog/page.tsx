@@ -4,7 +4,7 @@ import BlogManager from '@/components/admin/blog-manager';
 
 export default function AdminBlogManagePage() {
   return (
-    <div className="min-h-screen bg-slate-50 pt-32 pb-20">
+    <div className="min-h-screen bg-slate-50 pt-[22vh] lg:pt-[12vh] pb-20">
       <div className="container mx-auto px-6 max-w-7xl">
         
         {/* Breadcrumb */}

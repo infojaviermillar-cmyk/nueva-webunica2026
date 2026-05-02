@@ -37,7 +37,7 @@ export default function PartnersPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-32 pb-24 font-sans">
+    <main className="min-h-screen bg-zinc-950 pt-[22vh] lg:pt-[12vh] pb-24 font-sans">
       
       {/* Hero Section */}
       <section className="max-w-4xl mx-auto px-6 mb-20 text-center">
