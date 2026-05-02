@@ -108,6 +108,11 @@ export default function Footer() {
                     Sistemas ERP para Shopify
                   </Link>
                 </li>
+                <li>
+                  <Link href="/boleta-electronica-facturacion-shopify-chile" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Boleta Electrónica Shopify
+                  </Link>
+                </li>
               </ul>
             </div>
 
