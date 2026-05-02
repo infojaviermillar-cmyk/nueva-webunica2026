@@ -19,7 +19,13 @@ const ALL_SERVICES = [
   "Academias Tutor LMS",
   "Inmobiliarias Premium",
   "Funerarias & Obituarios",
-  "Dropshipping Shopi+Dropi"
+  "Dropshipping Shopi+Dropi",
+  "Configurar Pagos (Webpay, Flow)",
+  "Configurar Envíos (Starken, etc)",
+  "Conectar mi Contabilidad/ERP",
+  "Emisión de Boletas Electrónicas",
+  "Busco trabajo como Freelance",
+  "Soy Agencia y busco Partner"
 ];
 
 export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
