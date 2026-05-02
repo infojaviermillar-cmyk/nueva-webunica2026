@@ -120,7 +120,7 @@ export default function PaymentCommissionsPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-32 pb-24 overflow-hidden font-sans">
+    <main className="min-h-screen bg-slate-50 pt-32 pb-24 overflow-hidden font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -131,14 +131,14 @@ export default function PaymentCommissionsPage() {
         <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
           Guía Financiera E-commerce
         </div>
-        <h1 className="text-4xl lg:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+        <h1 className="text-4xl lg:text-6xl font-black text-zinc-900 tracking-tighter uppercase leading-[0.9] mb-8">
           Comparativa de Comisiones <br/>
           <span className="text-emerald-500 italic font-serif lowercase font-light text-5xl lg:text-7xl">Shopify Chile</span> 2026
         </h1>
-        <p className="text-xl text-zinc-400 font-light leading-relaxed max-w-2xl mx-auto mb-10">
+        <p className="text-xl text-zinc-600 font-light leading-relaxed max-w-2xl mx-auto mb-10">
           Analizamos a fondo los costos reales de Transbank Webpay, Mercado Pago, Flow y VentiPay. Descubre qué pasarela maximiza tus márgenes de ganancia.
         </p>
-        <LeadButton className="px-8 py-4 bg-white text-zinc-950 rounded-full font-bold uppercase tracking-wider text-xs hover:scale-105 transition-transform">
+        <LeadButton className="px-8 py-4 bg-zinc-900 text-white rounded-full font-bold uppercase tracking-wider text-xs hover:scale-105 transition-transform">
           Necesito integrar pagos en mi tienda
         </LeadButton>
       </section>
@@ -149,21 +149,21 @@ export default function PaymentCommissionsPage() {
           <h2 className="text-xl font-bold text-amber-500 mb-3 flex items-center gap-2">
             <span className="text-2xl">⚠️</span> El Costo Oculto: Tarifa de Terceros de Shopify
           </h2>
-          <p className="text-zinc-300 font-light leading-relaxed mb-4">
+          <p className="text-zinc-700 font-light leading-relaxed mb-4">
             Al no operar nativamente <strong>Shopify Payments</strong> en Chile, la plataforma te cobrará una comisión transaccional por usar cualquier pasarela de esta lista. Debes sumar este porcentaje al cálculo de tus precios:
           </p>
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            <li className="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800">
-              <span className="block text-zinc-500 text-xs uppercase mb-1">Plan Basic</span>
-              <strong className="text-xl text-white">2.0%</strong>
+            <li className="bg-slate-1000 p-4 rounded-xl border border-slate-200">
+              <span className="block text-zinc-600 text-xs uppercase mb-1">Plan Basic</span>
+              <strong className="text-xl text-zinc-900">2.0%</strong>
             </li>
-            <li className="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800">
-              <span className="block text-zinc-500 text-xs uppercase mb-1">Plan Shopify</span>
-              <strong className="text-xl text-white">1.0%</strong>
+            <li className="bg-slate-1000 p-4 rounded-xl border border-slate-200">
+              <span className="block text-zinc-600 text-xs uppercase mb-1">Plan Shopify</span>
+              <strong className="text-xl text-zinc-900">1.0%</strong>
             </li>
-            <li className="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800">
-              <span className="block text-zinc-500 text-xs uppercase mb-1">Plan Advanced</span>
-              <strong className="text-xl text-white">0.5%</strong>
+            <li className="bg-slate-1000 p-4 rounded-xl border border-slate-200">
+              <span className="block text-zinc-600 text-xs uppercase mb-1">Plan Advanced</span>
+              <strong className="text-xl text-zinc-900">0.5%</strong>
             </li>
           </ul>
         </div>
@@ -172,46 +172,46 @@ export default function PaymentCommissionsPage() {
       {/* Gateway Cards Grid */}
       <section className="max-w-7xl mx-auto px-6 mb-32">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-black text-white uppercase tracking-tight">Pasarelas Disponibles para Chile</h2>
-          <p className="text-zinc-400 mt-4">Tarifas estimadas para transacciones con tarjetas de crédito y débito.</p>
+          <h2 className="text-3xl font-black text-zinc-900 uppercase tracking-tight">Pasarelas Disponibles para Chile</h2>
+          <p className="text-zinc-600 mt-4">Tarifas estimadas para transacciones con tarjetas de crédito y débito.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {gateways.map((gw, idx) => (
-            <div key={idx} className={`p-8 rounded-[2rem] border relative overflow-hidden transition-all duration-300 ${gw.recommended ? 'bg-zinc-900/80 border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.05)]' : 'bg-white/5 border-white/10'}`}>
+            <div key={idx} className={`p-8 rounded-[2rem] border relative overflow-hidden transition-all duration-300 ${gw.recommended ? 'bg-white/80 border-emerald-500/30 shadow-[0_0_30px_rgba(16,185,129,0.05)]' : 'bg-slate-100 border-slate-200'}`}>
               {gw.popular && (
-                <div className="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold uppercase px-4 py-1.5 rounded-bl-xl">
+                <div className="absolute top-0 right-0 bg-emerald-500 text-zinc-900 text-[10px] font-bold uppercase px-4 py-1.5 rounded-bl-xl">
                   Más Utilizada
                 </div>
               )}
               
               <div className="text-4xl mb-4">{gw.logo}</div>
-              <h3 className="text-2xl font-black text-white mb-6 tracking-tight">{gw.name}</h3>
+              <h3 className="text-2xl font-black text-zinc-900 mb-6 tracking-tight">{gw.name}</h3>
               
-              <div className="mb-6 pb-6 border-b border-zinc-800">
-                <div className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-1">Comisión Base Aprox.</div>
+              <div className="mb-6 pb-6 border-b border-slate-200">
+                <div className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mb-1">Comisión Base Aprox.</div>
                 <div className="text-3xl font-black text-emerald-400">{gw.commission}</div>
               </div>
               
               <div className="mb-8">
-                <div className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-2">Liberación del Dinero</div>
-                <div className="text-zinc-300 text-sm">{gw.releaseTime}</div>
+                <div className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mb-2">Liberación del Dinero</div>
+                <div className="text-zinc-700 text-sm">{gw.releaseTime}</div>
               </div>
 
               <div>
-                <div className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-3">Ventajas Clave</div>
+                <div className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mb-3">Ventajas Clave</div>
                 <ul className="space-y-3 mb-6">
                   {gw.pros.map((p, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-zinc-300 font-light leading-snug">
+                    <li key={i} className="flex gap-3 text-sm text-zinc-700 font-light leading-snug">
                       <span className="text-emerald-500 shrink-0">✓</span> {p}
                     </li>
                   ))}
                 </ul>
 
-                <div className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-3">Consideraciones</div>
+                <div className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mb-3">Consideraciones</div>
                 <ul className="space-y-3">
                   {gw.cons.map((c, i) => (
-                    <li key={i} className="flex gap-3 text-sm text-zinc-400 font-light leading-snug">
+                    <li key={i} className="flex gap-3 text-sm text-zinc-600 font-light leading-snug">
                       <span className="text-amber-500 shrink-0">⚠</span> {c}
                     </li>
                   ))}
@@ -225,10 +225,10 @@ export default function PaymentCommissionsPage() {
       {/* Mid CTA */}
       <section className="bg-emerald-600/10 border-y border-emerald-500/20 py-20 mb-32">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl lg:text-4xl font-black text-white mb-6 tracking-tight">
+          <h2 className="text-3xl lg:text-4xl font-black text-zinc-900 mb-6 tracking-tight">
             ¿Confundido con las configuraciones financieras?
           </h2>
-          <p className="text-zinc-300 mb-8 mx-auto font-light leading-relaxed max-w-2xl">
+          <p className="text-zinc-700 mb-8 mx-auto font-light leading-relaxed max-w-2xl">
             Un error en la pasarela de pago puede costarte carritos abandonados y dinero retenido. Nuestro equipo de expertos en Shopify configura tus métodos de pago con las normativas locales y realiza pruebas exhaustivas (modo test y producción).
           </p>
           <LeadButton className="px-10 py-5 bg-emerald-500 text-zinc-950 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-emerald-400 transition-colors shadow-lg shadow-emerald-500/20">
@@ -246,11 +246,11 @@ export default function PaymentCommissionsPage() {
 
       {/* Final Integration CTA */}
       <section className="max-w-4xl mx-auto px-6 text-center mt-32">
-        <h2 className="text-4xl lg:text-6xl font-black text-white mb-6 tracking-tighter uppercase leading-[0.9]">
+        <h2 className="text-4xl lg:text-6xl font-black text-zinc-900 mb-6 tracking-tighter uppercase leading-[0.9]">
           Vende con total <br/>
           <span className="text-emerald-500 italic font-serif lowercase font-light">seguridad</span>
         </h2>
-        <p className="text-zinc-400 mb-10 mx-auto font-light leading-relaxed max-w-xl">
+        <p className="text-zinc-600 mb-10 mx-auto font-light leading-relaxed max-w-xl">
           Instalamos, probamos y certificamos Webpay, Mercado Pago o la pasarela que mejor se adapte a tu flujo de caja. Delega lo técnico y concéntrate en vender.
         </p>
         <LeadButton className="px-12 py-6 bg-zinc-100 text-zinc-950 rounded-[2rem] font-black uppercase tracking-[0.15em] text-[11px] inline-flex items-center justify-center hover:bg-white transition-all hover:scale-105 active:scale-95">

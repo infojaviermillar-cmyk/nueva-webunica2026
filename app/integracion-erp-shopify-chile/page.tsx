@@ -110,7 +110,7 @@ export default function ErpIntegrationPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-32 pb-24 overflow-hidden font-sans">
+    <main className="min-h-screen bg-slate-50 pt-32 pb-24 overflow-hidden font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -121,14 +121,14 @@ export default function ErpIntegrationPage() {
         <div className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
           Operaciones y Automatización
         </div>
-        <h1 className="text-4xl lg:text-6xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
+        <h1 className="text-4xl lg:text-6xl font-black text-zinc-900 tracking-tighter uppercase leading-[0.9] mb-8">
           Integración ERP para <br/>
           <span className="text-violet-500 italic font-serif lowercase font-light text-5xl lg:text-7xl">Shopify Chile</span>
         </h1>
-        <p className="text-xl text-zinc-400 font-light leading-relaxed max-w-2xl mx-auto mb-10">
+        <p className="text-xl text-zinc-600 font-light leading-relaxed max-w-2xl mx-auto mb-10">
           Descubre los costos reales y la mejor forma de sincronizar inventario, precios y emisión de DTE (SII) con Bsale, Obuma, Defontana, Kame y Laudus.
         </p>
-        <LeadButton className="px-8 py-4 bg-white text-zinc-950 rounded-full font-bold uppercase tracking-wider text-xs hover:scale-105 transition-transform">
+        <LeadButton className="px-8 py-4 bg-zinc-900 text-white rounded-full font-bold uppercase tracking-wider text-xs hover:scale-105 transition-transform">
           Cotizar Integración de ERP
         </LeadButton>
       </section>
@@ -139,11 +139,11 @@ export default function ErpIntegrationPage() {
           <h2 className="text-xl font-bold text-emerald-500 mb-3 flex items-center gap-2">
             <span className="text-2xl">💡</span> El Desafío del Checkout en Chile
           </h2>
-          <p className="text-zinc-300 font-light leading-relaxed mb-4">
+          <p className="text-zinc-700 font-light leading-relaxed mb-4">
             Para que cualquier ERP pueda emitir una factura en Chile de forma automática, necesita capturar el <strong>RUT</strong>, <strong>Giro</strong> y <strong>Razón Social</strong> del cliente en la pantalla de pagos de Shopify. 
           </p>
-          <div className="bg-zinc-900/50 p-6 rounded-xl border border-zinc-800 mt-6">
-            <p className="text-zinc-400 text-sm leading-relaxed">
+          <div className="bg-slate-1000 p-6 rounded-xl border border-slate-200 mt-6">
+            <p className="text-zinc-600 text-sm leading-relaxed">
               Shopify no trae estos campos por defecto. Nuestro equipo de desarrollo se encarga de inyectar y mapear estos campos tributarios en el carrito (o mediante la API del checkout) para asegurar que la integración con tu ERP no falle al momento de emitir el Documento Tributario Electrónico (DTE).
             </p>
           </div>
@@ -153,16 +153,16 @@ export default function ErpIntegrationPage() {
       {/* ERP Comparison Grid */}
       <section className="max-w-7xl mx-auto px-6 mb-32">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-black text-white uppercase tracking-tight">Sistemas ERP en Chile vs Shopify</h2>
-          <p className="text-zinc-400 mt-4 max-w-2xl mx-auto">Comparativa de las herramientas líderes en el mercado, métodos de conexión y costos asociados ocultos.</p>
+          <h2 className="text-3xl font-black text-zinc-900 uppercase tracking-tight">Sistemas ERP en Chile vs Shopify</h2>
+          <p className="text-zinc-600 mt-4 max-w-2xl mx-auto">Comparativa de las herramientas líderes en el mercado, métodos de conexión y costos asociados ocultos.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {erps.map((erp, idx) => (
-            <div key={idx} className={`p-8 md:p-10 rounded-[2.5rem] border relative transition-all duration-300 flex flex-col ${erp.recommended ? 'bg-zinc-900/80 border-violet-500/30 shadow-[0_0_40px_rgba(139,92,246,0.08)]' : 'bg-white/5 border-white/10'}`}>
+            <div key={idx} className={`p-8 md:p-10 rounded-[2.5rem] border relative transition-all duration-300 flex flex-col ${erp.recommended ? 'bg-white/80 border-violet-500/30 shadow-[0_0_40px_rgba(139,92,246,0.08)]' : 'bg-slate-100 border-slate-200'}`}>
               
               {erp.recommended && (
-                <div className="absolute top-0 right-0 px-4 py-2 bg-violet-600 text-white text-[10px] font-black uppercase tracking-widest rounded-bl-3xl rounded-tr-[2.5rem]">
+                <div className="absolute top-0 right-0 px-4 py-2 bg-violet-600 text-zinc-900 text-[10px] font-black uppercase tracking-widest rounded-bl-3xl rounded-tr-[2.5rem]">
                   Recomendado
                 </div>
               )}
@@ -170,13 +170,13 @@ export default function ErpIntegrationPage() {
               <div className="flex items-center gap-5 mb-6">
                 <div className="text-5xl">{erp.logo}</div>
                 <div>
-                  <h3 className="text-3xl font-black text-white tracking-tight">{erp.name}</h3>
+                  <h3 className="text-3xl font-black text-zinc-900 tracking-tight">{erp.name}</h3>
                   <div className="text-violet-400 text-[11px] font-bold uppercase tracking-widest mt-1">{erp.type}</div>
                 </div>
               </div>
               
-              <div className="inline-block bg-zinc-950 px-4 py-2 rounded-xl border border-zinc-800 text-zinc-300 text-sm font-medium mb-8 w-fit">
-                <span className="text-zinc-500 mr-2">Costos:</span> {erp.pricing}
+              <div className="inline-block bg-slate-50 px-4 py-2 rounded-xl border border-slate-200 text-zinc-700 text-sm font-medium mb-8 w-fit">
+                <span className="text-zinc-600 mr-2">Costos:</span> {erp.pricing}
               </div>
 
               <div className="grid md:grid-cols-2 gap-8 flex-grow">
@@ -187,7 +187,7 @@ export default function ErpIntegrationPage() {
                   </div>
                   <ul className="space-y-4">
                     {erp.pros.map((p, i) => (
-                      <li key={i} className="text-sm text-zinc-300 font-light leading-relaxed">
+                      <li key={i} className="text-sm text-zinc-700 font-light leading-relaxed">
                         {p}
                       </li>
                     ))}
@@ -200,7 +200,7 @@ export default function ErpIntegrationPage() {
                   </div>
                   <ul className="space-y-4">
                     {erp.cons.map((c, i) => (
-                      <li key={i} className="text-sm text-zinc-400 font-light leading-relaxed">
+                      <li key={i} className="text-sm text-zinc-600 font-light leading-relaxed">
                         {c}
                       </li>
                     ))}
@@ -216,13 +216,13 @@ export default function ErpIntegrationPage() {
       {/* Mid CTA */}
       <section className="bg-violet-600/10 border-y border-violet-500/20 py-20 mb-32">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl lg:text-4xl font-black text-white mb-6 tracking-tight">
+          <h2 className="text-3xl lg:text-4xl font-black text-zinc-900 mb-6 tracking-tight">
             ¿Vendes sin conexión al ERP?
           </h2>
-          <p className="text-zinc-300 mb-8 mx-auto font-light leading-relaxed max-w-2xl">
+          <p className="text-zinc-700 mb-8 mx-auto font-light leading-relaxed max-w-2xl">
             La digitación manual de boletas y el control de inventario en planillas es el cuello de botella #1 para crecer. Nosotros configuramos la topología completa: Shopify + Medio de Pago + Logística + ERP.
           </p>
-          <LeadButton className="px-10 py-5 bg-violet-600 text-white rounded-full font-bold uppercase tracking-wider text-sm hover:bg-violet-500 transition-colors shadow-lg shadow-violet-500/20">
+          <LeadButton className="px-10 py-5 bg-violet-600 text-zinc-900 rounded-full font-bold uppercase tracking-wider text-sm hover:bg-violet-500 transition-colors shadow-lg shadow-violet-500/20">
             Automatizar Mi Operación
           </LeadButton>
         </div>
@@ -237,11 +237,11 @@ export default function ErpIntegrationPage() {
 
       {/* Final CTA */}
       <section className="max-w-4xl mx-auto px-6 text-center mt-32">
-        <h2 className="text-4xl lg:text-6xl font-black text-white mb-6 tracking-tighter uppercase leading-[0.9]">
+        <h2 className="text-4xl lg:text-6xl font-black text-zinc-900 mb-6 tracking-tighter uppercase leading-[0.9]">
           Contabilidad en <br/>
           <span className="text-violet-500 italic font-serif lowercase font-light">sincronía perfecta</span>
         </h2>
-        <p className="text-zinc-400 mb-10 mx-auto font-light leading-relaxed max-w-xl">
+        <p className="text-zinc-600 mb-10 mx-auto font-light leading-relaxed max-w-xl">
           Evita quiebres de stock, olvídate de digitar boletas a mano y dedica tu tiempo a estrategias de crecimiento comercial.
         </p>
         <LeadButton className="px-12 py-6 bg-zinc-100 text-zinc-950 rounded-[2rem] font-black uppercase tracking-[0.15em] text-[11px] inline-flex items-center justify-center hover:bg-white transition-all hover:scale-105 active:scale-95">
