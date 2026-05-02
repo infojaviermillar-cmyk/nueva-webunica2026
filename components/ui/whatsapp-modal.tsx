@@ -24,6 +24,7 @@ const ALL_SERVICES = [
   "Configurar Envíos (Starken, etc)",
   "Conectar mi Contabilidad/ERP",
   "Emisión de Boletas Electrónicas",
+  "Talleres y Cursos Shopify",
   "Busco trabajo como Freelance",
   "Soy Agencia y busco Partner"
 ];

@@ -113,6 +113,11 @@ export default function Footer() {
                     Boleta Electrónica Shopify
                   </Link>
                 </li>
+                <li>
+                  <Link href="/cursos-y-talleres-shopify" className="text-sm font-bold text-amber-400 hover:text-white transition-colors pb-1 inline-block">
+                    Academia: Cursos Shopify
+                  </Link>
+                </li>
               </ul>
             </div>
 
