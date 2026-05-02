@@ -137,9 +137,10 @@ export default function DisenoWebShopifyPage() {
               <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-violet-50 border border-violet-100 rounded-full">
                 <span className="text-[10px] font-black tracking-[0.2em] text-violet-600 uppercase">Diseño Shopify Profesional</span>
               </div>
-              <h1 className="text-5xl lg:text-[70px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950">
+              <h1 className="text-[2.2rem] xs:text-4xl sm:text-5xl lg:text-[70px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950 break-words">
                 Diseño <span className="text-violet-600 italic font-serif lowercase font-light">Tiendas Shopify</span> Chile
               </h1>
+
               <p className="text-lg lg:text-xl text-zinc-500 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
                 Creamos experiencias visuales que venden. Especialistas en <strong className="text-zinc-900">diseño ecommerce Shopify</strong>. Optimizamos cada pixel para que tu marca destaque en el mercado chileno.
               </p>

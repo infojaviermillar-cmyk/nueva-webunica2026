@@ -36,18 +36,21 @@ export default function Page() {
   ];
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-[20vh] pb-24">
+    <main className="min-h-screen bg-white pt-[20vh] pb-24">
+
       {/* Hero FAQ */}
       <section className="max-w-7xl mx-auto px-6 mb-20 text-center">
-        <div className="inline-block px-4 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
+        <div className="inline-block px-4 py-1.5 rounded-full bg-violet-50 border border-violet-100 text-violet-600 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
           Centro de Conocimiento Shopify 2026
         </div>
-        <h1 className="text-4xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-8">
-          Preguntas <span className="text-violet-500 italic font-serif lowercase font-light text-5xl lg:text-8xl">frecuentes</span> <br/>sobre Shopify Chile
+        <h1 className="text-[2.2rem] xs:text-4xl lg:text-7xl font-black text-zinc-950 tracking-tighter uppercase leading-[0.9] mb-8 break-words">
+          Preguntas <span className="text-violet-600 italic font-serif lowercase font-light text-[2rem] xs:text-4xl lg:text-8xl">frecuentes</span> <br/>sobre Shopify Chile
         </h1>
-        <p className="text-xl text-zinc-400 max-w-2xl mx-auto font-light leading-relaxed">
+
+        <p className="text-xl text-zinc-600 max-w-2xl mx-auto font-light leading-relaxed">
           Resolvemos todas tus dudas técnicas y comerciales para que lances tu tienda online con éxito en el mercado chileno.
         </p>
+
       </section>
 
       {/* FAQ Grid */}
@@ -62,22 +65,23 @@ export default function Page() {
 
       {/* Trust Blocks */}
       <section className="max-w-7xl mx-auto px-6 mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 text-center uppercase">
-        <div className="p-10 border border-white/5 bg-white/5 rounded-[3rem]">
+        <div className="p-10 border border-zinc-100 bg-zinc-50 rounded-[3rem]">
           <span className="text-3xl mb-4 block">📈</span>
-          <h3 className="text-white font-bold mb-2 tracking-widest text-xs">Ventas 24/7</h3>
-          <p className="text-zinc-500 text-[10px] font-medium leading-relaxed">Tu tienda nunca duerme, automatiza tus ingresos.</p>
+          <h3 className="text-zinc-950 font-bold mb-2 tracking-widest text-xs">Ventas 24/7</h3>
+          <p className="text-zinc-600 text-[10px] font-medium leading-relaxed">Tu tienda nunca duerme, automatiza tus ingresos.</p>
         </div>
-        <div className="p-10 border border-white/5 bg-white/5 rounded-[3rem]">
+        <div className="p-10 border border-zinc-100 bg-zinc-50 rounded-[3rem]">
           <span className="text-3xl mb-4 block">🔒</span>
-          <h3 className="text-white font-bold mb-2 tracking-widest text-xs">Seguridad Pro</h3>
-          <p className="text-zinc-500 text-[10px] font-medium leading-relaxed">Certificados SSL incluidos y máxima protección de datos.</p>
+          <h3 className="text-zinc-950 font-bold mb-2 tracking-widest text-xs">Seguridad Pro</h3>
+          <p className="text-zinc-600 text-[10px] font-medium leading-relaxed">Certificados SSL incluidos y máxima protección de datos.</p>
         </div>
-        <div className="p-10 border border-white/5 bg-white/5 rounded-[3rem]">
+        <div className="p-10 border border-zinc-100 bg-zinc-50 rounded-[3rem]">
           <span className="text-3xl mb-4 block">🚀</span>
-          <h3 className="text-white font-bold mb-2 tracking-widest text-xs">Escalabilidad</h3>
-          <p className="text-zinc-500 text-[10px] font-medium leading-relaxed">Desde 1 hasta 100,000 productos sin perder rendimiento.</p>
+          <h3 className="text-zinc-950 font-bold mb-2 tracking-widest text-xs">Escalabilidad</h3>
+          <p className="text-zinc-600 text-[10px] font-medium leading-relaxed">Desde 1 hasta 100,000 productos sin perder rendimiento.</p>
         </div>
       </section>
+
 
       {/* Final CTA */}
       <section className="max-w-5xl mx-auto px-6 mt-32">

@@ -131,10 +131,11 @@ export default function PaymentCommissionsPage() {
         <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
           Guía Financiera E-commerce
         </div>
-        <h1 className="text-4xl lg:text-6xl font-black text-zinc-900 tracking-tighter uppercase leading-[0.9] mb-8">
+        <h1 className="text-[2.2rem] xs:text-4xl lg:text-6xl font-black text-zinc-900 tracking-tighter uppercase leading-[0.9] mb-8 break-words">
           Comparativa de Comisiones <br/>
-          <span className="text-emerald-500 italic font-serif lowercase font-light text-5xl lg:text-7xl">Shopify Chile</span> 2026
+          <span className="text-emerald-500 italic font-serif lowercase font-light text-[2rem] xs:text-4xl lg:text-7xl">Shopify Chile</span> 2026
         </h1>
+
         <p className="text-xl text-zinc-600 font-light leading-relaxed max-w-2xl mx-auto mb-10">
           Analizamos a fondo los costos reales de Transbank Webpay, Mercado Pago, Flow y VentiPay. Descubre qué pasarela maximiza tus márgenes de ganancia.
         </p>
