@@ -27,21 +27,16 @@ export const metadata = {
 export default function SenceAddonPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": "SoftwareApplication",
     "name": "Complemento Sence para Tutor LMS Pro",
     "description": "Solución técnica para plataformas Tutor LMS Pro que requieren cumplimiento normativo Sence en Chile.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "WordPress",
     "provider": {
-      "@type": "LocalBusiness",
+      "@type": "Organization",
       "name": "Webunica",
-      "image": "https://webunica.cl/logo-webunica.png.webp",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santiago",
-        "addressCountry": "CL"
-      }
+      "url": "https://webunica.cl/"
     },
-    "areaServed": "CL",
-    "serviceType": "E-learning Compliance Software",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
@@ -57,28 +52,6 @@ export default function SenceAddonPage() {
     ]
   };
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿El complemento cumple con el Libro de Clases Electrónico (LCE)?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí, nuestro complemento genera reportes compatibles con los formatos exigidos por Sence para el Libro de Clases Electrónico, facilitando la auditoría y liquidación de cursos."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Cómo funciona la Declaración Jurada?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Incluimos un módulo de firma digital/check para la Declaración Jurada del alumno al inicio o término del curso, cumpliendo con la normativa vigente de Sence."
-        }
-      }
-    ]
-  };
 
   const senceFaqs = [
     {
@@ -156,10 +129,7 @@ export default function SenceAddonPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+
 
       <main className="pt-32">
         {/* Hero Section */}

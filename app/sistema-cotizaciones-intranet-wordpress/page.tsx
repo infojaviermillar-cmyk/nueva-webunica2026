@@ -28,21 +28,16 @@ export const metadata = {
 export default function QuotationSystemPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": "SoftwareApplication",
     "name": "Sistema de Cotizaciones e Intranet Pro para WordPress",
     "description": "Plataforma integral para la gestión de presupuestos, área privada de clientes y reglas de descuento para sitios WordPress.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "WordPress",
     "provider": {
-      "@type": "LocalBusiness",
+      "@type": "Organization",
       "name": "Webunica",
-      "image": "https://webunica.cl/logo-webunica.png.webp",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santiago",
-        "addressCountry": "CL"
-      }
+      "url": "https://webunica.cl/"
     },
-    "areaServed": "CL",
-    "serviceType": "B2B Sales Software",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
@@ -50,28 +45,6 @@ export default function QuotationSystemPage() {
     }
   };
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿Los usuarios pueden ver sus cotizaciones pasadas?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí, el sistema incluye una Intranet (Área Privada) donde cada usuario puede loguearse y acceder a su historial completo de cotizaciones, estados (Pendiente/Aprobada) y descargar copias en PDF."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Cómo funciona el sistema de descuentos?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Puedes configurar reglas de descuento por perfil de cliente, volumen de compra o cupones específicos que se aplican automáticamente al generar la cotización."
-        }
-      }
-    ]
-  };
 
   const quotationFaqs = [
     {
@@ -149,10 +122,7 @@ export default function QuotationSystemPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+
 
       <main className="pt-32">
         {/* Hero Section */}

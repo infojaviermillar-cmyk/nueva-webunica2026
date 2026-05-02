@@ -34,28 +34,6 @@ export default function DisenoShopifyLandingPage() {
     "serviceType": "E-commerce Design"
   };
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿Cómo mejorar el diseño de mi Shopify para vender más?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Optimizamos la jerarquía visual, la velocidad de carga y simplificamos el proceso de checkout. Un diseño limpio y mobile-first es clave para aumentar la conversión en Chile."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Qué es un Experto Liquid Shopify?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Es un desarrollador que domina el lenguaje de programación nativo de Shopify para crear funciones personalizadas, temas a medida y optimizaciones de código sin depender de apps lentas."
-        }
-      }
-    ]
-  };
 
   const designServices = [
     {
@@ -129,10 +107,7 @@ export default function DisenoShopifyLandingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+
       <div className="min-h-screen bg-white font-sans antialiased text-zinc-900 overflow-x-hidden">
         <main className="pt-32">
           {/* Hero Section */}

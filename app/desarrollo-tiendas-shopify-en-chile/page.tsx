@@ -32,28 +32,6 @@ export default function ShopifyEnChilePage() {
     "serviceType": "E-commerce Development"
   };
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿Cuánto cuesta crear una tienda Shopify en Chile?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "El costo depende de la complejidad. Nuestros planes van desde los $320.000 para ajustes básicos hasta soluciones PRO escalables. Considera además la suscripción mensual de Shopify (desde $19 USD)."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Cómo integrar Webpay en Shopify?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "La forma más estable de usar Webpay en Shopify es a través de pasarelas como Flow, Mercado Pago o Ventipay, las cuales integramos y configuramos al 100%."
-        }
-      }
-    ]
-  };
 
   const processSteps = [
     { step: "01", name: "Briefing Inicial", desc: "Entendemos tu modelo de negocio y objetivos comerciales.", icon: <MessageSquare className="w-6 h-6" /> },
@@ -189,10 +167,7 @@ export default function ShopifyEnChilePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+
       <main className="pt-32">
         {/* Hero Section */}
         <section id="inicio" className="relative pt-20 pb-32 lg:pt-32 lg:pb-40 overflow-hidden">

@@ -32,21 +32,13 @@ export const metadata = {
 export default function TutorLMSPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": "Product",
     "name": "Desarrollo de Academias Online con Tutor LMS Pro",
     "description": "Servicio profesional de creación y configuración de plataformas e-learning utilizando Tutor LMS Pro, con pagos locales e infraestructura VPS.",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Webunica",
-      "image": "https://webunica.cl/logo-webunica.png.webp",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santiago",
-        "addressCountry": "CL"
-      }
+    "brand": {
+      "@type": "Brand",
+      "name": "Webunica"
     },
-    "areaServed": "CL",
-    "serviceType": "E-learning Development",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.9",
@@ -68,28 +60,6 @@ export default function TutorLMSPage() {
     ]
   };
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿Cuáles son los beneficios de Tutor LMS Pro para mi academia?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Tutor LMS Pro ofrece una experiencia de usuario superior (UX tipo Netflix), constructor de cursos drag & drop, certificados automáticos, gestión avanzada de cuestionarios y reportes detallados de ventas y progreso de alumnos."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Puedo pagar en cuotas mi plataforma e-learning?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí, en Webunica ofrecemos la facilidad de pagar hasta en 6 cuotas sin interés utilizando tarjetas de crédito a través de nuestras pasarelas de pago integradas."
-        }
-      }
-    ]
-  };
 
   const lmsFaqs = [
     {
@@ -201,10 +171,7 @@ export default function TutorLMSPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+
 
       <main className="pt-32">
         {/* Hero Section */}

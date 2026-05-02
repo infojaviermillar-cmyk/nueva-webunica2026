@@ -29,28 +29,6 @@ export default function SeoServicePage() {
     "serviceType": "Search Engine Optimization"
   };
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿Por qué mi sitio web no aparece en Google?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Puede deberse a errores técnicos (indexación), falta de autoridad o contenido no optimizado. Realizamos una auditoría técnica para detectar y corregir estos bloqueos de inmediato."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Qué es el SEO Técnico para Next.js?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Es la optimización del renderizado (SSR/ISR), metadatos dinámicos y arquitectura de datos para que Google indexe tu aplicación React de forma eficiente y rápida."
-        }
-      }
-    ]
-  };
 
   const seoFaqs = [
     {
@@ -77,10 +55,7 @@ export default function SeoServicePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+
       
       <main className="pt-[20vh] pb-20">
         {/* Tech Header Section */}
