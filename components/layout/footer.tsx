@@ -10,10 +10,10 @@ export default function Footer() {
 
       <footer className="bg-zinc-950 border-t border-zinc-800/50 pt-16 pb-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 mb-16">
             
             {/* Brand Col */}
-            <div className="flex flex-col gap-6 col-span-2 md:col-span-3 lg:col-span-1">
+            <div className="flex flex-col gap-6 col-span-2 md:col-span-3 lg:col-span-2">
               <div className="flex items-center gap-4">
                 <Link href="/" className="group relative block w-fit">
                   <div 
@@ -111,6 +111,23 @@ export default function Footer() {
                 <li>
                   <Link href="/boleta-electronica-facturacion-shopify-chile" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
                     Boleta Electrónica Shopify
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Links Col 3 */}
+            <div>
+              <h4 className="text-white font-semibold mb-6 uppercase tracking-wider text-xs">Comunidad & Partners</h4>
+              <ul className="space-y-4">
+                <li>
+                  <Link href="/programa-partners-agencias" className="text-sm font-bold text-blue-400 hover:text-white transition-colors pb-1 inline-block">
+                    Programa Partners B2B
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/trabaja-con-nosotros" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Trabaja con Nosotros
                   </Link>
                 </li>
               </ul>
