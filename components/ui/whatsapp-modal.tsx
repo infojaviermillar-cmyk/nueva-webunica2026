@@ -18,7 +18,6 @@ const ALL_SERVICES = [
   "Sitios Web Pymes",
   "Academias Tutor LMS",
   "Inmobiliarias Premium",
-  "Funerarias & Obituarios",
   "Dropshipping Shopi+Dropi",
   "Configurar Pagos (Webpay, Flow)",
   "Configurar Envíos (Starken, etc)",

@@ -70,7 +70,6 @@ export default function Header({ domain = '' }: { domain?: string }) {
     '/desarrollo-paginas-web-pymes-chile',
     '/diseno-themes-shopify-personalizados-adobe-xd',
     '/diseno-paginas-web-inmobiliaria',
-    '/desarrollo-pagina-web-funeraria',
     '/complemento-sence-tutor-lms-pro',
     '/sistema-cotizaciones-intranet-wordpress'
   ];
@@ -239,10 +238,6 @@ export default function Header({ domain = '' }: { domain?: string }) {
                         <Link href="/diseno-paginas-web-inmobiliaria" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
                           <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Inmobiliarias Premium</span>
                           <span className="text-[11px] text-zinc-500 font-medium">Catálogo de propiedades</span>
-                        </Link>
-                        <Link href="/desarrollo-pagina-web-funeraria" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Funerarias & Obituarios</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Software de gestión y homenajes</span>
                         </Link>
                         <Link href="/diseno-paginas-web-odontologia" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
                           <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Clínicas Dentales</span>
@@ -469,10 +464,6 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/diseno-paginas-web-inmobiliaria" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       Inmobiliarias
-                    </Link>
-                    <Link href="/desarrollo-pagina-web-funeraria" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
-                      Funerarias
                     </Link>
                     <Link href="/diseno-paginas-web-odontologia" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
