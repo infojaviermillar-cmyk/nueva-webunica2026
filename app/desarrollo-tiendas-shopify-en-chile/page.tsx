@@ -53,7 +53,11 @@ export default function ShopifyEnChilePage() {
     },
     {
       question: "¿Cuáles son las mejores pasarelas de pago para Shopify Chile?",
-      answer: "Recomendamos Mercado Pago por su alta tasa de aprobación y Flow por su facilidad de integración con Webpay. Ambas son líderes en el mercado chileno por estabilidad."
+      answer: "Recomendamos Transbank Webpay, Mercado Pago por su alta tasa de aprobación y Flow por su facilidad. Revisa nuestra guía de 'Comisiones de Pago Shopify Chile' en la sección de Herramientas para comparar tarifas exactas de este año."
+    },
+    {
+      question: "¿Qué opciones de empresas de transporte y envíos hay para Shopify Chile?",
+      answer: "Para automatizar envíos (Carrier Calculated Shipping) en Chile recomendamos multi-couriers como Shipit o Sendu, o conexiones directas con Bluexpress o Starken. Puedes revisar nuestra guía completa de 'Empresas de Transporte Shopify Chile' en el menú inferior para conocer los costos de integración."
     },
     {
       question: "¿Cómo funciona la Facturación Electrónica con el SII?",

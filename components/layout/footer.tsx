@@ -93,6 +93,16 @@ export default function Footer() {
                     Calculadora Meta Ads
                   </Link>
                 </li>
+                <li>
+                  <Link href="/comisiones-plataformas-de-pago-para-shopify-chile" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Pasarelas de Pago Chile
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/empresas-de-transporte-y-envios-para-shopify-chile" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Empresas de Envíos Shopify
+                  </Link>
+                </li>
               </ul>
             </div>
 
