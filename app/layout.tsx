@@ -65,13 +65,6 @@ export default async function RootLayout({
       lang="es"
       className={`${inter.variable} ${plusJakarta.variable} ${caveat.variable} h-full antialiased`}
     >
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-      </head>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
         <ContactModalProvider>
