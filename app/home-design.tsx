@@ -1,20 +1,16 @@
-"use client";
-
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Smartphone, Code2, Rocket, Zap } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
 import { BlogPost } from '@/lib/blog';
-
-const FeaturedBlogSection = dynamic(() => import('@/components/sections/featured-blog'), { ssr: true });
-const TestimonialsSection = dynamic(() => import('@/components/sections/testimonials'), { ssr: true });
-const HeroCarousel = dynamic(() => import('@/components/sections/hero-carousel'), { ssr: false });
-const MobileCarousel = dynamic(() => import('@/components/sections/mobile-carousel'), { ssr: false });
-const HomeFAQ = dynamic(() => import('@/components/sections/home-faq'), { ssr: true });
-const PricingPlans = dynamic(() => import('@/components/sections/pricing-plans'), { ssr: true });
-const ServicesTabs = dynamic(() => import('@/components/sections/services-tabs'), { ssr: true });
-const WorkProcess = dynamic(() => import('@/components/sections/work-process'), { ssr: true });
+import FeaturedBlogSection from '@/components/sections/featured-blog';
+import TestimonialsSection from '@/components/sections/testimonials';
+import HeroCarousel from '@/components/sections/hero-carousel';
+import MobileCarousel from '@/components/sections/mobile-carousel';
+import HomeFAQ from '@/components/sections/home-faq';
+import PricingPlans from '@/components/sections/pricing-plans';
+import ServicesTabs from '@/components/sections/services-tabs';
+import WorkProcess from '@/components/sections/work-process';
 
 export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const projects = [
