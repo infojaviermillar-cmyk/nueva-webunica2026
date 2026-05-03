@@ -55,23 +55,23 @@ export default function Header({ domain = '' }: { domain?: string }) {
   const darkPages = [
     '/desarrollo-web-nextjs-saas-custom',
     '/contacto',
-    '/servicios-seo-posicionamiento-google',
-    '/calculadora-de-campana-meta-ads-facebook',
-    '/tienda-dropshipping-shopify-dropi'
+    '/calculadora-de-campana-meta-ads-facebook'
   ];
 
   // Páginas con Hero CLARO (Texto Violeta)
   const lightPages = [
     '/',
     '/portafolio',
-    '/desarrollo-tiendas-shopify-chile',
+    '/desarrollo-tiendas-shopify-en-chile',
     '/desarrollo-tienda-en-linea-woocommerce',
     '/desarrollo-diseno-elearning-tutor-lms',
     '/desarrollo-paginas-web-pymes-chile',
     '/diseno-themes-shopify-personalizados-adobe-xd',
     '/diseno-paginas-web-inmobiliaria',
     '/complemento-sence-tutor-lms-pro',
-    '/sistema-cotizaciones-intranet-wordpress'
+    '/sistema-cotizaciones-intranet-wordpress',
+    '/servicios-seo-posicionamiento-google',
+    '/tienda-dropshipping-shopify-y-dropi'
   ];
 
   const isDarkHero = darkPages.includes(pathname);
