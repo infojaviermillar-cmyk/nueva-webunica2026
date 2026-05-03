@@ -31,7 +31,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-[22vh] lg:pt-[12vh] pb-20 overflow-hidden">
+      <section className="relative pt-[22vh] lg:pt-48 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-brand-purple/5 pointer-events-none" />
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-brand-green/10 rounded-full blur-3xl opacity-50" />
         
@@ -100,3 +100,4 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     </div>
   );
 }
+

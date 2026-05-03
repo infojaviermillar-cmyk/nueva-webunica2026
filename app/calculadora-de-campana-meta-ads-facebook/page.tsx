@@ -55,7 +55,7 @@ export default function MetaAdsCalculatorPage() {
 
   return (
     <div className="min-h-screen bg-black text-white font-sans antialiased">
-      <main className="pt-[22vh] lg:pt-[12vh] pb-20">
+      <main className="pt-[22vh] lg:pt-48 pb-20">
         {/* Simple Header for Calculator */}
         <section className="max-w-4xl mx-auto px-6 text-center mb-16">
           <h1 className="text-4xl lg:text-7xl font-black mb-6 tracking-tighter uppercase leading-[0.9]">
@@ -116,3 +116,4 @@ export default function MetaAdsCalculatorPage() {
     </div>
   );
 }
+

@@ -128,7 +128,7 @@ export default function DisenoWebShopifyPage() {
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-zinc-900 overflow-x-hidden">
-      <main className="pt-[22vh] lg:pt-[12vh]">
+      <main className="pt-[22vh] lg:pt-48">
         {/* Hero Section */}
         <section className="relative pt-0 pb-32 lg:pt-0 lg:pb-40">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-violet-600/10 blur-[120px] rounded-full -z-10 translate-x-1/3 -translate-y-1/3" />

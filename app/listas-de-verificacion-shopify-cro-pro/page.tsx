@@ -67,7 +67,7 @@ function ChecklistProContent() {
 
   if (!isPaid) {
     return (
-      <div className="min-h-screen pt-[22vh] lg:pt-[12vh] pb-20 px-4 bg-slate-50">
+      <div className="min-h-screen pt-[22vh] lg:pt-48 pb-20 px-4 bg-slate-50">
         <div className="max-w-xl mx-auto bg-white p-10 rounded-3xl shadow-xl border border-slate-200 text-center">
           <div className="w-20 h-20 bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <Lock className="w-10 h-10 text-violet-600" />
@@ -111,3 +111,4 @@ export default function ChecklistProPage() {
     </Suspense>
   );
 }
+

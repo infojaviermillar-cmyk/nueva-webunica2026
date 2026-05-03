@@ -91,7 +91,7 @@ export default function DropshippingPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="pt-[22vh] lg:pt-[12vh] pb-20">
+      <main className="pt-[22vh] lg:pt-48 pb-20">
         {/* Animated Hero Section */}
         <section className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-purple-600/5 blur-[150px] rounded-full -z-10 animate-pulse" />

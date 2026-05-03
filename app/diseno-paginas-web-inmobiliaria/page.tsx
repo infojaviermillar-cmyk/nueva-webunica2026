@@ -89,7 +89,7 @@ export default function RealEstatePage() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white font-sans antialiased overflow-x-hidden">
-      <main className="pt-[22vh] lg:pt-[12vh] pb-20">
+      <main className="pt-[22vh] lg:pt-48 pb-20">
         {/* Hero Section */}
         <section className="relative px-6 py-20 lg:py-40 overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/10 blur-[150px] rounded-full -z-10" />
@@ -254,3 +254,4 @@ export default function RealEstatePage() {
     </div>
   );
 }
+
