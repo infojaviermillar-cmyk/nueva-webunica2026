@@ -22,45 +22,68 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 31536000, // 1 year cache for optimized images
     remotePatterns: [
       {
-        // Supabase Storage
         protocol: 'https',
         hostname: '*.supabase.co',
         pathname: '/storage/v1/object/public/**',
       },
       {
-        // Unsplash fallback
         protocol: 'https',
         hostname: 'images.unsplash.com',
         pathname: '/**',
       },
       {
-        // DALL-E 3 generated images (Azure CDN)
         protocol: 'https',
         hostname: 'oaidalleapiprodscus.blob.core.windows.net',
         pathname: '/**',
       },
       {
-        // DALL-E images via OpenAI CDN
         protocol: 'https',
         hostname: '*.openai.com',
         pathname: '/**',
       },
       {
-        // Webunica WordPress assets
         protocol: 'https',
         hostname: 'webunica.cl',
         pathname: '/**',
       },
       {
-        // Pravatar for avatars
         protocol: 'https',
         hostname: 'i.pravatar.cc',
         pathname: '/**',
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+        ],
+      },
+      {
+        source: '/fonts/(.*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
 } as any;
 
