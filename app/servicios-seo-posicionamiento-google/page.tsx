@@ -57,22 +57,24 @@ export default function SeoServicePage() {
       />
 
       
-      <main className="pt-[20vh] pb-20">
-        {/* Tech Header Section */}
-        <section className="max-w-7xl mx-auto px-6 py-20 lg:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div>
+      <main className="pt-[22vh] lg:pt-[12vh]">
+        {/* Hero Section */}
+        <section className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-emerald-600/5 blur-[120px] rounded-full pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3" />
+          
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative z-10 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 mb-8">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-widest text-emerald-600">SEO de Ingeniería</span>
               </div>
-              <h1 className="text-[2.2rem] xs:text-4xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-10 break-words uppercase text-zinc-950">
+              <h1 className="text-[2.2rem] xs:text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950 break-words">
                 Domina <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-cyan-600">Google Chile</span>
               </h1>
-              <p className="text-xl text-zinc-600 mb-12 max-w-xl leading-relaxed font-light">
+              <p className="text-lg lg:text-xl text-zinc-600 mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
                 Implementamos <span className="text-violet-600 font-bold uppercase">SEO Técnico Avanzado</span> para que tu marca sea la primera respuesta de tus clientes. No usamos trucos, usamos ciencia de datos y performance.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
                  <LeadButton 
                   className="px-12 py-5 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20 text-center uppercase tracking-widest text-xs"
                  >
@@ -80,7 +82,7 @@ export default function SeoServicePage() {
                  </LeadButton>
               </div>
             </div>
-            <div className="relative group">
+            <div className="relative group hidden lg:block">
               <div className="absolute -inset-10 bg-emerald-500/5 rounded-full blur-[100px] -z-10" />
               <div className="rounded-[3rem] overflow-hidden border border-zinc-200 shadow-2xl bg-white p-2">
                 <Image 
