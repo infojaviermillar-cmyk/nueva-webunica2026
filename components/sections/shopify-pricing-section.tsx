@@ -134,6 +134,7 @@ export default function ShopifyPricingSection() {
         { title: 'Sistema de Reviews de clientes', detail: 'Instalación o configuración de un sistema de reseñas para productos, ayudando a aumentar confianza y conversión.' },
         { title: 'Formulario de Newsletter', detail: 'Configuración de formulario de suscripción para captar correos de potenciales clientes y construir una base de datos comercial.' },
         { title: 'Soporte prioritario 3 meses', detail: 'Soporte posterior a la entrega para resolver dudas, revisar funcionamiento y realizar ajustes menores relacionados con la implementación inicial.' },
+        { title: 'Carrier Calculated Shipping (CCS)', detail: 'Activación de tarifas de envío calculadas por transportistas en tiempo real (Starken, BlueExpress, etc.), permitiendo cobrar el valor exacto del despacho.' },
         { title: 'Entrega en 6 semanas', detail: 'Desarrollo más completo, pensado para tiendas con mayor catálogo y necesidades comerciales más avanzadas.' }
       ]
     },
@@ -155,6 +156,7 @@ export default function ShopifyPricingSection() {
         { title: 'Páginas de aterrizaje a medida', detail: 'Diseño de páginas especiales para campañas, productos destacados, colecciones o promociones. Las landing pages deben estar enfocadas en conversión, con beneficios, llamados a la acción, productos y elementos de confianza.' },
         { title: 'Optimización de velocidad avanzada', detail: 'Revisión avanzada de rendimiento, optimización de imágenes, análisis de apps instaladas, reducción de scripts innecesarios cuando sea posible y mejoras orientadas a carga móvil.' },
         { title: 'Configuración Meta Pixel & API', detail: 'Instalación de Meta Pixel, configuración de eventos principales y preparación de Conversion API cuando sea compatible. Esto permite mejorar la medición de campañas de Facebook e Instagram Ads.' },
+        { title: 'Carrier Calculated Shipping (CCS)', detail: 'Activación de tarifas de envío calculadas por transportistas en tiempo real (Starken, BlueExpress, etc.), permitiendo cobrar el valor exacto del despacho.' },
         { title: 'Consultoría estratégica 1 a 1', detail: 'Sesión estratégica para revisar objetivos comerciales, estructura del catálogo, propuesta de valor, embudo de ventas, campañas, oportunidades de mejora y recomendaciones para escalar la tienda.' }
       ]
     }
