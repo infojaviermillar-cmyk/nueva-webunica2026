@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, ChevronDown, MessageCircle, ArrowRight, Star } from 'lucide-react';
+import { Check, ChevronDown, MessageCircle, ArrowRight, Star, Rocket, Percent } from 'lucide-react';
 import Link from 'next/link';
+import LeadButton from '@/components/ui/lead-button';
 
 interface Feature {
   title: string;
@@ -245,17 +246,16 @@ export default function ShopifyPricingSection() {
                   <span className={plan.textColor}>{plan.time.replace('Entrega en ', '')}</span>
                 </div>
                 
-                <Link 
-                  href="https://wa.me/56984410379"
+                <LeadButton 
                   className={`w-full py-4 rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 transition-all active:scale-95 ${
                     plan.recommended 
                       ? 'bg-purple-600 text-white shadow-xl shadow-purple-600/30 hover:bg-purple-700' 
                       : `${plan.color} text-white shadow-xl shadow-zinc-900/10 hover:opacity-90`
                   }`}
                 >
-                  {plan.cta}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                  <Percent className="w-3.5 h-3.5" />
+                  Obtener 10% Descuento
+                </LeadButton>
 
                 <Link 
                   href="https://wa.me/56984410379"
@@ -314,13 +314,12 @@ export default function ShopifyPricingSection() {
                     </span>
                   </div>
 
-                  <Link 
-                    href="https://wa.me/56984410379"
+                  <LeadButton 
                     className="w-full py-4 rounded-2xl bg-blue-600 text-white font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all active:scale-95"
                   >
-                    {plan.cta}
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+                    <Percent className="w-3.5 h-3.5" />
+                    Quiero mi 10% de Descuento
+                  </LeadButton>
                 </div>
 
                 <div className="w-full md:w-2/3">
