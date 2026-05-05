@@ -5,6 +5,7 @@ import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
 import FunnelAnimation from '@/components/ui/funnel-animation';
 import { MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Palette, Search, Puzzle, Rocket, LayoutTemplate, ShoppingBag, CreditCard, Truck, FileText } from 'lucide-react';
+import ShopifyPricingSection from '@/components/sections/shopify-pricing-section';
 
 export const metadata = {
   title: 'Desarrollo de Tiendas Shopify en Chile | Expertos Shopify Partner 2026',
@@ -81,89 +82,7 @@ export default function ShopifyEnChilePage() {
     { title: "Página de Ayuda/FAQ", desc: "Mejora la confianza y reduce consultas de soporte." }
   ];
 
-  const plans = [
-    {
-      name: "Shopify AJUSTE",
-      price: "$320.000",
-      originalPrice: "$337.000",
-      highlight: "🔧 Optimización de Tiendas",
-      desc: "Ideal para marcas con tienda activa que necesitan mejorar su conversión y diseño visual.",
-      features: [
-        "🎁 Plantilla Premium de regalo",
-        "Auditoría Visual y de UX",
-        "Mejora de navegación y menú",
-        "Optimización de Ficha de Producto",
-        "Configuración de Apps esenciales",
-        "Botón de WhatsApp flotante",
-        "Mejora de velocidad de carga",
-        "Recuperación de carritos",
-        "Entrega en 10 días hábiles"
-      ],
-      time: "2 Semanas",
-      cta: "Cotizar Ajuste"
-    },
-    {
-      name: "Shopify PRENDE",
-      price: "$580.000",
-      originalPrice: "$650.000",
-      highlight: "🌟 Lanzamiento Profesional",
-      desc: "Perfecto para nuevos emprendimientos que buscan una base sólida y escalable en Chile.",
-      features: [
-        "Setup completo de Shopify",
-        "Conexión de dominio propio",
-        "Diseño basado en Plantilla Premium",
-        "Carga inicial de 70 productos",
-        "Configuración de Webpay/Flow",
-        "Integración de Logística básica",
-        "Diseño Mobile-First 100%",
-        "Capacitación de uso básica",
-        "Entrega en 4 semanas"
-      ],
-      time: "4 Semanas",
-      cta: "Iniciar mi Tienda"
-    },
-    {
-      name: "Shopify FULL",
-      price: "$780.000",
-      originalPrice: "$980.000",
-      highlight: "⚙️ Automatización & Ventas",
-      desc: "La solución preferida para negocios en crecimiento que necesitan automatizar procesos.",
-      recommended: true,
-      features: [
-        "Todo lo del Plan Prende, más:",
-        "Carga de hasta 120 productos",
-        "SEO Técnico: Títulos y Metas",
-        "Integración Google Analytics 4",
-        "Diseño personalizado por secciones",
-        "Sistema de Reviews de clientes",
-        "Formulario de Newsletter",
-        "Soporte prioritario 3 meses",
-        "Entrega en 6 semanas"
-      ],
-      time: "6 Semanas",
-      cta: "Cotizar Plan Full"
-    },
-    {
-      name: "Shopify PRO",
-      price: "$1.200.000",
-      originalPrice: "$1.400.000",
-      highlight: "🚀 Escalamiento Total",
-      desc: "Solución de alto nivel para marcas que facturan y necesitan integraciones complejas ERP/CRM.",
-      features: [
-        "Todo lo del Plan FULL, más:",
-        "Migración de hasta 300 productos",
-        "Integración ERP (Bsale/Obuma/Rex)",
-        "Email Marketing (Klaviyo)",
-        "Páginas de aterrizaje a medida",
-        "Optimización de velocidad avanzada",
-        "Configuración Meta Pixel & API",
-        "Consultoría estratégica 1 a 1",
-        "Entrega en 8 semanas"
-      ],
-      time: "8 Semanas",
-      cta: "Hablar con Experto"
-    }
-  ];
+
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-zinc-900 overflow-x-hidden">
@@ -290,44 +209,7 @@ export default function ShopifyEnChilePage() {
           </div>
         </section>
 
-        {/* Pricing Section */}
-        <section id="pricing" className="py-32 bg-zinc-50 border-y border-zinc-100">
-           <div className="max-w-7xl mx-auto px-6">
-              <div className="text-center mb-24">
-                 <h2 className="text-4xl lg:text-7xl font-black tracking-tighter uppercase mb-6 text-zinc-950">Planes Shopify 2026</h2>
-                 <p className="text-xl text-zinc-500 font-light max-w-2xl mx-auto">Invierte en una infraestructura comercial diseñada para escalar. Sin costos ocultos y con resultados medibles.</p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-                 {plans.map((p, i) => (
-                   <div key={i} className={`relative bg-white rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_rgba(124,58,237,0.1)] ${p.recommended ? 'border-violet-600 shadow-2xl shadow-violet-600/10' : 'border-zinc-100'}`}>
-                      <div className="absolute top-8 right-8 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-pulse">
-                        10% OFF
-                      </div>
-                      <h3 className="text-2xl font-black mb-2 uppercase">{p.name}</h3>
-                      <p className="text-xs font-bold text-violet-500 uppercase tracking-wider mb-6">{p.highlight}</p>
-                      <div className="mb-6">
-                        {p.originalPrice && (
-                          <div className="text-sm text-zinc-400 line-through font-medium mb-1">{p.originalPrice} + iva</div>
-                        )}
-                        <span className="text-4xl font-black text-zinc-900">{p.price}</span>
-                        <span className="text-sm text-zinc-500 font-medium ml-2">+ iva</span>
-                      </div>
-                      <ul className="space-y-4 mb-12">
-                         {p.features.map((f, idx) => (
-                           <li key={idx} className="text-sm text-zinc-600 flex gap-3 font-light">
-                              <span className="text-violet-600 font-bold">✓</span>
-                              {f}
-                           </li>
-                         ))}
-                      </ul>
-                      <LeadButton className={`w-full py-5 rounded-2xl font-bold transition-all ${p.recommended ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/30' : 'bg-black text-white hover:bg-zinc-800'}`}>
-                        {p.cta}
-                      </LeadButton>
-                   </div>
-                 ))}
-              </div>
-           </div>
-        </section>
+        <ShopifyPricingSection />
 
         {/* FAQ Section */}
         <div className="pb-32 bg-white">
