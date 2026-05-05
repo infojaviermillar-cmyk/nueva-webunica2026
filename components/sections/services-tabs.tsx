@@ -122,56 +122,72 @@ export default function ServicesTabs() {
   const [activeTab, setActiveTab] = useState(serviceData[0]);
 
   return (
-    <section className="py-32 bg-white relative overflow-hidden" id="servicios">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="py-24 md:py-32 bg-white relative overflow-hidden" id="servicios">
+      {/* Decorative background elements */}
+      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-violet-50/50 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-blue-50/50 blur-[100px] rounded-full pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
-        <div className="max-w-3xl mb-24">
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-violet-50 rounded-full border border-violet-100">
-             <span className="w-2 h-2 bg-violet-600 rounded-full animate-pulse"></span>
-             <span className="text-[10px] font-black tracking-widest text-violet-600 uppercase">Ecosistema de Soluciones</span>
-          </div>
-          <h2 className="text-5xl lg:text-7xl font-black text-zinc-950 tracking-tighter uppercase leading-[0.9] mb-8">
-            Nuestros centros de <br/><span className="text-violet-600 italic font-serif lowercase font-light">Ingeniería</span>
-          </h2>
-          <p className="text-xl text-zinc-500 font-light leading-relaxed">
-            Estrategias digitales de alto rendimiento para cada etapa de tu negocio. Desde el lanzamiento hasta el dominio total de tu nicho.
-          </p>
+        <div className="text-center md:text-left mb-16 md:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 bg-violet-50 rounded-full border border-violet-100">
+               <span className="w-1.5 h-1.5 bg-violet-600 rounded-full animate-pulse"></span>
+               <span className="text-[10px] font-black tracking-widest text-violet-600 uppercase">Ecosistema de Soluciones</span>
+            </div>
+            <h2 className="text-4xl lg:text-7xl font-black text-zinc-950 tracking-tighter uppercase leading-[0.95] mb-8">
+              Centros de <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 italic font-serif lowercase font-normal">Ingeniería Web</span>
+            </h2>
+            <p className="text-lg md:text-xl text-zinc-500 font-light leading-relaxed max-w-2xl">
+              Estrategias digitales de alto rendimiento para cada etapa de tu negocio. Desde el lanzamiento hasta el dominio total de tu nicho.
+            </p>
+          </motion.div>
         </div>
 
         {/* Interactive Tabs Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           
-          {/* Left Menu (Tabs) - Transformed for mobile responsiveness */}
-          <div className="lg:col-span-4 space-y-4">
+          {/* Left Menu (Tabs) - Cleaner & Slimmer */}
+          <div className="lg:col-span-3 space-y-2 relative">
+            {/* Vertical Indicator Bar for Desktop */}
+            <div className="hidden lg:block absolute left-0 top-0 w-[2px] h-full bg-zinc-100 rounded-full" />
+            
             {serviceData.map((service) => (
-              <div key={service.id} className="block">
+              <div key={service.id} className="relative">
                 <button
                   onClick={() => setActiveTab(service)}
-                  className={`w-full p-8 rounded-[2.5rem] text-left transition-all duration-500 group relative flex items-center gap-6 ${
+                  className={`w-full px-6 py-5 rounded-2xl text-left transition-all duration-300 flex items-center gap-4 group relative ${
                     activeTab.id === service.id 
-                    ? 'bg-zinc-950 text-white shadow-2xl shadow-zinc-950/20' 
-                    : 'bg-zinc-50 text-zinc-400 hover:bg-zinc-100'
+                    ? 'bg-violet-50 text-violet-700' 
+                    : 'bg-transparent text-zinc-400 hover:bg-zinc-50 hover:text-zinc-600'
                   }`}
                 >
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors duration-500 ${
-                    activeTab.id === service.id ? 'bg-violet-600 text-white' : 'bg-zinc-200 text-zinc-500 group-hover:bg-violet-100 group-hover:text-violet-600'
-                  }`}>
-                    {service.icon}
-                  </div>
-                  <div>
-                    <h3 className={`text-xl font-black uppercase tracking-tight transition-colors duration-500 ${
-                      activeTab.id === service.id ? 'text-white' : 'text-zinc-500 group-hover:text-zinc-950'
-                    }`}>
-                      {service.menuTitle}
-                    </h3>
-                    <div className={`h-1 bg-violet-600 transition-all duration-500 rounded-full mt-1 ${
-                      activeTab.id === service.id ? 'w-full opacity-100' : 'w-0 opacity-0'
-                    }`}></div>
-                  </div>
+                  {/* Active Indicator Bar */}
                   {activeTab.id === service.id && (
-                    <ArrowRight className="w-5 h-5 ml-auto text-violet-400" />
+                    <motion.div 
+                      layoutId="activeTabIndicator"
+                      className="absolute left-0 top-1/4 bottom-1/4 w-[3px] bg-violet-600 rounded-full"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
                   )}
+                  
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                    activeTab.id === service.id ? 'bg-white shadow-sm text-violet-600' : 'bg-zinc-50 text-zinc-400 group-hover:bg-white group-hover:text-zinc-600'
+                  }`}>
+                    {React.cloneElement(service.icon as React.ReactElement, { className: 'w-5 h-5' })}
+                  </div>
+                  
+                  <span className={`text-sm font-black uppercase tracking-wider transition-colors duration-300 ${
+                    activeTab.id === service.id ? 'text-violet-900' : 'text-zinc-500'
+                  }`}>
+                    {service.menuTitle}
+                  </span>
                 </button>
 
                 {/* Mobile Content Accordion */}
@@ -185,8 +201,8 @@ export default function ServicesTabs() {
                         transition={{ duration: 0.4, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="pt-8 pb-4">
-                          <div className="bg-zinc-50 rounded-[3rem] p-8 border border-zinc-100">
+                        <div className="py-6">
+                          <div className="bg-zinc-50/50 rounded-[2.5rem] p-6 border border-zinc-100">
                              <TabContent activeTab={service} />
                           </div>
                         </div>
@@ -199,15 +215,15 @@ export default function ServicesTabs() {
           </div>
 
           {/* Right Content Area (Desktop Only) */}
-          <div className="hidden lg:block lg:col-span-8">
-            <div className="bg-zinc-50 rounded-[4rem] p-16 border border-zinc-100 transition-all duration-700">
+          <div className="hidden lg:block lg:col-span-9">
+            <div className="bg-zinc-50/30 rounded-[3.5rem] p-12 lg:p-16 border border-zinc-100/50 relative overflow-hidden backdrop-blur-sm">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTab.id}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.4 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
                 >
                   <TabContent activeTab={activeTab} />
                 </motion.div>
