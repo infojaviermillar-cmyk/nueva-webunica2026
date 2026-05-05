@@ -72,22 +72,28 @@ const serviceData = [
 
 const shopifyProjects = [
   {
-    title: 'Aetheria Jewelry',
-    category: 'Joyería de Lujo',
-    image: '/tab-shopify.png',
-    description: 'Tienda de alta gama con optimización de conversión y diseño minimalista.'
+    title: 'Tecno-Mobile',
+    category: 'Electrónica',
+    image: '/clientes/Tecno-Mobile.png',
+    description: 'Tienda Shopify con catálogo masivo y filtros avanzados de búsqueda.'
+  },
+  {
+    title: 'Terra Andes',
+    category: 'Gourmet',
+    image: '/clientes/terranandes.png',
+    description: 'Ecommerce premium con enfoque en storytelling y branding de exportación.'
   },
   {
     title: 'Actusama',
-    category: 'Moda & Estilo',
-    image: '/tab-pymes.png', // Temporary placeholder, will improve
-    description: 'E-commerce escalable con integración de pagos y logística automatizada.'
+    category: 'Moda',
+    image: '/tab-shopify.png', 
+    description: 'Diseño minimalista enfocado en la experiencia de compra móvil.'
   },
   {
-    title: 'FreshCart',
-    category: 'Alimentos & Bebidas',
-    image: '/tab-saas.png', // Temporary placeholder
-    description: 'Plataforma de grocery store con carga ultra rápida y experiencia móvil superior.'
+    title: 'Kinelawen',
+    category: 'Salud',
+    image: '/clientes/kinelawen.png',
+    description: 'Interfaz limpia y profesional para servicios de salud y bienestar.'
   }
 ];
 
