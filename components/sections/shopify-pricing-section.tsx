@@ -208,7 +208,7 @@ export default function ShopifyPricingSection() {
 
               <div className="mb-8">
                 <h3 className="text-xl font-black mb-3 uppercase tracking-tight text-zinc-900">{plan.name}</h3>
-                <p className="text-xs text-zinc-500 font-medium leading-relaxed mb-6 h-12 overflow-hidden">
+                <p className="text-xs text-zinc-500 font-medium leading-relaxed mb-6">
                   {plan.description}
                 </p>
                 
