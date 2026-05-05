@@ -109,60 +109,93 @@ export default function TutorLMSPage() {
 
   const plans = [
     {
-      name: "LMS ACADEMIA SEO",
+      name: "LMS ACADEMIA INICIO",
       price: "$580.000",
       originalPrice: "$680.000",
-      highlight: "🎓 Para marcas personales y expertos",
-      desc: "Todo lo necesario para lanzar tu primer curso con una imagen profesional y SEO base.",
+      highlight: "🎓 Para marcas personales",
+      desc: "La base perfecta para lanzar tu primer curso online con una infraestructura profesional y pagos locales.",
       features: [
         "Instalación de WordPress + Tutor LMS Pro",
-        "Diseño de Landing Page de Venta SEO",
+        "Diseño Kit de Elementor pro Envato",
+        "Landing Page de Venta SEO",
         "Google Analytics 4 & Meta Pixel",
-        "Integración Webpay (Hasta 6 Cuotas)",
-        "Configuración Bunny.net (Video Seguro)",
-        "Certificados automáticos para alumnos",
-        "Optimización de velocidad (LCP < 2s)",
-        "Hosting VPS básico incluido",
+        "Integración Webpay / Mercado Pago / Flow",
+        "Configuración Bunny.net (Básico)",
+        "Optimización de velocidad",
+        "Web adaptable a mobile",
         "Soporte por 3 meses"
       ],
       cta: "Empezar Academia"
     },
     {
-      name: "LMS BUSINESS SEO",
+      name: "LMS BUSINESS PRO",
       price: "$780.000",
-      originalPrice: "$920.000",
-      highlight: "🚀 Para escuelas en crecimiento",
+      originalPrice: "$980.000",
+      highlight: "🚀 El Plan más Solicitado",
       recommended: true,
-      desc: "La solución completa para academias que buscan dominar el mercado con multi-instructores.",
+      desc: "La solución definitiva para academias que buscan dominar su nicho con automatización y SEO de alto nivel.",
       features: [
-        "Todo lo del Plan Academia, más:",
-        "Sistema Multi-instructor (Marketplace)",
+        "Desarrollo Web Academia Tutor LMS",
+        "Instalación WordPress + Tutor LMS Pro",
+        "Diseño Kit Elementor Pro Envato",
+        "Landing Page de Venta SEO",
+        "Google Analytics 4 & Meta Pixel",
+        "Carro de compra e Inicio automatizado",
+        "Configuración de Correo SMTP",
+        "Webpay, Mercado Pago o Flow",
+        "Configuración Bunny.net (Seguro)",
+        "Certificados automáticos",
+        "Optimización de velocidad",
+        "Configuración Hosting VPS",
         "Cuestionarios avanzados y tareas",
-        "Estrategia SEO Full (Silos de Contenido)",
+        "Estrategia SEO Full (Silos)",
         "Email Marketing automatizado",
-        "App móvil básica (Web-view optimizada)",
-        "VPS de alto rendimiento dedicado",
-        "Capacitación de administración total"
+        "Web adaptable a mobile",
+        "Capacitación administración total",
+        "Configuración de 1 curso completo"
       ],
       cta: "Escalar mi Negocio"
     },
     {
       name: "LMS ENTERPRISE SEO",
-      price: "$1.200.000",
-      highlight: "🏢 Corporativo y Medida",
-      desc: "Plataformas robustas para empresas que requieren integraciones complejas y miles de alumnos.",
+      price: "$1.480.000",
+      originalPrice: "$1.850.000",
+      highlight: "🏢 Corporativo y Escalable",
+      desc: "Ecosistema e-learning robusto con multi-instructores, infraestructura de alto tráfico e integraciones personalizadas.",
       features: [
-        "Infraestructura en AWS (Escalable)",
-        "Integración con CRM / ERP",
-        "Cumplimiento Normativo Sence",
+        "Todo lo del Plan Business, más:",
+        "Infraestructura AWS Auto-scalable",
+        "Sistema Multi-instructor (Marketplace)",
+        "Integración con CRM / ERP Externos",
         "Estrategia SEO de Ingeniería Avanzada",
-        "Soporte 24/7 y mantenimiento preventivo",
-        "Diseño UX/UI exclusivo desde cero",
-        "Consultoría estratégica de E-Learning",
-        "Auditoría de seguridad y penetración"
+        "App Móvil (Web-view optimizada)",
+        "Soporte 24/7 y Mantenimiento",
+        "Auditoría de Seguridad Mensual",
+        "Consultoría en Diseño Instruccional"
       ],
       cta: "Contactar Consultor"
     }
+  ];
+
+  const detailedBreakdown = [
+    { item: "Desarrollo Web Academia en Linea Tutor LMS", qty: 1, unit: "$180.000" },
+    { item: "Instalación de WordPress + Tutor LMS Pro", qty: 1, unit: "$80.000" },
+    { item: "Incluye diseño Kit de Elementor pro Envato.", qty: 1, unit: "$60.000" },
+    { item: "Diseño de Landing Page de Venta SEO", qty: 1, unit: "$70.000" },
+    { item: "Google Analytics 4 & Meta Pixel", qty: 1, unit: "$30.000" },
+    { item: "Inegración Carro de compra, inicio automatizado del alumno.", qty: 1, unit: "$50.000" },
+    { item: "Configuracion de sistema de correo SMTP", qty: 1, unit: "$20.000" },
+    { item: "Integración Webpay, mercado pago o Flow", qty: 1, unit: "$40.000" },
+    { item: "Configuración Bunny.net (Video Seguro)", qty: 1, unit: "$40.000" },
+    { item: "Certificados automáticos para alumnos", qty: 1, unit: "$20.000" },
+    { item: "Optimización de velocidad", qty: 1, unit: "$30.000" },
+    { item: "Conguración Hosting VPS", qty: 1, unit: "$30.000" },
+    { item: "Cuestionarios avanzados y tareas", qty: 1, unit: "$30.000" },
+    { item: "Estrategia SEO Full (Silos de Contenido)", qty: 1, unit: "$40.000" },
+    { item: "Email Marketing automatizado", qty: 1, unit: "$30.000" },
+    { item: "Web adaptable a mobile y a distintas pantallas", qty: 1, unit: "$0 (Incl.)" },
+    { item: "Capacitación de administración total", qty: 1, unit: "$0 (Incl.)" },
+    { item: "Incluye la configuracion de 1 curso con lecciones, tareas y cuestionarios.", qty: 1, unit: "$0 (Incl.)" },
   ];
 
   return (
@@ -301,11 +334,71 @@ export default function TutorLMSPage() {
                       <LeadButton className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-[14px] transition-all shadow-xl ${p.recommended ? 'bg-rose-600 text-white shadow-rose-600/20 hover:bg-rose-700' : 'bg-zinc-950 text-white hover:bg-zinc-800'}`}>
                         {p.cta} - 10% OFF
                       </LeadButton>
-                   </div>
-                 ))}
-              </div>
-           </div>
-        </section>
+                    </div>
+                  ))}
+               </div>
+            </div>
+         </section>
+
+         {/* Detailed Breakdown Section */}
+         <section className="py-24 bg-zinc-900 mx-4 rounded-[4rem] relative overflow-hidden border border-white/5">
+            <div className="max-w-7xl mx-auto px-6">
+               <div className="mb-16">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-500/10 border border-rose-500/20 rounded-full mb-6">
+                     <BarChart3 className="w-4 h-4 text-rose-500" />
+                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-rose-400">Transparencia de Ingeniería</span>
+                  </div>
+                  <h2 className="text-3xl lg:text-5xl font-black tracking-tighter uppercase mb-4 text-white">Desglose de <span className="text-rose-500 italic">Inversión Business</span></h2>
+                  <p className="text-zinc-400 font-light max-w-2xl">Especificaciones técnicas y valorización detallada para tu plataforma e-learning profesional.</p>
+               </div>
+
+               <div className="overflow-x-auto">
+                  <table className="w-full text-left border-collapse min-w-[1000px]">
+                     <thead>
+                        <tr className="border-b border-white/10">
+                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Detalle</th>
+                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Cantidad</th>
+                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Valor unit</th>
+                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Dscto-Rcgo</th>
+                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500 text-center">Afecto a IVA</th>
+                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Imp.específico</th>
+                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Valor con Imp.</th>
+                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500 text-center">Comisión</th>
+                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500 text-right">Acciones</th>
+                        </tr>
+                     </thead>
+                     <tbody className="divide-y divide-white/5">
+                        {detailedBreakdown.map((row, i) => (
+                           <tr key={i} className="hover:bg-white/5 transition-colors group">
+                              <td className="py-4 px-4 text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">{row.item}</td>
+                              <td className="py-4 px-4 text-xs font-medium text-zinc-500">{row.qty}</td>
+                              <td className="py-4 px-4 text-xs font-bold text-white">{row.unit}</td>
+                              <td className="py-4 px-4 text-xs font-medium text-zinc-500">$0</td>
+                              <td className="py-4 px-4 text-xs font-medium text-zinc-500 text-center">Sí</td>
+                              <td className="py-4 px-4 text-xs font-medium text-zinc-500">$0</td>
+                              <td className="py-4 px-4 text-xs font-bold text-zinc-300">Incl.</td>
+                              <td className="py-4 px-4 text-xs font-medium text-zinc-500 text-center">0%</td>
+                              <td className="py-4 px-4 text-right">
+                                 <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto" />
+                              </td>
+                           </tr>
+                        ))}
+                     </tbody>
+                  </table>
+               </div>
+               <div className="mt-12 p-8 bg-zinc-950/50 rounded-3xl border border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+                  <div>
+                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-500 block mb-2">Total Inversión Neta</span>
+                     <span className="text-4xl font-black text-white">$780.000 <span className="text-xl text-rose-500">+ IVA</span></span>
+                  </div>
+                  <div className="flex gap-4">
+                     <LeadButton className="px-10 py-5 bg-rose-600 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-rose-700 transition-all shadow-xl shadow-rose-600/20 active:scale-95">
+                        Solicitar Cotización Formal
+                     </LeadButton>
+                  </div>
+               </div>
+            </div>
+         </section>
 
         {/* Benefits Focus: Why Tutor LMS Pro? */}
         <section className="py-32 bg-zinc-950 relative overflow-hidden">
