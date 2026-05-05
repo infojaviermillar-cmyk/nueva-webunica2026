@@ -4,109 +4,76 @@ import { Sparkles, ChevronRight, TrendingUp } from 'lucide-react';
 const TOPIC_CATEGORIES = [
   {
     id: 'shopify',
-    label: 'Tiendas Shopify',
+    label: 'Ingeniería Shopify',
     color: 'bg-emerald-50 border-emerald-200 text-emerald-700',
     dot: 'bg-emerald-500',
-    icon: '🛍️',
+    icon: '💎',
     topics: [
-      { title: 'Cómo crear una tienda Shopify en Chile paso a paso', keywords: 'crear tienda shopify chile, shopify chile, abrir tienda shopify' },
-      { title: 'Los mejores temas Shopify para tiendas chilenas en 2025', keywords: 'temas shopify chile, themes shopify, plantillas shopify' },
-      { title: 'Cómo integrar Webpay en Shopify Chile', keywords: 'webpay shopify chile, transbank shopify, pago shopify chile' },
-      { title: 'Cómo configurar envíos con Starken y Chilexpress en Shopify', keywords: 'envios shopify chile, starken shopify, chilexpress shopify' },
-      { title: 'Diferencia entre Shopify Basic, Shopify y Advanced en Chile', keywords: 'planes shopify chile, precio shopify chile, shopify costo' },
-      { title: 'Apps imprescindibles para tu tienda Shopify en Chile', keywords: 'apps shopify chile, aplicaciones shopify, plugins shopify' },
-      { title: 'Cómo hacer SEO para tu tienda Shopify y aparecer en Google', keywords: 'seo shopify, posicionamiento shopify google, shopify seo chile' },
-      { title: 'Shopify vs WooCommerce: ¿cuál elegir para vender en Chile?', keywords: 'shopify vs woocommerce chile, comparar ecommerce chile' },
-    ]
-  },
-  {
-    id: 'ecommerce',
-    label: 'Tiendas en Línea',
-    color: 'bg-violet-50 border-violet-200 text-violet-700',
-    dot: 'bg-violet-500',
-    icon: '🛒',
-    topics: [
-      { title: 'Cómo crear una tienda online en Chile desde cero (Guía 2025)', keywords: 'crear tienda online chile, tienda en linea chile, ecommerce chile' },
-      { title: 'Cuánto cuesta crear una tienda online en Chile', keywords: 'costo tienda online chile, precio tienda en linea, cuanto cuesta ecommerce chile' },
-      { title: 'Los 5 errores más comunes al crear una tienda online', keywords: 'errores tienda online, como vender por internet chile, ecommerce errores' },
-      { title: 'Cómo elegir la mejor pasarela de pago para vender en Chile', keywords: 'pasarelas de pago chile, mercado pago chile, flow chile, webpay' },
-      { title: 'Cómo fotografiar tus productos para vender más online', keywords: 'fotografía productos ecommerce, fotos tienda online, product photography' },
-      { title: 'Estrategias para aumentar las ventas de tu tienda online en Chile', keywords: 'aumentar ventas tienda online chile, estrategias ecommerce, conversion rate' },
-      { title: 'Dropshipping en Chile: ¿es rentable en 2025?', keywords: 'dropshipping chile, dropi chile, vendredrop chile, negocio dropshipping' },
+      { title: 'Cómo crear una tienda Shopify en Chile paso a paso', keywords: 'crear tienda shopify chile, shopify chile, abrir tienda shopify', published: true },
+      { title: 'Optimización avanzada de LCP y Core Web Vitals en Shopify Plus', keywords: 'lcp shopify chile, velocidad shopify avanzado, core web vitals shopify' },
+      { title: 'Cómo integrar Webpay en Shopify Chile', keywords: 'webpay shopify chile, transbank shopify, pago shopify chile', published: false },
+      { title: 'Arquitectura Headless: Shopify Hydrogen vs Next.js para Chile', keywords: 'shopify headless chile, hydrogen shopify, shopify nextjs' },
+      { title: 'Cómo configurar envíos con Starken y Chilexpress en Shopify', keywords: 'envios shopify chile, starken shopify, chilexpress shopify', published: true },
+      { title: 'Diferencia entre Shopify Basic, Shopify y Advanced en Chile', keywords: 'planes shopify chile, precio shopify chile, shopify costo', published: false },
+      { title: 'Custom Apps en Shopify: Extendiendo la funcionalidad con Remix', keywords: 'apps personalizadas shopify, remix shopify app, api shopify chile' },
+      { title: 'Cómo hacer SEO para tu tienda Shopify y aparecer en Google', keywords: 'seo shopify, posicionamiento shopify google, shopify seo chile', published: false },
     ]
   },
   {
     id: 'desarrollo-web',
-    label: 'Desarrollo Web',
+    label: 'Ingeniería & Backend',
     color: 'bg-blue-50 border-blue-200 text-blue-700',
     dot: 'bg-blue-500',
     icon: '⚡',
     topics: [
-      { title: 'Next.js vs WordPress: ¿qué es mejor para tu empresa en Chile?', keywords: 'nextjs vs wordpress, desarrollo web chile, pagina web empresa chile' },
-      { title: 'Qué es una plataforma SaaS y cómo puede digitalizar tu negocio', keywords: 'saas chile, plataforma saas, software como servicio chile' },
-      { title: 'Velocidad web: por qué un sitio lento te hace perder clientes y ventas', keywords: 'velocidad web, pagina web rapida chile, google pagespeed chile' },
-      { title: 'Cómo crear un sistema de cotización online para tu empresa', keywords: 'sistema cotizacion online chile, cotizador web, formulario cotizacion' },
-      { title: 'Qué es una API y cómo puede automatizar tu negocio en Chile', keywords: 'integracion api chile, automatizacion negocio web, api rest chile' },
-      { title: 'Las mejores herramientas de desarrollo web en 2025', keywords: 'herramientas desarrollo web chile, stack tecnologico, tecnologia web 2025' },
+      { title: 'Seguridad en Next.js: RLS y Middleware con Supabase en 2025', keywords: 'seguridad nextjs chile, supabase rls chile, autenticacion nextjs' },
+      { title: 'Qué es una plataforma SaaS y cómo puede digitalizar tu negocio', keywords: 'saas chile, plataforma saas, software como servicio chile', published: true },
+      { title: 'React Server Actions: Manejo avanzado de estados y validaciones', keywords: 'react server actions chile, nextjs server actions, formularios avanzados' },
+      { title: 'Cómo crear un sistema de cotización online para tu empresa', keywords: 'sistema cotizacion online chile, cotizador web, formulario cotizacion', published: false },
+      { title: 'Arquitectura de Microservicios con Node.js para empresas chilenas', keywords: 'microservicios nodejs chile, arquitectura software chile, backend avanzado' },
+      { title: 'Qué es una API y cómo puede automatizar tu negocio en Chile', keywords: 'integracion api chile, automatizacion negocio web, api rest chile', published: false },
+    ]
+  },
+  {
+    id: 'cro-seo',
+    label: 'CRO & Datos',
+    color: 'bg-violet-50 border-violet-200 text-violet-700',
+    dot: 'bg-violet-500',
+    icon: '📈',
+    topics: [
+      { title: 'Configuración técnica de GA4 para medir el ROI real de tu ecommerce', keywords: 'ga4 ecommerce chile, medicion roi web, google analytics 4 avanzado' },
+      { title: 'Neurodivergencia y Accesibilidad: Cómo no perder 1 de cada 5 usuarios', keywords: 'accesibilidad web chile, neurodivergencia web, inclusividad digital', published: true },
+      { title: 'Psicología del consumo: Cómo optimizar el checkout para evitar rebotes', keywords: 'cro checkout chile, optimizar conversion chile, psicologia ventas online' },
+      { title: 'Implementación de Server-Side Tagging para mejorar el tracking', keywords: 'server side tagging chile, tracking avanzado web, privacidad datos chile' },
+      { title: 'A/B Testing en Next.js: Metodología técnica para validar cambios', keywords: 'ab testing nextjs, optimizacion conversion chile, experimentos web' },
     ]
   },
   {
     id: 'diseno-web',
-    label: 'Diseño Web',
+    label: 'UI/UX Engineering',
     color: 'bg-pink-50 border-pink-200 text-pink-700',
     dot: 'bg-pink-500',
     icon: '🎨',
     topics: [
-      { title: 'Tendencias de diseño web para empresas chilenas en 2025', keywords: 'tendencias diseño web 2025, diseño web moderno chile, web design trends' },
-      { title: 'Cómo diseñar una landing page que convierte clientes en Chile', keywords: 'landing page chile, diseño landing page, pagina de aterrizaje chile' },
-      { title: 'UX/UI: la diferencia entre un sitio web que vende y uno que no', keywords: 'ux ui diseño web chile, experiencia usuario web, interfaz web' },
-      { title: 'Los colores que más convierten en sitios web de empresas chilenas', keywords: 'colores diseño web, psicologia colores web, conversion colores sitio' },
-      { title: 'Diseño web con Adobe XD: de prototipo a sitio real', keywords: 'adobe xd chile, diseño web adobe xd, prototipo web chile' },
-      { title: 'Diseño web responsivo: cómo hacer que tu sitio se vea bien en móviles', keywords: 'diseño web responsivo chile, mobile first chile, sitio web movil' },
+      { title: 'Construcción de un Design System escalable con Tailwind CSS', keywords: 'design system chile, tailwind css avanzado, componentes react' },
+      { title: 'Diseño Web con Adobe XD: de prototipo a sitio real', keywords: 'adobe xd chile, diseño web adobe xd, prototipo web chile', published: true },
+      { title: 'Micro-interacciones con Framer Motion para mejorar el engagement', keywords: 'framer motion chile, animaciones react chile, ux moderno' },
+      { title: 'Diseño web responsivo: cómo hacer que tu sitio se vea bien en móviles', keywords: 'diseño web responsivo chile, mobile first chile, sitio web movil', published: true },
+      { title: 'Tendencias de diseño web para empresas chilenas en 2025', keywords: 'tendencias diseño web 2025, diseño web moderno chile, web design trends', published: true },
     ]
   },
   {
     id: 'paginas-web',
-    label: 'Páginas Web',
+    label: 'Negocio Web',
     color: 'bg-amber-50 border-amber-200 text-amber-700',
     dot: 'bg-amber-500',
     icon: '🌐',
     topics: [
-      { title: 'Cuánto cuesta una página web en Chile en 2025 (precios reales)', keywords: 'cuanto cuesta pagina web chile, precio pagina web, valor sitio web chile' },
-      { title: 'Qué debe tener una página web para una empresa en Chile', keywords: 'pagina web empresa chile, sitio web profesional chile, que tiene pagina web' },
-      { title: 'Cómo conseguir clientes con tu página web en Chile', keywords: 'conseguir clientes web chile, leads sitio web, clientes online chile' },
-      { title: 'Diferencia entre página web y tienda online: ¿cuál necesitas?', keywords: 'pagina web vs tienda online, diferencia sitio web ecommerce chile' },
-      { title: 'Dominio .cl: cómo registrarlo y para qué sirve', keywords: 'dominio cl chile, registrar dominio cl, nic chile dominio' },
-      { title: 'Por qué tu empresa necesita una página web hoy más que nunca', keywords: 'importancia pagina web empresa chile, pagina web negocio chile' },
-    ]
-  },
-  {
-    id: 'paginas-economicas',
-    label: 'Páginas Económicas',
-    color: 'bg-teal-50 border-teal-200 text-teal-700',
-    dot: 'bg-teal-500',
-    icon: '💰',
-    topics: [
-      { title: 'Las mejores plataformas para crear una página web económica en Chile', keywords: 'pagina web economica chile, web barata chile, crear web gratis chile' },
-      { title: 'Cómo tener una página web profesional con presupuesto limitado', keywords: 'pagina web barata profesional chile, web economica empresas, sitio economico' },
-      { title: 'Wix vs WordPress vs Shopify: ¿cuál es más económico para Chile?', keywords: 'wix vs wordpress chile, plataforma economica web chile, comparacion precios web' },
-      { title: 'Plantillas web gratis que se ven profesionales: guía completa', keywords: 'plantillas web gratis chile, templates gratis profesionales, temas web gratuitos' },
-      { title: 'Hosting económico en Chile: los mejores para tu sitio web', keywords: 'hosting chile economico, hosting barato chile, servidor web chile' },
-    ]
-  },
-  {
-    id: 'ia-web',
-    label: 'Páginas Web con IA',
-    color: 'bg-indigo-50 border-indigo-200 text-indigo-700',
-    dot: 'bg-indigo-500',
-    icon: '🤖',
-    topics: [
-      { title: 'Cómo la IA está cambiando el desarrollo web en Chile', keywords: 'inteligencia artificial web chile, ia desarrollo web, tecnologia ia 2025' },
-      { title: 'Chatbots con IA para tu sitio web: cómo aumentar ventas 24/7', keywords: 'chatbot ia chile, asistente virtual web, chatbot ventas chile' },
-      { title: 'Cómo crear contenido para tu web con ChatGPT y no morir en el intento', keywords: 'chatgpt web chile, contenido ia web, seo con chatgpt' },
-      { title: 'IA generativa en el diseño web: tendencias para Chile 2025', keywords: 'ia diseño web chile, generative ai web, diseño web artificial intelligence' },
-      { title: 'Cómo usar IA para mejorar el SEO de tu página web en Chile', keywords: 'ia seo chile, seo inteligencia artificial, automatizacion seo chile' },
-      { title: 'Personalización web con IA: ofrecer la experiencia correcta a cada usuario', keywords: 'personalizacion web ia, machine learning web, experiencia usuario ia' },
+      { title: 'Cuánto cuesta una página web en Chile en 2025 (precios reales)', keywords: 'cuanto cuesta pagina web chile, precio pagina web, valor sitio web chile', published: false },
+      { title: 'Estrategia de contenidos SEO para sectores B2B altamente técnicos', keywords: 'seo b2b chile, estrategia contenido tecnico, marketing industrial chile' },
+      { title: 'Dominio .cl: cómo registrarlo y para qué sirve', keywords: 'dominio cl chile, registrar dominio cl, nic chile dominio', published: false },
+      { title: 'Cómo Crear un Sitio Web para Inmobiliaria que Venda Efectivamente', keywords: 'crear sitio web inmobiliaria chile, web inmobiliaria, venta casas web', published: true },
+      { title: 'Academia en Línea con WordPress y Tutor LMS Pro: Guía Completa', keywords: 'academia online chile, tutor lms pro chile, cursos online wordpress', published: true },
     ]
   },
 ];
@@ -166,19 +133,34 @@ export default function AdminBlogPage() {
                   return (
                     <Link
                       key={i}
-                      href={`/admin-blog/generate?${params.toString()}`}
-                      className="group flex items-start gap-4 p-5 bg-white border border-slate-100 rounded-2xl hover:border-violet-300 hover:shadow-[0_8px_30px_rgba(124,58,237,0.08)] transition-all"
+                      href={topic.published ? '#' : `/admin-blog/generate?${params.toString()}`}
+                      className={`group flex items-start gap-4 p-5 bg-white border border-slate-100 rounded-2xl transition-all ${
+                        topic.published 
+                        ? 'opacity-60 cursor-default grayscale-[0.5]' 
+                        : 'hover:border-violet-300 hover:shadow-[0_8px_30px_rgba(124,58,237,0.08)]'
+                      }`}
                     >
-                      <div className={`mt-1 w-2 h-2 rounded-full shrink-0 ${cat.dot}`} />
+                      <div className={`mt-1 w-2 h-2 rounded-full shrink-0 ${topic.published ? 'bg-emerald-500' : cat.dot}`} />
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold text-slate-800 group-hover:text-violet-700 transition-colors leading-snug mb-2">
-                          {topic.title}
-                        </p>
+                        <div className="flex items-center gap-2 mb-2">
+                          <p className={`text-sm font-bold group-hover:text-violet-700 transition-colors leading-snug ${
+                            topic.published ? 'text-slate-500' : 'text-slate-800'
+                          }`}>
+                            {topic.title}
+                          </p>
+                          {topic.published && (
+                            <span className="flex-shrink-0 bg-emerald-100 text-emerald-700 text-[8px] font-black uppercase px-1.5 py-0.5 rounded">
+                              Publicado
+                            </span>
+                          )}
+                        </div>
                         <p className="text-xs text-slate-400 font-medium truncate">
                           🔑 {topic.keywords.split(',')[0].trim()}…
                         </p>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-violet-500 group-hover:translate-x-1 transition-all shrink-0 mt-0.5" />
+                      {!topic.published && (
+                        <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-violet-500 group-hover:translate-x-1 transition-all shrink-0 mt-0.5" />
+                      )}
                     </Link>
                   );
                 })}
