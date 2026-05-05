@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ShoppingBag, Building2, Cpu, BarChart3, CheckCircle2 } from 'lucide-react';
@@ -95,7 +95,7 @@ function TabContent({ activeTab }: { activeTab: typeof serviceData[0] }) {
   const [currentProject, setCurrentProject] = useState(0);
 
   // Auto-play for the carousel (only for shopify for now)
-  React.useEffect(() => {
+  useEffect(() => {
     if (activeTab.id !== 'shopify') return;
     const timer = setInterval(() => {
       setCurrentProject((prev) => (prev + 1) % shopifyProjects.length);
