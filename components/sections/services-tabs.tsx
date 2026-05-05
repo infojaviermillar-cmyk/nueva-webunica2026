@@ -70,11 +70,43 @@ const serviceData = [
   }
 ];
 
+const shopifyProjects = [
+  {
+    title: 'Aetheria Jewelry',
+    category: 'Joyería de Lujo',
+    image: '/tab-shopify.png',
+    description: 'Tienda de alta gama con optimización de conversión y diseño minimalista.'
+  },
+  {
+    title: 'Actusama',
+    category: 'Moda & Estilo',
+    image: '/tab-pymes.png', // Temporary placeholder, will improve
+    description: 'E-commerce escalable con integración de pagos y logística automatizada.'
+  },
+  {
+    title: 'FreshCart',
+    category: 'Alimentos & Bebidas',
+    image: '/tab-saas.png', // Temporary placeholder
+    description: 'Plataforma de grocery store con carga ultra rápida y experiencia móvil superior.'
+  }
+];
+
 function TabContent({ activeTab }: { activeTab: typeof serviceData[0] }) {
+  const [currentProject, setCurrentProject] = useState(0);
+
+  // Auto-play for the carousel (only for shopify for now)
+  React.useEffect(() => {
+    if (activeTab.id !== 'shopify') return;
+    const timer = setInterval(() => {
+      setCurrentProject((prev) => (prev + 1) % shopifyProjects.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [activeTab.id]);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center">
       {/* Text Content */}
-      <div>
+      <div className="order-2 md:order-1">
         <h3 className="text-3xl lg:text-4xl font-black text-zinc-950 uppercase tracking-tighter leading-none mb-8">
           {activeTab.title}
         </h3>
@@ -104,15 +136,73 @@ function TabContent({ activeTab }: { activeTab: typeof serviceData[0] }) {
         </div>
       </div>
 
-      {/* Visual Content */}
-      <div className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white group">
-        <Image 
-          src={activeTab.image} 
-          alt={activeTab.title} 
-          fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-110" 
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 to-transparent"></div>
+      {/* Visual Content - Carousel for Shopify, static for others */}
+      <div className="order-1 md:order-2">
+        <div className="relative aspect-square lg:aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white group bg-zinc-100">
+          <AnimatePresence mode="wait">
+            {activeTab.id === 'shopify' ? (
+              <motion.div
+                key={shopifyProjects[currentProject].title}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.7 }}
+                className="absolute inset-0"
+              >
+                <Image 
+                  src={shopifyProjects[currentProject].image} 
+                  alt={shopifyProjects[currentProject].title} 
+                  fill 
+                  className="object-cover" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent"></div>
+                <div className="absolute bottom-8 left-8 right-8 text-white">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-3 py-1 bg-violet-600 text-[9px] font-black uppercase rounded-full tracking-widest">
+                      {shopifyProjects[currentProject].category}
+                    </span>
+                    <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
+                  </div>
+                  <h4 className="text-xl font-black uppercase tracking-tight mb-2">
+                    {shopifyProjects[currentProject].title}
+                  </h4>
+                  <p className="text-xs text-zinc-300 font-light line-clamp-1">
+                    {shopifyProjects[currentProject].description}
+                  </p>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key={activeTab.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="absolute inset-0"
+              >
+                <Image 
+                  src={activeTab.image} 
+                  alt={activeTab.title} 
+                  fill 
+                  className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/40 to-transparent"></div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          
+          {/* Carousel Indicators for Shopify */}
+          {activeTab.id === 'shopify' && (
+            <div className="absolute top-8 right-8 flex gap-2">
+              {shopifyProjects.map((_, i) => (
+                <div 
+                  key={i}
+                  className={`h-1 rounded-full transition-all duration-500 ${
+                    i === currentProject ? 'w-8 bg-white' : 'w-2 bg-white/30'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
