@@ -26,33 +26,37 @@ export type GeneratedPost = {
 /**
  * Genera un artículo de blog SEO-optimizado con imagen de portada
  */
-export async function generateBlogPost(topic: string, keywords: string[], sources?: string): Promise<GeneratedPost & { cover_image: string }> {
+export async function generateBlogPost(topic: string, keywords: string[], sources?: string, mode: 'basic' | 'advanced' = 'basic'): Promise<GeneratedPost & { cover_image: string }> {
+  const isAdvanced = mode === 'advanced';
+  
   const prompt = `
-    Actúa como experto SEO y redactor técnico para Webunica.cl, agencia líder en Shopify y Next.js en Chile.
+    Actúa como experto de ÉLITE en SEO Técnico, Ingeniería Web y Estrategia de Negocios Digitales para Webunica.cl, la agencia líder en Shopify, Next.js y SaaS en Chile.
     
     TEMA: ${topic}
     PALABRAS CLAVE INICIALES: ${keywords.join(', ')}
     FUENTES DE CONSULTA: ${sources || 'No se proporcionaron fuentes adicionales.'}
+    MODO: ${isAdvanced ? 'INGENIERÍA AVANZADA / MASTERCLASS' : 'ESTÁNDAR EDUCATIVO'}
     
-    REGLAS:
-    1. Artículo de mínimo 1000 palabras en HTML (solo <p>, <h2>, <h3>, <ul>, <li>, <strong>, <em>, <blockquote>).
-    2. Utiliza la información de las FUENTES DE CONSULTA para enriquecer el contenido, citando datos o conceptos si es relevante.
-    3. Incluir al menos 3 subtítulos H2 con variantes de las palabras clave.
-    4. Tono profesional y persuasivo, orientado a conversión hacia Webunica.cl.
-    5. Intro atractiva + conclusión con CTA hacia servicios de Webunica.
-    6. Identifica y genera las mejores 5-8 PALABRAS CLAVE SEO para este artículo.
+    REGLAS DE CONTENIDO:
+    1. EXTENSIÓN: ${isAdvanced ? 'Mínimo 1800 palabras. Desarrolla cada punto con profundidad técnica quirúrgica.' : 'Mínimo 1000 palabras.'}
+    2. ESTRUCTURA: HTML semántico (solo <p>, <h2>, <h3>, <h4>, <ul>, <li>, <strong>, <em>, <blockquote>, <pre>, <code>).
+    3. ${isAdvanced ? 'INCLUYE BLOQUES DE CÓDIGO (usando <pre><code>...</code></pre>) con ejemplos reales en React, Shopify Liquid, JSON o Shell según corresponda.' : 'Enfoque en conceptos claros y beneficios.'}
+    4. TONO: ${isAdvanced ? 'Experto, técnico, autoritario pero accesible. Habla de arquitectura, performance (LCP, INP), seguridad y escalabilidad.' : 'Profesional, persuasivo y educativo.'}
+    5. SEO: Utiliza la información de las FUENTES DE CONSULTA para enriquecer el contenido. Incluye al menos 5 subtítulos (H2 y H3) optimizados semánticamente.
+    6. CTA: Intro de alto impacto + conclusión con Call to Action estratégico hacia los servicios de consultoría avanzada de Webunica.cl.
+    7. Identifica y genera las mejores 8 PALABRAS CLAVE SEO para este artículo.
     
     RESPONDE ÚNICAMENTE EN JSON:
     {
-      "title": "Título H1 atractivo con keyword principal",
+      "title": "Título H1 disruptivo con keyword principal",
       "slug": "url-amigable-seo",
-      "excerpt": "Resumen de 150 chars máx para listing",
+      "excerpt": "Resumen técnico de 150 chars máx",
       "content": "<p>HTML del artículo...</p>",
       "seo_title": "Título SEO (máx 60 chars)",
-      "seo_description": "Meta descripción SEO (máx 160 chars) con keyword + CTA",
-      "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"],
+      "seo_description": "Meta descripción SEO (máx 160 chars) con alto CTR",
+      "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5", "keyword6", "keyword7", "keyword8"],
       "cover_image_alt": "Alt descriptivo SEO para imagen (máx 120 chars)",
-      "cover_image_prompt": "Prompt en inglés para DALL-E 3: modern flat design illustration of [tema], Chilean tech startup, purple and green brand colors, clean background, no text"
+      "cover_image_prompt": "Prompt en inglés para DALL-E 3: high-end 3D tech render or professional minimalist illustration of [tema], deep purple and emerald green neon accents, dark mode aesthetic, cinematic lighting, 8k, professional, no text"
     }
   `;
 

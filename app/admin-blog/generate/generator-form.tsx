@@ -69,6 +69,7 @@ export function GeneratorForm() {
           topic: useTopic,
           keywords: useKeywords.split(',').map((kw: string) => kw.trim()).filter(Boolean),
           sources: sources,
+          mode: searchParams.get('mode') || 'basic'
         }),
       });
 

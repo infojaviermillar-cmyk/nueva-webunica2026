@@ -133,10 +133,10 @@ export default function AdminBlogPage() {
                   return (
                     <Link
                       key={i}
-                      href={topic.published ? '#' : `/admin-blog/generate?${params.toString()}`}
+                      href={`/admin-blog/generate?${params.toString()}${topic.published ? '&mode=advanced' : ''}`}
                       className={`group flex items-start gap-4 p-5 bg-white border border-slate-100 rounded-2xl transition-all ${
                         topic.published 
-                        ? 'opacity-60 cursor-default grayscale-[0.5]' 
+                        ? 'bg-slate-50/50 hover:border-violet-200' 
                         : 'hover:border-violet-300 hover:shadow-[0_8px_30px_rgba(124,58,237,0.08)]'
                       }`}
                     >
@@ -149,8 +149,8 @@ export default function AdminBlogPage() {
                             {topic.title}
                           </p>
                           {topic.published && (
-                            <span className="flex-shrink-0 bg-emerald-100 text-emerald-700 text-[8px] font-black uppercase px-1.5 py-0.5 rounded">
-                              Publicado
+                            <span className="flex-shrink-0 bg-emerald-100 text-emerald-700 text-[8px] font-black uppercase px-1.5 py-0.5 rounded group-hover:bg-violet-600 group-hover:text-white transition-colors">
+                              Mejorar Post
                             </span>
                           )}
                         </div>
