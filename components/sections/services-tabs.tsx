@@ -270,7 +270,7 @@ export default function ServicesTabs() {
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
                     activeTab.id === service.id ? 'bg-white shadow-sm text-violet-600' : 'bg-zinc-50 text-zinc-400 group-hover:bg-white group-hover:text-zinc-600'
                   }`}>
-                    {React.cloneElement(service.icon as React.ReactElement, { className: 'w-5 h-5' })}
+                    {React.cloneElement(service.icon as any, { className: 'w-5 h-5' })}
                   </div>
                   
                   <span className={`text-sm font-black uppercase tracking-wider transition-colors duration-300 ${
