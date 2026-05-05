@@ -355,7 +355,7 @@ export default function ShopifyPricingSection() {
               <div className="flex flex-col md:flex-row gap-8 items-start">
                 <div className="w-full md:w-1/3">
                   <div className="inline-flex items-center gap-2 px-3 py-1 bg-violet-600 text-white rounded-full text-[10px] font-black uppercase tracking-widest mb-6">
-                    <Rocket className="w-3 h-3" />
+                    <Zap className="w-3 h-3" />
                     Requisito Técnico
                   </div>
                   <h3 className="text-2xl md:text-3xl font-black mb-4 uppercase tracking-tight leading-none">
