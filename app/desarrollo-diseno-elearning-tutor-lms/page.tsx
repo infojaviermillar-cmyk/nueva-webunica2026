@@ -171,6 +171,9 @@ export default function TutorLMSPage() {
         "Plugin Asistencia SENCE",
         "Estrategia SEO Full (Silos de Contenido)",
         "App Móvil (Web-view optimizada)",
+        "Google Meet / Zoom",
+        "Google Classroom",
+        "Calendario de Eventos",
         "Soporte 24/7 y Mantenimiento",
         "Auditoría de Seguridad Mensual"
       ],
