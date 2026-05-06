@@ -119,7 +119,7 @@ export default function TutorLMSPage() {
         "Diseño Kit de Elementor pro Envato",
         "Landing Page de Venta SEO",
         "Google Analytics 4 & Meta Pixel",
-        "Integración Webpay / Mercado Pago / Flow",
+        "Integración Webpay, Mercado Pago o Flow + Fintoc o VentiPay",
         "Configuración Bunny.net (Básico)",
         "Optimización de velocidad",
         "Web adaptable a mobile",
