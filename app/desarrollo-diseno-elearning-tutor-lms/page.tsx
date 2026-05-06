@@ -356,11 +356,6 @@ export default function TutorLMSPage() {
                            <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Detalle</th>
                            <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Cantidad</th>
                            <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Valor unit</th>
-                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Dscto-Rcgo</th>
-                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500 text-center">Afecto a IVA</th>
-                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Imp.específico</th>
-                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500">Valor con Imp.</th>
-                           <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500 text-center">Comisión</th>
                            <th className="py-6 px-4 text-[11px] font-black uppercase tracking-[0.2em] text-rose-500 text-right">Acciones</th>
                         </tr>
                      </thead>
@@ -370,11 +365,6 @@ export default function TutorLMSPage() {
                               <td className="py-4 px-4 text-xs font-bold text-zinc-300 group-hover:text-white transition-colors">{row.item}</td>
                               <td className="py-4 px-4 text-xs font-medium text-zinc-500">{row.qty}</td>
                               <td className="py-4 px-4 text-xs font-bold text-white">{row.unit}</td>
-                              <td className="py-4 px-4 text-xs font-medium text-zinc-500">$0</td>
-                              <td className="py-4 px-4 text-xs font-medium text-zinc-500 text-center">Sí</td>
-                              <td className="py-4 px-4 text-xs font-medium text-zinc-500">$0</td>
-                              <td className="py-4 px-4 text-xs font-bold text-zinc-300">Incl.</td>
-                              <td className="py-4 px-4 text-xs font-medium text-zinc-500 text-center">0%</td>
                               <td className="py-4 px-4 text-right">
                                  <CheckCircle2 className="w-4 h-4 text-emerald-500 ml-auto" />
                               </td>
