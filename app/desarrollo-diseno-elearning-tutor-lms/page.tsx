@@ -123,6 +123,8 @@ export default function TutorLMSPage() {
         "Configuración Bunny.net (Básico)",
         "Optimización de velocidad",
         "Web adaptable a mobile",
+        "Creación de VPS Hostinger KVM 2",
+        "Creación de curso hasta 5 lecciones",
         "Soporte por 3 meses"
       ],
       cta: "Empezar Academia"
