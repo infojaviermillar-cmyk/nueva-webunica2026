@@ -30,7 +30,7 @@ export default function DisenoShopifyFooter() {
             <p>© {new Date().getFullYear()} DiseñoShopify.cl - Operado por Webunica. Todos los derechos reservados.</p>
             <div className="flex gap-4">
               <span className="bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">Santiago, Chile</span>
-              <span className="bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">consultas@webunica.cl</span>
+              <span className="bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800" dangerouslySetInnerHTML={{ __html: '<!--email_off-->consultas@webunica.cl<!--/email_off-->' }} />
             </div>
           </div>
         </div>

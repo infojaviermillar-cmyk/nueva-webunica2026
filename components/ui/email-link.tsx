@@ -7,8 +7,11 @@ export default function EmailLink({ className }: { className?: string }) {
   };
 
   return (
-    <a href="#contacto" onClick={handleClick} className={className}>
-      consultas&#64;webunica.cl
-    </a>
+    <a 
+      href="#contacto" 
+      onClick={handleClick} 
+      className={className}
+      dangerouslySetInnerHTML={{ __html: '<!--email_off-->consultas@webunica.cl<!--/email_off-->' }}
+    />
   );
 }

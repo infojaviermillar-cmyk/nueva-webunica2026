@@ -28,7 +28,7 @@ export default function DesarrolloShopifyFooter() {
             <p>© {new Date().getFullYear()} DesarrolloShopify.cl - Operado por Webunica. Todos los derechos reservados.</p>
             <div className="flex gap-4">
               <span className="bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800 hidden sm:inline-block">Santiago, Chile</span>
-              <span className="bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">consultas@webunica.cl</span>
+              <span className="bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800" dangerouslySetInnerHTML={{ __html: '<!--email_off-->consultas@webunica.cl<!--/email_off-->' }} />
             </div>
           </div>
         </div>
