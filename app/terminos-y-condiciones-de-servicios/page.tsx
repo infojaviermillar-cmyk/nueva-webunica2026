@@ -8,7 +8,7 @@ export const metadata = {
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans antialiased text-zinc-900 pb-20">
-      <main className="max-w-4xl mx-auto px-6 pt-[22vh] lg:pt-48 lg:pt-40">
+      <div className="max-w-4xl mx-auto px-6 pt-[22vh] lg:pt-48 lg:pt-40">
         <div className="bg-white rounded-[3rem] p-10 lg:p-20 shadow-xl border border-zinc-100">
           <h1 className="text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-10 text-zinc-950">
             Términos y <br/> <span className="text-violet-600 italic font-serif lowercase font-light">Condiciones</span>
@@ -91,7 +91,7 @@ export default function TermsPage() {
             </Link>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

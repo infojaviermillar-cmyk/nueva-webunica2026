@@ -91,7 +91,7 @@ export default function ShopifyEnChilePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <main className="pt-[22vh] lg:pt-48">
+      <div className="pt-[22vh] lg:pt-48">
         {/* Hero Section */}
         <section id="inicio" className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-violet-600/5 blur-[120px] rounded-full pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3" />
@@ -219,7 +219,7 @@ export default function ShopifyEnChilePage() {
              description="Todo lo que necesitas saber sobre costos, integraciones y tiempos antes de iniciar tu proyecto."
            />
         </div>
-      </main>
+      </div>
     </div>
   );
 }

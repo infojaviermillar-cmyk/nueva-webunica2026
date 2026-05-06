@@ -134,7 +134,7 @@ export default function PlanesShopifyChilePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <main className="pt-[15vh] pb-20">
+      <div className="pt-[15vh] pb-20">
         {/* Clear Hero Section */}
         <section className="max-w-7xl mx-auto px-6 text-center py-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-zinc-50 border border-zinc-100 rounded-full">
@@ -245,7 +245,7 @@ export default function PlanesShopifyChilePage() {
               Reservar mi Plan de Desarrollo
            </LeadButton>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

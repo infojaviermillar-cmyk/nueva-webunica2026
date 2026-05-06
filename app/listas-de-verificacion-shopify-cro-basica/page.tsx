@@ -228,6 +228,18 @@ export default function ChecklistCROPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-[116px]">
 
+      {/* SEO Intro Header - visible para crawlers y mejora ratio texto-HTML */}
+      <header className="max-w-3xl mx-auto px-4 pt-10 pb-6 text-center">
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-violet-500 mb-3">Auditoría Gratuita de Conversión</p>
+        <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter leading-tight mb-3">
+          Checklist CRO Shopify
+        </h1>
+        <p className="text-slate-500 font-light leading-relaxed max-w-xl mx-auto text-sm">
+          Evalúa el estado de optimización de conversión de tu tienda Shopify en 11 dimensiones clave. 
+          Responde el cuestionario y obtén tu puntaje real con recomendaciones de mejora prioritarias.
+        </p>
+      </header>
+
       {/* ── PROGRESS BAR — below site header ───────────────────────────────── */}
       <div className="sticky top-[95px] lg:top-[116px] z-[60] bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
         {/* Color bar */}

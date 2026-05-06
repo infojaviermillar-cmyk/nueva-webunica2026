@@ -1,10 +1,26 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Creacion Y Diseno De Plantillas Web Para Shopify | Webunica',
+  description: 'Descubre todo sobre Creacion Y Diseno De Plantillas Web Para Shopify con Webunica. Soluciones web avanzadas y diseño de alto rendimiento para el mercado chileno.',
+  openGraph: {
+    title: 'Creacion Y Diseno De Plantillas Web Para Shopify | Webunica',
+    description: 'Soluciones web y e-commerce de alto rendimiento con Webunica.',
+    url: 'https://webunica.cl/creacion-y-diseno-de-plantillas-web-para-shopify',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://webunica.cl/creacion-y-diseno-de-plantillas-web-para-shopify',
+  }
+};
+
 export default function Page() {
   return (
-    <main className="min-h-screen py-24 bg-zinc-950 flex items-center justify-center">
+    <div className="min-h-screen py-24 bg-zinc-950 flex items-center justify-center">
       <div className="text-center">
         <h1 className="text-4xl text-white font-bold mb-4">CREACION Y DISENO DE PLANTILLAS WEB PARA SHOPIFY</h1>
         <p className="text-zinc-400">Esta página está en proceso de rediseño.</p>
       </div>
-    </main>
+    </div>
   );
 }

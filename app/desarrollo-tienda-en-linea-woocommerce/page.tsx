@@ -109,7 +109,7 @@ export default function WooCommercePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="pt-[22vh] lg:pt-48">
+      <div className="pt-[22vh] lg:pt-48">
         {/* Professional Hero Section */}
         <section className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
           {/* Background Texture Overlay */}
@@ -304,7 +304,7 @@ export default function WooCommercePage() {
             ctaLabel="Agendar Evaluación WooCommerce"
           />
         </div>
-      </main>
+      </div>
     </div>
   );
 }

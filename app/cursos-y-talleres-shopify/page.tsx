@@ -68,7 +68,7 @@ export default function CoursesPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-[22vh] lg:pt-40 pb-24 font-sans">
+    <div className="min-h-screen bg-slate-50 pt-[22vh] lg:pt-40 pb-24 font-sans">
       
       {/* Hero Section */}
       <section className="max-w-4xl mx-auto px-6 mb-20 text-center">
@@ -156,8 +156,39 @@ export default function CoursesPage() {
         </div>
       </section>
 
+      {/* FAQ Section - Mejora de relación texto-HTML y SEO */}
+      <section className="max-w-4xl mx-auto px-6 mb-32">
+        <h2 className="text-3xl font-black text-zinc-900 mb-12 uppercase tracking-tight text-center">Preguntas Frecuentes</h2>
+        <div className="space-y-6">
+          <div className="bg-white border border-slate-200 rounded-3xl p-8">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3">¿Los talleres son presenciales o remotos?</h3>
+            <p className="text-zinc-600 font-light leading-relaxed">
+              Actualmente impartimos todas nuestras capacitaciones de forma remota vía Zoom o Google Meet. Esto nos permite grabar la sesión y compartir pantalla de manera fluida, lo cual es vital para el aprendizaje técnico en Shopify.
+            </p>
+          </div>
+          <div className="bg-white border border-slate-200 rounded-3xl p-8">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3">¿Necesito conocimientos previos de programación?</h3>
+            <p className="text-zinc-600 font-light leading-relaxed">
+              No para los niveles Básico e IA. El taller de Shopify Avanzado sí toca temas de arquitectura Liquid, pero está diseñado para que incluso perfiles no técnicos puedan entender la lógica detrás de los Metafields y la estructura de temas.
+            </p>
+          </div>
+          <div className="bg-white border border-slate-200 rounded-3xl p-8">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3">¿Entregan algún certificado de participación?</h3>
+            <p className="text-zinc-600 font-light leading-relaxed">
+              Sí, al finalizar cualquiera de nuestros programas corporativos, emitimos un certificado digital de Webunica que avala la capacitación técnica recibida por el equipo en las herramientas específicas de Shopify.
+            </p>
+          </div>
+          <div className="bg-white border border-slate-200 rounded-3xl p-8">
+            <h3 className="text-lg font-bold text-zinc-900 mb-3">¿Se pueden personalizar los temas del taller?</h3>
+            <p className="text-zinc-600 font-light leading-relaxed">
+              Totalmente. Antes de la sesión, realizamos un breve diagnóstico para entender qué áreas de Shopify les causan más problemas y adaptamos el temario para resolver esos "puntos de dolor" específicos de su operación diaria.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
-      <section className="max-w-4xl mx-auto px-6 text-center">
+      <section className="max-w-4xl mx-auto px-6 text-center pb-24">
         <h2 className="text-4xl lg:text-6xl font-black text-zinc-900 mb-6 tracking-tighter uppercase leading-[0.9]">
           El conocimiento es <br/>
           <span className="text-amber-500 italic font-serif lowercase font-light">Poder Comercial</span>
@@ -170,6 +201,6 @@ export default function CoursesPage() {
         </LeadButton>
       </section>
 
-    </main>
+    </div>
   );
 }

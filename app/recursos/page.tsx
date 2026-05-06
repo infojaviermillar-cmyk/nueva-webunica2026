@@ -58,7 +58,7 @@ export default function Page() {
   ];
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden">
+    <div className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden">
       {/* Hero */}
       <section className="max-w-4xl mx-auto px-6 mb-20 text-center">
         <h1 className="text-4xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-[0.9] mb-6">
@@ -67,6 +67,22 @@ export default function Page() {
         <p className="text-xl text-zinc-400 font-light leading-relaxed">
           Guías de alto valor, comparativas técnicas y recursos estratégicos para dueños de negocios e-commerce en Chile.
         </p>
+      </section>
+
+      {/* Intro Text - Mejora relación texto-HTML */}
+      <section className="max-w-4xl mx-auto px-6 mb-16 text-center">
+        <p className="text-zinc-400 font-light leading-relaxed text-lg">
+          En Webunica llevamos más de 7 años desarrollando e-commerce y plataformas digitales para empresas chilenas. 
+          Este centro reúne nuestro conocimiento más valioso: guías técnicas, comparativas de herramientas y recursos 
+          estratégicos pensados para dueños de negocios que quieren escalar con inteligencia.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {['Shopify Chile', 'WooCommerce', 'SEO Técnico', 'Embudos de Venta', 'Integraciones ERP', 'Pasarelas de Pago'].map((tag) => (
+            <span key={tag} className="px-4 py-1.5 bg-zinc-800 border border-zinc-700 rounded-full text-zinc-400 text-xs font-bold uppercase tracking-wider">
+              {tag}
+            </span>
+          ))}
+        </div>
       </section>
 
       {/* Grid Categories */}
@@ -106,6 +122,6 @@ export default function Page() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -9,7 +9,7 @@ export const metadata = {
 export default function LicensePage() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans antialiased text-zinc-900 pb-20 overflow-x-hidden">
-      <main className="max-w-5xl mx-auto px-6 pt-[22vh] lg:pt-48 lg:pt-40">
+      <div className="max-w-5xl mx-auto px-6 pt-[22vh] lg:pt-48 lg:pt-40">
         
         {/* Header Section */}
         <div className="text-center mb-24 relative">
@@ -150,7 +150,7 @@ export default function LicensePage() {
            </Link>
         </div>
 
-      </main>
+      </div>
     </div>
   );
 }

@@ -48,7 +48,7 @@ export default function Page() {
   ];
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden">
+    <div className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-6 mb-24 relative z-10 text-center">
         <div className="inline-block px-5 py-2 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-black uppercase tracking-[0.3em] mb-8">
@@ -127,7 +127,7 @@ export default function Page() {
         </LeadButton>
       </section>
 
-    </main>
+    </div>
   );
 }
 

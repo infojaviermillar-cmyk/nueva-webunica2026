@@ -109,7 +109,7 @@ export default function SaaSPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <main className="pt-[22vh] lg:pt-48">
+      <div className="pt-[22vh] lg:pt-48">
         {/* Futuristic Hero Section */}
         <section className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/20 blur-[150px] rounded-full -z-10 animate-pulse" />
@@ -312,7 +312,7 @@ export default function SaaSPage() {
             ctaLabel="Agendar Consultoría Gratuita"
           />
         </div>
-      </main>
+      </div>
     </div>
   );
 }

@@ -100,7 +100,7 @@ export default function PymesPage() {
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-zinc-900 overflow-x-hidden">
-      <main className="pt-[22vh] lg:pt-48 pb-20">
+      <div className="pt-[22vh] lg:pt-48 pb-20">
         {/* Pymes Hero */}
         <section className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
@@ -275,7 +275,7 @@ export default function PymesPage() {
               </div>
            </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

@@ -99,7 +99,7 @@ export default function DentistryPage() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white font-sans antialiased overflow-x-hidden">
-      <main className="pt-[22vh] lg:pt-48 pb-20">
+      <div className="pt-[22vh] lg:pt-48 pb-20">
         {/* Hero Section */}
         <section className="relative px-6 py-20 lg:py-40 overflow-hidden">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-emerald-600/10 blur-[150px] rounded-full -z-10" />
@@ -252,7 +252,7 @@ export default function DentistryPage() {
               Cotizar Proyecto Dental
            </LeadButton>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

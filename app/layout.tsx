@@ -69,9 +69,9 @@ export default async function RootLayout({
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
         <ContactModalProvider>
           {isDisenoShopify ? <DisenoShopifyHeader /> : <Header domain={domain} />}
-          <div className="flex-grow">
+          <main className="flex-grow">
             {children}
-          </div>
+          </main>
           {isDisenoShopify ? <DisenoShopifyFooter /> : isDesarrolloShopify ? <DesarrolloShopifyFooter /> : <Footer />}
           {/* Botón unificado en ContactModalProvider */}
         </ContactModalProvider>

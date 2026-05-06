@@ -93,14 +93,14 @@ function ChecklistProContent() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-0">
+    <div className="min-h-screen bg-slate-50 pt-0">
       <ChecklistClient 
         title="Checklist CRO Shopify PRO"
         description="Estrategias avanzadas de psicología de ventas y optimización técnica para tiendas de alto rendimiento."
         rawText={rawText}
         storageKey="cro-pro-checklist"
       />
-    </main>
+    </div>
   );
 }
 

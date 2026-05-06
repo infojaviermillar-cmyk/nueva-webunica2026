@@ -39,7 +39,7 @@ export default function ComparisonPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-zinc-50 pt-[20vh] pb-32 overflow-hidden">
+    <div className="min-h-screen bg-zinc-50 pt-[20vh] pb-32 overflow-hidden">
       <section className="max-w-5xl mx-auto px-6 text-center mb-20">
         <h1 className="text-4xl lg:text-7xl font-black text-zinc-950 uppercase tracking-tighter mb-8 leading-[0.9]">
           Shopify <span className="text-zinc-300">vs</span> Jumpseller <span className="text-zinc-300">vs</span> WooCommerce
@@ -103,6 +103,6 @@ export default function ComparisonPage() {
             </Link>
          </div>
       </section>
-    </main>
+    </div>
   );
 }

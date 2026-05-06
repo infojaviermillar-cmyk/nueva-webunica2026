@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden">
+    <div className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden">
       <section className="max-w-5xl mx-auto px-6 mb-20 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-8">
           <span className="text-emerald-400 text-[10px] font-black uppercase tracking-widest">✅ Checklist Gratuita</span>
@@ -40,6 +40,6 @@ export default function Page() {
           </form>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -144,7 +144,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-10 ml-16 relative z-30">
+            <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-10 ml-16 relative z-30">
               {isShopifyLanding ? (
                 <>
                   <Link href="#inicio" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>Inicio</Link>
@@ -174,29 +174,39 @@ export default function Header({ domain = '' }: { domain?: string }) {
                         <span className="w-1.5 h-1.5 rounded-sm bg-violet-600"></span>
                         E-commerce & SaaS
                       </h4>
-                      <div className="flex flex-col gap-1">
-                        <Link href="/desarrollo-tiendas-shopify-en-chile" className="group/item flex flex-col p-4 bg-zinc-50 rounded-[2.2rem] border-2 border-transparent hover:border-violet-500 hover:bg-violet-50 transition-all relative overflow-hidden mb-2">
-                          <div className="absolute top-0 right-0 px-3 py-1 bg-violet-600 text-[8px] font-black text-white uppercase rounded-bl-xl">Estrella</div>
-                          <span className="text-[15px] font-black text-zinc-950 group-hover/item:text-violet-600 transition-colors uppercase italic">Tiendas Shopify</span>
-                          <span className="text-[11px] text-zinc-500 font-medium leading-tight">Diseño y desarrollo pro en Chile</span>
-                        </Link>
-                        <Link href="/desarrollo-tienda-en-linea-woocommerce" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Tienda WooCommerce</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">B2B y Catálogos complejos</span>
-                        </Link>
-                        <Link href="/tienda-dropshipping-shopify-y-dropi" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Dropshipping Shopi+Dropi</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Automatización de ventas</span>
-                        </Link>
-                        <Link href="/desarrollo-web-nextjs-saas-custom" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Next.js & SaaS a Medida</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Software Web de Alto Vuelo</span>
-                        </Link>
-                        <Link href="/desarrollo-paginas-web-pymes-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Sitios Web Pymes</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Diseño para servicios locales</span>
-                        </Link>
-                      </div>
+                      <ul className="flex flex-col gap-1">
+                        <li>
+                          <Link href="/desarrollo-tiendas-shopify-en-chile" className="group/item flex flex-col p-4 bg-zinc-50 rounded-[2.2rem] border-2 border-transparent hover:border-violet-500 hover:bg-violet-50 transition-all relative overflow-hidden mb-2">
+                            <div className="absolute top-0 right-0 px-3 py-1 bg-violet-600 text-[8px] font-black text-white uppercase rounded-bl-xl">Estrella</div>
+                            <span className="text-[15px] font-black text-zinc-950 group-hover/item:text-violet-600 transition-colors uppercase italic">Tiendas Shopify</span>
+                            <span className="text-[11px] text-zinc-500 font-medium leading-tight">Diseño y desarrollo pro en Chile</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/desarrollo-tienda-en-linea-woocommerce" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Tienda WooCommerce</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">B2B y Catálogos complejos</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/tienda-dropshipping-shopify-y-dropi" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Dropshipping Shopi+Dropi</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Automatización de ventas</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/desarrollo-web-nextjs-saas-custom" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Next.js & SaaS a Medida</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Software Web de Alto Vuelo</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/desarrollo-paginas-web-pymes-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Sitios Web Pymes</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Diseño para servicios locales</span>
+                          </Link>
+                        </li>
+                      </ul>
                     </div>
 
                     {/* Col 2: Marketing & Herramientas */}
@@ -205,31 +215,41 @@ export default function Header({ domain = '' }: { domain?: string }) {
                         <span className="w-1.5 h-1.5 rounded-sm bg-blue-500"></span>
                         Marketing & Recursos
                       </h4>
-                      <div className="flex flex-col gap-1">
-                        <Link href="/servicios-seo-posicionamiento-google" className="group/item flex flex-col p-4 bg-violet-600 rounded-3xl mb-2 group/seo transition-all hover:bg-zinc-950">
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-[15px] font-black text-white">SEO Avanzado</span>
-                            <span className="text-[9px] bg-white/20 text-white px-2 py-0.5 rounded-full font-black">PRO</span>
-                          </div>
-                          <span className="text-[11px] text-white/70 font-medium leading-tight">Auditoría y posicionamiento</span>
-                        </Link>
-                        <Link href="/agencia-de-embudos-de-venta-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors">Embudos de Venta</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Sales Funnels de conversión</span>
-                        </Link>
-                        <Link href="/calculadora-de-campana-meta-ads-facebook" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors">Calculadora Meta Ads</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Proyecta tu ROAS y ventas</span>
-                        </Link>
-                        <Link href="/listas-de-verificacion-shopify-cro-basica" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors">Checklist CRO Shopify</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Auditoría de conversión</span>
-                        </Link>
-                        <Link href="/recursos" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors">Centro de Recursos</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Herramientas gratuitas</span>
-                        </Link>
-                      </div>
+                      <ul className="flex flex-col gap-1">
+                        <li>
+                          <Link href="/servicios-seo-posicionamiento-google" className="group/item flex flex-col p-4 bg-violet-600 rounded-3xl mb-2 group/seo transition-all hover:bg-zinc-950">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-[15px] font-black text-white">SEO Avanzado</span>
+                              <span className="text-[9px] bg-white/20 text-white px-2 py-0.5 rounded-full font-black">PRO</span>
+                            </div>
+                            <span className="text-[11px] text-white/70 font-medium leading-tight">Auditoría y posicionamiento</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/agencia-de-embudos-de-venta-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors">Embudos de Venta</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Sales Funnels de conversión</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/calculadora-de-campana-meta-ads-facebook" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors">Calculadora Meta Ads</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Proyecta tu ROAS y ventas</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/listas-de-verificacion-shopify-cro-basica" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors">Checklist CRO Shopify</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Auditoría de conversión</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/recursos" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors">Centro de Recursos</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Herramientas gratuitas</span>
+                          </Link>
+                        </li>
+                      </ul>
                     </div>
 
                     {/* Col 3: Guías Shopify */}
@@ -238,28 +258,38 @@ export default function Header({ domain = '' }: { domain?: string }) {
                         <span className="w-1.5 h-1.5 rounded-sm bg-emerald-500"></span>
                         Guías Shopify Chile
                       </h4>
-                      <div className="flex flex-col gap-1">
-                        <Link href="/comisiones-plataformas-de-pago-para-shopify-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Comisiones de Pago</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Transbank, Mercado Pago, etc.</span>
-                        </Link>
-                        <Link href="/empresas-de-transporte-y-envios-para-shopify-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Logística y Envíos</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Shipit, Bluexpress, Starken</span>
-                        </Link>
-                        <Link href="/integracion-erp-shopify-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Integración ERP</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Bsale, Obuma, Defontana</span>
-                        </Link>
-                        <Link href="/boleta-electronica-facturacion-shopify-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Boletas y Facturas</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Haulmer, Lioren, LibreDTE</span>
-                        </Link>
-                        <Link href="/cursos-y-talleres-shopify" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Talleres & Cursos</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Básico, Avanzado, IA</span>
-                        </Link>
-                      </div>
+                      <ul className="flex flex-col gap-1">
+                        <li>
+                          <Link href="/comisiones-plataformas-de-pago-para-shopify-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Comisiones de Pago</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Transbank, Mercado Pago, etc.</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/empresas-de-transporte-y-envios-para-shopify-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Logística y Envíos</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Shipit, Bluexpress, Starken</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/integracion-erp-shopify-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Integración ERP</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Bsale, Obuma, Defontana</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/boleta-electronica-facturacion-shopify-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Boletas y Facturas</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Haulmer, Lioren, LibreDTE</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/cursos-y-talleres-shopify" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Talleres & Cursos</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Básico, Avanzado, IA</span>
+                          </Link>
+                        </li>
+                      </ul>
                     </div>
 
                     {/* Col 4: Especialidades Pro */}
@@ -268,28 +298,38 @@ export default function Header({ domain = '' }: { domain?: string }) {
                         <span className="w-1.5 h-1.5 rounded-sm bg-orange-500"></span>
                         Especialidades B2B
                       </h4>
-                      <div className="flex flex-col gap-1">
-                        <Link href="/desarrollo-diseno-elearning-tutor-lms" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Academias Tutor LMS</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">E-learning y Cursos</span>
-                        </Link>
-                        <Link href="/complemento-sence-tutor-lms-pro" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Plugin Sence Pro</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Cumplimiento para Tutor LMS</span>
-                        </Link>
-                        <Link href="/sistema-cotizaciones-intranet-wordpress" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Cotizador & Intranet</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Gestión B2B y Descuentos</span>
-                        </Link>
-                        <Link href="/diseno-paginas-web-inmobiliaria" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Inmobiliarias Premium</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Catálogo de propiedades</span>
-                        </Link>
-                        <Link href="/diseno-paginas-web-odontologia" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
-                          <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Clínicas Dentales</span>
-                          <span className="text-[11px] text-zinc-500 font-medium">Agendas y captación</span>
-                        </Link>
-                      </div>
+                      <ul className="flex flex-col gap-1">
+                        <li>
+                          <Link href="/desarrollo-diseno-elearning-tutor-lms" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Academias Tutor LMS</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">E-learning y Cursos</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/complemento-sence-tutor-lms-pro" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Plugin Sence Pro</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Cumplimiento para Tutor LMS</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/sistema-cotizaciones-intranet-wordpress" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Cotizador & Intranet</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Gestión B2B y Descuentos</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/diseno-paginas-web-inmobiliaria" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Inmobiliarias Premium</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Catálogo de propiedades</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/diseno-paginas-web-odontologia" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Clínicas Dentales</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Agendas y captación</span>
+                          </Link>
+                        </li>
+                      </ul>
                     </div>
 
                     {/* Col 5: Últimos Artículos */}
@@ -415,7 +455,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
         {/* Side Panel */}
         <div className={`absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl transition-transform duration-500 ease-out flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="flex-grow flex flex-col pt-32 px-10 pb-12 overflow-y-auto">
-            <nav className="flex flex-col gap-8">
+            <nav aria-label="Navegación móvil" className="flex flex-col gap-8">
               {isShopifyLanding ? (
                 <div className="flex flex-col gap-6">
                   <Link href="#inicio" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">Inicio</Link>

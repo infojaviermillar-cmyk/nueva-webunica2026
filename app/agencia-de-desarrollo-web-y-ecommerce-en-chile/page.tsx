@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden relative">
+    <div className="min-h-screen bg-zinc-950 pt-[20vh] pb-24 overflow-hidden relative">
       {/* Abstract Background pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-20" />
       
@@ -37,6 +37,6 @@ export default function Page() {
           <span className="text-emerald-400 text-xs font-bold uppercase tracking-widest group-hover:underline">Leer más &rarr;</span>
         </Link>
       </section>
-    </main>
+    </div>
   );
 }

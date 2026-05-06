@@ -1,9 +1,25 @@
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Proyectos Paginas Y Sitios Web | Webunica',
+  description: 'Descubre todo sobre Proyectos Paginas Y Sitios Web con Webunica. Soluciones web avanzadas y diseño de alto rendimiento para el mercado chileno.',
+  openGraph: {
+    title: 'Proyectos Paginas Y Sitios Web | Webunica',
+    description: 'Soluciones web y e-commerce de alto rendimiento con Webunica.',
+    url: 'https://webunica.cl/proyectos-paginas-y-sitios-web',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://webunica.cl/proyectos-paginas-y-sitios-web',
+  }
+};
+
 import Link from 'next/link';
 import LeadButton from '@/components/ui/lead-button';
 
 export default function PortfolioPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       {/* Top Header Spacing (in case header is fixed) */}
       <div className="h-20"></div>
 
@@ -117,6 +133,6 @@ export default function PortfolioPage() {
           </LeadButton>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

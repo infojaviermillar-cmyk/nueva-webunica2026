@@ -117,7 +117,7 @@ export default function ShippingCompaniesPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 pt-[22vh] lg:pt-40 pb-24 overflow-hidden font-sans">
+    <div className="min-h-screen bg-slate-50 pt-[22vh] lg:pt-40 pb-24 overflow-hidden font-sans">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -269,6 +269,6 @@ export default function ShippingCompaniesPage() {
           Hablar con un Experto Shopify
         </LeadButton>
       </section>
-    </main>
+    </div>
   );
 }

@@ -35,7 +35,7 @@ export default function Page() {
   ];
 
   return (
-    <main className="min-h-screen bg-zinc-950 pt-[22vh] lg:pt-48 pb-24 overflow-hidden font-sans">
+    <div className="min-h-screen bg-zinc-950 pt-[22vh] lg:pt-48 pb-24 overflow-hidden font-sans">
       {/* Hero Document Section */}
       <section className="max-w-4xl mx-auto px-6 mb-20">
         <div className="flex items-center gap-3 mb-8">
@@ -118,7 +118,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 

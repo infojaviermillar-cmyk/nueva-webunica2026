@@ -36,7 +36,7 @@ export default function Page() {
   ];
 
   return (
-    <main className="min-h-screen bg-white pt-[20vh] pb-24">
+    <div className="min-h-screen bg-white pt-[20vh] pb-24">
 
       {/* Hero FAQ */}
       <section className="max-w-7xl mx-auto px-6 mb-20 text-center">
@@ -98,7 +98,7 @@ export default function Page() {
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 
