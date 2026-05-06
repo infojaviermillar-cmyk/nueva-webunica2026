@@ -304,7 +304,7 @@ export default function TutorLMSPage() {
                    <div key={i} className={`relative bg-zinc-50 rounded-[4rem] p-10 lg:p-14 border-2 transition-all duration-500 hover:translate-y-[-10px] flex flex-col h-full ${p.recommended ? 'border-rose-500 shadow-3xl shadow-rose-500/10' : 'border-transparent hover:border-rose-100'}`}>
                       {p.recommended && (
                         <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-rose-600 text-white text-[14px] font-black px-6 py-2 rounded-full uppercase tracking-widest">
-                          Recomendado SEO
+                          Más vendido
                         </div>
                       )}
                       
