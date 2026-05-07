@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Smartphone, Code2, Rocket, Zap } from 'lucide-react';
+import { ArrowRight, Smartphone, Code2, Rocket, Zap, Gauge, ShieldCheck, Activity } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
 import { BlogPost } from '@/lib/blog';
 import FeaturedBlogSection from '@/components/sections/featured-blog';
@@ -253,40 +253,68 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
 
       <section className="py-32 bg-zinc-50 rounded-[4rem] mx-4 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="mb-16 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-violet-100 text-violet-600 text-[10px] font-black uppercase tracking-widest rounded-full mb-4">
+              <Activity className="w-3 h-3" />
+              Alta Ingeniería de Rendimiento
+            </div>
+            <h2 className="text-3xl lg:text-5xl font-black text-zinc-950 tracking-tighter uppercase">Tecnología que <br/> <span className="text-violet-600 italic font-serif lowercase font-light">impulsa</span> tu negocio</h2>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            <div className="md:col-span-8 bg-zinc-950 rounded-[4rem] p-12 lg:p-16 text-white relative overflow-hidden group">
+            {/* Main Performance Card */}
+            <div className="md:col-span-8 bg-zinc-950 rounded-[4rem] p-12 lg:p-16 text-white relative overflow-hidden group border border-white/5 shadow-2xl hover:border-violet-500/30 transition-all duration-700">
+              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 group-hover:bg-violet-600/20 transition-colors" />
+              
               <div className="relative z-10 h-full flex flex-col justify-between">
                 <div>
-                  <Zap className="w-12 h-12 text-violet-500 mb-8" />
-                  <h2 className="text-4xl lg:text-5xl font-black tracking-tighter uppercase mb-6 leading-none">Velocidad <br/>de Carga Crítica</h2>
-                  <p className="text-zinc-400 text-lg font-light max-w-md leading-relaxed">
-                    Optimizamos <span className="text-white font-bold">Core Web Vitals</span> con Next.js para que tu sitio cargue en menos de 1 segundo, mejorando tu ranking en Google y tus ventas.
+                  <div className="flex items-center justify-between mb-8">
+                    <Zap className="w-12 h-12 text-violet-500 animate-pulse" />
+                    <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex items-center gap-3">
+                      <Gauge className="w-5 h-5 text-emerald-400" />
+                      <span className="text-xl font-black text-emerald-400 font-mono tracking-tighter">100/100</span>
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 leading-[0.9]">Performance <br/>de Élite</h3>
+                  <p className="text-zinc-400 text-lg font-light max-w-lg leading-relaxed mb-8">
+                    Eliminamos la latencia. Cada milisegundo cuenta para tu conversión. Arquitectura <span className="text-white font-bold italic">server-side</span> con Next.js para una velocidad de carga instantánea que Google ama.
                   </p>
                 </div>
-                <div className="mt-12 flex gap-8 border-t border-white/10 pt-8">
-                  <div>
-                    <div className="text-3xl font-black text-white mb-1 uppercase italic tracking-tighter">SEO Pro</div>
-                    <div className="text-[14px] font-black text-zinc-500 uppercase tracking-widest">Indexación Semántica</div>
+                
+                <div className="mt-12 grid grid-cols-2 gap-8 border-t border-white/10 pt-10">
+                  <div className="group/item">
+                    <div className="text-3xl font-black text-white mb-2 uppercase italic tracking-tighter group-hover/item:text-violet-400 transition-colors">SEO Técnico</div>
+                    <div className="text-[12px] font-black text-zinc-500 uppercase tracking-widest leading-none">Indexación Semántica Avanzada</div>
                   </div>
-                  <div>
-                    <div className="text-3xl font-black text-white mb-1 uppercase italic tracking-tighter">99.9%</div>
-                    <div className="text-[14px] font-black text-zinc-500 uppercase tracking-widest">Uptime Garantizado</div>
+                  <div className="group/item">
+                    <div className="text-3xl font-black text-white mb-2 uppercase italic tracking-tighter group-hover/item:text-violet-400 transition-colors">99.99%</div>
+                    <div className="text-[12px] font-black text-zinc-500 uppercase tracking-widest leading-none">Escalabilidad Garantizada</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="md:col-span-4 space-y-8">
-              <div className="bg-violet-600 rounded-[3.5rem] p-10 border border-violet-500 flex flex-col justify-end h-full group hover:bg-violet-700 transition-all relative overflow-hidden min-h-[450px]">
+            {/* Mobile First Card */}
+            <div className="md:col-span-4 group h-full">
+              <div className="bg-violet-600 rounded-[4rem] p-12 border border-violet-500/50 flex flex-col justify-end h-full relative overflow-hidden min-h-[550px] shadow-2xl hover:shadow-violet-600/40 hover:-translate-y-2 transition-all duration-700">
                 <div className="absolute inset-0 z-0">
-                  <Image src="/mobile-mockup.png" alt="Diseño Web Mobile-First Chile" fill className="object-cover opacity-40" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-violet-900 via-violet-900/40 to-transparent"></div>
+                  <Image 
+                    src="/mobile-mockup.png" 
+                    alt="Diseño Web Mobile-First Chile" 
+                    fill 
+                    className="object-cover opacity-30 grayscale group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-50 transition-all duration-1000" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-violet-950 via-violet-900/40 to-transparent"></div>
                 </div>
+                
                 <div className="relative z-10">
-                  <Smartphone className="w-10 h-10 text-white mb-8" />
-                  <h3 className="text-2xl font-black text-white uppercase tracking-tight leading-none mb-4">Diseño <br/>Mobile-First</h3>
-                  <p className="text-violet-100 text-sm font-medium leading-relaxed">
-                    Optimizamos la experiencia de usuario para smartphones, donde ocurre el 85% de las búsquedas en Chile.
+                  <div className="w-14 h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center mb-10">
+                    <Smartphone className="w-7 h-7 text-white" />
+                  </div>
+                  <h3 className="text-3xl font-black text-white uppercase tracking-tighter leading-none mb-6">Experiencia <br/>Impecable</h3>
+                  <p className="text-violet-100 text-lg font-light leading-snug">
+                    Diseño centrado en el pulgar. El <span className="text-white font-bold">85%</span> de tu tráfico es móvil; nos aseguramos que cada tap sea una <span className="italic font-serif">conversión</span>.
                   </p>
                 </div>
               </div>
