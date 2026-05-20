@@ -289,6 +289,12 @@ export default function Header({ domain = '' }: { domain?: string }) {
                             <span className="text-[11px] text-zinc-500 font-medium">Básico, Avanzado, IA</span>
                           </Link>
                         </li>
+                        <li>
+                          <Link href="/integracion-fintoc-shopify" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Fintoc Shopify</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Pagos por transferencia</span>
+                          </Link>
+                        </li>
                       </ul>
                     </div>
 
@@ -586,6 +592,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/cursos-y-talleres-shopify" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-blue-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
                       Talleres & Cursos
+                    </Link>
+                    <Link href="/integracion-fintoc-shopify" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-blue-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                      Fintoc Shopify
                     </Link>
                   </div>
                 </div>

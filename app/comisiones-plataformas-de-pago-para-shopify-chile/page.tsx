@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Guía definitiva sobre comisiones, tarifas y plazos de retiro de las pasarelas de pago disponibles para Shopify en Chile. Incluye Transbank, VentiPay y más.',
   openGraph: {
     title: 'Comisiones de Pago en Shopify Chile 2026',
-    description: 'Compara las tarifas reales de Transbank Webpay, Mercado Pago, Flow, VentiPay y Pago Fácil para tu tienda Shopify.',
+    description: 'Compara las tarifas reales de Transbank Webpay, Mercado Pago, Flow, VentiPay y Fintoc para tu tienda Shopify.',
     url: 'https://webunica.cl/comisiones-plataformas-de-pago-para-shopify-chile',
     type: 'article',
   }
@@ -19,7 +19,7 @@ export default function PaymentCommissionsPage() {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "Comisiones de Plataformas de Pago para Shopify en Chile (2026)",
-    "description": "Análisis y comparativa de las comisiones de Transbank Webpay, Mercado Pago, Flow, Pago Fácil y VentiPay para tiendas Shopify en Chile.",
+    "description": "Análisis y comparativa de las comisiones de Transbank Webpay, Mercado Pago, Flow, Fintoc y VentiPay para tiendas Shopify en Chile.",
     "author": {
       "@type": "Organization",
       "name": "Webunica",
@@ -79,13 +79,13 @@ export default function PaymentCommissionsPage() {
       popular: false
     },
     {
-      name: "Pago Fácil",
+      name: "Fintoc",
       logo: "⚡",
-      commission: "2.95% + IVA",
-      releaseTime: "A convenir",
-      pros: ["Múltiples medios de pago locales en una sola integración", "Planes a medida para empresas corporativas"],
-      cons: ["Independientes pagan una tasa mayor (3.49% + IVA)", "El checkout también es externo"],
-      recommended: false,
+      commission: "Variable",
+      releaseTime: "Según proveedor",
+      pros: ["Confirmación automatizada de transferencias", "Menor fricción que transferencia manual"],
+      cons: ["No procesa tarjetas de crédito ni cuotas", "Complementario a otras pasarelas"],
+      recommended: true,
       popular: false
     },
     {
