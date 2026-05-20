@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import LeadButton from '@/components/ui/lead-button';
+import WhatsAppButton from '@/components/ui/whatsapp-button';
 
 export const metadata: Metadata = {
   title: 'Shopify Chile: Desarrollo de Tiendas Online | Webunica',
@@ -158,12 +160,12 @@ export default function DesarrolloShopifyChilePage() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-16">
-          <Link href="#contacto" className="bg-violet-600 text-white font-bold px-8 py-4 rounded-full hover:bg-violet-700 transition shadow-lg hover:shadow-violet-600/30 text-center text-lg">
+          <LeadButton className="bg-violet-600 text-white font-bold px-8 py-4 rounded-full hover:bg-violet-700 transition shadow-lg hover:shadow-violet-600/30 text-center text-lg">
             Solicitar cotización
-          </Link>
-          <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer" className="bg-white border-2 border-zinc-200 text-zinc-900 font-bold px-8 py-4 rounded-full hover:border-zinc-300 transition text-center text-lg flex items-center justify-center gap-2">
+          </LeadButton>
+          <WhatsAppButton className="bg-white border-2 border-zinc-200 text-zinc-900 font-bold px-8 py-4 rounded-full hover:border-zinc-300 transition text-center text-lg flex items-center justify-center gap-2">
             Hablar por WhatsApp
-          </a>
+          </WhatsAppButton>
         </div>
 
         <div className="bg-white p-8 rounded-3xl shadow-sm border border-zinc-100 max-w-2xl w-full text-left">
@@ -454,7 +456,7 @@ export default function DesarrolloShopifyChilePage() {
                 <li>✓ Envíos base</li>
                 <li>✓ Capacitación</li>
               </ul>
-              <Link href="#contacto" className="block text-center bg-zinc-950 text-white font-bold py-3 rounded-full hover:bg-zinc-800 transition">Solicitar plan</Link>
+              <LeadButton className="block w-full text-center bg-zinc-950 text-white font-bold py-3 rounded-full hover:bg-zinc-800 transition">Solicitar plan</LeadButton>
             </div>
 
             {/* PLAN FULL */}
@@ -470,7 +472,7 @@ export default function DesarrolloShopifyChilePage() {
                 <li>✓ Meta Pixel & Analytics</li>
                 <li>✓ Soporte adicional</li>
               </ul>
-              <Link href="#contacto" className="block text-center bg-violet-500 text-white font-bold py-3 rounded-full hover:bg-violet-400 transition">Solicitar plan</Link>
+              <LeadButton className="block w-full text-center bg-violet-500 text-white font-bold py-3 rounded-full hover:bg-violet-400 transition">Solicitar plan</LeadButton>
             </div>
 
             {/* PLAN AVANZADO */}
@@ -485,7 +487,7 @@ export default function DesarrolloShopifyChilePage() {
                 <li>✓ Asesoría estratégica</li>
                 <li>✓ Capacitación avanzada</li>
               </ul>
-              <Link href="#contacto" className="block text-center bg-zinc-950 text-white font-bold py-3 rounded-full hover:bg-zinc-800 transition">Solicitar plan</Link>
+              <LeadButton className="block w-full text-center bg-zinc-950 text-white font-bold py-3 rounded-full hover:bg-zinc-800 transition">Solicitar plan</LeadButton>
             </div>
           </div>
           <p className="text-center mt-10 text-sm text-violet-200">Valores referenciales sujetos al alcance final del proyecto.</p>
@@ -562,12 +564,12 @@ export default function DesarrolloShopifyChilePage() {
             Te ayudamos a crear una tienda Shopify lista para vender en Chile, con pagos, envíos, productos, SEO técnico y configuración profesional.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:hola@webunica.cl" className="bg-violet-600 text-white font-bold px-8 py-4 rounded-full hover:bg-violet-500 transition text-lg shadow-lg hover:shadow-violet-600/30">
+            <LeadButton className="bg-violet-600 text-white font-bold px-8 py-4 rounded-full hover:bg-violet-500 transition text-lg shadow-lg hover:shadow-violet-600/30">
               Solicitar cotización
-            </a>
-            <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer" className="bg-white text-zinc-950 font-bold px-8 py-4 rounded-full hover:bg-zinc-200 transition text-lg flex items-center justify-center gap-2">
+            </LeadButton>
+            <WhatsAppButton className="bg-white text-zinc-950 font-bold px-8 py-4 rounded-full hover:bg-zinc-200 transition text-lg flex items-center justify-center gap-2">
               Hablar por WhatsApp
-            </a>
+            </WhatsAppButton>
           </div>
         </div>
       </section>
