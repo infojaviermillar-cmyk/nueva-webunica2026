@@ -102,12 +102,12 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   );
 }
 
-function MarqueeColumn({ items, duration, reverse = false }: { items: Testimonial[]; duration: number; reverse?: boolean }) {
+function MarqueeColumn({ items, duration, reverse = false, className = '' }: { items: Testimonial[]; duration: number; reverse?: boolean; className?: string }) {
   // Duplicamos para scroll infinito continuo
   const doubled = [...items, ...items];
 
   return (
-    <div className="flex flex-col overflow-hidden h-[600px]">
+    <div className={`flex flex-col overflow-hidden h-[600px] ${className}`}>
       <div
         className="flex flex-col"
         style={{
@@ -166,15 +166,20 @@ export default function TestimonialsSection() {
       </div>
 
       {/* Columnas con scroll infinito */}
-      <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-4 px-6 max-w-7xl mx-auto">
-        {cols.map((col, ci) => (
-          <MarqueeColumn
-            key={ci}
-            items={col.length >= 2 ? col : [...col, ...col, ...col]}
-            duration={20 + ci * 5}
-            reverse={ci % 2 === 1}
-          />
-        ))}
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-6 max-w-7xl mx-auto">
+        {cols.map((col, ci) => {
+          // col 0: visible siempre | col 1: hidden en mobile | col 2-3: hidden hasta md
+          const colClass = ci === 0 ? '' : ci === 1 ? 'hidden sm:flex flex-col' : 'hidden md:flex flex-col';
+          return (
+            <MarqueeColumn
+              key={ci}
+              items={col.length >= 2 ? col : [...col, ...col, ...col]}
+              duration={20 + ci * 5}
+              reverse={ci % 2 === 1}
+              className={colClass}
+            />
+          );
+        })}
       </div>
 
       {/* CTA inferior */}

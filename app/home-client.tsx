@@ -121,7 +121,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
                 <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-widest text-violet-700 font-black">Performance Marketing Agency 2026</span>
               </div>
-              <h1 className="text-5xl lg:text-[85px] font-black tracking-tighter leading-[0.85] mb-10 text-zinc-950 uppercase">
+              <h1 className="text-4xl sm:text-5xl lg:text-[85px] font-black tracking-tighter leading-[0.9] lg:leading-[0.85] mb-10 text-zinc-950 uppercase">
                 CONVERTIMOS <br/>TRÁFICO EN <span className="text-violet-600 font-serif italic lowercase font-light">Clientes</span>
               </h1>
               <p className="text-xl text-zinc-500 mb-12 max-w-xl leading-relaxed text-pretty font-light">
@@ -142,7 +142,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
                 </Link>
               </div>
             </div>
-            <div className="lg:col-span-5 relative">
+            <div className="hidden lg:block lg:col-span-5 relative">
               <div className="bg-violet-50 rounded-[3rem] p-10 lg:p-14 relative group overflow-hidden border-2 border-violet-100 shadow-2xl shadow-violet-600/5 transition-all hover:scale-[1.02]">
                 <div className="flex justify-between items-center mb-10">
                   <div className="text-4xl text-violet-600">📈</div>
@@ -176,7 +176,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
               <div className="inline-block px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-500 text-[10px] font-black uppercase tracking-[0.2em] mb-8">
                 ⚠️ Alerta de Rendimiento
               </div>
-              <h2 className="text-4xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-8">
+              <h2 className="text-3xl sm:text-4xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-8">
                 ¡Tu página web actual de <span className="text-rose-500 italic font-serif lowercase font-light">5 años atrás</span> te está deteniendo!
               </h2>
             </div>
@@ -184,7 +184,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
               <p className="text-xl lg:text-2xl text-zinc-400 font-light leading-relaxed mb-10">
                 El mundo digital ha cambiado más en los últimos 24 meses que en la década pasada. Una web estática y lenta no es una "presencia online"... <span className="text-white font-bold">es un agujero negro</span> por donde se escapan tus prospectos, tu autoridad y tu facturación.
               </p>
-              <div className="flex flex-col sm:flex-row gap-8 items-start">
+              <div className="flex flex-row gap-8 items-start flex-wrap">
                 <div className="flex flex-col">
                   <span className="text-4xl font-black text-white mb-2 tracking-tighter">7.4s</span>
                   <span className="text-[10px] font-black text-zinc-500 uppercase tracking-widest leading-tight">Carga promedio <br/>web antigua</span>
