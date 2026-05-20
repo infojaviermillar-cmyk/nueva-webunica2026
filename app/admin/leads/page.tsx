@@ -7,7 +7,8 @@ export default async function LeadsPage() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user || user.email !== 'javiermillarv@gmail.com') {
+  const isAllowedAdmin = user?.email === 'javiermillarv@gmail.com' || user?.email?.endsWith('@webunica.cl');
+  if (!user || !isAllowedAdmin) {
     redirect('/mi-cuenta');
   }
 
