@@ -96,9 +96,9 @@ export default function WorkProcess() {
           {/* Decorative line for desktop */}
           <div className="absolute top-[60px] left-0 right-0 h-px bg-zinc-100 hidden lg:block -z-0"></div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-y-20 gap-x-12 relative z-10">
+          <div className="flex overflow-x-auto lg:grid lg:grid-cols-5 gap-y-20 gap-x-6 lg:gap-x-12 relative z-10 snap-x snap-mandatory pb-8 px-6 lg:px-0 -mx-6 lg:mx-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {steps.map((step, index) => (
-              <div key={index} className="flex flex-col items-center text-center group">
+              <div key={index} className="flex flex-col items-center text-center group min-w-[280px] w-[80vw] lg:w-auto lg:min-w-0 flex-shrink-0 snap-center">
                 {/* Icon Container */}
                 <div className="w-24 h-24 rounded-full bg-white border border-zinc-100 shadow-xl flex items-center justify-center mb-8 relative transition-all duration-500 group-hover:border-violet-500 group-hover:scale-110">
                   <div className="text-violet-600 transition-colors duration-500">
@@ -121,10 +121,6 @@ export default function WorkProcess() {
                   </p>
                 </div>
 
-                {/* Connecting Line for mobile/tablet */}
-                {index < steps.length - 1 && (
-                  <div className="w-px h-12 bg-zinc-100 my-4 lg:hidden"></div>
-                )}
               </div>
             ))}
           </div>

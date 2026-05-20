@@ -263,7 +263,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             {/* Main Performance Card */}
-            <div className="md:col-span-8 bg-zinc-950 rounded-[4rem] p-12 lg:p-16 text-white relative overflow-hidden group border border-white/5 shadow-2xl hover:border-violet-500/30 transition-all duration-700">
+            <div className="md:col-span-8 bg-zinc-950 rounded-[4rem] p-8 sm:p-12 lg:p-16 text-white relative overflow-hidden group border border-white/5 shadow-2xl hover:border-violet-500/30 transition-all duration-700">
               <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 group-hover:bg-violet-600/20 transition-colors" />
               
               <div className="relative z-10 h-full flex flex-col justify-between">
@@ -276,7 +276,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
                     </div>
                   </div>
                   
-                  <h3 className="text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 leading-[0.9]">Performance <br/>de Élite</h3>
+                  <h3 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 leading-[0.9] break-words">Performance <br/>de Élite</h3>
                   <p className="text-zinc-400 text-lg font-light max-w-lg leading-relaxed mb-8">
                     Eliminamos la latencia. Cada milisegundo cuenta para tu conversión. Arquitectura <span className="text-white font-bold italic">server-side</span> con Next.js para una velocidad de carga instantánea que Google ama.
                   </p>
