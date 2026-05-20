@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { getSupabaseAdmin } from '@/lib/supabase/admin';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Users } from 'lucide-react';
@@ -14,8 +15,9 @@ export default async function LeadsPage() {
     redirect('/mi-cuenta');
   }
 
-  // Cargamos todos los leads de una vez (el filtrado es client-side)
-  const { data: leads, error } = await supabase
+  // Usamos el cliente Admin (service role) para bypassear el RLS y leer todos los leads
+  const supabaseAdmin = getSupabaseAdmin();
+  const { data: leads, error } = await supabaseAdmin
     .from('leads')
     .select('*')
     .order('created_at', { ascending: false })
