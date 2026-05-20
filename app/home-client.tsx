@@ -264,6 +264,9 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
+      {/* ===== PROCESO DE TRABAJO ===== */}
+      <ProcesoSection />
+
       {/* Main Philosophy Section */}
       <section className="bg-zinc-950 py-32 rounded-[4rem] mx-4 relative overflow-hidden group">
         <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-transparent pointer-events-none" />
