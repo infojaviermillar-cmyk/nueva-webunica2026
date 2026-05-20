@@ -12,6 +12,7 @@ import {
   Puzzle, 
   Rocket 
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const steps = [
   {
@@ -91,25 +92,21 @@ export default function WorkProcess() {
           </p>
         </div>
 
-        {/* Steps Grid - Layout similar to the image */}
-        <div className="relative">
-          {/* Decorative line for desktop */}
-          <div className="absolute top-[60px] left-0 right-0 h-px bg-zinc-100 hidden lg:block -z-0"></div>
-          
-          <div className="flex overflow-x-auto lg:grid lg:grid-cols-5 gap-y-20 gap-x-6 lg:gap-x-12 relative z-10 snap-x snap-mandatory pb-8 px-6 lg:px-0 -mx-6 lg:mx-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        {/* Desktop Grid */}
+        <div className="relative hidden lg:block">
+          <div className="absolute top-[60px] left-0 right-0 h-px bg-zinc-100 -z-0"></div>
+          <div className="grid grid-cols-5 gap-y-20 gap-x-12 relative z-10">
             {steps.map((step, index) => (
-              <div key={index} className="flex flex-col items-center text-center group min-w-[280px] w-[80vw] lg:w-auto lg:min-w-0 flex-shrink-0 snap-center">
+              <div key={index} className="flex flex-col items-center text-center group">
                 {/* Icon Container */}
                 <div className="w-24 h-24 rounded-full bg-white border border-zinc-100 shadow-xl flex items-center justify-center mb-8 relative transition-all duration-500 group-hover:border-violet-500 group-hover:scale-110">
                   <div className="text-violet-600 transition-colors duration-500">
                     {step.icon}
                   </div>
-                  {/* Step indicator */}
                   <div className="absolute -top-2 -right-2 bg-zinc-950 text-white text-[10px] font-black px-2 py-1 rounded-md">
                     {step.num}
                   </div>
                 </div>
-
                 {/* Content */}
                 <div className="space-y-3">
                   <span className="text-[10px] font-black text-violet-500 uppercase tracking-[0.2em]">Paso {step.num}</span>
@@ -120,10 +117,44 @@ export default function WorkProcess() {
                     {step.desc}
                   </p>
                 </div>
-
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Mobile Marquee */}
+        <div className="lg:hidden w-full overflow-hidden relative -mx-6 px-6 pb-12">
+          {/* Fading Edges */}
+          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+          
+          <motion.div
+            className="flex w-max"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+          >
+            {[...steps, ...steps].map((step, index) => (
+              <div key={index} className="w-[280px] flex-shrink-0 flex flex-col items-center text-center px-4 group">
+                <div className="w-24 h-24 rounded-full bg-white border border-zinc-100 shadow-xl flex items-center justify-center mb-8 relative transition-all duration-500 group-hover:border-violet-500 group-hover:scale-110">
+                  <div className="text-violet-600 transition-colors duration-500">
+                    {step.icon}
+                  </div>
+                  <div className="absolute -top-2 -right-2 bg-zinc-950 text-white text-[10px] font-black px-2 py-1 rounded-md">
+                    {step.num}
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <span className="text-[10px] font-black text-violet-500 uppercase tracking-[0.2em]">Paso {step.num}</span>
+                  <h3 className="text-lg font-black text-zinc-900 uppercase tracking-tight leading-none group-hover:text-violet-600 transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-zinc-500 font-medium leading-relaxed max-w-[200px] mx-auto">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
         </div>
 
       </div>
