@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {
   Calendar, Mail, Phone, Calculator, Search, X,
   CheckCircle2, Clock, MessageSquare, XCircle, Send, Loader2, ChevronDown,
-  AlertTriangle,
+  AlertTriangle, Plus
 } from 'lucide-react';
 
 // ── Types ────────────────────────────────────────────────
@@ -199,6 +199,57 @@ export default function LeadsTable({ leads: initialLeads }: { leads: Lead[] }) {
   const [filterStatus, setFilterStatus] = useState<LeadStatus | 'all'>('all');
   const [expandedLeadId, setExpandedLeadId] = useState<string | null>(null);
 
+  // Manual lead creation states
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [createLoading, setCreateLoading] = useState(false);
+  const [createError, setCreateError] = useState<string | null>(null);
+  const [newLeadForm, setNewLeadForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    city: '',
+    service_interest: 'Shopify - Tienda Completa',
+    source: 'WhatsApp',
+    message: '',
+  });
+
+  const handleCreateLead = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newLeadForm.name || !newLeadForm.email) {
+      setCreateError('Nombre y Email son campos obligatorios.');
+      return;
+    }
+    setCreateLoading(true);
+    setCreateError(null);
+    try {
+      const res = await fetch('/api/leads/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newLeadForm),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setCreateError(data.error || 'Error al guardar el lead');
+        return;
+      }
+      setLeads(prev => [data.lead, ...prev]);
+      setNewLeadForm({
+        name: '',
+        email: '',
+        phone: '',
+        city: '',
+        service_interest: 'Shopify - Tienda Completa',
+        source: 'WhatsApp',
+        message: '',
+      });
+      setShowCreateModal(false);
+    } catch (err: any) {
+      setCreateError(err.message || 'Error de conexión');
+    } finally {
+      setCreateLoading(false);
+    }
+  };
+
   const handleStatusChange = (id: string, status: LeadStatus) => {
     setLeads(prev => prev.map(l => l.id === id ? { ...l, status } : l));
   };
@@ -273,25 +324,36 @@ export default function LeadsTable({ leads: initialLeads }: { leads: Lead[] }) {
           })}
         </div>
 
-        {/* Search */}
-        <div className="relative">
-          <div className={`flex items-center gap-3 bg-white border-2 rounded-2xl px-4 py-3 transition-all shadow-sm ${showDropdown && suggestions.length > 0 ? 'border-violet-500' : 'border-slate-200'}`}>
-            <Search className="w-4 h-4 text-slate-400 shrink-0" />
-            <input
-              type="text"
-              placeholder="Buscar... (mín. 3 letras)"
-              value={query}
-              onChange={e => { setQuery(e.target.value); setSelectedId(null); setShowDropdown(true); }}
-              onFocus={() => setShowDropdown(true)}
-              onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
-              className="bg-transparent outline-none text-sm font-medium text-slate-700 placeholder:text-slate-300 w-48"
-            />
-            {query && (
-              <button onClick={() => { setQuery(''); setSelectedId(null); }} className="text-slate-300 hover:text-slate-500 transition-colors">
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
+        {/* Search and Action */}
+        <div className="flex items-center gap-3 w-full sm:w-auto flex-wrap sm:flex-nowrap">
+          {/* Add Manual Lead */}
+          <button
+            onClick={() => setShowCreateModal(true)}
+            className="inline-flex items-center gap-2 px-5 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:scale-[1.03] active:scale-95 transition-all shadow-md shadow-violet-200/50 cursor-pointer whitespace-nowrap justify-center"
+          >
+            <Plus className="w-4 h-4" />
+            Agregar Lead
+          </button>
+
+          {/* Search */}
+          <div className="relative">
+            <div className={`flex items-center gap-3 bg-white border-2 rounded-2xl px-4 py-3 transition-all shadow-sm ${showDropdown && suggestions.length > 0 ? 'border-violet-500' : 'border-slate-200'}`}>
+              <Search className="w-4 h-4 text-slate-400 shrink-0" />
+              <input
+                type="text"
+                placeholder="Buscar... (mín. 3 letras)"
+                value={query}
+                onChange={e => { setQuery(e.target.value); setSelectedId(null); setShowDropdown(true); }}
+                onFocus={() => setShowDropdown(true)}
+                onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
+                className="bg-transparent outline-none text-sm font-medium text-slate-700 placeholder:text-slate-300 w-48"
+              />
+              {query && (
+                <button onClick={() => { setQuery(''); setSelectedId(null); }} className="text-slate-300 hover:text-slate-500 transition-colors">
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
 
           {/* Dropdown */}
           {showDropdown && query.length >= 3 && suggestions.length > 0 && (
@@ -340,6 +402,7 @@ export default function LeadsTable({ leads: initialLeads }: { leads: Lead[] }) {
           )}
         </div>
       </div>
+    </div>
 
       {query.length >= 3 && (
         <p className="text-xs text-slate-500 font-medium mb-4">
@@ -494,6 +557,184 @@ export default function LeadsTable({ leads: initialLeads }: { leads: Lead[] }) {
           </table>
         </div>
       </div>
+
+      {/* ── CREATE LEAD MODAL ── */}
+      {showCreateModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm transition-opacity">
+          <div className="bg-white rounded-[2rem] w-full max-w-lg border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            {/* Modal Header */}
+            <div className="bg-zinc-950 px-8 py-6 text-white flex justify-between items-center shrink-0">
+              <div>
+                <h2 className="text-xl font-black tracking-tight flex items-center gap-2">
+                  <Plus className="w-5 h-5 text-violet-400" />
+                  Agregar Lead Manual
+                </h2>
+                <p className="text-xs text-zinc-400 font-medium mt-1">
+                  Registra leads recibidos por WhatsApp, llamadas o recomendación.
+                </p>
+              </div>
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="p-2 hover:bg-white/10 rounded-full transition-colors text-zinc-400 hover:text-white"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Form */}
+            <form onSubmit={handleCreateLead} className="flex-1 overflow-y-auto p-8 space-y-5">
+              {createError && (
+                <div className="bg-rose-50 border border-rose-200 text-rose-700 p-4 rounded-xl text-xs font-semibold flex items-center gap-2">
+                  <AlertTriangle className="w-4 h-4 text-rose-500 shrink-0" />
+                  {createError}
+                </div>
+              )}
+
+              {/* Nombre & Email */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    Nombre Completo <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Ej. Juan Pérez"
+                    value={newLeadForm.name}
+                    onChange={e => setNewLeadForm({ ...newLeadForm, name: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200/50 transition-all"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    Email <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="juan@correo.com"
+                    value={newLeadForm.email}
+                    onChange={e => setNewLeadForm({ ...newLeadForm, email: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200/50 transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Teléfono & Ciudad */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    Teléfono
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Ej. +56 9 1234 5678"
+                    value={newLeadForm.phone}
+                    onChange={e => setNewLeadForm({ ...newLeadForm, phone: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200/50 transition-all"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    Ciudad / Comuna
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Ej. Santiago"
+                    value={newLeadForm.city}
+                    onChange={e => setNewLeadForm({ ...newLeadForm, city: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200/50 transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Servicio de Interés */}
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  Servicio de Interés
+                </label>
+                <select
+                  value={newLeadForm.service_interest}
+                  onChange={e => setNewLeadForm({ ...newLeadForm, service_interest: e.target.value })}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200/50 transition-all"
+                >
+                  <option value="Shopify - Tienda Completa">Shopify - Tienda Completa</option>
+                  <option value="WooCommerce - E-commerce Pymes">WooCommerce - E-commerce Pymes</option>
+                  <option value="Next.js / SaaS Custom">Next.js / SaaS Custom</option>
+                  <option value="Diseño Web Odontología">Diseño Web Odontología</option>
+                  <option value="Diseño Web Inmobiliaria">Diseño Web Inmobiliaria</option>
+                  <option value="E-learning Tutor LMS Pro">E-learning Tutor LMS Pro</option>
+                  <option value="Capacitación Sence Pro">Capacitación Sence Pro</option>
+                  <option value="Diseño Web & SEO Corporativo">Diseño Web & SEO Corporativo</option>
+                  <option value="Consulta General / Otro">Consulta General / Otro</option>
+                </select>
+              </div>
+
+              {/* Origen / Medio de Contacto */}
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  Origen / Medio de Contacto
+                </label>
+                <select
+                  value={newLeadForm.source}
+                  onChange={e => setNewLeadForm({ ...newLeadForm, source: e.target.value })}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200/50 transition-all"
+                >
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="Llamada Telefónica">Llamada Telefónica</option>
+                  <option value="Recomendado">Recomendado</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="Correo Directo">Correo Directo</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+
+              {/* Mensaje / Requerimiento */}
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  Mensaje / Detalles del Proyecto
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="Detalles sobre los requerimientos, presupuesto conversado o plazos..."
+                  value={newLeadForm.message}
+                  onChange={e => setNewLeadForm({ ...newLeadForm, message: e.target.value })}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-200/50 transition-all resize-none"
+                />
+              </div>
+
+              {/* Form Actions */}
+              <div className="pt-4 flex items-center justify-end gap-3 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setShowCreateModal(false)}
+                  disabled={createLoading}
+                  className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-xs font-black uppercase tracking-widest transition-colors disabled:opacity-50"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={createLoading}
+                  className="flex items-center gap-2 px-6 py-2.5 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-md shadow-violet-200 transition-all disabled:opacity-50"
+                >
+                  {createLoading ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      Guardando...
+                    </>
+                  ) : (
+                    <>
+                      Guardar Lead
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 }
