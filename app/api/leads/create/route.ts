@@ -29,10 +29,9 @@ export async function POST(req: NextRequest) {
       phone: phone || null,
       city: city || null,
       service_interest: service_interest || 'Consulta General',
-      source: source || 'Otro',
+      source_url: source || 'Otro',
       message: message || '',
       status: 'new',
-      welcome_email_sent: false,
     };
 
     const { data, error } = await admin
