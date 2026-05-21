@@ -1,6 +1,15 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to prevent build-time crashes when RESEND_API_KEY is not defined
+let resendInstance: Resend | null = null;
+function getResend() {
+  if (!resendInstance) {
+    const apiKey = process.env.RESEND_API_KEY || 're_dummy_for_build';
+    resendInstance = new Resend(apiKey);
+  }
+  return resendInstance;
+}
+
 const ADMIN_EMAIL = 'javier@webunica.cl';
 
 export async function sendLeadNotification(leadData: {
@@ -10,6 +19,7 @@ export async function sendLeadNotification(leadData: {
   phone: string;
 }) {
   try {
+    const resend = getResend();
     // 1. Email para el Cliente (Persuasivo y Mágico)
     await resend.emails.send({
       from: 'Javier de Webunica <consultas@webunica.cl>',
