@@ -6,6 +6,42 @@ import Link from 'next/link';
 import { ArrowLeft, Download, Trash2, Mail, Phone, User, Building2, CheckCircle2, Plus, FileText, Tag } from 'lucide-react';
 import { ALL_PLANS, PLANS_BY_CATEGORY, formatCLP, type Plan } from '@/lib/plans-catalog';
 
+// Helper function to map lead's raw service interest keyword to recommended catalog plans
+function mapServiceInterestToPlan(serviceParam: string): Plan | undefined {
+  const service = serviceParam.toLowerCase();
+  
+  if (service.includes('shopify')) {
+    return ALL_PLANS.find(p => p.id === 'sh-full');
+  }
+  if (service.includes('woocommerce') || service.includes('woo')) {
+    return ALL_PLANS.find(p => p.id === 'woo-empresa');
+  }
+  if (service.includes('next.js') || service.includes('saas') || service.includes('nextjs')) {
+    return ALL_PLANS.find(p => p.id === 'saas-mvp');
+  }
+  if (service.includes('odontología') || service.includes('dental') || service.includes('odontologia')) {
+    return ALL_PLANS.find(p => p.id === 'dental-pro');
+  }
+  if (service.includes('inmobiliaria') || service.includes('inmo')) {
+    return ALL_PLANS.find(p => p.id === 'inmo-base');
+  }
+  if (service.includes('lms') || service.includes('elearning') || service.includes('aula') || service.includes('tutor')) {
+    return ALL_PLANS.find(p => p.id === 'lms-business-pro');
+  }
+  if (service.includes('sence')) {
+    return ALL_PLANS.find(p => p.id === 'sence-pro');
+  }
+  if (service.includes('diseño') || service.includes('diseño web') || service.includes('seo') || service.includes('corporativa')) {
+    return ALL_PLANS.find(p => p.id === 'web-corporativa-seo');
+  }
+
+  // Fallback fuzzy match
+  return ALL_PLANS.find(p =>
+    p.name.toLowerCase().includes(service.slice(0, 10)) ||
+    p.category.toLowerCase().includes(service.slice(0, 10))
+  );
+}
+
 function CotizadorContent() {
   const searchParams = useSearchParams();
 
@@ -20,9 +56,7 @@ function CotizadorContent() {
   const [selectedPlans, setSelectedPlans] = useState<Plan[]>(() => {
     const serviceParam = searchParams.get('service');
     if (serviceParam) {
-      const found = ALL_PLANS.find(p =>
-        p.name.toLowerCase().includes(serviceParam.toLowerCase().slice(0, 10))
-      );
+      const found = mapServiceInterestToPlan(serviceParam);
       return found ? [found] : [];
     }
     return [];
@@ -136,8 +170,15 @@ function CotizadorContent() {
 
               {/* Client Fields */}
               <div>
-                <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
-                  <FileText className="w-3.5 h-3.5" /> Preparado para
+                <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center justify-between gap-2 flex-wrap">
+                  <span className="flex items-center gap-2">
+                    <FileText className="w-3.5 h-3.5" /> Preparado para
+                  </span>
+                  {searchParams.get('leadId') && (
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-violet-100 border border-violet-200 text-violet-700 rounded-full text-[8px] font-black uppercase tracking-widest animate-pulse">
+                      ✓ Lead Vinculado
+                    </span>
+                  )}
                 </h3>
                 <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100 space-y-4 print:bg-white print:border-none print:p-0">
                   {[
