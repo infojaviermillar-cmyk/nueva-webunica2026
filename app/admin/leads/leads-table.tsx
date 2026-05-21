@@ -525,8 +525,8 @@ export default function LeadsTable({ leads: initialLeads }: { leads: Lead[] }) {
                           <td colSpan={7} className="bg-slate-50/50 p-6 border-b border-slate-100">
                             <CRMNotesPanel
                               lead={lead}
-                              onSave={(id, notes) => {
-                                setLeads(prev => prev.map(l => l.id === id ? { ...l, notes } : l));
+                              onUpdateLead={(updatedLead) => {
+                                setLeads(prev => prev.map(l => l.id === updatedLead.id ? updatedLead : l));
                               }}
                             />
                           </td>
