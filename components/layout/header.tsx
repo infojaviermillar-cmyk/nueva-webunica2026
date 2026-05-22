@@ -10,7 +10,7 @@ import { User, LogIn, ShoppingBag } from 'lucide-react';
 export default function Header({ domain = '' }: { domain?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { openModal } = useContactModal();
+  const { openModal, openWhatsApp } = useContactModal();
   const pathname = usePathname();
   const [user, setUser] = useState<any>(null);
 
@@ -421,9 +421,15 @@ export default function Header({ domain = '' }: { domain?: string }) {
             {/* CTA & Mobile Menu Toggle */}
             <div className="flex items-center gap-4">
               <a 
-                href={isShopifyLanding ? "#planes" : "https://wa.me/56984410379"} 
-                target={isShopifyLanding ? undefined : "_blank"}
-                rel={isShopifyLanding ? undefined : "noopener noreferrer"}
+                href={isShopifyLanding ? "#planes" : "#"} 
+                onClick={(e) => {
+                  if (!isShopifyLanding) {
+                    e.preventDefault();
+                    openWhatsApp();
+                  }
+                }}
+                target={isShopifyLanding ? undefined : undefined}
+                rel={isShopifyLanding ? undefined : undefined}
                 className={`hidden md:flex items-center gap-2.5 px-8 py-3.5 rounded-full font-black text-[11px] uppercase tracking-[0.18em] transition-all duration-300 transform animate-shake-15s border border-white/20 relative overflow-hidden group active:scale-95 ${
                   isShopifyLanding 
                     ? 'bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 text-white shadow-[0_8px_25px_rgba(219,39,119,0.3)] hover:shadow-[0_15px_35px_rgba(219,39,119,0.5)] hover:scale-105' 
@@ -644,9 +650,16 @@ export default function Header({ domain = '' }: { domain?: string }) {
 
             <div className="mt-auto pt-10 grid gap-4">
               <a 
-                href={isShopifyLanding ? "#planes" : "https://wa.me/56984410379"} 
-                target={isShopifyLanding ? undefined : "_blank"} 
-                rel={isShopifyLanding ? undefined : "noopener noreferrer"} 
+                href={isShopifyLanding ? "#planes" : "#"} 
+                onClick={(e) => {
+                  if (!isShopifyLanding) {
+                    e.preventDefault();
+                    setIsMobileMenuOpen(false);
+                    openWhatsApp();
+                  }
+                }}
+                target={isShopifyLanding ? undefined : undefined} 
+                rel={isShopifyLanding ? undefined : undefined} 
                 className={`w-full py-4 text-white rounded-2xl font-black uppercase tracking-[0.18em] text-[11px] flex items-center justify-center gap-2.5 shadow-xl transition-all duration-300 border border-white/20 relative overflow-hidden group active:scale-95 ${
                   isShopifyLanding 
                     ? 'bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 shadow-[0_8px_25px_rgba(219,39,119,0.3)] hover:shadow-[0_15px_35px_rgba(219,39,119,0.5)]' 
