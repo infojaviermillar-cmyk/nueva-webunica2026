@@ -144,23 +144,23 @@ export default function Header({ domain = '' }: { domain?: string }) {
             </div>
 
             {/* Desktop Navigation */}
-            <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-10 ml-16 relative z-30">
+            <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-4 xl:gap-10 ml-6 xl:ml-16 relative z-30">
               {isShopifyLanding ? (
                 <>
-                  <Link href="#inicio" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>Inicio</Link>
-                  <Link href="#ventajas" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>Ventajas</Link>
-                  <Link href="#planes" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>Planes</Link>
-                  <Link href="#faq" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>FAQ</Link>
+                  <Link href="#inicio" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>Inicio</Link>
+                  <Link href="#ventajas" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>Ventajas</Link>
+                  <Link href="#planes" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>Planes</Link>
+                  <Link href="#faq" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>FAQ</Link>
                 </>
               ) : (
                 <>
-                  <Link href="/" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest cursor-pointer`}>
+                  <Link href="/" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>
                     Inicio
                   </Link>
               
               {/* Servicios Dropdown */}
               <div className="relative group">
-                <button className={`${textColor} ${hoverColor} font-bold transition-all flex items-center gap-1 text-[12px] uppercase tracking-widest py-4`}>
+                <button className={`${textColor} ${hoverColor} font-bold transition-all flex items-center gap-1 text-[11px] xl:text-[12px] uppercase tracking-widest py-4`}>
                   Servicios
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
                 </button>
@@ -392,21 +392,21 @@ export default function Header({ domain = '' }: { domain?: string }) {
                 </div>
               </div>
 
-              <Link href="/portafolio" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest`}>
+              <Link href="/portafolio" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest`}>
                 Portafolio
               </Link>
               
-              <Link href="/blog" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest`}>
+              <Link href="/blog" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest`}>
                 Blog
               </Link>
               
-              <Link href="/contacto" className={`${textColor} ${hoverColor} font-bold transition-all text-[12px] uppercase tracking-widest`}>
+              <Link href="/contacto" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest`}>
                 Contacto
               </Link>
               
               <Link 
                 href="/mi-cuenta" 
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${scrolled ? 'bg-zinc-100 text-zinc-900 border border-zinc-200' : (isDarkHero ? 'bg-white/10 text-white border border-white/20' : 'bg-violet-50 text-violet-600 border border-violet-100')} hover:scale-105`}
+                className={`flex items-center gap-1.5 xl:gap-2 px-3 xl:px-4 py-1.5 xl:py-2 rounded-xl text-[9px] xl:text-[10px] font-black uppercase tracking-widest transition-all ${scrolled ? 'bg-zinc-100 text-zinc-900 border border-zinc-200' : (isDarkHero ? 'bg-white/10 text-white border border-white/20' : 'bg-violet-50 text-violet-600 border border-violet-100')} hover:scale-105`}
               >
                 {user ? (
                   <><User className="w-3.5 h-3.5" /> Mi Cuenta</>
@@ -430,7 +430,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
                 }}
                 target={isShopifyLanding ? undefined : undefined}
                 rel={isShopifyLanding ? undefined : undefined}
-                className={`hidden md:flex items-center gap-2.5 px-8 py-3.5 rounded-full font-black text-[11px] uppercase tracking-[0.18em] transition-all duration-300 transform animate-shake-15s border border-white/20 relative overflow-hidden group active:scale-95 ${
+                className={`hidden md:flex items-center gap-1.5 xl:gap-2.5 px-4 lg:px-5 xl:px-8 py-2.5 lg:py-3 xl:py-3.5 rounded-full font-black text-[10px] xl:text-[11px] uppercase tracking-[0.15em] xl:tracking-[0.18em] transition-all duration-300 transform animate-shake-15s border border-white/20 relative overflow-hidden group active:scale-95 ${
                   isShopifyLanding 
                     ? 'bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 text-white shadow-[0_8px_25px_rgba(219,39,119,0.3)] hover:shadow-[0_15px_35px_rgba(219,39,119,0.5)] hover:scale-105' 
                     : 'bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-800 text-white shadow-[0_8px_25px_rgba(124,58,237,0.3)] hover:shadow-[0_15px_35px_rgba(124,58,237,0.5)] hover:scale-105'

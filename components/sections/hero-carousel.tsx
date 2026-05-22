@@ -14,7 +14,7 @@ export default function HeroCarousel({ projects }: HeroCarouselProps) {
   const set2 = projects.filter((_, i) => i % 2 !== 0);
 
   return (
-    <div className="relative h-[700px] lg:h-[900px] hidden lg:flex gap-8 overflow-hidden pr-4">
+    <div className="relative lg:h-[620px] xl:h-[820px] hidden lg:flex gap-6 xl:gap-8 overflow-hidden pr-4">
       <style jsx>{`
         @keyframes scroll-vertical {
           0% { transform: translateY(0); }
