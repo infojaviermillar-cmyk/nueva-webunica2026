@@ -204,13 +204,13 @@ function InteractiveBalloon({ step, index }: InteractiveBalloonProps) {
   return (
     <div 
       ref={containerRef}
-      className="flex flex-col items-center text-center group cursor-pointer relative w-full pt-6"
+      className="flex flex-col items-center text-center group cursor-pointer relative w-full pt-6 select-none"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
       {/* Floating Balloon */}
       <motion.div 
-        className="relative flex flex-col items-center z-10 select-none"
+        className="relative flex flex-col items-center z-10"
         style={{ x: balloonX, y: balloonY }}
         animate={{
           y: [0, -8, 0],
@@ -335,10 +335,10 @@ export default function WorkProcess() {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="w-full relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-24">
+        <div className="max-w-7xl mx-auto px-6 text-center mb-24">
           <h2 className="text-5xl lg:text-7xl font-black text-zinc-950 tracking-tighter uppercase leading-none mb-6">
             Proceso de <span className="text-violet-600">Trabajo</span>
           </h2>
@@ -347,35 +347,39 @@ export default function WorkProcess() {
           </p>
         </div>
 
-        {/* Desktop Grid */}
-        <div className="relative hidden lg:block">
-          {/* Subtle wind-stream dashed connector line */}
-          <div className="absolute top-[160px] left-8 right-8 border-t border-dashed border-zinc-300/40 -z-0"></div>
+        {/* Carousel / Marquee Container for BOTH Desktop and Mobile */}
+        <div className="w-full overflow-hidden relative pb-16 pt-6">
+          {/* Fading Edge Masks */}
+          <div className="absolute inset-y-0 left-0 w-24 sm:w-60 bg-gradient-to-r from-slate-50 via-slate-50/70 to-transparent z-20 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-24 sm:w-60 bg-gradient-to-l from-slate-50 via-slate-50/70 to-transparent z-20 pointer-events-none" />
           
-          <div className="grid grid-cols-5 gap-y-16 gap-x-8 relative z-10">
-            {steps.map((step, index) => (
-              <InteractiveBalloon key={index} step={step} index={index} />
-            ))}
-          </div>
-        </div>
+          {/* CSS Animation with Hardware Acceleration & Native Pause-on-Hover */}
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes marquee {
+              0% { transform: translate3d(0, 0, 0); }
+              100% { transform: translate3d(-50%, 0, 0); }
+            }
+            .marquee-track {
+              display: flex;
+              width: max-content;
+              animation: marquee 65s linear infinite;
+            }
+            .marquee-track:hover {
+              animation-play-state: paused;
+            }
+          `}} />
 
-        {/* Mobile Marquee */}
-        <div className="lg:hidden w-full overflow-hidden relative -mx-6 px-6 pb-12">
-          {/* Fading Edges */}
-          <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none"></div>
-          
-          <motion.div
-            className="flex w-max pt-6"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ ease: "linear", duration: 40, repeat: Infinity }}
-          >
+          {/* Marquee Track */}
+          <div className="marquee-track">
             {[...steps, ...steps].map((step, index) => (
-              <div key={index} className="w-[220px] flex-shrink-0 px-2">
+              <div 
+                key={index} 
+                className="w-[220px] sm:w-[260px] flex-shrink-0 px-3 sm:px-6"
+              >
                 <InteractiveBalloon step={step} index={index} />
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
 
       </div>
