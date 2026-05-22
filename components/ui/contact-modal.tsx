@@ -72,78 +72,78 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
         </button>
 
         {/* Modal Scrollable Content Area */}
-        <div className="flex-grow overflow-y-auto p-6 sm:p-10 pb-12 custom-scrollbar">
+        <div className="flex-grow overflow-y-auto p-5 sm:p-8 pb-8 custom-scrollbar">
 
           {isSuccess ? (
-            <div className="text-center py-12">
-              <div className="w-20 h-20 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl">
+            <div className="text-center py-10">
+              <div className="w-16 h-16 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center mx-auto mb-5 text-3xl">
                 ✓
               </div>
-              <h3 className="text-2xl font-black uppercase tracking-tighter mb-4 text-zinc-900">¡Mensaje Recibido!</h3>
+              <h3 className="text-2xl font-black uppercase tracking-tighter mb-3 text-zinc-900">¡Mensaje Recibido!</h3>
               <p className="text-zinc-500 font-light leading-relaxed">
                 Gracias por confiar en Webunica. <br/>Un asesor experto te contactará en breve.
               </p>
             </div>
           ) : (
             <>
-              <div className="mb-8 text-center px-6 sm:px-10">
-                <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-3 text-zinc-900">Cotización Gratis</h3>
-                <p className="text-zinc-500 font-light text-sm sm:text-base">Completa tus datos para iniciar tu transformación digital.</p>
+              <div className="mb-5 text-center px-4 sm:px-8">
+                <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-2 text-zinc-900">Cotización Gratis</h3>
+                <p className="text-zinc-500 font-light text-xs sm:text-sm">Completa tus datos para iniciar tu transformación digital.</p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2 ml-4">Nombre Completo</label>
+                  <label className="block text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1 ml-3">Nombre Completo</label>
                   <input 
                     required
                     type="text" 
                     placeholder="Ej: Javier Millar"
-                    className="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:ring-2 focus:ring-violet-500 outline-none transition-all placeholder:text-zinc-300"
+                    className="w-full px-5 py-3 sm:py-3.5 bg-zinc-50 border border-zinc-100 rounded-2xl focus:ring-2 focus:ring-violet-500 outline-none transition-all placeholder:text-zinc-300"
                     value={formData.nombre}
                     onChange={(e) => setFormData({...formData, nombre: e.target.value})}
                   />
                 </div>
 
-                <div className="grid grid-cols-1 xs:grid-cols-1 gap-5">
+                <div className="grid grid-cols-1 xs:grid-cols-1 gap-4">
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2 ml-4">Tu Correo</label>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1 ml-3">Tu Correo</label>
                     <input 
                       required
                       type="email" 
                       placeholder="hola@tuempresa.com"
-                      className="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:ring-2 focus:ring-violet-500 outline-none transition-all placeholder:text-zinc-300"
+                      className="w-full px-5 py-3 sm:py-3.5 bg-zinc-50 border border-zinc-100 rounded-2xl focus:ring-2 focus:ring-violet-500 outline-none transition-all placeholder:text-zinc-300"
                       value={formData.correo}
                       onChange={(e) => setFormData({...formData, correo: e.target.value})}
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2 ml-4">Teléfono</label>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1 ml-3">Teléfono</label>
                     <input 
                       required
                       type="tel" 
                       placeholder="+56 9..."
-                      className="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:ring-2 focus:ring-violet-500 outline-none transition-all placeholder:text-zinc-300"
+                      className="w-full px-5 py-3 sm:py-3.5 bg-zinc-50 border border-zinc-100 rounded-2xl focus:ring-2 focus:ring-violet-500 outline-none transition-all placeholder:text-zinc-300"
                       value={formData.telefono}
                       onChange={(e) => setFormData({...formData, telefono: e.target.value})}
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 xs:grid-cols-1 gap-5">
+                <div className="grid grid-cols-1 xs:grid-cols-1 gap-4">
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2 ml-4">Ciudad</label>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1 ml-3">Ciudad</label>
                     <input 
                       required
                       type="text"
-                      className="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:ring-2 focus:ring-violet-500 outline-none transition-all"
+                      className="w-full px-5 py-3 sm:py-3.5 bg-zinc-50 border border-zinc-100 rounded-2xl focus:ring-2 focus:ring-violet-500 outline-none transition-all"
                       value={formData.ciudad}
                       onChange={(e) => setFormData({...formData, ciudad: e.target.value})}
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-2 ml-4">Servicio</label>
+                    <label className="block text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1 ml-3">Servicio</label>
                     <select 
-                      className="w-full px-6 py-4 bg-zinc-50 border border-zinc-100 rounded-2xl focus:ring-2 focus:ring-violet-500 outline-none transition-all appearance-none"
+                      className="w-full px-5 py-3 sm:py-3.5 bg-zinc-50 border border-zinc-100 rounded-2xl focus:ring-2 focus:ring-violet-500 outline-none transition-all appearance-none"
                       value={formData.servicio}
                       onChange={(e) => setFormData({...formData, servicio: e.target.value})}
                     >
@@ -156,7 +156,7 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
                 </div>
 
                 {error && (
-                  <div className="bg-red-50 border border-red-100 text-red-600 text-[10px] font-bold uppercase p-4 rounded-xl text-center">
+                  <div className="bg-red-50 border border-red-100 text-red-600 text-[10px] font-bold uppercase p-3 rounded-xl text-center">
                     ⚠️ {error}
                   </div>
                 )}
@@ -164,7 +164,7 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
                 <button 
                   type="submit"
                   disabled={isSending}
-                  className="w-full py-5 sm:py-6 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-[0.2em] text-[11px] hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/20 active:scale-95 disabled:opacity-50 mt-4 leading-none"
+                  className="w-full py-4 sm:py-4.5 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-[0.2em] text-[11px] hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/20 active:scale-95 disabled:opacity-50 mt-3 leading-none"
                 >
                   {isSending ? 'Enviando...' : 'Solicitar Cotización Ahora'}
                 </button>
