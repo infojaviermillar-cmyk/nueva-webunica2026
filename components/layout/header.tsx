@@ -421,14 +421,29 @@ export default function Header({ domain = '' }: { domain?: string }) {
                 href={isShopifyLanding ? "#planes" : "https://wa.me/56984410379"} 
                 target={isShopifyLanding ? undefined : "_blank"}
                 rel={isShopifyLanding ? undefined : "noopener noreferrer"}
-                className={`hidden md:flex items-center gap-2 px-7 py-3 rounded-full font-black text-[11px] uppercase tracking-[0.15em] transition-all transform animate-shake-15s shadow-[0_10px_30px_rgba(124,58,237,0.3)] ${isShopifyLanding ? 'bg-pink-600 text-white hover:bg-pink-700 shadow-pink-600/30' : 'bg-violet-600 text-white hover:bg-violet-700 hover:scale-105 active:scale-95'}`}
+                className={`hidden md:flex items-center gap-2.5 px-8 py-3.5 rounded-full font-black text-[11px] uppercase tracking-[0.18em] transition-all duration-300 transform animate-shake-15s border border-white/20 relative overflow-hidden group active:scale-95 ${
+                  isShopifyLanding 
+                    ? 'bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 text-white shadow-[0_8px_25px_rgba(219,39,119,0.3)] hover:shadow-[0_15px_35px_rgba(219,39,119,0.5)] hover:scale-105' 
+                    : 'bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-800 text-white shadow-[0_8px_25px_rgba(124,58,237,0.3)] hover:shadow-[0_15px_35px_rgba(124,58,237,0.5)] hover:scale-105'
+                }`}
               >
+                {/* Shine metallic reflection effect */}
+                <span className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-[25deg] -translate-x-[150%] transition-transform duration-1000 ease-out group-hover:translate-x-[150%] pointer-events-none" />
+                
                 {!isShopifyLanding && (
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412 0 6.556-5.338 11.892-11.893 11.892-1.997 0-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143c1.589.943 3.259 1.44 4.968 1.441 5.4 0 9.792-4.392 9.792-9.792 0-2.618-1.02-5.079-2.872-6.932s-4.314-2.871-6.932-2.871c-5.4 0-9.791 4.391-9.791 9.791 0 1.763.47 3.485 1.363 4.991l-.993 3.626 3.71-.973zm11.238-6.111c.07.117.117.272.164.351.047.079.047.439-.117.772-.164.333-.941.666-1.293.743-.353.076-.84.14-1.293.129-.453-.012-.662-.129-2.185-.742-1.523-.614-2.483-2.145-2.553-2.261-.07-.117-.585-.778-.585-1.487 0-.709.351-1.057.515-1.234.164-.176.353-.223.47-.223h.334c.117 0 .273 0 .422.351.15.351.515 1.258.562 1.353.047.094.079.205.016.333-.063.129-.094.205-.188.311-.094.106-.199.237-.282.333-.094.094-.194.195-.084.382.11.188.489.805 1.049 1.303.719.639 1.32.838 1.503.932.183.094.288.079.397-.047.109-.126.468-.544.593-.728.125-.184.249-.155.421-.094s1.077.508 1.258.597z"/>
-                  </svg>
+                  <div className="relative flex items-center justify-center">
+                    <svg className="w-4.5 h-4.5 text-white transition-transform duration-500 group-hover:rotate-[12deg] group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.8 1.006 3.85 1.536 5.94 1.536h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                    
+                    {/* Active/Online Glow Indicator */}
+                    <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                    </span>
+                  </div>
                 )}
-                {isShopifyLanding ? 'Ver Planes' : 'Hablemos'}
+                <span className="relative z-10">{isShopifyLanding ? 'Ver Planes' : 'Hablemos'}</span>
               </a>
 
               <button 
@@ -625,13 +640,33 @@ export default function Header({ domain = '' }: { domain?: string }) {
             </nav>
 
             <div className="mt-auto pt-10 grid gap-4">
-              <a href={isShopifyLanding ? "#planes" : "https://wa.me/56984410379"} target={isShopifyLanding ? undefined : "_blank"} rel={isShopifyLanding ? undefined : "noopener noreferrer"} className={`w-full py-4 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 shadow-xl active:scale-95 ${isShopifyLanding ? 'bg-pink-600 shadow-pink-600/20 hover:bg-pink-700' : 'bg-violet-600 shadow-violet-600/20 hover:bg-violet-700'}`}>
+              <a 
+                href={isShopifyLanding ? "#planes" : "https://wa.me/56984410379"} 
+                target={isShopifyLanding ? undefined : "_blank"} 
+                rel={isShopifyLanding ? undefined : "noopener noreferrer"} 
+                className={`w-full py-4 text-white rounded-2xl font-black uppercase tracking-[0.18em] text-[11px] flex items-center justify-center gap-2.5 shadow-xl transition-all duration-300 border border-white/20 relative overflow-hidden group active:scale-95 ${
+                  isShopifyLanding 
+                    ? 'bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 shadow-[0_8px_25px_rgba(219,39,119,0.3)] hover:shadow-[0_15px_35px_rgba(219,39,119,0.5)]' 
+                    : 'bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-800 shadow-[0_8px_25px_rgba(124,58,237,0.3)] hover:shadow-[0_15px_35px_rgba(124,58,237,0.5)]'
+                }`}
+              >
+                {/* Shine metallic reflection effect */}
+                <span className="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-[25deg] -translate-x-[150%] transition-transform duration-1000 ease-out group-hover:translate-x-[150%] pointer-events-none" />
+
                 {!isShopifyLanding && (
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412 0 6.556-5.338 11.892-11.893 11.892-1.997 0-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143c1.589.943 3.259 1.44 4.968 1.441 5.4 0 9.792-4.392 9.792-9.792 0-2.618-1.02-5.079-2.872-6.932s-4.314-2.871-6.932-2.871c-5.4 0-9.791 4.391-9.791 9.791 0 1.763.47 3.485 1.363 4.991l-.993 3.626 3.71-.973zm11.238-6.111c.07.117.117.272.164.351.047.079.047.439-.117.772-.164.333-.941.666-1.293.743-.353.076-.84.14-1.293.129-.453-.012-.662-.129-2.185-.742-1.523-.614-2.483-2.145-2.553-2.261-.07-.117-.585-.778-.585-1.487 0-.709.351-1.057.515-1.234.164-.176.353-.223.47-.223h.334c.117 0 .273 0 .422.351.15.351.515 1.258.562 1.353.047.094.079.205.016.333-.063.129-.094.205-.188.311-.094.106-.199.237-.282.333-.094.094-.194.195-.084.382.11.188.489.805 1.049 1.303.719.639 1.32.838 1.503.932.183.094.288.079.397-.047.109-.126.468-.544.593-.728.125-.184.249-.155.421-.094s1.077.508 1.258.597z"/>
-                  </svg>
+                  <div className="relative flex items-center justify-center">
+                    <svg className="w-4.5 h-4.5 text-white transition-transform duration-500 group-hover:rotate-[12deg] group-hover:scale-110" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.8 1.006 3.85 1.536 5.94 1.536h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                    
+                    {/* Active/Online Glow Indicator */}
+                    <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+                    </span>
+                  </div>
                 )}
-                {isShopifyLanding ? 'Ver Planes' : 'Asesor Directo'}
+                <span className="relative z-10">{isShopifyLanding ? 'Ver Planes' : 'Asesor Directo'}</span>
               </a>
             </div>
           </div>
