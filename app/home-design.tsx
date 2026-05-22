@@ -263,33 +263,33 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             {/* Main Performance Card */}
-            <div className="md:col-span-8 bg-zinc-950 rounded-[4rem] p-8 sm:p-12 lg:p-16 text-white relative overflow-hidden group border border-white/5 shadow-2xl hover:border-violet-500/30 transition-all duration-700">
-              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 group-hover:bg-violet-600/20 transition-colors" />
+            <div className="md:col-span-8 bg-white/70 backdrop-blur-md rounded-[4rem] p-8 sm:p-12 lg:p-16 text-zinc-950 relative overflow-hidden group border border-zinc-200/60 shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:border-violet-500/20 transition-all duration-700">
+              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 group-hover:bg-violet-500/15 transition-colors" />
               
               <div className="relative z-10 h-full flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-8">
-                    <Zap className="w-12 h-12 text-violet-500 animate-pulse" />
-                    <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex items-center gap-3">
-                      <Gauge className="w-5 h-5 text-emerald-400" />
-                      <span className="text-xl font-black text-emerald-400 font-mono tracking-tighter">100/100</span>
+                    <Zap className="w-12 h-12 text-violet-600 animate-pulse" />
+                    <div className="px-4 py-2 bg-emerald-500/5 border border-emerald-500/20 rounded-2xl flex items-center gap-3">
+                      <Gauge className="w-5 h-5 text-emerald-600" />
+                      <span className="text-xl font-mono font-black text-emerald-600 tracking-tighter">100/100</span>
                     </div>
                   </div>
                   
-                  <h3 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 leading-[0.9] break-words">Performance <br/>de Élite</h3>
-                  <p className="text-zinc-400 text-lg font-light max-w-lg leading-relaxed mb-8">
-                    Eliminamos la latencia. Cada milisegundo cuenta para tu conversión. Arquitectura <span className="text-white font-bold italic">server-side</span> con Next.js para una velocidad de carga instantánea que Google ama.
+                  <h3 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 leading-[0.9] break-words text-zinc-950">Performance <br/>de Élite</h3>
+                  <p className="text-zinc-600 text-lg font-light max-w-lg leading-relaxed mb-8">
+                    Eliminamos la latencia. Cada milisegundo cuenta para tu conversión. Arquitectura <span className="text-zinc-950 font-bold italic">server-side</span> con Next.js para una velocidad de carga instantánea que Google ama.
                   </p>
                 </div>
                 
-                <div className="mt-12 grid grid-cols-2 gap-8 border-t border-white/10 pt-10">
+                <div className="mt-12 grid grid-cols-2 gap-8 border-t border-zinc-200/80 pt-10">
                   <div className="group/item">
-                    <div className="text-3xl font-black text-white mb-2 uppercase italic tracking-tighter group-hover/item:text-violet-400 transition-colors">SEO Técnico</div>
-                    <div className="text-[12px] font-black text-zinc-500 uppercase tracking-widest leading-none">Indexación Semántica Avanzada</div>
+                    <div className="text-3xl font-black text-zinc-900 mb-2 uppercase italic tracking-tighter group-hover/item:text-violet-600 transition-colors">SEO Técnico</div>
+                    <div className="text-[12px] font-black text-zinc-400 uppercase tracking-widest leading-none">Indexación Semántica Avanzada</div>
                   </div>
                   <div className="group/item">
-                    <div className="text-3xl font-black text-white mb-2 uppercase italic tracking-tighter group-hover/item:text-violet-400 transition-colors">99.99%</div>
-                    <div className="text-[12px] font-black text-zinc-500 uppercase tracking-widest leading-none">Escalabilidad Garantizada</div>
+                    <div className="text-3xl font-black text-zinc-900 mb-2 uppercase italic tracking-tighter group-hover/item:text-violet-600 transition-colors">99.99%</div>
+                    <div className="text-[12px] font-black text-zinc-400 uppercase tracking-widest leading-none">Escalabilidad Garantizada</div>
                   </div>
                 </div>
               </div>
