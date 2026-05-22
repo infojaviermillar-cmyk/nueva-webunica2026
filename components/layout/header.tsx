@@ -176,10 +176,12 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       </h4>
                       <ul className="flex flex-col gap-1">
                         <li>
-                          <Link href="/desarrollo-tiendas-shopify-en-chile" className="group/item flex flex-col p-4 bg-zinc-50 rounded-[2.2rem] border-2 border-transparent hover:border-violet-500 hover:bg-violet-50 transition-all relative overflow-hidden mb-2">
-                            <div className="absolute top-0 right-0 px-3 py-1 bg-violet-600 text-[8px] font-black text-white uppercase rounded-bl-xl">Estrella</div>
-                            <span className="text-[15px] font-black text-zinc-950 group-hover/item:text-violet-600 transition-colors uppercase italic">Tiendas Shopify</span>
-                            <span className="text-[11px] text-zinc-500 font-medium leading-tight">Diseño y desarrollo pro en Chile</span>
+                          <Link href="/desarrollo-tiendas-shopify-en-chile" className="group/item flex flex-col p-4 bg-violet-600 rounded-[2.2rem] mb-2 group/shopify transition-all hover:bg-zinc-950 relative overflow-hidden">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-[15px] font-black text-white uppercase">Tiendas Shopify</span>
+                              <span className="text-[9px] bg-white/20 text-white px-2 py-0.5 rounded-full font-black">ESTRELLA</span>
+                            </div>
+                            <span className="text-[11px] text-white/80 font-medium leading-tight">Diseño y desarrollo pro en Chile</span>
                           </Link>
                         </li>
                         <li>
@@ -217,12 +219,9 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       </h4>
                       <ul className="flex flex-col gap-1">
                         <li>
-                          <Link href="/servicios-seo-posicionamiento-google" className="group/item flex flex-col p-4 bg-violet-600 rounded-3xl mb-2 group/seo transition-all hover:bg-zinc-950">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="text-[15px] font-black text-white">SEO Avanzado</span>
-                              <span className="text-[9px] bg-white/20 text-white px-2 py-0.5 rounded-full font-black">PRO</span>
-                            </div>
-                            <span className="text-[11px] text-white/70 font-medium leading-tight">Auditoría y posicionamiento</span>
+                          <Link href="/servicios-seo-posicionamiento-google" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors">SEO Avanzado</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Auditoría y posicionamiento</span>
                           </Link>
                         </li>
                         <li>
@@ -353,11 +352,13 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       <div className="flex flex-col gap-4">
                         {/* Article 1 */}
                         <Link href="/blog/como-elegir-el-mejor-erp-para-conectar-con-shopify" className="group flex flex-col gap-3">
-                          <div className="w-full h-24 bg-indigo-100 rounded-2xl overflow-hidden relative border border-zinc-200 flex items-center justify-center">
-                            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 to-purple-600 opacity-90 group-hover:scale-105 transition-transform duration-500" />
-                            <div className="absolute inset-0 flex items-center justify-center text-white font-black text-2xl tracking-tighter opacity-50 z-10">
-                              SHOP
-                            </div>
+                          <div className="w-full h-24 rounded-2xl overflow-hidden relative border border-zinc-200/50 shadow-sm">
+                            <img 
+                              src="/shopify_hero_card.png" 
+                              alt="Shopify vs ERPs"
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/20 via-transparent to-transparent opacity-60" />
                           </div>
                           <div>
                             <span className="inline-block px-2 py-0.5 bg-indigo-100 text-indigo-700 text-[9px] font-black uppercase tracking-widest rounded mb-1">Integraciones</span>
@@ -369,11 +370,13 @@ export default function Header({ domain = '' }: { domain?: string }) {
 
                         {/* Article 2 */}
                         <Link href="/blog/guia-definitiva-de-seo-tecnico-para-tiendas-online-en-2025" className="group flex flex-col gap-3 mt-2">
-                          <div className="w-full h-24 bg-emerald-100 rounded-2xl overflow-hidden relative border border-zinc-200 flex items-center justify-center">
-                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-600 opacity-90 group-hover:scale-105 transition-transform duration-500" />
-                            <div className="absolute inset-0 flex items-center justify-center text-white font-black text-2xl tracking-tighter opacity-50 z-10">
-                              SEO
-                            </div>
+                          <div className="w-full h-24 rounded-2xl overflow-hidden relative border border-zinc-200/50 shadow-sm">
+                            <img 
+                              src="/seo_performance_dashboard_premium_1776268863414.png" 
+                              alt="Guía Definitiva de SEO Técnico"
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/20 via-transparent to-transparent opacity-60" />
                           </div>
                           <div>
                             <span className="inline-block px-2 py-0.5 bg-emerald-100 text-emerald-700 text-[9px] font-black uppercase tracking-widest rounded mb-1">Marketing</span>
