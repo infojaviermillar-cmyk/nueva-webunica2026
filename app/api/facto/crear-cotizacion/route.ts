@@ -69,7 +69,7 @@ export async function POST(req: Request) {
     };
 
     // 6. Execute POST request to Facto REST API
-    const factoResponse = await fetch('https://api-billing.koywe.com/V1/documents', {
+    const factoResponse = await fetch('https://api.facto.cl/v1/documents', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
