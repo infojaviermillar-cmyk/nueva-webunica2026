@@ -87,6 +87,7 @@ export async function POST(req: Request) {
       header: {
         document_type_id: 2, // 2 is standard code for Factura Electrónica Afecta (DTE 33) in Facto/Koywe billing system
         issue_date: new Date().toISOString().split('T')[0],
+        document_status: 0, // 0 = Draft/Borrador (acts as a Quote/Proforma commercial document)
         customer: {
           tax_id: clientRut,
           name: clientInfo.company || clientInfo.name,
