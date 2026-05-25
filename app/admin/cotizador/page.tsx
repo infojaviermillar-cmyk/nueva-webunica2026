@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense } from 'react';
+import { useState, Suspense, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { 
@@ -84,6 +84,63 @@ function CotizadorContent() {
     }
     return [];
   });
+
+  // --- Auto-complete / Search Leads States ---
+  const [dbLeads, setDbLeads] = useState<any[]>([]);
+  const [filteredLeads, setFilteredLeads] = useState<any[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  useEffect(() => {
+    const fetchLeads = async () => {
+      try {
+        const response = await fetch('/api/leads/list');
+        if (response.ok) {
+          const data = await response.json();
+          setDbLeads(data.leads || []);
+        }
+      } catch (err) {
+        console.error('Error loading leads for autocomplete:', err);
+      }
+    };
+    fetchLeads();
+  }, []);
+
+  const handleNameChange = (val: string) => {
+    setClientInfo(prev => ({ ...prev, name: val }));
+    if (val.length >= 3) {
+      const query = val.toLowerCase();
+      const filtered = dbLeads.filter(lead => 
+        (lead.name && lead.name.toLowerCase().includes(query)) ||
+        (lead.company && lead.company.toLowerCase().includes(query)) ||
+        (lead.email && lead.email.toLowerCase().includes(query))
+      );
+      setFilteredLeads(filtered);
+      setShowSuggestions(filtered.length > 0);
+    } else {
+      setFilteredLeads([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  const handleSelectLead = (lead: any) => {
+    setClientInfo({
+      name: lead.name || '',
+      email: lead.email || '',
+      phone: lead.phone || '',
+      company: lead.company || '',
+      rut: lead.rut || '',
+    });
+
+    if (lead.service) {
+      const plan = mapServiceInterestToPlan(lead.service);
+      if (plan && !selectedPlans.find(p => p.id === plan.id)) {
+        setSelectedPlans(prev => [...prev, plan]);
+      }
+    }
+
+    setShowSuggestions(false);
+    setFilteredLeads([]);
+  };
 
   // --- Custom Service Inputs ---
   const [customName, setCustomName] = useState('');
@@ -328,15 +385,57 @@ function CotizadorContent() {
                   { icon: <Mail className="w-4 h-4" />, key: 'email', placeholder: 'correo@empresa.cl', type: 'email' },
                   { icon: <Phone className="w-4 h-4" />, key: 'phone', placeholder: '+56 9 XXXX XXXX', type: 'tel' },
                 ].map(({ icon, key, placeholder, type }) => (
-                  <div key={key} className="flex items-center gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+                  <div key={key} className="relative flex items-center gap-3 border-b border-slate-100 pb-3 last:border-0 last:pb-0">
                     <span className="text-slate-400 shrink-0">{icon}</span>
-                    <input
-                      type={type}
-                      placeholder={placeholder}
-                      className="bg-transparent outline-none w-full font-medium text-slate-800 placeholder:text-slate-300 text-sm focus:placeholder:text-slate-400 transition-colors"
-                      value={clientInfo[key as keyof typeof clientInfo]}
-                      onChange={e => setClientInfo({ ...clientInfo, [key]: e.target.value })}
-                    />
+                    <div className="flex-1 relative">
+                      <input
+                        type={type}
+                        placeholder={placeholder}
+                        className="bg-transparent outline-none w-full font-medium text-slate-800 placeholder:text-slate-300 text-sm focus:placeholder:text-slate-400 transition-colors animate-none"
+                        value={clientInfo[key as keyof typeof clientInfo]}
+                        onChange={e => {
+                          if (key === 'name') {
+                            handleNameChange(e.target.value);
+                          } else {
+                            setClientInfo({ ...clientInfo, [key]: e.target.value });
+                          }
+                        }}
+                        onBlur={() => {
+                          if (key === 'name') {
+                            setTimeout(() => setShowSuggestions(false), 200);
+                          }
+                        }}
+                        onFocus={() => {
+                          if (key === 'name' && clientInfo.name.length >= 3 && filteredLeads.length > 0) {
+                            setShowSuggestions(true);
+                          }
+                        }}
+                      />
+
+                      {/* Sugerencias de Autocompletado en tiempo real */}
+                      {key === 'name' && showSuggestions && filteredLeads.length > 0 && (
+                        <div className="absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-2xl shadow-2xl z-50 max-h-48 overflow-y-auto divide-y divide-slate-50">
+                          {filteredLeads.map(lead => (
+                            <button
+                              key={lead.id}
+                              type="button"
+                              onClick={() => handleSelectLead(lead)}
+                              className="w-full text-left px-4 py-3 hover:bg-violet-50 transition-colors flex flex-col gap-0.5"
+                            >
+                              <span className="font-extrabold text-xs text-slate-800">{lead.name}</span>
+                              <div className="flex items-center gap-2 text-[10px] font-semibold text-slate-400">
+                                {lead.company && (
+                                  <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-600 font-bold">
+                                    {lead.company}
+                                  </span>
+                                )}
+                                {lead.email && <span>{lead.email}</span>}
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
