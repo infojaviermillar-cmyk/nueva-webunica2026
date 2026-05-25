@@ -44,6 +44,9 @@ function mapServiceInterestToPlan(serviceParam: string): Plan | undefined {
   if (service.includes('odontología') || service.includes('dental') || service.includes('odontologia')) {
     return ALL_PLANS.find(p => p.id === 'dental-pro');
   }
+  if (service.includes('funeraria') || service.includes('funeral')) {
+    return ALL_PLANS.find(p => p.id === 'funeral-profesional');
+  }
   if (service.includes('inmobiliaria') || service.includes('inmo')) {
     return ALL_PLANS.find(p => p.id === 'inmo-base');
   }

@@ -447,6 +447,77 @@ export const DENTAL_PLANS: Plan[] = [
 ];
 
 // ════════════════════════════════════════════
+// ⚱️ PÁGINAS WEB FUNERARIA
+// Fuente: /desarrollo-pagina-web-funeraria
+// ════════════════════════════════════════════
+export const FUNERAL_PLANS: Plan[] = [
+  {
+    id: 'funeral-esencial',
+    name: 'Plan Funerario Esencial',
+    highlight: 'Presencia con Respeto',
+    desc: 'Ideal para funerarias locales que buscan una presencia e imagen digital sumamente solemne, profesional y digna.',
+    price: 580000,
+    originalPrice: 650000,
+    deliveryDays: '15 días hábiles',
+    category: '⚱️ Funeraria',
+    url: '/desarrollo-pagina-web-funeraria',
+    features: [
+      'Diseño Web Profesional, Elegante y Respetuoso',
+      'Sección de presentación corporativa, Servicios y Previsión familiar',
+      'Obituario Digital Básico (Homenajes sin comentarios)',
+      'Botón de WhatsApp de urgencia 24/7 de alta visibilidad',
+      'Maquetación responsiva 100% Mobile-first',
+      'SEO Local Inicial e Integración con Google Maps para capillas',
+      'Hosting y Dominio .cl incluidos por 1 año',
+      'Soporte técnico por 3 meses post-lanzamiento',
+    ],
+  },
+  {
+    id: 'funeral-profesional',
+    name: 'Plan Funerario Profesional',
+    highlight: 'Mayor Alcance Digital',
+    desc: 'Estructura web avanzada con obituario digital interactivo y sección de condolencias para acompañar a las familias.',
+    price: 780000,
+    originalPrice: 880000,
+    recommended: true,
+    deliveryDays: '4 semanas',
+    category: '⚱️ Funeraria',
+    url: '/desarrollo-pagina-web-funeraria',
+    features: [
+      'Todo lo del Plan Esencial, más:',
+      'Sistema de Condolencias en línea interactivo con moderación',
+      'Galería de Homenaje y Memorial (Carga de Fotos y Videos)',
+      'Sección de Blog informativo de Apoyo y Acompañamiento al Duelo',
+      'Estrategia de Palabras Clave y SEO local avanzado por zonas',
+      'Integración automatizada con redes sociales de la funeraria',
+      'Optimización técnica de velocidad de carga extrema',
+      'Capacitación completa de administración de obituarios y contenido',
+    ],
+  },
+  {
+    id: 'funeral-elite',
+    name: 'Plan Funerario Elite / Funnel',
+    highlight: 'Máxima Conversión 2026',
+    desc: 'El sistema tecnológico definitivo para captar servicios de previsión y urgencia, con embudo estructurado y SEO semántico.',
+    price: 980000,
+    originalPrice: 1200000,
+    deliveryDays: '6 semanas',
+    category: '⚱️ Funeraria',
+    url: '/desarrollo-pagina-web-funeraria',
+    features: [
+      'Todo lo del Plan Profesional, más:',
+      'Embudo de Venta Estratégico enfocado en Previsión familiar y Urgencia',
+      'Landing Pages optimizadas para nichos de servicios específicos',
+      'Sistema integrado de cotización de servicios funerarios en línea',
+      'Automatizaciones de Email Marketing para acompañamiento e información',
+      'Dashboard administrativo de analítica de Leads captados',
+      'SEO Semántico profundo con marcado Schema estructurado para Obituarios',
+      'Soporte prioritario y mantenimiento garantizado por 6 meses',
+    ],
+  },
+];
+
+// ════════════════════════════════════════════
 // 🏠 PÁGINAS WEB INMOBILIARIA
 // Fuente: /diseno-paginas-web-inmobiliaria
 // ════════════════════════════════════════════
@@ -866,6 +937,7 @@ export const ALL_PLANS: Plan[] = [
   ...WOOCOMMERCE_PLANS,
   ...WEB_PYME_PLANS,
   ...DENTAL_PLANS,
+  ...FUNERAL_PLANS,
   ...INMOBILIARIA_PLANS,
   ...ELEARNING_PLANS,
   ...SENCE_PLANS,
