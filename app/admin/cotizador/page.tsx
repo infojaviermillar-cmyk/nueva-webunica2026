@@ -103,7 +103,14 @@ function CotizadorContent() {
         }),
       });
 
-      const data = await response.json();
+      const responseText = await response.text();
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseErr) {
+        console.error('Non-JSON response received:', responseText);
+        throw new Error(`El servidor respondió con un formato inesperado (HTML/Texto) y Código HTTP ${response.status}. Esto suele ocurrir si la aplicación se está reiniciando en Dokploy, hay un error de compilación, o el proxy devolvió un 502/503. Por favor, espera un minuto o revisa los logs en Dokploy.`);
+      }
 
       if (!response.ok) {
         throw new Error(data.error || 'Ocurrió un error al intentar crear el documento en Facto.cl');
