@@ -228,7 +228,7 @@ function CotizadorContent() {
     
     if (showBankDetails) {
       text += `*Datos de Transferencia Bancaria:*\n`;
-      text += `• Banco de Chile | Cuenta Corriente\n`;
+      text += `• Banco Estado de Chile | Cuenta Vista o Chequera Electrónica\n`;
       text += `• Cuenta: 62900224166 | Webunica Chile EIRL\n`;
       text += `• RUT: 76.371.864-6 | pagos@webunica.cl\n\n`;
     }
@@ -743,8 +743,8 @@ function CotizadorContent() {
                   </h4>
                   <div className="grid sm:grid-cols-2 gap-3 text-xs text-slate-600 print:text-zinc-800 font-medium">
                     <div className="space-y-1">
-                      <p><span className="font-extrabold text-slate-400 print:text-zinc-500">Banco:</span> Banco de Chile</p>
-                      <p><span className="font-extrabold text-slate-400 print:text-zinc-500">Tipo Cuenta:</span> Cuenta Corriente</p>
+                      <p><span className="font-extrabold text-slate-400 print:text-zinc-500">Banco:</span> Banco Estado de Chile</p>
+                      <p><span className="font-extrabold text-slate-400 print:text-zinc-500">Tipo Cuenta:</span> Cuenta Vista / Chequera Electrónica</p>
                       <p><span className="font-extrabold text-slate-400 print:text-zinc-500">N° Cuenta:</span> 629-00224-166</p>
                     </div>
                     <div className="space-y-1">
