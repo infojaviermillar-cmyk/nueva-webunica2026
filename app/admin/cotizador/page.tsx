@@ -68,12 +68,56 @@ function CotizadorContent() {
   );
   const [notes, setNotes] = useState('');
 
+  // ── Facto Integration States ──
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [syncError, setSyncError] = useState<string | null>(null);
+  const [syncSuccessMessage, setSyncSuccessMessage] = useState<string | null>(null);
+  const [factoDocNumber, setFactoDocNumber] = useState<string | null>(null);
+  const [factoDocUrl, setFactoDocUrl] = useState<string | null>(null);
+
   // ── Calculations ──
   const subtotal = selectedPlans.reduce((acc, p) => acc + p.price, 0);
   const discountAmount = Math.round(subtotal * (discountPercent / 100));
   const subtotalWithDiscount = subtotal - discountAmount;
   const iva = Math.round(subtotalWithDiscount * 0.19);
   const total = subtotalWithDiscount + iva;
+
+  const handleSyncWithFacto = async () => {
+    if (selectedPlans.length === 0) return;
+    setIsSyncing(true);
+    setSyncError(null);
+    setSyncSuccessMessage(null);
+
+    try {
+      const response = await fetch('/api/facto/crear-cotizacion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          clientInfo,
+          selectedPlans,
+          discountPercent,
+          quoteNumber,
+          total,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Ocurrió un error al intentar crear el documento en Facto.cl');
+      }
+
+      setSyncSuccessMessage(data.message);
+      setFactoDocNumber(data.docNumber);
+      setFactoDocUrl(data.docUrl);
+    } catch (err: any) {
+      setSyncError(err.message || 'Error al conectar con la API de sincronización.');
+    } finally {
+      setIsSyncing(false);
+    }
+  };
 
   const handleAddPlan = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const planId = e.target.value;
@@ -111,14 +155,77 @@ function CotizadorContent() {
               </span>
             </h1>
           </div>
-          <button
-            onClick={handlePrint}
-            className="flex items-center gap-2 px-6 py-3 bg-zinc-900 text-white rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-violet-600 transition-all shadow-lg active:scale-95"
-          >
-            <Download className="w-4 h-4" />
-            Exportar PDF
-          </button>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={handleSyncWithFacto}
+              disabled={isSyncing || selectedPlans.length === 0}
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#9cce4a] to-[#88bc36] text-white rounded-full font-black uppercase tracking-widest text-[10px] hover:from-[#a8dc56] hover:to-[#96cd3d] transition-all shadow-lg active:scale-95 disabled:opacity-60 disabled:pointer-events-none hover:scale-105 hover:shadow-[0_8px_20px_rgba(156,206,74,0.2)] relative overflow-hidden"
+            >
+              {isSyncing ? (
+                <>
+                  <svg className="animate-spin h-3.5 w-3.5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Sincronizando...
+                </>
+              ) : (
+                <>
+                  <FileText className="w-4 h-4" />
+                  Crear en Facto.cl
+                </>
+              )}
+            </button>
+            <button
+              onClick={handlePrint}
+              className="flex items-center gap-2 px-6 py-3 bg-zinc-900 text-white rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-violet-600 transition-all shadow-lg active:scale-95"
+            >
+              <Download className="w-4 h-4" />
+              Exportar PDF
+            </button>
+          </div>
         </div>
+
+        {/* ── Facto Integration Status Alert ── */}
+        {(syncSuccessMessage || syncError) && (
+          <div className={`mb-6 p-6 rounded-[2rem] border transition-all ${syncError ? 'bg-red-50 border-red-200 text-red-800' : 'bg-emerald-50 border-emerald-200 text-emerald-800'} print:hidden`}>
+            {syncError ? (
+              <div className="flex items-start gap-3">
+                <span className="p-1 bg-red-100 rounded-full text-red-600 font-bold shrink-0 mt-0.5">⚠️</span>
+                <div>
+                  <h4 className="font-black uppercase tracking-widest text-xs mb-1">Error de Sincronización</h4>
+                  <p className="text-sm font-medium text-red-700">{syncError}</p>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-start gap-3">
+                <span className="p-1 bg-emerald-100 rounded-full text-emerald-600 font-bold shrink-0 mt-0.5">✓</span>
+                <div className="flex-1">
+                  <h4 className="font-black uppercase tracking-widest text-xs mb-1 text-emerald-700">¡Cotización Sincronizada con Éxito!</h4>
+                  <p className="text-sm font-medium text-emerald-800 mb-4">{syncSuccessMessage}</p>
+                  
+                  <div className="flex flex-wrap gap-4">
+                    {factoDocNumber && (
+                      <div className="px-4 py-1.5 bg-white border border-emerald-200 rounded-xl text-xs font-bold text-emerald-700">
+                        Nº Documento: <span className="font-black">{factoDocNumber}</span>
+                      </div>
+                    )}
+                    {factoDocUrl && (
+                      <a
+                        href={factoDocUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-emerald-600 text-white hover:bg-emerald-700 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
+                      >
+                        Abrir Documento Oficial ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* ── Document ── */}
         <div className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none">
