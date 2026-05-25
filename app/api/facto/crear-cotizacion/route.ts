@@ -80,9 +80,14 @@ export async function POST(req: Request) {
 
     if (!factoResponse.ok) {
       const errorText = await factoResponse.text();
-      console.error('Error from Facto REST API:', errorText);
+      console.error('Error from Facto REST API:', {
+        status: factoResponse.status,
+        statusText: factoResponse.statusText,
+        body: errorText,
+        headers: Object.fromEntries(factoResponse.headers.entries())
+      });
       return NextResponse.json({ 
-        error: `Facto API Error: ${factoResponse.statusText}. Detalle: ${errorText}` 
+        error: `Facto API Error (HTTP ${factoResponse.status}): ${factoResponse.statusText || 'Error'}. Detalle: ${errorText || 'Sin detalle del servidor'}` 
       }, { status: 502 });
     }
 
