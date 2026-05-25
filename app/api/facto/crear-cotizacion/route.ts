@@ -20,9 +20,48 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Faltan campos obligatorios: nombre de cliente o servicios seleccionados.' }, { status: 400 });
     }
 
-    // 3. Verify Facto API Key
-    const apiKey = process.env.FACTO_API_KEY;
-    if (!apiKey) {
+    // 3. Verify Facto Credentials
+    const clientId = process.env.FACTO_CLIENT_ID;
+    const clientSecret = process.env.FACTO_CLIENT_SECRET;
+    const username = process.env.FACTO_USERNAME;
+    const password = process.env.FACTO_PASSWORD;
+    const apiKeyFallback = process.env.FACTO_API_KEY;
+
+    let accessToken = '';
+
+    if (clientId && clientSecret && username && password) {
+      // Execute authentication request to get a dynamic access token
+      const authResponse = await fetch('https://api-billing.koywe.com/V1/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          grant_type: 'password',
+          client_id: clientId,
+          client_secret: clientSecret,
+          username: username,
+          password: password,
+        }),
+      });
+
+      if (!authResponse.ok) {
+        const authErrorText = await authResponse.text();
+        console.error('Facto Authentication Failed:', {
+          status: authResponse.status,
+          statusText: authResponse.statusText,
+          body: authErrorText,
+        });
+        return NextResponse.json({
+          error: `Error de autenticación en Facto (HTTP ${authResponse.status}): ${authResponse.statusText}. Detalle: ${authErrorText || 'Sin detalle'}`
+        }, { status: 502 });
+      }
+
+      const authData = await authResponse.json();
+      accessToken = authData.access_token || authData.token;
+    } else if (apiKeyFallback) {
+      accessToken = apiKeyFallback;
+    } else {
       // Elegant Sandbox/Mock mode if the production API Key is not set in environment variables yet.
       // This allows the user to test the visual flow instantly without crashing the application.
       return NextResponse.json({
@@ -30,7 +69,7 @@ export async function POST(req: Request) {
         isMock: true,
         docNumber: `CO-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 900) + 100)}`,
         docUrl: 'https://facto.cl/producto/integracion-facto-api/',
-        message: '¡Sincronización simulada con éxito! Para emitir documentos tributarios reales en tu cuenta de Facto.cl, configura la variable de entorno FACTO_API_KEY en tu servidor.'
+        message: '¡Sincronización simulada con éxito! Para emitir documentos tributarios reales en tu cuenta de Facto.cl, configura las credenciales de la API en tu servidor.'
       });
     }
 
@@ -73,7 +112,7 @@ export async function POST(req: Request) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer ${accessToken}`
       },
       body: JSON.stringify(factoPayload)
     });
