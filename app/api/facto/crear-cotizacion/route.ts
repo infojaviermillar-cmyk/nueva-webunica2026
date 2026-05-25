@@ -85,7 +85,7 @@ export async function POST(req: Request) {
     // 5. Structure payload for Facto.cl REST API V1
     const factoPayload = {
       header: {
-        document_type_id: 110, // 110 is standard code for Quote (Cotización) in Facto/Koywe billing system
+        document_type_id: 2, // 2 is standard code for Factura Electrónica Afecta (DTE 33) in Facto/Koywe billing system
         issue_date: new Date().toISOString().split('T')[0],
         customer: {
           tax_id: clientRut,
@@ -131,11 +131,12 @@ export async function POST(req: Request) {
     }
 
     const resData = await factoResponse.json();
+    console.log('Facto Success Response Body:', JSON.stringify(resData));
     
     return NextResponse.json({
       success: true,
       isMock: false,
-      docNumber: resData.document_number || resData.id || `FACTO-${quoteNumber}`,
+      docNumber: resData.document_number || resData.sequence_number || resData.header?.sequence_number || resData.id || resData.document_id || `FACTO-${quoteNumber}`,
       docUrl: resData.pdf_url || resData.url || 'https://facto.cl',
       message: 'Cotización creada en Facto.cl de forma exitosa.'
     });
