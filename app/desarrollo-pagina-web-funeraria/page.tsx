@@ -80,19 +80,18 @@ export default function FuneralPage() {
     },
     {
       name: "Plan Elite / Funnel",
-      price: "$980.000",
-      original: "$1.200.000",
-      highlight: "Máxima Conversión 2026",
-      desc: "Un verdadero embudo de ventas digital diseñado para captar leads de previsión y urgencia.",
+      price: "$1.600.000",
+      original: "$1.850.000",
+      highlight: "Motor Comercial & SEO Local",
+      desc: "Una potente herramienta de atracción diseñada para captar clientes en momentos críticos, posicionar tu marca y abrir una nueva fuente de ingresos.",
       features: [
-        "Todo lo del Plan Profesional +",
-        "Embudo de Venta Estratégico",
-        "Landing Pages para Servicios Específicos",
-        "Sistema de Cotización en Línea",
-        "Automatización de correos informativos",
-        "Dashboard de Analítica de Leads",
-        "SEO Técnico Profundo (Schema Obituarios)",
-        "Soporte Prioritario 6 meses"
+        "Estructura optimizada con textos profesionales y keywords estratégicas",
+        "SEO Local y posicionamiento en San Miguel, La Cisterna, San Joaquín, PAC, El Bosque, etc.",
+        "Soporte de herramientas de Inteligencia Artificial para optimizar contenidos y potenciar SEO",
+        "Sistema de Cotización en Línea dinámico y consultas rápidas por WhatsApp",
+        "Motor comercial digital listo para campañas Google Ads y presencia orgánica",
+        "Obituario digital interactivo de alta gama con sistema de condolencias moderado",
+        "Soporte técnico VIP, copias de seguridad y mantención por 6 meses"
       ]
     }
   ];
