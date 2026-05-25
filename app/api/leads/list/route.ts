@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
     const admin = getSupabaseAdmin();
     const { data, error } = await admin
       .from('leads')
-      .select('id, name, company, email, phone, notes, service')
+      .select('*')
       .order('created_at', { ascending: false })
       .limit(300);
 

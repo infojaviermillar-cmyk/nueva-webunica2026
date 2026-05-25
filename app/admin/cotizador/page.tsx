@@ -131,8 +131,9 @@ function CotizadorContent() {
       rut: lead.rut || '',
     });
 
-    if (lead.service) {
-      const plan = mapServiceInterestToPlan(lead.service);
+    const targetService = lead.service || lead.service_interest;
+    if (targetService) {
+      const plan = mapServiceInterestToPlan(targetService);
       if (plan && !selectedPlans.find(p => p.id === plan.id)) {
         setSelectedPlans(prev => [...prev, plan]);
       }
@@ -423,10 +424,15 @@ function CotizadorContent() {
                               className="w-full text-left px-4 py-3 hover:bg-violet-50 transition-colors flex flex-col gap-0.5"
                             >
                               <span className="font-extrabold text-xs text-slate-800">{lead.name}</span>
-                              <div className="flex items-center gap-2 text-[10px] font-semibold text-slate-400">
-                                {lead.company && (
+                              <div className="flex flex-wrap items-center gap-1.5 text-[10px] font-semibold text-slate-400">
+                                {(lead.company || lead.city) && (
                                   <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-600 font-bold">
-                                    {lead.company}
+                                    {lead.company || lead.city}
+                                  </span>
+                                )}
+                                {(lead.service || lead.service_interest) && (
+                                  <span className="bg-violet-50 text-violet-600 px-1.5 py-0.5 rounded font-black uppercase tracking-wider text-[8px]">
+                                    {lead.service || lead.service_interest}
                                   </span>
                                 )}
                                 {lead.email && <span>{lead.email}</span>}
