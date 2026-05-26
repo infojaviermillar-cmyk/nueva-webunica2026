@@ -860,7 +860,9 @@ function CotizadorContent() {
           {/* ========================================================= */}
           {/* HOJA DE COTIZACIÓN PREVIEW (RIGHT) - PRINTABLE AREA       */}
           {/* ========================================================= */}
-          <div className="lg:col-span-7 bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0">
+          <div className="lg:col-span-7 space-y-8 print:space-y-0 print:w-full print:mx-0 print:my-0">
+            
+            <div className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0">
             
             {/* Encabezado Corporativo Premium */}
             <div className="bg-zinc-950 px-8 py-7 flex flex-col sm:flex-row justify-between items-start gap-6 border-b print:bg-white print:border-b-2 print:border-zinc-900 print:px-0">
@@ -1114,7 +1116,7 @@ function CotizadorContent() {
           {/* SEGUNDA PÁGINA: ANEXO DE COSTOS (OPTIONAL / CONDITIONAL)  */}
           {/* ========================================================= */}
           {showSecondPage && (
-            <div className="mt-8 bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0 print:break-before-page">
+            <div className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0 print:break-before-page">
               
               {/* Encabezado Corporativo Página 2 */}
               <div className="bg-zinc-950 px-8 py-6 flex flex-col sm:flex-row justify-between items-start gap-4 border-b print:bg-white print:border-b-2 print:border-zinc-900 print:px-0 print:py-4">
@@ -1238,6 +1240,7 @@ function CotizadorContent() {
             </div>
           )}
 
+          </div>
         </div>
       </div>
 
