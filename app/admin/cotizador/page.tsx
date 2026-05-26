@@ -443,7 +443,19 @@ function CotizadorContent() {
     setIsGeneratingPDF(true);
 
     try {
-      const html2pdf = (await import('html2pdf.js')).default;
+      const html2pdfModule = await import('html2pdf.js');
+      let html2pdf = html2pdfModule.default;
+      if (!html2pdf || typeof html2pdf !== 'function') {
+        html2pdf = (html2pdfModule as any) || html2pdfModule;
+      }
+      if (typeof html2pdf !== 'function' && (html2pdf as any).default) {
+        html2pdf = (html2pdf as any).default;
+      }
+
+      if (typeof html2pdf !== 'function') {
+        throw new Error('html2pdf is not resolved as a callable function');
+      }
+
       const element = document.getElementById('printable-quote-area');
       if (!element) {
         throw new Error('Printable area element not found');
