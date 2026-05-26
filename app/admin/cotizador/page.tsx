@@ -437,7 +437,49 @@ function CotizadorContent() {
     setTimeout(() => setCopiedWhatsApp(false), 2500);
   };
 
-  const handlePrint = () => window.print();
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+
+  const handleExportPDF = async () => {
+    if (selectedPlans.length === 0) return;
+    setIsGeneratingPDF(true);
+
+    try {
+      const html2pdf = (await import('html2pdf.js')).default;
+      const element = document.getElementById('printable-quote-area');
+      if (!element) {
+        throw new Error('Printable area element not found');
+      }
+
+      // Add temporary class for flat PDF styling
+      element.classList.add('pdf-rendering');
+
+      const filename = `Cotizacion_${quoteNumber}_${(clientInfo.company || clientInfo.name || 'Cliente').replace(/\s+/g, '_')}.pdf`;
+
+      const opt = {
+        margin:       0,
+        filename:     filename,
+        image:        { type: 'jpeg' as const, quality: 0.98 },
+        html2canvas:  { 
+          scale: 2, 
+          useCORS: true, 
+          letterRendering: true,
+          scrollX: 0,
+          scrollY: 0
+        },
+        jsPDF:        { unit: 'pt', format: 'letter', orientation: 'portrait' as const },
+        pagebreak:    { mode: ['css', 'legacy'] as const }
+      };
+
+      await html2pdf().set(opt).from(element).save();
+      element.classList.remove('pdf-rendering');
+    } catch (err) {
+      console.error('Error generating PDF:', err);
+      // graceful fallback to print dialog
+      window.print();
+    } finally {
+      setIsGeneratingPDF(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-slate-50/50 pt-[22vh] lg:pt-36 pb-20 print:bg-white print:pt-0 print:pb-0 font-sans">
@@ -486,12 +528,21 @@ function CotizadorContent() {
               )}
             </button>
             <button
-              onClick={handlePrint}
-              disabled={selectedPlans.length === 0}
-              className="flex items-center gap-2 px-6 py-3 bg-zinc-950 text-white rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-violet-600 transition-all shadow-lg active:scale-95 disabled:opacity-50 disabled:pointer-events-none hover:scale-105"
+              onClick={handleExportPDF}
+              disabled={selectedPlans.length === 0 || isGeneratingPDF}
+              className="flex items-center gap-2 px-6 py-3 bg-zinc-950 text-white rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-violet-600 transition-all shadow-lg active:scale-95 disabled:opacity-50 disabled:pointer-events-none hover:scale-105 min-w-[150px] justify-center"
             >
-              <Download className="w-4 h-4" />
-              Exportar PDF
+              {isGeneratingPDF ? (
+                <>
+                  <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin shrink-0" />
+                  Generando...
+                </>
+              ) : (
+                <>
+                  <Download className="w-4 h-4" />
+                  Descargar PDF
+                </>
+              )}
             </button>
           </div>
         </div>
@@ -860,7 +911,7 @@ function CotizadorContent() {
           {/* ========================================================= */}
           {/* HOJA DE COTIZACIÓN PREVIEW (RIGHT) - PRINTABLE AREA       */}
           {/* ========================================================= */}
-          <div className="lg:col-span-7 space-y-8 print:space-y-0 print:w-full print:mx-0 print:my-0">
+          <div id="printable-quote-area" className="lg:col-span-7 space-y-8 print:space-y-0 print:w-full print:mx-0 print:my-0">
             
             <div className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0">
             
@@ -1116,7 +1167,7 @@ function CotizadorContent() {
           {/* SEGUNDA PÁGINA: ANEXO DE COSTOS (OPTIONAL / CONDITIONAL)  */}
           {/* ========================================================= */}
           {showSecondPage && (
-            <div className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0 print:break-before-page">
+            <div className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0 print:break-before-page html2pdf__page-break">
               
               {/* Encabezado Corporativo Página 2 */}
               <div className="bg-zinc-950 px-8 py-6 flex flex-col sm:flex-row justify-between items-start gap-4 border-b print:bg-white print:border-b-2 print:border-zinc-900 print:px-0 print:py-4">
@@ -1262,6 +1313,26 @@ function CotizadorContent() {
             padding: 0 !important;
             margin: 0 !important;
           }
+        }
+
+        /* PDF rendering engine overrides */
+        .pdf-rendering {
+          width: 816px !important;
+          background-color: #ffffff !important;
+          color: #000000 !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+        .pdf-rendering .bg-white {
+          border-radius: 0 !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+        .pdf-rendering .shadow-xl {
+          box-shadow: none !important;
+        }
+        .pdf-rendering .rounded-\[2rem\] {
+          border-radius: 0 !important;
         }
       `}</style>
     </div>
