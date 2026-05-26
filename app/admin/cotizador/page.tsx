@@ -443,17 +443,23 @@ function CotizadorContent() {
     setIsGeneratingPDF(true);
 
     try {
-      const html2pdfModule = await import('html2pdf.js');
-      let html2pdf = html2pdfModule.default;
-      if (!html2pdf || typeof html2pdf !== 'function') {
-        html2pdf = (html2pdfModule as any) || html2pdfModule;
-      }
-      if (typeof html2pdf !== 'function' && (html2pdf as any).default) {
-        html2pdf = (html2pdf as any).default;
+      // 100% bulletproof load of html2pdf from stable CDN to bypass Webpack/Turbopack node_modules packaging errors
+      let html2pdf = (window as any).html2pdf;
+      if (!html2pdf) {
+        await new Promise<void>((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+          script.onload = () => {
+            html2pdf = (window as any).html2pdf;
+            resolve();
+          };
+          script.onerror = () => reject(new Error('Failed to load html2pdf from CDN'));
+          document.head.appendChild(script);
+        });
       }
 
-      if (typeof html2pdf !== 'function') {
-        throw new Error('html2pdf is not resolved as a callable function');
+      if (!html2pdf) {
+        throw new Error('html2pdf was not found on window after CDN script injection');
       }
 
       const element = document.getElementById('printable-quote-area');
@@ -473,9 +479,8 @@ function CotizadorContent() {
         html2canvas:  { 
           scale: 2, 
           useCORS: true, 
-          letterRendering: true,
-          scrollX: 0,
-          scrollY: 0
+          logging: false,
+          letterRendering: true
         },
         jsPDF:        { unit: 'pt', format: 'letter', orientation: 'portrait' as const },
         pagebreak:    { mode: ['css', 'legacy'] as const }
@@ -483,9 +488,10 @@ function CotizadorContent() {
 
       await html2pdf().set(opt).from(element).save();
       element.classList.remove('pdf-rendering');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error generating PDF:', err);
-      // graceful fallback to print dialog
+      // alert user of the exact error for full transparency in development, and fallback gracefully
+      alert(`[PDF Direct Download] No se pudo generar la descarga directa automáticamente (${err.message || err}). Abriendo el panel de guardado nativo del navegador...`);
       window.print();
     } finally {
       setIsGeneratingPDF(false);
