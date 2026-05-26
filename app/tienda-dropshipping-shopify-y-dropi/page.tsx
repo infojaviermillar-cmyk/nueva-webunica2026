@@ -261,7 +261,7 @@ export default function DropshippingPage() {
                     "Personalización de 1 producto estrella con 5 fotos IA únicas y 3 videos generados con IA",
                     "1 tipo de formas de pago (Webpay/Flow/Mercado Pago) + Fintoc",
                     "Video Explicativo cómo crear imágenes IA para productos dropshipping",
-                    "Integración Bluexpress (Dropi)",
+                    "Métodos de transporte y envíos incluidos vía Dropi Chile",
                     "Categorías y Colecciones",
                     "WhatsApp + Redes Sociales",
                     "Soporte 3 meses (3 cambios)",

@@ -771,7 +771,7 @@ export const DROPSHIPPING_PLANS: Plan[] = [
       'Creación de 5 colecciones inteligentes',
       'Sincronización automática de inventario y pedidos',
       'Configuración de Pago Contra Entrega (COD) local',
-      'Integración con Blue Express (Dropi Chile)',
+      'Métodos de transporte y envíos incluidos vía Dropi Chile',
       'Personalización de 1 producto estrella con 5 fotos IA únicas y 3 videos generados con IA',
       '1 tipo de formas de pago (Webpay/Flow/Mercado Pago) + Fintoc',
       'Video Explicativo cómo crear imágenes IA para productos dropshipping',
