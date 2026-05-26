@@ -116,10 +116,16 @@ export default function DropshippingPage() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-                 <LeadButton className="px-12 py-5 bg-zinc-950 text-white font-black rounded-full hover:bg-zinc-800 transition-all shadow-xl shadow-zinc-950/10 uppercase tracking-widest text-xs">
-                    Iniciar mi Tienda Dropi
+                 <LeadButton 
+                    id="hero-start-dropshipping-btn"
+                    className="px-12 py-5 bg-zinc-950 text-white font-black rounded-full hover:bg-zinc-800 transition-all shadow-xl shadow-zinc-950/10 uppercase tracking-widest text-xs"
+                 >
+                    Cotizar mi Tienda Dropshipping
                  </LeadButton>
-                 <LeadButton className="px-12 py-5 border border-zinc-200 text-zinc-950 font-black rounded-full hover:bg-zinc-50 transition-all uppercase tracking-widest text-xs">
+                 <LeadButton 
+                    id="hero-view-portfolio-btn"
+                    className="px-12 py-5 border border-zinc-200 text-zinc-950 font-black rounded-full hover:bg-zinc-50 transition-all uppercase tracking-widest text-xs"
+                 >
                     Ver Portafolio
                  </LeadButton>
               </div>
@@ -247,7 +253,6 @@ export default function DropshippingPage() {
                 {
                   name: "Dropshipping Básico",
                   price: "$580.000",
-                  original: "$650.000",
                   highlight: "Ideal para iniciar",
                   features: [
                     "Desarrollo Tienda Dropshipping Dropi",
@@ -271,7 +276,6 @@ export default function DropshippingPage() {
                 {
                   name: "Dropshipping Avanzado",
                   price: "$850.000",
-                  original: "$980.000",
                   highlight: "Para escalar volumen",
                   features: [
                     "Todo lo del Plan Básico +",
@@ -290,14 +294,10 @@ export default function DropshippingPage() {
                 }
                ].map((p, i) => (
                  <div key={i} className={`relative p-10 lg:p-14 rounded-[4rem] border transition-all duration-500 ${p.recommended ? 'bg-zinc-950 text-white border-purple-500 shadow-2xl scale-105 z-10' : 'bg-zinc-50 text-zinc-950 border-zinc-200 hover:border-purple-500/30'}`}>
-                    <div className="absolute top-10 right-10 bg-emerald-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full animate-pulse">
-                       10% DESCUENTO
-                    </div>
                     <h3 className="text-3xl font-black mb-2 uppercase tracking-tight">{p.name}</h3>
                     <p className={`text-xs font-bold uppercase mb-8 ${p.recommended ? 'text-purple-400' : 'text-purple-600'}`}>{p.highlight}</p>
                     
                     <div className="mb-10">
-                       <div className={`text-sm line-through font-medium mb-1 opacity-50`}>{p.original} + iva</div>
                        <div className="flex items-baseline gap-2">
                           <span className="text-5xl font-black">{p.price}</span>
                           <span className="text-sm opacity-50 font-medium">+ iva</span>
@@ -313,8 +313,10 @@ export default function DropshippingPage() {
                        ))}
                     </ul>
 
-                    <LeadButton className={`w-full py-5 rounded-3xl font-black uppercase tracking-widest text-[11px] transition-all ${p.recommended ? 'bg-white text-zinc-950 hover:bg-zinc-200 shadow-xl shadow-white/5' : 'bg-zinc-950 text-white hover:bg-zinc-800 shadow-xl shadow-zinc-950/10'}`}>
-                       Obtener 10% Descuento
+                    <LeadButton 
+                      id={`dropshipping-plan-btn-${p.name.toLowerCase().replace(/\s+/g, '-')}`}
+                      className={`w-full py-5 rounded-3xl font-black uppercase tracking-widest text-[11px] transition-all ${p.recommended ? 'bg-white text-zinc-950 hover:bg-zinc-200 shadow-xl shadow-white/5' : 'bg-zinc-950 text-white hover:bg-zinc-800 shadow-xl shadow-zinc-950/10'}`}>
+                       Cotizar este Plan
                     </LeadButton>
                  </div>
                ))}
@@ -328,9 +330,9 @@ export default function DropshippingPage() {
             faqs={dropshippingFaqs}
             title="Dudas sobre Dropshipping"
             description="Todo lo que necesitas saber para triunfar en el dropshipping chile."
-            ctaTitle="¿Obtén un 10% de Descuento?"
-            ctaDescription="Inicia tu tienda dropshiping hoy y recibe un descuento especial en la configuración."
-            ctaLabel="Quiero mi 10% Descuento"
+            ctaTitle="¿Necesitas una Propuesta Comercial?"
+            ctaDescription="Solicita una cotización hoy y recibe una asesoría estratégica personalizada para tu tienda online."
+            ctaLabel="Cotizar mi Proyecto"
           />
         </div>
 
@@ -342,8 +344,10 @@ export default function DropshippingPage() {
            <p className="text-zinc-600 text-xl mb-16 max-w-2xl mx-auto font-light leading-relaxed">
               No esperes más para profesionalizar tu negocio. El <strong className="text-zinc-900">dropshipping chile</strong> está explotando y Shopify + Dropi Chile son el combo ganador.
            </p>
-           <LeadButton className="px-16 py-8 bg-zinc-950 text-white font-black rounded-full hover:scale-105 transition-all shadow-2xl shadow-zinc-950/10 uppercase tracking-[0.2em] text-xs">
-              Configurar mi Ecosistema
+           <LeadButton 
+             id="final-cta-dropshipping-btn"
+             className="px-16 py-8 bg-zinc-950 text-white font-black rounded-full hover:scale-105 transition-all shadow-2xl shadow-zinc-950/10 uppercase tracking-[0.2em] text-xs">
+              Cotizar mi Tienda Dropshipping
            </LeadButton>
         </section>
 

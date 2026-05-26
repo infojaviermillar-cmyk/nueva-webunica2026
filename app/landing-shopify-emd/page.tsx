@@ -167,20 +167,22 @@ export default function ShopifyEmdLandingPage() {
     {
       name: "DROPI Básico",
       price: "$580.000",
-      originalPrice: "$650.000",
       highlight: "📦 Dropshipping Automatizado",
       desc: "Inicia tu negocio sin stock propio con la mejor integración de Chile: Shopify + Dropi.",
       features: [
         "Desarrollo Tienda Dropshipping Dropi",
         "Configuración completa Shopify",
         "Dominio + Validación correo",
-        "Plantilla Premium incluida",
-        "Carga hasta 70 productos Dropi",
-        "Sincronización total con Dropi",
-        "Pago Contra Entrega o Tradicional",
-        "Certificado SSL + Panel Admin",
-        "1 Medio de Pago (Webpay/MercadoPago)",
-        "Envíos Bluexpress (vía Dropi)",
+        "Plantilla Premium Envato / Shopify",
+        "Creación de 5 colecciones inteligentes",
+        "Sincronización plataforma Dropi",
+        "Pago por entrega o Tradicional",
+        "Certificado SSL y Panel administrador",
+        "Personalización de 1 producto estrella con 5 fotos IA únicas y 3 videos generados con IA",
+        "1 tipo de formas de pago (Webpay/Flow/Mercado Pago) + Fintoc",
+        "Video Explicativo cómo crear imágenes IA para productos dropshipping",
+        "Métodos de transporte y envíos incluidos vía Dropi Chile",
+        "Categorías y Colecciones",
         "WhatsApp + Redes Sociales",
         "Soporte 3 meses (3 cambios)",
         "Entrega: Hasta 4 semanas"
@@ -188,17 +190,20 @@ export default function ShopifyEmdLandingPage() {
     },
     {
       name: "DROPI Pro",
-      price: "$780.000",
-      originalPrice: "$980.000",
+      price: "$850.000",
       highlight: "🚀 Dropshipping de Alto Vuelo",
       desc: "Escala tu tienda dropshipping con optimización de conversión y mayor catálogo.",
       features: [
         "Todo lo de DROPI Básico +",
-        "Carga hasta 250 productos Dropi",
+        "Creación de hasta 15 colecciones inteligentes",
+        "Personalización de 3 productos ganadores con 5 fotos cada uno y 3 videos IA",
+        "Todos los medios de pago que escojan (Webpay, Flow, Mercado Pago, Fintoc, etc.)",
+        "Video Explicativo cómo crear imágenes IA para productos dropshipping + cómo crear Videos para productos dropshipping",
         "Optimización de Conversión (CRO)",
+        "Configuración de Pixel y Analytics",
+        "Diseño de Banners personalizados",
         "SEO de categorías avanzado",
-        "Integración avanzada de Apps",
-        "Soporte Prioritario",
+        "Soporte prioritario",
         "Entrega: Hasta 5 semanas"
       ]
     }
@@ -545,13 +550,12 @@ export default function ShopifyEmdLandingPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 {dropshippingPlans.map((p, i) => (
                   <div key={i} className={`relative bg-white rounded-[3rem] p-12 flex flex-col border border-zinc-100 shadow-xl hover:shadow-2xl transition-all duration-500`}>
-                     <div className="absolute top-10 right-10 bg-emerald-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full animate-pulse">
-                       10% DESCUENTO
-                     </div>
                      <h3 className="text-3xl font-black mb-2 uppercase text-zinc-900">{p.name}</h3>
                      <p className="text-sm font-bold text-purple-600 uppercase mb-6">{p.highlight}</p>
                      <div className="mb-8">
-                       <div className="text-sm text-zinc-400 line-through font-medium mb-1">{p.originalPrice} + iva</div>
+                       {p.originalPrice && (
+                         <div className="text-sm text-zinc-400 line-through font-medium mb-1">{p.originalPrice} + iva</div>
+                       )}
                        <span className="text-5xl font-black text-zinc-900">{p.price}</span>
                        <span className="text-sm text-zinc-500 font-medium ml-1">+ iva</span>
                      </div>
@@ -563,8 +567,11 @@ export default function ShopifyEmdLandingPage() {
                          </li>
                        ))}
                      </ul>
-                     <LeadButton className="w-full py-5 bg-purple-600 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-purple-700 shadow-xl shadow-purple-600/20 active:scale-95 transition-all">
-                       Obtener 10% Descuento
+                     <LeadButton 
+                       id={`landing-shopify-emd-dropshipping-btn-${p.name.toLowerCase().replace(/\s+/g, '-')}`}
+                       className="w-full py-5 bg-purple-600 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] hover:bg-purple-700 shadow-xl shadow-purple-600/20 active:scale-95 transition-all"
+                     >
+                       Cotizar este Plan
                      </LeadButton>
                   </div>
                 ))}

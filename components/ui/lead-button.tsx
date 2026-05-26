@@ -3,19 +3,22 @@
 import React from 'react';
 import { useContactModal } from '@/context/contact-modal-context';
 
-interface LeadButtonProps {
+interface LeadButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  className?: string;
   city?: string;
 }
 
-export default function LeadButton({ children, className, city = "" }: LeadButtonProps) {
+export default function LeadButton({ children, className, city = "", ...props }: LeadButtonProps) {
   const { openModal } = useContactModal();
 
   return (
     <button 
-      onClick={() => openModal(city)}
+      onClick={(e) => {
+        openModal(city);
+        if (props.onClick) props.onClick(e);
+      }}
       className={className}
+      {...props}
     >
       {children}
     </button>
