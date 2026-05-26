@@ -375,10 +375,9 @@ function CotizadorContent() {
       if (p.deliveryDays) text += `   ⏱ _Plazo: ${p.deliveryDays}_\n`;
       if (p.features && p.features.length > 0) {
         text += `   _Incluye:_\n`;
-        p.features.slice(0, 4).forEach(f => {
+        p.features.forEach(f => {
           text += `   • ${f}\n`;
         });
-        if (p.features.length > 4) text += `   • y otros detalles adicionales...\n`;
       }
       text += `\n`;
     });
@@ -1029,7 +1028,7 @@ function CotizadorContent() {
                             </td>
                             <td className="px-5 py-4 hidden md:table-cell print:table-cell">
                               <ul className="space-y-1">
-                                {plan.features.slice(0, 6).map((f, i) => (
+                                {plan.features.map((f, i) => (
                                   <li
                                     key={i}
                                     className="flex items-start gap-1.5 text-[10px] text-slate-600 font-medium print:text-zinc-700"
@@ -1038,11 +1037,6 @@ function CotizadorContent() {
                                     {f}
                                   </li>
                                 ))}
-                                {plan.features.length > 6 && (
-                                  <li className="text-[9px] text-slate-400 italic">
-                                    + {plan.features.length - 6} características adicionales
-                                  </li>
-                                )}
                               </ul>
                             </td>
                             <td className="px-5 py-4 text-right">
