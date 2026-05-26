@@ -768,7 +768,7 @@ export const DROPSHIPPING_PLANS: Plan[] = [
       'Desarrollo Tienda Dropshipping Dropi',
       'Configuración completa Shopify (Dominio + SSL)',
       'Plantilla Premium optimizada para conversión',
-      'Carga de hasta 70 productos desde Dropi',
+      'Creación de 5 colecciones inteligentes',
       'Sincronización automática de inventario y pedidos',
       'Configuración de Pago Contra Entrega (COD) local',
       'Integración con Blue Express (Dropi Chile)',
@@ -792,7 +792,7 @@ export const DROPSHIPPING_PLANS: Plan[] = [
     url: '/tienda-dropshipping-shopify-y-dropi',
     features: [
       'Todo lo del Plan Básico, más:',
-      'Carga de hasta 250 productos desde Dropi Chile',
+      'Creación de hasta 15 colecciones inteligentes',
       'Personalización de 3 productos ganadores con 5 fotos cada uno y 3 videos IA',
       'Optimización de Conversión avanzada (CRO)',
       'Configuración precisa de Meta Pixel, TikTok Pixel y Google Analytics 4',

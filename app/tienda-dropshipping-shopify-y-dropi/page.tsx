@@ -254,7 +254,7 @@ export default function DropshippingPage() {
                     "Configuración completa Shopify",
                     "Dominio + Validación correo",
                     "Plantilla Premium Envato / Shopify",
-                    "Carga hasta 70 productos desde Dropi",
+                    "Creación de 5 colecciones inteligentes",
                     "Sincronización plataforma Dropi",
                     "Pago por entrega o Tradicional",
                     "Certificado SSL y Panel administrador",
@@ -274,7 +274,7 @@ export default function DropshippingPage() {
                   highlight: "Para escalar volumen",
                   features: [
                     "Todo lo del Plan Básico +",
-                    "Carga hasta 250 productos Dropi",
+                    "Creación de hasta 15 colecciones inteligentes",
                     "Personalización de 3 productos ganadores con 5 fotos cada uno y 3 videos IA",
                     "Optimización de Conversión (CRO)",
                     "Configuración de Pixel y Analytics",
