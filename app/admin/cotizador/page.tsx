@@ -67,6 +67,115 @@ function mapServiceInterestToPlan(serviceParam: string): Plan | undefined {
   );
 }
 
+// --- Shopify & Third Party Operational Costs ---
+interface OpCostItem {
+  id: string;
+  name: string;
+  category: 'Shopify' | 'Logística' | 'Apps';
+  frequency: 'Mensual' | 'Transaccional' | 'Única vez' | 'Anual';
+  costLabel: string;
+  desc: string;
+}
+
+const OPERATIONAL_COSTS: OpCostItem[] = [
+  {
+    id: 'sh-plan-basic',
+    name: 'Plan Shopify Basic',
+    category: 'Shopify',
+    frequency: 'Mensual',
+    costLabel: 'USD 39/mes (~CLP 36.000)',
+    desc: 'Ideal para tiendas nuevas. Comisión por venta de 2.0% (usando Flow/Webpay) + tarifa de pasarela.',
+  },
+  {
+    id: 'sh-plan-shopify',
+    name: 'Plan Shopify Standard',
+    category: 'Shopify',
+    frequency: 'Mensual',
+    costLabel: 'USD 105/mes (~CLP 97.000)',
+    desc: 'Para negocios en crecimiento. Comisión por venta de 1.0% + mejores reportes profesionales.',
+  },
+  {
+    id: 'sh-plan-advanced',
+    name: 'Plan Shopify Advanced',
+    category: 'Shopify',
+    frequency: 'Mensual',
+    costLabel: 'USD 399/mes (~CLP 370.000)',
+    desc: 'Para grandes volúmenes. Comisión por venta reducida a 0.6% y analítica de conversión avanzada.',
+  },
+  {
+    id: 'sh-ccs-monthly',
+    name: 'Shopify CCS (Carrier Calculated Shipping)',
+    category: 'Shopify',
+    frequency: 'Mensual',
+    costLabel: 'USD 20/mes (~CLP 18.500)',
+    desc: 'Necesario para mostrar tarifas automáticas de Starken/Shipit en el checkout en plan mensual.',
+  },
+  {
+    id: 'sh-ccs-annual',
+    name: 'Shopify CCS Gratis (Plan Anual)',
+    category: 'Shopify',
+    frequency: 'Anual',
+    costLabel: 'Gratis (Ahorro Anual de 10% en plan)',
+    desc: 'Recomendado. Al pagar Shopify de forma anual, habilitan el CCS gratis y ahorras 10% en tu suscripción.',
+  },
+  {
+    id: 'log-shipit-free',
+    name: 'Shipit.cl / Sendu.cl (Plan Base)',
+    category: 'Logística',
+    frequency: 'Transaccional',
+    costLabel: 'CLP 0/mes (Solo pagas lo enviado)',
+    desc: 'Habilita Starken, Chilexpress, Correos en tu checkout. El plugin es gratis, solo pagas la etiqueta del despacho.',
+  },
+  {
+    id: 'log-shipit-pro',
+    name: 'Shipit.cl / Sendu.cl Plan PRO',
+    category: 'Logística',
+    frequency: 'Mensual',
+    costLabel: 'Desde CLP 15.000/mes',
+    desc: 'Tarifas de despacho preferenciales (hasta 20% descuento) y soporte de envíos VIP.',
+  },
+  {
+    id: 'app-reviews-free',
+    name: 'Reseñas de Clientes (Judge.me)',
+    category: 'Apps',
+    frequency: 'Mensual',
+    costLabel: 'CLP 0/mes (Plan Gratis)',
+    desc: 'Muestra fotos de clientes e insignias de reviews en tu ficha. Altamente recomendado para generar confianza.',
+  },
+  {
+    id: 'app-reviews-pro',
+    name: 'Reseñas Avanzadas (Loox)',
+    category: 'Apps',
+    frequency: 'Mensual',
+    costLabel: 'Desde USD 9.99/mes (~CLP 9.200)',
+    desc: 'Solicita reviews por correo de forma automatizada ofreciendo cupones de descuento.',
+  },
+  {
+    id: 'app-bundles',
+    name: 'Ofertas por Volumen & Bundles',
+    category: 'Apps',
+    frequency: 'Mensual',
+    costLabel: 'Desde USD 14.99/mes (~CLP 13.900)',
+    desc: 'Eleva tu ticket promedio vendiendo combos de productos (ej: Lleva 2 con 15% OFF).',
+  },
+  {
+    id: 'app-translate',
+    name: 'Traductor y Multimoneda',
+    category: 'Apps',
+    frequency: 'Mensual',
+    costLabel: 'Desde USD 9.90/mes (~CLP 9.200)',
+    desc: 'Traduce automáticamente tu sitio y convierte precios a monedas locales para vender fuera de Chile.',
+  },
+  {
+    id: 'app-klaviyo-free',
+    name: 'Klaviyo Email Marketing (Básico)',
+    category: 'Apps',
+    frequency: 'Mensual',
+    costLabel: 'CLP 0/mes (Hasta 250 contactos)',
+    desc: 'CRM de email marketing líder. Envía tus flujos automatizados de forma gratuita al inicio.',
+  },
+];
+
 function CotizadorContent() {
   const searchParams = useSearchParams();
 
@@ -87,6 +196,15 @@ function CotizadorContent() {
     }
     return [];
   });
+
+  // --- Shopify & Third Party Operational Costs ---
+  const [showSecondPage, setShowSecondPage] = useState(false);
+  const [selectedOpCosts, setSelectedOpCosts] = useState<string[]>([
+    'sh-plan-basic',
+    'sh-ccs-annual',
+    'log-shipit-free',
+    'app-reviews-free'
+  ]);
 
   // --- Auto-complete / Search Leads States ---
   const [dbLeads, setDbLeads] = useState<any[]>([]);
@@ -139,6 +257,9 @@ function CotizadorContent() {
       const plan = mapServiceInterestToPlan(targetService);
       if (plan && !selectedPlans.find(p => p.id === plan.id)) {
         setSelectedPlans(prev => [...prev, plan]);
+      }
+      if (targetService.toLowerCase().includes('shopify')) {
+        setShowSecondPage(true);
       }
     }
 
@@ -292,6 +413,21 @@ function CotizadorContent() {
       text += `• Banco Estado de Chile | Cuenta Vista o Chequera Electrónica\n`;
       text += `• Cuenta: 62900224166 | Webunica Chile EIRL\n`;
       text += `• RUT: 76.371.864-6 | pagos@webunica.cl\n\n`;
+    }
+
+    if (showSecondPage && selectedOpCosts.length > 0) {
+      text += `--------------------------------------------\n`;
+      text += `*Anexo: Costos Operacionales de Terceros (Estimados)*\n`;
+      text += `_Valores de referencia cobrados directamente por los proveedores (Shopify, Apps, Envíos):_\n\n`;
+      
+      selectedOpCosts.forEach(costId => {
+        const item = OPERATIONAL_COSTS.find(o => o.id === costId);
+        if (item) {
+          text += `• *${item.name}* (${item.frequency})\n`;
+          text += `  Costo: ${item.costLabel}\n`;
+          text += `  _${item.desc}_\n\n`;
+        }
+      });
     }
 
     text += `🚀 ¡Quedamos a su total disposición para dar inicio al desarrollo!`;
@@ -644,6 +780,81 @@ function CotizadorContent() {
               </div>
             </div>
 
+            {/* Tarjeta 5: Costos Operacionales de Terceros */}
+            <div className="bg-white rounded-[1.5rem] border border-slate-200/80 shadow-[0_10px_30px_rgba(0,0,0,0.02)] p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 flex items-center gap-2">
+                  <CreditCard className="w-4 h-4 text-violet-500" /> Costos de Terceros (Pág 2)
+                </h3>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={showSecondPage}
+                    onChange={() => setShowSecondPage(!showSecondPage)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-violet-600"></div>
+                </label>
+              </div>
+              
+              <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">
+                Habilita el anexo de costos estimativos (licencias de Shopify, habilitación de envíos CCS, apps de conversión). 
+              </p>
+
+              {showSecondPage && (
+                <div className="space-y-4 pt-2 border-t border-slate-100 max-h-80 overflow-y-auto pr-1">
+                  {['Shopify', 'Logística', 'Apps'].map(category => {
+                    const items = OPERATIONAL_COSTS.filter(o => o.category === category);
+                    return (
+                      <div key={category} className="space-y-2">
+                        <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 block border-b border-slate-50 pb-1">
+                          {category}
+                        </span>
+                        <div className="space-y-2">
+                          {items.map(item => {
+                            const isChecked = selectedOpCosts.includes(item.id);
+                            return (
+                              <label
+                                key={item.id}
+                                className={`flex items-start gap-2.5 p-2 rounded-xl border text-xs cursor-pointer hover:bg-slate-50 transition-all ${
+                                  isChecked 
+                                    ? 'bg-violet-50/50 border-violet-200 text-violet-900' 
+                                    : 'bg-white border-slate-200 text-slate-700'
+                                }`}
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={isChecked}
+                                  onChange={() => {
+                                    if (isChecked) {
+                                      setSelectedOpCosts(selectedOpCosts.filter(id => id !== item.id));
+                                    } else {
+                                      setSelectedOpCosts([...selectedOpCosts, item.id]);
+                                    }
+                                  }}
+                                  className="mt-0.5 accent-violet-600 shrink-0"
+                                />
+                                <div className="space-y-0.5">
+                                  <div className="font-extrabold text-[11px] leading-tight flex flex-wrap items-center gap-1">
+                                    {item.name}
+                                    <span className="text-[8px] font-black bg-slate-100 px-1 py-0.2 rounded text-slate-500 uppercase tracking-wide">
+                                      {item.frequency}
+                                    </span>
+                                  </div>
+                                  <div className="text-[10px] font-black text-violet-600">{item.costLabel}</div>
+                                  <p className="text-[9px] text-slate-400 leading-normal font-medium">{item.desc}</p>
+                                </div>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
           </div>
 
           {/* ========================================================= */}
@@ -898,6 +1109,134 @@ function CotizadorContent() {
             </div>
             
           </div>
+
+          {/* ========================================================= */}
+          {/* SEGUNDA PÁGINA: ANEXO DE COSTOS (OPTIONAL / CONDITIONAL)  */}
+          {/* ========================================================= */}
+          {showSecondPage && (
+            <div className="mt-8 bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0 print:break-before-page">
+              
+              {/* Encabezado Corporativo Página 2 */}
+              <div className="bg-zinc-950 px-8 py-6 flex flex-col sm:flex-row justify-between items-start gap-4 border-b print:bg-white print:border-b-2 print:border-zinc-900 print:px-0 print:py-4">
+                <div>
+                  <img
+                    src="/logo-webunica.png.webp"
+                    alt="Webunica"
+                    className="h-6 brightness-0 invert print:brightness-0 print:invert-0 mb-2"
+                  />
+                  <div className="text-zinc-400 print:text-zinc-500 text-[10px] font-medium">
+                    <p className="text-white print:text-zinc-900 font-extrabold uppercase tracking-wide">Webunica Chile EIRL</p>
+                    <p>RUT: 76.371.864-6 · consultas@webunica.cl</p>
+                  </div>
+                </div>
+                <div className="text-left sm:text-right">
+                  <h2 className="text-xl font-black uppercase tracking-widest text-white print:text-zinc-950 mb-1 leading-none">
+                    Anexo Comercial
+                  </h2>
+                  <p className="text-[10px] text-zinc-400 print:text-zinc-500">
+                    Costos de Operación de Terceros (Estimados)
+                  </p>
+                </div>
+              </div>
+
+              {/* Contenido Página 2 */}
+              <div className="p-8 space-y-6 print:px-0">
+                <div className="space-y-2">
+                  <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400 print:text-zinc-500">
+                    Resumen de Suscripciones y Tarifas de Operación
+                  </h3>
+                  <p className="text-xs text-slate-500 leading-relaxed font-medium print:text-zinc-600">
+                    Para el correcto funcionamiento de una tienda online moderna, existen ciertos costos operacionales y de software provistos por terceros. A continuación se detallan las tarifas estimadas según los requerimientos cotizados.
+                  </p>
+                </div>
+
+                {/* Tabla de Costos Operacionales */}
+                <div className="border border-slate-200 rounded-xl overflow-hidden print:border-zinc-300">
+                  <table className="w-full text-left border-collapse text-xs">
+                    <thead>
+                      <tr className="bg-slate-50 border-b border-slate-200 text-[9px] font-black uppercase tracking-widest text-slate-400 print:bg-zinc-100 print:border-zinc-300 print:text-zinc-600">
+                        <th className="px-5 py-3">Ítem / Servicio Externo</th>
+                        <th className="px-5 py-3">Categoría</th>
+                        <th className="px-5 py-3">Periodicidad</th>
+                        <th className="px-5 py-3 text-right">Costo Estimado</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 print:divide-zinc-200">
+                      {selectedOpCosts.length === 0 ? (
+                        <tr>
+                          <td colSpan={4} className="px-5 py-8 text-center text-slate-400 font-medium italic">
+                            No hay costos de terceros seleccionados. Actívalos en el panel de control.
+                          </td>
+                        </tr>
+                      ) : (
+                        selectedOpCosts.map(costId => {
+                          const item = OPERATIONAL_COSTS.find(o => o.id === costId);
+                          if (!item) return null;
+                          return (
+                            <tr key={item.id} className="align-top">
+                              <td className="px-5 py-3.5">
+                                <div className="font-extrabold text-slate-900 print:text-zinc-950">{item.name}</div>
+                                <p className="text-[10px] text-slate-500 font-medium mt-0.5 leading-relaxed max-w-[280px]">
+                                  {item.desc}
+                                </p>
+                              </td>
+                              <td className="px-5 py-3.5">
+                                <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider ${
+                                  item.category === 'Shopify' 
+                                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' 
+                                    : item.category === 'Logística'
+                                      ? 'bg-blue-50 text-blue-700 border border-blue-100'
+                                      : 'bg-violet-50 text-violet-700 border border-violet-100'
+                                }`}>
+                                  {item.category}
+                                </span>
+                              </td>
+                              <td className="px-5 py-3.5">
+                                <span className="font-semibold text-slate-600 print:text-zinc-700">
+                                  {item.frequency}
+                                </span>
+                              </td>
+                              <td className="px-5 py-3.5 text-right font-extrabold text-slate-900 print:text-zinc-950 whitespace-nowrap">
+                                {item.costLabel}
+                              </td>
+                            </tr>
+                          );
+                        })
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Nota de Transparencia Aclaratoria */}
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 print:bg-white print:border-t-2 print:border-zinc-900 print:border-x-0 print:border-b-0 print:rounded-none">
+                  <h4 className="font-extrabold text-slate-900 mb-2 text-xs uppercase tracking-widest print:text-zinc-950">
+                    Declaración de Transparencia Comercial
+                  </h4>
+                  <ul className="text-[11px] text-slate-500 space-y-1.5 font-medium list-disc list-inside print:text-zinc-700">
+                    <li>
+                      Los montos indicados en este anexo corresponden a tarifas oficiales de terceros (Shopify, apps externas y empresas logísticas) y son <strong className="text-slate-900 print:text-zinc-900">estimaciones informativas de referencia</strong>.
+                    </li>
+                    <li>
+                      Estos servicios <strong className="text-slate-900 print:text-zinc-900">son cobrados directamente por los proveedores</strong> mediante sus respectivas plataformas. Webunica Chile no actúa como recaudador ni cobra comisiones o recargos sobre estos servicios externos.
+                    </li>
+                    <li>
+                      Las comisiones por venta indicadas corresponden a cobros de pasarelas de pago externas (ej: Flow, Mercado Pago) y el porcentaje transaccional nativo del plan Shopify.
+                    </li>
+                    <li>
+                      Para habilitar la sincronización de tarifas automáticas en tiempo real en los couriers (CCS - Carrier Calculated Shipping), se recomienda la suscripción al <strong className="text-slate-900 print:text-zinc-900">Plan Anual de Shopify</strong>, el cual incluye esta característica de forma 100% gratuita.
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+
+              {/* Footer Corporativo Página 2 */}
+              <div className="bg-slate-50 text-center py-4 border-t border-slate-100 text-[9px] text-slate-400 font-semibold print:bg-white print:text-zinc-500 print:border-t-2 print:border-zinc-200">
+                <p>Webunica Chile EIRL · RUT 76.371.864-6 · consultas@webunica.cl · www.webunica.cl</p>
+              </div>
+
+            </div>
+          )}
 
         </div>
       </div>
