@@ -86,10 +86,10 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
     workerThreads: false,
     cpus: 1,
-    turbo: {
-      resolveAlias: {
-        'html2canvas': 'html2canvas-pro',
-      }
+  },
+  turbopack: {
+    resolveAlias: {
+      'html2canvas': 'html2canvas-pro',
     }
   },
   webpack: (config: any) => {
