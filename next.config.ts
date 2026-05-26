@@ -84,6 +84,8 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
+    workerThreads: false,
+    cpus: 1,
   },
 } as any;
 
