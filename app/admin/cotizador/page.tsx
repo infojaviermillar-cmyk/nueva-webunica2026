@@ -443,23 +443,18 @@ function CotizadorContent() {
     setIsGeneratingPDF(true);
 
     try {
-      // 100% bulletproof load of html2pdf from stable CDN to bypass Webpack/Turbopack node_modules packaging errors
-      let html2pdf = (window as any).html2pdf;
-      if (!html2pdf) {
-        await new Promise<void>((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
-          script.onload = () => {
-            html2pdf = (window as any).html2pdf;
-            resolve();
-          };
-          script.onerror = () => reject(new Error('Failed to load html2pdf from CDN'));
-          document.head.appendChild(script);
-        });
+      // Load html2pdf locally from node_modules (which will resolve html2canvas to html2canvas-pro via config alias)
+      const html2pdfModule = await import('html2pdf.js');
+      let html2pdf = html2pdfModule.default;
+      if (!html2pdf || typeof html2pdf !== 'function') {
+        html2pdf = (html2pdfModule as any) || html2pdfModule;
+      }
+      if (typeof html2pdf !== 'function' && (html2pdf as any).default) {
+        html2pdf = (html2pdf as any).default;
       }
 
-      if (!html2pdf) {
-        throw new Error('html2pdf was not found on window after CDN script injection');
+      if (typeof html2pdf !== 'function') {
+        throw new Error('html2pdf is not resolved as a callable function');
       }
 
       const element = document.getElementById('printable-quote-area');
