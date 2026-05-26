@@ -750,6 +750,60 @@ export const NEXTJS_PLANS: Plan[] = [
 ];
 
 // ════════════════════════════════════════════
+// 📦 DROPSHIPPING — Shopify + Dropi
+// Fuente: /tienda-dropshipping-shopify-y-dropi
+// ════════════════════════════════════════════
+export const DROPSHIPPING_PLANS: Plan[] = [
+  {
+    id: 'drop-basico',
+    name: 'Dropshipping BÁSICO',
+    highlight: 'Ideal para Iniciar sin Stock',
+    desc: 'Desarrollo de tienda Shopify automatizada con Dropi Chile y pago contra entrega (COD). Todo listo para vender.',
+    price: 580000,
+    originalPrice: 650000,
+    deliveryDays: '4 semanas',
+    category: '📦 Dropshipping Shopify + Dropi',
+    url: '/tienda-dropshipping-shopify-y-dropi',
+    features: [
+      'Desarrollo Tienda Dropshipping Dropi',
+      'Configuración completa Shopify (Dominio + SSL)',
+      'Plantilla Premium optimizada para conversión',
+      'Carga de hasta 70 productos desde Dropi',
+      'Sincronización automática de inventario y pedidos',
+      'Configuración de Pago Contra Entrega (COD) local',
+      'Integración con Blue Express (Dropi Chile)',
+      'Personalización de 1 producto estrella con 5 fotos IA únicas y 3 videos generados con IA',
+      '1 Medio de pago tradicional configurado (Flow/Webpay)',
+      'Categorías, Colecciones y Menús dinámicos',
+      'Integración con WhatsApp y Redes Sociales',
+      'Soporte técnico por 3 meses (3 cambios incluidos)',
+    ],
+  },
+  {
+    id: 'drop-avanzado',
+    name: 'Dropshipping AVANZADO',
+    highlight: 'Para Escalar Volumen de Ventas',
+    desc: 'La solución definitiva para escalamiento y optimización. Incluye analítica, banners profesionales y más productos.',
+    price: 850000,
+    originalPrice: 980000,
+    recommended: true,
+    deliveryDays: '5 semanas',
+    category: '📦 Dropshipping Shopify + Dropi',
+    url: '/tienda-dropshipping-shopify-y-dropi',
+    features: [
+      'Todo lo del Plan Básico, más:',
+      'Carga de hasta 250 productos desde Dropi Chile',
+      'Personalización de 3 productos ganadores con 5 fotos cada uno y 3 videos IA',
+      'Optimización de Conversión avanzada (CRO)',
+      'Configuración precisa de Meta Pixel, TikTok Pixel y Google Analytics 4',
+      'Diseño de Banners y recursos gráficos personalizados',
+      'Estrategia avanzada de SEO en colecciones y categorías',
+      'Soporte prioritario y consultoría de escalamiento',
+    ],
+  },
+];
+
+// ════════════════════════════════════════════
 // ⚙️ INTEGRACIONES Y ADD-ONS
 // ════════════════════════════════════════════
 export const ADDON_SERVICES: Plan[] = [
@@ -942,6 +996,7 @@ export const ALL_PLANS: Plan[] = [
   ...SENCE_PLANS,
   ...NEXTJS_PLANS,
   ...ADDON_SERVICES,
+  ...DROPSHIPPING_PLANS,
 ];
 
 // Agrupado por categoría para el <select> del cotizador

@@ -258,6 +258,7 @@ export default function DropshippingPage() {
                     "Sincronización plataforma Dropi",
                     "Pago por entrega o Tradicional",
                     "Certificado SSL y Panel administrador",
+                    "Personalización de 1 producto estrella con 5 fotos IA únicas y 3 videos generados con IA",
                     "1 Medio de pago (Webpay/Flow/Etc)",
                     "Integración Bluexpress (Dropi)",
                     "Categorías y Colecciones",
@@ -268,12 +269,13 @@ export default function DropshippingPage() {
                 },
                 {
                   name: "Dropshipping Avanzado",
-                  price: "$780.000",
+                  price: "$850.000",
                   original: "$980.000",
                   highlight: "Para escalar volumen",
                   features: [
                     "Todo lo del Plan Básico +",
                     "Carga hasta 250 productos Dropi",
+                    "Personalización de 3 productos ganadores con 5 fotos cada uno y 3 videos IA",
                     "Optimización de Conversión (CRO)",
                     "Configuración de Pixel y Analytics",
                     "Diseño de Banners personalizados",
