@@ -473,22 +473,20 @@ function CotizadorContent() {
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = pdf.internal.pageSize.getHeight();
       
-      const imgWidth = pdfWidth;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let imgWidth = pdfWidth;
+      let imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-      let heightLeft = imgHeight;
-      let position = 0;
-
-      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pdfHeight;
-
-      // Add new pages if content is taller than one page
-      while (heightLeft >= 20) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pdfHeight;
+      // Escalar la imagen para que encaje perfectamente en una sola página si es más larga
+      if (imgHeight > pdfHeight) {
+        const ratio = pdfHeight / imgHeight;
+        imgHeight = pdfHeight;
+        imgWidth = imgWidth * ratio;
       }
+
+      // Centrar horizontalmente si hubo que achicar a lo ancho
+      const xOffset = (pdfWidth - imgWidth) / 2;
+
+      pdf.addImage(imgData, 'JPEG', xOffset, 0, imgWidth, imgHeight);
 
       const filename = `Cotizacion_${quoteNumber}_${(clientInfo.company || clientInfo.name || 'Cliente').replace(/\s+/g, '_')}.pdf`;
       pdf.save(filename);
