@@ -442,53 +442,65 @@ function CotizadorContent() {
     if (selectedPlans.length === 0) return;
     setIsGeneratingPDF(true);
 
+    let element: HTMLElement | null = null;
     try {
-      // Load html2pdf locally from node_modules (which will resolve html2canvas to html2canvas-pro via config alias)
-      const html2pdfModule = await import('html2pdf.js');
-      let html2pdf = html2pdfModule.default;
-      if (!html2pdf || typeof html2pdf !== 'function') {
-        html2pdf = (html2pdfModule as any) || html2pdfModule;
-      }
-      if (typeof html2pdf !== 'function' && (html2pdf as any).default) {
-        html2pdf = (html2pdf as any).default;
-      }
-
-      if (typeof html2pdf !== 'function') {
-        throw new Error('html2pdf is not resolved as a callable function');
-      }
-
-      const element = document.getElementById('printable-quote-area');
+      element = document.getElementById('printable-quote-area');
       if (!element) {
         throw new Error('Printable area element not found');
       }
 
-      // Add temporary class for flat PDF styling
       element.classList.add('pdf-rendering');
+      
+      // Allow CSS changes to apply
+      await new Promise(resolve => setTimeout(resolve, 150));
+
+      const { default: html2canvas } = await import('html2canvas');
+      const { jsPDF } = await import('jspdf');
+
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+      });
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.98);
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'pt',
+        format: 'letter'
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      
+      const imgWidth = pdfWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pdfHeight;
+
+      // Add new pages if content is taller than one page
+      while (heightLeft >= 20) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pdfHeight;
+      }
 
       const filename = `Cotizacion_${quoteNumber}_${(clientInfo.company || clientInfo.name || 'Cliente').replace(/\s+/g, '_')}.pdf`;
-
-      const opt = {
-        margin:       0,
-        filename:     filename,
-        image:        { type: 'jpeg' as const, quality: 0.98 },
-        html2canvas:  { 
-          scale: 2, 
-          useCORS: true, 
-          logging: false,
-          letterRendering: true
-        },
-        jsPDF:        { unit: 'pt', format: 'letter', orientation: 'portrait' as const },
-        pagebreak:    { mode: ['css', 'legacy'] as const }
-      };
-
-      await html2pdf().set(opt).from(element).save();
-      element.classList.remove('pdf-rendering');
+      pdf.save(filename);
+      
     } catch (err: any) {
       console.error('Error generating PDF:', err);
-      // alert user of the exact error for full transparency in development, and fallback gracefully
-      alert(`[PDF Direct Download] No se pudo generar la descarga directa automáticamente (${err.message || err}). Abriendo el panel de guardado nativo del navegador...`);
+      alert(`[PDF Direct Download] Error al generar: ${err.message || err}. Fallback a impresión nativa.`);
       window.print();
     } finally {
+      if (element) {
+        element.classList.remove('pdf-rendering');
+      }
       setIsGeneratingPDF(false);
     }
   };
