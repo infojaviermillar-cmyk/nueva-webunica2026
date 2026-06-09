@@ -15,7 +15,8 @@ import {
   AlertCircle,
   Zap,
   Lock,
-  ArrowRight
+  ArrowRight,
+  PenTool
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
@@ -126,7 +127,7 @@ export default function UserAccountPage() {
         {/* Mis Recursos: Checklists Section */}
         <div className="mb-12">
           <h2 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-widest ml-6">Mis Recursos y Herramientas</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Basic Checklist Link */}
             <div 
               onClick={() => router.push('/listas-de-verificacion-shopify-cro-basica')}
@@ -168,6 +169,24 @@ export default function UserAccountPage() {
                 </div>
               </div>
               <ArrowRight className={`w-5 h-5 ${hasProAccess ? 'text-slate-300 group-hover:text-emerald-500' : 'text-amber-300 group-hover:text-amber-500'} group-hover:translate-x-1 transition-all`} />
+            </div>
+
+            {/* Design Feedback Link */}
+            <div 
+              onClick={() => router.push('/mi-cuenta/proyectos')}
+              className="bg-zinc-950 text-white border-zinc-800 border rounded-[2.5rem] p-8 flex items-center justify-between hover:border-violet-500 hover:shadow-lg transition-all cursor-pointer group relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-violet-600/20 blur-[50px] rounded-full" />
+              <div className="flex items-center gap-6 relative z-10">
+                <div className="w-14 h-14 bg-white/10 text-white rounded-2xl flex items-center justify-center shrink-0">
+                  <PenTool className="w-7 h-7" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black leading-none mb-2">Revisión de Diseños</h3>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-violet-300">Feedback Interactivo</span>
+                </div>
+              </div>
+              <ArrowRight className="w-5 h-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all relative z-10" />
             </div>
           </div>
         </div>
