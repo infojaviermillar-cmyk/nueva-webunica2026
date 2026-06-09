@@ -10,6 +10,7 @@ export default function NuevoProyectoAdmin() {
   const [users, setUsers] = useState<{id: string, email: string}[]>([])
   const [loadingUsers, setLoadingUsers] = useState(true)
   const [submitting, setSubmitting] = useState(false)
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -93,15 +94,25 @@ export default function NuevoProyectoAdmin() {
                   name="image" 
                   accept="image/png, image/jpeg, image/webp"
                   required
+                  onChange={(e) => {
+                    const file = e.target.files?.[0]
+                    if (file) setSelectedFileName(file.name)
+                  }}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 />
                 <div className="pointer-events-none flex flex-col items-center gap-4">
                   <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
-                    <UploadCloud className="w-8 h-8 text-fuchsia-500" />
+                    <UploadCloud className={`w-8 h-8 ${selectedFileName ? 'text-emerald-500' : 'text-fuchsia-500'}`} />
                   </div>
                   <div>
-                    <p className="font-bold text-slate-700">Arrastra o haz clic para subir</p>
-                    <p className="text-xs text-slate-400 mt-1">Recomendado: Imagen vertical completa de la web.</p>
+                    {selectedFileName ? (
+                      <p className="font-bold text-emerald-600">{selectedFileName}</p>
+                    ) : (
+                      <>
+                        <p className="font-bold text-slate-700">Arrastra o haz clic para subir</p>
+                        <p className="text-xs text-slate-400 mt-1">Recomendado: Imagen vertical completa de la web.</p>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
