@@ -24,9 +24,12 @@ import {
   Briefcase,
   HelpCircle,
   Sparkles,
-  Calendar
+  Calendar,
+  UserPlus,
+  Loader2
 } from 'lucide-react';
 import { ALL_PLANS, PLANS_BY_CATEGORY, formatCLP, type Plan } from '@/lib/plans-catalog';
+import { createClientUserAccount } from '@/lib/user-actions';
 
 // Helper function to map lead's raw service interest keyword to recommended catalog plans
 function mapServiceInterestToPlan(serviceParam: string): Plan | undefined {
@@ -211,6 +214,10 @@ function CotizadorContent() {
   const [filteredLeads, setFilteredLeads] = useState<any[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  // --- User Creation State ---
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
+  const [userCreationResult, setUserCreationResult] = useState<{success: boolean, msg: string} | null>(null);
+
   useEffect(() => {
     const fetchLeads = async () => {
       try {
@@ -314,6 +321,19 @@ function CotizadorContent() {
     taxLabel = 'Impuestos (Exento)';
     totalLabel = 'TOTAL NETO';
   }
+
+  const handleCreateUser = async () => {
+    if (!clientInfo.email || !clientInfo.rut) {
+      setUserCreationResult({ success: false, msg: 'Falta email o RUT' });
+      return;
+    }
+    setIsCreatingUser(true);
+    setUserCreationResult(null);
+    const result = await createClientUserAccount(clientInfo.email, clientInfo.rut, clientInfo.name || 'Cliente');
+    setUserCreationResult({ success: result.success, msg: result.success ? 'Usuario creado' : result.error || 'Error' });
+    setIsCreatingUser(false);
+    setTimeout(() => setUserCreationResult(null), 5000);
+  };
 
   // --- Handlers ---
   const handleAddPlan = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -656,6 +676,24 @@ function CotizadorContent() {
                     </div>
                   </div>
                 ))}
+              </div>
+
+              {/* Add User Creation Button */}
+              <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={handleCreateUser}
+                  disabled={isCreatingUser || !clientInfo.email || !clientInfo.rut}
+                  className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-slate-800 disabled:opacity-50 transition-all"
+                >
+                  {isCreatingUser ? <Loader2 className="w-3 h-3 animate-spin" /> : <UserPlus className="w-3 h-3" />}
+                  Crear Usuario
+                </button>
+                {userCreationResult && (
+                  <span className={`text-[10px] font-bold ${userCreationResult.success ? 'text-emerald-500' : 'text-red-500'}`}>
+                    {userCreationResult.msg}
+                  </span>
+                )}
               </div>
             </div>
 
