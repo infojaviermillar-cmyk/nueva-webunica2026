@@ -10,7 +10,8 @@ import {
   Sparkles, 
   PlusCircle,
   TrendingUp,
-  FileText
+  FileText,
+  PenTool
 } from 'lucide-react';
 
 export default async function AdminDashboard() {
@@ -58,6 +59,15 @@ export default async function AdminDashboard() {
       count: "Herramienta",
       color: "bg-orange-50 border-orange-100",
       cta: "Ver Vista Pública"
+    },
+    {
+      title: "Revisión de Diseños",
+      desc: "Sube proyectos y diseños para que los clientes dejen su feedback visual.",
+      icon: <PenTool className="w-8 h-8 text-fuchsia-600" />,
+      href: "/admin/proyectos",
+      count: "Feedback",
+      color: "bg-fuchsia-50 border-fuchsia-100",
+      cta: "Gestionar Proyectos"
     }
   ];
 
