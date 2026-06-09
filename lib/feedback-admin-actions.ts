@@ -12,7 +12,7 @@ export async function getAllUsers() {
 
     return { 
       success: true, 
-      users: users.map(u => ({ id: u.id, email: u.email })) 
+      users: users.map(u => ({ id: u.id, email: u.email || 'Sin correo' })) 
     }
   } catch (error: any) {
     console.error('Error fetching users:', error)
