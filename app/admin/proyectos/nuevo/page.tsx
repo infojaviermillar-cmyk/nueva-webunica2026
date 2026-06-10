@@ -24,13 +24,36 @@ export default function NuevoProyectoAdmin() {
     loadUsers()
   }, [])
 
+  const fileToDataUrl = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = () => resolve(reader.result as string)
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+  }
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setSubmitting(true)
     
     try {
       const formData = new FormData(e.currentTarget)
-      const result = await createProjectWithDesign(formData)
+      
+      const imageFile = formData.get('image') as File
+      let base64Image = ''
+      if (imageFile && imageFile.size > 0) {
+        base64Image = await fileToDataUrl(imageFile)
+      }
+      
+      const payload = new FormData()
+      payload.append('userId', formData.get('userId') as string)
+      payload.append('title', formData.get('title') as string)
+      payload.append('imageBase64', base64Image)
+      payload.append('fileName', imageFile.name)
+      payload.append('fileType', imageFile.type)
+      
+      const result = await createProjectWithDesign(payload)
       
       if (result.success) {
         router.push('/admin/proyectos')

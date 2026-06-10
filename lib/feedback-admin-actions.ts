@@ -49,9 +49,11 @@ export async function createProjectWithDesign(formData: FormData) {
   try {
     const userId = formData.get('userId') as string
     const title = formData.get('title') as string
-    const imageFile = formData.get('image') as File
+    const imageBase64 = formData.get('imageBase64') as string
+    const originalFileName = formData.get('fileName') as string
+    const fileType = formData.get('fileType') as string
     
-    if (!userId || !title || !imageFile) {
+    if (!userId || !title || !imageBase64) {
       throw new Error('Faltan datos obligatorios')
     }
 
@@ -64,16 +66,16 @@ export async function createProjectWithDesign(formData: FormData) {
     }
 
     // 2. Upload image
-    const fileExt = imageFile.name.split('.').pop()
+    const fileExt = originalFileName.split('.').pop()
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
 
-    const arrayBuffer = await imageFile.arrayBuffer()
-    const fileBuffer = Buffer.from(arrayBuffer)
+    const base64Data = imageBase64.split(',')[1]
+    const fileBuffer = Buffer.from(base64Data, 'base64')
 
     const { error: uploadError } = await adminClient.storage
       .from('designs')
       .upload(fileName, fileBuffer, {
-        contentType: imageFile.type,
+        contentType: fileType,
         upsert: false
       })
 
