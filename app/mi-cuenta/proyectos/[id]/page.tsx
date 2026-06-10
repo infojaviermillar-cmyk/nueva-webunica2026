@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { ArrowLeft, Image as ImageIcon } from 'lucide-react'
 import DesignFeedbackClient from './DesignFeedbackClient'
 
-export default async function ProjectFeedbackPage({ params }: { params: { id: string } }) {
-  const { id } = params
-  const { success, project, design, error } = await getProjectWithDesign(id)
+export default async function ProjectFeedbackPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const { success, project, design, error, isAdmin } = await getProjectWithDesign(id)
 
   if (!success || !project) {
     return (

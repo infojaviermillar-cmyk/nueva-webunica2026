@@ -108,8 +108,11 @@ export async function getProjectWithDesign(projectId: string) {
 // 3. Get pins and comments for a design
 export async function getDesignPins(designId: string) {
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  const isAdmin = ADMIN_EMAILS.includes(user?.email || '')
+  const client = isAdmin ? getSupabaseAdmin() : supabase
   
-  const { data: pins, error } = await supabase
+  const { data: pins, error } = await client
     .from('design_pins')
     .select(`
       *,

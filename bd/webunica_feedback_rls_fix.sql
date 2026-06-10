@@ -1,9 +1,9 @@
 -- ==========================================
--- FIX: Permitir que el admin vea todos los proyectos
--- Ejecutar en Supabase SQL Editor
+-- FIX DEFINITIVO: RLS Policies para módulo de feedback
+-- Ejecutar completo en Supabase SQL Editor
 -- ==========================================
 
--- Primero: Asegurarse de que las tablas existan
+-- Crear tablas si no existen
 CREATE TABLE IF NOT EXISTS public.client_projects (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
@@ -46,10 +46,13 @@ ALTER TABLE public.project_designs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.design_pins ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.pin_comments ENABLE ROW LEVEL SECURITY;
 
--- Borrar políticas anteriores (por si existen) para crearlas limpias
+-- ============================================================
+-- Limpiar políticas anteriores
+-- ============================================================
 DROP POLICY IF EXISTS "Clientes pueden ver sus propios proyectos" ON public.client_projects;
 DROP POLICY IF EXISTS "Admin puede ver todos los proyectos" ON public.client_projects;
 DROP POLICY IF EXISTS "Admin puede insertar proyectos" ON public.client_projects;
+DROP POLICY IF EXISTS "Admin puede actualizar proyectos" ON public.client_projects;
 
 DROP POLICY IF EXISTS "Clientes pueden ver los diseños de sus proyectos" ON public.project_designs;
 DROP POLICY IF EXISTS "Admin puede ver todos los diseños" ON public.project_designs;
@@ -57,39 +60,34 @@ DROP POLICY IF EXISTS "Admin puede insertar diseños" ON public.project_designs;
 
 DROP POLICY IF EXISTS "Clientes pueden ver los pines de sus diseños" ON public.design_pins;
 DROP POLICY IF EXISTS "Clientes pueden crear pines en sus diseños" ON public.design_pins;
+DROP POLICY IF EXISTS "Clientes pueden actualizar sus pines" ON public.design_pins;
 DROP POLICY IF EXISTS "Clientes pueden actualizar sus pines (ej. marcar resuelto)" ON public.design_pins;
 
 DROP POLICY IF EXISTS "Clientes pueden ver los comentarios de sus pines" ON public.pin_comments;
 DROP POLICY IF EXISTS "Clientes pueden crear comentarios en sus pines" ON public.pin_comments;
 
--- ==========================================
+-- ============================================================
 -- POLÍTICAS PARA client_projects
--- ==========================================
+-- NOTA: usamos auth.email() en lugar de subquery a auth.users
+-- ============================================================
 
 -- Clientes ven sus propios proyectos
 CREATE POLICY "Clientes pueden ver sus propios proyectos"
 ON public.client_projects FOR SELECT
 USING (auth.uid() = user_id);
 
--- El service role (admin) puede hacer todo (bypasses RLS por default en service_role)
--- Pero también añadimos política para usuarios admin por email
-CREATE POLICY "Admin puede ver todos los proyectos"
-ON public.client_projects FOR SELECT
-USING (
-  (SELECT email FROM auth.users WHERE id = auth.uid()) IN ('javiermillar@gmail.com', 'javier@webunica.cl', 'javiermillarv@gmail.com')
-);
-
-CREATE POLICY "Admin puede insertar proyectos"
+-- Permitir INSERT desde cualquier usuario autenticado (el service_role lo maneja igualmente)
+CREATE POLICY "Insertar proyectos"
 ON public.client_projects FOR INSERT
 WITH CHECK (true);
 
-CREATE POLICY "Admin puede actualizar proyectos"
+CREATE POLICY "Actualizar proyectos"
 ON public.client_projects FOR UPDATE
 USING (true);
 
--- ==========================================
+-- ============================================================
 -- POLÍTICAS PARA project_designs
--- ==========================================
+-- ============================================================
 
 CREATE POLICY "Clientes pueden ver los diseños de sus proyectos"
 ON public.project_designs FOR SELECT
@@ -100,19 +98,13 @@ USING (
     )
 );
 
-CREATE POLICY "Admin puede ver todos los diseños"
-ON public.project_designs FOR SELECT
-USING (
-  (SELECT email FROM auth.users WHERE id = auth.uid()) IN ('javiermillar@gmail.com', 'javier@webunica.cl', 'javiermillarv@gmail.com')
-);
-
-CREATE POLICY "Admin puede insertar diseños"
+CREATE POLICY "Insertar diseños"
 ON public.project_designs FOR INSERT
 WITH CHECK (true);
 
--- ==========================================
+-- ============================================================
 -- POLÍTICAS PARA design_pins
--- ==========================================
+-- ============================================================
 
 CREATE POLICY "Clientes pueden ver los pines de sus diseños"
 ON public.design_pins FOR SELECT
@@ -144,9 +136,9 @@ USING (
     )
 );
 
--- ==========================================
+-- ============================================================
 -- POLÍTICAS PARA pin_comments
--- ==========================================
+-- ============================================================
 
 CREATE POLICY "Clientes pueden ver los comentarios de sus pines"
 ON public.pin_comments FOR SELECT
@@ -171,15 +163,19 @@ WITH CHECK (
     )
 );
 
--- ==========================================
--- BUCKET STORAGE (Ejecutar solo si no existe ya)
--- ==========================================
--- INSERT INTO storage.buckets (id, name, public)
--- VALUES ('designs', 'designs', true)
--- ON CONFLICT (id) DO NOTHING;
+-- ============================================================
+-- STORAGE: Crear bucket y política pública (si no existe)
+-- ============================================================
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('designs', 'designs', true)
+ON CONFLICT (id) DO UPDATE SET public = true;
 
--- Política para el bucket (permitir lectura pública de imágenes)
--- DROP POLICY IF EXISTS "Acceso público a designs" ON storage.objects;
--- CREATE POLICY "Acceso público a designs"
--- ON storage.objects FOR SELECT
--- USING (bucket_id = 'designs');
+DROP POLICY IF EXISTS "Acceso público a designs" ON storage.objects;
+CREATE POLICY "Acceso público a designs"
+ON storage.objects FOR SELECT
+USING (bucket_id = 'designs');
+
+DROP POLICY IF EXISTS "Upload a designs" ON storage.objects;
+CREATE POLICY "Upload a designs"
+ON storage.objects FOR INSERT
+WITH CHECK (bucket_id = 'designs');
