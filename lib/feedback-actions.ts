@@ -142,7 +142,10 @@ export async function createPin(designId: string, xPercent: number, yPercent: nu
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { success: false, error: 'Unauthorized' }
 
-  const { data: pin, error } = await supabase
+  const isAdmin = ADMIN_EMAILS.includes(user.email || '')
+  const client = isAdmin ? getSupabaseAdmin() : supabase
+
+  const { data: pin, error } = await client
     .from('design_pins')
     .insert({
       design_id: designId,
@@ -170,7 +173,10 @@ export async function createComment(pinId: string, content: string, attachmentUr
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { success: false, error: 'Unauthorized' }
 
-  const { data: comment, error } = await supabase
+  const isAdmin = ADMIN_EMAILS.includes(user.email || '')
+  const client = isAdmin ? getSupabaseAdmin() : supabase
+
+  const { data: comment, error } = await client
     .from('pin_comments')
     .insert({
       pin_id: pinId,
