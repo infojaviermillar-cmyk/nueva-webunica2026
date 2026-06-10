@@ -1,8 +1,6 @@
 import { getClientProjects } from '@/lib/feedback-actions'
-import { PenTool, ArrowRight, Clock, CheckCircle2 } from 'lucide-react'
+import { PenTool, ArrowRight, Clock, CheckCircle2, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
-import { supabase } from '@/lib/supabase/client'
 
 export default async function ProyectosPage() {
   const result = await getClientProjects()
@@ -21,6 +19,7 @@ export default async function ProyectosPage() {
   }
 
   const projects = result.projects || []
+  const isAdmin = result.isAdmin || false
 
   return (
     <div className="min-h-screen bg-slate-50 pt-[22vh] lg:pt-48 pb-20 font-sans">
@@ -31,12 +30,26 @@ export default async function ProyectosPage() {
           <Link href="/mi-cuenta" className="text-xs font-black uppercase tracking-widest text-violet-600 hover:text-violet-700 mb-6 inline-block">
             ← Volver a Mi Cuenta
           </Link>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tighter mb-4">
-            Revisión de <span className="text-violet-600">Diseños</span>
-          </h1>
+          <div className="flex items-center gap-4 mb-4">
+            <h1 className="text-4xl md:text-5xl font-black tracking-tighter">
+              Revisión de <span className="text-violet-600">Diseños</span>
+            </h1>
+            {isAdmin && (
+              <span className="px-3 py-1 bg-fuchsia-50 border border-fuchsia-200 text-fuchsia-600 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1">
+                <ShieldCheck className="w-3 h-3" /> Admin
+              </span>
+            )}
+          </div>
           <p className="text-slate-500 font-medium">
-            Revisa las propuestas de diseño, deja tus comentarios y aprueba los avances.
+            {isAdmin 
+              ? 'Vista de administrador — mostrando todos los proyectos de clientes.' 
+              : 'Revisa las propuestas de diseño, deja tus comentarios y aprueba los avances.'}
           </p>
+          {isAdmin && (
+            <Link href="/admin/proyectos/nuevo" className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-zinc-800 transition-colors">
+              + Nuevo Proyecto
+            </Link>
+          )}
         </div>
 
         {/* Project List */}

@@ -1,7 +1,10 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { getSupabaseAdmin } from '@/lib/supabase/admin'
 import { revalidatePath } from 'next/cache'
+
+const ADMIN_EMAILS = ['javiermillarv@gmail.com', 'javier@webunica.cl', 'javiermillar@gmail.com']
 
 export type ClientProject = {
   id: string
@@ -49,18 +52,21 @@ export async function getClientProjects() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { success: false, projects: [] }
 
-  const { data: projects, error } = await supabase
-    .from('client_projects')
-    .select('*')
-    .eq('user_id', user.id)
-    .order('created_at', { ascending: false })
+  const isAdmin = ADMIN_EMAILS.includes(user.email || '')
+
+  // Admins see all projects, clients only see their own
+  const query = isAdmin
+    ? getSupabaseAdmin().from('client_projects').select('*').order('created_at', { ascending: false })
+    : supabase.from('client_projects').select('*').eq('user_id', user.id).order('created_at', { ascending: false })
+
+  const { data: projects, error } = await query
 
   if (error) {
     console.error('Error fetching projects:', error)
     return { success: false, error: error.message, projects: [] }
   }
 
-  return { success: true, projects: projects as ClientProject[] }
+  return { success: true, projects: projects as ClientProject[], isAdmin }
 }
 
 // 2. Get a specific project with its latest design
@@ -70,20 +76,21 @@ export async function getProjectWithDesign(projectId: string) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return { success: false, error: 'Unauthorized' }
 
-  // Get project
-  const { data: project, error: projectError } = await supabase
-    .from('client_projects')
-    .select('*')
-    .eq('id', projectId)
-    .eq('user_id', user.id)
-    .single()
+  const isAdmin = ADMIN_EMAILS.includes(user.email || '')
+
+  // Admins bypass user_id filter using service role client
+  const client = isAdmin ? getSupabaseAdmin() : supabase
+  const query = client.from('client_projects').select('*').eq('id', projectId)
+  if (!isAdmin) query.eq('user_id', user.id)
+
+  const { data: project, error: projectError } = await query.single()
 
   if (projectError || !project) {
     return { success: false, error: 'Project not found' }
   }
 
   // Get latest design
-  const { data: designs, error: designError } = await supabase
+  const { data: designs } = await client
     .from('project_designs')
     .select('*')
     .eq('project_id', projectId)
@@ -93,7 +100,8 @@ export async function getProjectWithDesign(projectId: string) {
   return { 
     success: true, 
     project: project as ClientProject, 
-    design: designs && designs.length > 0 ? (designs[0] as ProjectDesign) : null 
+    design: designs && designs.length > 0 ? (designs[0] as ProjectDesign) : null,
+    isAdmin
   }
 }
 
