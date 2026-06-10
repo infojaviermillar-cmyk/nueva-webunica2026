@@ -195,3 +195,27 @@ export async function createComment(pinId: string, content: string, attachmentUr
   revalidatePath(`/mi-cuenta/proyectos`)
   return { success: true, comment }
 }
+
+// 6. Delete a pin (and its comments via cascade)
+export async function deletePin(pinId: string) {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { success: false, error: 'Unauthorized' }
+
+  const isAdmin = ADMIN_EMAILS.includes(user.email || '')
+  const client = isAdmin ? getSupabaseAdmin() : supabase
+
+  const { error } = await client
+    .from('design_pins')
+    .delete()
+    .eq('id', pinId)
+
+  if (error) {
+    console.error('Error deleting pin:', error)
+    return { success: false, error: error.message }
+  }
+
+  revalidatePath(`/mi-cuenta/proyectos`)
+  return { success: true }
+}

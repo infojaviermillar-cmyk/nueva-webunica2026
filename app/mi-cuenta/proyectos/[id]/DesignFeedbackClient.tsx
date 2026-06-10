@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
-import { ClientProject, ProjectDesign, DesignPin, PinComment, createPin, createComment } from '@/lib/feedback-actions'
-import { Send, CheckCircle2, MessageSquare, Loader2 } from 'lucide-react'
+import { ClientProject, ProjectDesign, DesignPin, PinComment, createPin, createComment, deletePin } from '@/lib/feedback-actions'
+import { Send, CheckCircle2, MessageSquare, Loader2, Trash2 } from 'lucide-react'
 
 type DesignFeedbackClientProps = {
   project: ClientProject
@@ -16,6 +16,7 @@ export default function DesignFeedbackClient({ project, design, initialPins }: D
   const [isCreatingPin, setIsCreatingPin] = useState(false)
   const [newCommentText, setNewCommentText] = useState('')
   const [isSubmittingComment, setIsSubmittingComment] = useState(false)
+  const [deletingPinId, setDeletingPinId] = useState<string | null>(null)
   
   const imageContainerRef = useRef<HTMLDivElement>(null)
   const sidebarRef = useRef<HTMLDivElement>(null)
@@ -57,6 +58,20 @@ export default function DesignFeedbackClient({ project, design, initialPins }: D
     }
     
     setIsCreatingPin(false)
+  }
+
+  const handleDeletePin = async (e: React.MouseEvent, pinId: string) => {
+    e.stopPropagation()
+    if (!confirm('¿Eliminar este marcador y todos sus comentarios?')) return
+    setDeletingPinId(pinId)
+    const result = await deletePin(pinId)
+    if (result.success) {
+      setPins(prev => prev.filter(p => p.id !== pinId))
+      if (activePinId === pinId) setActivePinId(null)
+    } else {
+      alert('Error al eliminar: ' + result.error)
+    }
+    setDeletingPinId(null)
   }
 
   const handleAddComment = async (e: React.FormEvent, pinId: string) => {
@@ -180,6 +195,14 @@ export default function DesignFeedbackClient({ project, design, initialPins }: D
                   {pin.status === 'resuelto' && (
                     <span className="ml-auto text-[9px] font-black uppercase tracking-widest text-emerald-500 bg-emerald-50 px-2 py-1 rounded-full">Resuelto</span>
                   )}
+                  <button
+                    onClick={(e) => handleDeletePin(e, pin.id)}
+                    disabled={deletingPinId === pin.id}
+                    className="ml-auto w-6 h-6 flex items-center justify-center rounded-full hover:bg-red-50 text-slate-400 hover:text-red-500 transition-colors disabled:opacity-50"
+                    title="Eliminar marcador"
+                  >
+                    {deletingPinId === pin.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <Trash2 className="w-3 h-3" />}
+                  </button>
                 </div>
 
                 {/* Comments List */}
