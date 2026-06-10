@@ -67,9 +67,13 @@ export async function createProjectWithDesign(formData: FormData) {
     const fileExt = imageFile.name.split('.').pop()
     const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
 
+    const arrayBuffer = await imageFile.arrayBuffer()
+    const fileBuffer = Buffer.from(arrayBuffer)
+
     const { error: uploadError } = await adminClient.storage
       .from('designs')
-      .upload(fileName, imageFile, {
+      .upload(fileName, fileBuffer, {
+        contentType: imageFile.type,
         upsert: false
       })
 

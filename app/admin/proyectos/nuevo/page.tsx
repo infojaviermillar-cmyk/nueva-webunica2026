@@ -28,13 +28,19 @@ export default function NuevoProyectoAdmin() {
     e.preventDefault()
     setSubmitting(true)
     
-    const formData = new FormData(e.currentTarget)
-    const result = await createProjectWithDesign(formData)
-    
-    if (result.success) {
-      router.push('/admin/proyectos')
-    } else {
-      alert('Error: ' + result.error)
+    try {
+      const formData = new FormData(e.currentTarget)
+      const result = await createProjectWithDesign(formData)
+      
+      if (result.success) {
+        router.push('/admin/proyectos')
+      } else {
+        alert('Error: ' + result.error)
+        setSubmitting(false)
+      }
+    } catch (err: any) {
+      console.error(err)
+      alert('Error inesperado de red o servidor: ' + err.message)
       setSubmitting(false)
     }
   }
