@@ -86,6 +86,9 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
     workerThreads: false,
     cpus: 1,
+    serverActions: {
+      bodySizeLimit: '10mb',
+    },
   },
   turbopack: {
     resolveAlias: {
