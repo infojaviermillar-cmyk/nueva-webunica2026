@@ -185,12 +185,6 @@ export default function Header({ domain = '' }: { domain?: string }) {
                           </Link>
                         </li>
                         <li>
-                          <Link href="/migrar-a-shopify" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
-                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Migrar a Shopify</span>
-                            <span className="text-[11px] text-zinc-500 font-medium">Desde Magento, WooCommerce, Jumpseller</span>
-                          </Link>
-                        </li>
-                        <li>
                           <Link href="/desarrollo-tienda-en-linea-woocommerce" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
                             <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Tienda WooCommerce</span>
                             <span className="text-[11px] text-zinc-500 font-medium">B2B y Catálogos complejos</span>
@@ -298,6 +292,12 @@ export default function Header({ domain = '' }: { domain?: string }) {
                           <Link href="/integracion-fintoc-shopify" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
                             <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Fintoc Shopify</span>
                             <span className="text-[11px] text-zinc-500 font-medium">Pagos por transferencia</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/migrar-a-shopify" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Migrar a Shopify</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Desde Magento, WooCommerce, Jumpseller</span>
                           </Link>
                         </li>
                       </ul>
