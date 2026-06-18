@@ -8,9 +8,17 @@ import LeadButton from '@/components/ui/lead-button';
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('Todas');
 
-  const categories = ['Todas', 'Shopify', 'SaaS', 'PYMES'];
+  const categories = ['Todas', 'Shopify', 'Migración', 'SaaS', 'PYMES'];
 
   const projects = [
+    {
+      title: "Vicca.cl",
+      category: "Migración",
+      description: "Migración completa de Magento a Shopify vía API. Traspaso íntegro de catálogo, clientes, historial de pedidos y configuraciones sin perder datos ni tiempo de operación.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fvicca.cl%2F?w=1200",
+      link: "https://vicca.cl/",
+      tags: ["Migración", "Magento → Shopify", "API", "Ecommerce"]
+    },
     {
       title: "Tecno-Mobile",
       category: "Shopify",
@@ -233,8 +241,8 @@ export default function PortfolioPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/20 to-transparent" />
                   <div className="absolute top-6 left-6 flex gap-2">
-                    <span className="px-4 py-1.5 bg-violet-600/90 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest rounded-full border border-white/10">
-                      {project.category}
+                    <span className={`px-4 py-1.5 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest rounded-full border border-white/10 ${project.category === 'Migración' ? 'bg-amber-500/90' : 'bg-violet-600/90'}`}>
+                      {project.category === 'Migración' ? '⚡ Migración' : project.category}
                     </span>
                   </div>
                 </div>
@@ -243,7 +251,7 @@ export default function PortfolioPage() {
                   <div>
                     <div className="flex flex-wrap gap-2 mb-6">
                       {project.tags?.map(tag => (
-                        <span key={tag} className="text-[10px] font-bold uppercase tracking-wider text-violet-600 bg-violet-50 border border-violet-100 px-3 py-1 rounded-full">
+                        <span key={tag} className={`text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${project.category === 'Migración' ? 'text-amber-600 bg-amber-50 border-amber-100' : 'text-violet-600 bg-violet-50 border-violet-100'}`}>
                           {tag}
                         </span>
                       ))}
