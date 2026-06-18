@@ -185,6 +185,12 @@ export default function Header({ domain = '' }: { domain?: string }) {
                           </Link>
                         </li>
                         <li>
+                          <Link href="/migrar-a-shopify" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Migrar a Shopify</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Desde Magento, WooCommerce, Jumpseller</span>
+                          </Link>
+                        </li>
+                        <li>
                           <Link href="/desarrollo-tienda-en-linea-woocommerce" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
                             <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Tienda WooCommerce</span>
                             <span className="text-[11px] text-zinc-500 font-medium">B2B y Catálogos complejos</span>
@@ -508,6 +514,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/desarrollo-tiendas-shopify-en-chile" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       Tiendas Shopify
+                    </Link>
+                    <Link href="/migrar-a-shopify" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      Migrar a Shopify
                     </Link>
                     <Link href="/desarrollo-tienda-en-linea-woocommerce" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />

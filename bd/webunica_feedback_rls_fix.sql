@@ -53,6 +53,9 @@ DROP POLICY IF EXISTS "Clientes pueden ver sus propios proyectos" ON public.clie
 DROP POLICY IF EXISTS "Admin puede ver todos los proyectos" ON public.client_projects;
 DROP POLICY IF EXISTS "Admin puede insertar proyectos" ON public.client_projects;
 DROP POLICY IF EXISTS "Admin puede actualizar proyectos" ON public.client_projects;
+DROP POLICY IF EXISTS "Insertar proyectos" ON public.client_projects;
+DROP POLICY IF EXISTS "Actualizar proyectos" ON public.client_projects;
+DROP POLICY IF EXISTS "Insertar diseños" ON public.project_designs;
 
 DROP POLICY IF EXISTS "Clientes pueden ver los diseños de sus proyectos" ON public.project_designs;
 DROP POLICY IF EXISTS "Admin puede ver todos los diseños" ON public.project_designs;

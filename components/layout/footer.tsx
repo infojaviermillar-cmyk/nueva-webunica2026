@@ -68,6 +68,11 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/migrar-a-shopify" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Migrar a Shopify
+                  </Link>
+                </li>
+                <li>
                   <Link href="/desarrollo-paginas-web-pymes-chile" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
                     Páginas Web PYMES
                   </Link>
