@@ -244,7 +244,7 @@ export default function MigrarAShopifyPage() {
               <h2 className="text-3xl lg:text-6xl font-black tracking-tighter uppercase leading-[0.9] mb-4">
                 Nuestro Proceso de <span className="text-violet-400 italic font-serif lowercase font-light">Migración</span>
               </h2>
-              <p className="text-zinc-400 font-light max-w-xl mx-auto">Un proceso probado en +80 proyectos para garantizar cero pérdida de datos.</p>
+              <p className="text-zinc-400 font-light max-w-xl mx-auto">Un proceso estructurado que garantiza cero pérdida de datos.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
