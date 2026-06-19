@@ -45,6 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/migrar-de-magento-a-shopify',
     '/migrar-de-jumpseller-a-shopify',
     '/migrar-de-woocommerce-a-shopify',
+    '/shopify-inteligencia-artificial',
     '/medios-de-transporte-shopify',
     '/corregir-errores-pagina-web-wordpress',
     '/soporte-mensual-sitio-web-wordpress',

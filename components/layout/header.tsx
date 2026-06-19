@@ -300,6 +300,12 @@ export default function Header({ domain = '' }: { domain?: string }) {
                             <span className="text-[11px] text-zinc-500 font-medium">Desde Magento, WooCommerce, Jumpseller</span>
                           </Link>
                         </li>
+                        <li>
+                          <Link href="/shopify-inteligencia-artificial" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Shopify + IA</span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Productos, textos y ofertas con IA</span>
+                          </Link>
+                        </li>
                       </ul>
                     </div>
 
