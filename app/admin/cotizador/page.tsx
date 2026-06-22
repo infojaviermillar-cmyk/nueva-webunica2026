@@ -293,6 +293,65 @@ function CotizadorContent() {
 
   const [copiedWhatsApp, setCopiedWhatsApp] = useState(false);
 
+  // --- Inline editing ---
+  const [editingCell, setEditingCell] = useState<{ planId: string; field: string } | null>(null);
+
+  const updatePlanField = (planId: string, field: string, value: string | number | string[]) => {
+    setSelectedPlans(prev =>
+      prev.map(p => {
+        if (p.id !== planId) return p;
+        if (field.startsWith('features.')) {
+          const idx = parseInt(field.split('.')[1]);
+          const newFeatures = [...p.features];
+          newFeatures[idx] = value as string;
+          return { ...p, features: newFeatures };
+        }
+        return { ...p, [field]: value };
+      })
+    );
+  };
+
+  const EditableText = ({
+    planId, field, value, className, multiline = false, numeric = false,
+  }: {
+    planId: string; field: string; value: string; className?: string;
+    multiline?: boolean; numeric?: boolean;
+  }) => {
+    const isEditing = editingCell?.planId === planId && editingCell?.field === field;
+    const [draft, setDraft] = useState(value);
+
+    const commit = () => {
+      const parsed = numeric ? Number(draft.replace(/\D/g, '')) || 0 : draft;
+      updatePlanField(planId, field, parsed);
+      setEditingCell(null);
+    };
+
+    if (isEditing) {
+      const shared = {
+        className: `w-full bg-violet-50 border border-violet-300 rounded px-2 py-1 outline-none text-violet-900 font-semibold resize-none ${className ?? ''}`,
+        value: draft,
+        onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setDraft(e.target.value),
+        onBlur: commit,
+        onKeyDown: (e: React.KeyboardEvent) => { if (e.key === 'Enter' && !multiline) { e.preventDefault(); commit(); } if (e.key === 'Escape') setEditingCell(null); },
+        autoFocus: true,
+      };
+      return multiline
+        ? <textarea rows={3} {...shared as React.TextareaHTMLAttributes<HTMLTextAreaElement>} />
+        : <input type={numeric ? 'number' : 'text'} {...shared as React.InputHTMLAttributes<HTMLInputElement>} />;
+    }
+
+    return (
+      <span
+        onClick={() => { setDraft(value); setEditingCell({ planId, field }); }}
+        className={`cursor-text hover:bg-violet-50 hover:text-violet-700 rounded px-1 -mx-1 transition-colors group/edit relative print:hover:bg-transparent print:cursor-default ${className ?? ''}`}
+        title="Clic para editar"
+      >
+        {value || <span className="italic text-slate-300">—</span>}
+        <span className="absolute -top-2 -right-2 text-[8px] bg-violet-100 text-violet-500 px-1 rounded opacity-0 group-hover/edit:opacity-100 print:hidden transition-opacity">✏</span>
+      </span>
+    );
+  };
+
   // --- Calculations ---
   const subtotal = selectedPlans.reduce((acc, p) => acc + p.price, 0);
   const discountAmount = Math.round(subtotal * (discountPercent / 100));
@@ -1088,16 +1147,20 @@ function CotizadorContent() {
                           <tr key={plan.id} className="group align-top">
                             <td className="px-5 py-4">
                               <div className="font-extrabold text-slate-900 print:text-zinc-950 text-xs">
-                                {plan.name}
+                                <EditableText planId={plan.id} field="name" value={plan.name} className="text-xs font-extrabold text-slate-900" />
                               </div>
                               <div className="text-[10px] font-black text-violet-600 print:text-zinc-700 uppercase tracking-widest mt-0.5">
-                                {plan.highlight}
+                                <EditableText planId={plan.id} field="highlight" value={plan.highlight} className="text-[10px] font-black text-violet-600 uppercase tracking-widest" />
                               </div>
                               <p className="text-[11px] text-slate-500 font-medium mt-1 leading-relaxed max-w-[200px]">
-                                {plan.desc}
+                                <EditableText planId={plan.id} field="desc" value={plan.desc} multiline className="text-[11px] font-medium" />
                               </p>
+                              <div className="mt-1.5 flex items-center gap-1 print:hidden">
+                                <span className="text-[10px] text-slate-400 font-bold">⏱</span>
+                                <EditableText planId={plan.id} field="deliveryDays" value={plan.deliveryDays ?? ''} className="text-[10px] text-slate-500 font-extrabold uppercase tracking-widest" />
+                              </div>
                               {plan.deliveryDays && (
-                                <div className="mt-1.5 inline-block px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-extrabold uppercase tracking-widest print:bg-zinc-100 print:text-zinc-600">
+                                <div className="mt-1 hidden print:inline-block px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-extrabold uppercase tracking-widest print:bg-zinc-100 print:text-zinc-600">
                                   ⏱ Plazo: {plan.deliveryDays}
                                 </div>
                               )}
@@ -1105,25 +1168,39 @@ function CotizadorContent() {
                             <td className="px-5 py-4 hidden md:table-cell print:table-cell">
                               <ul className="space-y-1">
                                 {plan.features.map((f, i) => (
-                                  <li
-                                    key={i}
-                                    className="flex items-start gap-1.5 text-[10px] text-slate-600 font-medium print:text-zinc-700"
-                                  >
-                                    <span className="text-emerald-500 shrink-0 font-bold print:text-zinc-800">✓</span>
-                                    {f}
+                                  <li key={i} className="flex items-start gap-1.5 text-[10px] text-slate-600 font-medium print:text-zinc-700">
+                                    <span className="text-emerald-500 shrink-0 font-bold print:text-zinc-800 mt-0.5">✓</span>
+                                    <EditableText
+                                      planId={plan.id}
+                                      field={`features.${i}`}
+                                      value={f}
+                                      className="text-[10px] text-slate-600 font-medium flex-1"
+                                    />
                                   </li>
                                 ))}
+                                <li>
+                                  <button
+                                    onClick={() => updatePlanField(plan.id, 'features', [...plan.features, 'Nueva característica'] as any)}
+                                    className="text-[9px] text-violet-400 hover:text-violet-600 font-black uppercase tracking-widest mt-1 print:hidden"
+                                  >
+                                    + agregar ítem
+                                  </button>
+                                </li>
                               </ul>
                             </td>
                             <td className="px-5 py-4 text-right">
-                              <div className="font-extrabold text-slate-900 print:text-zinc-950">
+                              <div className="font-extrabold text-slate-900 print:text-zinc-950 text-right">
+                                <EditableText
+                                  planId={plan.id}
+                                  field="price"
+                                  value={String(plan.price)}
+                                  numeric
+                                  className="text-right font-extrabold text-slate-900 w-28"
+                                />
+                              </div>
+                              <div className="text-[10px] text-slate-400 font-semibold mt-0.5">
                                 {formatCLP(plan.price)}
                               </div>
-                              {plan.originalPrice && (
-                                <div className="text-[10px] text-slate-400 line-through font-semibold">
-                                  {formatCLP(plan.originalPrice)}
-                                </div>
-                              )}
                             </td>
                             <td className="px-3 py-4 print:hidden text-center">
                               <button
