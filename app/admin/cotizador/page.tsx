@@ -462,63 +462,78 @@ function CotizadorContent() {
     if (selectedPlans.length === 0) return;
     setIsGeneratingPDF(true);
 
-    let element: HTMLElement | null = null;
     try {
-      element = document.getElementById('printable-quote-area');
-      if (!element) {
-        throw new Error('Printable area element not found');
-      }
-
-      element.classList.add('pdf-rendering');
-      
-      // Allow CSS changes to apply
-      await new Promise(resolve => setTimeout(resolve, 150));
-
       const { default: html2canvas } = await import('html2canvas');
       const { jsPDF } = await import('jspdf');
 
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'letter' });
+      const pdfW = pdf.internal.pageSize.getWidth();
+      const pdfH = pdf.internal.pageSize.getHeight();
+      const MARGIN = 32;
+      const FOOTER_H = 20;
+      const CONTENT_W = pdfW - MARGIN * 2;
+      const CONTENT_H = pdfH - MARGIN * 2 - FOOTER_H;
+
+      const renderSlices = async (elementId: string) => {
+        const el = document.getElementById(elementId);
+        if (!el) return [];
+
+        el.classList.add('pdf-rendering');
+        await new Promise(r => setTimeout(r, 150));
+
+        const canvas = await html2canvas(el, { scale: 2, useCORS: true, logging: false });
+        el.classList.remove('pdf-rendering');
+
+        const pxPerPt = canvas.width / CONTENT_W;
+        const contentHPx = CONTENT_H * pxPerPt;
+        const pagesNeeded = Math.ceil(canvas.height / contentHPx);
+        const slices: { imgData: string; h: number }[] = [];
+
+        for (let p = 0; p < pagesNeeded; p++) {
+          const srcY = Math.round(p * contentHPx);
+          const sliceHPx = Math.min(Math.round(contentHPx), canvas.height - srcY);
+
+          const sliceCanvas = document.createElement('canvas');
+          sliceCanvas.width = canvas.width;
+          sliceCanvas.height = sliceHPx;
+          const ctx = sliceCanvas.getContext('2d')!;
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
+          ctx.drawImage(canvas, 0, srcY, canvas.width, sliceHPx, 0, 0, canvas.width, sliceHPx);
+
+          slices.push({ imgData: sliceCanvas.toDataURL('image/jpeg', 0.98), h: sliceHPx / pxPerPt });
+        }
+
+        return slices;
+      };
+
+      const p1Slices = await renderSlices('printable-quote-p1');
+      const p2Slices = showSecondPage ? await renderSlices('printable-quote-p2') : [];
+      const allSlices = [...p1Slices, ...p2Slices];
+      const totalPages = allSlices.length;
+
+      allSlices.forEach((slice, i) => {
+        if (i > 0) pdf.addPage();
+        pdf.addImage(slice.imgData, 'JPEG', MARGIN, MARGIN, CONTENT_W, slice.h);
+
+        pdf.setFontSize(8);
+        pdf.setTextColor(160, 160, 160);
+        pdf.text(
+          `Página ${i + 1} de ${totalPages}  ·  ${quoteNumber}  ·  webunica.cl`,
+          pdfW / 2,
+          pdfH - 8,
+          { align: 'center' }
+        );
       });
-
-      const imgData = canvas.toDataURL('image/jpeg', 0.98);
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'pt',
-        format: 'letter'
-      });
-
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      
-      let imgWidth = pdfWidth;
-      let imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-      // Escalar la imagen para que encaje perfectamente en una sola página si es más larga
-      if (imgHeight > pdfHeight) {
-        const ratio = pdfHeight / imgHeight;
-        imgHeight = pdfHeight;
-        imgWidth = imgWidth * ratio;
-      }
-
-      // Centrar horizontalmente si hubo que achicar a lo ancho
-      const xOffset = (pdfWidth - imgWidth) / 2;
-
-      pdf.addImage(imgData, 'JPEG', xOffset, 0, imgWidth, imgHeight);
 
       const filename = `Cotizacion_${quoteNumber}_${(clientInfo.company || clientInfo.name || 'Cliente').replace(/\s+/g, '_')}.pdf`;
       pdf.save(filename);
-      
+
     } catch (err: any) {
       console.error('Error generating PDF:', err);
-      alert(`[PDF Direct Download] Error al generar: ${err.message || err}. Fallback a impresión nativa.`);
+      alert(`Error al generar PDF: ${err.message || err}. Fallback a impresión nativa.`);
       window.print();
     } finally {
-      if (element) {
-        element.classList.remove('pdf-rendering');
-      }
       setIsGeneratingPDF(false);
     }
   };
@@ -973,8 +988,8 @@ function CotizadorContent() {
           {/* ========================================================= */}
           <div id="printable-quote-area" className="lg:col-span-7 space-y-8 print:space-y-0 print:w-full print:mx-0 print:my-0">
             
-            <div className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0">
-            
+            <div id="printable-quote-p1" className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0">
+
             {/* Encabezado Corporativo Premium */}
             <div className="bg-zinc-950 px-8 py-7 flex flex-col sm:flex-row justify-between items-start gap-6 border-b print:bg-white print:border-b-2 print:border-zinc-900 print:px-0">
               <div>
@@ -1051,7 +1066,7 @@ function CotizadorContent() {
                 <div className="border border-slate-200 rounded-xl overflow-hidden print:border-zinc-300">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-slate-50 border-b border-slate-200 text-[9px] font-black uppercase tracking-widest text-slate-400 print:bg-zinc-100 print:border-zinc-300 print:text-zinc-600">
+                      <tr className="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase tracking-widest text-slate-400 print:bg-zinc-100 print:border-zinc-300 print:text-zinc-600">
                         <th className="px-5 py-3">Plan / Servicio</th>
                         <th className="px-5 py-3 hidden md:table-cell print:table-cell">Incluye / Entregables</th>
                         <th className="px-5 py-3 text-right whitespace-nowrap">Monto Neto</th>
@@ -1075,14 +1090,14 @@ function CotizadorContent() {
                               <div className="font-extrabold text-slate-900 print:text-zinc-950 text-xs">
                                 {plan.name}
                               </div>
-                              <div className="text-[8px] font-black text-violet-600 print:text-zinc-700 uppercase tracking-widest mt-0.5">
+                              <div className="text-[10px] font-black text-violet-600 print:text-zinc-700 uppercase tracking-widest mt-0.5">
                                 {plan.highlight}
                               </div>
                               <p className="text-[11px] text-slate-500 font-medium mt-1 leading-relaxed max-w-[200px]">
                                 {plan.desc}
                               </p>
                               {plan.deliveryDays && (
-                                <div className="mt-1.5 inline-block px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded text-[8px] font-extrabold uppercase tracking-widest print:bg-zinc-100 print:text-zinc-600">
+                                <div className="mt-1.5 inline-block px-1.5 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-extrabold uppercase tracking-widest print:bg-zinc-100 print:text-zinc-600">
                                   ⏱ Plazo: {plan.deliveryDays}
                                 </div>
                               )}
@@ -1222,7 +1237,7 @@ function CotizadorContent() {
           {/* SEGUNDA PÁGINA: ANEXO DE COSTOS (OPTIONAL / CONDITIONAL)  */}
           {/* ========================================================= */}
           {showSecondPage && (
-            <div className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0 print:break-before-page html2pdf__page-break">
+            <div id="printable-quote-p2" className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0 print:break-before-page html2pdf__page-break">
               
               {/* Encabezado Corporativo Página 2 */}
               <div className="bg-zinc-950 px-8 py-6 flex flex-col sm:flex-row justify-between items-start gap-4 border-b print:bg-white print:border-b-2 print:border-zinc-900 print:px-0 print:py-4">
@@ -1262,7 +1277,7 @@ function CotizadorContent() {
                 <div className="border border-slate-200 rounded-xl overflow-hidden print:border-zinc-300">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-slate-50 border-b border-slate-200 text-[9px] font-black uppercase tracking-widest text-slate-400 print:bg-zinc-100 print:border-zinc-300 print:text-zinc-600">
+                      <tr className="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase tracking-widest text-slate-400 print:bg-zinc-100 print:border-zinc-300 print:text-zinc-600">
                         <th className="px-5 py-3">Ítem / Servicio Externo</th>
                         <th className="px-5 py-3">Categoría</th>
                         <th className="px-5 py-3">Periodicidad</th>
@@ -1289,7 +1304,7 @@ function CotizadorContent() {
                                 </p>
                               </td>
                               <td className="px-5 py-3.5">
-                                <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider ${
+                                <span className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
                                   item.category === 'Shopify' 
                                     ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' 
                                     : item.category === 'Logística'
@@ -1339,7 +1354,7 @@ function CotizadorContent() {
               </div>
 
               {/* Footer Corporativo Página 2 */}
-              <div className="bg-slate-50 text-center py-4 border-t border-slate-100 text-[9px] text-slate-400 font-semibold print:bg-white print:text-zinc-500 print:border-t-2 print:border-zinc-200">
+              <div className="bg-slate-50 text-center py-4 border-t border-slate-100 text-[10px] text-slate-400 font-semibold print:bg-white print:text-zinc-500 print:border-t-2 print:border-zinc-200">
                 <p>Webunica Chile EIRL · RUT 76.371.864-6 · consultas@webunica.cl · www.webunica.cl</p>
               </div>
 
