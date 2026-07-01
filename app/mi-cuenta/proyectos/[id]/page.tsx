@@ -2,7 +2,7 @@ import { getProjectPhasesWithTasks } from '@/lib/project-actions'
 import { createClient } from '@/lib/supabase/server'
 import { getSupabaseAdmin } from '@/lib/supabase/admin'
 import Link from 'next/link'
-import { ArrowLeft, ExternalLink, Globe, Layout, Palette, PenTool, DollarSign } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Globe, Layout, Palette, PenTool, DollarSign, Clock } from 'lucide-react'
 import TaskCard from '@/components/client/task-card'
 
 export const dynamic = 'force-dynamic'
