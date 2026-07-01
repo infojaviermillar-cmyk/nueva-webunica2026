@@ -176,8 +176,8 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
               )}
             </div>
 
-            {/* Fechas */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Fechas y Precio */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div>
                 <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">
                   Fecha de Inicio
@@ -195,6 +195,17 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
                 <input
                   type="date"
                   name="deadline"
+                  className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 focus:outline-none focus:border-violet-400 transition-all text-slate-700 font-medium"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">
+                  Valor Total (CLP)
+                </label>
+                <input
+                  type="number"
+                  name="totalPrice"
+                  placeholder="Ej: 1500000"
                   className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 focus:outline-none focus:border-violet-400 transition-all text-slate-700 font-medium"
                 />
               </div>

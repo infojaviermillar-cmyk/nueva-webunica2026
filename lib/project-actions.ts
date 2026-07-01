@@ -50,6 +50,7 @@ export async function createProjectWithTemplate(formData: FormData) {
     const deadline = formData.get('deadline') as string | null
     const stagingUrl = formData.get('stagingUrl') as string | null
     const description = formData.get('description') as string | null
+    const totalPrice = formData.get('totalPrice') ? parseFloat(formData.get('totalPrice') as string) : 0
 
     if (!userId || !title) throw new Error('Faltan datos obligatorios: userId y title')
 
@@ -70,6 +71,7 @@ export async function createProjectWithTemplate(formData: FormData) {
         staging_url: stagingUrl || null,
         description: description || null,
         progress: 0,
+        total_price: totalPrice,
       })
       .select()
       .single()
@@ -101,6 +103,8 @@ export async function createProjectWithTemplate(formData: FormData) {
         description: t.description,
         status: 'pendiente',
         sort_order: idx,
+        assigned_to: t.assigned_to,
+        detailed_info: t.detailed_info,
       }))
 
       const { error: tasksError } = await adminClient.from('project_tasks').insert(tasks)
@@ -180,6 +184,7 @@ export async function updateProject(
     progress?: number
     design_url?: string
     design_tool?: string
+    total_price?: number
   }
 ) {
   try {

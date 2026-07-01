@@ -2,7 +2,8 @@ import { getProjectPhasesWithTasks } from '@/lib/project-actions'
 import { createClient } from '@/lib/supabase/server'
 import { getSupabaseAdmin } from '@/lib/supabase/admin'
 import Link from 'next/link'
-import { ArrowLeft, CheckCircle2, Circle, Clock, ExternalLink, Globe, Layout, Palette, PenTool } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Globe, Layout, Palette, PenTool, Figma, DollarSign } from 'lucide-react'
+import TaskCard from '@/components/client/task-card'
 
 export const dynamic = 'force-dynamic'
 
@@ -91,6 +92,9 @@ export default async function ClientProyectoDetailPage({
   const phase0 = (phases as any[]).find(p => p.phase_number === 0)
   const phase1 = (phases as any[]).find(p => p.phase_number === 1)
   const devPhases = (phases as any[]).filter(p => p.phase_number >= 2)
+
+  const paymentPerPhase = project.total_price ? Math.round(project.total_price * 0.25) : 0
+  const formattedPayment = new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(paymentPerPhase)
 
   return (
     <div className="min-h-screen bg-[#fafaf9] font-sans antialiased text-[#1c1917] pt-[22vh] lg:pt-48 pb-24">
@@ -221,35 +225,24 @@ export default async function ClientProyectoDetailPage({
               <Palette className="w-32 h-32 text-amber-500" />
             </div>
             <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex items-center justify-between mb-2">
                 <span className="px-3 py-1 bg-amber-200 text-amber-800 rounded-lg text-[10px] font-black uppercase tracking-widest">
                   Fase 0 — Requiere tu acción
                 </span>
+                {paymentPerPhase > 0 && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white text-slate-800 rounded-full text-xs font-bold shadow-sm">
+                    <DollarSign className="w-3 h-3 text-emerald-500" />
+                    Pago: {formattedPayment}
+                  </span>
+                )}
               </div>
               <h2 className="text-2xl font-black text-slate-900 mb-2">{phase0.title}</h2>
               <p className="text-slate-600 mb-8 max-w-2xl">{phase0.subtitle}</p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(phase0.tasks || []).map((task: any) => {
-                  const isDone = task.status === 'completado'
-                  return (
-                    <div key={task.id} className="flex items-start gap-3 bg-white p-4 rounded-xl border border-amber-100 shadow-sm">
-                      <span className="mt-0.5 shrink-0">
-                        {isDone ? (
-                          <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                        ) : (
-                          <Circle className="w-5 h-5 text-amber-300" />
-                        )}
-                      </span>
-                      <div>
-                        <span className={`block text-sm font-bold ${isDone ? 'line-through text-slate-400' : 'text-slate-800'}`}>
-                          {task.title}
-                        </span>
-                        <span className="block text-xs text-slate-500 mt-0.5">{task.description}</span>
-                      </div>
-                    </div>
-                  )
-                })}
+                {(phase0.tasks || []).map((task: any) => (
+                  <TaskCard key={task.id} task={task} />
+                ))}
               </div>
             </div>
           </div>
@@ -260,10 +253,16 @@ export default async function ClientProyectoDetailPage({
           <div className="bg-white border-2 border-pink-100 hover:border-pink-300 rounded-3xl overflow-hidden mb-12 transition-all shadow-sm">
             <div className="bg-gradient-to-r from-pink-50 to-rose-50 p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-pink-100">
               <div>
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-3 mb-2 flex-wrap">
                   <span className="px-3 py-1 bg-pink-200 text-pink-800 rounded-lg text-[10px] font-black uppercase tracking-widest">
                     Fase 1
                   </span>
+                  {paymentPerPhase > 0 && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white text-slate-800 rounded-full text-xs font-bold shadow-sm">
+                      <DollarSign className="w-3 h-3 text-emerald-500" />
+                      Pago: {formattedPayment}
+                    </span>
+                  )}
                 </div>
                 <h2 className="text-2xl font-black text-slate-900 mb-1">{phase1.title}</h2>
                 <p className="text-slate-500">{phase1.subtitle}</p>
@@ -278,23 +277,9 @@ export default async function ClientProyectoDetailPage({
             </div>
 
             <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-3">
-              {(phase1.tasks || []).map((task: any) => {
-                const isDone = task.status === 'completado'
-                const isProgress = task.status === 'en_progreso'
-                return (
-                  <div key={task.id} className={`flex items-start gap-3 p-3 rounded-xl ${isDone ? 'bg-emerald-50' : isProgress ? 'bg-blue-50' : 'bg-slate-50'}`}>
-                    <span className="mt-0.5 shrink-0">
-                      {isDone ? <CheckCircle2 className="w-5 h-5 text-emerald-500" /> : isProgress ? <Clock className="w-5 h-5 text-blue-500" /> : <Circle className="w-5 h-5 text-slate-300" />}
-                    </span>
-                    <div className="flex-1">
-                      <span className={`block text-sm font-semibold leading-snug ${isDone ? 'line-through text-emerald-700' : 'text-slate-800'}`}>
-                        {task.title}
-                      </span>
-                      {task.description && <span className="block text-xs text-slate-400 mt-0.5">{task.description}</span>}
-                    </div>
-                  </div>
-                )
-              })}
+              {(phase1.tasks || []).map((task: any) => (
+                <TaskCard key={task.id} task={task} />
+              ))}
             </div>
           </div>
         )}
@@ -325,6 +310,12 @@ export default async function ClientProyectoDetailPage({
                           {badgeLabel}
                         </span>
                       )}
+                      {paymentPerPhase > 0 && phase.phase_number < 4 && (
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-800 rounded-full text-xs font-bold">
+                          <DollarSign className="w-3 h-3 text-emerald-500" />
+                          Pago: {formattedPayment}
+                        </span>
+                      )}
                     </div>
                     {phase.subtitle && (
                       <p className="text-sm text-slate-400">{phase.subtitle}</p>
@@ -340,38 +331,9 @@ export default async function ClientProyectoDetailPage({
 
                 {/* Tasks Grid */}
                 <div className="p-7 grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {phaseTasks.map((task: any) => {
-                    const isDone = task.status === 'completado'
-                    const isProgress = task.status === 'en_progreso'
-                    return (
-                      <div
-                        key={task.id}
-                        className={`flex items-start gap-3 p-3 rounded-xl ${
-                          isDone ? 'bg-emerald-50' : isProgress ? 'bg-blue-50' : 'bg-[#fafaf9]'
-                        }`}
-                      >
-                        <span className="mt-0.5 shrink-0">
-                          {isDone ? (
-                            <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                          ) : isProgress ? (
-                            <Clock className="w-5 h-5 text-blue-500" />
-                          ) : (
-                            <Circle className="w-5 h-5 text-slate-300" />
-                          )}
-                        </span>
-                        <div className="flex-1">
-                          <span className={`block text-sm font-semibold leading-snug ${
-                            isDone ? 'line-through text-emerald-700' : 'text-slate-800'
-                          }`}>
-                            {task.title}
-                          </span>
-                          {task.description && (
-                            <span className="block text-xs text-slate-400 mt-0.5">{task.description}</span>
-                          )}
-                        </div>
-                      </div>
-                    )
-                  })}
+                  {phaseTasks.map((task: any) => (
+                    <TaskCard key={task.id} task={task} />
+                  ))}
                 </div>
               </div>
             )
