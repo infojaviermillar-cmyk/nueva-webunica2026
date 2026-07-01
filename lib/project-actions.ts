@@ -1,0 +1,249 @@
+'use server'
+
+import { getSupabaseAdmin } from '@/lib/supabase/admin'
+import { createClient } from '@/lib/supabase/server'
+import { revalidatePath } from 'next/cache'
+import { PROJECT_TEMPLATES, type ProjectPhase } from '@/lib/project-types'
+
+// ——— SERVER ACTIONS ———
+
+// Obtain phases + tasks for a project
+export async function getProjectPhasesWithTasks(projectId: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { success: false, error: 'Unauthorized', phases: [] as ProjectPhase[] }
+
+  const adminClient = getSupabaseAdmin()
+
+  const { data: phases, error } = await adminClient
+    .from('project_phases')
+    .select(`
+      *,
+      project_tasks (*)
+    `)
+    .eq('project_id', projectId)
+    .order('phase_number', { ascending: true })
+
+  if (error) {
+    console.error('Error fetching phases:', error)
+    return { success: false, error: error.message, phases: [] as ProjectPhase[] }
+  }
+
+  // Sort tasks by sort_order within each phase
+  const sortedPhases = (phases || []).map((phase: any) => ({
+    ...phase,
+    tasks: (phase.project_tasks || []).sort((a: any, b: any) => a.sort_order - b.sort_order),
+  }))
+
+  return { success: true, phases: sortedPhases as ProjectPhase[] }
+}
+
+// Create a project with auto-generated phases and tasks from template
+export async function createProjectWithTemplate(formData: FormData) {
+  try {
+    const userId = formData.get('userId') as string
+    const title = formData.get('title') as string
+    const platform = (formData.get('platform') as string) || 'shopify'
+    const clientName = formData.get('clientName') as string | null
+    const clientEmail = formData.get('clientEmail') as string | null
+    const startDate = formData.get('startDate') as string | null
+    const deadline = formData.get('deadline') as string | null
+    const stagingUrl = formData.get('stagingUrl') as string | null
+    const description = formData.get('description') as string | null
+
+    if (!userId || !title) throw new Error('Faltan datos obligatorios: userId y title')
+
+    const adminClient = getSupabaseAdmin()
+
+    // 1. Create project row
+    const { data: project, error: projectError } = await adminClient
+      .from('client_projects')
+      .insert({
+        user_id: userId,
+        title,
+        status: 'en_revision',
+        platform,
+        client_name: clientName || null,
+        client_email: clientEmail || null,
+        start_date: startDate || null,
+        deadline: deadline || null,
+        staging_url: stagingUrl || null,
+        description: description || null,
+        progress: 0,
+      })
+      .select()
+      .single()
+
+    if (projectError) throw projectError
+
+    // 2. Create phases and tasks from the appropriate template
+    const template = PROJECT_TEMPLATES[platform] || PROJECT_TEMPLATES['shopify']
+
+    for (const phaseTemplate of template) {
+      const { data: phase, error: phaseError } = await adminClient
+        .from('project_phases')
+        .insert({
+          project_id: project.id,
+          phase_number: phaseTemplate.phase_number,
+          title: phaseTemplate.title,
+          subtitle: phaseTemplate.subtitle,
+          status: 'pendiente',
+          badge: phaseTemplate.badge,
+        })
+        .select()
+        .single()
+
+      if (phaseError) throw phaseError
+
+      const tasks = phaseTemplate.tasks.map((t, idx) => ({
+        phase_id: phase.id,
+        title: t.title,
+        description: t.description,
+        status: 'pendiente',
+        sort_order: idx,
+      }))
+
+      const { error: tasksError } = await adminClient.from('project_tasks').insert(tasks)
+      if (tasksError) throw tasksError
+    }
+
+    revalidatePath('/admin/proyectos')
+    return { success: true, projectId: project.id }
+  } catch (error: any) {
+    console.error('Error creating project with template:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+// Update the status of a single task and recalculate progress
+export async function updateTaskStatus(
+  taskId: string,
+  status: 'pendiente' | 'en_progreso' | 'completado',
+  projectId: string
+) {
+  try {
+    const adminClient = getSupabaseAdmin()
+
+    const { error } = await adminClient
+      .from('project_tasks')
+      .update({ status })
+      .eq('id', taskId)
+
+    if (error) throw error
+
+    // Recalculate overall project progress
+    await recalculateProgress(projectId)
+
+    revalidatePath(`/admin/proyectos/${projectId}`)
+    revalidatePath(`/mi-cuenta/proyectos/${projectId}`)
+    return { success: true }
+  } catch (error: any) {
+    console.error('Error updating task status:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+// Update the status of a phase
+export async function updatePhaseStatus(
+  phaseId: string,
+  status: 'pendiente' | 'en_progreso' | 'completado',
+  projectId: string
+) {
+  try {
+    const adminClient = getSupabaseAdmin()
+
+    const { error } = await adminClient
+      .from('project_phases')
+      .update({ status })
+      .eq('id', phaseId)
+
+    if (error) throw error
+
+    revalidatePath(`/admin/proyectos/${projectId}`)
+    revalidatePath(`/mi-cuenta/proyectos/${projectId}`)
+    return { success: true }
+  } catch (error: any) {
+    console.error('Error updating phase status:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+// Update project metadata (URLs, status, description, progress)
+export async function updateProject(
+  projectId: string,
+  data: {
+    title?: string
+    status?: string
+    staging_url?: string
+    production_url?: string
+    description?: string
+    progress?: number
+  }
+) {
+  try {
+    const adminClient = getSupabaseAdmin()
+
+    const { error } = await adminClient
+      .from('client_projects')
+      .update(data)
+      .eq('id', projectId)
+
+    if (error) throw error
+
+    revalidatePath(`/admin/proyectos/${projectId}`)
+    revalidatePath(`/mi-cuenta/proyectos/${projectId}`)
+    return { success: true }
+  } catch (error: any) {
+    console.error('Error updating project:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+// Fetch full project with phases and tasks (admin use)
+export async function getProjectFull(projectId: string) {
+  const adminClient = getSupabaseAdmin()
+
+  const { data: project, error: projectError } = await adminClient
+    .from('client_projects')
+    .select('*')
+    .eq('id', projectId)
+    .single()
+
+  if (projectError || !project) {
+    return { success: false, error: 'Proyecto no encontrado', project: null, phases: [] as ProjectPhase[] }
+  }
+
+  const { phases } = await getProjectPhasesWithTasks(projectId)
+
+  return { success: true, project, phases }
+}
+
+// Internal helper: recalculate progress % based on completed tasks
+async function recalculateProgress(projectId: string) {
+  const adminClient = getSupabaseAdmin()
+
+  const { data: phases } = await adminClient
+    .from('project_phases')
+    .select('id')
+    .eq('project_id', projectId)
+
+  if (!phases || phases.length === 0) return
+
+  const phaseIds = phases.map((p: any) => p.id)
+
+  const { data: allTasks } = await adminClient
+    .from('project_tasks')
+    .select('status')
+    .in('phase_id', phaseIds)
+
+  if (!allTasks || allTasks.length === 0) return
+
+  const completed = allTasks.filter((t: any) => t.status === 'completado').length
+  const total = allTasks.length
+  const progress = Math.round((completed / total) * 100)
+
+  await adminClient
+    .from('client_projects')
+    .update({ progress })
+    .eq('id', projectId)
+}
