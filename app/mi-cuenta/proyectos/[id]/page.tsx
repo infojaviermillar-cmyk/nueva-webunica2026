@@ -2,17 +2,19 @@ import { getProjectPhasesWithTasks } from '@/lib/project-actions'
 import { createClient } from '@/lib/supabase/server'
 import { getSupabaseAdmin } from '@/lib/supabase/admin'
 import Link from 'next/link'
-import { ArrowLeft, CheckCircle2, Circle, Clock, ExternalLink, Globe } from 'lucide-react'
+import { ArrowLeft, CheckCircle2, Circle, Clock, ExternalLink, Globe, Layout, Palette, PenTool } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
 const ADMIN_EMAILS = ['javiermillarv@gmail.com', 'javier@webunica.cl', 'javiermillar@gmail.com']
 
+// Nuevos colores para 5 fases (Fase 0 a Fase 4)
 const PHASE_GRADIENTS = [
-  { bg: 'from-teal-500 to-emerald-500', badge: '#0d9488' },
-  { bg: 'from-violet-500 to-purple-500', badge: '#7c3aed' },
-  { bg: 'from-orange-500 to-amber-500', badge: '#f97316' },
-  { bg: 'from-red-500 to-rose-500', badge: '#ef4444' },
+  { bg: 'from-amber-400 to-orange-500', badge: '#f59e0b' }, // Fase 0
+  { bg: 'from-pink-500 to-rose-500', badge: '#ec4899' },    // Fase 1 (Diseño)
+  { bg: 'from-teal-500 to-emerald-500', badge: '#14b8a6' }, // Fase 2
+  { bg: 'from-violet-500 to-purple-500', badge: '#8b5cf6' }, // Fase 3
+  { bg: 'from-blue-500 to-cyan-500', badge: '#3b82f6' },    // Fase 4
 ]
 
 const BADGE_LABELS: Record<string, string> = {
@@ -26,7 +28,7 @@ const BADGE_CLASSES: Record<string, string> = {
   critico: 'bg-red-50 text-red-600',
   intenso: 'bg-orange-50 text-orange-600',
   go_live: 'bg-emerald-50 text-emerald-600',
-  normal: '',
+  normal: 'bg-slate-100 text-slate-500',
 }
 
 const PLATFORM_LABEL: Record<string, string> = {
@@ -77,13 +79,18 @@ export default async function ClientProyectoDetailPage({
 
   const { phases } = await getProjectPhasesWithTasks(id)
 
-  // Calculate stats
+  // Calculate stats (ignoring Fase 0 for overall dev progress maybe? For now include all)
   const allTasks = (phases as any[]).flatMap((p: any) => p.tasks || [])
   const completedCount = allTasks.filter((t: any) => t.status === 'completado').length
   const totalCount = allTasks.length
   const progressPct = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0
 
   const platform = PLATFORM_LABEL[project.platform] || 'Proyecto Web'
+
+  // Extract phases for specialized UI
+  const phase0 = (phases as any[]).find(p => p.phase_number === 0)
+  const phase1 = (phases as any[]).find(p => p.phase_number === 1)
+  const devPhases = (phases as any[]).filter(p => p.phase_number >= 2)
 
   return (
     <div className="min-h-screen bg-[#fafaf9] font-sans antialiased text-[#1c1917] pt-[22vh] lg:pt-48 pb-24">
@@ -113,17 +120,17 @@ export default async function ClientProyectoDetailPage({
                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
                 <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
               </svg>
-              Proyecto en desarrollo activo — Actualizamos tu plan en tiempo real
+              Proyecto en desarrollo — Actualizamos tu plan en tiempo real
             </div>
           )}
         </header>
 
         {/* Timeline Overview */}
-        <div className="bg-slate-900 text-white rounded-3xl p-8 mb-8 relative overflow-hidden">
+        <div className="bg-slate-900 text-white rounded-3xl p-8 mb-12 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(124,58,237,0.2),transparent)] pointer-events-none" />
           <div className="relative z-10">
             <h3 className="text-xl font-black mb-6 tracking-tight">
-              Vista General: {phases.length} Semanas
+              Vista General del Proyecto
             </h3>
 
             {/* Segment bar */}
@@ -132,12 +139,11 @@ export default async function ClientProyectoDetailPage({
                 const pTasks = phase.tasks || []
                 const pCompleted = pTasks.filter((t: any) => t.status === 'completado').length
                 const pPct = pTasks.length > 0 ? pCompleted / pTasks.length : 0
-                const gradients = ['bg-teal-400', 'bg-violet-400', 'bg-orange-400', 'bg-red-400']
-                const dimmed = ['bg-teal-900', 'bg-violet-900', 'bg-orange-900', 'bg-red-900']
+                const colors = ['bg-amber-400', 'bg-pink-400', 'bg-teal-400', 'bg-violet-400', 'bg-blue-400']
                 return (
                   <div key={phase.id} className="flex-1 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.1)' }}>
                     <div
-                      className={`h-full transition-all duration-700 ${gradients[i % gradients.length]}`}
+                      className={`h-full transition-all duration-700 ${colors[i % colors.length]}`}
                       style={{ width: `${pPct * 100}%` }}
                     />
                   </div>
@@ -147,11 +153,11 @@ export default async function ClientProyectoDetailPage({
 
             {/* Labels */}
             <div className="flex">
-              {(phases as any[]).map((phase: any, i: number) => (
+              {(phases as any[]).map((phase: any) => (
                 <div key={phase.id} className="flex-1 text-center">
-                  <strong className="block text-sm text-white">Sem {phase.phase_number}</strong>
-                  <span className="text-xs text-slate-400 leading-tight">
-                    {phase.title.replace(/Semana \d+: /, '')}
+                  <strong className="block text-sm text-white">Fase {phase.phase_number}</strong>
+                  <span className="text-[10px] sm:text-xs text-slate-400 leading-tight block truncate px-1">
+                    {phase.title.replace(/Fase \d+: /, '').replace(/Semana \d+: /, '')}
                   </span>
                 </div>
               ))}
@@ -174,26 +180,33 @@ export default async function ClientProyectoDetailPage({
           </div>
         </div>
 
-        {/* URLs */}
-        {(project.staging_url || project.production_url) && (
-          <div className="bg-teal-50 border border-teal-100 rounded-2xl p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        {/* URLs (Design, Staging, Production) */}
+        {(project.design_url || project.staging_url || project.production_url) && (
+          <div className="bg-teal-50 border border-teal-100 rounded-2xl p-6 mb-12 flex flex-col sm:flex-row items-start sm:items-center gap-5">
             <div className="w-12 h-12 bg-teal-500 rounded-2xl flex items-center justify-center shrink-0">
               <Globe className="w-6 h-6 text-white" />
             </div>
             <div className="flex-1">
-              <h4 className="font-bold text-slate-800 mb-1">Acceso a tu proyecto</h4>
-              <p className="text-sm text-slate-500">Puedes ver los avances en los siguientes enlaces</p>
+              <h4 className="font-bold text-slate-800 mb-1">Accesos de tu proyecto</h4>
+              <p className="text-sm text-slate-500">Links para revisar avances de diseño y desarrollo.</p>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 shrink-0">
+              {project.design_url && (
+                <a href={project.design_url} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-pink-100 border border-pink-200 rounded-full text-xs font-bold text-pink-700 hover:bg-pink-200 transition-colors">
+                  {project.design_tool === 'adobe_xd' ? <Layout className="w-3.5 h-3.5" /> : <PenTool className="w-3.5 h-3.5" />}
+                  Diseño {project.design_tool === 'adobe_xd' ? 'Adobe XD' : 'Figma'} <ExternalLink className="w-3 h-3" />
+                </a>
+              )}
               {project.staging_url && (
                 <a href={project.staging_url} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors">
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors">
                   Staging / Preview <ExternalLink className="w-3 h-3" />
                 </a>
               )}
               {project.production_url && (
                 <a href={project.production_url} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 rounded-full text-xs font-bold text-white hover:bg-emerald-700 transition-colors">
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 rounded-full text-xs font-bold text-white hover:bg-emerald-700 transition-colors">
                   Sitio en Producción <ExternalLink className="w-3 h-3" />
                 </a>
               )}
@@ -201,18 +214,104 @@ export default async function ClientProyectoDetailPage({
           </div>
         )}
 
-        {/* Phase Cards */}
-        <div className="space-y-5">
-          {(phases as any[]).map((phase: any, phaseIdx: number) => {
+        {/* FASE 0: Kick-off (Special UI) */}
+        {phase0 && (
+          <div className="bg-amber-50 border border-amber-200 rounded-3xl p-8 mb-12 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+              <Palette className="w-32 h-32 text-amber-500" />
+            </div>
+            <div className="relative z-10">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="px-3 py-1 bg-amber-200 text-amber-800 rounded-lg text-[10px] font-black uppercase tracking-widest">
+                  Fase 0 — Requiere tu acción
+                </span>
+              </div>
+              <h2 className="text-2xl font-black text-slate-900 mb-2">{phase0.title}</h2>
+              <p className="text-slate-600 mb-8 max-w-2xl">{phase0.subtitle}</p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {(phase0.tasks || []).map((task: any) => {
+                  const isDone = task.status === 'completado'
+                  return (
+                    <div key={task.id} className="flex items-start gap-3 bg-white p-4 rounded-xl border border-amber-100 shadow-sm">
+                      <span className="mt-0.5 shrink-0">
+                        {isDone ? (
+                          <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                        ) : (
+                          <Circle className="w-5 h-5 text-amber-300" />
+                        )}
+                      </span>
+                      <div>
+                        <span className={`block text-sm font-bold ${isDone ? 'line-through text-slate-400' : 'text-slate-800'}`}>
+                          {task.title}
+                        </span>
+                        <span className="block text-xs text-slate-500 mt-0.5">{task.description}</span>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* FASE 1: Diseño UX/UI (Special UI) */}
+        {phase1 && (
+          <div className="bg-white border-2 border-pink-100 hover:border-pink-300 rounded-3xl overflow-hidden mb-12 transition-all shadow-sm">
+            <div className="bg-gradient-to-r from-pink-50 to-rose-50 p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-pink-100">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="px-3 py-1 bg-pink-200 text-pink-800 rounded-lg text-[10px] font-black uppercase tracking-widest">
+                    Fase 1
+                  </span>
+                </div>
+                <h2 className="text-2xl font-black text-slate-900 mb-1">{phase1.title}</h2>
+                <p className="text-slate-500">{phase1.subtitle}</p>
+              </div>
+              {project.design_url && (
+                <a href={project.design_url} target="_blank" rel="noopener noreferrer"
+                  className="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-4 bg-pink-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-pink-200 hover:bg-pink-700 transition-all">
+                  <PenTool className="w-4 h-4" />
+                  Ver Maqueta Visual en {project.design_tool === 'adobe_xd' ? 'Adobe XD' : 'Figma'}
+                </a>
+              )}
+            </div>
+
+            <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-3">
+              {(phase1.tasks || []).map((task: any) => {
+                const isDone = task.status === 'completado'
+                const isProgress = task.status === 'en_progreso'
+                return (
+                  <div key={task.id} className={`flex items-start gap-3 p-3 rounded-xl ${isDone ? 'bg-emerald-50' : isProgress ? 'bg-blue-50' : 'bg-slate-50'}`}>
+                    <span className="mt-0.5 shrink-0">
+                      {isDone ? <CheckCircle2 className="w-5 h-5 text-emerald-500" /> : isProgress ? <Clock className="w-5 h-5 text-blue-500" /> : <Circle className="w-5 h-5 text-slate-300" />}
+                    </span>
+                    <div className="flex-1">
+                      <span className={`block text-sm font-semibold leading-snug ${isDone ? 'line-through text-emerald-700' : 'text-slate-800'}`}>
+                        {task.title}
+                      </span>
+                      {task.description && <span className="block text-xs text-slate-400 mt-0.5">{task.description}</span>}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Fases 2-4: Desarrollo Regular */}
+        <div className="space-y-6">
+          <h3 className="text-2xl font-black text-slate-900 mb-6 px-2">Fases de Desarrollo</h3>
+          {devPhases.map((phase: any, phaseIdx: number) => {
             const phaseTasks = phase.tasks || []
             const phaseCompleted = phaseTasks.filter((t: any) => t.status === 'completado').length
             const phaseTotal = phaseTasks.length
-            const gradient = PHASE_GRADIENTS[phaseIdx % PHASE_GRADIENTS.length]
+            const gradient = PHASE_GRADIENTS[(phaseIdx + 2) % PHASE_GRADIENTS.length] // +2 because Phase 0 and 1 exist
             const badgeLabel = BADGE_LABELS[phase.badge]
-            const badgeClass = BADGE_CLASSES[phase.badge]
+            const badgeClass = BADGE_CLASSES[phase.badge] || BADGE_CLASSES.normal
 
             return (
-              <div key={phase.id} className="bg-white border border-[#e7e5e4] rounded-3xl overflow-hidden hover:border-teal-300 hover:shadow-lg hover:shadow-teal-50 transition-all">
+              <div key={phase.id} className="bg-white border border-[#e7e5e4] rounded-3xl overflow-hidden hover:shadow-lg hover:shadow-slate-100 transition-all">
                 {/* Phase Header */}
                 <div className="flex items-center gap-5 p-7 border-b border-[#e7e5e4]">
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradient.bg} flex items-center justify-center shrink-0`}>
@@ -290,7 +389,7 @@ export default async function ClientProyectoDetailPage({
         )}
 
         {/* Footer CTA */}
-        <div className="mt-12 bg-teal-50 border border-teal-100 rounded-2xl p-7 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+        <div className="mt-16 bg-teal-50 border border-teal-100 rounded-2xl p-7 flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <div className="w-12 h-12 bg-teal-500 rounded-2xl flex items-center justify-center shrink-0">
             <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>

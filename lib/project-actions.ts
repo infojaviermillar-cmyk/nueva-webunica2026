@@ -178,6 +178,8 @@ export async function updateProject(
     production_url?: string
     description?: string
     progress?: number
+    design_url?: string
+    design_tool?: string
   }
 ) {
   try {
@@ -195,6 +197,31 @@ export async function updateProject(
     return { success: true }
   } catch (error: any) {
     console.error('Error updating project:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+// Update design settings specifically
+export async function updateDesignSettings(
+  projectId: string,
+  designUrl: string,
+  designTool: string
+) {
+  try {
+    const adminClient = getSupabaseAdmin()
+
+    const { error } = await adminClient
+      .from('client_projects')
+      .update({ design_url: designUrl, design_tool: designTool })
+      .eq('id', projectId)
+
+    if (error) throw error
+
+    revalidatePath(`/admin/proyectos/${projectId}`)
+    revalidatePath(`/mi-cuenta/proyectos/${projectId}`)
+    return { success: true }
+  } catch (error: any) {
+    console.error('Error updating design settings:', error)
     return { success: false, error: error.message }
   }
 }

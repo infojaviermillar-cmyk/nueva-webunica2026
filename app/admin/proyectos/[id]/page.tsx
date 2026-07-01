@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft, ExternalLink, Globe, CheckCircle2, Circle, Clock } from 'lucide-react'
 import TaskToggle from '@/components/admin/task-toggle'
+import DesignSettingsForm from '@/components/admin/design-settings-form'
 
 export const dynamic = 'force-dynamic'
 
@@ -130,6 +131,13 @@ export default async function AdminProyectoDetailPage({
             </div>
           </div>
         </div>
+
+        {/* Design URL Setup */}
+        <DesignSettingsForm 
+          projectId={id} 
+          initialDesignUrl={project.design_url} 
+          initialDesignTool={project.design_tool} 
+        />
 
         {/* Phases */}
         <div className="space-y-6">
