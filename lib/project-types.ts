@@ -38,9 +38,9 @@ export type PhaseTemplate = {
 export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
   shopify: [
     {
-      phase_number: 0,
-      title: 'Fase 0: Kick-off & Entregables',
-      subtitle: 'Lo que el cliente debe enviar para iniciar el proyecto',
+      phase_number: 1,
+      title: 'Semana 1: Kick-off & Diseño UX/UI',
+      subtitle: 'Entregables iniciales, wireframes y mockups visuales antes de desarrollar',
       badge: 'critico',
       tasks: [
         { 
@@ -96,20 +96,6 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           description: 'Links a Instagram, Facebook, TikTok, etc.', 
           assigned_to: 'cliente', 
           detailed_info: 'Envía los enlaces exactos de tus perfiles de redes sociales para integrarlos en el pie de página de la tienda y configurar correctamente las etiquetas de metadatos para compartir.' 
-        },
-      ],
-    },
-    {
-      phase_number: 1,
-      title: 'Semana 1: Diseño UX/UI (Figma/Adobe XD)',
-      subtitle: 'Wireframes y mockups visuales antes de desarrollar',
-      badge: 'critico',
-      tasks: [
-        { 
-          title: 'Pago Etapa 2 (25%)', 
-          description: 'Pago correspondiente al inicio del diseño', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Antes de presentar y trabajar en los wireframes y diseño de alta fidelidad, se requiere el segundo pago del 25%.' 
         },
         { 
           title: 'Wireframes (bocetos)', 
@@ -168,10 +154,10 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       badge: 'intenso',
       tasks: [
         { 
-          title: 'Pago Etapa 3 (25%)', 
+          title: 'Pago Etapa 2 (25%)', 
           description: 'Pago correspondiente al inicio del desarrollo', 
           assigned_to: 'cliente', 
-          detailed_info: 'Al aprobar el diseño y comenzar la etapa de programación en la plataforma, se debe realizar el tercer pago del 25%.' 
+          detailed_info: 'Al aprobar el diseño y comenzar la etapa de programación en la plataforma, se debe realizar el segundo pago del 25%.' 
         },
         { 
           title: 'Crear cuenta Shopify', 
@@ -230,10 +216,10 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       badge: 'intenso',
       tasks: [
         { 
-          title: 'Pago Etapa 4 (25%)', 
-          description: 'Pago final correspondiente a la carga y cierre', 
+          title: 'Pago Etapa 3 (25%)', 
+          description: 'Pago correspondiente a la carga y desarrollo avanzado', 
           assigned_to: 'cliente', 
-          detailed_info: 'Para proceder con la carga final de productos, configuraciones avanzadas y preparación para el lanzamiento, se requiere el último pago del 25%.' 
+          detailed_info: 'Para proceder con la carga de productos, configuraciones avanzadas y construcción de páginas secundarias, se requiere el tercer pago del 25%.' 
         },
         { 
           title: 'Carga de productos (hasta 50 SKUs)', 
@@ -292,6 +278,12 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       badge: 'go_live',
       tasks: [
         { 
+          title: 'Pago Etapa 4 (25%)', 
+          description: 'Pago final de lanzamiento', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Pago final para habilitar las pasarelas de pago, realizar pruebas integrales y publicar el sitio en vivo.' 
+        },
+        { 
           title: 'Integrar Mercado Pago', 
           description: 'Tarjetas crédito/débito activas', 
           assigned_to: 'agencia', 
@@ -344,9 +336,9 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
   ],
   wordpress: [
     {
-      phase_number: 0,
-      title: 'Fase 0: Kick-off & Entregables',
-      subtitle: 'Lo que el cliente debe enviar para iniciar el proyecto',
+      phase_number: 1,
+      title: 'Semana 1: Kick-off & Diseño UX/UI',
+      subtitle: 'Entregables iniciales, wireframes y mockups visuales antes de desarrollar',
       badge: 'critico',
       tasks: [
         { 
@@ -402,20 +394,6 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           description: 'Links a Instagram, Facebook, TikTok, etc.', 
           assigned_to: 'cliente', 
           detailed_info: 'Envía los enlaces exactos de tus perfiles de redes sociales para integrarlos en el pie de página de la tienda y configurar correctamente las etiquetas de metadatos para compartir.' 
-        },
-      ],
-    },
-    {
-      phase_number: 1,
-      title: 'Semana 1: Diseño UX/UI (Figma/Adobe XD)',
-      subtitle: 'Wireframes y mockups visuales antes de desarrollar',
-      badge: 'critico',
-      tasks: [
-        { 
-          title: 'Pago Etapa 2 (25%)', 
-          description: 'Pago correspondiente al inicio del diseño', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Antes de presentar y trabajar en los wireframes y diseño de alta fidelidad, se requiere el segundo pago del 25%.' 
         },
         { 
           title: 'Wireframes (bocetos)', 
@@ -474,10 +452,10 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       badge: 'intenso',
       tasks: [
         { 
-          title: 'Pago Etapa 3 (25%)', 
+          title: 'Pago Etapa 2 (25%)', 
           description: 'Pago correspondiente al inicio del desarrollo', 
           assigned_to: 'cliente', 
-          detailed_info: 'Al aprobar el diseño y comenzar la etapa de programación en la plataforma, se debe realizar el tercer pago del 25%.' 
+          detailed_info: 'Al aprobar el diseño y comenzar la etapa de programación en la plataforma, se debe realizar el segundo pago del 25%.' 
         },
         { 
           title: 'WordPress + SSL', 
@@ -536,10 +514,10 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       badge: 'intenso',
       tasks: [
         { 
-          title: 'Pago Etapa 4 (25%)', 
-          description: 'Pago final correspondiente a la carga y cierre', 
+          title: 'Pago Etapa 3 (25%)', 
+          description: 'Pago correspondiente a la carga de contenido y páginas', 
           assigned_to: 'cliente', 
-          detailed_info: 'Para proceder con la carga final de productos, configuraciones avanzadas y preparación para el lanzamiento, se requiere el último pago del 25%.' 
+          detailed_info: 'Para proceder con la carga final de productos, configuraciones avanzadas y construcción, se requiere el tercer pago del 25%.' 
         },
         { 
           title: 'Desarrollo Homepage', 
@@ -597,6 +575,12 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       subtitle: 'WebPay, envíos, políticas, testing, go live',
       badge: 'go_live',
       tasks: [
+        { 
+          title: 'Pago Etapa 4 (25%)', 
+          description: 'Pago final de lanzamiento', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Pago final para habilitar pasarelas de pago y realizar el lanzamiento público en el dominio definitivo.' 
+        },
         { 
           title: 'WebPay Plus', 
           description: 'Tarjetas Crédito/Débito activas', 

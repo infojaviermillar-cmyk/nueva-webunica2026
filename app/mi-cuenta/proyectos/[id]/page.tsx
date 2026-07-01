@@ -89,7 +89,6 @@ export default async function ClientProyectoDetailPage({
   const platform = PLATFORM_LABEL[project.platform] || 'Proyecto Web'
 
   // Extract phases for specialized UI
-  const phase0 = (phases as any[]).find(p => p.phase_number === 0)
   const phase1 = (phases as any[]).find(p => p.phase_number === 1)
   const devPhases = (phases as any[]).filter(p => p.phase_number >= 2)
 
@@ -218,71 +217,67 @@ export default async function ClientProyectoDetailPage({
           </div>
         )}
 
-        {/* FASE 0: Kick-off (Special UI) */}
-        {phase0 && (
-          <div className="bg-amber-50 border border-amber-200 rounded-3xl p-8 mb-12 shadow-sm relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-              <Palette className="w-32 h-32 text-amber-500" />
-            </div>
-            <div className="relative z-10">
-              <div className="flex items-center justify-between mb-2">
-                <span className="px-3 py-1 bg-amber-200 text-amber-800 rounded-lg text-[10px] font-black uppercase tracking-widest">
-                  Fase 0 — Requiere tu acción
-                </span>
-                {paymentPerPhase > 0 && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white text-slate-800 rounded-full text-xs font-bold shadow-sm">
-                    <DollarSign className="w-3 h-3 text-emerald-500" />
-                    Pago: {formattedPayment}
-                  </span>
+
+
+        {/* FASE 1: Kick-off & Diseño UX/UI (Special UI) */}
+        {phase1 && (() => {
+          const clientTasks = (phase1.tasks || []).filter((t: any) => t.assigned_to === 'cliente')
+          const agencyTasks = (phase1.tasks || []).filter((t: any) => t.assigned_to === 'agencia')
+
+          return (
+            <div className="bg-white border-2 border-pink-100 hover:border-pink-300 rounded-3xl overflow-hidden mb-12 transition-all shadow-sm">
+              <div className="bg-gradient-to-r from-pink-50 to-rose-50 p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-pink-100">
+                <div>
+                  <div className="flex items-center gap-3 mb-2 flex-wrap">
+                    <span className="px-3 py-1 bg-pink-200 text-pink-800 rounded-lg text-[10px] font-black uppercase tracking-widest">
+                      Fase 1 — Inicio
+                    </span>
+                    {paymentPerPhase > 0 && (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white text-slate-800 rounded-full text-xs font-bold shadow-sm">
+                        <DollarSign className="w-3 h-3 text-emerald-500" />
+                        Pago: {formattedPayment}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="text-2xl font-black text-slate-900 mb-1">{phase1.title}</h2>
+                  <p className="text-slate-500">{phase1.subtitle}</p>
+                </div>
+                {project.design_url && (
+                  <a href={project.design_url} target="_blank" rel="noopener noreferrer"
+                    className="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-4 bg-pink-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-pink-200 hover:bg-pink-700 transition-all">
+                    <PenTool className="w-4 h-4" />
+                    Ver Maqueta Visual en {project.design_tool === 'adobe_xd' ? 'Adobe XD' : 'Figma'}
+                  </a>
                 )}
               </div>
-              <h2 className="text-2xl font-black text-slate-900 mb-2">{phase0.title}</h2>
-              <p className="text-slate-600 mb-8 max-w-2xl">{phase0.subtitle}</p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(phase0.tasks || []).map((task: any) => (
-                  <TaskCard key={task.id} task={task} />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* FASE 1: Diseño UX/UI (Special UI) */}
-        {phase1 && (
-          <div className="bg-white border-2 border-pink-100 hover:border-pink-300 rounded-3xl overflow-hidden mb-12 transition-all shadow-sm">
-            <div className="bg-gradient-to-r from-pink-50 to-rose-50 p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-pink-100">
-              <div>
-                <div className="flex items-center gap-3 mb-2 flex-wrap">
-                  <span className="px-3 py-1 bg-pink-200 text-pink-800 rounded-lg text-[10px] font-black uppercase tracking-widest">
-                    Fase 1
-                  </span>
-                  {paymentPerPhase > 0 && (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white text-slate-800 rounded-full text-xs font-bold shadow-sm">
-                      <DollarSign className="w-3 h-3 text-emerald-500" />
-                      Pago: {formattedPayment}
-                    </span>
-                  )}
+              <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-pink-100">
+                <div className="p-8 bg-amber-50/50">
+                  <h3 className="text-sm font-black uppercase tracking-widest text-amber-700 mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-amber-500" />
+                    Lo que necesitamos de ti
+                  </h3>
+                  <div className="flex flex-col gap-3">
+                    {clientTasks.map((task: any) => (
+                      <TaskCard key={task.id} task={task} />
+                    ))}
+                  </div>
                 </div>
-                <h2 className="text-2xl font-black text-slate-900 mb-1">{phase1.title}</h2>
-                <p className="text-slate-500">{phase1.subtitle}</p>
+                <div className="p-8">
+                  <h3 className="text-sm font-black uppercase tracking-widest text-pink-700 mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-pink-500" />
+                    Nuestra parte: Diseño UX/UI
+                  </h3>
+                  <div className="flex flex-col gap-3">
+                    {agencyTasks.map((task: any) => (
+                      <TaskCard key={task.id} task={task} />
+                    ))}
+                  </div>
+                </div>
               </div>
-              {project.design_url && (
-                <a href={project.design_url} target="_blank" rel="noopener noreferrer"
-                  className="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-4 bg-pink-600 text-white rounded-xl text-sm font-bold shadow-lg shadow-pink-200 hover:bg-pink-700 transition-all">
-                  <PenTool className="w-4 h-4" />
-                  Ver Maqueta Visual en {project.design_tool === 'adobe_xd' ? 'Adobe XD' : 'Figma'}
-                </a>
-              )}
             </div>
-
-            <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-3">
-              {(phase1.tasks || []).map((task: any) => (
-                <TaskCard key={task.id} task={task} />
-              ))}
-            </div>
-          </div>
-        )}
+          )
+        })()}
 
         {/* Fases 2-4: Desarrollo Regular */}
         <div className="space-y-6">
@@ -291,7 +286,7 @@ export default async function ClientProyectoDetailPage({
             const phaseTasks = phase.tasks || []
             const phaseCompleted = phaseTasks.filter((t: any) => t.status === 'completado').length
             const phaseTotal = phaseTasks.length
-            const gradient = PHASE_GRADIENTS[(phaseIdx + 2) % PHASE_GRADIENTS.length] // +2 because Phase 0 and 1 exist
+            const gradient = PHASE_GRADIENTS[(phaseIdx + 2) % PHASE_GRADIENTS.length] // Start from teal
             const badgeLabel = BADGE_LABELS[phase.badge]
             const badgeClass = BADGE_CLASSES[phase.badge] || BADGE_CLASSES.normal
 
@@ -310,7 +305,7 @@ export default async function ClientProyectoDetailPage({
                           {badgeLabel}
                         </span>
                       )}
-                      {paymentPerPhase > 0 && phase.phase_number < 4 && (
+                      {paymentPerPhase > 0 && (
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-slate-100 text-slate-800 rounded-full text-xs font-bold">
                           <DollarSign className="w-3 h-3 text-emerald-500" />
                           Pago: {formattedPayment}
