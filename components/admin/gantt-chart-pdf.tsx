@@ -26,12 +26,25 @@ export default function GanttExportButton({ project, phases }: { project: any, p
       
       const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'letter' })
       const pdfW = pdf.internal.pageSize.getWidth()
+      const pdfH = pdf.internal.pageSize.getHeight()
       
       const margin = 20
       const contentW = pdfW - margin * 2
-      const contentH = (canvas.height * contentW) / canvas.width
+      const imgHeightOnPdf = (canvas.height * contentW) / canvas.width
+      const pageHeightOnPdf = pdfH - margin * 2
 
-      pdf.addImage(imgData, 'JPEG', margin, margin, contentW, contentH)
+      let heightLeft = imgHeightOnPdf
+      let position = margin
+
+      pdf.addImage(imgData, 'JPEG', margin, position, contentW, imgHeightOnPdf)
+      heightLeft -= pageHeightOnPdf
+
+      while (heightLeft > 0) {
+        position -= pageHeightOnPdf
+        pdf.addPage()
+        pdf.addImage(imgData, 'JPEG', margin, position, contentW, imgHeightOnPdf)
+        heightLeft -= pageHeightOnPdf
+      }
       
       pdf.save(`Carta_Gantt_${project.title.replace(/\s+/g, '_')}.pdf`)
     } catch (e) {
