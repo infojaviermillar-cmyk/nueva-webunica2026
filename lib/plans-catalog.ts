@@ -174,6 +174,33 @@ export const SHOPIFY_PLANS: Plan[] = [
       'Configuración y exención de impuestos personalizada por perfil comercial',
     ],
   },
+  {
+    id: 'sh-custom-elite',
+    name: 'Shopify CUSTOM ELITE',
+    highlight: 'Desarrollo a Medida Full',
+    desc: 'La solución más completa con diseño desde cero, migración avanzada e integraciones ERP y georreferenciación.',
+    price: 1420002,
+    deliveryDays: 'A convenir',
+    category: '🛍️ Shopify',
+    url: '/planes-de-desarrollo-shopify-en-chile',
+    features: [
+      'Setup completo de Shopify (Dominio, SSL, Impuestos, checkout)',
+      'Diseñado desde cero en Figma (UI/UX) a medida, sin uso de plantillas. Paginas home, categorias o colecciones y ficha de producto para Shopify.',
+      'Migración inicial de productos desde wordpress, base de datos, informacion de empresa, etc.',
+      'Integración de pasarelas Webpay, Flow o MercadoPago',
+      'Implementación del módulo de georreferenciación con integración a Google Maps API cuenta empresa.',
+      'Diseño Mobile-First 100% optimizado',
+      'SEO Técnico en colecciones y fichas de productos',
+      'Integración Google Anatytics Estadisticas, Meta Pixel, Google Tag Manager',
+      'Sistema reseñas de productos, formulario Newsletter.',
+      'Integración ERP Bsale, AppA stroselling o multivende venta multicanal con mercadolibre, Ripley, Falabella, Paris',
+      'Filtros inteligentes de busqueda de productos',
+      'Integración logistica de transporte directo o por multicurier Sendu, Shipit, enviame.',
+      'Garantía de 3 meses en su funcionamiento',
+      'Soporte via whatsapp o telefono',
+      'Videos de ayuda para la administración de Shopify',
+    ],
+  },
 ];
 
 // ════════════════════════════════════════════
