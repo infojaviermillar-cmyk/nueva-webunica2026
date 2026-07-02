@@ -286,6 +286,8 @@ function CotizadorContent() {
   const [taxType, setTaxType] = useState<'factura' | 'boleta' | 'exento'>('factura');
   const [showBankDetails, setShowBankDetails] = useState(true);
   const [installments, setInstallments] = useState(1);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [notes, setNotes] = useState('');
   
   const [quoteNumber] = useState(
@@ -484,8 +486,12 @@ function CotizadorContent() {
     text += `*Condiciones Comerciales:*\n`;
     if (installments > 1) {
       text += `• Forma de pago: ${installments} cuotas de ${formatCLP(Math.round(total / installments))}.\n`;
+      text += `• Los pagos de las cuotas están sujetos a hitos de avance según la planificación.\n`;
     } else {
       text += `• 50% para dar inicio al proyecto y 50% contra entrega conforme.\n`;
+    }
+    if (startDate && endDate) {
+      text += `• Plazos: Inicio el ${new Date(startDate + 'T00:00:00').toLocaleDateString('es-CL')} y finalización estimada el ${new Date(endDate + 'T00:00:00').toLocaleDateString('es-CL')} (incluye 2 semanas extras por imprevistos).\n`;
     }
     text += `• Precios en pesos chilenos (CLP).\n`;
     text += `• Soporte y garantía técnica incluidos por 30 días.\n`;
@@ -968,6 +974,39 @@ function CotizadorContent() {
                 </div>
               </div>
 
+              {/* Fechas de Proyecto */}
+              <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-100">
+                <div>
+                  <label className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1.5 block">
+                    Fecha de Inicio
+                  </label>
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={e => {
+                      setStartDate(e.target.value);
+                      if (e.target.value) {
+                        const start = new Date(e.target.value + 'T00:00:00');
+                        start.setDate(start.getDate() + 14); // 2 semanas extra base
+                        setEndDate(start.toISOString().split('T')[0]);
+                      }
+                    }}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 focus:bg-white focus:border-violet-500 outline-none transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1.5 block">
+                    Fecha Fin (con holgura)
+                  </label>
+                  <input
+                    type="date"
+                    value={endDate}
+                    onChange={e => setEndDate(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-medium text-slate-600 focus:bg-white focus:border-violet-500 outline-none transition-all"
+                  />
+                </div>
+              </div>
+
               {/* Toggle Datos Bancarios */}
               <div className="flex items-center justify-between pt-2 border-t border-slate-100">
                 <div className="flex items-center gap-2">
@@ -1319,15 +1358,22 @@ function CotizadorContent() {
                   <li>
                     Forma de pago:{' '}
                     {installments > 1 ? (
-                      <strong className="text-slate-900 print:text-zinc-900">
-                        {installments} cuotas de {formatCLP(Math.round(total / installments))}
-                      </strong>
+                      <>
+                        <strong className="text-slate-900 print:text-zinc-900">
+                          {installments} cuotas de {formatCLP(Math.round(total / installments))}
+                        </strong>. Los pagos de las cuotas están sujetos a hitos de avance según la planificación.
+                      </>
                     ) : (
                       <>
                         <strong className="text-slate-900 print:text-zinc-900">50% para inicio del proyecto</strong>, y 50% contra entrega conforme y despliegue final en producción.
                       </>
                     )}
                   </li>
+                  {startDate && endDate && (
+                    <li>
+                      Plazos del proyecto: Fecha de inicio <strong>{new Date(startDate + 'T00:00:00').toLocaleDateString('es-CL')}</strong> y fecha de finalización estimada <strong>{new Date(endDate + 'T00:00:00').toLocaleDateString('es-CL')}</strong> (incluye 2 semanas de holgura por posibles imprevistos).
+                    </li>
+                  )}
                   {taxType === 'factura' ? (
                     <li>Valores netos expresados en pesos chilenos (CLP). Sujetos a IVA (19%) por ley.</li>
                   ) : taxType === 'boleta' ? (
