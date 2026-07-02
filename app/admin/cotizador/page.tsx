@@ -285,6 +285,7 @@ function CotizadorContent() {
   const [discountPercent, setDiscountPercent] = useState(0);
   const [taxType, setTaxType] = useState<'factura' | 'boleta' | 'exento'>('factura');
   const [showBankDetails, setShowBankDetails] = useState(true);
+  const [installments, setInstallments] = useState(1);
   const [notes, setNotes] = useState('');
   
   const [quoteNumber] = useState(
@@ -481,7 +482,11 @@ function CotizadorContent() {
     }
 
     text += `*Condiciones Comerciales:*\n`;
-    text += `• 50% para dar inicio al proyecto y 50% contra entrega conforme.\n`;
+    if (installments > 1) {
+      text += `• Forma de pago: ${installments} cuotas de ${formatCLP(Math.round(total / installments))}.\n`;
+    } else {
+      text += `• 50% para dar inicio al proyecto y 50% contra entrega conforme.\n`;
+    }
     text += `• Precios en pesos chilenos (CLP).\n`;
     text += `• Soporte y garantía técnica incluidos por 30 días.\n`;
     text += `• Validez de cotización: 15 días corridos.\n\n`;
@@ -489,7 +494,7 @@ function CotizadorContent() {
     if (showBankDetails) {
       text += `*Datos de Transferencia Bancaria:*\n`;
       text += `• Banco Estado de Chile | Cuenta Vista o Chequera Electrónica\n`;
-      text += `• Cuenta: 62900224166 | Webunica Chile EIRL\n`;
+      text += `• Cuenta: 629 - 716 - 20345 | Webunica Chile EIRL\n`;
       text += `• RUT: 76.371.864-6 | pagos@webunica.cl\n\n`;
     }
 
@@ -933,6 +938,36 @@ function CotizadorContent() {
                 </div>
               </div>
 
+              {/* Selector de Cuotas */}
+              <div>
+                <label className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-1.5 block">
+                  Dividir Pago en Cuotas
+                </label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="range"
+                    min="1"
+                    max="12"
+                    step="1"
+                    value={installments}
+                    onChange={e => setInstallments(Number(e.target.value))}
+                    className="flex-1 h-1 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-violet-600"
+                  />
+                  <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1">
+                    <input
+                      type="number"
+                      min="1"
+                      max="12"
+                      value={installments}
+                      onChange={e =>
+                        setInstallments(Math.min(12, Math.max(1, Number(e.target.value))))
+                      }
+                      className="w-8 text-center font-black text-xs text-slate-700 bg-transparent outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+
               {/* Toggle Datos Bancarios */}
               <div className="flex items-center justify-between pt-2 border-t border-slate-100">
                 <div className="flex items-center gap-2">
@@ -1264,7 +1299,7 @@ function CotizadorContent() {
                     <div className="space-y-1">
                       <p><span className="font-extrabold text-slate-400 print:text-zinc-500">Banco:</span> Banco Estado de Chile</p>
                       <p><span className="font-extrabold text-slate-400 print:text-zinc-500">Tipo Cuenta:</span> Cuenta Vista / Chequera Electrónica</p>
-                      <p><span className="font-extrabold text-slate-400 print:text-zinc-500">N° Cuenta:</span> 629-00224-166</p>
+                      <p><span className="font-extrabold text-slate-400 print:text-zinc-500">N° Cuenta:</span> 629 - 716 - 20345</p>
                     </div>
                     <div className="space-y-1">
                       <p><span className="font-extrabold text-slate-400 print:text-zinc-500">Titular:</span> Webunica Chile EIRL</p>
@@ -1283,7 +1318,15 @@ function CotizadorContent() {
                 <ul className="text-[11px] text-slate-500 space-y-1.5 font-medium list-disc list-inside print:text-zinc-700">
                   <li>
                     Forma de pago:{' '}
-                    <strong className="text-slate-900 print:text-zinc-900">50% para inicio del proyecto</strong>, y 50% contra entrega conforme y despliegue final en producción.
+                    {installments > 1 ? (
+                      <strong className="text-slate-900 print:text-zinc-900">
+                        {installments} cuotas de {formatCLP(Math.round(total / installments))}
+                      </strong>
+                    ) : (
+                      <>
+                        <strong className="text-slate-900 print:text-zinc-900">50% para inicio del proyecto</strong>, y 50% contra entrega conforme y despliegue final en producción.
+                      </>
+                    )}
                   </li>
                   {taxType === 'factura' ? (
                     <li>Valores netos expresados en pesos chilenos (CLP). Sujetos a IVA (19%) por ley.</li>
