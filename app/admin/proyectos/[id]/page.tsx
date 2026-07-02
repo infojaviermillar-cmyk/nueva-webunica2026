@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ArrowLeft, ExternalLink, Globe, CheckCircle2, Circle, Clock } from 'lucide-react'
 import TaskToggle from '@/components/admin/task-toggle'
 import DesignSettingsForm from '@/components/admin/design-settings-form'
+import GanttExportButton from '@/components/admin/gantt-chart-pdf'
 
 export const dynamic = 'force-dynamic'
 
@@ -88,8 +89,10 @@ export default async function AdminProyectoDetailPage({
               )}
             </div>
 
-            {/* URLs */}
+            {/* URLs and Actions */}
             <div className="flex flex-col gap-3 shrink-0">
+              <GanttExportButton project={project} phases={phases} />
+              
               {project.staging_url && (
                 <a href={project.staging_url} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-3 bg-slate-100 hover:bg-slate-200 rounded-full text-xs font-bold text-slate-700 transition-colors">
