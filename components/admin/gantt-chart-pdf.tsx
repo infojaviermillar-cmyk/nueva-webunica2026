@@ -15,37 +15,44 @@ export default function GanttExportButton({ project, phases }: { project: any, p
       const el = document.getElementById('gantt-export-area')
       if (!el) return
 
-      // Desocultar momentáneamente para renderizar
       el.style.display = 'block'
-      
-      const canvas = await html2canvas(el, { scale: 2, useCORS: true, logging: false })
-      
-      el.style.display = 'none'
-
-      const imgData = canvas.toDataURL('image/jpeg', 0.98)
       
       const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'letter' })
       const pdfW = pdf.internal.pageSize.getWidth()
       const pdfH = pdf.internal.pageSize.getHeight()
-      
       const margin = 20
       const contentW = pdfW - margin * 2
-      const imgHeightOnPdf = (canvas.height * contentW) / canvas.width
-      const pageHeightOnPdf = pdfH - margin * 2
 
-      let heightLeft = imgHeightOnPdf
-      let position = margin
+      const elementsToExport = phases.length > 0 ? phases.length : 1;
 
-      pdf.addImage(imgData, 'JPEG', margin, position, contentW, imgHeightOnPdf)
-      heightLeft -= pageHeightOnPdf
+      for (let i = 0; i < elementsToExport; i++) {
+        const phaseEl = document.getElementById(`gantt-export-phase-${i}`)
+        if (!phaseEl) continue
 
-      while (heightLeft > 0) {
-        position -= pageHeightOnPdf
-        pdf.addPage()
+        const canvas = await html2canvas(phaseEl, { scale: 2, useCORS: true, logging: false })
+        const imgData = canvas.toDataURL('image/jpeg', 0.98)
+        
+        const imgHeightOnPdf = (canvas.height * contentW) / canvas.width
+        const pageHeightOnPdf = pdfH - margin * 2
+
+        if (i > 0) pdf.addPage()
+
+        let heightLeft = imgHeightOnPdf
+        let position = margin
+
         pdf.addImage(imgData, 'JPEG', margin, position, contentW, imgHeightOnPdf)
         heightLeft -= pageHeightOnPdf
+
+        while (heightLeft > 0) {
+          position -= pageHeightOnPdf
+          pdf.addPage()
+          pdf.addImage(imgData, 'JPEG', margin, position, contentW, imgHeightOnPdf)
+          heightLeft -= pageHeightOnPdf
+        }
       }
-      
+
+      el.style.display = 'none'
+
       pdf.save(`Carta_Gantt_${project.title.replace(/\s+/g, '_')}.pdf`)
     } catch (e) {
       console.error(e)
@@ -70,9 +77,8 @@ export default function GanttExportButton({ project, phases }: { project: any, p
         Descargar Carta Gantt (PDF)
       </button>
 
-      {/* Hidden Gantt Chart Area */}
       <div className="absolute top-[-9999px] left-[-9999px]">
-        <div style={{ display: 'none' }} id="gantt-export-area" className="w-[1100px] bg-white p-8 font-sans border border-transparent">
+        <div style={{ display: 'none' }} id="gantt-export-area">
           <GanttChart project={project} phases={phases} />
         </div>
       </div>
@@ -124,7 +130,6 @@ function GanttChart({ project, phases }: { project: any, phases: any[] }) {
     let startCol = Math.floor(startPct * columnsCount)
     let span = Math.max(0.5, Math.ceil((endPct - startPct) * columnsCount))
     
-    // clamp to avoid overflow
     if (startCol + span > columnsCount) span = columnsCount - startCol
     
     return { startCol, span }
@@ -135,8 +140,8 @@ function GanttChart({ project, phases }: { project: any, phases: any[] }) {
     return formatDate(colDate)
   })
 
-  return (
-    <>
+  const renderContent = (phase: any, pIdx: number) => (
+    <div id={`gantt-export-phase-${pIdx}`} className="w-[1100px] bg-white p-8 font-sans border border-transparent">
       <div className="mb-6 text-center">
         <h1 className="text-2xl font-black text-slate-800 uppercase tracking-widest">Diagrama de Gantt</h1>
         <h2 className="text-lg font-bold text-slate-500 uppercase tracking-widest mt-1">Progreso del Plan de Trabajo</h2>
@@ -164,9 +169,8 @@ function GanttChart({ project, phases }: { project: any, phases: any[] }) {
           </div>
         </div>
 
-        {rows.map((phase, pIdx) => (
-          <React.Fragment key={phase.id}>
-            {/* Phase Row */}
+        {phase && (
+          <React.Fragment>
             <div className="grid grid-cols-[250px_60px_70px_70px_50px_1fr] bg-slate-100 border-b border-slate-200 text-[10px] font-bold text-slate-700">
               <div className="p-2 border-r border-slate-200 truncate">{phase.phase_number}. {phase.title}</div>
               <div className="p-2 border-r border-slate-200 text-center">-</div>
@@ -186,7 +190,6 @@ function GanttChart({ project, phases }: { project: any, phases: any[] }) {
               </div>
             </div>
 
-            {/* Tasks Rows */}
             {phase.phaseTasks.map((task: any) => (
               <div key={task.id} className="grid grid-cols-[250px_60px_70px_70px_50px_1fr] border-b border-slate-200 text-[9px] font-medium text-slate-600 bg-white">
                 <div className="p-2 border-r border-slate-200 truncate pl-6">{task.title}</div>
@@ -209,12 +212,19 @@ function GanttChart({ project, phases }: { project: any, phases: any[] }) {
               </div>
             ))}
           </React.Fragment>
-        ))}
+        )}
       </div>
       
-      <div className="mt-8 text-center text-[10px] text-slate-400 font-medium">
-        Generado automáticamente por el Sistema de Proyectos Webunica — webunica.cl
+      <div className="mt-8 flex justify-between text-[10px] text-slate-400 font-medium">
+        <div>Generado automáticamente por el Sistema de Proyectos Webunica — webunica.cl</div>
+        <div>Página {pIdx + 1} de {Math.max(1, rows.length)}</div>
       </div>
-    </>
+    </div>
+  )
+
+  return (
+    <div className="flex flex-col gap-10">
+      {rows.length === 0 ? renderContent(null, 0) : rows.map((phase, i) => renderContent(phase, i))}
+    </div>
   )
 }
