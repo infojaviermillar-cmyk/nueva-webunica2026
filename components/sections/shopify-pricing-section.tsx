@@ -79,8 +79,7 @@ export default function ShopifyPricingSection() {
       lightColor: 'bg-blue-50',
       textColor: 'text-blue-600',
       features: [
-        { title: 'Plantilla Premium de regalo', detail: 'Incluye una plantilla profesional para Shopify, seleccionada según el tipo de negocio, estilo visual y necesidades comerciales de la tienda.' },
-        { title: 'Auditoría Visual y de UX', detail: 'Revisión de estructura visual, jerarquía de contenidos, botones, navegación, experiencia móvil y puntos de fricción que pueden afectar la conversión.' },
+        { title: 'Auditoría visual y de UX/UI', detail: 'Revisión de estructura visual, jerarquía de contenidos, botones, navegación, experiencia móvil y puntos de fricción que pueden afectar la conversión.' },
         { title: 'Mejora de navegación y menú', detail: 'Optimización del menú principal, categorías, colecciones y accesos rápidos para que el cliente encuentre fácilmente los productos.' },
         { title: 'Optimización de Ficha de Producto', detail: 'Mejora de la estructura de la página de producto, orden de la información, llamados a la acción, imágenes, beneficios y elementos de confianza.' },
         { title: 'Configuración de Apps esenciales', detail: 'Instalación o configuración básica de aplicaciones necesarias para mejorar la operación, conversión o experiencia del cliente.' },
