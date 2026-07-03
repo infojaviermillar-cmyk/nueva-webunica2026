@@ -72,7 +72,7 @@ export default async function RootLayout({
       lang="es"
       className={`${inter.variable} ${plusJakarta.variable} ${caveat.variable} h-full antialiased`}
     >
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''} />
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-LXMLKX5Y7G'} />
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
         <ContactModalProvider>
           {isDisenoShopify ? <DisenoShopifyHeader /> : <Header domain={domain} />}
