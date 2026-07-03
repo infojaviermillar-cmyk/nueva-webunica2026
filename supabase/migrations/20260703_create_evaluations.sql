@@ -12,15 +12,20 @@ CREATE TABLE IF NOT EXISTS public.service_evaluations (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
+-- Ensure project_url column exists if the table was created before
+ALTER TABLE public.service_evaluations ADD COLUMN IF NOT EXISTS project_url TEXT;
+
 -- Set up Row Level Security
 ALTER TABLE public.service_evaluations ENABLE ROW LEVEL SECURITY;
 
 -- Allow public read access to published evaluations
+DROP POLICY IF EXISTS "Public profiles are viewable by everyone." ON public.service_evaluations;
 CREATE POLICY "Public profiles are viewable by everyone."
     ON public.service_evaluations FOR SELECT
     USING ( is_published = true );
 
 -- Allow admins to read all evaluations
+DROP POLICY IF EXISTS "Admins can view all evaluations" ON public.service_evaluations;
 CREATE POLICY "Admins can view all evaluations"
     ON public.service_evaluations FOR SELECT
     TO authenticated
@@ -29,6 +34,7 @@ CREATE POLICY "Admins can view all evaluations"
     );
 
 -- Allow admins to update evaluations (publish them)
+DROP POLICY IF EXISTS "Admins can update evaluations" ON public.service_evaluations;
 CREATE POLICY "Admins can update evaluations"
     ON public.service_evaluations FOR UPDATE
     TO authenticated

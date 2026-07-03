@@ -8,9 +8,17 @@ import LeadButton from '@/components/ui/lead-button';
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('Todas');
 
-  const categories = ['Todas', 'Shopify', 'Migración', 'SaaS', 'PYMES'];
+  const categories = ['Todas', 'Shopify', 'Migración', 'SaaS', 'PYMES', 'LMS'];
 
   const projects = [
+    {
+      title: "Academia Ctalentos",
+      category: "LMS",
+      description: "Academia con tutor LMS, creado de acuerdo al diseño UX/UI solicitado por cliente.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Facademia.ctalentos.cl%2F?w=1200",
+      link: "https://academia.ctalentos.cl/",
+      tags: ["LMS", "Educación", "UX/UI"]
+    },
     {
       title: "Vicca.cl",
       category: "Migración",
