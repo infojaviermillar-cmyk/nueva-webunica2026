@@ -3,21 +3,29 @@ import HomeDesign from './home-design';
 import { getPublishedPosts } from '@/lib/blog';
 
 export const metadata: Metadata = {
-  title: 'Webunica | Agencia de Diseño y Desarrollo Web de Élite en Chile',
-  description: 'Especialistas en diseño de páginas web, desarrollo de sitios ecommerce con Shopify y aplicaciones SaaS con Next.js. Alta ingeniería web para marcas que buscan resultados reales en Chile.',
-  keywords: ['diseño web chile', 'desarrollo shopify chile', 'agencia diseño web', 'desarrollo nextjs chile', 'diseño paginas web', 'experto shopify chile', 'embudos de venta'],
+  title: 'Webunica | Expertos en E-commerce, Embudos de Venta y Shopify Partners',
+  description: 'Expertos en desarrollo web, integraciones y e-commerce. Construimos tiendas Shopify, aplicaciones Next.js y portales SaaS desde Chile para el mundo.',
+  keywords: ['diseño web chile', 'desarrollo shopify chile', 'expertos ecommerce', 'desarrollo nextjs chile', 'diseño paginas web', 'shopify partner chile', 'embudos de venta'],
   openGraph: {
-    title: 'Webunica | Ingeniería Web de Élite',
-    description: 'Transformamos marcas con sitios web de alto rendimiento y estrategias de conversión probadas.',
+    title: 'Webunica | Expertos en E-commerce y Desarrollo',
+    description: 'Ingeniería Web orientada a resultados comerciales. Expertos Shopify Partner y Desarrollo SaaS en Chile.',
     url: 'https://webunica.cl',
     siteName: 'Webunica',
+    images: [
+      {
+        url: 'https://webunica.cl/og-image.jpg',
+        width: 1200,
+        height: 630,
+      },
+    ],
     locale: 'es_CL',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Webunica | Agencia de Desarrollo Web Pro',
-    description: 'Sitios web ultra-rápidos con Next.js y Shopify para empresas que quieren escalar.',
+    title: 'Webunica | Expertos en E-commerce y Desarrollo',
+    description: 'Expertos Shopify Partner, aplicaciones Next.js y portales SaaS.',
+    images: ['https://webunica.cl/twitter-image.jpg'],
   },
   alternates: {
     canonical: 'https://webunica.cl',

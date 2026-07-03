@@ -25,7 +25,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Webunica - Agencia de Marketing Performance & Desarrollo Web",
+    "name": "Webunica - Expertos en E-commerce y Embudos de Venta",
     "url": "https://webunica.cl/",
     "potentialAction": {
       "@type": "SearchAction",
@@ -193,7 +193,7 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
             <div className="lg:col-span-7 pointer-events-auto">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-50 border border-violet-100 mb-8">
                 <span className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
-                <span className="text-xs font-black uppercase tracking-widest text-violet-700">Agencia de Marketing Performance 2026</span>
+                <span className="text-xs font-black uppercase tracking-widest text-violet-700">Expertos en E-commerce y Embudos de Venta 2026</span>
               </div>
               <h1 className="text-[2.5rem] xs:text-5xl lg:text-[85px] font-black tracking-tighter leading-[0.85] mb-10 text-zinc-950 uppercase break-words">
                 Convertimos <br/>Tráfico en <span className="text-violet-600 italic font-serif lowercase font-light">Clientes</span>

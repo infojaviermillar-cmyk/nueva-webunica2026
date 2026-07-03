@@ -171,7 +171,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const businessJsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "Webunica - Diseño & Desarrollo Web de Élite",
+    "name": "Webunica - Expertos en E-commerce y Desarrollo Digital",
     "image": "https://webunica.cl/logo-webunica.png.webp",
     "url": "https://webunica.cl",
     "telephone": "+56912345678",
@@ -221,7 +221,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
                 </span>
-                <span className="text-[10px] font-black tracking-[0.25em] text-zinc-500 uppercase">Ingeniería Web de Élite Chile 2026</span>
+                <span className="text-[10px] font-black tracking-[0.25em] text-zinc-500 uppercase">Expertos en E-commerce & Shopify Partners</span>
               </div>
               
               <h1 className="text-[2.4rem] xs:text-5xl sm:text-5xl md:text-6xl lg:text-[68px] xl:text-[85px] font-black tracking-tighter leading-[0.85] mb-6 xl:mb-12 uppercase text-zinc-950 break-words">
@@ -276,7 +276,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
                     </div>
                   </div>
                   
-                  <h3 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 leading-[0.9] break-words text-zinc-950">Performance <br/>de Élite</h3>
+                  <h3 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 leading-[0.9] break-words text-zinc-950">Expertos en <br/>E-commerce</h3>
                   <p className="text-zinc-600 text-lg font-light max-w-lg leading-relaxed mb-8">
                     Eliminamos la latencia. Cada milisegundo cuenta para tu conversión. Arquitectura <span className="text-zinc-950 font-bold italic">server-side</span> con Next.js para una velocidad de carga instantánea que Google ama.
                   </p>

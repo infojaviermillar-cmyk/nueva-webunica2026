@@ -29,14 +29,21 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: 'Webunica | Agencia de Embudos de Venta y Alta Ingeniería Web',
-  description: 'Expertos en embudos de venta de alto rendimiento, captación de leads y automatización comercial en Chile. Desarrollamos sistemas digitales que convierten para marcas escala global.',
-  keywords: 'embudos de venta chile, captacion de leads, agencia embudos de venta, desarrollo nextjs chile, expertos shopify chile, saas development, automatizacion comercial',
+  title: 'Webunica | Expertos Digitales y Shopify Partners en Chile',
+  description: 'Desarrollamos soluciones web de alto impacto orientadas a ventas. Sitios ultra-rápidos, embudos de conversión, portales SaaS y ecosistemas Shopify rentables.',
+  keywords: 'expertos digitales, shopify partners chile, embudos de venta chile, captacion de leads, desarrollo nextjs chile, expertos shopify chile, saas development, automatizacion comercial',
   openGraph: {
-    title: 'Webunica | Agencia de Embudos de Venta de Élite',
-    description: 'Convertimos tráfico en clientes. Embudos de venta, SaaS y E-commerce de alto rendimiento en Chile.',
+    title: 'Webunica | Expertos Digitales y Shopify Partners',
+    description: 'Ingeniería Web orientada a resultados. Convertimos tráfico en clientes a través de tecnología, velocidad y conversión comercial en Chile.',
     url: 'https://webunica.cl',
     siteName: 'Webunica',
+    images: [
+      {
+        url: 'https://webunica.cl/og-image.jpg',
+        width: 1200,
+        height: 630,
+      },
+    ],
     locale: 'es_CL',
     type: 'website',
   },
