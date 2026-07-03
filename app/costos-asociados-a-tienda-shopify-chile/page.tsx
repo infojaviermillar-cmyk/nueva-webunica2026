@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
 import LeadButton from '@/components/ui/lead-button';
+import ShopifyCalculator from '@/components/calculators/shopify-calculator';
 
 export const metadata: Metadata = {
   title: 'Costos Reales de Shopify en Chile (2026) | Comisiones y Planes',
@@ -90,17 +91,18 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="max-w-4xl mx-auto px-6 text-center">
+      {/* Final CTA / Calculator */}
+      <section className="max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-3xl lg:text-5xl font-black text-white mb-6 tracking-tighter uppercase">
-          Saquemos la <span className="text-violet-500 italic font-serif lowercase font-light">calculadora</span>
+          Saquemos la <span className="text-emerald-500 italic font-serif lowercase font-light">calculadora</span>
         </h2>
-        <p className="text-zinc-400 mb-10 max-w-xl mx-auto font-light leading-relaxed">
-          Cuéntanos sobre tus márgenes de producto y tu ticket promedio. Haremos un análisis de viabilidad para asegurarnos de que Shopify sea altamente rentable para ti.
+        <p className="text-zinc-400 mb-12 max-w-xl mx-auto font-light leading-relaxed">
+          Usa nuestra calculadora interactiva para simular tus costos mensuales, inversión inicial y márgenes de ganancia estimados.
         </p>
-        <LeadButton className="px-12 py-6 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-[0.15em] text-[11px] inline-flex items-center justify-center hover:bg-violet-700 transition-all shadow-[0_0_40px_rgba(124,58,237,0.3)] hover:scale-105 active:scale-95">
-          Agendar Evaluación Gratuita
-        </LeadButton>
+        
+        <div className="text-left">
+          <ShopifyCalculator />
+        </div>
       </section>
 
     </div>
