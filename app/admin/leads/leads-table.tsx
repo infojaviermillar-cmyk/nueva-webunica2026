@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {
   Calendar, Mail, Phone, Calculator, Search, X,
   CheckCircle2, Clock, MessageSquare, XCircle, Send, Loader2, ChevronDown,
-  AlertTriangle, Plus
+  AlertTriangle, Plus, Star
 } from 'lucide-react';
 
 import { Lead, LeadStatus } from '@/types/lead';
@@ -503,6 +503,17 @@ export default function LeadsTable({ leads: initialLeads }: { leads: Lead[] }) {
                         {/* Acciones */}
                         <td className="p-5 align-top text-right">
                           <div className="flex items-center justify-end gap-2 flex-wrap">
+                            <button
+                              onClick={() => {
+                                const url = `${window.location.origin}/evaluacion?leadId=${lead.id}&name=${encodeURIComponent(lead.name ?? '')}`;
+                                navigator.clipboard.writeText(url);
+                                alert('Link de evaluación copiado al portapapeles:\n' + url);
+                              }}
+                              title="Copiar Link de Evaluación"
+                              className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-50 text-amber-600 hover:bg-amber-100 transition-colors border border-amber-200"
+                            >
+                              <Star className="w-3.5 h-3.5" />
+                            </button>
                             <button
                               onClick={() => setExpandedLeadId(isExpanded ? null : lead.id)}
                               className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest border transition-all ${isExpanded ? 'bg-violet-600 text-white border-violet-600 shadow-sm' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'}`}
