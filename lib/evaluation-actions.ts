@@ -9,6 +9,7 @@ export interface ServiceEvaluation {
   lead_id: string;
   client_name: string;
   client_role: string;
+  project_url?: string;
   answers: Record<string, number>;
   average_score: number;
   summary_quote: string;
@@ -24,6 +25,7 @@ export async function submitEvaluation(data: ServiceEvaluation) {
     p_lead_id: data.lead_id,
     p_client_name: data.client_name,
     p_client_role: data.client_role,
+    p_project_url: data.project_url || null,
     p_answers: data.answers,
     p_average_score: data.average_score,
     p_summary_quote: data.summary_quote

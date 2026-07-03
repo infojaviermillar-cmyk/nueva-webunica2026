@@ -23,6 +23,7 @@ function EvaluationForm() {
   const [formData, setFormData] = useState({
     clientName: initialName,
     clientRole: '',
+    projectUrl: '',
     summaryQuote: ''
   });
 
@@ -76,6 +77,7 @@ function EvaluationForm() {
       lead_id: leadId,
       client_name: formData.clientName,
       client_role: formData.clientRole,
+      project_url: formData.projectUrl,
       answers,
       average_score,
       summary_quote: formData.summaryQuote
@@ -157,6 +159,16 @@ function EvaluationForm() {
                   value={formData.clientRole}
                   onChange={(e) => setFormData(prev => ({ ...prev, clientRole: e.target.value }))}
                   placeholder="Ej. CEO & Fundador"
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-violet-500 transition-colors"
+                />
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <label className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Sitio Web / Proyecto Evaluado (Opcional)</label>
+                <input 
+                  type="url" 
+                  value={formData.projectUrl}
+                  onChange={(e) => setFormData(prev => ({ ...prev, projectUrl: e.target.value }))}
+                  placeholder="Ej. https://miempresa.cl"
                   className="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder:text-zinc-700 focus:outline-none focus:border-violet-500 transition-colors"
                 />
               </div>
