@@ -3,8 +3,8 @@ import { Metadata } from 'next';
 import LeadButton from '@/components/ui/lead-button';
 
 export const metadata: Metadata = {
-  title: 'Agencia de Desarrollo Web y E-commerce en Chile | Webunica',
-  description: 'Agencia experta en desarrollo web de alto rendimiento. Construimos e-commerce Shopify, aplicaciones Next.js y portales SaaS desde Chile para el mundo.',
+  title: 'Expertos en Desarrollo Web y E-commerce en Chile | Webunica',
+  description: 'Equipo experto en desarrollo web de alto rendimiento. Construimos e-commerce Shopify, aplicaciones Next.js y portales SaaS desde Chile para el mundo.',
 };
 
 export default function Page() {

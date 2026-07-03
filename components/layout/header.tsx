@@ -134,7 +134,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
                 <Link href="/" className="group block focus:outline-none cursor-pointer">
                   <img 
                     src="/logo-webunica.png.webp" 
-                    alt="Webunica Agencia" 
+                    alt="Webunica Expertos en E-commerce" 
                     className={`h-10 w-auto transition-all duration-500 group-hover:scale-105 ${isDarkHero && !scrolled ? 'violet-filter' : 'brightness-[0.1] opacity-100 gris-img'}`}
                     width={135}
                     height={36}

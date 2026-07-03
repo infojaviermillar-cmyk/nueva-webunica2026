@@ -9,8 +9,8 @@ import ShopifyPricingSection from '@/components/sections/shopify-pricing-section
 
 export const metadata = {
   title: 'Desarrollo de Tiendas Shopify en Chile | Expertos Shopify Partner 2026',
-  description: 'Agencia líder en diseño y desarrollo de tiendas Shopify en Chile. Optimizamos tu ecommerce con Transbank, Webpay, Flow y Facturación SII. ¡Cotiza con Expertos Shopify!',
-  keywords: 'desarrollo tiendas shopify chile, diseño tienda shopify, expertos shopify chile, agencia shopify partner santiago, ecommerce shopify chile, pasarelas de pago shopify chile, factura electronica shopify',
+  description: 'Expertos líderes en diseño y desarrollo de tiendas Shopify en Chile. Optimizamos tu ecommerce con Transbank, Webpay, Flow y Facturación SII. ¡Cotiza con Expertos Shopify!',
+  keywords: 'desarrollo tiendas shopify chile, diseño tienda shopify, expertos shopify chile, expertos shopify partner santiago, ecommerce shopify chile, pasarelas de pago shopify chile, factura electronica shopify',
 };
 
 export default function ShopifyEnChilePage() {
@@ -128,7 +128,7 @@ export default function ShopifyEnChilePage() {
               <div className="absolute inset-0 bg-gradient-to-tr from-violet-500 to-indigo-400 rounded-full blur-[80px] opacity-20 animate-pulse" />
               <Image
                 src="/tecno.png"
-                alt="Agencia de Desarrollo Shopify en Chile - Webunica"
+                alt="Expertos en Desarrollo Shopify en Chile - Webunica"
                 width={800}
                 height={600}
                 className="relative w-full h-auto object-contain transform rotate-2 hover:rotate-0 transition-transform duration-700 z-10"

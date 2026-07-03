@@ -62,7 +62,7 @@ export default function BillingSystemsPage() {
       logo: "💻",
       type: "Integración API (Desarrolladores)",
       pricing: "Planes desde $0 (Limitado) o muy económicos",
-      pros: ["Ideal si cuentas con una agencia de desarrollo (como Webunica)", "Altísima flexibilidad técnica para flujos complejos", "Costos recurrentes bajísimos"],
+      pros: ["Ideal si cuentas con un equipo experto en desarrollo (como Webunica)", "Altísima flexibilidad técnica para flujos complejos", "Costos recurrentes bajísimos"],
       cons: ["No es 'Plug & Play'. Requiere conocimientos técnicos para conectar la API de Shopify"],
       recommended: false
     },
@@ -97,7 +97,7 @@ export default function BillingSystemsPage() {
     },
     {
       question: "¿Cómo Shopify sabe si emitir Boleta o Factura?",
-      answer: "Por defecto, Shopify no sabe la diferencia. Como agencia, nosotros configuramos el 'Checkout' de tu tienda agregando los campos obligatorios del SII (RUT, Razón Social, Giro). Si el cliente los llena, la App de facturación detecta los datos y emite una Factura; si no los llena, emite una Boleta."
+      answer: "Por defecto, Shopify no sabe la diferencia. Como expertos, nosotros configuramos el 'Checkout' de tu tienda agregando los campos obligatorios del SII (RUT, Razón Social, Giro). Si el cliente los llena, la App de facturación detecta los datos y emite una Factura; si no los llena, emite una Boleta."
     },
     {
       question: "¿La boleta se envía automáticamente al cliente?",

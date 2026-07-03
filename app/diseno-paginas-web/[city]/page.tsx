@@ -23,7 +23,7 @@ const citiesData: Record<string, {
   },
   'puerto-montt': {
     name: 'Puerto Montt',
-    title: 'Agencia de Diseño Web en Puerto Montt',
+    title: 'Expertos en Diseño Web en Puerto Montt',
     desc: 'Potenciamos el crecimiento de la capital de Los Lagos con sitios web Next.js y tiendas Shopify optimizadas para conversión.',
     keywords: ['Páginas Web Puerto Montt', 'Ecommerce Los Lagos', 'Google Ads']
   },
@@ -43,11 +43,11 @@ const citiesData: Record<string, {
     name: 'Temuco',
     title: 'Diseño de Páginas Web y Tiendas Online en Temuco',
     desc: 'Líderes en transformación digital en la Araucanía. Implementamos e-commerce avanzados con WooCommerce y Shopify.',
-    keywords: ['Diseño Web Temuco', 'Shopify Temuco', 'Agencia Digital']
+    keywords: ['Diseño Web Temuco', 'Shopify Temuco', 'Expertos Digitales']
   },
   'concepcion': {
     name: 'Concepción',
-    title: 'Agencia de Diseño Web en Concepción y el Biobío',
+    title: 'Expertos en Diseño Web en Concepción y el Biobío',
     desc: 'Ingeniería web de alto impacto para la región del Biobío. Sitios web a medida que cargan en menos de 1 segundo.',
     keywords: ['Páginas Web Concepción', 'Ecommerce Biobío', 'Shopify Experts']
   },
@@ -61,7 +61,7 @@ const citiesData: Record<string, {
     name: 'Santiago',
     title: 'Diseño Web en Santiago | Ingeniería y E-commerce',
     desc: 'La capital demanda estándares de élite. Desarrollamos plataformas SaaS, CRM y tiendas Shopify con foco en resultados.',
-    keywords: ['Páginas Web Santiago', 'Agencia Shopify Chile', 'Next.js']
+    keywords: ['Páginas Web Santiago', 'Expertos Shopify Chile', 'Next.js']
   },
   'la-serena': {
     name: 'La Serena',

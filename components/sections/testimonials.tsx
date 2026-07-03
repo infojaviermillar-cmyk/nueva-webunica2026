@@ -57,7 +57,7 @@ const MOCK_TESTIMONIALS: Testimonial[] = [
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
-    quote: "Muy satisfecha con el trabajo de la agencia. Serios y responsables. La implementación de nuestra tienda fue impecable.",
+    quote: "Muy satisfecha con el trabajo del equipo experto. Serios y responsables. La implementación de nuestra tienda fue impecable.",
     author: "Ana María",
     stars: 5, active: true, created_at: new Date().toISOString()
   },

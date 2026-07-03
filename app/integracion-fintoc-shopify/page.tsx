@@ -174,7 +174,7 @@ export default function IntegracionFintocShopifyPage() {
     "@type": "ProfessionalService",
     "name": "Webunica.cl",
     "image": "https://webunica.cl/logo.png",
-    "description": "Agencia chilena especializada en desarrollo Shopify, configuración de tiendas online, medios de pago, envíos y SEO técnico.",
+    "description": "Expertos chilenos especializados en desarrollo Shopify, configuración de tiendas online, medios de pago, envíos y SEO técnico.",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Santiago",

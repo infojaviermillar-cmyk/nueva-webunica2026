@@ -34,7 +34,7 @@ export default function Footer() {
                 </div>
               </div>
               <p className="text-zinc-400 leading-relaxed text-sm">
-                Agencia de desarrollo web y eCommerce en Chile. Creamos plataformas rápidas, escalables y orientadas a resultados comerciales.
+                Expertos en desarrollo web y eCommerce en Chile. Creamos plataformas rápidas, escalables y orientadas a resultados comerciales.
               </p>
               <div className="flex items-center gap-4">
                 <a href="https://www.facebook.com/webunicachile" target="_blank" rel="noreferrer" aria-label="Seguir a Webunica en Facebook" className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-blue-500 transition-colors">

@@ -19,7 +19,7 @@ const faqs: FAQ[] = [
     answer: "Shopify ofrece la mayor estabilidad y seguridad del mercado. En Chile, se integra nativamente con Flow, Mercado Pago y aplicaciones de logística líderes. Olvídate de servidores caídos o errores de plugins; con Shopify te enfocas en vender, no en arreglar código."
   },
   {
-    question: "¿Qué diferencia a Webunica de una agencia de diseño web tradicional?",
+    question: "¿Qué diferencia a Webunica de un proveedor de diseño web tradicional?",
     answer: "No somos diseñadores que 'hacen cosas bonitas'. Somos ingenieros de conversión. Aplicamos psicología de ventas y arquitectura de embudos (funnels) en cada línea de código. Tu sitio no solo se verá increíble, estará diseñado para facturar."
   },
   {

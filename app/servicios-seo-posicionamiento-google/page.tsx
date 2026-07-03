@@ -4,9 +4,9 @@ import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 
 export const metadata = {
-  title: 'Agencia de SEO Técnico Chile | Posicionamiento Web Google 2026',
+  title: 'Expertos en SEO Técnico Chile | Posicionamiento Web Google 2026',
   description: 'Especialistas en SEO técnico impulsado por Next.js y React. Auditorías de Core Web Vitals, estrategia de contenidos y posicionamiento orgánico orientado al ROI.',
-  keywords: 'agencia seo chile, posicionamiento google santiago, experto seo tecnico, auditoria seo gratis, seo para ecommerce shopify, posicionamiento web chile, consultoria seo profesional',
+  keywords: 'expertos seo chile, posicionamiento google santiago, experto seo tecnico, auditoria seo gratis, seo para ecommerce shopify, posicionamiento web chile, consultoria seo profesional',
 };
 
 export default function SeoServicePage() {
@@ -87,7 +87,7 @@ export default function SeoServicePage() {
               <div className="rounded-[3rem] overflow-hidden border border-zinc-200 shadow-2xl bg-white p-2">
                 <Image 
                   src="/seo_performance_dashboard_premium_1776268863414.png"
-                  alt="Dashboard de Rendimiento SEO - Agencia Webunica Chile"
+                  alt="Dashboard de Rendimiento SEO - Webunica Expertos Digitales"
                   width={800}
                   height={800}
                   className="w-full h-auto rounded-[2.5rem] transform group-hover:scale-105 transition-transform duration-1000"

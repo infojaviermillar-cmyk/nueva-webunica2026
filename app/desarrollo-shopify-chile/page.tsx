@@ -6,7 +6,7 @@ import WhatsAppButton from '@/components/ui/whatsapp-button';
 export const metadata: Metadata = {
   title: 'Shopify Chile: Desarrollo de Tiendas Online | Webunica',
   description: 'Creamos tiendas Shopify en Chile con pagos, envíos, boleta electrónica, SEO técnico, CRO y capacitación. Planes desde $480.000 + IVA.',
-  keywords: 'Shopify Chile, Desarrollo Shopify Chile, Agencia Shopify Chile, Webpay Shopify Chile, Boleta electrónica Shopify Chile, Migrar Magento a Shopify',
+  keywords: 'Shopify Chile, Desarrollo Shopify Chile, Expertos Shopify Chile, Webpay Shopify Chile, Boleta electrónica Shopify Chile, Migrar Magento a Shopify',
 };
 
 export default function DesarrolloShopifyChilePage() {
@@ -132,7 +132,7 @@ export default function DesarrolloShopifyChilePage() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "Webunica - Agencia de Desarrollo Shopify",
+    "name": "Webunica - Expertos Shopify Partners",
     "image": "https://webunica.cl/logo.png",
     "description": "Creamos tiendas Shopify en Chile con pagos, envíos, boleta electrónica, SEO técnico, CRO y capacitación.",
     "address": {
@@ -287,7 +287,7 @@ export default function DesarrolloShopifyChilePage() {
                   <td className="p-4 font-medium">Sujeto al plan publicado oficialmente</td>
                 </tr>
                 <tr>
-                  <td className="p-4 border-r border-zinc-200">Desarrollo Inicial Agencia</td>
+                  <td className="p-4 border-r border-zinc-200">Desarrollo Inicial Expertos</td>
                   <td className="p-4 text-zinc-500 border-r border-zinc-200">Único</td>
                   <td className="p-4 font-medium">Desde $480.000 CLP + IVA</td>
                 </tr>

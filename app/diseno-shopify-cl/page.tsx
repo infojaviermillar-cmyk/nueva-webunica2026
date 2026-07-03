@@ -148,7 +148,7 @@ export default function DisenoShopifyLandingPage() {
                 <div className="relative bg-white p-4 rounded-[3rem] shadow-2xl border border-zinc-100 overflow-hidden group">
                   <Image
                     src="/tecno.png"
-                    alt="Agencia de Diseño Shopify en Chile - Portafolio Webunica"
+                    alt="Expertos en Diseño Shopify en Chile - Portafolio Webunica"
                     width={800}
                     height={600}
                     className="w-full h-auto object-contain transform group-hover:scale-[1.02] transition-transform duration-700"
