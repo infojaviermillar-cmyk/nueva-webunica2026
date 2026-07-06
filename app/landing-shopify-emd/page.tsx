@@ -2,15 +2,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import WorkProcess from '@/components/sections/work-process';
+import ShopifyPlans from '@/components/sections/shopify-plans';
+import Script from 'next/script';
 import LeadButton from '@/components/ui/lead-button';
 import { ShoppingBag, MonitorSmartphone, Rocket, Star, CheckCircle2, ShoppingCart, Search, Zap, ShieldCheck, Box, HelpCircle, ArrowRight, LayoutTemplate, MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Palette, Puzzle } from 'lucide-react';
 
 export const metadata = {
-  title: 'Desarrollo de Tiendas Shopify Chile | Diseño, Planes y Costos',
-  description: 'Creamos tiendas Shopify profesionales, pensadas para vender, con diseño atractivo, configuración técnica, personalización de themes y estructura lista para crecer.',
-  keywords: 'desarrollo shopify chile, tiendas shopify, diseño shopify, partners shopify, ecommerce chile',
+  title: 'Desarrollo de Tiendas Shopify Chile | Expertos, Planes y Costos',
+  description: 'Somos expertos en desarrollo de tiendas Shopify en Chile. Diseño profesional, configuración de ventas, integraciones locales y optimización comercial (CRO) para tu negocio.',
+  keywords: 'desarrollo shopify chile, tiendas shopify, diseño shopify, partners shopify, ecommerce chile, crear tienda shopify chile',
   alternates: {
     canonical: 'https://desarrolloshopify.cl/',
+  },
+  openGraph: {
+    title: 'Desarrollo de Tiendas Shopify en Chile | Webunica',
+    description: 'Expertos en desarrollo y diseño Shopify en Chile. Construimos y optimizamos tu e-commerce para maximizar ventas.',
+    url: 'https://desarrolloshopify.cl',
+    type: 'website',
   }
 };
 
@@ -209,8 +217,33 @@ export default function ShopifyEmdLandingPage() {
     }
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Desarrollo de Tiendas Shopify",
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Webunica",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CL",
+        "addressLocality": "Santiago"
+      }
+    },
+    "areaServed": "CL",
+    "description": "Servicio experto de diseño, desarrollo y configuración técnica de tiendas Shopify en Chile.",
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "CLP",
+      "lowPrice": "320000",
+      "highPrice": "1200000",
+      "offerCount": "4"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-zinc-900 overflow-x-hidden">
+      <Script id="json-ld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="pt-[22vh] lg:pt-48">
         {/* 1. Hero Principal */}
         <section id="inicio" className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
@@ -483,58 +516,7 @@ export default function ShopifyEmdLandingPage() {
         </section>
 
         {/* 7. Planes de Desarrollo */}
-        <section id="planes" className="py-32 bg-white">
-          <div className="max-w-[90rem] mx-auto px-6">
-             <div className="text-center mb-20">
-                <span className="text-[10px] font-black uppercase tracking-widest text-pink-600 mb-4 block">Inversión</span>
-                <h2 className="text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 text-zinc-950">Nuestros Planes</h2>
-             </div>
-             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-               {plans.map((p, i) => (
-                 <div key={i} className={`relative bg-zinc-50 rounded-[3rem] p-10 flex flex-col transition-all duration-300 ${p.recommended ? 'border-2 border-pink-600 shadow-2xl shadow-pink-600/10 scale-100 lg:scale-105 z-10' : 'border border-zinc-200'}`}>
-                    <div className="absolute top-8 right-8 bg-emerald-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-pulse">
-                      10% OFF
-                    </div>
-                    {p.recommended && (
-                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-pink-600 text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg">
-                        Recomendado
-                      </div>
-                    )}
-                    <h3 className="text-2xl font-black mb-2 uppercase text-zinc-900">{p.name}</h3>
-                    <p className="text-xs font-bold text-pink-600 uppercase mb-4">{p.highlight}</p>
-                    <div className="mb-4">
-                      {p.originalPrice ? (
-                        <div className="text-sm text-zinc-400 line-through font-medium mb-1">{p.originalPrice} + iva</div>
-                      ) : (
-                        <div className="h-5 mb-1" />
-                      )}
-                      <span className="text-4xl font-black text-zinc-900">{p.price}</span>
-                      <span className="text-sm text-zinc-500 font-medium ml-1">+ iva</span>
-                    </div>
-                    <div className="flex items-center gap-2 mb-6 text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg w-fit border border-emerald-100">
-                      <span className="text-xs font-black uppercase tracking-widest">💳 6 cuotas sin interés</span>
-                    </div>
-                    <p className="text-sm text-zinc-500 font-light mb-8 min-h-[40px]">{p.desc}</p>
-                    <div className="flex-grow">
-                      <ul className="space-y-4 mb-10">
-                        {p.features.map((f, idx) => (
-                          <li key={idx} className="text-sm text-zinc-600 font-medium flex items-start gap-3">
-                            <CheckCircle2 className="w-5 h-5 text-pink-600 flex-shrink-0" />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <LeadButton 
-                      className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[11px] text-center transition-colors shadow-md active:scale-95 ${p.recommended ? 'bg-pink-600 text-white hover:bg-pink-700 shadow-pink-600/30' : 'bg-zinc-900 text-white hover:bg-zinc-800'}`}
-                    >
-                      Obtener 10% Dto
-                    </LeadButton>
-                 </div>
-               ))}
-             </div>
-          </div>
-        </section>
+        <ShopifyPlans />
 
         {/* Proceso de Trabajo */}
         <WorkProcess />
