@@ -248,7 +248,7 @@ export default function ShopifyEmdLandingPage() {
       <Script id="json-ld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="pt-[22vh] lg:pt-48">
         {/* 1. Hero Principal */}
-        <section id="inicio" className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
+        <section id="inicio" className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 scroll-mt-32 overflow-hidden">
           <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-pink-600/5 blur-[120px] rounded-full pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3" />
           
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -320,7 +320,7 @@ export default function ShopifyEmdLandingPage() {
         </section>
 
         {/* 2. ¿Qué significa desarrollar? */}
-        <section id="ventajas" className="py-24 bg-zinc-950 text-white relative overflow-hidden">
+        <section id="ventajas" className="py-24 bg-zinc-950 text-white relative scroll-mt-32 overflow-hidden">
           <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
             <h2 className="text-3xl lg:text-5xl font-black mb-8 tracking-tighter uppercase leading-tight">
               ¿Qué significa desarrollar una <br/><span className="text-pink-500">tienda Shopify?</span>
@@ -742,7 +742,7 @@ export default function ShopifyEmdLandingPage() {
         </section>
 
         {/* 12. Preguntas Frecuentes */}
-        <section id="faq" className="pb-32 bg-white">
+        <section id="faq" className="pb-32 bg-white scroll-mt-32">
            <FAQSection 
              faqs={faqs} 
              title="Preguntas Frecuentes"
@@ -751,7 +751,7 @@ export default function ShopifyEmdLandingPage() {
         </section>
 
         {/* 13. Llamado a la Acción Final */}
-        <section id="cotizar" className="py-32 px-6">
+        <section id="cotizar" className="py-32 px-6 scroll-mt-32">
           <div className="max-w-5xl mx-auto bg-pink-600 rounded-[4rem] p-12 lg:p-24 text-center text-white relative overflow-hidden group shadow-2xl shadow-pink-600/30">
             <div className="absolute inset-0 bg-[url('/bg-01.jpg')] mix-blend-overlay opacity-10 pointer-events-none" />
             <div className="relative z-10">

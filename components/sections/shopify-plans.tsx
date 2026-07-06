@@ -95,7 +95,7 @@ export default function ShopifyPlans() {
   ];
 
   return (
-    <section id="planes" className="py-32 bg-white relative">
+    <section id="planes" className="py-32 scroll-mt-32 bg-white relative">
       <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-pink-200 to-transparent" />
       <div className="max-w-[90rem] mx-auto px-6">
         <div className="text-center mb-20 max-w-4xl mx-auto">
