@@ -8,7 +8,7 @@ export default function ShopifyPlans() {
     {
       name: "Shopify AJUSTE",
       price: "$320.000",
-      originalPrice: "$337.000",
+      bonus: "Auditoría CRO Gratis",
       highlight: "🔧 Para tiendas ya creadas",
       desc: "Ideal para tiendas que necesitan mejorar imagen, orden comercial y confianza visual.",
       icon: <Zap className="w-6 h-6 text-pink-600" />,
@@ -32,7 +32,7 @@ export default function ShopifyPlans() {
     {
       name: "Shopify PRENDE",
       price: "$580.000",
-      originalPrice: "$650.000",
+      bonus: "Theme Premium Incluido",
       highlight: "🌟 Ideal para emprendedores que inician",
       desc: "Perfecto para emprendedores que dan sus primeros pasos en el comercio digital. Lanza tu tienda con imagen profesional y optimizada para vender.",
       icon: <Star className="w-6 h-6 text-pink-600" />,
@@ -55,7 +55,7 @@ export default function ShopifyPlans() {
     {
       name: "Shopify FULL",
       price: "$780.000",
-      originalPrice: "$980.000",
+      bonus: "Setup GA4 Sin Costo",
       highlight: "⚙️ Para negocios en crecimiento",
       desc: "Automatiza, optimiza y escala tus ventas. Para negocios que necesitan mayor capacidad de productos y herramientas de marketing.",
       recommended: true,
@@ -74,7 +74,7 @@ export default function ShopifyPlans() {
     {
       name: "Shopify PRO",
       price: "$1.200.000",
-      originalPrice: "$1.400.000",
+      bonus: "Consultoría SEO Inicial",
       highlight: "🚀 Para marcas que desean escalar",
       desc: "Solución completa y profesional. Integraciones complejas, estrategias de conversión avanzadas y diseño a medida.",
       icon: <ArrowRight className="w-6 h-6 text-pink-600" />,
@@ -134,20 +134,18 @@ export default function ShopifyPlans() {
                 <div className="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center">
                   {p.icon}
                 </div>
-                <div className="bg-emerald-50 text-emerald-600 text-[10px] font-black px-3 py-1 rounded-full border border-emerald-100">
-                  10% OFF
-                </div>
+                {p.bonus && (
+                  <div className="bg-emerald-50 text-emerald-600 text-[10px] font-black px-3 py-1 rounded-full border border-emerald-100">
+                    + {p.bonus}
+                  </div>
+                )}
               </div>
 
               <h3 className="text-2xl font-black mb-2 uppercase text-zinc-900 group-hover:text-pink-600 transition-colors">{p.name}</h3>
               <p className="text-xs font-bold text-pink-500 uppercase mb-6">{p.highlight}</p>
               
               <div className="mb-6 pb-6 border-b border-zinc-100">
-                {p.originalPrice ? (
-                  <div className="text-sm text-zinc-400 line-through font-medium mb-1 decoration-pink-300">{p.originalPrice} + iva</div>
-                ) : (
-                  <div className="h-5 mb-1" />
-                )}
+                <div className="h-5 mb-1" />
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-black text-zinc-900 tracking-tight">{p.price}</span>
                   <span className="text-sm text-zinc-500 font-medium">+ iva</span>
@@ -180,7 +178,7 @@ export default function ShopifyPlans() {
                     : 'bg-zinc-900 text-white hover:bg-zinc-800'
                   }`}
               >
-                Obtener 10% Dto
+                Solicitar Propuesta
                 <ArrowRight className="w-4 h-4" />
               </LeadButton>
             </div>

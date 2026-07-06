@@ -3,6 +3,8 @@ import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import WorkProcess from '@/components/sections/work-process';
 import ShopifyPlans from '@/components/sections/shopify-plans';
+import SuccessCases from '@/components/sections/success-cases';
+import PlatformComparison from '@/components/sections/platform-comparison';
 import Script from 'next/script';
 import LeadButton from '@/components/ui/lead-button';
 import { ShoppingBag, MonitorSmartphone, Rocket, Star, CheckCircle2, ShoppingCart, Search, Zap, ShieldCheck, Box, HelpCircle, ArrowRight, LayoutTemplate, MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Palette, Puzzle } from 'lucide-react';
