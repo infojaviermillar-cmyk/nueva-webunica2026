@@ -81,6 +81,12 @@ const COMPARISON_DATA: PlanCategory[] = [
         pro: "Múltiples / Avanzado"
       },
       {
+        feature: { name: "Carro de Compra Optimizado", description: "Formulario especial en el carrito para guardar datos de facturación (RUT, Razón Social, Giro) antes del pago, facilitando la emisión automática de facturas." },
+        prende: false,
+        full: true,
+        pro: true
+      },
+      {
         feature: { name: "Sistema de Reviews", description: "Implementación de aplicaciones para recolectar y mostrar opiniones de clientes, generando confianza." },
         prende: false,
         full: true,
