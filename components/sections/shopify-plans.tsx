@@ -2,63 +2,21 @@
 
 import LeadButton from '@/components/ui/lead-button';
 import { Check, X, Star, Zap, Shield, ArrowRight } from 'lucide-react';
+import { plans, features } from '@/data/shopify-plans';
+import Link from 'next/link';
+
 
 export default function ShopifyPlans() {
-  const plans = [
-    {
-      name: "AJUSTE",
-      price: "$320.000",
-      bonus: "Auditoría CRO Gratis",
-      desc: "Para tiendas ya creadas.",
-      icon: <Zap className="w-5 h-5 text-pink-600" />,
-      recommended: false
-    },
-    {
-      name: "PRENDE",
-      price: "$580.000",
-      bonus: "Theme Premium Incluido",
-      desc: "Emprendedores que inician.",
-      icon: <Star className="w-5 h-5 text-pink-600" />,
-      recommended: false
-    },
-    {
-      name: "FULL",
-      price: "$780.000",
-      bonus: "Setup GA4 Sin Costo",
-      desc: "Negocios en crecimiento.",
-      icon: <Shield className="w-5 h-5 text-pink-600" />,
-      recommended: true
-    },
-    {
-      name: "PRO",
-      price: "$1.200.000",
-      bonus: "Consultoría SEO Inicial",
-      desc: "Marcas que desean escalar.",
-      icon: <ArrowRight className="w-5 h-5 text-pink-600" />,
-      recommended: false
-    }
-  ];
 
-  const features = [
-    { name: "Plantilla Envato Premium", ajuste: true, prende: true, full: true, pro: true },
-    { name: "Configuración tienda Shopify", ajuste: "Revisión general", prende: true, full: true, pro: true },
-    { name: "Carga de productos", ajuste: false, prende: "Hasta 70", full: "Hasta 70", pro: "Hasta 300" },
-    { name: "Dominio y validación correo", ajuste: false, prende: true, full: true, pro: true },
-    { name: "Medios de pago locales", ajuste: false, prende: "1 Medio", full: "1 Medio", pro: "Todos" },
-    { name: "Integración Multicourier", ajuste: false, prende: true, full: true, pro: true },
-    { name: "Redes Sociales y WhatsApp", ajuste: true, prende: true, full: true, pro: true },
-    { name: "Notificaciones automáticas", ajuste: true, prende: true, full: true, pro: true },
-    { name: "Carritos abandonados", ajuste: "Básico", prende: "Básico", full: "Avanzado", pro: "Avanzado" },
-    { name: "Integración Analytics y Pixel", ajuste: false, prende: false, full: true, pro: "Avanzado (GA4)" },
-    { name: "Optimización SEO Básica", ajuste: false, prende: false, full: true, pro: true },
-    { name: "Newsletter / Suscripción", ajuste: false, prende: false, full: true, pro: true },
-    { name: "Chat en vivo (Tawk.to)", ajuste: false, prende: false, full: true, pro: true },
-    { name: "Integración ERP/Bsale", ajuste: false, prende: false, full: false, pro: "Previa evaluación" },
-    { name: "Marketing automatizado", ajuste: false, prende: false, full: false, pro: "Mailchimp/Klaviyo" },
-    { name: "Google Ads y Meta Ads", ajuste: false, prende: false, full: false, pro: true },
-    { name: "Soporte técnico", ajuste: "1 Videollamada", prende: "3 meses (3 cambios)", full: "Capacitación", pro: "Preferente + Auditoría" },
-    { name: "Tiempo de entrega", ajuste: "5-10 días", prende: "Hasta 4 sem.", full: "Hasta 4 sem.", pro: "Hasta 8 sem." },
-  ];
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'Zap': return <Zap className="w-5 h-5 text-pink-600" />;
+      case 'Star': return <Star className="w-5 h-5 text-pink-600" />;
+      case 'Shield': return <Shield className="w-5 h-5 text-pink-600" />;
+      case 'ArrowRight': return <ArrowRight className="w-5 h-5 text-pink-600" />;
+      default: return null;
+    }
+  };
 
   const renderValue = (value: boolean | string) => {
     if (value === true) return <Check className="w-5 h-5 text-emerald-500 mx-auto" />;
@@ -99,7 +57,7 @@ export default function ShopifyPlans() {
                     )}
                     <div className="flex justify-center mb-3">
                       <div className="w-10 h-10 rounded-xl bg-pink-50 flex items-center justify-center">
-                        {p.icon}
+                        {getIcon(p.iconName)}
                       </div>
                     </div>
                     <h3 className="text-xl font-black mb-1 uppercase text-zinc-900">{p.name}</h3>
@@ -111,9 +69,9 @@ export default function ShopifyPlans() {
                     <div className="bg-emerald-50 text-emerald-600 text-[9px] font-black px-2 py-1 rounded flex items-center justify-center gap-1 mx-auto w-fit mb-6 border border-emerald-100">
                       + {p.bonus}
                     </div>
-                    <LeadButton className={`w-full py-3 rounded-lg font-black uppercase tracking-widest text-[10px] text-center transition-all shadow-sm flex items-center justify-center gap-2 ${p.recommended ? 'bg-pink-600 text-white hover:bg-pink-700' : 'bg-zinc-900 text-white hover:bg-zinc-800'}`}>
-                      Elegir Plan
-                    </LeadButton>
+                    <Link href={`/planes/${p.id}`} className={`w-full py-3 rounded-lg font-black uppercase tracking-widest text-[10px] text-center transition-all shadow-sm flex items-center justify-center gap-2 ${p.recommended ? 'bg-pink-600 text-white hover:bg-pink-700' : 'bg-zinc-900 text-white hover:bg-zinc-800'}`}>
+                      Ver Plan
+                    </Link>
                   </th>
                 ))}
               </tr>
@@ -138,7 +96,7 @@ export default function ShopifyPlans() {
              <div key={i} className={`bg-white rounded-[2rem] p-8 flex flex-col ${p.recommended ? 'border-2 border-pink-500 shadow-xl shadow-pink-500/10' : 'border border-zinc-200'}`}>
                 <div className="flex justify-between items-start mb-6">
                   <div className="w-12 h-12 rounded-2xl bg-pink-50 flex items-center justify-center">
-                    {p.icon}
+                    {getIcon(p.iconName)}
                   </div>
                   {p.recommended && (
                     <div className="bg-pink-600 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
@@ -173,9 +131,9 @@ export default function ShopifyPlans() {
                   </ul>
                 </div>
                 
-                <LeadButton className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[11px] text-center transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 ${p.recommended ? 'bg-pink-600 text-white hover:bg-pink-700' : 'bg-zinc-900 text-white hover:bg-zinc-800'}`}>
-                  Elegir Plan <ArrowRight className="w-4 h-4" />
-                </LeadButton>
+                <Link href={`/planes/${p.id}`} className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[11px] text-center transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 ${p.recommended ? 'bg-pink-600 text-white hover:bg-pink-700' : 'bg-zinc-900 text-white hover:bg-zinc-800'}`}>
+                  Ver Plan <ArrowRight className="w-4 h-4" />
+                </Link>
              </div>
            ))}
         </div>
