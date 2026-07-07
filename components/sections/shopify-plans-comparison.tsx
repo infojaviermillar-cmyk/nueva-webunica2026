@@ -35,9 +35,9 @@ const COMPARISON_DATA: PlanCategory[] = [
       },
       {
         feature: { name: "Carga de Productos", description: "Cantidad de productos que nuestro equipo configurará inicialmente. Incluye carga de imágenes, descripciones, precios y variantes base." },
-        prende: "Hasta 70",
-        full: "Hasta 120",
-        pro: "Hasta 300+"
+        prende: "Carga inicial de productos",
+        full: "Carga ampliada de productos",
+        pro: "Carga masiva de productos"
       },
       {
         feature: { name: "Diseño Mobile-First", description: "El 80% de las compras en Chile se hacen desde el celular. Optimizamos la tienda priorizando la experiencia móvil." },
