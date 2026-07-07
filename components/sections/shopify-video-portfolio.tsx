@@ -15,6 +15,10 @@ export default function ShopifyVideoPortfolio() {
     {
       id: "DETnCBf3Mzk",
       title: "vicca video vertical"
+    },
+    {
+      id: "edpKIU695WU",
+      title: "chiletronic video vertical"
     }
   ];
 
@@ -30,7 +34,7 @@ export default function ShopifyVideoPortfolio() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
           {videos.map((video) => (
             <div key={video.id} className="w-full max-w-[320px] aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl relative border-4 border-zinc-950 bg-zinc-100">
               <iframe 
