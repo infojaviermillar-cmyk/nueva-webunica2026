@@ -145,6 +145,8 @@ export default function ShopifyEnChilePage() {
           </div>
         </section>
 
+        <ShopifyPricingSection />
+
         {/* Video Portfolio Section */}
         <ShopifyVideoPortfolio />
 
@@ -212,7 +214,6 @@ export default function ShopifyEnChilePage() {
           </div>
         </section>
 
-        <ShopifyPricingSection />
 
         {/* FAQ Section */}
         <div className="pb-32 bg-white">
