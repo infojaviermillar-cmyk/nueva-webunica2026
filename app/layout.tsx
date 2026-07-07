@@ -8,7 +8,7 @@ import DisenoShopifyFooter from '@/components/layout/diseno-shopify-footer';
 import DesarrolloShopifyFooter from '@/components/layout/desarrollo-shopify-footer';
 import FloatingWhatsApp from '@/components/layout/floating-whatsapp';
 import { ContactModalProvider } from '@/context/contact-modal-context';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -72,6 +72,7 @@ export default async function RootLayout({
       lang="es"
       className={`${inter.variable} ${plusJakarta.variable} ${caveat.variable} h-full antialiased`}
     >
+      <GoogleTagManager gtmId="GTM-TLZXRQCG" />
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-LXMLKX5Y7G'} />
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
         <ContactModalProvider>
