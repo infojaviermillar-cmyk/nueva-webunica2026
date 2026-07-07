@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check, ChevronDown, MessageCircle, ArrowRight, Star, Zap, Percent } from 'lucide-react';
 import Link from 'next/link';
 import LeadButton from '@/components/ui/lead-button';
+import ShopifyPlansComparison from '@/components/sections/shopify-plans-comparison';
 
 interface Feature {
   title: string;
@@ -186,159 +187,11 @@ export default function ShopifyPricingSection() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-16">
-          {plans.filter(p => p.id !== 'prende').map((plan, index) => (
-            <motion.div
-              key={plan.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative flex flex-col h-full bg-white rounded-[2.5rem] p-8 border-2 transition-all duration-500 group hover:translate-y-[-12px] ${
-                plan.recommended 
-                  ? 'border-purple-600 shadow-[0_32px_64px_-16px_rgba(139,92,246,0.15)] ring-4 ring-purple-50' 
-                  : 'border-zinc-100 shadow-[0_16px_48px_-12px_rgba(0,0,0,0.05)] hover:border-zinc-200'
-              }`}
-            >
-              {plan.recommended && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white text-[10px] font-black px-4 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg shadow-purple-600/30 uppercase tracking-widest">
-                  <Star className="w-3 h-3 fill-current" />
-                  Recomendado
-                </div>
-              )}
-
-              <div className="mb-8">
-                <h3 className="text-xl font-black mb-3 uppercase tracking-tight text-zinc-900">{plan.name}</h3>
-                <p className="text-xs text-zinc-500 font-medium leading-relaxed mb-6">
-                  {plan.description}
-                </p>
-                
-                <div className="mt-4 flex flex-col">
-                  {plan.oldPrice && (
-                    <span className="text-sm text-zinc-400 line-through font-medium mb-1">
-                      {plan.oldPrice} + IVA
-                    </span>
-                  )}
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-black text-zinc-950 tracking-tighter">
-                      {plan.price}
-                    </span>
-                    <span className="text-sm font-bold text-zinc-500 uppercase tracking-tight">+ IVA</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex-grow">
-                <div className="mb-4 pt-4 border-t border-zinc-50">
-                  <span className="text-[10px] font-black uppercase tracking-[0.1em] text-zinc-400 block mb-4">
-                    ¿Qué incluye? (Clic para ver detalle)
-                  </span>
-                  <div className="space-y-1">
-                    {plan.features.map((feature, fIndex) => (
-                      <FeatureAccordion key={fIndex} feature={feature} planColor={plan.color} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-zinc-50 space-y-4">
-                <div className="flex items-center justify-between text-[11px] font-bold text-zinc-500 uppercase tracking-wider mb-2">
-                  <span>Tiempo estimado</span>
-                  <span className={plan.textColor}>{plan.time.replace('Entrega en ', '')}</span>
-                </div>
-                
-                <LeadButton 
-                  className={`w-full py-4 rounded-2xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 transition-all active:scale-95 ${
-                    plan.recommended 
-                      ? 'bg-purple-600 text-white shadow-xl shadow-purple-600/30 hover:bg-purple-700' 
-                      : `${plan.color} text-white shadow-xl shadow-zinc-900/10 hover:opacity-90`
-                  }`}
-                >
-                  <Percent className="w-3.5 h-3.5" />
-                  Obtener 10% Descuento
-                </LeadButton>
-
-                <Link 
-                  href="https://wa.me/56984410379"
-                  className="w-full py-3 rounded-2xl font-bold text-[10px] uppercase tracking-widest text-zinc-400 border border-zinc-100 flex items-center justify-center gap-2 hover:bg-zinc-50 hover:text-zinc-600 transition-all"
-                >
-                  <MessageCircle className="w-3.5 h-3.5" />
-                  Hablar con Webunica
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+        <div className="mb-16">
+          <ShopifyPlansComparison />
         </div>
 
-        {/* Separator / Subtitle for Prende */}
-        <div className="text-center mb-10">
-           <div className="inline-block px-6 py-2 bg-zinc-100 rounded-full text-zinc-500 text-xs font-bold uppercase tracking-widest mb-4">
-              ¿Ya tienes una tienda?
-           </div>
-        </div>
 
-        {/* Plan Prende Below */}
-        <div className="max-w-4xl mx-auto">
-          {plans.filter(p => p.id === 'prende').map((plan) => (
-            <motion.div
-              key={plan.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-blue-50/30 rounded-[3rem] p-8 md:p-12 border-2 border-blue-100/50 shadow-sm hover:shadow-md transition-all group"
-            >
-              <div className="flex flex-col md:flex-row gap-10 items-start">
-                <div className="w-full md:w-1/3">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-widest mb-4">
-                    <Zap className="w-3 h-3" />
-                    Optimización Rápida
-                  </div>
-                  <h3 className="text-3xl font-black mb-4 uppercase tracking-tight text-zinc-900">{plan.name}</h3>
-                  <p className="text-sm text-zinc-500 leading-relaxed mb-6">
-                    {plan.description}
-                  </p>
-                  
-                  <div className="flex flex-col mb-8">
-                    {plan.oldPrice && (
-                      <span className="text-sm text-zinc-400 line-through font-medium mb-1">
-                        {plan.oldPrice} + IVA
-                      </span>
-                    )}
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-5xl font-black text-zinc-950 tracking-tighter">
-                        {plan.price}
-                      </span>
-                      <span className="text-sm font-bold text-zinc-500 uppercase tracking-tight">+ IVA</span>
-                    </div>
-                    <span className="text-xs font-bold text-blue-600 mt-2 uppercase tracking-wide">
-                       {plan.time}
-                    </span>
-                  </div>
-
-                  <LeadButton 
-                    className="w-full py-4 rounded-2xl bg-blue-600 text-white font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all active:scale-95"
-                  >
-                    <Percent className="w-3.5 h-3.5" />
-                    Quiero mi 10% de Descuento
-                  </LeadButton>
-                </div>
-
-                <div className="w-full md:w-2/3">
-                  <div className="bg-white rounded-[2rem] p-6 md:p-8 border border-blue-100/50 shadow-inner">
-                    <span className="text-[10px] font-black uppercase tracking-[0.1em] text-zinc-400 block mb-6">
-                      Funcionalidades incluidas
-                    </span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-                      {plan.features.map((feature, fIndex) => (
-                        <FeatureAccordion key={fIndex} feature={feature} planColor={plan.color} />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
 
         {/* CCS Requirement Explanation */}
         <div className="max-w-4xl mx-auto mt-20 mb-16">
