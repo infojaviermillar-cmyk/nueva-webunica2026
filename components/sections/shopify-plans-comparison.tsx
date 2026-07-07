@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Check, Info, Rocket, TrendingUp, Zap, Minus } from 'lucide-react';
 import FeatureExplanationModal from '@/components/modals/feature-explanation-modal';
 import LeadButton from '@/components/ui/lead-button';
+import WhatsAppButton from '@/components/ui/whatsapp-button';
 
 interface FeatureInfo {
   name: string;
@@ -230,6 +231,15 @@ export default function ShopifyPlansComparison() {
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div className="mt-12 flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+        <LeadButton className="px-8 py-4 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/20 active:scale-95 text-center flex items-center justify-center gap-2">
+          Solicitar Cotización Gratis
+        </LeadButton>
+        <WhatsAppButton className="px-8 py-4 bg-emerald-500 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-emerald-600 transition-all shadow-xl shadow-emerald-500/20 active:scale-95 text-center flex items-center justify-center gap-2">
+          Hablar con un Experto
+        </WhatsAppButton>
       </div>
 
       <FeatureExplanationModal 
