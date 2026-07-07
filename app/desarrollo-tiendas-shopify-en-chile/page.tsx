@@ -6,7 +6,7 @@ import WhatsAppButton from '@/components/ui/whatsapp-button';
 import FunnelAnimation from '@/components/ui/funnel-animation';
 import { MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Palette, Search, Puzzle, Rocket, LayoutTemplate, ShoppingBag, CreditCard, Truck, FileText } from 'lucide-react';
 import ShopifyPricingSection from '@/components/sections/shopify-pricing-section';
-
+import ShopifyVideoPortfolio from '@/components/sections/shopify-video-portfolio';
 export const metadata = {
   title: 'Desarrollo de Tiendas Shopify en Chile | Expertos Shopify Partner 2026',
   description: 'Expertos líderes en diseño y desarrollo de tiendas Shopify en Chile. Optimizamos tu ecommerce con Transbank, Webpay, Flow y Facturación SII. ¡Cotiza con Expertos Shopify!',
@@ -144,6 +144,9 @@ export default function ShopifyEnChilePage() {
             </div>
           </div>
         </section>
+
+        {/* Video Portfolio Section */}
+        <ShopifyVideoPortfolio />
 
         {/* Local Advantage Section */}
         <section className="bg-zinc-950 py-32 rounded-[4rem] mx-4 text-white overflow-hidden relative">
