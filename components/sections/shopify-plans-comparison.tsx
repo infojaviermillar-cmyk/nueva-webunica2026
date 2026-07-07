@@ -204,12 +204,14 @@ export default function ShopifyPlansComparison() {
                       <td className="p-4 px-8 border-b border-zinc-100 border-r border-r-zinc-50">
                         <button 
                           onClick={() => setActiveFeature(item.feature)}
-                          className="flex items-center gap-3 text-left w-full hover:opacity-70 transition-opacity"
+                          className="flex items-center gap-3 text-left w-full group/btn"
                         >
-                          <span className="w-6 h-6 rounded-full bg-zinc-100 flex items-center justify-center shrink-0 group-hover:bg-violet-100 transition-colors">
-                            <Info className="w-3.5 h-3.5 text-zinc-400 group-hover:text-violet-600" />
+                          <span className="w-6 h-6 rounded-full bg-zinc-100 flex items-center justify-center shrink-0 group-hover/btn:bg-violet-100 group-hover/btn:scale-110 transition-all duration-300">
+                            <Info className="w-3.5 h-3.5 text-zinc-400 group-hover/btn:text-violet-600 transition-colors" />
                           </span>
-                          <span className="font-bold text-sm text-zinc-700">{item.feature.name}</span>
+                          <span className="font-bold text-sm text-zinc-700 border-b border-dashed border-zinc-300 group-hover/btn:border-violet-400 group-hover/btn:text-violet-700 transition-all duration-300 pb-0.5">
+                            {item.feature.name}
+                          </span>
                         </button>
                       </td>
                       <td className="p-4 text-center border-b border-zinc-100 border-r border-r-zinc-50">
