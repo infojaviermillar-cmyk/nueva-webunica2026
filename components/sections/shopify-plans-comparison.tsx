@@ -46,6 +46,12 @@ const COMPARISON_DATA: PlanCategory[] = [
         pro: true
       },
       {
+        feature: { name: "Diseño Optimizado para Convertir (CRO)", description: "Aplicamos técnicas de conversión y persuasión en la ficha de producto, carritos y checkout para maximizar ventas." },
+        prende: false,
+        full: true,
+        pro: true
+      },
+      {
         feature: { name: "Páginas Informativas", description: "Creación de páginas esenciales como Quienes Somos, Contacto, Políticas de Devolución y Términos de Servicio." },
         prende: "Básicas",
         full: "Completas",
@@ -71,8 +77,8 @@ const COMPARISON_DATA: PlanCategory[] = [
       {
         feature: { name: "Integración ERP / Boletas", description: "Conexión con sistemas de facturación y control de inventario locales para emitir boletas electrónicas automáticamente." },
         prende: false,
-        full: false,
-        pro: "Bsale / Obuma / Defontana"
+        full: "Básico (1 Integración)",
+        pro: "Múltiples / Avanzado"
       },
       {
         feature: { name: "Sistema de Reviews", description: "Implementación de aplicaciones para recolectar y mostrar opiniones de clientes, generando confianza." },
@@ -100,7 +106,7 @@ const COMPARISON_DATA: PlanCategory[] = [
       {
         feature: { name: "Email Marketing", description: "Configuración de flujos automáticos de correos (ej. Carrito Abandonado, Bienvenida) para recuperar y aumentar ventas." },
         prende: false,
-        full: false,
+        full: "Recuperación de Carritos",
         pro: "Klaviyo (Flujos Avanzados)"
       }
     ]
