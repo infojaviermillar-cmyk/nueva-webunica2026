@@ -84,6 +84,8 @@ export default function Header({ domain = '' }: { domain?: string }) {
 
   const hoverColor = isDarkHero && !scrolled ? 'hover:text-violet-400' : 'hover:text-violet-700';
 
+  const basePath = (pathname === '/' || pathname === '/landing-shopify-emd') ? '' : '/';
+
   return (
     <>
       <style jsx global>{`
@@ -121,7 +123,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
             {/* Logo Oficial Webunica */}
             <div className="flex-shrink-0 flex items-center relative z-20">
               {isShopifyLanding ? (
-                <Link href="#inicio" className="group flex items-center gap-3 bg-white px-5 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all border border-zinc-100">
+                <Link href={`${basePath}#inicio`} className="group flex items-center gap-3 bg-white px-5 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all border border-zinc-100">
                   <div className="flex flex-col leading-none">
                     <span className="text-[14px] font-black uppercase tracking-tighter text-zinc-950">desarrolloshopify</span>
                     <span className="text-[8px] font-bold uppercase tracking-[0.1em] text-pink-600">de webunica.cl</span>
@@ -147,10 +149,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
             <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-4 xl:gap-10 ml-6 xl:ml-16 relative z-30">
               {isShopifyLanding ? (
                 <>
-                  <Link href="#inicio" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>Inicio</Link>
-                  <Link href="#ventajas" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>Ventajas</Link>
-                  <Link href="#planes" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>Planes</Link>
-                  <Link href="#faq" className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>FAQ</Link>
+                  <Link href={`${basePath}#inicio`} className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>Inicio</Link>
+                  <Link href={`${basePath}#ventajas`} className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>Ventajas</Link>
+                  <Link href={`${basePath}#planes`} className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>Planes</Link>
+                  <Link href={`${basePath}#faq`} className={`${textColor} ${hoverColor} font-bold transition-all text-[11px] xl:text-[12px] uppercase tracking-widest cursor-pointer`}>FAQ</Link>
                 </>
               ) : (
                 <>
@@ -500,10 +502,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
             <nav aria-label="Navegación móvil" className="flex flex-col gap-8">
               {isShopifyLanding ? (
                 <div className="flex flex-col gap-6">
-                  <Link href="#inicio" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">Inicio</Link>
-                  <Link href="#ventajas" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">Ventajas</Link>
-                  <Link href="#planes" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">Planes</Link>
-                  <Link href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">FAQ</Link>
+                  <Link href={`${basePath}#inicio`} onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">Inicio</Link>
+                  <Link href={`${basePath}#ventajas`} onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">Ventajas</Link>
+                  <Link href={`${basePath}#planes`} onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">Planes</Link>
+                  <Link href={`${basePath}#faq`} onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-zinc-900 uppercase tracking-tighter hover:text-pink-600 transition-colors border-b border-zinc-100 pb-4">FAQ</Link>
                 </div>
               ) : (
                 <>
