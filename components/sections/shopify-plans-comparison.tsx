@@ -52,6 +52,12 @@ const COMPARISON_DATA: PlanCategory[] = [
         pro: true
       },
       {
+        feature: { name: "Fichas de Producto Dinámicas (Metacampos)", description: "Personalización avanzada usando metacampos de Shopify para agregar PDF descargables, videos específicos, pestañas adicionales y contenido único por producto." },
+        prende: false,
+        full: false,
+        pro: true
+      },
+      {
         feature: { name: "Páginas Informativas", description: "Creación de páginas esenciales como Quienes Somos, Contacto, Políticas de Devolución y Términos de Servicio." },
         prende: "Básicas",
         full: "Completas",
