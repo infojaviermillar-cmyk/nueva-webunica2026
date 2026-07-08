@@ -140,9 +140,9 @@ const COMPARISON_DATA: PlanCategory[] = [
       },
       {
         feature: { name: "Soporte Post-Lanzamiento", description: "Atención prioritaria para resolver dudas técnicas y asegurar que la tienda funcione perfectamente tras salir a vivo." },
-        prende: "1 Mes",
-        full: "3 Meses",
-        pro: "6 Meses"
+        prende: "1 Mes de Garantía",
+        full: "1 Mes de Garantía",
+        pro: "3 Meses + 1 Extra"
       }
     ]
   }
