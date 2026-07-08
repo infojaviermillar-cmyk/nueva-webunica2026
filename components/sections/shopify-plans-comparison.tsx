@@ -122,9 +122,9 @@ const COMPARISON_DATA: PlanCategory[] = [
     features: [
       {
         feature: { name: "Tiempo de Entrega", description: "Tiempo estimado para tener tu tienda lista y operando, desde la entrega de la información inicial." },
-        prende: "4 Semanas",
-        full: "6 Semanas",
-        pro: "8-10 Semanas"
+        prende: "2 a 3 Semanas",
+        full: "4 a 5 Semanas",
+        pro: "5 a 6 Semanas"
       },
       {
         feature: { name: "Capacitación", description: "Entrenamiento para que tú y tu equipo puedan administrar la tienda, procesar pedidos y actualizar inventario." },
