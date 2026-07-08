@@ -64,7 +64,7 @@ const COMPARISON_DATA: PlanCategory[] = [
     features: [
       {
         feature: { name: "Medios de Pago", description: "Configuración de pasarelas de pago para recibir pagos con Tarjetas de Crédito, Débito y Transferencias en Chile." },
-        prende: "Webpay Plus / Flow",
+        prende: "Mercado Pago",
         full: "Múltiples (Webpay, Flow, MercadoPago)",
         pro: "Múltiples + B2B"
       },

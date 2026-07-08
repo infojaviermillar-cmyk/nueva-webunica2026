@@ -179,7 +179,7 @@ export default function ShopifyPricingSection() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6 text-zinc-950">
-              Planes de Desarrollo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-600 italic font-serif lowercase font-normal">Shopify en Chile</span>
+              Planes de Desarrollo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-600 italic font-serif font-normal">Shopify en Chile</span>
             </h2>
             <p className="text-lg md:text-xl text-zinc-500 font-light max-w-3xl mx-auto leading-relaxed">
               Creamos tiendas Shopify profesionales en Chile, optimizadas para vender online, integrar medios de pago, mejorar la experiencia móvil y preparar tu ecommerce para campañas digitales. Elige el plan que mejor se adapta al estado actual de tu negocio.
