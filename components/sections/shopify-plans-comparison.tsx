@@ -29,6 +29,12 @@ const COMPARISON_DATA: PlanCategory[] = [
     category: "Configuración y Diseño",
     features: [
       {
+        feature: { name: "Plataforma Autoadministrable", description: "Tu tienda quedará configurada para que tú o tu equipo puedan gestionar ventas, productos y clientes fácilmente." },
+        prende: true,
+        full: true,
+        pro: true
+      },
+      {
         feature: { name: "Tema y Diseño", description: "Utilizamos plantillas premium de Shopify, optimizadas para conversión y velocidad. En planes superiores, personalizamos secciones a medida de la marca." },
         prende: "Plantilla Premium",
         full: "Secciones Personalizadas",
@@ -39,6 +45,12 @@ const COMPARISON_DATA: PlanCategory[] = [
         prende: "Carga inicial de productos",
         full: "Carga ampliada de productos",
         pro: "Carga masiva de productos"
+      },
+      {
+        feature: { name: "Categorías y Colecciones", description: "Configuración de árboles de navegación, categorías principales y colecciones inteligentes para ordenar el catálogo." },
+        prende: "Básicas",
+        full: "Avanzadas",
+        pro: "Estructura Completa"
       },
       {
         feature: { name: "Diseño Mobile-First", description: "El 80% de las compras en Chile se hacen desde el celular. Optimizamos la tienda priorizando la experiencia móvil." },
@@ -102,25 +114,72 @@ const COMPARISON_DATA: PlanCategory[] = [
     ]
   },
   {
-    category: "Marketing y Análisis",
+    category: "Implementación Técnica y Analítica",
     features: [
       {
-        feature: { name: "SEO Técnico", description: "Optimización de títulos, meta descripciones, estructura de URLs y etiquetas ALT en imágenes para mejorar el posicionamiento en Google." },
+        feature: { name: "Google Analytics 4", description: "Configuración de la propiedad de GA4 para medir visitas, comportamiento y rendimiento general." },
         prende: "Básico",
-        full: "Avanzado",
-        pro: "Estrategia Completa"
+        full: true,
+        pro: true
       },
       {
-        feature: { name: "Analítica Web", description: "Instalación de Google Analytics 4 y configuración de píxeles para medir el rendimiento de la tienda." },
-        prende: "Básico",
-        full: "Google Analytics 4",
-        pro: "GA4 + Meta Pixel API"
+        feature: { name: "Google Tag Manager", description: "Implementación de GTM para administrar etiquetas y scripts de forma ordenada sin tocar el código." },
+        prende: false,
+        full: false,
+        pro: true
+      },
+      {
+        feature: { name: "Meta Pixel y Conversion API", description: "Instalación del pixel de Facebook/Instagram y la API de conversiones para mejorar el rendimiento de tus anuncios." },
+        prende: false,
+        full: "Solo Pixel",
+        pro: "Pixel + Conversion API"
+      },
+      {
+        feature: { name: "Google Merchant Center", description: "Sincronización del catálogo de productos con Google para aparecer en Google Shopping." },
+        prende: false,
+        full: false,
+        pro: true
+      },
+      {
+        feature: { name: "Medición de Eventos y Conversiones", description: "Configuración de eventos clave (agregar al carrito, iniciar pago, compra) para optimizar campañas publicitarias." },
+        prende: false,
+        full: "Básico",
+        pro: "Avanzado (Para Ads)"
       },
       {
         feature: { name: "Email Marketing", description: "Configuración de flujos automáticos de correos (ej. Carrito Abandonado, Bienvenida) para recuperar y aumentar ventas." },
         prende: false,
         full: "Recuperación de Carritos",
         pro: "Klaviyo (Flujos Avanzados)"
+      }
+    ]
+  },
+  {
+    category: "SEO y Posicionamiento",
+    features: [
+      {
+        feature: { name: "Optimización SEO Técnica", description: "Configuración de mapa del sitio, archivo robots.txt, velocidad de carga y solución de errores técnicos para Google." },
+        prende: "Básica",
+        full: "Avanzada",
+        pro: "Auditoría y Setup Completo"
+      },
+      {
+        feature: { name: "SEO On-Page (Categorías y Productos)", description: "Optimización de títulos, meta descripciones y etiquetas ALT en imágenes de las páginas más importantes." },
+        prende: false,
+        full: "Básico",
+        pro: "Estrategia Completa"
+      },
+      {
+        feature: { name: "Estructura Optimizada para SEO", description: "Organización jerárquica de URLs y menús pensada para que Google entienda y priorice tu contenido." },
+        prende: false,
+        full: true,
+        pro: true
+      },
+      {
+        feature: { name: "Propuesta de Servicio SEO Mensual", description: "Plan de acción y propuesta comercial para trabajar el SEO mes a mes y lograr crecimiento sostenido del tráfico orgánico." },
+        prende: false,
+        full: false,
+        pro: "Incluida"
       }
     ]
   },
