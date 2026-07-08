@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Check, Info, Rocket, TrendingUp, Zap, Minus } from 'lucide-react';
+import { Check, Info, Rocket, TrendingUp, Zap, X } from 'lucide-react';
 import FeatureExplanationModal from '@/components/modals/feature-explanation-modal';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
@@ -148,9 +148,9 @@ export default function ShopifyPlansComparison() {
   const renderValue = (val: string | boolean, highlight: boolean = false) => {
     if (typeof val === 'boolean') {
       return val ? (
-        <Check className={`w-5 h-5 mx-auto ${highlight ? 'text-violet-500' : 'text-zinc-400'}`} />
+        <Check className={`w-5 h-5 mx-auto ${highlight ? 'text-violet-600' : 'text-zinc-800'}`} strokeWidth={3} />
       ) : (
-        <Minus className="w-5 h-5 mx-auto text-zinc-200" />
+        <X className="w-5 h-5 mx-auto text-zinc-300" strokeWidth={2} />
       );
     }
     return <span className={`text-sm ${highlight ? 'font-black text-violet-700' : 'font-medium text-zinc-600'}`}>{val}</span>;
@@ -173,18 +173,19 @@ export default function ShopifyPlansComparison() {
                 <th className="p-8 lg:p-10 w-2/9 text-center border-b border-zinc-100 border-l border-zinc-50">
                   <div className="flex justify-center mb-4"><TrendingUp className="w-8 h-8 text-emerald-500" /></div>
                   <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Prende</h4>
-                  <div className="text-xl font-black text-zinc-900 mb-6">$580.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
-                  <LeadButton className="w-full py-4 text-[10px] bg-zinc-950 text-white rounded-xl uppercase font-black tracking-widest hover:bg-zinc-800">
+                  <div className="text-xl font-black text-zinc-900 mb-6">$580.000 <span className="text-xs text-zinc-400 uppercase font-bold">+ IVA</span></div>
+                  <LeadButton className="w-full py-4 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-widest hover:bg-zinc-50">
                     Cotizar
                   </LeadButton>
                 </th>
 
                 {/* FULL (Recommended) */}
-                <th className="p-8 lg:p-10 w-2/9 text-center border-b border-zinc-100 border-l border-zinc-50 bg-violet-50/30 relative">
+                <th className="p-8 lg:p-10 w-2/9 text-center border-b border-zinc-100 border-l border-zinc-50 bg-violet-50/50 relative">
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-violet-600 text-white text-[9px] font-black px-4 py-1.5 rounded-b-lg uppercase tracking-widest">Recomendado</div>
                   <div className="flex justify-center mb-4 mt-2"><Zap className="w-8 h-8 text-violet-500" /></div>
                   <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Full</h4>
-                  <div className="text-xl font-black text-violet-700 mb-6">$780.000 <span className="text-[10px] text-violet-400/80 uppercase font-bold">+ IVA</span></div>
+                  <div className="text-xl font-black text-violet-700 mb-2">$780.000 <span className="text-xs text-violet-500 uppercase font-bold">+ IVA</span></div>
+                  <div className="text-[10px] font-black text-violet-600 bg-violet-100 px-2 py-0.5 rounded-full inline-block mb-3">Ahorra en Apps y Comisiones</div>
                   <LeadButton className="w-full py-4 text-[10px] bg-violet-600 text-white rounded-xl uppercase font-black tracking-widest hover:bg-violet-700 shadow-lg shadow-violet-600/20">
                     Cotizar Full
                   </LeadButton>
@@ -194,8 +195,8 @@ export default function ShopifyPlansComparison() {
                 <th className="p-8 lg:p-10 w-2/9 text-center border-b border-zinc-100 border-l border-zinc-50">
                   <div className="flex justify-center mb-4"><Rocket className="w-8 h-8 text-blue-500" /></div>
                   <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Pro</h4>
-                  <div className="text-xl font-black text-zinc-900 mb-6">$1.200.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
-                  <LeadButton className="w-full py-4 text-[10px] bg-zinc-950 text-white rounded-xl uppercase font-black tracking-widest hover:bg-zinc-800">
+                  <div className="text-xl font-black text-zinc-900 mb-6">$1.200.000 <span className="text-xs text-zinc-400 uppercase font-bold">+ IVA</span></div>
+                  <LeadButton className="w-full py-4 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-widest hover:bg-zinc-50">
                     Hablar con Experto
                   </LeadButton>
                 </th>
@@ -230,7 +231,7 @@ export default function ShopifyPlansComparison() {
                       <td className="p-4 text-center border-b border-zinc-100 border-r border-r-zinc-50">
                         {renderValue(item.prende)}
                       </td>
-                      <td className="p-4 text-center border-b border-zinc-100 border-r border-r-zinc-50 bg-violet-50/10">
+                      <td className="p-4 text-center border-b border-zinc-100 border-r border-r-zinc-50 bg-violet-50/50">
                         {renderValue(item.full, true)}
                       </td>
                       <td className="p-4 text-center border-b border-zinc-100">
