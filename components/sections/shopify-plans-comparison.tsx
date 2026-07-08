@@ -170,7 +170,7 @@ export default function ShopifyPlansComparison() {
           <table className="w-full min-w-[800px] text-left border-collapse">
             <thead>
               <tr>
-                <th className="p-8 lg:p-10 w-1/3 bg-zinc-50 border-b border-zinc-100">
+                <th className="p-8 lg:p-10 w-1/3 bg-zinc-50 border-b border-zinc-100 sticky left-0 z-20">
                   <h3 className="text-xl font-black text-zinc-900 tracking-tighter uppercase mb-2">Compara los Planes</h3>
                   <p className="text-xs text-zinc-500 font-light">Haz clic en cada característica para ver el detalle de lo que incluye.</p>
                 </th>
@@ -213,7 +213,7 @@ export default function ShopifyPlansComparison() {
                 <React.Fragment key={sIdx}>
                   {/* Category Header */}
                   <tr>
-                    <td colSpan={4} className="bg-zinc-50 py-4 px-8 text-xs font-black uppercase tracking-[0.2em] text-zinc-400">
+                    <td colSpan={4} className="bg-zinc-50 py-4 px-8 text-xs font-black uppercase tracking-[0.2em] text-zinc-400 sticky left-0 z-10">
                       {section.category}
                     </td>
                   </tr>
@@ -221,7 +221,7 @@ export default function ShopifyPlansComparison() {
                   {/* Features */}
                   {section.features.map((item, iIdx) => (
                     <tr key={iIdx} className="group hover:bg-zinc-50/50 transition-colors">
-                      <td className="p-4 px-8 border-b border-zinc-100 border-r border-r-zinc-50">
+                      <td className="p-4 px-8 border-b border-zinc-100 border-r border-r-zinc-50 sticky left-0 z-10 bg-white group-hover:bg-zinc-50/50 transition-colors">
                         <button 
                           onClick={() => setActiveFeature(item.feature)}
                           className="flex items-center gap-3 text-left w-full group/btn"
