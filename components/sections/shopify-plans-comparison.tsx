@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Check, Info, Rocket, TrendingUp, Zap, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Check, Info, Rocket, TrendingUp, Zap, X, ChevronDown } from 'lucide-react';
 import FeatureExplanationModal from '@/components/modals/feature-explanation-modal';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
@@ -148,6 +149,118 @@ const COMPARISON_DATA: PlanCategory[] = [
   }
 ];
 
+const PLAN_CARDS = [
+  {
+    id: "prende",
+    name: "Prende",
+    icon: <TrendingUp className="w-6 h-6 text-emerald-500" />,
+    price: "$580.000",
+    subtitle: "+ IVA",
+    cta: "Cotizar",
+    ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
+    color: "emerald"
+  },
+  {
+    id: "full",
+    name: "Full",
+    icon: <Zap className="w-6 h-6 text-violet-500" />,
+    price: "$780.000",
+    subtitle: "+ IVA",
+    badge: "Ahorra en Apps y Comisiones",
+    recommended: true,
+    cta: "Cotizar Full",
+    ctaClass: "bg-violet-600 text-white hover:bg-violet-700 shadow-lg shadow-violet-600/20",
+    color: "violet"
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    icon: <Rocket className="w-6 h-6 text-blue-500" />,
+    price: "$1.200.000",
+    subtitle: "+ IVA",
+    cta: "Hablar con Experto",
+    ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
+    color: "blue"
+  }
+];
+
+const MobilePlanCard = ({ plan, data, onFeatureClick }: { plan: any, data: PlanCategory[], onFeatureClick: (feature: FeatureInfo) => void }) => {
+  const [isOpen, setIsOpen] = useState(plan.recommended || false);
+
+  return (
+    <div className={`rounded-[2rem] border ${plan.recommended ? 'border-violet-200 bg-violet-50/50' : 'border-zinc-200 bg-white'} overflow-hidden relative shadow-xl`}>
+      {plan.recommended && (
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-violet-600 text-white text-[9px] font-black px-4 py-1.5 rounded-b-lg uppercase tracking-widest">
+          Recomendado
+        </div>
+      )}
+      <div className={`p-8 ${plan.recommended ? 'pt-10' : ''} flex flex-col items-center text-center border-b border-zinc-100`}>
+        <div className="flex justify-center mb-4">{plan.icon}</div>
+        <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">{plan.name}</h4>
+        <div className={`text-xl font-black ${plan.recommended ? 'text-violet-700' : 'text-zinc-900'} mb-2`}>
+          {plan.price} <span className={`text-xs uppercase font-bold ${plan.recommended ? 'text-violet-500' : 'text-zinc-400'}`}>{plan.subtitle}</span>
+        </div>
+        {plan.badge && (
+          <div className="text-[10px] font-black text-violet-600 bg-violet-100 px-2 py-0.5 rounded-full inline-block mb-3">{plan.badge}</div>
+        )}
+        <LeadButton className={`w-full py-4 mt-2 text-[10px] rounded-xl uppercase font-black tracking-widest ${plan.ctaClass}`}>
+          {plan.cta}
+        </LeadButton>
+        
+        <button 
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full flex items-center justify-between text-sm font-bold text-zinc-900 mt-6 pt-6 border-t border-zinc-100/50"
+        >
+          {isOpen ? 'Ocultar características' : 'Ver características'}
+          <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 py-8 space-y-8 bg-zinc-50/50">
+              {data.map((category, idx) => {
+                const includedFeatures = category.features.filter(f => f[plan.id as keyof PlanFeature] !== false);
+                if (includedFeatures.length === 0) return null;
+
+                return (
+                  <div key={idx}>
+                    <h5 className="text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-4">{category.category}</h5>
+                    <ul className="space-y-4">
+                      {includedFeatures.map((f, fIdx) => {
+                        const val = f[plan.id as keyof PlanFeature];
+                        return (
+                          <li key={fIdx} className="flex items-start gap-3">
+                            <Check className={`w-5 h-5 shrink-0 mt-0.5 ${plan.recommended ? 'text-violet-600' : 'text-zinc-800'}`} strokeWidth={3} />
+                            <div>
+                              <button onClick={() => onFeatureClick(f.feature)} className="font-bold text-sm text-zinc-700 text-left border-b border-dashed border-zinc-300 pb-0.5 hover:text-violet-600 hover:border-violet-400 transition-colors">
+                                {f.feature.name}
+                              </button>
+                              {typeof val === 'string' && (
+                                <span className={`block text-xs mt-1 ${plan.recommended ? 'font-bold text-violet-700' : 'font-medium text-zinc-600'}`}>{val}</span>
+                              )}
+                            </div>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 export default function ShopifyPlansComparison() {
   const [activeFeature, setActiveFeature] = useState<FeatureInfo | null>(null);
 
@@ -164,8 +277,15 @@ export default function ShopifyPlansComparison() {
 
   return (
     <div className="w-full">
-      {/* Table Container */}
-      <div className="bg-white rounded-[2rem] lg:rounded-[3rem] border border-zinc-100 shadow-xl overflow-hidden">
+      {/* Mobile Cards (hidden on lg desktop) */}
+      <div className="flex lg:hidden flex-col gap-8">
+        {PLAN_CARDS.map(plan => (
+          <MobilePlanCard key={plan.id} plan={plan} data={COMPARISON_DATA} onFeatureClick={setActiveFeature} />
+        ))}
+      </div>
+
+      {/* Desktop Table (hidden on mobile) */}
+      <div className="hidden lg:block bg-white rounded-[2rem] lg:rounded-[3rem] border border-zinc-100 shadow-xl overflow-hidden">
         <div className="overflow-x-auto custom-scrollbar">
           <table className="w-full min-w-[800px] text-left border-collapse">
             <thead>
