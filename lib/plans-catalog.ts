@@ -184,6 +184,9 @@ export const SHOPIFY_PLANS: Plan[] = [
     category: '🛍️ Shopify',
     url: '/planes-de-desarrollo-shopify-en-chile',
     features: [
+      'Setup inicial y configuración completa de Shopify (Dominio, SSL, Impuestos, Checkout).',
+      'Diseño UX/UI a medida desde cero en Figma (sin uso de plantillas).',
+      'Migración o carga inicial de productos, clientes y contenido de la empresa.',
       'Diseño profesional orientado a maximizar la conversión (CRO).',
       'Diseño responsive para dispositivos móviles.',
       'Plataforma autoadministrable.',
