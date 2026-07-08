@@ -170,9 +170,9 @@ export default function ShopifyPlansComparison() {
           <table className="w-full min-w-[800px] text-left border-collapse">
             <thead>
               <tr>
-                <th className="p-8 lg:p-10 w-1/3 bg-zinc-50 border-b border-zinc-100 sticky left-0 z-20">
-                  <h3 className="text-xl font-black text-zinc-900 tracking-tighter uppercase mb-2">Compara los Planes</h3>
-                  <p className="text-xs text-zinc-500 font-light">Haz clic en cada característica para ver el detalle de lo que incluye.</p>
+                <th className="p-4 lg:p-10 w-[140px] min-w-[140px] max-w-[140px] lg:w-1/3 lg:min-w-0 lg:max-w-none bg-zinc-50 border-b border-zinc-100 sticky left-0 z-20 shadow-[4px_0_12px_rgba(0,0,0,0.03)] lg:shadow-none">
+                  <h3 className="text-sm lg:text-xl font-black text-zinc-900 tracking-tighter uppercase mb-1 lg:mb-2">Compara</h3>
+                  <p className="text-[9px] lg:text-xs text-zinc-500 font-light hidden lg:block">Haz clic en cada característica para ver el detalle de lo que incluye.</p>
                 </th>
                 
                 {/* PRENDE */}
@@ -213,7 +213,7 @@ export default function ShopifyPlansComparison() {
                 <React.Fragment key={sIdx}>
                   {/* Category Header */}
                   <tr>
-                    <td colSpan={4} className="bg-zinc-50 py-4 px-8 text-xs font-black uppercase tracking-[0.2em] text-zinc-400 sticky left-0 z-10">
+                    <td colSpan={4} className="bg-zinc-50 py-3 lg:py-4 px-4 lg:px-8 text-[10px] lg:text-xs font-black uppercase tracking-[0.2em] text-zinc-400 sticky left-0 z-10">
                       {section.category}
                     </td>
                   </tr>
@@ -221,15 +221,15 @@ export default function ShopifyPlansComparison() {
                   {/* Features */}
                   {section.features.map((item, iIdx) => (
                     <tr key={iIdx} className="group hover:bg-zinc-50/50 transition-colors">
-                      <td className="p-4 px-8 border-b border-zinc-100 border-r border-r-zinc-50 sticky left-0 z-10 bg-white group-hover:bg-zinc-50/50 transition-colors">
+                      <td className="p-3 lg:p-4 lg:px-8 w-[140px] min-w-[140px] max-w-[140px] lg:w-1/3 lg:min-w-0 lg:max-w-none border-b border-zinc-100 border-r border-r-zinc-50 sticky left-0 z-10 bg-white group-hover:bg-zinc-50/50 transition-colors shadow-[4px_0_12px_rgba(0,0,0,0.03)] lg:shadow-none">
                         <button 
                           onClick={() => setActiveFeature(item.feature)}
-                          className="flex items-center gap-3 text-left w-full group/btn"
+                          className="flex items-center gap-2 lg:gap-3 text-left w-full group/btn"
                         >
-                          <span className="w-6 h-6 rounded-full bg-zinc-100 flex items-center justify-center shrink-0 group-hover/btn:bg-violet-100 group-hover/btn:scale-110 transition-all duration-300">
+                          <span className="hidden lg:flex w-6 h-6 rounded-full bg-zinc-100 items-center justify-center shrink-0 group-hover/btn:bg-violet-100 group-hover/btn:scale-110 transition-all duration-300">
                             <Info className="w-3.5 h-3.5 text-zinc-400 group-hover/btn:text-violet-600 transition-colors" />
                           </span>
-                          <span className="font-bold text-sm text-zinc-700 border-b border-dashed border-zinc-300 group-hover/btn:border-violet-400 group-hover/btn:text-violet-700 transition-all duration-300 pb-0.5">
+                          <span className="font-bold text-[11px] lg:text-sm text-zinc-700 border-b border-dashed border-zinc-300 group-hover/btn:border-violet-400 group-hover/btn:text-violet-700 transition-all duration-300 pb-0.5 leading-tight">
                             {item.feature.name}
                           </span>
                         </button>
