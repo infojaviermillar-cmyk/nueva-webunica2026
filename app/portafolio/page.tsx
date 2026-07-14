@@ -15,7 +15,7 @@ export default function PortfolioPage() {
       title: "Activos en Red",
       category: "SaaS",
       description: "Portal inmobiliario avanzado con filtros dinámicos, gestión de propiedades y diseño profesional.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Factivosenred.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://activosenred.cl/",
       link: "https://activosenred.cl/",
       tags: ["Inmobiliaria", "PropTech"]
     },
@@ -23,7 +23,7 @@ export default function PortfolioPage() {
       title: "BodyMuscle",
       category: "Shopify",
       description: "Tienda online de suplementación deportiva (en desarrollo), enfocada en alto rendimiento y conversiones.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fbodymuscle-89.myshopify.com%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://bodymuscle-89.myshopify.com/",
       link: "https://bodymuscle-89.myshopify.com/",
       tags: ["En Desarrollo", "Deportes"]
     },
@@ -31,7 +31,7 @@ export default function PortfolioPage() {
       title: "Academia Ctalentos",
       category: "LMS",
       description: "Academia con tutor LMS, creado de acuerdo al diseño UX/UI solicitado por cliente.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Facademia.ctalentos.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://academia.ctalentos.cl/",
       link: "https://academia.ctalentos.cl/",
       tags: ["LMS", "Educación", "UX/UI"]
     },
@@ -39,7 +39,7 @@ export default function PortfolioPage() {
       title: "Vicca.cl",
       category: "Migración",
       description: "Migración completa de Magento a Shopify vía API. Traspaso íntegro de catálogo, clientes, historial de pedidos y configuraciones sin perder datos ni tiempo de operación.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fvicca.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://vicca.cl/",
       link: "https://vicca.cl/",
       tags: ["Migración", "Magento → Shopify", "API", "Ecommerce"]
     },
@@ -47,7 +47,7 @@ export default function PortfolioPage() {
       title: "Tecno-Mobile",
       category: "Shopify",
       description: "Catálogo tecnológico con look comercial claro, navegación rápida y enfoque en productos destacados.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftecno-mobile.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://tecno-mobile.cl/",
       link: "https://tecno-mobile.cl/",
       tags: ["Tecnología", "Gadgets"]
     },
@@ -55,7 +55,7 @@ export default function PortfolioPage() {
       title: "Tuupos",
       category: "Shopify",
       description: "Proyecto Shopify con identidad propia, buena legibilidad y composición de bloques moderna.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftuupos.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://tuupos.cl/",
       link: "https://tuupos.cl/",
       tags: ["General Store", "Dropshipping"]
     },
@@ -63,7 +63,7 @@ export default function PortfolioPage() {
       title: "Terra Andes",
       category: "Shopify",
       description: "Proyecto con estética más corporativa y vitrina visual enfocada en credibilidad y presentación.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fterraandesplus.com%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://terraandesplus.com/",
       link: "https://terraandesplus.com/",
       tags: ["Alimentos", "Exportación"]
     },
@@ -71,7 +71,7 @@ export default function PortfolioPage() {
       title: "Chiletronics",
       category: "Shopify",
       description: "Tienda tecnológica con estructura orientada a variedad de productos y lectura rápida del catálogo.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fchiletronics.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://chiletronics.cl/",
       link: "https://chiletronics.cl/",
       tags: ["Electrónica", "Retail"]
     },
@@ -79,7 +79,7 @@ export default function PortfolioPage() {
       title: "Canine Fight",
       category: "Shopify",
       description: "Tienda Shopify de alto rendimiento para artículos deportivos y artes marciales. Una plataforma robusta diseñada para la comunidad de combate y entrenamiento intenso.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcaninefight.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://caninefight.cl/",
       link: "https://caninefight.cl/",
       tags: ["Artes Marciales", "Deportes", "Equipamiento"]
     },
@@ -95,7 +95,7 @@ export default function PortfolioPage() {
       title: "Pymee.org",
       category: "SaaS",
       description: "Plataforma SaaS de gestión empresarial para PYMES. Herramientas digitales integradas para optimizar operaciones y escalar negocios en Latinoamérica.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpymee.org%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://pymee.org/",
       link: "https://pymee.org/",
       tags: ["SaaS", "PYMES", "Gestión"]
     },
@@ -103,7 +103,7 @@ export default function PortfolioPage() {
       title: "Kinelawen",
       category: "Shopify",
       description: "Tienda Shopify con identidad limpia, navegación moderna y foco en experiencia de marca.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.kinelawen.com%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://www.kinelawen.com/",
       link: "https://www.kinelawen.com/",
       tags: ["Salud", "Branding"]
     },
@@ -111,7 +111,7 @@ export default function PortfolioPage() {
       title: "SpinMedical",
       category: "Shopify",
       description: "Proyecto ecommerce con estructura profesional, catálogo claro y presentación visual de confianza.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fspinmedical.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://spinmedical.cl/",
       link: "https://spinmedical.cl/",
       tags: ["Insumos Médicos", "B2C"]
     },
@@ -119,7 +119,7 @@ export default function PortfolioPage() {
       title: "Librería Bazarte",
       category: "Shopify",
       description: "Ecommerce visualmente atractivo, preparado para exhibir productos y facilitar exploración por colecciones.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flibreriabazarte.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://libreriabazarte.cl/",
       link: "https://libreriabazarte.cl/",
       tags: ["Retail", "Diseño"]
     },
@@ -127,7 +127,7 @@ export default function PortfolioPage() {
       title: "Altavista Chile",
       category: "Shopify",
       description: "Tienda de look robusto, con enfoque en navegación eficiente y presencia visual consistente.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Faltavistachile.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://altavistachile.cl/",
       link: "https://altavistachile.cl/",
       tags: ["Outdoor", "Shopify"]
     },
@@ -135,7 +135,7 @@ export default function PortfolioPage() {
       title: "Recovery Zone",
       category: "Shopify",
       description: "Proyecto Shopify con diseño orientado a conversión y fichas de producto con buena lectura visual.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Frecoveryzone.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://recoveryzone.cl/",
       link: "https://recoveryzone.cl/",
       tags: ["Deportes", "Conversión"]
     },
@@ -143,7 +143,7 @@ export default function PortfolioPage() {
       title: "Only Jeep",
       category: "Shopify",
       description: "Tienda con carácter de nicho, buena jerarquía de colecciones y estética alineada al rubro automotor.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.onlyjeep.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://www.onlyjeep.cl/",
       link: "https://www.onlyjeep.cl/",
       tags: ["Automotriz", "Repuestos"]
     },
@@ -151,7 +151,7 @@ export default function PortfolioPage() {
       title: "EvertSport",
       category: "Shopify",
       description: "Diseño deportivo, moderno y preparado para destacar colecciones, ofertas y llamados a la acción.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Feversport.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://eversport.cl/",
       link: "https://eversport.cl/",
       tags: ["Sportswear", "Fashion"]
     },
@@ -159,7 +159,7 @@ export default function PortfolioPage() {
       title: "AntarctiCare",
       category: "Shopify",
       description: "Ecommerce con branding más refinado, visual pulido y una presentación clara del catálogo.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fantarcticare.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://antarcticare.cl/",
       link: "https://antarcticare.cl/",
       tags: ["Premium", "Skincare"]
     },
@@ -167,7 +167,7 @@ export default function PortfolioPage() {
       title: "Divan Tienda",
       category: "Shopify",
       description: "Proyecto con estilo comercial elegante, pensado para destacar productos y mantener orden visual.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fdivantienda.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://divantienda.cl/",
       link: "https://divantienda.cl/",
       tags: ["Muebles", "Interiorismo"]
     },
@@ -175,7 +175,7 @@ export default function PortfolioPage() {
       title: "PHY Waters",
       category: "Shopify",
       description: "Marca con enfoque visual fuerte, experiencia simple y espacio claro para beneficios de producto.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fphywaters.com%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://phywaters.com/",
       link: "https://phywaters.com/",
       tags: ["Bienestar", "Ventas"]
     },
@@ -183,7 +183,7 @@ export default function PortfolioPage() {
       title: "Anteros",
       category: "Shopify",
       description: "Tienda enfocada en visual limpio, presencia de marca y una experiencia de exploración ordenada.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftienda.anteros.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://tienda.anteros.cl/",
       link: "https://tienda.anteros.cl/",
       tags: ["Branding", "Ventas"]
     },
@@ -191,7 +191,7 @@ export default function PortfolioPage() {
       title: "Serch",
       category: "Shopify",
       description: "Diseño actual, orden visual sólido y estructura preparada para campañas y catálogo online.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.serch.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://www.serch.cl/",
       link: "https://www.serch.cl/",
       tags: ["Moda", "Accesorios"]
     },
@@ -199,7 +199,7 @@ export default function PortfolioPage() {
       title: "Sonnda",
       category: "Shopify",
       description: "Tienda con enfoque comercial, categorías claras y presentación robusta para productos técnicos.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fsonnda.cl%2F?w=1200",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://sonnda.cl/",
       link: "https://sonnda.cl/",
       tags: ["Técnico", "B2B"]
     },
@@ -207,7 +207,7 @@ export default function PortfolioPage() {
       title: "Fcastro.cl",
       category: "Shopify",
       description: "Nueva tienda Shopify en proceso, enfocada en categorías como sillas, mesas, escaleras, hogar y cocina.",
-      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Ffcastrocl.myshopify.com%2F?w=1400",
+      image: "https://image.thum.io/get/width/1200/crop/800/https://fcastrocl.myshopify.com/?w=1400",
       link: "https://fcastrocl.myshopify.com/",
       tags: ["En Desarrollo", "Hogar"]
     }
