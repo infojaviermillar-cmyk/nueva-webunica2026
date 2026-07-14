@@ -24,6 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/desarrollo-tiendas-shopify-chile',
     '/diseno-web-shopify-chile',
     '/servicios-seo-posicionamiento-google',
+    '/geo-ai-visibility',
     '/desarrollo-tienda-en-linea-woocommerce',
     '/desarrollo-paginas-web-pymes-chile',
     '/diseno-themes-shopify-personalizados-adobe-xd',
