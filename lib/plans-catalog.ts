@@ -1013,6 +1013,46 @@ export const ADDON_SERVICES: Plan[] = [
   },
 ];
 
+
+// ════════════════════════════════════════════
+// 🤖 INTELIGENCIA ARTIFICIAL
+// Fuente: /implementacion-ia-conversacional
+// ════════════════════════════════════════════
+export const IA_PLANS: Plan[] = [
+  {
+    id: 'ia-conversacional-databot',
+    name: 'Implementación IA Conversacional',
+    highlight: 'Chatbot con IA',
+    desc: 'Implementación única de un asistente virtual inteligente basado en Databot, entrenado con la información de tu negocio.',
+    price: 590000,
+    category: '🤖 Inteligencia Artificial',
+    url: '/implementacion-ia-conversacional',
+    features: [
+      'Diagnóstico del negocio y Configuración completa',
+      'Entrenamiento de la IA con info de la empresa',
+      'Diseño de flujos conversacionales',
+      'Integración con sitio web',
+      'Capacitación del equipo',
+    ],
+  },
+  {
+    id: 'ia-soporte-mensual',
+    name: 'Soporte Webunica (Opcional)',
+    highlight: 'Mantención IA',
+    desc: 'Asegura el máximo rendimiento de tu IA. Optimización continua, ajustes de respuestas e incorporación de nueva información.',
+    price: 120000,
+    category: '🤖 Inteligencia Artificial',
+    url: '/implementacion-ia-conversacional',
+    features: [
+      'Optimización continua de la IA',
+      'Ajustes de respuestas e info',
+      'Revisión de conversaciones mensual',
+      'Soporte prioritario',
+    ],
+  }
+];
+
+
 // ════════════════════════════════════════════
 // CATÁLOGO COMPLETO (usado en el cotizador)
 // ════════════════════════════════════════════
@@ -1029,6 +1069,7 @@ export const ALL_PLANS: Plan[] = [
   ...NEXTJS_PLANS,
   ...ADDON_SERVICES,
   ...DROPSHIPPING_PLANS,
+  ...IA_PLANS,
 ];
 
 // Agrupado por categoría para el <select> del cotizador
