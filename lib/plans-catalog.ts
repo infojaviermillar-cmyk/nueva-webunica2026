@@ -840,6 +840,33 @@ export const DROPSHIPPING_PLANS: Plan[] = [
 // ════════════════════════════════════════════
 export const ADDON_SERVICES: Plan[] = [
   {
+    id: 'mkt-paid-media',
+    name: 'Paid Media',
+    highlight: 'SERVICIO PERSONALIZADO',
+    desc: 'Administración de campañas en Meta Ads y Google Ads. Estrategia de captación de tráfico calificado. Optimización permanente de campañas enfocada en maximizar ROAS. Gestión de audiencias, remarketing y escalamiento de campañas.',
+    price: 550000,
+    category: '📈 Marketing & SEO',
+    features: [
+      'Desarrollo a medida',
+      'Garantía técnica de código',
+      'Configuración profesional'
+    ],
+  },
+  {
+    id: 'mkt-seo-crecimiento',
+    name: 'Servicio SEO mensual para crecimiento sostenido del tráfico orgánico',
+    highlight: 'SERVICIO PERSONALIZADO',
+    desc: 'Auditoría SEO, Optimización SEO On-Page de páginas y contenidos, Optimización de títulos, meta descripciones y estructura de encabezados, Corrección de errores de indexación y rastreo. Implementación y optimización de datos estructurados (Schema). etc.',
+    price: 250000,
+    category: '📈 Marketing & SEO',
+    features: [
+      'Desarrollo a medida',
+      'Garantía técnica de código',
+      'Configuración profesional'
+    ],
+  },
+
+  {
     id: 'add-klaviyo',
     name: 'Configuración Avanzada de Klaviyo',
     highlight: 'Email Marketing CRM',
