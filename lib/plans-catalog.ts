@@ -1045,8 +1045,7 @@ export const ADDON_SERVICES: Plan[] = [
 // 🤖 INTELIGENCIA ARTIFICIAL
 // Fuente: /implementacion-ia-conversacional
 // ════════════════════════════════════════════
-export const IA_PLANS: Plan[] = [
-  {
+export const IA_PLANS: Plan[] = [{
     id: 'ia-conversacional-databot',
     name: 'Implementación IA Conversacional',
     highlight: 'Chatbot con IA',
@@ -1075,6 +1074,58 @@ export const IA_PLANS: Plan[] = [
       'Ajustes de respuestas e info',
       'Revisión de conversaciones mensual',
       'Soporte prioritario',
+    ],
+  }
+,
+  {
+    id: 'ia-consultoria-starter',
+    name: 'AI Starter (Consultoría AI)',
+    highlight: 'Para ecommerce en crecimiento',
+    desc: 'Retainer mensual diseñado para escalar la autoridad digital de tu empresa en el largo plazo (hasta 500 productos).',
+    price: 300000,
+    category: '🤖 Inteligencia Artificial',
+    url: '/geo-ai-visibility',
+    features: [
+      '20 Páginas optimizadas al mes',
+      '2 Artículos/Clústeres Semánticos',
+      'Schema.org Dinámico Básico',
+      'Auditoría de Share of Voice (Trimestral)',
+      '1 Reunión de Estrategia mensual',
+    ],
+  },
+  {
+    id: 'ia-consultoria-pro',
+    name: 'AI Professional (Consultoría AI)',
+    highlight: 'MÁS SOLICITADO',
+    desc: 'Para empresas B2B y tiendas medianas (hasta 2.500 productos).',
+    price: 600000,
+    recommended: true,
+    category: '🤖 Inteligencia Artificial',
+    url: '/geo-ai-visibility',
+    features: [
+      '50 Páginas optimizadas al mes',
+      '4 Artículos/Clústeres Semánticos',
+      'Schema.org Avanzado (FAQ, Breadcrumbs)',
+      'Auditoría de Share of Voice (Mensual)',
+      '1 Mención Digital PR (Señales EEAT)',
+      '2 Reuniones Estratégicas mensuales',
+    ],
+  },
+  {
+    id: 'ia-consultoria-enterprise',
+    name: 'AI Enterprise (Consultoría AI)',
+    highlight: 'A Medida',
+    desc: 'Solución a escala para marcas líderes y catálogos masivos.',
+    price: 1200000,
+    category: '🤖 Inteligencia Artificial',
+    url: '/geo-ai-visibility',
+    features: [
+      '+150 Páginas optimizadas al mes',
+      '+8 Artículos/Clústeres Semánticos',
+      'Schema.org Personalizado Custom',
+      'Auditoría de Share of Voice (Quincenal)',
+      '3 Menciones Digital PR (Alto EEAT)',
+      'Canal de Slack Compartido',
     ],
   }
 ];
