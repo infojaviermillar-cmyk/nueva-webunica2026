@@ -12,6 +12,22 @@ export default function PortfolioPage() {
 
   const projects = [
     {
+      title: "Activos en Red",
+      category: "SaaS",
+      description: "Portal inmobiliario avanzado con filtros dinámicos, gestión de propiedades y diseño profesional.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Factivosenred.cl%2F?w=1200",
+      link: "https://activosenred.cl/",
+      tags: ["Inmobiliaria", "PropTech"]
+    },
+    {
+      title: "BodyMuscle",
+      category: "Shopify",
+      description: "Tienda online de suplementación deportiva (en desarrollo), enfocada en alto rendimiento y conversiones.",
+      image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fbodymuscle-89.myshopify.com%2F?w=1200",
+      link: "https://bodymuscle-89.myshopify.com/",
+      tags: ["En Desarrollo", "Deportes"]
+    },
+    {
       title: "Academia Ctalentos",
       category: "LMS",
       description: "Academia con tutor LMS, creado de acuerdo al diseño UX/UI solicitado por cliente.",
