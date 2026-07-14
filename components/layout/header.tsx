@@ -326,6 +326,12 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       </h4>
                       <ul className="flex flex-col gap-1">
                         <li>
+                          <Link href="/implementacion-ia-conversacional" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors bg-orange-50/50 border border-orange-100">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors flex items-center gap-2">IA Conversacional <span className="text-[8px] bg-orange-600 text-white px-1.5 py-0.5 rounded-sm uppercase">NUEVO</span></span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Chatbots Databot B2B</span>
+                          </Link>
+                        </li>
+                        <li>
                           <Link href="/desarrollo-diseno-elearning-tutor-lms" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors">
                             <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors">Academias Tutor LMS</span>
                             <span className="text-[11px] text-zinc-500 font-medium">E-learning y Cursos</span>
@@ -568,6 +574,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/servicios-seo-posicionamiento-google" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       SEO Avanzado
+                    </Link>
+                    <Link href="/implementacion-ia-conversacional" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      IA Conversacional <span className="text-[9px] bg-violet-600 text-white px-2 py-0.5 rounded-full uppercase">Nuevo</span>
                     </Link>
                     <Link href="/desarrollo-paginas-web-pymes-chile" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
