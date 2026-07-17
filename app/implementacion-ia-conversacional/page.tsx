@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { MessageSquare, Clock, TrendingUp, Users, Zap, CheckCircle2, ArrowRight, Bot, ShieldCheck } from "lucide-react";
 import Link from "next/link";
@@ -14,6 +15,32 @@ const stagger = {
 };
 
 export default function ImplementacionIAPage() {
+  const [activeTab, setActiveTab] = useState("Venta");
+
+  const tabContent = {
+    "Venta": [
+      "Recomendaciones inteligentes.",
+      "Guía de compra paso a paso.",
+      "Captura leads automáticamente.",
+      "Agregar al carrito desde el chat.",
+      "Información de stock, precio y variantes."
+    ],
+    "Postventa": [
+      "Respuestas automáticas 24/7 sobre estado de envío.",
+      "Gestión de devoluciones y garantías sin fricción.",
+      "Derivación inteligente a agentes humanos (Livechat).",
+      "Historial de compras sincronizado con Shopify.",
+      "Resolución de dudas frecuentes de inmediato."
+    ],
+    "WhatsApp Marketing": [
+      "Envío de notificaciones de carritos abandonados.",
+      "Campañas outbound con alta tasa de apertura (72%).",
+      "Promociones y ofertas personalizadas por segmento.",
+      "Integración nativa con catálogos de productos.",
+      "Reactivación de clientes inactivos de tu tienda."
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-indigo-500/30 font-sans overflow-hidden">
       
@@ -74,6 +101,118 @@ export default function ImplementacionIAPage() {
               </Link>
             </motion.div>
           </motion.div>
+        </section>
+
+        {/* Interactive Features Section */}
+        <section className="py-24 max-w-7xl mx-auto px-6 overflow-visible">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left side: Mobile UI Mockup */}
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative mx-auto w-full max-w-[340px]"
+            >
+              <div className="absolute inset-0 bg-blue-400 blur-[80px] rounded-full opacity-20 -z-10" />
+              <div className="bg-slate-900 rounded-[2.5rem] p-3 shadow-2xl border-4 border-slate-800 relative overflow-hidden">
+                <div className="bg-white rounded-[2rem] overflow-hidden flex flex-col h-[650px] relative">
+                  {/* Chat Header */}
+                  <div className="bg-slate-900 text-white p-4 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="bg-blue-500 w-10 h-10 rounded-full flex items-center justify-center shadow-inner">
+                        <MessageSquare className="w-5 h-5 text-white" fill="currentColor" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-sm">Chatbot</div>
+                        <div className="text-[10px] text-slate-300">Disponible ahora</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Chat Content */}
+                  <div className="flex-1 p-5 bg-slate-50/50 overflow-y-auto">
+                    <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 mb-4">
+                      <h4 className="font-bold text-lg mb-4 text-slate-800 leading-tight">Producto Destacado - Tienda Online</h4>
+                      <div className="bg-slate-100 rounded-xl h-40 mb-4 flex items-center justify-center relative overflow-hidden group">
+                        <span className="absolute top-2 left-2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded-md z-10">¡Oferta!</span>
+                        <div className="flex items-center justify-center text-slate-400 text-sm">
+                           🖼️ Imagen del Producto
+                        </div>
+                      </div>
+                      <p className="text-xs text-slate-500 mb-5 leading-relaxed line-clamp-2">Excelente para tus compradores. Permite que vean los detalles y características directamente desde la ventana de chat.</p>
+                      
+                      <div className="flex justify-between items-center mb-5">
+                        <div>
+                          <div className="font-bold text-xl text-slate-900">CLP $9.900</div>
+                          <div className="text-[10px] text-slate-400 line-through">Antes $12.990</div>
+                        </div>
+                        <div className="flex items-center bg-slate-100 rounded-lg border border-slate-200">
+                          <button className="px-3 py-1 text-slate-500 hover:text-slate-900">-</button>
+                          <span className="px-2 font-medium text-sm text-slate-700">1</span>
+                          <button className="px-3 py-1 text-slate-500 hover:text-slate-900">+</button>
+                        </div>
+                      </div>
+                      
+                      <button className="w-full bg-slate-900 text-white text-sm font-semibold py-3.5 rounded-xl hover:bg-slate-800 transition-colors shadow-md">
+                        Agregar al carro
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right side: Tabs & Content */}
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-wrap gap-2 mb-8">
+                {Object.keys(tabContent).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                      activeTab === tab 
+                        ? "bg-slate-900 text-white shadow-lg shadow-slate-900/20" 
+                        : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight tracking-tight">
+                La <span className="text-blue-500">nueva era</span> de la Inteligencia artificial en servicio al cliente.
+              </h2>
+              <p className="text-lg text-slate-600 mb-10 font-light">
+                Podrás entrenar las capas de conocimiento de tu chatbot de diferentes formas para potenciar tu e-commerce.
+              </p>
+
+              <div className="bg-white border border-slate-100 rounded-[2rem] p-8 shadow-xl shadow-blue-900/5 relative">
+                {/* Decorative stack effect */}
+                <div className="absolute -bottom-3 left-6 right-6 h-4 bg-blue-50 rounded-b-3xl -z-10" />
+                <div className="absolute -bottom-6 left-12 right-12 h-4 bg-blue-50/50 rounded-b-3xl -z-20" />
+                
+                <ul className="space-y-4">
+                  {tabContent[activeTab as keyof typeof tabContent].map((item, index) => (
+                    <motion.li 
+                      key={item}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex items-center gap-4 text-slate-700 font-medium"
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+                      {item}
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          </div>
         </section>
 
         {/* The Problem Statement */}
