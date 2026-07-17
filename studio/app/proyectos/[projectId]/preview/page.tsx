@@ -41,6 +41,8 @@ export default function PreviewPage() {
       window.parent.postMessage({ type: 'PDF_STATUS', status: 'generating' }, '*');
     }
 
+    const cssBackups: any[] = [];
+
     try {
       const html2canvasModule = await import('html2canvas');
       const html2canvas = html2canvasModule.default || html2canvasModule;
@@ -50,6 +52,37 @@ export default function PreviewPage() {
 
       const element = document.getElementById('simulation-capture');
       if (!element) throw new Error("No se encontró el elemento simulador (#simulation-capture)");
+
+      // Temporarily remove unsupported CSS color functions to prevent html2canvas parsing crashes
+      for (let i = 0; i < document.styleSheets.length; i++) {
+        const sheet = document.styleSheets[i];
+        try {
+          const rules = sheet.cssRules || sheet.rules;
+          if (!rules) continue;
+          const backupRules = [];
+          for (let j = rules.length - 1; j >= 0; j--) {
+            const rule = rules[j];
+            try {
+              if (rule.cssText && (
+                rule.cssText.includes('color-mix') ||
+                rule.cssText.includes('light-dark') ||
+                rule.cssText.includes('oklch') ||
+                rule.cssText.includes('from')
+              )) {
+                backupRules.push({ index: j, cssText: rule.cssText });
+                sheet.deleteRule(j);
+              }
+            } catch (err) {
+              // Ignore rule failure
+            }
+          }
+          if (backupRules.length > 0) {
+            cssBackups.push({ sheet, backupRules });
+          }
+        } catch (e) {
+          // Ignore stylesheet rules access errors (e.g. cross-origin fonts)
+        }
+      }
 
       // Wait a moment for any assets/fonts to settle
       await new Promise((resolve) => setTimeout(resolve, 800));
@@ -96,6 +129,18 @@ export default function PreviewPage() {
           status: 'error', 
           errorDetails: error?.message || String(error)
         }, '*');
+      }
+    } finally {
+      // Restore deleted styles
+      for (const backup of cssBackups) {
+        const { sheet, backupRules } = backup;
+        for (const rule of backupRules.reverse()) {
+          try {
+            sheet.insertRule(rule.cssText, rule.index);
+          } catch (e) {
+            // Ignore insert errors
+          }
+        }
       }
     }
   };
