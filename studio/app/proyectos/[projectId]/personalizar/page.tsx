@@ -77,6 +77,7 @@ export default function PersonalizarPage() {
         shadow: store.shadow,
         heroBgImage: store.heroBgImage,
         heroProductImage: store.heroProductImage,
+        productImages: store.productImages,
       };
       iframe.contentWindow.postMessage({ type: 'UPDATE_CONFIG', config }, '*');
     }
@@ -110,6 +111,7 @@ export default function PersonalizarPage() {
     store.shadow,
     store.heroBgImage,
     store.heroProductImage,
+    store.productImages,
   ]);
 
   // Cargar configuración guardada y usuario
@@ -150,6 +152,7 @@ export default function PersonalizarPage() {
           shadow: store.shadow,
           heroBgImage: store.heroBgImage,
           heroProductImage: store.heroProductImage,
+          productImages: store.productImages,
         };
         localStorage.setItem(`project_config_${projectId}`, JSON.stringify(configToSave));
         setSaveStatus('saved');
@@ -187,6 +190,7 @@ export default function PersonalizarPage() {
           shadow: store.shadow,
           heroBgImage: store.heroBgImage,
           heroProductImage: store.heroProductImage,
+          productImages: store.productImages,
         };
         localStorage.setItem(`project_config_${projectId}`, JSON.stringify(configToSave));
         setSaveStatus('saved');
@@ -523,6 +527,58 @@ export default function PersonalizarPage() {
                   )}
                 </div>
 
+              </div>
+            </div>
+
+            {/* 8. Imágenes de Productos */}
+            <div>
+              <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
+                <ImageIcon className="w-4 h-4" /> 8. Imágenes Productos
+              </h3>
+              <p className="text-[10px] text-slate-400 mb-4 leading-relaxed">
+                Sube hasta 5 imágenes de productos. Se asignan en orden a las tarjetas de la cuadrícula.
+              </p>
+              <div className="grid grid-cols-5 gap-1.5">
+                {[0, 1, 2, 3, 4].map((idx) => (
+                  <div key={idx} className="relative">
+                    {store.productImages[idx] ? (
+                      <div className="relative rounded-lg overflow-hidden border border-slate-200">
+                        <img
+                          src={store.productImages[idx]!}
+                          alt={`Producto ${idx + 1}`}
+                          className="w-full aspect-square object-cover"
+                        />
+                        <button
+                          onClick={() => store.setProductImage(idx, null)}
+                          className="absolute top-0.5 right-0.5 bg-white/90 hover:bg-white rounded-full p-0.5 shadow cursor-pointer transition-colors"
+                          title="Eliminar"
+                        >
+                          <X className="w-2.5 h-2.5 text-slate-600" />
+                        </button>
+                      </div>
+                    ) : (
+                      <label className="flex flex-col items-center justify-center w-full aspect-square border-2 border-dashed border-slate-200 rounded-lg cursor-pointer hover:border-indigo-400 hover:bg-indigo-50/50 transition-all group">
+                        <span className="text-[9px] font-bold text-slate-300 group-hover:text-indigo-400">{idx + 1}</span>
+                        <Upload className="w-3.5 h-3.5 text-slate-300 group-hover:text-indigo-400 mt-0.5" />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+                            const reader = new FileReader();
+                            reader.onload = (ev) => {
+                              store.setProductImage(idx, ev.target?.result as string);
+                            };
+                            reader.readAsDataURL(file);
+                            e.target.value = '';
+                          }}
+                        />
+                      </label>
+                    )}
+                  </div>
+                ))}
               </div>
             </div>
 

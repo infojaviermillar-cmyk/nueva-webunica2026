@@ -87,6 +87,7 @@ export default function PreviewPage() {
       cardStyle={currentStyle.cardStyle}
       heroBgImage={config.heroBgImage ?? null}
       heroProductImage={config.heroProductImage ?? null}
+      productImages={config.productImages ?? [null, null, null, null, null]}
     />
   );
 }

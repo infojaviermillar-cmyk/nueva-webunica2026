@@ -50,6 +50,7 @@ type SimulationRendererProps = {
   cardStyle: string;
   heroBgImage?: string | null;
   heroProductImage?: string | null;
+  productImages?: (string | null)[];
 };
 
 export function SimulationRenderer({
@@ -61,6 +62,7 @@ export function SimulationRenderer({
   cardStyle,
   heroBgImage,
   heroProductImage,
+  productImages = [null, null, null, null, null],
 }: SimulationRendererProps) {
   const params = useParams();
   const projectId = params?.projectId as string || '';
@@ -363,11 +365,15 @@ export function SimulationRenderer({
       <section className="max-w-6xl mx-auto w-full px-6 py-12 mb-16">
         <h2 className="font-primary font-bold text-xl uppercase text-custom-text mb-8 tracking-wider">Productos Destacados</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((i) => (
+          {[0, 1, 2, 3].map((i) => (
             <div key={i} className={`p-4 ${cardStyle} bg-custom-surface flex flex-col justify-between hover:shadow-lg transition-shadow`}>
               <div>
                 <div className="aspect-square w-full mb-4">
-                  <ImagePlaceholder className="rounded-2xl" />
+                  {productImages[i] ? (
+                    <img src={productImages[i]!} alt={`Producto ${i + 1}`} className="w-full h-full object-contain rounded-2xl" />
+                  ) : (
+                    <ImagePlaceholder className="rounded-2xl" />
+                  )}
                 </div>
                 <h3 className="font-primary font-bold text-xs text-custom-text mb-1">Nombre del Producto</h3>
                 <p className="font-primary font-black text-custom-primary text-sm mb-2">$00.000</p>
@@ -533,20 +539,18 @@ export function SimulationRenderer({
       <section className="max-w-6xl mx-auto w-full px-6 py-12 mb-16">
         <h2 className="font-primary font-bold text-xl uppercase text-custom-text mb-8 tracking-wider">Productos Destacados</h2>
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-          {[
-            { name: 'Nombre del Producto', price: '$00.000' },
-            { name: 'Nombre del Producto', price: '$00.000' },
-            { name: 'Nombre del Producto', price: '$00.000' },
-            { name: 'Nombre del Producto', price: '$00.000' },
-            { name: 'Nombre del Producto', price: '$00.000' }
-          ].map((prod, i) => (
+          {[0, 1, 2, 3, 4].map((i) => (
             <div key={i} className={`p-4 ${cardStyle} bg-custom-surface flex flex-col justify-between hover:shadow-md transition-shadow`}>
               <div>
                 <div className="aspect-square w-full mb-4">
-                  <ImagePlaceholder className="rounded-xl" />
+                  {productImages[i] ? (
+                    <img src={productImages[i]!} alt={`Producto ${i + 1}`} className="w-full h-full object-contain rounded-xl" />
+                  ) : (
+                    <ImagePlaceholder className="rounded-xl" />
+                  )}
                 </div>
-                <h3 className="font-primary font-bold text-xs text-custom-text mb-1 line-clamp-1">{prod.name}</h3>
-                <p className="font-primary font-black text-custom-primary text-sm mb-2">{prod.price}</p>
+                <h3 className="font-primary font-bold text-xs text-custom-text mb-1 line-clamp-1">Nombre del Producto</h3>
+                <p className="font-primary font-black text-custom-primary text-sm mb-2">$00.000</p>
                 {renderStars(5, 0)}
               </div>
             </div>
@@ -715,11 +719,15 @@ export function SimulationRenderer({
           <span className="text-xs text-custom-primary font-bold hover:underline cursor-pointer flex items-center gap-1">Ver todos <ChevronRight className="w-4 h-4" /></span>
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-          {[1, 2, 3, 4, 5].map((i) => (
+          {[0, 1, 2, 3, 4].map((i) => (
             <div key={i} className={`p-4 ${cardStyle} bg-custom-surface flex flex-col justify-between hover:shadow-md transition-shadow`}>
               <div>
                 <div className="aspect-square w-full mb-4">
-                  <ImagePlaceholder className="rounded-xl" />
+                  {productImages[i] ? (
+                    <img src={productImages[i]!} alt={`Producto ${i + 1}`} className="w-full h-full object-contain rounded-xl" />
+                  ) : (
+                    <ImagePlaceholder className="rounded-xl" />
+                  )}
                 </div>
                 <h3 className="font-primary font-bold text-xs text-custom-text mb-1">Nombre del Producto</h3>
                 <p className="font-primary font-black text-custom-primary text-sm mb-2">$00.000</p>

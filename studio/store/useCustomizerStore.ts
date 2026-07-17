@@ -48,6 +48,7 @@ export type CustomizerState = {
   shadow: string;
   heroBgImage: string | null;
   heroProductImage: string | null;
+  productImages: (string | null)[];
   
   // Actions
   setWireframe: (id: string) => void;
@@ -58,6 +59,7 @@ export type CustomizerState = {
   setButtonRadius: (radius: string) => void;
   setHeroBgImage: (url: string | null) => void;
   setHeroProductImage: (url: string | null) => void;
+  setProductImage: (index: number, url: string | null) => void;
   loadConfig: (config: any) => void;
 };
 
@@ -207,6 +209,7 @@ export const useCustomizerStore = create<CustomizerState>((set, get) => ({
   shadow: 'shadow-lg shadow-slate-200/50',
   heroBgImage: null,
   heroProductImage: null,
+  productImages: [null, null, null, null, null],
 
   setWireframe: (id) => set({ selectedWireframe: id }),
 
@@ -280,6 +283,12 @@ export const useCustomizerStore = create<CustomizerState>((set, get) => ({
 
   setHeroProductImage: (url) => set({ heroProductImage: url }),
 
+  setProductImage: (index, url) => set((state) => {
+    const updated = [...state.productImages];
+    updated[index] = url;
+    return { productImages: updated };
+  }),
+
   loadConfig: (config) => {
     if (!config) return;
     set({
@@ -292,6 +301,7 @@ export const useCustomizerStore = create<CustomizerState>((set, get) => ({
       shadow: config.shadow || get().shadow,
       heroBgImage: config.heroBgImage ?? null,
       heroProductImage: config.heroProductImage ?? null,
+      productImages: Array.isArray(config.productImages) ? config.productImages : [null, null, null, null, null],
     });
   }
 }));
