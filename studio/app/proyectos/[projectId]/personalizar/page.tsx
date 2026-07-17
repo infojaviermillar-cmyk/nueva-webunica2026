@@ -21,7 +21,10 @@ import {
   CheckCircle2,
   AlertCircle,
   ZoomIn,
-  ZoomOut
+  ZoomOut,
+  ImageIcon,
+  X,
+  Upload
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -71,7 +74,9 @@ export default function PersonalizarPage() {
         colors: store.colors,
         fonts: store.fonts,
         buttonRadius: store.buttonRadius,
-        shadow: store.shadow
+        shadow: store.shadow,
+        heroBgImage: store.heroBgImage,
+        heroProductImage: store.heroProductImage,
       };
       iframe.contentWindow.postMessage({ type: 'UPDATE_CONFIG', config }, '*');
     }
@@ -102,7 +107,9 @@ export default function PersonalizarPage() {
     store.colors,
     store.fonts,
     store.buttonRadius,
-    store.shadow
+    store.shadow,
+    store.heroBgImage,
+    store.heroProductImage,
   ]);
 
   // Cargar configuración guardada y usuario
@@ -140,7 +147,9 @@ export default function PersonalizarPage() {
           colors: store.colors,
           fonts: store.fonts,
           buttonRadius: store.buttonRadius,
-          shadow: store.shadow
+          shadow: store.shadow,
+          heroBgImage: store.heroBgImage,
+          heroProductImage: store.heroProductImage,
         };
         localStorage.setItem(`project_config_${projectId}`, JSON.stringify(configToSave));
         setSaveStatus('saved');
@@ -175,7 +184,9 @@ export default function PersonalizarPage() {
           colors: store.colors,
           fonts: store.fonts,
           buttonRadius: store.buttonRadius,
-          shadow: store.shadow
+          shadow: store.shadow,
+          heroBgImage: store.heroBgImage,
+          heroProductImage: store.heroProductImage,
         };
         localStorage.setItem(`project_config_${projectId}`, JSON.stringify(configToSave));
         setSaveStatus('saved');
@@ -429,6 +440,90 @@ export default function PersonalizarPage() {
                   <option key={font} value={font}>{font}</option>
                 ))}
               </select>
+            </div>
+
+            {/* 7. Imágenes del Banner */}
+            <div>
+              <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
+                <ImageIcon className="w-4 h-4" /> 7. Imágenes Banner
+              </h3>
+              <div className="space-y-4">
+
+                {/* Fondo del Banner */}
+                <div>
+                  <p className="text-[11px] font-bold text-slate-500 mb-2 uppercase tracking-wider">Fondo del Banner (BG)</p>
+                  {store.heroBgImage ? (
+                    <div className="relative rounded-xl overflow-hidden border border-slate-200">
+                      <img src={store.heroBgImage} alt="Fondo Banner" className="w-full h-24 object-cover" />
+                      <button
+                        onClick={() => store.setHeroBgImage(null)}
+                        className="absolute top-1.5 right-1.5 bg-white/90 hover:bg-white rounded-full p-1 shadow cursor-pointer transition-colors"
+                        title="Eliminar imagen"
+                      >
+                        <X className="w-3.5 h-3.5 text-slate-600" />
+                      </button>
+                    </div>
+                  ) : (
+                    <label className="flex flex-col items-center justify-center gap-2 w-full h-20 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:border-indigo-400 hover:bg-indigo-50/50 transition-all group">
+                      <Upload className="w-5 h-5 text-slate-300 group-hover:text-indigo-400 transition-colors" />
+                      <span className="text-[10px] font-bold text-slate-400 group-hover:text-indigo-500">Click o arrastra imagen</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const reader = new FileReader();
+                          reader.onload = (ev) => {
+                            store.setHeroBgImage(ev.target?.result as string);
+                          };
+                          reader.readAsDataURL(file);
+                          e.target.value = '';
+                        }}
+                      />
+                    </label>
+                  )}
+                </div>
+
+                {/* Imagen del Producto en Banner */}
+                <div>
+                  <p className="text-[11px] font-bold text-slate-500 mb-2 uppercase tracking-wider">Producto en Banner</p>
+                  {store.heroProductImage ? (
+                    <div className="relative rounded-xl overflow-hidden border border-slate-200">
+                      <img src={store.heroProductImage} alt="Producto Banner" className="w-full h-24 object-cover object-center" />
+                      <button
+                        onClick={() => store.setHeroProductImage(null)}
+                        className="absolute top-1.5 right-1.5 bg-white/90 hover:bg-white rounded-full p-1 shadow cursor-pointer transition-colors"
+                        title="Eliminar imagen"
+                      >
+                        <X className="w-3.5 h-3.5 text-slate-600" />
+                      </button>
+                    </div>
+                  ) : (
+                    <label className="flex flex-col items-center justify-center gap-2 w-full h-20 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:border-indigo-400 hover:bg-indigo-50/50 transition-all group">
+                      <Upload className="w-5 h-5 text-slate-300 group-hover:text-indigo-400 transition-colors" />
+                      <span className="text-[10px] font-bold text-slate-400 group-hover:text-indigo-500">Click o arrastra imagen</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const reader = new FileReader();
+                          reader.onload = (ev) => {
+                            store.setHeroProductImage(ev.target?.result as string);
+                          };
+                          reader.readAsDataURL(file);
+                          e.target.value = '';
+                        }}
+                      />
+                    </label>
+                  )}
+                </div>
+
+              </div>
             </div>
 
             {/* Reset button */}

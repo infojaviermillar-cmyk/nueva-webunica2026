@@ -85,6 +85,8 @@ export default function PreviewPage() {
       buttonRadius={config.buttonRadius}
       shadow={config.shadow}
       cardStyle={currentStyle.cardStyle}
+      heroBgImage={config.heroBgImage ?? null}
+      heroProductImage={config.heroProductImage ?? null}
     />
   );
 }

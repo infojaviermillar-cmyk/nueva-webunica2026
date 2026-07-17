@@ -46,6 +46,8 @@ export type CustomizerState = {
   };
   buttonRadius: string;
   shadow: string;
+  heroBgImage: string | null;
+  heroProductImage: string | null;
   
   // Actions
   setWireframe: (id: string) => void;
@@ -54,6 +56,8 @@ export type CustomizerState = {
   setColor: (key: keyof CustomizerState['colors'], val: string) => void;
   setFont: (key: 'primary' | 'secondary', fontName: string) => void;
   setButtonRadius: (radius: string) => void;
+  setHeroBgImage: (url: string | null) => void;
+  setHeroProductImage: (url: string | null) => void;
   loadConfig: (config: any) => void;
 };
 
@@ -201,6 +205,8 @@ export const useCustomizerStore = create<CustomizerState>((set, get) => ({
   },
   buttonRadius: '9999px',
   shadow: 'shadow-lg shadow-slate-200/50',
+  heroBgImage: null,
+  heroProductImage: null,
 
   setWireframe: (id) => set({ selectedWireframe: id }),
 
@@ -270,6 +276,10 @@ export const useCustomizerStore = create<CustomizerState>((set, get) => ({
 
   setButtonRadius: (radius) => set({ buttonRadius: radius }),
 
+  setHeroBgImage: (url) => set({ heroBgImage: url }),
+
+  setHeroProductImage: (url) => set({ heroProductImage: url }),
+
   loadConfig: (config) => {
     if (!config) return;
     set({
@@ -279,7 +289,9 @@ export const useCustomizerStore = create<CustomizerState>((set, get) => ({
       colors: config.colors ? { ...config.colors } : get().colors,
       fonts: config.fonts ? { ...config.fonts } : get().fonts,
       buttonRadius: config.buttonRadius || get().buttonRadius,
-      shadow: config.shadow || get().shadow
+      shadow: config.shadow || get().shadow,
+      heroBgImage: config.heroBgImage ?? null,
+      heroProductImage: config.heroProductImage ?? null,
     });
   }
 }));

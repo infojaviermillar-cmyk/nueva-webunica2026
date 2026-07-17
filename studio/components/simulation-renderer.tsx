@@ -48,6 +48,8 @@ type SimulationRendererProps = {
   buttonRadius: string;
   shadow: string;
   cardStyle: string;
+  heroBgImage?: string | null;
+  heroProductImage?: string | null;
 };
 
 export function SimulationRenderer({
@@ -56,7 +58,9 @@ export function SimulationRenderer({
   fonts,
   buttonRadius,
   shadow,
-  cardStyle
+  cardStyle,
+  heroBgImage,
+  heroProductImage,
 }: SimulationRendererProps) {
   const params = useParams();
   const projectId = params?.projectId as string || '';
@@ -328,7 +332,11 @@ export function SimulationRenderer({
           </div>
         </div>
         <div className="aspect-[4/3] w-full">
-          <ImagePlaceholder className="rounded-3xl" />
+          {heroProductImage ? (
+            <img src={heroProductImage} alt="Producto" className="w-full h-full object-contain rounded-3xl" />
+          ) : (
+            <ImagePlaceholder className="rounded-3xl" />
+          )}
         </div>
       </section>
 
@@ -433,10 +441,18 @@ export function SimulationRenderer({
       </header>
 
       {/* Hero Emocional */}
-      <section className="relative bg-slate-950 text-white min-h-[480px] flex items-center py-20 px-6 overflow-hidden">
-        {/* Simulación de fondo tecnológico */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-slate-900 to-black opacity-80" />
-        <div className="absolute top-0 right-0 w-[450px] h-full bg-custom-primary/10 blur-[120px] rounded-full pointer-events-none" />
+      <section 
+        className="relative text-white min-h-[480px] flex items-center py-20 px-6 overflow-hidden"
+        style={heroBgImage ? {
+          backgroundImage: `url(${heroBgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundColor: 'transparent',
+        } : { backgroundColor: '#020617' }}
+      >
+        {/* Overlay oscuro siempre presente para legibilidad */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+        {!heroBgImage && <div className="absolute top-0 right-0 w-[450px] h-full bg-custom-primary/10 blur-[120px] rounded-full pointer-events-none" />}
         
         <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-8 items-center relative z-10">
           <div className="text-left space-y-6">
@@ -457,7 +473,11 @@ export function SimulationRenderer({
             </div>
           </div>
           <div className="aspect-[4/3] w-full hidden md:block">
-            <ImagePlaceholder className="rounded-3xl border border-slate-800" />
+            {heroProductImage ? (
+              <img src={heroProductImage} alt="Producto" className="w-full h-full object-contain rounded-3xl" />
+            ) : (
+              <ImagePlaceholder className="rounded-3xl border border-slate-800" />
+            )}
           </div>
         </div>
       </section>
@@ -635,7 +655,11 @@ export function SimulationRenderer({
             </div>
           </div>
           <div className="aspect-[4/3] w-full">
-            <ImagePlaceholder className="rounded-[2rem]" />
+            {heroProductImage ? (
+              <img src={heroProductImage} alt="Producto" className="w-full h-full object-contain rounded-[2rem]" />
+            ) : (
+              <ImagePlaceholder className="rounded-[2rem]" />
+            )}
           </div>
         </div>
       </section>
