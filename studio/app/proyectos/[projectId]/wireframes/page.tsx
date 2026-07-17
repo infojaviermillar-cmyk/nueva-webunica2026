@@ -33,34 +33,34 @@ export default function WireframesPage() {
   const [selectedHome, setSelectedHome] = useState<string | null>(null);
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
-  const homeOptions: WireframeOption[] = [
+  const homeOptions = [
     {
       id: 'home-completo',
       name: 'Home Completo',
       description: 'Mayor densidad de secciones comerciales: categorías destacadas, múltiples grillas de productos, ofertas por tiempo limitado, carrusel de marcas y sección de testimonios. Ideal para tiendas con catálogos amplios y alto enfoque promocional.',
-      svgPath: '/wireframes/maxxgo/home-completo.svg',
+      imagePath: '/wireframes/maxxgo/home-completo.png',
       type: 'home'
     },
     {
       id: 'home-alternativo',
       name: 'Home Alternativo',
       description: 'Diseño enfocado en branding e impacto visual. Destaca por un banner de héroe de pantalla completa, menor densidad de elementos, y un equilibrio óptimo entre la narrativa de la marca y la conversión.',
-      svgPath: '/wireframes/maxxgo/home-alternativo.svg',
+      imagePath: '/wireframes/maxxgo/home-alternativo.png',
       type: 'home'
     },
     {
       id: 'home-simple',
       name: 'Home Simple',
       description: 'Aproximadamente 50% menos secciones que el modelo completo. Navegación extremadamente directa, libre de ruido visual, centrándose exclusivamente en el catálogo de productos esenciales y buscador destacado.',
-      svgPath: '/wireframes/maxxgo/home-simple.svg',
+      imagePath: '/wireframes/maxxgo/home-simple.png',
       type: 'home'
     }
   ];
 
-  const internalPages: WireframeOption[] = [
-    { id: 'categoria', name: 'Página de Categoría', description: 'Vista de catálogo con barra lateral de filtros avanzados y ordenamiento.', svgPath: '/wireframes/maxxgo/categoria.svg', type: 'internal' },
-    { id: 'producto', name: 'Ficha de Producto', description: 'Detalle técnico, selector de atributos (color, tamaño), cantidad y botones de compra.', svgPath: '/wireframes/maxxgo/producto.svg', type: 'internal' },
-    { id: 'carrito', name: 'Carro de Compras', description: 'Resumen del pedido, tabla de ítems y desglose de totales.', svgPath: '/wireframes/maxxgo/carrito.svg', type: 'internal' }
+  const internalPages = [
+    { id: 'categoria', name: 'Página de Categoría', description: 'Vista de catálogo con barra lateral de filtros avanzados y ordenamiento.', imagePath: '/wireframes/maxxgo/categoria.png', type: 'internal' },
+    { id: 'producto', name: 'Ficha de Producto', description: 'Detalle técnico, selector de atributos (color, tamaño), cantidad y botones de compra.', imagePath: '/wireframes/maxxgo/producto.png', type: 'internal' },
+    { id: 'carrito', name: 'Carro de Compras', description: 'Resumen del pedido, tabla de ítems y desglose de totales.', imagePath: '/wireframes/maxxgo/carrito.png', type: 'internal' }
   ];
 
   useEffect(() => {
@@ -164,14 +164,14 @@ export default function WireframesPage() {
                 <div>
                   {/* Image container */}
                   <div className="aspect-[4/5] bg-slate-100 relative group overflow-hidden border-b border-slate-100">
-                    {/* SVG container */}
-                    <iframe 
-                      src={opt.svgPath} 
-                      className="w-full h-full pointer-events-none select-none"
+                    <img 
+                      src={opt.imagePath} 
+                      alt={opt.name}
+                      className="w-full h-full object-cover object-top select-none"
                     />
                     <div className="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
                       <button 
-                        onClick={() => setZoomedImage(opt.svgPath)}
+                        onClick={() => setZoomedImage(opt.imagePath)}
                         className="bg-white/90 hover:bg-white text-slate-800 p-3.5 rounded-full shadow-lg transition-transform hover:scale-115 cursor-pointer"
                         title="Ampliar Wireframe"
                       >
@@ -223,13 +223,14 @@ export default function WireframesPage() {
               >
                 <div>
                   <div className="aspect-[4/3] bg-slate-100 relative group overflow-hidden border-b border-slate-100">
-                    <iframe 
-                      src={opt.svgPath} 
-                      className="w-full h-full pointer-events-none select-none"
+                    <img 
+                      src={opt.imagePath} 
+                      alt={opt.name}
+                      className="w-full h-full object-cover object-top select-none"
                     />
                     <div className="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <button 
-                        onClick={() => setZoomedImage(opt.svgPath)}
+                        onClick={() => setZoomedImage(opt.imagePath)}
                         className="bg-white/90 hover:bg-white text-slate-800 p-3 rounded-full shadow-lg cursor-pointer"
                       >
                         <ZoomIn className="w-4 h-4" />
@@ -261,10 +262,11 @@ export default function WireframesPage() {
           >
             <X className="w-6 h-6" />
           </button>
-          <div className="w-full max-w-4xl max-h-[85vh] bg-white rounded-[2rem] overflow-hidden p-3 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
-            <iframe 
+          <div className="w-full max-w-4xl max-h-[85vh] bg-white rounded-[2rem] overflow-hidden p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 flex items-center justify-center">
+            <img 
               src={zoomedImage} 
-              className="w-full h-[80vh] border-0"
+              alt="Ampliado"
+              className="max-w-full max-h-[75vh] object-contain rounded-xl"
             />
           </div>
         </div>

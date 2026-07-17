@@ -143,8 +143,8 @@ export default function PersonalizarPage() {
   // Obtener estilo actualmente seleccionado
   const currentStyle = DESIGN_STYLES.find(s => s.id === store.selectedStyleId) || DESIGN_STYLES[0];
 
-  // Determinar ruta de imagen SVG original
-  const originalSvgPath = `/wireframes/maxxgo/${store.selectedWireframe}.svg`;
+  // Determinar ruta de imagen original
+  const originalImagePath = `/wireframes/maxxgo/${store.selectedWireframe}.png`;
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900 font-sans flex flex-col overflow-hidden h-screen">
@@ -460,10 +460,11 @@ export default function PersonalizarPage() {
                 />
               </div>
             ) : (
-              <div className="bg-white border border-slate-200 shadow-xl rounded-[2.5rem] p-4 max-w-4xl w-full">
-                <iframe 
-                  src={originalSvgPath} 
-                  className="w-full h-[70vh] border-0"
+              <div className="bg-white border border-slate-200 shadow-xl rounded-[2.5rem] p-6 max-w-4xl w-full flex items-center justify-center">
+                <img 
+                  src={originalImagePath} 
+                  alt="Referencia Original"
+                  className="max-w-full max-h-[70vh] object-contain rounded-xl"
                 />
               </div>
             )}
