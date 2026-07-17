@@ -62,7 +62,10 @@ export default function PreviewPage() {
               text.includes('color-mix') ||
               text.includes('light-dark') ||
               text.includes('oklch') ||
-              text.includes('from')
+              text.includes('rgb(from') ||
+              text.includes('rgba(from') ||
+              text.includes('hsl(from') ||
+              text.includes('hsla(from')
             )) {
               cleanText += text + "\n";
             }
