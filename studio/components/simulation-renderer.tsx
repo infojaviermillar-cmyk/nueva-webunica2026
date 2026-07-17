@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { 
   Search, 
   ShoppingCart, 
@@ -10,7 +12,21 @@ import {
   ShieldCheck,
   RotateCcw,
   Truck,
-  Heart
+  Heart,
+  HelpCircle,
+  Laptop,
+  Headphones,
+  Home,
+  BadgeAlert,
+  Lightbulb,
+  Dumbbell,
+  Mail,
+  Plus,
+  Minus,
+  Trash2,
+  Lock,
+  Compass,
+  FileText
 } from 'lucide-react';
 
 type SimulationRendererProps = {
@@ -42,6 +58,8 @@ export function SimulationRenderer({
   shadow,
   cardStyle
 }: SimulationRendererProps) {
+  const params = useParams();
+  const projectId = params?.projectId as string || '';
   
   // Estilo inline para inyectar variables CSS en el contenedor de simulación
   const customVariables = {
@@ -61,489 +79,1280 @@ export function SimulationRenderer({
   // Carga dinámica de fuentes de Google Fonts
   const fontUrl = `https://fonts.googleapis.com/css2?family=${fonts.primary.replace(' ', '+')}&family=${fonts.secondary.replace(' ', '+')}&display=swap`;
 
-  // Renderizador de Header Común
-  const renderHeader = () => (
-    <header className="border-b border-custom-border bg-custom-surface px-6 py-4 flex items-center justify-between sticky top-0 z-10 transition-all">
+  // Helper para renderizar placeholder de imagen (Caja con X)
+  const ImagePlaceholder = ({ className = "w-full h-full" }) => (
+    <div className={`bg-slate-200/60 border border-slate-300 relative flex items-center justify-center overflow-hidden ${className}`}>
+      {/* Líneas cruzadas tipo wireframe */}
+      <svg className="absolute inset-0 w-full h-full text-slate-300/80" preserveAspectRatio="none">
+        <line x1="0" y1="0" x2="100%" y2="100%" stroke="currentColor" strokeWidth="1" />
+        <line x1="100%" y1="0" x2="0" y2="100%" stroke="currentColor" strokeWidth="1" />
+      </svg>
+      <span className="relative z-10 text-[10px] uppercase font-bold tracking-wider text-slate-400">Imagen</span>
+    </div>
+  );
+
+  // Renderizador de Estrellas
+  const renderStars = (rating: number = 5, count: number = 12) => (
+    <div className="flex items-center gap-1">
+      <div className="flex text-amber-400">
+        {[...Array(5)].map((_, i) => (
+          <Star key={i} className={`w-3.5 h-3.5 ${i < rating ? 'fill-current' : 'text-slate-300'}`} />
+        ))}
+      </div>
+      <span className="font-secondary text-[11px] text-custom-muted">({count})</span>
+    </div>
+  );
+
+  // Renderizador de pre-header común
+  const renderPreHeader = (theme: 'light' | 'dark' | 'cream') => {
+    const bgClass = theme === 'dark' 
+      ? 'bg-slate-950 text-white border-b border-slate-900' 
+      : theme === 'cream'
+      ? 'bg-[#ebdcb9] text-[#5c4a24] border-b border-[#ebdcb9]'
+      : 'bg-slate-100 text-slate-600 border-b border-slate-200';
+
+    return (
+      <div className={`${bgClass} px-6 py-2 flex flex-wrap justify-center md:justify-between items-center text-xs font-secondary transition-colors duration-200 gap-4`}>
+        <div className="flex items-center gap-2">
+          <Truck className="w-3.5 h-3.5" />
+          <span>Envíos a todo Chile</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <ShieldCheck className="w-3.5 h-3.5" />
+          <span>Pago seguro y protegido</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <RotateCcw className="w-3.5 h-3.5" />
+          <span>Garantía Maxxgo</span>
+        </div>
+      </div>
+    );
+  };
+
+  // Header Común (Simple / Categoría / Producto / Carrito)
+  const renderMainHeader = (hasFavoritos = false, hasBigLabels = false) => (
+    <header className="border-b border-custom-border bg-custom-surface px-6 py-4 flex items-center justify-between sticky top-0 z-25 transition-all">
       <div className="flex items-center gap-3">
-        <span className="font-primary font-black text-xl tracking-tight text-custom-primary uppercase">MAXXGO</span>
+        <span className="font-primary font-black text-2xl tracking-tight text-custom-primary uppercase">
+          MAXXGO
+          <span className="block text-[8px] font-bold text-custom-text tracking-widest mt-[-2px]">BY PACIFIC COLOR</span>
+        </span>
       </div>
       
-      <div className="hidden md:flex items-center gap-6 font-secondary text-sm font-medium text-custom-text">
-        <span className="cursor-pointer hover:text-custom-primary">Inicio</span>
-        <span className="cursor-pointer hover:text-custom-primary">Tienda</span>
-        <span className="cursor-pointer hover:text-custom-primary">Ofertas</span>
-        <span className="cursor-pointer hover:text-custom-primary">Contacto</span>
+      <div className="flex-1 max-w-md mx-8 hidden md:block">
+        <div className="relative">
+          <input 
+            type="text" 
+            placeholder="Buscar productos..."
+            className="w-full bg-slate-50 border border-custom-border rounded-xl px-4 py-2.5 text-xs font-secondary focus:outline-none focus:border-custom-primary focus:bg-white text-custom-text"
+          />
+          <Search className="w-4 h-4 text-custom-muted absolute right-4 top-1/2 -translate-y-1/2" />
+        </div>
       </div>
 
-      <div className="flex items-center gap-4 text-custom-text">
-        <Search className="w-5 h-5 cursor-pointer hover:text-custom-primary" />
-        <User className="w-5 h-5 cursor-pointer hover:text-custom-primary" />
-        <div className="relative cursor-pointer hover:text-custom-primary">
-          <ShoppingCart className="w-5 h-5" />
-          <span className="absolute -top-2 -right-2 bg-custom-primary text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-            2
-          </span>
-        </div>
+      <div className="flex items-center gap-6 text-custom-text">
+        {hasBigLabels ? (
+          <>
+            <div className="flex flex-col items-center cursor-pointer hover:text-custom-primary">
+              <User className="w-5 h-5" />
+              <span className="text-[9px] font-bold font-secondary uppercase mt-1">Mi cuenta</span>
+            </div>
+            {hasFavoritos && (
+              <div className="flex flex-col items-center cursor-pointer hover:text-custom-primary">
+                <Heart className="w-5 h-5" />
+                <span className="text-[9px] font-bold font-secondary uppercase mt-1">Favoritos</span>
+              </div>
+            )}
+            <div className="flex flex-col items-center cursor-pointer hover:text-custom-primary relative">
+              <ShoppingCart className="w-5 h-5" />
+              <span className="text-[9px] font-bold font-secondary uppercase mt-1">Carrito</span>
+              <span className="absolute -top-1 right-2 bg-custom-primary text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                2
+              </span>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex items-center gap-2 cursor-pointer hover:text-custom-primary">
+              <User className="w-5 h-5" />
+              <span className="text-xs font-medium font-secondary hidden lg:inline">Mi cuenta</span>
+            </div>
+            <div className="flex items-center gap-2 cursor-pointer hover:text-custom-primary relative">
+              <ShoppingCart className="w-5 h-5" />
+              <span className="text-xs font-medium font-secondary hidden lg:inline">Carro</span>
+              <span className="absolute -top-1.5 -right-2 bg-custom-primary text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                3
+              </span>
+            </div>
+          </>
+        )}
         <Menu className="w-5 h-5 md:hidden cursor-pointer hover:text-custom-primary" />
       </div>
     </header>
   );
 
-  // Renderizador de Footer Común
-  const renderFooter = () => (
-    <footer className="border-t border-custom-border bg-custom-surface px-6 py-12 text-custom-text transition-all mt-auto">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-        <div>
-          <h4 className="font-primary font-bold text-lg mb-4 text-custom-primary uppercase">MAXXGO</h4>
-          <p className="font-secondary text-xs text-custom-muted leading-relaxed">
-            Tecnología premium e innovación constante para tu setup de trabajo y gaming.
+  // Sub-header / Navigation Links
+  const renderNavLinks = (activeLink = '') => (
+    <nav className="bg-custom-surface border-b border-custom-border py-3 px-6 hidden md:block">
+      <div className="max-w-6xl mx-auto flex justify-center gap-12 font-secondary text-xs font-bold uppercase tracking-wider text-custom-text">
+        {['Tecnología', 'Audio', 'Computación', 'Hogar', 'Ofertas'].map((link) => (
+          <span 
+            key={link} 
+            className={`cursor-pointer hover:text-custom-primary transition-colors pb-1 ${
+              activeLink === link ? 'border-b-2 border-custom-primary text-custom-primary' : ''
+            }`}
+          >
+            {link}
+          </span>
+        ))}
+      </div>
+    </nav>
+  );
+
+  // Newsletter Section (Simple & Alternativo)
+  const renderNewsletter = () => (
+    <section className="bg-slate-100 border-t border-custom-border py-16 px-6">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div className="text-left space-y-4">
+          <div className="flex items-center gap-3 text-custom-primary">
+            <Mail className="w-8 h-8" />
+            <h3 className="font-primary font-bold text-2xl uppercase text-custom-text">Suscríbete a Maxxgo</h3>
+          </div>
+          <p className="font-secondary text-sm text-custom-muted">
+            Recibe ofertas exclusivas, novedades y promociones directamente en tu correo.
           </p>
+          <div className="flex gap-2 max-w-md pt-2">
+            <input 
+              type="email" 
+              placeholder="Ingresa tu email"
+              className="flex-1 bg-white border border-custom-border rounded-xl px-4 py-3 text-xs font-secondary text-custom-text focus:outline-none"
+            />
+            <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-6 py-3 text-xs uppercase tracking-wider hover:opacity-95 transition-opacity cursor-pointer">
+              Suscribirme
+            </button>
+          </div>
         </div>
-        <div>
-          <h4 className="font-primary font-bold text-sm mb-4 uppercase">Explorar</h4>
-          <ul className="font-secondary text-xs text-custom-muted space-y-2">
-            <li className="hover:text-custom-primary cursor-pointer">Colección de Audio</li>
-            <li className="hover:text-custom-primary cursor-pointer">Sillas Gaming</li>
-            <li className="hover:text-custom-primary cursor-pointer">Monitores Pro</li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-primary font-bold text-sm mb-4 uppercase">Contacto</h4>
-          <p className="font-secondary text-xs text-custom-muted leading-relaxed">
-            Soporte 24/7 en soporte@maxxgo.cl<br/>
-            Santiago, Chile.
-          </p>
+        <div className="hidden md:block h-36">
+          <ImagePlaceholder className="rounded-2xl" />
         </div>
       </div>
-      <div className="max-w-6xl mx-auto border-t border-custom-border mt-8 pt-6 text-center font-secondary text-[10px] text-custom-muted">
-        © 2026 Maxxgo. Todos los derechos reservados. Diseñado para Pacific Color.
+    </section>
+  );
+
+  // Footer Común (5 columnas + copyright + gateway logos)
+  const renderFooterDetailed = (columnsCount = 3) => (
+    <footer className="border-t border-custom-border bg-slate-950 text-white px-6 py-16 transition-all mt-auto font-secondary">
+      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+        <div className="col-span-2 md:col-span-2 space-y-4">
+          <h4 className="font-primary font-black text-2xl text-custom-primary uppercase">MAXXGO</h4>
+          <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+            Calidad, innovación y rendimiento en productos tecnológicos diseñados para potenciar tu vida.
+          </p>
+          {/* Redes sociales */}
+          <div className="flex gap-4 text-slate-400">
+            <span className="hover:text-custom-primary cursor-pointer text-xs font-bold">FB</span>
+            <span className="hover:text-custom-primary cursor-pointer text-xs font-bold">IG</span>
+            <span className="hover:text-custom-primary cursor-pointer text-xs font-bold">YT</span>
+            <span className="hover:text-custom-primary cursor-pointer text-xs font-bold">LI</span>
+          </div>
+        </div>
+        
+        <div>
+          <h4 className="font-bold text-xs uppercase text-slate-300 mb-4 tracking-wider">Categorías</h4>
+          <ul className="text-xs text-slate-400 space-y-2.5">
+            <li className="hover:text-custom-primary cursor-pointer">Tecnología</li>
+            <li className="hover:text-custom-primary cursor-pointer">Audio</li>
+            <li className="hover:text-custom-primary cursor-pointer">Computación</li>
+            <li className="hover:text-custom-primary cursor-pointer">Hogar</li>
+            <li className="hover:text-custom-primary cursor-pointer">Ofertas</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-xs uppercase text-slate-300 mb-4 tracking-wider">Información</h4>
+          <ul className="text-xs text-slate-400 space-y-2.5">
+            <li className="hover:text-custom-primary cursor-pointer">Quiénes somos</li>
+            <li className="hover:text-custom-primary cursor-pointer">Despachos</li>
+            <li className="hover:text-custom-primary cursor-pointer">Cambios y Devoluciones</li>
+            <li className="hover:text-custom-primary cursor-pointer">Términos y condiciones</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="font-bold text-xs uppercase text-slate-300 mb-4 tracking-wider">Contacto</h4>
+          <ul className="text-xs text-slate-400 space-y-2.5">
+            <li>+56 2 3206 0700</li>
+            <li>hola@maxxgo.cl</li>
+            <li className="text-[10px] text-slate-500">Lunes a Viernes 9:00 a 18:00 hrs</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto border-t border-slate-900 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] text-slate-500">
+        <span>© 2026 Maxxgo | Pacific Color. Todos los derechos reservados.</span>
+        <div className="flex gap-3 items-center opacity-70">
+          <span className="font-bold uppercase border border-slate-800 px-2 py-0.5 rounded">webpay</span>
+          <span className="font-bold uppercase border border-slate-800 px-2 py-0.5 rounded">mercado pago</span>
+          <span className="font-bold uppercase border border-slate-800 px-2 py-0.5 rounded">visa</span>
+          <span className="font-bold uppercase border border-slate-800 px-2 py-0.5 rounded">mastercard</span>
+        </div>
       </div>
     </footer>
   );
 
-  // 1. HOME SIMPLE (Diseño Directo, Limpio, Pocas Secciones)
+  // 1. HOME SIMPLE (Mismos textos y secciones de la imagen "home-simple.png")
   const renderHomeSimple = () => (
-    <div className="flex flex-col min-h-full">
-      {renderHeader()}
-      
+    <div className="flex flex-col min-h-full bg-white">
+      {renderPreHeader('cream')}
+      {renderMainHeader(false, false)}
+      {renderNavLinks()}
+
       {/* Hero */}
-      <section className="px-6 py-16 text-center max-w-4xl mx-auto">
-        <h1 className="font-primary font-black text-4xl md:text-5xl uppercase tracking-tight text-custom-text mb-6">
-          Tu Setup, <span className="text-custom-primary">Tu Rendimiento</span>
-        </h1>
-        <p className="font-secondary text-base text-custom-muted max-w-2xl mx-auto mb-8 font-light">
-          Gadgets esenciales y accesorios de alta durabilidad optimizados para programadores y diseñadores exigentes.
-        </p>
-        <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-8 py-4 text-sm uppercase tracking-wider hover:opacity-90 transition-opacity cursor-pointer">
-          Comprar Gadgets
-        </button>
-      </section>
-
-      {/* Grid de 3 Categorías */}
-      <section className="px-6 py-12 max-w-6xl mx-auto w-full">
-        <h2 className="font-primary font-bold text-xl mb-8 uppercase text-custom-text">Categorías Destacadas</h2>
-        <div className="grid sm:grid-cols-3 gap-6">
-          {['Audio Premium', 'Cargadores', 'Setup Escritorio'].map((cat, i) => (
-            <div key={i} className={`p-8 ${cardStyle} bg-custom-surface transition-all flex flex-col justify-between h-48`}>
-              <span className="font-primary font-bold text-lg text-custom-text">{cat}</span>
-              <span className="text-xs text-custom-primary font-bold inline-flex items-center gap-1 cursor-pointer">
-                Ver más <ChevronRight className="w-3.5 h-3.5" />
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Lista de 4 Productos */}
-      <section className="px-6 py-12 max-w-6xl mx-auto w-full mb-16">
-        <h2 className="font-primary font-bold text-xl mb-8 uppercase text-custom-text">Más Vendidos</h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { name: 'Audífonos Pro ANC', price: '$79.990' },
-            { name: 'Cargador MagSafe 20W', price: '$19.990' },
-            { name: 'Smartwatch S3 Active', price: '$129.990' },
-            { name: 'Parlante Bluetooth Mini', price: '$49.990' }
-          ].map((prod, i) => (
-            <div key={i} className={`p-5 ${cardStyle} bg-custom-surface flex flex-col justify-between`}>
-              <div>
-                <div className="aspect-square bg-slate-200/50 rounded-xl mb-4 flex items-center justify-center text-xs text-slate-400">
-                  📷 Imagen
-                </div>
-                <h3 className="font-primary font-bold text-sm text-custom-text mb-1">{prod.name}</h3>
-                <p className="font-primary font-bold text-custom-primary text-base">{prod.price}</p>
-              </div>
-              <button className="btn-custom-radius bg-custom-secondary text-custom-text font-primary font-bold text-xs uppercase py-2.5 mt-4 hover:opacity-80 transition-opacity w-full cursor-pointer">
-                Ver detalle
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {renderFooter()}
-    </div>
-  );
-
-  // 2. HOME ALTERNATIVO (Branding Alto, Gran Impacto Visual, Densidad Baja)
-  const renderHomeAlternativo = () => (
-    <div className="flex flex-col min-h-full">
-      {renderHeader()}
-
-      {/* Banner Héroe Gigante de Imagen */}
-      <section className="relative bg-custom-secondary py-32 px-6 flex flex-col items-start justify-center overflow-hidden min-h-[500px]">
-        <div className="absolute top-0 right-0 w-[400px] h-full bg-custom-accent/10 blur-[100px] rounded-full pointer-events-none" />
-        <div className="max-w-2xl relative z-10 text-left">
-          <span className="font-secondary text-xs uppercase tracking-widest text-custom-accent font-bold mb-4 block">PACIFIC COLOR EDITION</span>
-          <h1 className="font-primary font-black text-5xl md:text-6xl uppercase tracking-tighter text-custom-text mb-6 leading-none">
-            TECNOLOGÍA QUE <br/>
-            <span className="text-custom-primary">CONECTA TU MUNDO</span>
+      <section className="max-w-6xl mx-auto w-full px-6 py-12 grid md:grid-cols-2 gap-8 items-center">
+        <div className="text-left space-y-6">
+          <span className="text-xs font-bold text-custom-primary tracking-widest uppercase">LO QUE NECESITAS, EN UN SOLO LUGAR</span>
+          <h1 className="font-primary font-black text-4xl md:text-5xl uppercase tracking-tight text-custom-text leading-tight">
+            Tecnología y calidad para hacer tu vida más fácil
           </h1>
-          <p className="font-secondary text-sm text-custom-muted mb-8 max-w-md font-light leading-relaxed">
-            Unificando acabados industriales elegantes y el más alto estándar de conectividad inalámbrica para tu oficina moderna.
+          <p className="font-secondary text-sm text-custom-muted font-light max-w-md">
+            Descubre nuestra cuidada selección de audífonos, computadoras y accesorios de alta durabilidad.
           </p>
-          <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-8 py-4 text-xs uppercase tracking-widest hover:opacity-90 transition-opacity cursor-pointer">
-            Explorar Colección
+          <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-8 py-3.5 text-xs uppercase tracking-wider hover:opacity-90 transition-opacity cursor-pointer">
+            Ver Productos
+          </button>
+          {/* Slider Dots */}
+          <div className="flex gap-2 pt-4">
+            <span className="w-2.5 h-2.5 bg-custom-primary rounded-full" />
+            <span className="w-2.5 h-2.5 bg-slate-300 rounded-full" />
+            <span className="w-2.5 h-2.5 bg-slate-300 rounded-full" />
+          </div>
+        </div>
+        <div className="aspect-[4/3] w-full">
+          <ImagePlaceholder className="rounded-3xl" />
+        </div>
+      </section>
+
+      {/* Categorías (5 Columnas) */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12">
+        <h2 className="font-primary font-bold text-xl uppercase text-custom-text mb-8 tracking-wider">Categorías</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
+          {[
+            { label: 'Tecnología', icon: Laptop },
+            { label: 'Audio', icon: Headphones },
+            { label: 'Computación', icon: Laptop },
+            { label: 'Hogar', icon: Home },
+            { label: 'Ofertas', icon: BadgeAlert }
+          ].map((cat, i) => (
+            <div key={i} className={`p-6 ${cardStyle} bg-custom-surface flex flex-col items-center justify-center h-32 gap-3 hover:border-custom-primary hover:scale-103 transition-all cursor-pointer`}>
+              <cat.icon className="w-7 h-7 text-custom-primary" />
+              <span className="font-secondary text-xs font-bold text-custom-text">{cat.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Productos Destacados (4 Columnas) */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12 mb-16">
+        <h2 className="font-primary font-bold text-xl uppercase text-custom-text mb-8 tracking-wider">Productos Destacados</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className={`p-4 ${cardStyle} bg-custom-surface flex flex-col justify-between hover:shadow-lg transition-shadow`}>
+              <div>
+                <div className="aspect-square w-full mb-4">
+                  <ImagePlaceholder className="rounded-2xl" />
+                </div>
+                <h3 className="font-primary font-bold text-xs text-custom-text mb-1">Nombre del Producto</h3>
+                <p className="font-primary font-black text-custom-primary text-sm mb-2">$00.000</p>
+                {renderStars(5, 0)}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="text-center pt-8">
+          <button className="btn-custom-radius border border-custom-primary text-custom-primary font-primary font-bold px-8 py-3 text-xs uppercase tracking-wider hover:bg-custom-primary hover:text-white transition-all cursor-pointer">
+            Ver todos →
           </button>
         </div>
       </section>
 
-      {/* Showcase Comercial Detallado */}
-      <section className="px-6 py-20 max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <span className="font-primary text-xs font-bold text-custom-primary uppercase tracking-wider block mb-2">Características Clave</span>
-          <h2 className="font-primary font-bold text-3xl text-custom-text mb-6 uppercase">Diseño de Aluminio Aeroespacial</h2>
-          <p className="font-secondary text-sm text-custom-muted mb-6 leading-relaxed">
-            Construido con materiales reciclados de alta resistencia, nuestros cargadores y adaptadores resisten golpes accidentales manteniendo una conductividad eléctrica estable.
-          </p>
-          <ul className="space-y-3 font-secondary text-xs text-custom-text font-medium">
-            <li className="flex items-center gap-2">✓ Eficiencia energética de clase A</li>
-            <li className="flex items-center gap-2">✓ Carga magnética ultra firme</li>
-            <li className="flex items-center gap-2">✓ Garantía extendida de 2 años</li>
-          </ul>
-        </div>
-        <div className="aspect-[4/3] bg-custom-surface border border-custom-border rounded-[2rem] flex items-center justify-center text-slate-400">
-           📷 Detalle Técnico
-        </div>
-      </section>
-
-      {/* Carrusel de Productos */}
-      <section className="px-6 py-12 max-w-6xl mx-auto w-full mb-20">
-        <h2 className="font-primary font-bold text-xl mb-8 uppercase text-custom-text">Lanzamientos Recientes</h2>
-        <div className="grid md:grid-cols-3 gap-8">
+      {/* Trust proposition banner (4 items) */}
+      <section className="border-y border-custom-border bg-custom-surface py-12 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 text-left">
           {[
-            { name: 'Auriculares Inalámbricos Over-Ear', price: '$189.990' },
-            { name: 'MagSafe Duo Charger Stand', price: '$49.990' },
-            { name: 'Teclado Mecánico de Aluminio', price: '$119.990' }
-          ].map((prod, i) => (
-            <div key={i} className={`p-6 ${cardStyle} bg-custom-surface hover:scale-[1.02] transition-transform`}>
-              <div className="aspect-square bg-slate-200/50 rounded-2xl mb-5 flex items-center justify-center text-slate-400">
-                📷 Producto
+            { title: 'Despacho rápido', desc: 'a todo Chile', icon: Truck },
+            { title: 'Pago seguro', desc: 'y protegido', icon: Lock },
+            { title: 'Garantía en todos', desc: 'nuestros productos', icon: RotateCcw },
+            { title: 'Atención y soporte', desc: 'especializado', icon: HelpCircle }
+          ].map((item, i) => (
+            <div key={i} className="flex gap-3 items-center">
+              <item.icon className="w-8 h-8 text-custom-primary shrink-0" />
+              <div>
+                <h4 className="font-primary font-bold text-xs uppercase text-custom-text leading-tight">{item.title}</h4>
+                <p className="font-secondary text-[11px] text-custom-muted leading-tight mt-0.5">{item.desc}</p>
               </div>
-              <h3 className="font-primary font-bold text-base text-custom-text mb-2">{prod.name}</h3>
-              <p className="font-primary font-bold text-custom-primary text-lg">{prod.price}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {renderFooter()}
+      {renderNewsletter()}
+      {renderFooterDetailed(3)}
     </div>
   );
 
-  // 3. HOME COMPLETO (Estrategia Comercial Completa, Alta Densidad)
-  const renderHomeCompleto = () => (
-    <div className="flex flex-col min-h-full">
-      {/* Top Banner de Despacho */}
-      <div className="bg-custom-primary text-white text-center py-2 px-6 font-primary text-[10px] uppercase tracking-widest font-black transition-all">
-        🔥 Despacho gratis por compras sobre $50.000 en todo Chile
-      </div>
-      
-      {renderHeader()}
+  // 2. HOME ALTERNATIVO (Mismo diseño de la imagen "home-alternativo.png")
+  const renderHomeAlternativo = () => (
+    <div className="flex flex-col min-h-full bg-white">
+      {renderPreHeader('dark')}
+      {/* Header alternativo con navegación metida */}
+      <header className="border-b border-custom-border bg-custom-surface px-6 py-4 flex items-center justify-between sticky top-0 z-25 transition-all">
+        <div className="flex items-center gap-3">
+          <span className="font-primary font-black text-2xl tracking-tight text-custom-primary uppercase">MAXXGO</span>
+        </div>
+        
+        <div className="hidden lg:flex items-center gap-6 font-secondary text-xs font-bold uppercase tracking-wider text-custom-text">
+          <span className="cursor-pointer hover:text-custom-primary">Categorías</span>
+          <span className="cursor-pointer hover:text-custom-primary">Ofertas</span>
+          <span className="cursor-pointer hover:text-custom-primary">Novedades</span>
+          <span className="cursor-pointer hover:text-custom-primary">Marcas</span>
+        </div>
 
-      {/* Hero Banner Slider */}
-      <section className="px-6 py-16 max-w-7xl mx-auto w-full">
-        <div className="bg-custom-surface border border-custom-border rounded-[2.5rem] p-10 md:p-16 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
-          <div className="flex-1 text-left relative z-10">
-            <h1 className="font-primary font-black text-4xl md:text-5xl uppercase tracking-tighter text-custom-text mb-4">
-              EQUIPA TU SETUP <br/>CON LO MEJOR
-            </h1>
-            <p className="font-secondary text-sm text-custom-muted mb-8 max-w-md font-light leading-relaxed">
-              Consigue el máximo rendimiento con nuestros teclados mecánicos, monitores y audífonos premium en oferta.
-            </p>
-            <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-8 py-4 text-xs uppercase tracking-widest hover:opacity-90 transition-opacity cursor-pointer">
-              Ver Catálogo Completo
-            </button>
+        <div className="flex items-center gap-4">
+          <div className="relative max-w-[200px] hidden sm:block">
+            <input type="text" placeholder="Buscar..." className="w-full bg-slate-50 border border-custom-border rounded-xl px-4 py-1.5 text-xs font-secondary focus:outline-none focus:bg-white text-custom-text" />
+            <Search className="w-3.5 h-3.5 text-custom-muted absolute right-3 top-1/2 -translate-y-1/2" />
           </div>
-          <div className="flex-1 aspect-[4/3] bg-slate-200/50 rounded-[2rem] flex items-center justify-center text-slate-400 z-10">
-             📷 Banner Banner Principal
+          <User className="w-5 h-5 text-custom-text cursor-pointer hover:text-custom-primary" />
+          <div className="relative text-custom-text cursor-pointer hover:text-custom-primary">
+            <ShoppingCart className="w-5 h-5" />
+            <span className="absolute -top-1.5 -right-2 bg-custom-primary text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+              0
+            </span>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Emocional */}
+      <section className="relative bg-slate-950 text-white min-h-[480px] flex items-center py-20 px-6 overflow-hidden">
+        {/* Simulación de fondo tecnológico */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-slate-900 to-black opacity-80" />
+        <div className="absolute top-0 right-0 w-[450px] h-full bg-custom-primary/10 blur-[120px] rounded-full pointer-events-none" />
+        
+        <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-8 items-center relative z-10">
+          <div className="text-left space-y-6">
+            <h1 className="font-primary font-black text-5xl uppercase tracking-tighter leading-none text-white">
+              TECNOLOGÍA <br/>QUE TE MUEVE
+            </h1>
+            <p className="font-secondary text-sm text-slate-300 font-light max-w-sm">
+              Los mejores productos para potenciar tu mundo. Gadgets premium listos para el trabajo pesado.
+            </p>
+            <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-8 py-3.5 text-xs uppercase tracking-widest hover:opacity-95 transition-all cursor-pointer shadow-lg shadow-custom-primary/20">
+              Comprar Ahora
+            </button>
+            {/* Dots */}
+            <div className="flex gap-2 pt-4 justify-start">
+              <span className="w-2.5 h-2.5 bg-custom-primary rounded-full" />
+              <span className="w-2.5 h-2.5 bg-slate-600 rounded-full" />
+              <span className="w-2.5 h-2.5 bg-slate-600 rounded-full" />
+            </div>
+          </div>
+          <div className="aspect-[4/3] w-full hidden md:block">
+            <ImagePlaceholder className="rounded-3xl border border-slate-800" />
           </div>
         </div>
       </section>
 
-      {/* Brands Banner */}
-      <section className="bg-custom-surface border-y border-custom-border py-6 px-6 text-center font-primary font-black text-sm text-custom-muted uppercase tracking-widest flex flex-wrap justify-center gap-12">
-        <span>Brand 1</span>
-        <span>Brand 2</span>
-        <span>Brand 3</span>
-        <span>Brand 4</span>
-        <span>Brand 5</span>
-      </section>
-
-      {/* Grid de 4 Categorías */}
-      <section className="px-6 py-16 max-w-6xl mx-auto w-full">
-        <h2 className="font-primary font-bold text-xl mb-8 uppercase text-custom-text">Explora Categorías</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {['Audio', 'Monitores', 'Componentes', 'Accesorios'].map((cat, i) => (
-            <div key={i} className={`p-6 ${cardStyle} bg-custom-surface flex flex-col justify-between aspect-video`}>
-              <span className="font-primary font-bold text-sm text-custom-text">{cat}</span>
-              <span className="text-[10px] text-custom-primary font-bold flex items-center cursor-pointer">
-                Explorar <ArrowRight className="w-3 h-3 ml-1" />
-              </span>
+      {/* Banner 4 items */}
+      <section className="bg-custom-surface border-b border-custom-border py-8 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+          {[
+            { title: 'Despacho rápido', desc: 'a todo Chile', icon: Truck },
+            { title: 'Pago seguro', desc: 'y hasta 12 cuotas', icon: Lock },
+            { title: 'Calidad garantizada', desc: 'en todos los productos', icon: ShieldCheck },
+            { title: 'Soporte experto', desc: 'antes y después de tu compra', icon: HelpCircle }
+          ].map((item, i) => (
+            <div key={i} className="flex gap-3 items-center">
+              <item.icon className="w-8 h-8 text-custom-primary shrink-0" />
+              <div>
+                <h4 className="font-primary font-bold text-xs uppercase text-custom-text leading-tight">{item.title}</h4>
+                <p className="font-secondary text-[11px] text-custom-muted leading-tight mt-0.5">{item.desc}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Grid de Productos (8 items) */}
-      <section className="px-6 py-12 max-w-6xl mx-auto w-full mb-16">
-        <h2 className="font-primary font-bold text-xl mb-8 uppercase text-custom-text">Novedades Destacadas</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {/* Categorías Destacadas (6 Columnas) */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12">
+        <h2 className="font-primary font-bold text-xl uppercase text-custom-text mb-8 tracking-wider text-center md:text-left">Categorías Destacadas</h2>
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
           {[
-            { name: 'Mouse Ergonómico USB-C', price: '$34.990' },
-            { name: 'Teclado Slim de Oficina', price: '$29.990' },
-            { name: 'Monitor 24" IPS Full HD', price: '$149.990' },
-            { name: 'Silla Ergonómica Pro', price: '$199.990' },
-            { name: 'Hub Multiport USB-C', price: '$24.990' },
-            { name: 'Foco Inteligente Smart LED', price: '$9.990' },
-            { name: 'Cámara Web Full HD 1080p', price: '$39.990' },
-            { name: 'Disco Duro Externo 1TB', price: '$54.990' }
+            { label: 'Tecnología', icon: Laptop },
+            { label: 'Audio', icon: Headphones },
+            { label: 'Computación', icon: Laptop },
+            { label: 'Hogar', icon: Home },
+            { label: 'Iluminación', icon: Lightbulb },
+            { label: 'Fitness', icon: Dumbbell }
+          ].map((cat, i) => (
+            <div key={i} className={`p-5 ${cardStyle} bg-custom-surface flex flex-col items-center justify-center h-36 gap-3 hover:border-custom-primary transition-all cursor-pointer`}>
+              <div className="w-12 h-12 bg-slate-100 flex items-center justify-center rounded-xl">
+                <cat.icon className="w-6 h-6 text-custom-primary" />
+              </div>
+              <span className="font-secondary text-xs font-bold text-custom-text text-center">{cat.label}</span>
+            </div>
+          ))}
+        </div>
+        <div className="text-center pt-8">
+          <button className="btn-custom-radius border border-custom-primary text-custom-primary font-primary font-bold px-8 py-3 text-xs uppercase tracking-wider hover:bg-custom-primary hover:text-white transition-all cursor-pointer">
+            Ver todas →
+          </button>
+        </div>
+      </section>
+
+      {/* Productos (5 Columnas) */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12 mb-16">
+        <h2 className="font-primary font-bold text-xl uppercase text-custom-text mb-8 tracking-wider">Productos Destacados</h2>
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+          {[
+            { name: 'Nombre del Producto', price: '$00.000' },
+            { name: 'Nombre del Producto', price: '$00.000' },
+            { name: 'Nombre del Producto', price: '$00.000' },
+            { name: 'Nombre del Producto', price: '$00.000' },
+            { name: 'Nombre del Producto', price: '$00.000' }
           ].map((prod, i) => (
-            <div key={i} className={`p-4 ${cardStyle} bg-custom-surface flex flex-col justify-between`}>
+            <div key={i} className={`p-4 ${cardStyle} bg-custom-surface flex flex-col justify-between hover:shadow-md transition-shadow`}>
               <div>
-                <div className="aspect-square bg-slate-200/50 rounded-xl mb-3 flex items-center justify-center text-[10px] text-slate-400">
-                  📷 Imagen
+                <div className="aspect-square w-full mb-4">
+                  <ImagePlaceholder className="rounded-xl" />
                 </div>
                 <h3 className="font-primary font-bold text-xs text-custom-text mb-1 line-clamp-1">{prod.name}</h3>
-                <p className="font-primary font-bold text-custom-primary text-sm">{prod.price}</p>
+                <p className="font-primary font-black text-custom-primary text-sm mb-2">{prod.price}</p>
+                {renderStars(5, 0)}
               </div>
-              <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold text-[10px] uppercase py-2.5 mt-3 hover:opacity-90 transition-opacity w-full cursor-pointer">
-                Agregar
-              </button>
             </div>
           ))}
         </div>
       </section>
 
-      {renderFooter()}
+      {/* Banner Promo */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12 mb-16">
+        <div className="bg-slate-950 border-2 border-custom-border rounded-[2rem] overflow-hidden grid md:grid-cols-2 items-center">
+          <div className="p-12 space-y-4 text-left">
+            <h3 className="font-primary font-black text-3xl text-white uppercase tracking-wider leading-tight">
+              Ofertas <br/>que no puedes <br/>dejar pasar
+            </h3>
+            <p className="font-secondary text-sm text-slate-300">Hasta 40% dcto. en productos seleccionados</p>
+            <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-8 py-3.5 text-xs uppercase tracking-wider hover:opacity-90 transition-opacity cursor-pointer">
+              Ver Ofertas
+            </button>
+          </div>
+          <div className="h-64 md:h-full">
+            <ImagePlaceholder />
+          </div>
+        </div>
+      </section>
+
+      {/* Marcas */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12 mb-16 text-center">
+        <h2 className="font-primary font-bold text-xs uppercase tracking-widest text-custom-muted mb-8">Marcas Líderes</h2>
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center opacity-60">
+          {['SAMSUNG', 'JBL', 'logitech', 'xiaomi', 'PHILIPS', 'hp'].map((brand, i) => (
+            <span key={i} className="font-primary font-black text-lg text-custom-text uppercase tracking-widest">{brand}</span>
+          ))}
+        </div>
+      </section>
+
+      {/* Value prop footer list */}
+      <section className="bg-slate-900 border-t border-slate-800 text-white py-12 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+          {[
+            { title: 'Compra segura', desc: 'Tus datos siempre protegidos', icon: ShieldCheck },
+            { title: 'Garantía Maxxgo', desc: 'Respaldo y calidad asegurada', icon: RotateCcw },
+            { title: 'Despachos a todo Chile', desc: 'Rápido y confiable', icon: Truck },
+            { title: 'Atención personalizada', desc: 'Estamos para ayudarte', icon: HelpCircle }
+          ].map((item, i) => (
+            <div key={i} className="flex gap-3 items-center">
+              <item.icon className="w-8 h-8 text-custom-primary shrink-0" />
+              <div>
+                <h4 className="font-primary font-bold text-xs uppercase text-slate-100 leading-tight">{item.title}</h4>
+                <p className="font-secondary text-[11px] text-slate-400 leading-tight mt-0.5">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {renderFooterDetailed(4)}
     </div>
   );
 
-  // 4. CATEGORIA (Catalogo + Barra Lateral de Filtros)
-  const renderCategoria = () => (
-    <div className="flex flex-col min-h-full">
-      {renderHeader()}
-      
-      <main className="max-w-6xl mx-auto w-full px-6 py-12">
-        <h1 className="font-primary font-bold text-3xl text-custom-text uppercase mb-2">Smartphones &amp; Accesorios</h1>
-        <p className="font-secondary text-xs text-custom-muted mb-8">Mostrando 1-6 de 24 productos</p>
+  // 3. HOME COMPLETO (Mismos textos y secciones de la imagen "home-completo.png")
+  const renderHomeCompleto = () => (
+    <div className="flex flex-col min-h-full bg-white">
+      {/* Preheader */}
+      <div className="bg-[#ebdcb9] text-[#5c4a24] px-6 py-2 flex flex-wrap justify-between items-center text-xs font-secondary gap-4">
+        <span>Despacho a todo Chile</span>
+        <span>Pago seguro Webpay / Mercado Pago</span>
+        <span>Facturación para Empresas</span>
+      </div>
 
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Sidebar */}
-          <aside className="space-y-6">
-            <div className={`p-6 ${cardStyle} bg-custom-surface space-y-4`}>
-              <h3 className="font-primary font-bold text-sm text-custom-text uppercase">Filtros</h3>
-              <div className="border-t border-custom-border pt-4">
-                <h4 className="font-primary font-bold text-xs text-custom-text uppercase mb-3">Precio</h4>
-                <div className="h-1 bg-custom-border rounded-full relative">
-                  <div className="absolute left-1/4 right-1/4 h-full bg-custom-primary" />
-                  <div className="absolute left-1/4 -top-1.5 w-4 h-4 bg-custom-primary rounded-full" />
-                  <div className="absolute right-1/4 -top-1.5 w-4 h-4 bg-custom-primary rounded-full" />
-                </div>
+      {renderMainHeader(true, true)}
+
+      {/* Nav de categorias completo */}
+      <nav className="bg-slate-950 text-white py-3 px-6 hidden md:block sticky top-[72px] z-20">
+        <div className="max-w-6xl mx-auto flex items-center justify-between font-secondary text-xs uppercase font-bold tracking-wider">
+          <div className="flex items-center gap-2 cursor-pointer hover:text-custom-primary bg-slate-900 px-4 py-2 rounded-lg border border-slate-800">
+            <Menu className="w-4 h-4" />
+            <span>Todas las Categorías</span>
+          </div>
+          <div className="flex gap-8 text-slate-300">
+            {['Tecnología', 'Audio', 'Computación', 'Hogar', 'Iluminación', 'Fitness', 'Ofertas'].map((link) => (
+              <span key={link} className="cursor-pointer hover:text-custom-primary transition-colors">{link}</span>
+            ))}
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Completo */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12">
+        <div className="border border-custom-border rounded-[2.5rem] p-10 md:p-16 grid md:grid-cols-2 gap-8 items-center bg-custom-surface">
+          <div className="text-left space-y-6">
+            <span className="text-xs font-bold text-custom-primary tracking-widest uppercase">TECNOLOGÍA QUE IMPULSA TU DÍA A DÍA</span>
+            <h1 className="font-primary font-black text-4xl md:text-5xl uppercase tracking-tighter text-custom-text leading-none">
+              Calidad, innovación y rendimiento en cada producto
+            </h1>
+            <p className="font-secondary text-sm text-custom-muted max-w-sm leading-relaxed font-light">
+              Descubre lo mejor en tecnología, audio, hogar, fitness y más. En Maxxgo tenemos lo que necesitas, al mejor precio.
+            </p>
+            <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-8 py-3.5 text-xs uppercase tracking-wider hover:opacity-90 transition-opacity cursor-pointer">
+              Ver Productos
+            </button>
+            {/* Dots */}
+            <div className="flex gap-2 pt-2 justify-start">
+              <span className="w-2.5 h-2.5 bg-custom-primary rounded-full" />
+              <span className="w-2.5 h-2.5 bg-slate-300 rounded-full" />
+              <span className="w-2.5 h-2.5 bg-slate-300 rounded-full" />
+            </div>
+          </div>
+          <div className="aspect-[4/3] w-full">
+            <ImagePlaceholder className="rounded-[2rem]" />
+          </div>
+        </div>
+      </section>
+
+      {/* 5 items propositions */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-6">
+        <div className={`p-8 ${cardStyle} bg-custom-surface grid grid-cols-2 lg:grid-cols-5 gap-6 text-left`}>
+          {[
+            { title: 'Despacho rápido', desc: 'a todo Chile', icon: Truck },
+            { title: 'Pago seguro', desc: 'y protegido', icon: Lock },
+            { title: 'Garantía de', desc: 'todos los productos', icon: RotateCcw },
+            { title: 'Atención y soporte', desc: 'especializado', icon: HelpCircle },
+            { title: 'Facturación', desc: 'para empresas', icon: FileText }
+          ].map((item, i) => (
+            <div key={i} className="flex gap-3 items-center">
+              <item.icon className="w-8 h-8 text-custom-primary shrink-0" />
+              <div>
+                <h4 className="font-primary font-bold text-xs uppercase text-custom-text leading-tight">{item.title}</h4>
+                <p className="font-secondary text-[10px] text-custom-muted leading-tight mt-0.5">{item.desc}</p>
               </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-              <div className="border-t border-custom-border pt-4 space-y-2">
-                <h4 className="font-primary font-bold text-xs text-custom-text uppercase mb-2">Marca</h4>
-                {['Brand A', 'Brand B', 'Brand C'].map((brand, i) => (
-                  <label key={i} className="flex items-center gap-2 font-secondary text-xs text-custom-muted cursor-pointer hover:text-custom-primary">
+      {/* Categorías Principales (6 Columnas) */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12">
+        <div className="flex justify-between items-center mb-8 border-b border-custom-border pb-4">
+          <h2 className="font-primary font-bold text-xl uppercase text-custom-text tracking-wider">Categorías Principales</h2>
+          <span className="text-xs text-custom-primary font-bold hover:underline cursor-pointer flex items-center gap-1">Ver todas <ChevronRight className="w-4 h-4" /></span>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+          {[
+            { label: 'Tecnología', icon: Laptop },
+            { label: 'Audio', icon: Headphones },
+            { label: 'Computación', icon: Laptop },
+            { label: 'Hogar', icon: Home },
+            { label: 'Iluminación', icon: Lightbulb },
+            { label: 'Fitness', icon: Dumbbell }
+          ].map((cat, i) => (
+            <div key={i} className={`p-6 ${cardStyle} bg-custom-surface flex flex-col items-center justify-center h-32 gap-3 hover:border-custom-primary transition-all cursor-pointer`}>
+              <cat.icon className="w-6 h-6 text-custom-primary" />
+              <span className="font-secondary text-xs font-bold text-custom-text text-center">{cat.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Productos Destacados (5 Columnas) */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12">
+        <div className="flex justify-between items-center mb-8 border-b border-custom-border pb-4">
+          <h2 className="font-primary font-bold text-xl uppercase text-custom-text tracking-wider">Productos Destacados</h2>
+          <span className="text-xs text-custom-primary font-bold hover:underline cursor-pointer flex items-center gap-1">Ver todos <ChevronRight className="w-4 h-4" /></span>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <div key={i} className={`p-4 ${cardStyle} bg-custom-surface flex flex-col justify-between hover:shadow-md transition-shadow`}>
+              <div>
+                <div className="aspect-square w-full mb-4">
+                  <ImagePlaceholder className="rounded-xl" />
+                </div>
+                <h3 className="font-primary font-bold text-xs text-custom-text mb-1">Nombre del Producto</h3>
+                <p className="font-primary font-black text-custom-primary text-sm mb-2">$00.000</p>
+                {renderStars(5, 0)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Doble Promo Banners */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12 grid md:grid-cols-2 gap-8 mb-16">
+        {/* Banner 1 */}
+        <div className={`p-8 ${cardStyle} bg-[#f5efe4] border border-[#e5dcd0] flex items-center justify-between`}>
+          <div className="space-y-3 text-left max-w-[200px]">
+            <span className="text-[10px] font-bold text-amber-800 tracking-wider uppercase">Ofertas Exclusivas</span>
+            <h3 className="font-primary font-bold text-lg text-[#403628] uppercase leading-tight">Hasta 40% dcto. en productos seleccionados</h3>
+            <button className="btn-custom-radius bg-[#a68c68] text-white font-primary font-bold px-4 py-2.5 text-[10px] uppercase tracking-wider hover:opacity-90 transition-opacity cursor-pointer">
+              Ver Código
+            </button>
+          </div>
+          <div className="w-36 h-36">
+            <ImagePlaceholder className="rounded-xl" />
+          </div>
+        </div>
+
+        {/* Banner 2 */}
+        <div className={`p-8 ${cardStyle} bg-custom-surface flex items-center justify-between`}>
+          <div className="space-y-3 text-left max-w-[200px]">
+            <span className="text-[10px] font-bold text-custom-primary tracking-wider uppercase">Novedades</span>
+            <h3 className="font-primary font-bold text-lg text-custom-text uppercase leading-tight">Los últimos lanzamientos que Maxxgo trae para ti</h3>
+            <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-4 py-2.5 text-[10px] uppercase tracking-wider hover:opacity-90 transition-opacity cursor-pointer">
+              Ver Novedades
+            </button>
+          </div>
+          <div className="w-36 h-36">
+            <ImagePlaceholder className="rounded-xl" />
+          </div>
+        </div>
+      </section>
+
+      {/* Marcas */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12 mb-16 text-center border-t border-custom-border">
+        <h2 className="font-primary font-bold text-xs uppercase tracking-widest text-custom-muted mb-8">Marcas que trabajamos</h2>
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center opacity-60">
+          {['SAMSUNG', 'JBL', 'logitech', 'xiaomi', 'PHILIPS', 'hp'].map((brand, i) => (
+            <span key={i} className="font-primary font-black text-lg text-custom-text uppercase tracking-widest">{brand}</span>
+          ))}
+        </div>
+      </section>
+
+      {/* Newsletter simple inline */}
+      <section className="bg-slate-100 border-t border-custom-border py-12 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="text-left">
+            <h3 className="font-primary font-bold text-lg uppercase text-custom-text">Suscríbete y recibe ofertas exclusivas</h3>
+            <p className="font-secondary text-xs text-custom-muted">Se el primero en enterarte de novedades y promociones.</p>
+          </div>
+          <div className="flex gap-2 w-full md:max-w-md">
+            <input type="email" placeholder="Ingresa tu email" className="flex-1 bg-white border border-custom-border rounded-xl px-4 py-2.5 text-xs font-secondary focus:outline-none" />
+            <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-6 py-2.5 text-xs uppercase tracking-wider hover:opacity-95 cursor-pointer">Suscribirme</button>
+          </div>
+        </div>
+      </section>
+
+      {renderFooterDetailed(5)}
+    </div>
+  );
+
+  // 4. CATEGORIA (Diseño idéntico a "categorias.png")
+  const renderCategoria = () => (
+    <div className="flex flex-col min-h-full bg-white">
+      {renderPreHeader('light')}
+      {renderMainHeader(false, false)}
+      {renderNavLinks('Computación')}
+
+      {/* Breadcrumbs */}
+      <div className="bg-slate-50 border-b border-slate-200 px-6 py-3 font-secondary text-[11px] text-custom-muted">
+        <div className="max-w-6xl mx-auto">
+          <span>Inicio</span>
+          <span className="mx-2">&gt;</span>
+          <span className="text-custom-text font-semibold">Computación</span>
+        </div>
+      </div>
+
+      {/* Category Hero Banner */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12">
+        <div className="border border-custom-border rounded-[2.5rem] p-10 grid md:grid-cols-2 gap-8 items-center bg-custom-surface">
+          <div className="text-left space-y-4">
+            <span className="text-xs font-bold text-custom-primary tracking-wider uppercase">Computación</span>
+            <h1 className="font-primary font-black text-3xl md:text-4xl uppercase text-custom-text leading-tight">
+              Todo para tu rendimiento
+            </h1>
+            <p className="font-secondary text-xs text-custom-muted leading-relaxed max-w-sm">
+              Encuentra notebooks, componentes, periféricos y más para trabajar, estudiar y crear sin límites.
+            </p>
+          </div>
+          <div className="aspect-[4/1.8] w-full">
+            <ImagePlaceholder className="rounded-2xl" />
+          </div>
+        </div>
+      </section>
+
+      {/* Subcategories */}
+      <section className="max-w-6xl mx-auto w-full px-6 pb-12">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
+          {[
+            { label: 'Notebooks', active: true },
+            { label: 'Componentes' },
+            { label: 'Periféricos' },
+            { label: 'Almacenamiento' },
+            { label: 'Monitores' },
+            { label: 'Accesorios' }
+          ].map((sub, i) => (
+            <div 
+              key={i} 
+              className={`p-4 rounded-2xl border flex flex-col items-center justify-center gap-2 cursor-pointer transition-all ${
+                sub.active 
+                  ? 'border-custom-primary bg-custom-surface shadow-sm ring-2 ring-custom-primary/5' 
+                  : 'border-slate-200 bg-white hover:border-slate-300'
+              }`}
+            >
+              <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <Laptop className="w-4 h-4 text-custom-primary" />
+              </div>
+              <span className="font-secondary text-[11px] font-bold text-custom-text">{sub.label}</span>
+              <span className="font-secondary text-[9px] text-custom-muted">Ver todo</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Content Split: Filter + Grid */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-6 grid md:grid-cols-4 gap-8 mb-16">
+        {/* Sidebar Filters */}
+        <aside className="space-y-6">
+          <div className={`p-6 ${cardStyle} bg-custom-surface space-y-6 text-left`}>
+            <h3 className="font-primary font-bold text-sm text-custom-text uppercase border-b border-custom-border pb-3">Filtrar por</h3>
+            
+            {/* Price */}
+            <div>
+              <h4 className="font-primary font-bold text-xs text-custom-text uppercase mb-4">Precio</h4>
+              <div className="h-1.5 bg-custom-border rounded-full relative mb-3">
+                <div className="absolute left-[5%] right-[25%] h-full bg-custom-primary" />
+                <div className="absolute left-[5%] -top-1.5 w-4.5 h-4.5 bg-custom-primary border-2 border-white rounded-full shadow cursor-pointer" />
+                <div className="absolute right-[25%] -top-1.5 w-4.5 h-4.5 bg-custom-primary border-2 border-white rounded-full shadow cursor-pointer" />
+              </div>
+              <div className="flex justify-between font-mono text-[10px] text-custom-muted font-bold">
+                <span>$0</span>
+                <span>$1.500.000+</span>
+              </div>
+            </div>
+
+            {/* Brand */}
+            <div className="border-t border-custom-border pt-4">
+              <h4 className="font-primary font-bold text-xs text-custom-text uppercase mb-3">Marca</h4>
+              <div className="space-y-2.5">
+                {[
+                  { label: 'HP', count: 24 },
+                  { label: 'Lenovo', count: 22 },
+                  { label: 'ASUS', count: 20 },
+                  { label: 'Acer', count: 16 },
+                  { label: 'Logitech', count: 14 }
+                ].map((brand) => (
+                  <label key={brand.label} className="flex items-center justify-between font-secondary text-xs text-custom-muted cursor-pointer hover:text-custom-primary">
+                    <div className="flex items-center gap-2">
+                      <input type="checkbox" className="rounded text-custom-primary focus:ring-custom-primary" />
+                      <span>{brand.label}</span>
+                    </div>
+                    <span className="text-[10px] text-slate-400">({brand.count})</span>
+                  </label>
+                ))}
+              </div>
+              <span className="text-[10px] text-custom-primary font-bold mt-2.5 block hover:underline cursor-pointer">Ver más v</span>
+            </div>
+
+            {/* Availability */}
+            <div className="border-t border-custom-border pt-4">
+              <h4 className="font-primary font-bold text-xs text-custom-text uppercase mb-3">Disponibilidad</h4>
+              <div className="space-y-2.5">
+                {[
+                  { label: 'En stock', count: 98 },
+                  { label: 'Stock bajo', count: 30 }
+                ].map((item) => (
+                  <label key={item.label} className="flex items-center gap-2 font-secondary text-xs text-custom-muted cursor-pointer hover:text-custom-primary">
                     <input type="checkbox" className="rounded text-custom-primary focus:ring-custom-primary" />
-                    {brand}
+                    <span>{item.label} ({item.count})</span>
                   </label>
                 ))}
               </div>
             </div>
-          </aside>
 
-          {/* Grid Products */}
-          <div className="md:col-span-3 grid grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Rating */}
+            <div className="border-t border-custom-border pt-4">
+              <h4 className="font-primary font-bold text-xs text-custom-text uppercase mb-3">Calificación</h4>
+              <div className="space-y-2">
+                {[5, 4, 3, 2].map((stars) => (
+                  <label key={stars} className="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" className="rounded text-custom-primary focus:ring-custom-primary" />
+                    <div className="flex text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className={`w-3 h-3 ${i < stars ? 'fill-current' : 'text-slate-200'}`} />
+                      ))}
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <button className="w-full py-3 border border-custom-border hover:border-custom-primary hover:text-custom-primary rounded-xl font-primary font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer text-center text-custom-text">
+              Limpiar filtros
+            </button>
+          </div>
+        </aside>
+
+        {/* Product Grid (4 Columnas) */}
+        <div className="md:col-span-3 space-y-6">
+          {/* Header grid filters */}
+          <div className="flex justify-between items-center font-secondary text-xs text-custom-muted">
+            <span>Mostrando 1-12 de 128 productos</span>
+            <div className="flex items-center gap-2">
+              <span>Ordenar por:</span>
+              <select className="bg-white border border-custom-border rounded-lg px-3 py-1.5 font-bold text-custom-text">
+                <option>Más vendidos</option>
+                <option>Precio menor a mayor</option>
+                <option>Precio mayor a menor</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { name: 'Smartphone Max 1', price: '$299.990' },
-              { name: 'Smartphone Max 2', price: '$349.990' },
-              { name: 'Smartphone Lite', price: '$199.990' },
-              { name: 'Audífonos In-Ear Air', price: '$49.990' },
-              { name: 'Audífonos Over-Ear', price: '$89.990' },
-              { name: 'Cable Cargador Rápido', price: '$9.990' }
+              { name: 'Notebook Lenovo IdeaPad 3 15.6"', price: '$549.990', rating: 5, count: 128 },
+              { name: 'Mouse Logitech M185 Inalámbrico', price: '$14.990', rating: 5, count: 96 },
+              { name: 'SSD Kingston NV2 1TB M.2 NVMe', price: '$89.990', rating: 4, count: 74 },
+              { name: 'Teclado Logitech K120 USB', price: '$12.990', rating: 4, count: 54 },
+              { name: 'Monitor LG 24" 24MP400-B FHD IPS', price: '$129.990', rating: 5, count: 86 },
+              { name: 'Memoria RAM Corsair Vengeance 16GB', price: '$49.990', rating: 4, count: 71 },
+              { name: 'Disco Duro Seagate 2TB 3.5"', price: '$69.990', rating: 4, count: 63 },
+              { name: 'Auriculares Logitech H390 USB', price: '$24.990', rating: 4, count: 41 },
+              { name: 'Notebook HP 15s i5 8GB 512GB', price: '$599.990', rating: 5, count: 52 },
+              { name: 'Tarjeta de Video ASUS RTX 4060', price: '$329.990', rating: 5, count: 33 },
+              { name: 'Fuente de Poder Corsair CV650', price: '$59.990', rating: 4, count: 28 },
+              { name: 'Impresora HP DeskJet 2775 WiFi', price: '$64.990', rating: 3, count: 19 }
             ].map((prod, i) => (
-              <div key={i} className={`p-4 ${cardStyle} bg-custom-surface flex flex-col justify-between`}>
-                <div>
-                  <div className="aspect-square bg-slate-200/50 rounded-xl mb-3 flex items-center justify-center text-xs text-slate-400">
-                    📷 Producto
+              <div key={i} className={`p-4.5 ${cardStyle} bg-custom-surface flex flex-col justify-between hover:shadow-md transition-shadow`}>
+                <div className="space-y-3">
+                  <div className="aspect-square w-full">
+                    <ImagePlaceholder className="rounded-xl" />
                   </div>
-                  <h3 className="font-primary font-bold text-xs text-custom-text mb-1">{prod.name}</h3>
-                  <p className="font-primary font-bold text-custom-primary text-sm">{prod.price}</p>
+                  <h3 className="font-primary font-bold text-xs text-custom-text line-clamp-2 min-h-[32px]">{prod.name}</h3>
+                  <p className="font-primary font-black text-custom-primary text-sm">{prod.price}</p>
+                  {renderStars(prod.rating, prod.count)}
                 </div>
-                <button className="btn-custom-radius bg-custom-secondary text-custom-text font-primary font-bold text-[10px] uppercase py-2 mt-3 hover:opacity-85 transition-opacity w-full cursor-pointer">
-                  Ver opciones
+                <button className="btn-custom-radius bg-custom-secondary text-custom-text font-primary font-bold text-[10px] uppercase py-2.5 mt-4 hover:opacity-85 transition-opacity w-full cursor-pointer border border-custom-border">
+                  Agregar al carrito
                 </button>
               </div>
             ))}
           </div>
         </div>
-      </main>
+      </section>
 
-      {renderFooter()}
+      {/* Trust propositions */}
+      <section className="border-t border-custom-border bg-custom-surface py-12 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+          {[
+            { title: 'Despacho rápido', desc: 'a todo Chile', icon: Truck },
+            { title: 'Pago seguro', desc: 'y protegido', icon: Lock },
+            { title: 'Garantía en todos', desc: 'nuestros productos', icon: RotateCcw },
+            { title: 'Atención y soporte', desc: 'especializado', icon: HelpCircle }
+          ].map((item, i) => (
+            <div key={i} className="flex gap-3 items-center">
+              <item.icon className="w-8 h-8 text-custom-primary shrink-0" />
+              <div>
+                <h4 className="font-primary font-bold text-xs uppercase text-custom-text leading-tight">{item.title}</h4>
+                <p className="font-secondary text-[11px] text-custom-muted leading-tight mt-0.5">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {renderNewsletter()}
+      {renderFooterDetailed(5)}
     </div>
   );
 
-  // 5. PRODUCTO (Ficha de Producto + Controles)
+  // 5. PRODUCTO (Diseño idéntico a "producto.png")
   const renderProducto = () => (
-    <div className="flex flex-col min-h-full">
-      {renderHeader()}
+    <div className="flex flex-col min-h-full bg-white">
+      {renderPreHeader('light')}
+      {renderMainHeader(false, false)}
+      
+      {/* Navigation sub-header */}
+      <nav className="bg-custom-surface border-b border-custom-border py-3.5 px-6 hidden md:block">
+        <div className="max-w-6xl mx-auto flex justify-center gap-12 font-secondary text-xs font-bold uppercase tracking-wider text-custom-text items-center">
+          <span className="cursor-pointer hover:text-custom-primary flex items-center gap-1"><Laptop className="w-4 h-4" /> Tecnología</span>
+          <span className="cursor-pointer hover:text-custom-primary flex items-center gap-1"><Headphones className="w-4 h-4" /> Audio</span>
+          <span className="cursor-pointer hover:text-custom-primary flex items-center gap-1"><Laptop className="w-4 h-4" /> Computación</span>
+          <span className="cursor-pointer hover:text-custom-primary flex items-center gap-1"><Home className="w-4 h-4" /> Hogar</span>
+          <span className="cursor-pointer hover:text-custom-primary flex items-center gap-1"><BadgeAlert className="w-4 h-4" /> Ofertas</span>
+        </div>
+      </nav>
 
+      {/* Breadcrumbs */}
+      <div className="bg-slate-50 border-b border-slate-200 px-6 py-3 font-secondary text-[11px] text-custom-muted">
+        <div className="max-w-6xl mx-auto">
+          <span>Inicio</span>
+          <span className="mx-2">&gt;</span>
+          <span>Tecnología</span>
+          <span className="mx-2">&gt;</span>
+          <span>Smartphones</span>
+          <span className="mx-2">&gt;</span>
+          <span className="text-custom-text font-semibold">Samsung Galaxy S24 Ultra 256GB Negro</span>
+        </div>
+      </div>
+
+      {/* Product Detail columns */}
       <main className="max-w-6xl mx-auto w-full px-6 py-12 grid md:grid-cols-2 gap-12">
-        {/* Left Side: Images */}
-        <div className="space-y-4">
-          <div className="aspect-square bg-custom-surface border border-custom-border rounded-[2rem] flex items-center justify-center text-slate-400">
-            📷 Imagen Principal
+        {/* Left column: Image & Carousel */}
+        <div className="space-y-6">
+          <div className="aspect-square bg-slate-50 border border-custom-border rounded-[2.5rem] relative overflow-hidden flex items-center justify-center">
+            {/* Badge discount */}
+            <span className="absolute top-6 left-6 bg-[#d97706] text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
+              -10%
+            </span>
+            <button className="absolute top-6 right-6 p-2.5 bg-white rounded-full border border-custom-border text-slate-400 hover:text-rose-500 shadow-sm transition-colors cursor-pointer">
+              <Heart className="w-4 h-4" />
+            </button>
+            <ImagePlaceholder />
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="aspect-square bg-custom-surface border border-custom-border rounded-xl flex items-center justify-center text-slate-400 text-xs">Thumb 1</div>
-            <div className="aspect-square bg-custom-surface border border-custom-border rounded-xl flex items-center justify-center text-slate-400 text-xs">Thumb 2</div>
-            <div className="aspect-square bg-custom-surface border border-custom-border rounded-xl flex items-center justify-center text-slate-400 text-xs">Thumb 3</div>
+          {/* Thumbnails list */}
+          <div className="flex items-center gap-4">
+            <span className="text-slate-400 cursor-pointer font-bold text-lg hover:text-custom-primary">&lt;</span>
+            <div className="flex-1 grid grid-cols-4 gap-3">
+              <div className="aspect-square bg-slate-50 border-2 border-custom-primary rounded-xl overflow-hidden p-1"><ImagePlaceholder /></div>
+              <div className="aspect-square bg-slate-50 border border-custom-border rounded-xl overflow-hidden p-1"><ImagePlaceholder /></div>
+              <div className="aspect-square bg-slate-50 border border-custom-border rounded-xl overflow-hidden p-1"><ImagePlaceholder /></div>
+              <div className="aspect-square bg-slate-50 border border-custom-border rounded-xl overflow-hidden p-1"><ImagePlaceholder /></div>
+            </div>
+            <span className="text-slate-400 cursor-pointer font-bold text-lg hover:text-custom-primary">&gt;</span>
           </div>
         </div>
 
-        {/* Right Side: Configuration */}
-        <div className="space-y-6">
-          <div>
-            <h1 className="font-primary font-bold text-3xl text-custom-text uppercase mb-2">Smartphone Max 1 Pro</h1>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="flex text-amber-500">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-              </div>
-              <span className="font-secondary text-xs text-custom-muted">(12 valoraciones)</span>
-            </div>
-            <p className="font-primary font-bold text-2xl text-custom-primary">$349.990</p>
-            <p className="font-secondary text-xs text-custom-muted line-through">$399.990</p>
+        {/* Right column: Information & configuration */}
+        <div className="text-left space-y-6">
+          <div className="space-y-2">
+            <h1 className="font-primary font-black text-3xl text-custom-text leading-tight uppercase">
+              Samsung Galaxy S24 Ultra 256GB Negro
+            </h1>
+            <p className="font-secondary text-xs text-custom-muted leading-relaxed">
+              El smartphone más avanzado de Samsung con cámara profesional y rendimiento de última generación.
+            </p>
+            {renderStars(5, 128)}
+            <span className="text-[10px] text-slate-400 font-bold block pt-1">SKU: SM-S928BZKGLTA</span>
           </div>
 
-          <hr className="border-custom-border" />
+          <div className="space-y-2">
+            <div className="flex items-baseline gap-3">
+              <span className="font-primary font-black text-3xl text-custom-primary">$1.249.990</span>
+              <span className="font-secondary text-sm text-custom-muted line-through">$1.389.990</span>
+              <span className="bg-[#fcfaf7] text-custom-primary border border-custom-border text-[10px] font-bold px-2 py-1 rounded">
+                Ahorra $140.000
+              </span>
+            </div>
+            <p className="font-secondary text-[11px] text-custom-muted">
+              Hasta 12 cuotas sin interés de $104.166 | <span className="text-custom-primary font-bold hover:underline cursor-pointer">Ver medios de pago</span>
+            </p>
+          </div>
 
-          {/* Color Selector */}
-          <div>
-            <span className="font-primary text-[10px] font-black uppercase tracking-wider text-custom-text block mb-2">Color</span>
-            <div className="flex gap-2">
-              <span className="w-8 h-8 rounded-full bg-slate-800 border-2 border-custom-primary cursor-pointer" />
-              <span className="w-8 h-8 rounded-full bg-indigo-800 cursor-pointer" />
-              <span className="w-8 h-8 rounded-full bg-emerald-800 cursor-pointer" />
+          <div className="flex items-center gap-4 text-xs font-semibold">
+            <span className="text-emerald-600 flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full" /> En stock
+            </span>
+            <span className="text-slate-200">|</span>
+            <span className="text-custom-muted">Despacho inmediato</span>
+          </div>
+
+          {/* Bullets with icons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-medium text-custom-text border-y border-custom-border py-4">
+            <div className="flex items-center gap-2.5">
+              <Laptop className="w-4.5 h-4.5 text-custom-primary shrink-0" />
+              <span>Cámara de 200MP con IA</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Laptop className="w-4.5 h-4.5 text-custom-primary shrink-0" />
+              <span>Pantalla Dynamic AMOLED 2X 6.8"</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Laptop className="w-4.5 h-4.5 text-custom-primary shrink-0" />
+              <span>Procesador Snapdragon 8 Gen 3</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Laptop className="w-4.5 h-4.5 text-custom-primary shrink-0" />
+              <span>Batería 5000 mAh + 45W carga</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Laptop className="w-4.5 h-4.5 text-custom-primary shrink-0" />
+              <span>Resistencia al agua IP68</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Laptop className="w-4.5 h-4.5 text-custom-primary shrink-0" />
+              <span>Incluye S Pen inteligente</span>
             </div>
           </div>
 
-          {/* Storage selector */}
-          <div>
-            <span className="font-primary text-[10px] font-black uppercase tracking-wider text-custom-text block mb-2">Almacenamiento</span>
-            <div className="flex gap-2">
-              {['128 GB', '256 GB', '512 GB'].map((size, i) => (
-                <button 
-                  key={i} 
-                  className={`btn-custom-radius border px-4 py-2 text-xs font-bold font-secondary cursor-pointer ${
-                    i === 0 
-                      ? 'border-custom-primary text-custom-primary bg-custom-surface' 
-                      : 'border-custom-border text-custom-muted hover:border-custom-text'
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
+          {/* Qty Selector */}
+          <div className="flex items-center gap-4">
+            <span className="font-primary text-[10px] font-black uppercase tracking-wider text-custom-text">Cantidad</span>
+            <div className="flex items-center bg-slate-50 border border-custom-border rounded-xl px-4 py-2 font-bold font-secondary">
+              <button className="text-custom-muted hover:text-custom-primary px-2"><Minus className="w-3.5 h-3.5" /></button>
+              <span className="px-4 text-xs text-custom-text">1</span>
+              <button className="text-custom-muted hover:text-custom-primary px-2"><Plus className="w-3.5 h-3.5" /></button>
             </div>
           </div>
 
           {/* Action buttons */}
-          <div className="space-y-3 pt-4">
-            <button className="btn-custom-radius bg-custom-primary text-white w-full py-4 font-primary font-bold text-xs uppercase tracking-widest hover:opacity-95 transition-opacity shadow-lg shadow-custom-primary/10 cursor-pointer">
-              Agregar al Carro
+          <div className="space-y-3">
+            <button className="btn-custom-radius bg-custom-primary text-white w-full py-4 font-primary font-bold text-xs uppercase tracking-widest hover:opacity-95 transition-opacity shadow-lg shadow-custom-primary/10 cursor-pointer flex items-center justify-center gap-2">
+              <ShoppingCart className="w-4 h-4" /> Agregar al carro
             </button>
-            <button className="btn-custom-radius bg-custom-secondary text-custom-text w-full py-4 font-primary font-bold text-xs uppercase tracking-widest hover:opacity-85 transition-opacity cursor-pointer">
-              Comprar Ahora
+            <button className="btn-custom-radius bg-custom-secondary text-custom-text w-full py-4 font-primary font-bold text-xs uppercase tracking-widest hover:opacity-85 transition-opacity cursor-pointer border border-custom-border">
+              Comprar ahora
             </button>
           </div>
+
+          {/* 3 items trust banner */}
+          <div className="grid grid-cols-3 gap-2 text-center bg-slate-50 border border-custom-border rounded-2xl p-4 font-secondary text-[9px] text-custom-muted leading-tight">
+            <div>
+              <Truck className="w-5 h-5 mx-auto text-custom-primary mb-1.5" />
+              <span className="font-bold block text-custom-text">Despacho a todo Chile</span>
+              <span>Recibe entre 1 y 3 días hábiles en RM</span>
+            </div>
+            <div>
+              <ShieldCheck className="w-5 h-5 mx-auto text-custom-primary mb-1.5" />
+              <span className="font-bold block text-custom-text">Garantía de fábrica</span>
+              <span>12 meses de garantía oficial</span>
+            </div>
+            <div>
+              <RotateCcw className="w-5 h-5 mx-auto text-custom-primary mb-1.5" />
+              <span className="font-bold block text-custom-text">Devolución fácil</span>
+              <span>30 días para cambios</span>
+            </div>
+          </div>
+
         </div>
       </main>
 
-      {renderFooter()}
+      {/* Product Tabs */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-6 mb-16">
+        <div className="border-b border-custom-border flex gap-8 font-secondary text-xs uppercase font-bold text-custom-text pb-px">
+          <span className="border-b-2 border-custom-primary pb-3 text-custom-primary cursor-pointer">Descripción</span>
+          <span className="text-custom-muted hover:text-custom-text pb-3 cursor-pointer">Especificaciones técnicas</span>
+          <span className="text-custom-muted hover:text-custom-text pb-3 cursor-pointer">Envíos</span>
+          <span className="text-custom-muted hover:text-custom-text pb-3 cursor-pointer">Reseñas (128)</span>
+        </div>
+        <div className="p-8 bg-slate-50 border border-t-0 border-custom-border rounded-b-[2rem] text-left text-xs font-secondary text-custom-muted leading-relaxed">
+          El Samsung Galaxy S24 Ultra combina potencia, diseño y tecnología de vanguardia para llevar tu experiencia móvil al siguiente nivel. Su cámara de 200MP con IA, pantalla AMOLED 2X de 120Hz y el procesador más potente de Samsung te entregan rendimiento excepcional en todo momento.
+        </div>
+      </section>
+
+      {/* Cross Selling */}
+      <section className="max-w-6xl mx-auto w-full px-6 py-12 mb-16">
+        <div className="flex justify-between items-center mb-8 border-b border-custom-border pb-4">
+          <h2 className="font-primary font-bold text-xl uppercase text-custom-text tracking-wider">También podría interesarte</h2>
+          <span className="text-xs text-custom-primary font-bold hover:underline cursor-pointer flex items-center gap-1">Ver más productos <ChevronRight className="w-4 h-4" /></span>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { name: 'Apple iPhone 15 Pro Max 256GB Titanio Natural', price: '$1.399.990', rating: 5, count: 96 },
+            { name: 'Xiaomi 14 Ultra 512GB Negro', price: '$1.099.990', rating: 5, count: 64 },
+            { name: 'Samsung Galaxy S24+ 256GB Gris', price: '$999.990', rating: 5, count: 88 },
+            { name: 'Google Pixel 8 Pro 256GB Negro', price: '$899.990', rating: 4, count: 72 }
+          ].map((prod, i) => (
+            <div key={i} className={`p-4.5 ${cardStyle} bg-custom-surface flex flex-col justify-between hover:shadow-md transition-shadow`}>
+              <div>
+                <div className="aspect-square w-full mb-4">
+                  <ImagePlaceholder className="rounded-xl" />
+                </div>
+                <h3 className="font-primary font-bold text-xs text-custom-text line-clamp-2 min-h-[32px]">{prod.name}</h3>
+                <p className="font-primary font-black text-custom-primary text-sm mb-2">{prod.price}</p>
+                {renderStars(prod.rating, prod.count)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {renderNewsletter()}
+      {renderFooterDetailed(5)}
     </div>
   );
 
-  // 6. CARRITO (Resumen + Tabla items)
+  // 6. CARRITO (Diseño idéntico a "carrito.png")
   const renderCarrito = () => (
-    <div className="flex flex-col min-h-full">
-      {renderHeader()}
+    <div className="flex flex-col min-h-full bg-white">
+      {renderPreHeader('light')}
+      {renderMainHeader(false, false)}
+      
+      {/* Checkout progress steps */}
+      <div className="bg-slate-50 border-b border-slate-200 py-6 px-6 shrink-0">
+        <div className="max-w-md mx-auto flex items-center justify-between font-secondary text-[11px] font-bold text-custom-text">
+          <div className="flex flex-col items-center gap-1.5">
+            <span className="w-7 h-7 rounded-full bg-custom-primary text-white flex items-center justify-center">1</span>
+            <span className="text-custom-primary">Carro</span>
+          </div>
+          <div className="flex-1 h-0.5 bg-slate-200 mx-4 relative top-[-10px]" />
+          <div className="flex flex-col items-center gap-1.5 opacity-40">
+            <span className="w-7 h-7 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center">2</span>
+            <span>Datos</span>
+          </div>
+          <div className="flex-1 h-0.5 bg-slate-200 mx-4 relative top-[-10px]" />
+          <div className="flex flex-col items-center gap-1.5 opacity-40">
+            <span className="w-7 h-7 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center">3</span>
+            <span>Pago</span>
+          </div>
+        </div>
+      </div>
 
-      <main className="max-w-6xl mx-auto w-full px-6 py-12">
-        <h1 className="font-primary font-bold text-3xl text-custom-text uppercase mb-8">Carro de Compras</h1>
+      <main className="max-w-6xl mx-auto w-full px-6 py-12 text-left">
+        <h1 className="font-primary font-black text-3xl text-custom-text uppercase mb-2">Carro de compra</h1>
+        <p className="font-secondary text-xs text-custom-muted mb-8">Revisa los productos que agregaste a tu carrito.</p>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Table Items */}
+          {/* Left: Cart Items List */}
           <div className="lg:col-span-2 space-y-4">
+            
+            {/* Header labels */}
+            <div className="hidden sm:grid grid-cols-12 gap-4 px-6 py-2 border-b border-custom-border font-secondary text-[10px] font-bold text-slate-400 uppercase">
+              <span className="col-span-6">Producto</span>
+              <span className="col-span-2 text-center">Precio Unitario</span>
+              <span className="col-span-2 text-center">Cantidad</span>
+              <span className="col-span-2 text-right">Subtotal</span>
+            </div>
+
             {[
-              { name: 'Smartphone Max 1 Pro', details: 'Gris • 128 GB', price: '$349.990' },
-              { name: 'Audífonos Pro Noise', details: 'Negro', price: '$79.990' }
+              { name: 'Audífonos Inalámbricos MAXXGO SoundPro', details: 'Inalámbricos Bluetooth 5.3 Negro', price: '$59.990' },
+              { name: 'Parlante Portátil MAXXGO Beat', details: 'Bluetooth 5.0 / Resistente al agua IPX7', price: '$39.990' },
+              { name: 'Cable USB-C a USB-C MAXXGO 1.5m', details: 'Carga rápida 60W / Nylon trenzado', price: '$8.990' }
             ].map((item, i) => (
-              <div key={i} className={`p-6 ${cardStyle} bg-custom-surface flex items-center justify-between`}>
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-slate-200/50 rounded-xl flex items-center justify-center text-[10px] text-slate-400">📷 Item</div>
+              <div key={i} className={`p-6 ${cardStyle} bg-custom-surface flex flex-col sm:grid sm:grid-cols-12 gap-4 items-center`}>
+                <div className="col-span-6 flex items-center gap-4 w-full text-left">
+                  <div className="w-16 h-16 shrink-0">
+                    <ImagePlaceholder className="rounded-xl" />
+                  </div>
                   <div>
                     <h4 className="font-primary font-bold text-sm text-custom-text">{item.name}</h4>
-                    <p className="font-secondary text-xs text-custom-muted mt-0.5">{item.details}</p>
+                    <p className="font-secondary text-[11px] text-custom-muted mt-0.5">{item.details}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-6">
-                  <span className="font-primary font-bold text-sm text-custom-text">{item.price}</span>
-                  <button className="text-slate-400 hover:text-rose-500 font-secondary text-sm cursor-pointer">Eliminar</button>
+                
+                <div className="col-span-2 text-center font-primary font-bold text-xs text-custom-text">
+                  {item.price}
+                </div>
+
+                <div className="col-span-2 flex justify-center">
+                  <div className="flex items-center bg-slate-50 border border-custom-border rounded-lg px-2 py-1 font-bold font-secondary">
+                    <button className="text-custom-muted hover:text-custom-primary px-1.5"><Minus className="w-3 h-3" /></button>
+                    <span className="px-2 text-xs text-custom-text">1</span>
+                    <button className="text-custom-muted hover:text-custom-primary px-1.5"><Plus className="w-3 h-3" /></button>
+                  </div>
+                </div>
+
+                <div className="col-span-2 w-full flex items-center justify-end gap-4">
+                  <span className="font-primary font-bold text-xs text-custom-text">{item.price}</span>
+                  <button className="text-slate-300 hover:text-rose-500 p-1.5 cursor-pointer">
+                    <Trash2 className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
             ))}
+
+            <div className="pt-4 text-left">
+              <Link 
+                href={`/proyectos/${projectId}/wireframes`}
+                className="font-secondary text-xs font-bold text-custom-primary hover:underline flex items-center gap-1.5"
+              >
+                ← Seguir comprando
+              </Link>
+            </div>
           </div>
 
-          {/* Summary Panel */}
-          <div className={`p-8 ${cardStyle} bg-custom-surface h-fit space-y-6`}>
-            <h3 className="font-primary font-bold text-lg text-custom-text uppercase border-b border-custom-border pb-4">Resumen del Pedido</h3>
-            
-            <div className="space-y-3 font-secondary text-xs text-custom-muted">
-              <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span className="font-bold text-custom-text">$429.980</span>
+          {/* Right: Summary panel */}
+          <div className="space-y-6">
+            <div className={`p-8 ${cardStyle} bg-custom-surface space-y-6`}>
+              <h3 className="font-primary font-bold text-base text-custom-text uppercase border-b border-custom-border pb-4">Resumen del pedido</h3>
+              
+              <div className="space-y-3 font-secondary text-xs text-custom-muted">
+                <div className="flex justify-between">
+                  <span>Subtotal (3 productos)</span>
+                  <span className="font-bold text-custom-text">$108.970</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="flex items-center gap-1">Despacho estimado <HelpCircle className="w-3.5 h-3.5 text-slate-300" /></span>
+                  <span className="font-bold text-custom-text">$2.990</span>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span>Despacho</span>
-                <span className="font-bold text-emerald-600">Gratis</span>
+
+              {/* Discount Code */}
+              <div className="space-y-2 pt-2">
+                <span className="font-primary text-[10px] font-black uppercase tracking-wider text-custom-text block">Código de descuento</span>
+                <div className="flex gap-2">
+                  <input type="text" placeholder="Ingresa tu código" className="flex-1 bg-white border border-custom-border rounded-xl px-3 py-2 text-xs font-secondary focus:outline-none" />
+                  <button className="border border-custom-primary hover:bg-custom-primary hover:text-white text-custom-primary font-primary font-bold px-4 py-2 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer">Aplicar</button>
+                </div>
+              </div>
+
+              <hr className="border-custom-border" />
+
+              <div className="space-y-1">
+                <div className="flex justify-between font-primary text-xl font-black text-custom-text uppercase">
+                  <span>Total</span>
+                  <span className="text-custom-primary">$111.960</span>
+                </div>
+                <span className="font-secondary text-[10px] text-custom-muted block text-right leading-none">Hasta 6 cuotas sin interés</span>
+              </div>
+
+              <button className="btn-custom-radius bg-custom-primary text-white w-full py-4 font-primary font-bold text-xs uppercase tracking-widest hover:opacity-95 transition-opacity shadow-lg shadow-custom-primary/10 cursor-pointer">
+                Ir a pagar
+              </button>
+
+              <div className="text-center font-secondary text-[10px] text-custom-muted flex items-center justify-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-emerald-600" /> Pago 100% seguro
               </div>
             </div>
 
-            <hr className="border-custom-border" />
-
-            <div className="flex justify-between font-primary text-base font-bold text-custom-text">
-              <span>Total</span>
-              <span>$429.980</span>
+            {/* Small value props box */}
+            <div className={`p-6 ${cardStyle} bg-custom-surface space-y-4 font-secondary text-xs text-custom-text`}>
+              <div className="flex items-center gap-3">
+                <ShieldCheck className="w-6 h-6 text-custom-primary shrink-0" />
+                <div>
+                  <h4 className="font-bold">Pago seguro</h4>
+                  <p className="text-[10px] text-custom-muted mt-0.5">Tus datos protegidos</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Truck className="w-6 h-6 text-custom-primary shrink-0" />
+                <div>
+                  <h4 className="font-bold">Despacho rápido</h4>
+                  <p className="text-[10px] text-custom-muted mt-0.5">A todo Chile</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <RotateCcw className="w-6 h-6 text-custom-primary shrink-0" />
+                <div>
+                  <h4 className="font-bold">Garantía Maxxgo</h4>
+                  <p className="text-[10px] text-custom-muted mt-0.5">Respaldo oficial</p>
+                </div>
+              </div>
             </div>
 
-            <button className="btn-custom-radius bg-custom-primary text-white w-full py-4 font-primary font-bold text-xs uppercase tracking-widest hover:opacity-95 transition-opacity cursor-pointer">
-              Proceder al Pago
-            </button>
           </div>
         </div>
       </main>
 
-      {renderFooter()}
+      {renderFooterDetailed(5)}
     </div>
   );
 
