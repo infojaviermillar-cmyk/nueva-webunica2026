@@ -24,7 +24,8 @@ import {
   ZoomOut,
   ImageIcon,
   X,
-  Upload
+  Upload,
+  FileDown
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -57,6 +58,7 @@ export default function PersonalizarPage() {
   const [deviceView, setDeviceView] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const [zoomLevel, setZoomLevel] = useState<number>(100);
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'error' | 'idle'>('idle');
+  const [pdfStatus, setPdfStatus] = useState<'idle' | 'generating' | 'success' | 'error'>('idle');
   const [user, setUser] = useState<{ email: string; role: string } | null>(null);
   const [iframeHeight, setIframeHeight] = useState<number>(1200);
 
@@ -91,12 +93,25 @@ export default function PersonalizarPage() {
           setIframeHeight(event.data.height);
         } else if (event.data.type === 'REQUEST_INITIAL_CONFIG') {
           sendConfigToIframe();
+        } else if (event.data.type === 'PDF_STATUS') {
+          setPdfStatus(event.data.status);
+          if (event.data.status === 'success' || event.data.status === 'error') {
+            setTimeout(() => setPdfStatus('idle'), 3000);
+          }
         }
       }
     };
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
   }, [store]);
+
+  const handleDownloadPDFTrigger = () => {
+    const iframe = iframeRef.current;
+    if (iframe && iframe.contentWindow) {
+      setPdfStatus('generating');
+      iframe.contentWindow.postMessage({ type: 'DOWNLOAD_PDF' }, '*');
+    }
+  };
 
   // 3. Sincronizar en tiempo real cuando cambie cualquier valor del personalizador
   useEffect(() => {
@@ -242,22 +257,48 @@ export default function PersonalizarPage() {
         {/* Save status feedback */}
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            {saveStatus === 'saving' && (
+            {pdfStatus === 'generating' && (
+              <span className="text-xs text-indigo-600 font-bold flex items-center gap-1.5 animate-pulse">
+                <span className="w-2 h-2 rounded-full bg-indigo-500" /> Generando PDF...
+              </span>
+            )}
+            {pdfStatus === 'success' && (
+              <span className="text-xs text-emerald-600 font-bold flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4" /> ¡PDF Descargado!
+              </span>
+            )}
+            {pdfStatus === 'error' && (
+              <span className="text-xs text-rose-600 font-bold flex items-center gap-1.5">
+                <AlertCircle className="w-4 h-4" /> Error al generar PDF
+              </span>
+            )}
+            {saveStatus === 'saving' && pdfStatus === 'idle' && (
               <span className="text-xs text-amber-600 font-bold flex items-center gap-1.5 animate-pulse">
                 <span className="w-2 h-2 rounded-full bg-amber-500" /> Guardando...
               </span>
             )}
-            {saveStatus === 'saved' && (
+            {saveStatus === 'saved' && pdfStatus === 'idle' && (
               <span className="text-xs text-emerald-600 font-bold flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4" /> Cambios guardados
               </span>
             )}
-            {saveStatus === 'error' && (
+            {saveStatus === 'error' && pdfStatus === 'idle' && (
               <span className="text-xs text-rose-600 font-bold flex items-center gap-1.5">
                 <AlertCircle className="w-4 h-4" /> Error al guardar
               </span>
             )}
           </div>
+
+          <button 
+            onClick={handleDownloadPDFTrigger}
+            disabled={pdfStatus === 'generating'}
+            className={`border border-slate-300 hover:border-slate-400 text-slate-700 font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-xl flex items-center gap-2 cursor-pointer transition-all ${
+              pdfStatus === 'generating' ? 'opacity-50 cursor-not-allowed' : 'bg-white hover:bg-slate-50'
+            }`}
+          >
+            <FileDown className="w-4 h-4 text-slate-500" /> 
+            {pdfStatus === 'generating' ? 'Exportando...' : 'Descargar PDF'}
+          </button>
 
           <button 
             onClick={handleManualSave}

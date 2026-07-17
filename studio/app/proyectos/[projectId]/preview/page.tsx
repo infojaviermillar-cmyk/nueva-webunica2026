@@ -15,8 +15,12 @@ export default function PreviewPage() {
   // 1. Escuchar actualizaciones desde el padre por postMessage
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      if (event.data && event.data.type === 'UPDATE_CONFIG') {
-        setConfig(event.data.config);
+      if (event.data) {
+        if (event.data.type === 'UPDATE_CONFIG') {
+          setConfig(event.data.config);
+        } else if (event.data.type === 'DOWNLOAD_PDF') {
+          handleDownloadPDF();
+        }
       }
     };
 
@@ -30,7 +34,64 @@ export default function PreviewPage() {
     return () => {
       window.removeEventListener('message', handleMessage);
     };
-  }, []);
+  }, [config, projectId]); // Depend on config and projectId so PDF download has closure on correct values
+
+  const handleDownloadPDF = async () => {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'PDF_STATUS', status: 'generating' }, '*');
+    }
+
+    try {
+      const html2canvas = (await import('html2canvas')).default;
+      const { jsPDF } = await import('jspdf');
+
+      const element = document.getElementById('simulation-capture');
+      if (!element) throw new Error("Element not found");
+
+      // Wait a moment for any assets/fonts to settle
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
+      const canvas = await html2canvas(element, {
+        useCORS: true,
+        allowTaint: true,
+        scale: 1.5, // Good quality without making file size humongous
+        logging: false,
+        backgroundColor: '#ffffff'
+      });
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.9); // Use JPEG with 90% quality for smaller PDF file size
+      
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgWidth = 210; // A4 size width
+      const pageHeight = 297; // A4 size height
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      // First page
+      pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
+      heightLeft -= pageHeight;
+
+      // Multi-page loop
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight, undefined, 'FAST');
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save(`wireframe-${config.selectedWireframe}-${projectId}-${Date.now()}.pdf`);
+      
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'PDF_STATUS', status: 'success' }, '*');
+      }
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'PDF_STATUS', status: 'error' }, '*');
+      }
+    }
+  };
 
   // 2. Fallback de localStorage (para cuando se abre directamente sin iframe)
   useEffect(() => {
@@ -78,16 +139,18 @@ export default function PreviewPage() {
   const currentStyle = DESIGN_STYLES.find(s => s.id === config.selectedStyle) || DESIGN_STYLES[0];
 
   return (
-    <SimulationRenderer
-      wireframeId={config.selectedWireframe}
-      colors={config.colors}
-      fonts={config.fonts}
-      buttonRadius={config.buttonRadius}
-      shadow={config.shadow}
-      cardStyle={currentStyle.cardStyle}
-      heroBgImage={config.heroBgImage ?? null}
-      heroProductImage={config.heroProductImage ?? null}
-      productImages={config.productImages ?? [null, null, null, null, null]}
-    />
+    <div id="simulation-capture" className="w-full bg-white relative">
+      <SimulationRenderer
+        wireframeId={config.selectedWireframe}
+        colors={config.colors}
+        fonts={config.fonts}
+        buttonRadius={config.buttonRadius}
+        shadow={config.shadow}
+        cardStyle={currentStyle.cardStyle}
+        heroBgImage={config.heroBgImage ?? null}
+        heroProductImage={config.heroProductImage ?? null}
+        productImages={config.productImages ?? [null, null, null, null, null]}
+      />
+    </div>
   );
 }
