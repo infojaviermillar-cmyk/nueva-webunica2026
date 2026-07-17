@@ -55,8 +55,20 @@ export default function PersonalizarPage() {
   const [zoomLevel, setZoomLevel] = useState<number>(100);
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'error' | 'idle'>('idle');
   const [user, setUser] = useState<{ email: string; role: string } | null>(null);
+  const [iframeHeight, setIframeHeight] = useState<number>(1200);
 
   const saveTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Escuchar altura de la simulación desde el iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data && event.data.type === 'PREVIEW_HEIGHT') {
+        setIframeHeight(event.data.height);
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   // Cargar configuración guardada y usuario
   useEffect(() => {
@@ -148,6 +160,12 @@ export default function PersonalizarPage() {
 
   // Determinar ruta de imagen original
   const originalImagePath = `/wireframes/maxxgo/${store.selectedWireframe}.png`;
+
+  // Cálculos de dimensiones físicas del simulador según Zoom
+  const originalWidth = deviceView === 'desktop' ? 1440 : deviceView === 'tablet' ? 768 : 390;
+  const scale = zoomLevel / 100;
+  const scaledWidth = originalWidth * scale;
+  const scaledHeight = iframeHeight * scale;
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900 font-sans flex flex-col overflow-hidden h-screen">
@@ -449,10 +467,10 @@ export default function PersonalizarPage() {
                 {/* Zoom controls */}
                 <div className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg p-1">
                   <button 
-                    onClick={() => setZoomLevel(prev => Math.max(50, prev - 25))}
+                    onClick={() => setZoomLevel(prev => Math.max(25, prev - 25))}
                     className="p-1 hover:bg-slate-50 rounded text-slate-500 hover:text-slate-800 disabled:opacity-40 cursor-pointer"
                     title="Alejar"
-                    disabled={zoomLevel <= 50}
+                    disabled={zoomLevel <= 25}
                   >
                     <ZoomOut className="w-4 h-4" />
                   </button>
@@ -485,18 +503,26 @@ export default function PersonalizarPage() {
           <div className="flex-1 overflow-auto p-8 flex justify-center items-start bg-slate-50">
             {activeViewTab === 'simulation' ? (
               <div 
-                className="transition-all duration-300 bg-white border border-slate-200 shadow-xl overflow-hidden rounded-[2.5rem] flex flex-col origin-top"
+                className="transition-all duration-300 bg-white border border-slate-200 shadow-xl overflow-hidden rounded-[2.5rem]"
                 style={{
-                  width: deviceView === 'desktop' ? '100%' : deviceView === 'tablet' ? '768px' : deviceView === 'mobile' ? '390px' : '100%',
-                  maxWidth: '100%',
-                  height: '80vh',
-                  transform: `scale(${zoomLevel / 100})`,
+                  width: `${scaledWidth}px`,
+                  height: `${scaledHeight}px`
                 }}
               >
-                <iframe 
-                  src={`/proyectos/${projectId}/preview`}
-                  className="w-full flex-1 border-0"
-                />
+                <div 
+                  className="origin-top-left flex flex-col h-full"
+                  style={{
+                    width: `${originalWidth}px`,
+                    height: `${iframeHeight}px`,
+                    transform: `scale(${scale})`
+                  }}
+                >
+                  <iframe 
+                    src={`/proyectos/${projectId}/preview`}
+                    className="w-full flex-1 border-0"
+                    scrolling="no"
+                  />
+                </div>
               </div>
             ) : (
               <div className="bg-white border border-slate-200 shadow-xl rounded-[2.5rem] p-6 max-w-4xl w-full flex items-center justify-center">

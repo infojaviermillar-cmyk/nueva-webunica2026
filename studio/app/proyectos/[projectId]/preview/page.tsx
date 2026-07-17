@@ -44,6 +44,26 @@ export default function PreviewPage() {
   // Encontrar el estilo actual para obtener su cardStyle
   const currentStyle = DESIGN_STYLES.find(s => s.id === config.selectedStyle) || DESIGN_STYLES[0];
 
+  useEffect(() => {
+    if (!config) return;
+    
+    const sendHeight = () => {
+      const height = document.documentElement.scrollHeight || document.body.scrollHeight;
+      window.parent.postMessage({ type: 'PREVIEW_HEIGHT', height }, '*');
+    };
+
+    // Pequeño retardo inicial
+    const timer = setTimeout(sendHeight, 200);
+
+    const resizeObserver = new ResizeObserver(sendHeight);
+    resizeObserver.observe(document.body);
+
+    return () => {
+      clearTimeout(timer);
+      resizeObserver.disconnect();
+    };
+  }, [config]);
+
   return (
     <SimulationRenderer
       wireframeId={config.selectedWireframe}
