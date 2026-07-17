@@ -10,28 +10,62 @@ export default function PreviewPage() {
   const projectId = params?.projectId as string;
   const [config, setConfig] = useState<any>(null);
 
+  // REGLA DE HOOKS: todos los useEffect deben estar ANTES de cualquier return condicional
+
+  // 1. Escuchar actualizaciones desde el padre por postMessage
   useEffect(() => {
-    const loadConfig = () => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data && event.data.type === 'UPDATE_CONFIG') {
+        setConfig(event.data.config);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+
+    // Solicitar configuración inicial al padre
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'REQUEST_INITIAL_CONFIG' }, '*');
+    }
+
+    return () => {
+      window.removeEventListener('message', handleMessage);
+    };
+  }, []);
+
+  // 2. Fallback de localStorage (para cuando se abre directamente sin iframe)
+  useEffect(() => {
+    try {
       const savedConfig = localStorage.getItem(`project_config_${projectId}`);
       if (savedConfig) {
         setConfig(JSON.parse(savedConfig));
       }
+    } catch (err) {
+      console.warn("localStorage no disponible en iframe, usando postMessage.");
+    }
+  }, [projectId]);
+
+  // 3. Reportar la altura real del documento al padre (siempre presente, condición interna)
+  useEffect(() => {
+    if (!config) return;
+
+    const sendHeight = () => {
+      const height = document.documentElement.scrollHeight || document.body.scrollHeight;
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'PREVIEW_HEIGHT', height }, '*');
+      }
     };
 
-    // Carga inicial
-    loadConfig();
-
-    // Escuchar cambios de storage (útil si está en otra ventana o pestaña)
-    window.addEventListener('storage', loadConfig);
-
-    // Sondeo de seguridad rápido (500ms) para actualizaciones en tiempo real en la misma pestaña
-    const interval = setInterval(loadConfig, 500);
+    const timer = setTimeout(sendHeight, 300);
+    const resizeObserver = new ResizeObserver(sendHeight);
+    resizeObserver.observe(document.body);
 
     return () => {
-      window.removeEventListener('storage', loadConfig);
-      clearInterval(interval);
+      clearTimeout(timer);
+      resizeObserver.disconnect();
     };
-  }, [projectId]);
+  }, [config]);
+
+  // --- RETURN CONDICIONAL: siempre después de todos los hooks ---
 
   if (!config) {
     return (
@@ -41,28 +75,7 @@ export default function PreviewPage() {
     );
   }
 
-  // Encontrar el estilo actual para obtener su cardStyle
   const currentStyle = DESIGN_STYLES.find(s => s.id === config.selectedStyle) || DESIGN_STYLES[0];
-
-  useEffect(() => {
-    if (!config) return;
-    
-    const sendHeight = () => {
-      const height = document.documentElement.scrollHeight || document.body.scrollHeight;
-      window.parent.postMessage({ type: 'PREVIEW_HEIGHT', height }, '*');
-    };
-
-    // Pequeño retardo inicial
-    const timer = setTimeout(sendHeight, 200);
-
-    const resizeObserver = new ResizeObserver(sendHeight);
-    resizeObserver.observe(document.body);
-
-    return () => {
-      clearTimeout(timer);
-      resizeObserver.disconnect();
-    };
-  }, [config]);
 
   return (
     <SimulationRenderer

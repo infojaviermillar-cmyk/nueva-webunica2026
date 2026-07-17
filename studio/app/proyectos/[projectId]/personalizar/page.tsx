@@ -58,17 +58,52 @@ export default function PersonalizarPage() {
   const [iframeHeight, setIframeHeight] = useState<number>(1200);
 
   const saveTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  // Escuchar altura de la simulación desde el iframe
+  // 1. Función para mandar la configuración al iframe de forma instantánea
+  const sendConfigToIframe = () => {
+    const iframe = iframeRef.current;
+    if (iframe && iframe.contentWindow) {
+      const config = {
+        selectedWireframe: store.selectedWireframe,
+        selectedStyle: store.selectedStyleId,
+        selectedPalette: store.selectedPaletteId,
+        colors: store.colors,
+        fonts: store.fonts,
+        buttonRadius: store.buttonRadius,
+        shadow: store.shadow
+      };
+      iframe.contentWindow.postMessage({ type: 'UPDATE_CONFIG', config }, '*');
+    }
+  };
+
+  // 2. Escuchar mensajes del iframe (altura del contenido y peticiones iniciales)
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      if (event.data && event.data.type === 'PREVIEW_HEIGHT') {
-        setIframeHeight(event.data.height);
+      if (event.data) {
+        if (event.data.type === 'PREVIEW_HEIGHT') {
+          setIframeHeight(event.data.height);
+        } else if (event.data.type === 'REQUEST_INITIAL_CONFIG') {
+          sendConfigToIframe();
+        }
       }
     };
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, []);
+  }, [store]);
+
+  // 3. Sincronizar en tiempo real cuando cambie cualquier valor del personalizador
+  useEffect(() => {
+    sendConfigToIframe();
+  }, [
+    store.selectedWireframe,
+    store.selectedStyleId,
+    store.selectedPaletteId,
+    store.colors,
+    store.fonts,
+    store.buttonRadius,
+    store.shadow
+  ]);
 
   // Cargar configuración guardada y usuario
   useEffect(() => {
@@ -518,6 +553,7 @@ export default function PersonalizarPage() {
                   }}
                 >
                   <iframe 
+                    ref={iframeRef}
                     src={`/proyectos/${projectId}/preview`}
                     className="w-full flex-1 border-0"
                     scrolling="no"
