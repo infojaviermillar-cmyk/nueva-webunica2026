@@ -41,7 +41,38 @@ export default function PreviewPage() {
       window.parent.postMessage({ type: 'PDF_STATUS', status: 'generating' }, '*');
     }
 
-    const cssBackups: any[] = [];
+    const tempStyleTags: HTMLStyleElement[] = [];
+    const hiddenLinks: { parent: Node; next: Node | null; element: Element }[] = [];
+    const hiddenStyles: { parent: Node; next: Node | null; element: Element }[] = [];
+
+    // Helper to recursively clean CSS rules (handles @media and grouping rules correctly)
+    const cleanRules = (rules: CSSRuleList): string => {
+      let cleanText = "";
+      for (let i = 0; i < rules.length; i++) {
+        const rule = rules[i];
+        try {
+          // If it is a grouping/media rule, clean its child rules recursively
+          if ((rule as any).cssRules) {
+            const childrenText = cleanRules((rule as any).cssRules);
+            const header = rule.cssText.split('{')[0];
+            cleanText += `${header} {\n${childrenText}\n}\n`;
+          } else {
+            const text = rule.cssText;
+            if (text && !(
+              text.includes('color-mix') ||
+              text.includes('light-dark') ||
+              text.includes('oklch') ||
+              text.includes('from')
+            )) {
+              cleanText += text + "\n";
+            }
+          }
+        } catch (e) {
+          // Ignore individual rule access errors
+        }
+      }
+      return cleanText;
+    };
 
     try {
       const html2canvasModule = await import('html2canvas');
@@ -53,38 +84,66 @@ export default function PreviewPage() {
       const element = document.getElementById('simulation-capture');
       if (!element) throw new Error("No se encontró el elemento simulador (#simulation-capture)");
 
-      // Temporarily remove unsupported CSS color functions to prevent html2canvas parsing crashes
-      for (let i = 0; i < document.styleSheets.length; i++) {
-        const sheet = document.styleSheets[i];
+      // 1. Process and swap all link tags
+      const linkElements = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
+      for (const link of linkElements) {
         try {
+          const sheet = (link as any).sheet as CSSStyleSheet;
+          if (!sheet) continue;
           const rules = sheet.cssRules || sheet.rules;
           if (!rules) continue;
-          const backupRules = [];
-          for (let j = rules.length - 1; j >= 0; j--) {
-            const rule = rules[j];
-            try {
-              if (rule.cssText && (
-                rule.cssText.includes('color-mix') ||
-                rule.cssText.includes('light-dark') ||
-                rule.cssText.includes('oklch') ||
-                rule.cssText.includes('from')
-              )) {
-                backupRules.push({ index: j, cssText: rule.cssText });
-                sheet.deleteRule(j);
-              }
-            } catch (err) {
-              // Ignore rule failure
-            }
-          }
-          if (backupRules.length > 0) {
-            cssBackups.push({ sheet, backupRules });
+
+          const cleanedCss = cleanRules(rules);
+          
+          const styleTag = document.createElement('style');
+          styleTag.type = 'text/css';
+          styleTag.innerHTML = cleanedCss;
+          document.head.appendChild(styleTag);
+          tempStyleTags.push(styleTag);
+
+          const parent = link.parentNode;
+          if (parent) {
+            const next = link.nextSibling;
+            hiddenLinks.push({ parent, next, element: link });
+            parent.removeChild(link);
           }
         } catch (e) {
-          // Ignore stylesheet rules access errors (e.g. cross-origin fonts)
+          // Keep the stylesheet as is if we can't access it due to CORS (usually Google Fonts)
         }
       }
 
-      // Wait a moment for any assets/fonts to settle
+      // 2. Process and swap all existing inline style tags (e.g. Next.js injected styles)
+      const styleElements = Array.from(document.querySelectorAll('style'));
+      for (const style of styleElements) {
+        // Skip our own temp styles
+        if (tempStyleTags.includes(style)) continue;
+
+        try {
+          const sheet = style.sheet as CSSStyleSheet;
+          if (!sheet) continue;
+          const rules = sheet.cssRules || sheet.rules;
+          if (!rules) continue;
+
+          const cleanedCss = cleanRules(rules);
+
+          const styleTag = document.createElement('style');
+          styleTag.type = 'text/css';
+          styleTag.innerHTML = cleanedCss;
+          document.head.appendChild(styleTag);
+          tempStyleTags.push(styleTag);
+
+          const parent = style.parentNode;
+          if (parent) {
+            const next = style.nextSibling;
+            hiddenStyles.push({ parent, next, element: style });
+            parent.removeChild(style);
+          }
+        } catch (e) {
+          // Ignore
+        }
+      }
+
+      // Wait a moment for layout to settle without the old style rules
       await new Promise((resolve) => setTimeout(resolve, 800));
 
       const canvas = await html2canvas(element, {
@@ -131,16 +190,23 @@ export default function PreviewPage() {
         }, '*');
       }
     } finally {
-      // Restore deleted styles
-      for (const backup of cssBackups) {
-        const { sheet, backupRules } = backup;
-        for (const rule of backupRules.reverse()) {
-          try {
-            sheet.insertRule(rule.cssText, rule.index);
-          } catch (e) {
-            // Ignore insert errors
-          }
-        }
+      // Restore all original link tags
+      for (const { parent, next, element } of hiddenLinks) {
+        try {
+          parent.insertBefore(element, next);
+        } catch (e) {}
+      }
+      // Restore all original style tags
+      for (const { parent, next, element } of hiddenStyles) {
+        try {
+          parent.insertBefore(element, next);
+        } catch (e) {}
+      }
+      // Remove temporary styles
+      for (const styleTag of tempStyleTags) {
+        try {
+          styleTag.remove();
+        } catch (e) {}
       }
     }
   };
