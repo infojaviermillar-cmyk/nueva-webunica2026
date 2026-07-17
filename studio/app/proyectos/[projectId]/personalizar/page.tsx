@@ -3,7 +3,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useCustomizerStore, DESIGN_STYLES } from '../../../../store/useCustomizerStore';
-import { SimulationRenderer } from '../../../../components/simulation-renderer';
 import { 
   Bot, 
   ArrowLeft, 
@@ -448,20 +447,16 @@ export default function PersonalizarPage() {
           <div className="flex-1 overflow-y-auto p-8 flex justify-center items-start">
             {activeViewTab === 'simulation' ? (
               <div 
-                className="transition-all duration-300 bg-white border border-slate-200 shadow-xl overflow-hidden rounded-[2.5rem]"
+                className="transition-all duration-300 bg-white border border-slate-200 shadow-xl overflow-hidden rounded-[2.5rem] flex flex-col"
                 style={{
-                  width: deviceView === 'desktop' ? '100%' : deviceView === 'tablet' ? '768px' : '390px',
+                  width: deviceView === 'desktop' ? '100%' : deviceView === 'tablet' ? '768px' : deviceView === 'mobile' ? '390px' : '100%',
                   maxWidth: '100%',
-                  minHeight: '80vh'
+                  height: '80vh'
                 }}
               >
-                <SimulationRenderer
-                  wireframeId={store.selectedWireframe}
-                  colors={store.colors}
-                  fonts={store.fonts}
-                  buttonRadius={store.buttonRadius}
-                  shadow={store.shadow}
-                  cardStyle={currentStyle.cardStyle}
+                <iframe 
+                  src={`/proyectos/${projectId}/preview`}
+                  className="w-full flex-1 border-0"
                 />
               </div>
             ) : (

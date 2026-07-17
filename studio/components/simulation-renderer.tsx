@@ -84,6 +84,7 @@ export function SimulationRenderer({
             2
           </span>
         </div>
+        <Menu className="w-5 h-5 md:hidden cursor-pointer hover:text-custom-primary" />
       </div>
     </header>
   );
