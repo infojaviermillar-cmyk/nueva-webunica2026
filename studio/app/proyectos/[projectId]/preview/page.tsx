@@ -42,11 +42,14 @@ export default function PreviewPage() {
     }
 
     try {
-      const html2canvas = (await import('html2canvas')).default;
-      const { jsPDF } = await import('jspdf');
+      const html2canvasModule = await import('html2canvas');
+      const html2canvas = html2canvasModule.default || html2canvasModule;
+
+      const jsPDFModule = await import('jspdf');
+      const jsPDF = jsPDFModule.jsPDF || jsPDFModule.default || jsPDFModule;
 
       const element = document.getElementById('simulation-capture');
-      if (!element) throw new Error("Element not found");
+      if (!element) throw new Error("No se encontró el elemento simulador (#simulation-capture)");
 
       // Wait a moment for any assets/fonts to settle
       await new Promise((resolve) => setTimeout(resolve, 800));
@@ -85,10 +88,14 @@ export default function PreviewPage() {
       if (window.parent && window.parent !== window) {
         window.parent.postMessage({ type: 'PDF_STATUS', status: 'success' }, '*');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error generating PDF:", error);
       if (window.parent && window.parent !== window) {
-        window.parent.postMessage({ type: 'PDF_STATUS', status: 'error' }, '*');
+        window.parent.postMessage({ 
+          type: 'PDF_STATUS', 
+          status: 'error', 
+          errorDetails: error?.message || String(error)
+        }, '*');
       }
     }
   };

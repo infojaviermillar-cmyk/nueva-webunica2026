@@ -59,6 +59,7 @@ export default function PersonalizarPage() {
   const [zoomLevel, setZoomLevel] = useState<number>(100);
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'error' | 'idle'>('idle');
   const [pdfStatus, setPdfStatus] = useState<'idle' | 'generating' | 'success' | 'error'>('idle');
+  const [pdfErrorDetails, setPdfErrorDetails] = useState<string>('');
   const [user, setUser] = useState<{ email: string; role: string } | null>(null);
   const [iframeHeight, setIframeHeight] = useState<number>(1200);
 
@@ -95,8 +96,16 @@ export default function PersonalizarPage() {
           sendConfigToIframe();
         } else if (event.data.type === 'PDF_STATUS') {
           setPdfStatus(event.data.status);
+          if (event.data.status === 'error') {
+            setPdfErrorDetails(event.data.errorDetails || 'Error desconocido');
+          } else {
+            setPdfErrorDetails('');
+          }
           if (event.data.status === 'success' || event.data.status === 'error') {
-            setTimeout(() => setPdfStatus('idle'), 3000);
+            setTimeout(() => {
+              setPdfStatus('idle');
+              setPdfErrorDetails('');
+            }, 6000);
           }
         }
       }
@@ -268,8 +277,9 @@ export default function PersonalizarPage() {
               </span>
             )}
             {pdfStatus === 'error' && (
-              <span className="text-xs text-rose-600 font-bold flex items-center gap-1.5">
-                <AlertCircle className="w-4 h-4" /> Error al generar PDF
+              <span className="text-xs text-rose-600 font-bold flex flex-col items-end gap-0.5" title={pdfErrorDetails}>
+                <span className="flex items-center gap-1.5"><AlertCircle className="w-4 h-4" /> Error al generar PDF</span>
+                {pdfErrorDetails && <span className="text-[10px] text-rose-500 font-normal pl-5 max-w-[200px] truncate">{pdfErrorDetails}</span>}
               </span>
             )}
             {saveStatus === 'saving' && pdfStatus === 'idle' && (
