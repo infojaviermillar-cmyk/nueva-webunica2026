@@ -19,7 +19,9 @@ import {
   Type,
   Layout,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  ZoomIn,
+  ZoomOut
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -50,6 +52,7 @@ export default function PersonalizarPage() {
 
   const [activeViewTab, setActiveViewTab] = useState<'simulation' | 'original'>('simulation');
   const [deviceView, setDeviceView] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
+  const [zoomLevel, setZoomLevel] = useState<number>(100);
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'error' | 'idle'>('idle');
   const [user, setUser] = useState<{ email: string; role: string } | null>(null);
 
@@ -417,41 +420,77 @@ export default function PersonalizarPage() {
               </button>
             </div>
 
-            {/* Device View resize (Only visible for interactive simulation) */}
+            {/* Device View resize & Zoom controls (Only visible for interactive simulation) */}
             {activeViewTab === 'simulation' && (
-              <div className="flex gap-2">
-                {[
-                  { id: 'desktop' as const, icon: Monitor, label: '1440px' },
-                  { id: 'tablet' as const, icon: TabletIcon, label: '768px' },
-                  { id: 'mobile' as const, icon: Smartphone, label: '390px' }
-                ].map((device) => (
-                  <button
-                    key={device.id}
-                    onClick={() => setDeviceView(device.id)}
-                    className={`p-2 rounded-lg border transition-all flex items-center gap-2 cursor-pointer ${
-                      deviceView === device.id 
-                        ? 'border-indigo-600 bg-indigo-50 text-indigo-600' 
-                        : 'border-slate-200 text-slate-400 hover:text-slate-800 bg-white'
-                    }`}
-                    title={device.label}
+              <div className="flex items-center gap-4">
+                {/* Device views */}
+                <div className="flex gap-2">
+                  {[
+                    { id: 'desktop' as const, icon: Monitor, label: '1440px' },
+                    { id: 'tablet' as const, icon: TabletIcon, label: '768px' },
+                    { id: 'mobile' as const, icon: Smartphone, label: '390px' }
+                  ].map((device) => (
+                    <button
+                      key={device.id}
+                      onClick={() => setDeviceView(device.id)}
+                      className={`p-2 rounded-lg border transition-all flex items-center gap-2 cursor-pointer ${
+                        deviceView === device.id 
+                          ? 'border-indigo-600 bg-indigo-50 text-indigo-600' 
+                          : 'border-slate-200 text-slate-400 hover:text-slate-800 bg-white'
+                      }`}
+                      title={device.label}
+                    >
+                      <device.icon className="w-4 h-4" />
+                      <span className="text-[10px] font-bold">{device.label}</span>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Zoom controls */}
+                <div className="flex items-center gap-1.5 bg-white border border-slate-200 rounded-lg p-1">
+                  <button 
+                    onClick={() => setZoomLevel(prev => Math.max(50, prev - 25))}
+                    className="p-1 hover:bg-slate-50 rounded text-slate-500 hover:text-slate-800 disabled:opacity-40 cursor-pointer"
+                    title="Alejar"
+                    disabled={zoomLevel <= 50}
                   >
-                    <device.icon className="w-4 h-4" />
-                    <span className="text-[10px] font-bold">{device.label}</span>
+                    <ZoomOut className="w-4 h-4" />
                   </button>
-                ))}
+                  <span className="text-[10px] font-bold text-slate-600 min-w-[32px] text-center select-none">
+                    {zoomLevel}%
+                  </span>
+                  <button 
+                    onClick={() => setZoomLevel(prev => Math.min(150, prev + 25))}
+                    className="p-1 hover:bg-slate-50 rounded text-slate-500 hover:text-slate-800 disabled:opacity-40 cursor-pointer"
+                    title="Acercar"
+                    disabled={zoomLevel >= 150}
+                  >
+                    <ZoomIn className="w-4 h-4" />
+                  </button>
+                  {zoomLevel !== 100 && (
+                    <button 
+                      onClick={() => setZoomLevel(100)}
+                      className="p-1 hover:bg-slate-50 rounded text-slate-400 hover:text-slate-600 cursor-pointer"
+                      title="Restaurar zoom (100%)"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
               </div>
             )}
           </div>
 
           {/* Interactive view container */}
-          <div className="flex-1 overflow-y-auto p-8 flex justify-center items-start">
+          <div className="flex-1 overflow-auto p-8 flex justify-center items-start bg-slate-50">
             {activeViewTab === 'simulation' ? (
               <div 
-                className="transition-all duration-300 bg-white border border-slate-200 shadow-xl overflow-hidden rounded-[2.5rem] flex flex-col"
+                className="transition-all duration-300 bg-white border border-slate-200 shadow-xl overflow-hidden rounded-[2.5rem] flex flex-col origin-top"
                 style={{
                   width: deviceView === 'desktop' ? '100%' : deviceView === 'tablet' ? '768px' : deviceView === 'mobile' ? '390px' : '100%',
                   maxWidth: '100%',
-                  height: '80vh'
+                  height: '80vh',
+                  transform: `scale(${zoomLevel / 100})`,
                 }}
               >
                 <iframe 
