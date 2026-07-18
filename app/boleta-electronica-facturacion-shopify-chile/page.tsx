@@ -6,36 +6,102 @@ import FAQSection from '@/components/sections/faq-section';
 
 export const metadata: Metadata = {
   title: 'Boleta Electrónica y Facturación para Shopify Chile (2026)',
-  description: 'Conoce los mejores sistemas de facturación y boleta electrónica para Shopify en Chile. Integración directa con el SII mediante Haulmer, LibreDTE, Lioren y más.',
+  description: 'Conoce los mejores sistemas de facturación y boleta electrónica para Shopify en Chile. Integración directa con el SII mediante Wasabil, Haulmer, LibreDTE, Lioren y más.',
+  keywords: [
+    'boleta electronica shopify chile',
+    'facturacion shopify chile',
+    'sii shopify chile',
+    'wasabil shopify',
+    'haulmer shopify',
+    'lioren shopify',
+    'libredte shopify',
+    'dte shopify chile',
+    'boleta facil shopify',
+    'autoservicio facturacion chile'
+  ],
+  alternates: {
+    canonical: 'https://webunica.cl/boleta-electronica-facturacion-shopify-chile',
+  },
   openGraph: {
-    title: 'Sistemas de Boleta y Factura para Shopify en Chile',
-    description: 'Automatiza tus Documentos Tributarios Electrónicos (DTE). Guía de integración de Haulmer OpenFactura, Relbase y LibreDTE para Shopify.',
+    title: 'Sistemas de Boleta y Factura para Shopify en Chile (2026)',
+    description: 'Automatiza tus Documentos Tributarios Electrónicos (DTE). Guía de integración de Wasabil, Haulmer OpenFactura, Relbase y LibreDTE para Shopify.',
     url: 'https://webunica.cl/boleta-electronica-facturacion-shopify-chile',
+    siteName: 'Webunica',
+    locale: 'es_CL',
     type: 'article',
+    images: [
+      {
+        url: 'https://webunica.cl/shopify_hero_card.png',
+        width: 1200,
+        height: 630,
+        alt: 'Sistemas de Boleta Electrónica y Facturación para Shopify Chile',
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sistemas de Boleta y Factura para Shopify en Chile (2026)',
+    description: 'Automatiza tus Documentos Tributarios Electrónicos (DTE). Guía de integración de Wasabil, Haulmer, Relbase y más.',
+    images: ['https://webunica.cl/shopify_hero_card.png']
   }
 };
 
 export default function BillingSystemsPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Sistema de Boleta Electrónica y Facturación para Shopify Chile",
-    "description": "Análisis de las mejores aplicaciones y sistemas para automatizar la emisión de boletas y facturas electrónicas (DTE) en Shopify cumpliendo con el SII.",
-    "author": {
-      "@type": "Organization",
-      "name": "Webunica",
-      "url": "https://webunica.cl"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Webunica",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://webunica.cl/logo-webunica.png.webp"
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": "https://webunica.cl/boleta-electronica-facturacion-shopify-chile#article",
+        "headline": "Sistema de Boleta Electrónica y Facturación para Shopify Chile",
+        "description": "Análisis de las mejores aplicaciones y sistemas para automatizar la emisión de boletas y facturas electrónicas (DTE) en Shopify cumpliendo con el SII.",
+        "author": {
+          "@type": "Organization",
+          "name": "Webunica",
+          "url": "https://webunica.cl"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Webunica",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://webunica.cl/logo-webunica.png.webp"
+          }
+        },
+        "datePublished": "2024-01-01T08:00:00+08:00",
+        "dateModified": new Date().toISOString()
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://webunica.cl/boleta-electronica-facturacion-shopify-chile#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Cuál es la diferencia entre un ERP y un Sistema de Boleta Electrónica?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Un Sistema de Facturación o Boleta Electrónica (como Wasabil, Haulmer o Lioren) sirve exclusivamente para emitir el Documento Tributario (DTE) al SII y enviarlo al cliente. Un ERP (como Bsale o Defontana) hace eso, pero además gestiona la contabilidad profunda, múltiples bodegas, recursos humanos, etc."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué necesito para empezar a emitir boletas en Shopify?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Necesitas 3 cosas: 1) Haber iniciado actividades en el SII de Chile. 2) Comprar un Certificado Digital (Firma Electrónica) e instalarlo en el SII. 3) Contratar una App de facturación (ej. Wasabil o Haulmer) y conectarla con tu tienda Shopify."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo Shopify sabe si emitir Boleta o Factura?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Por defecto, Shopify no sabe la diferencia. Como expertos, nosotros configuramos el 'Checkout' de tu tienda agregando los campos obligatorios del SII (RUT, Razón Social, Giro). Si el cliente los llena, la App de facturación detecta los datos y emite una Factura; si no los llena, emite una Boleta."
+            }
+          }
+        ]
       }
-    },
-    "datePublished": "2024-01-01T08:00:00+08:00",
-    "dateModified": new Date().toISOString(),
+    ]
   };
 
   const billingSystems = [

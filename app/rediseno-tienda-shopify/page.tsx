@@ -13,8 +13,45 @@ export const metadata: Metadata = {
   title: 'Rediseño de Tienda Shopify en Chile | Webunica',
   description:
     'Tu tienda Shopify ya existe, nosotros la hacemos vender mejor. Rediseño completo de tema, UX y conversión. Planes desde $290.000. Expertos Shopify Partner en Chile.',
-  keywords:
-    'rediseño tienda shopify, mejorar tienda shopify, actualizar shopify chile, shopify ux conversion, rediseño ecommerce chile, shopify partner chile',
+  keywords: [
+    'rediseño tienda shopify',
+    'mejorar tienda shopify chile',
+    'actualizar tema shopify',
+    'shopify ux conversion',
+    'rediseño ecommerce chile',
+    'shopify partner chile',
+    'optimizar shopify',
+    'cambiar tema shopify',
+    'shopify cro chile',
+    'renovar tienda shopify',
+  ],
+  alternates: {
+    canonical: 'https://webunica.cl/rediseno-tienda-shopify',
+  },
+  openGraph: {
+    title: 'Rediseño de Tienda Shopify | Webunica Chile',
+    description:
+      'Transforma tu tienda Shopify existente en una máquina de ventas. Nuevo diseño, mejor UX, mayor conversión. Planes desde $290.000.',
+    url: 'https://webunica.cl/rediseno-tienda-shopify',
+    siteName: 'Webunica',
+    locale: 'es_CL',
+    type: 'website',
+    images: [
+      {
+        url: 'https://webunica.cl/og-rediseno-shopify.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Rediseño de Tienda Shopify en Chile - Webunica',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rediseño de Tienda Shopify | Webunica Chile',
+    description:
+      'Tu tienda Shopify ya existe, nosotros la hacemos vender mejor. Planes desde $290.000.',
+    images: ['https://webunica.cl/og-rediseno-shopify.jpg'],
+  },
 };
 
 const alertas = [
@@ -115,23 +152,46 @@ const featureVal = (val: boolean | string, accent: string) => {
 export default function RedesignShopifyPage() {
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Rediseño de Tienda Shopify en Chile',
-    description:
-      'Servicio especializado de rediseño de tiendas Shopify para mejorar la conversión, UX y diseño visual.',
-    provider: {
-      '@type': 'LocalBusiness',
-      name: 'Webunica',
-      url: 'https://webunica.cl',
-      address: { '@type': 'PostalAddress', addressLocality: 'Santiago', addressCountry: 'CL' },
-    },
-    areaServed: 'CL',
-    offers: redesignPlans.map((p) => ({
-      '@type': 'Offer',
-      name: `Rediseño Shopify Plan ${p.name}`,
-      price: p.price.replace(/\D/g, ''),
-      priceCurrency: 'CLP',
-    })),
+    '@graph': [
+      {
+        '@type': 'Service',
+        '@id': 'https://webunica.cl/rediseno-tienda-shopify#service',
+        'name': 'Rediseño de Tienda Shopify en Chile',
+        'description':
+          'Servicio especializado de rediseño de tiendas Shopify para mejorar la conversión, UX y diseño visual.',
+        'provider': {
+          '@type': 'LocalBusiness',
+          'name': 'Webunica',
+          'url': 'https://webunica.cl',
+          'image': 'https://webunica.cl/logo-webunica.png.webp',
+          'telephone': '+56984410379',
+          'address': { '@type': 'PostalAddress', 'addressLocality': 'Santiago', 'addressCountry': 'CL' },
+        },
+        'areaServed': {
+          '@type': 'Country',
+          'name': 'Chile'
+        },
+        'offers': redesignPlans.map((p) => ({
+          '@type': 'Offer',
+          'name': `Rediseño Shopify Plan ${p.name}`,
+          'price': p.price.replace(/\D/g, ''),
+          'priceCurrency': 'CLP',
+          'url': `https://webunica.cl/rediseno/${p.id}`
+        })),
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': 'https://webunica.cl/rediseno-tienda-shopify#faq',
+        'mainEntity': faqs.map((faq) => ({
+          '@type': 'Question',
+          'name': faq.q,
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': faq.a,
+          },
+        })),
+      }
+    ]
   };
 
   return (

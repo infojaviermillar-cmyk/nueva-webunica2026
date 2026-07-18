@@ -18,6 +18,38 @@ export async function generateMetadata({
   return {
     title: `Rediseño Shopify Plan ${plan.name} | Webunica`,
     description: `${plan.desc} ${plan.shortDesc} Entrega en ${plan.deliveryTime}. Bonus: ${plan.bonus}.`,
+    keywords: [
+      `plan ${plan.name.toLowerCase()} rediseño shopify`,
+      `rediseño shopify ${plan.id}`,
+      'mejorar ecommerce shopify',
+      'actualizar tema shopify chile',
+      'cro shopify chile'
+    ],
+    alternates: {
+      canonical: `https://webunica.cl/rediseno/${plan.id}`,
+    },
+    openGraph: {
+      title: `Rediseño Shopify Plan ${plan.name} | Webunica`,
+      description: `${plan.desc} ${plan.shortDesc} Entrega en ${plan.deliveryTime}.`,
+      url: `https://webunica.cl/rediseno/${plan.id}`,
+      siteName: 'Webunica',
+      locale: 'es_CL',
+      type: 'website',
+      images: [
+        {
+          url: 'https://webunica.cl/og-rediseno-shopify.jpg',
+          width: 1200,
+          height: 630,
+          alt: `Rediseño Shopify Plan ${plan.name} - Webunica`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Rediseño Shopify Plan ${plan.name} | Webunica`,
+      description: `${plan.desc} ${plan.shortDesc}`,
+      images: ['https://webunica.cl/og-rediseno-shopify.jpg'],
+    },
   };
 }
 
@@ -69,8 +101,57 @@ export default async function RedesignPlanPage({
   const bg     = accentBg[plan.color]     ?? 'bg-violet-50 border-violet-100';
   const btn    = accentBtn[plan.color]    ?? 'bg-violet-600 hover:bg-violet-700 shadow-violet-600/20';
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Product',
+        '@id': `https://webunica.cl/rediseno/${plan.id}#product`,
+        'name': `Rediseño Shopify Plan ${plan.name}`,
+        'image': 'https://webunica.cl/og-rediseno-shopify.jpg',
+        'description': `${plan.desc} ${plan.shortDesc} Tiempo de entrega estimado: ${plan.deliveryTime}.`,
+        'brand': {
+          '@type': 'Brand',
+          'name': 'Webunica'
+        },
+        'offers': {
+          '@type': 'Offer',
+          'price': plan.price.replace(/\D/g, ''),
+          'priceCurrency': 'CLP',
+          'availability': 'https://schema.org/InStock',
+          'url': `https://webunica.cl/rediseno/${plan.id}`
+        }
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': `https://webunica.cl/rediseno/${plan.id}#breadcrumb`,
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': 'Inicio',
+            'item': 'https://webunica.cl'
+          },
+          {
+            '@type': 'ListItem',
+            'position': 2,
+            'name': 'Rediseño Shopify',
+            'item': 'https://webunica.cl/rediseno-tienda-shopify'
+          },
+          {
+            '@type': 'ListItem',
+            'position': 3,
+            'name': plan.name,
+            'item': `https://webunica.cl/rediseno/${plan.id}`
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-zinc-50 pt-[20vh] pb-32">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="max-w-4xl mx-auto px-6">
 
         {/* Breadcrumbs */}
