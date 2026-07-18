@@ -230,28 +230,32 @@ export default function RedesignShopifyPage() {
       </section>
 
       {/* ═══════════════════════ SEÑALES DE ALERTA ═══════════════════════ */}
-      <section className="bg-zinc-950 py-24 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="bg-gradient-to-b from-white to-violet-50/40 py-24 px-6 relative overflow-hidden">
+        {/* Ambient decorative blurs */}
+        <div className="absolute top-1/4 left-0 w-80 h-80 bg-violet-400/10 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-indigo-400/10 blur-[100px] rounded-full pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-red-900/30 border border-red-800/40 rounded-full">
-              <AlertTriangle className="w-4 h-4 text-red-400" />
-              <span className="text-[10px] font-black tracking-[0.2em] text-red-400 uppercase">¿Reconoces estos síntomas?</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-red-50 border border-red-100 rounded-full">
+              <AlertTriangle className="w-4 h-4 text-red-500" />
+              <span className="text-[10px] font-black tracking-[0.2em] text-red-600 uppercase">¿Reconoces estos síntomas?</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white mb-4">
+            <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tighter text-zinc-950 mb-4">
               Tu tienda necesita un rediseño si...
             </h2>
-            <p className="text-zinc-400 font-light max-w-xl mx-auto">
+            <p className="text-zinc-500 font-light max-w-xl mx-auto">
               Estas son las señales más comunes que indican que tu tienda está perdiendo ventas por problemas de diseño o UX.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {alertas.map((alerta, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 rounded-3xl p-7 hover:bg-white/8 transition-colors">
-                <div className="w-12 h-12 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center justify-center mb-5">
-                  <alerta.icon className="w-6 h-6 text-red-400" />
+              <div key={i} className="bg-white border border-zinc-100 rounded-3xl p-7 shadow-xl shadow-zinc-150/40 hover:shadow-2xl hover:shadow-violet-900/5 hover:-translate-y-1 transition-all duration-300">
+                <div className="w-12 h-12 bg-red-50 border border-red-100 rounded-2xl flex items-center justify-center mb-5">
+                  <alerta.icon className="w-6 h-6 text-red-500" />
                 </div>
-                <h3 className="font-bold text-white text-sm mb-2">{alerta.title}</h3>
-                <p className="text-zinc-400 text-sm font-light leading-relaxed">{alerta.desc}</p>
+                <h3 className="font-bold text-zinc-900 text-sm mb-2">{alerta.title}</h3>
+                <p className="text-zinc-500 text-sm font-light leading-relaxed">{alerta.desc}</p>
               </div>
             ))}
           </div>
@@ -365,16 +369,19 @@ export default function RedesignShopifyPage() {
       </section>
 
       {/* ═══════════════════════ CTA FINAL ═══════════════════════ */}
-      <section className="py-24 px-6 bg-zinc-950">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="w-20 h-20 bg-violet-500/10 border border-violet-500/20 rounded-3xl flex items-center justify-center mx-auto mb-8">
-            <Shield className="w-10 h-10 text-violet-400" />
+      <section className="py-24 px-6 bg-gradient-to-tr from-violet-100 via-indigo-50 to-white border-t border-zinc-150 relative overflow-hidden">
+        {/* Soft back ambient glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-violet-400/20 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-3xl mx-auto text-center relative z-10">
+          <div className="w-20 h-20 bg-white border border-violet-200 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-md">
+            <Shield className="w-10 h-10 text-violet-600" />
           </div>
-          <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tighter text-white mb-6">
+          <h2 className="text-4xl lg:text-5xl font-black uppercase tracking-tighter text-zinc-950 mb-6">
             Revisamos tu tienda<br />
-            <span className="text-violet-400">sin costo ni compromiso</span>
+            <span className="text-violet-600">sin costo ni compromiso</span>
           </h2>
-          <p className="text-zinc-400 font-light text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-zinc-600 font-light text-lg mb-10 max-w-xl mx-auto leading-relaxed">
             Antes de elegir un plan, agendemos una videollamada de 30 minutos. Revisamos tu tienda actual y te decimos exactamente qué mejorar y cuánto costará.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -385,7 +392,7 @@ export default function RedesignShopifyPage() {
               href="https://wa.me/56984410379"
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 font-bold uppercase tracking-widest text-[11px] px-8 py-4 rounded-2xl transition-all"
+              className="border border-zinc-200 bg-white text-zinc-700 hover:text-zinc-950 hover:border-zinc-300 font-bold uppercase tracking-widest text-[11px] px-8 py-4 rounded-2xl transition-all shadow-sm"
             >
               WhatsApp directo →
             </a>
