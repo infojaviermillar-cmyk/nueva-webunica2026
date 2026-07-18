@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ShoppingBag, Building2, Cpu, BarChart3, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ShoppingBag, Building2, Cpu, BarChart3, CheckCircle2, Sparkles } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -67,6 +67,21 @@ const serviceData = [
     image: '/tab-pymes.png', // Reuse or add another
     link: '/servicios-seo-posicionamiento-google',
     icon: <BarChart3 className="w-6 h-6" />
+  },
+  {
+    id: 'rediseno',
+    menuTitle: 'Rediseño Shopify',
+    title: 'Tu tienda, reinventada para vender',
+    description: '¿Tu tienda ya existe pero no convierte como debería? Rediseñamos la experiencia completa: nuevo tema premium, UX optimizada, estrategia CRO y todo el setup de analytics. El resultado es una tienda que se ve mejor y vende más desde el primer día.',
+    features: [
+      'Auditoría visual y UX de tu tienda actual',
+      'Nuevo tema premium instalado y configurado',
+      'Optimización CRO: CTAs, jerarquía y flujos',
+      'Setup GA4 + Meta Pixel post-rediseño'
+    ],
+    image: '/tab-shopify.png',
+    link: '/rediseno-tienda-shopify',
+    icon: <Sparkles className="w-6 h-6" />
   }
 ];
 
@@ -279,11 +294,18 @@ export default function ServicesTabs() {
                     {React.cloneElement(service.icon as any, { className: 'w-5 h-5' })}
                   </div>
                   
-                  <span className={`text-sm font-black uppercase tracking-wider transition-colors duration-300 ${
-                    activeTab.id === service.id ? 'text-violet-900' : 'text-zinc-500'
-                  }`}>
-                    {service.menuTitle}
-                  </span>
+                  <div className="flex flex-col gap-0.5">
+                    <span className={`text-sm font-black uppercase tracking-wider transition-colors duration-300 ${
+                      activeTab.id === service.id ? 'text-violet-900' : 'text-zinc-500'
+                    }`}>
+                      {service.menuTitle}
+                    </span>
+                    {service.id === 'rediseno' && (
+                      <span className="text-[9px] font-black uppercase tracking-widest text-white bg-violet-500 px-2 py-0.5 rounded-full w-fit">
+                        NUEVO
+                      </span>
+                    )}
+                  </div>
                 </button>
 
                 {/* Mobile Content Accordion */}
