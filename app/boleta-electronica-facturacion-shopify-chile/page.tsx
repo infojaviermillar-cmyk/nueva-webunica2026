@@ -40,10 +40,26 @@ export default function BillingSystemsPage() {
 
   const billingSystems = [
     {
+      name: "Wasabil",
+      logo: "🚀",
+      type: "Facturación + Finanzas + Shopify Nativo",
+      pricing: "Desde $34.990 CLP / mes (Plan Growth)",
+      url: "https://wasabil.com/",
+      pros: [
+        "Integración nativa con Shopify, Mercado Libre y Falabella",
+        "Recupera automáticamente el IVA de servicios digitales extranjeros (Meta Ads, Google, AWS, OpenAI)",
+        "Conciliación bancaria automática con Santander, BCI, Banco de Chile y más",
+        "Compatible con agentes IA (MCP nativo para Claude y Cursor)"
+      ],
+      cons: ["Plataforma relativamente nueva (fundada 2023), documentación en crecimiento"],
+      recommended: true
+    },
+    {
       name: "Haulmer (OpenFactura)",
       logo: "🧾",
       type: "App Oficial en Shopify",
       pricing: "Desde 1 UF mensual (Aprox.)",
+      url: "",
       pros: ["Integración extremadamente fluida mediante App oficial", "Portal de autoservicio (el cliente convierte su boleta a factura)", "Plataforma OpenFactura muy amigable"],
       cons: ["El soporte técnico puede tardar en fechas de alta demanda (Cyber)"],
       recommended: true
@@ -53,6 +69,7 @@ export default function BillingSystemsPage() {
       logo: "⚡",
       type: "Conector Directo",
       pricing: "Planes por tramos de documentos",
+      url: "",
       pros: ["Soporte técnico destacable y rápido", "Configuración de App muy sencilla", "Excelente estabilidad de conexión con el SII"],
       cons: ["Interfaz de usuario un poco más tradicional", "Menos funcionalidades que un ERP completo"],
       recommended: true
@@ -62,6 +79,7 @@ export default function BillingSystemsPage() {
       logo: "💻",
       type: "Integración API (Desarrolladores)",
       pricing: "Planes desde $0 (Limitado) o muy económicos",
+      url: "",
       pros: ["Ideal si cuentas con un equipo experto en desarrollo (como Webunica)", "Altísima flexibilidad técnica para flujos complejos", "Costos recurrentes bajísimos"],
       cons: ["No es 'Plug & Play'. Requiere conocimientos técnicos para conectar la API de Shopify"],
       recommended: false
@@ -71,6 +89,7 @@ export default function BillingSystemsPage() {
       logo: "🔄",
       type: "Sistema de Ventas y Facturación",
       pricing: "Desde $19.990 CLP / mes",
+      url: "",
       pros: ["Buena relación calidad-precio para PyMEs", "Permite gestionar ventas físicas (POS) y de Shopify en un solo lugar", "Sincroniza inventario básico"],
       cons: ["Su App de integración puede requerir apoyo técnico para configuración inicial"],
       recommended: false
@@ -80,6 +99,7 @@ export default function BillingSystemsPage() {
       logo: "🏷️",
       type: "Emisión Simplificada",
       pricing: "Pago por paquete de boletas o plan básico",
+      url: "",
       pros: ["Como su nombre lo indica, la curva de aprendizaje es casi nula", "Muy económico si tu volumen de venta es bajo"],
       cons: ["Opciones muy limitadas si el negocio escala rápidamente"],
       recommended: false
@@ -126,7 +146,7 @@ export default function BillingSystemsPage() {
           <span className="text-violet-500 italic font-serif lowercase font-light text-5xl lg:text-7xl">Shopify Chile</span>
         </h1>
         <p className="text-xl text-zinc-600 font-light leading-relaxed max-w-2xl mx-auto mb-10">
-          Evita multas del SII. Automatiza la emisión de tus Documentos Tributarios Electrónicos (DTE) utilizando Haulmer, Lioren o LibreDTE integrados a tu checkout.
+          Evita multas del SII. Automatiza la emisión de tus Documentos Tributarios Electrónicos (DTE) con <strong>Wasabil</strong>, Haulmer, Lioren o LibreDTE integrados a tu checkout de Shopify.
         </p>
         <LeadButton className="px-8 py-4 bg-zinc-900 text-white rounded-full font-bold uppercase tracking-wider text-xs hover:scale-105 transition-transform">
           Automatizar Facturación
@@ -158,7 +178,7 @@ export default function BillingSystemsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {billingSystems.map((sys, idx) => (
+        {billingSystems.map((sys, idx) => (
             <div key={idx} className={`p-8 rounded-[2rem] border relative transition-all duration-300 flex flex-col ${sys.recommended ? 'bg-white/80 border-violet-500/30 shadow-[0_0_30px_rgba(139,92,246,0.05)]' : 'bg-slate-100 border-slate-200'}`}>
               
               {sys.recommended && (
@@ -186,7 +206,7 @@ export default function BillingSystemsPage() {
                 </ul>
               </div>
 
-              <div>
+              <div className="mb-6">
                 <div className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest mb-3">Limitaciones</div>
                 <ul className="space-y-3">
                   {sys.cons.map((c, i) => (
@@ -196,6 +216,17 @@ export default function BillingSystemsPage() {
                   ))}
                 </ul>
               </div>
+
+              {sys.url && (
+                <a
+                  href={sys.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest text-violet-600 hover:text-violet-800 transition-colors border border-violet-200 bg-violet-50 rounded-xl px-4 py-2.5 w-fit"
+                >
+                  Visitar sitio →
+                </a>
+              )}
             </div>
           ))}
         </div>
