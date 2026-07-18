@@ -188,6 +188,15 @@ export default function Header({ domain = '' }: { domain?: string }) {
                           </Link>
                         </li>
                         <li>
+                          <Link href="/rediseno-tienda-shopify" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors border border-violet-100 bg-violet-50/40">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors flex items-center gap-2">
+                              Rediseño Shopify
+                              <span className="text-[8px] bg-violet-600 text-white px-1.5 py-0.5 rounded-sm uppercase font-black">NUEVO</span>
+                            </span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Tu tienda, reinventada para vender</span>
+                          </Link>
+                        </li>
+                        <li>
                           <Link href="/desarrollo-tienda-en-linea-woocommerce" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
                             <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Tienda WooCommerce</span>
                             <span className="text-[11px] text-zinc-500 font-medium">B2B y Catálogos complejos</span>
@@ -535,6 +544,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/desarrollo-tiendas-shopify-en-chile" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       Tiendas Shopify
+                    </Link>
+                    <Link href="/rediseno-tienda-shopify" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      Rediseño Shopify <span className="text-[9px] bg-violet-600 text-white px-2 py-0.5 rounded-full uppercase font-black">NUEVO</span>
                     </Link>
                     <Link href="/migrar-a-shopify" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
