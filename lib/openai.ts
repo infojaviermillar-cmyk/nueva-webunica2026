@@ -30,33 +30,35 @@ export async function generateBlogPost(topic: string, keywords: string[], source
   const isAdvanced = mode === 'advanced';
   
   const prompt = `
-    Actúa como experto de ÉLITE en SEO Técnico, Ingeniería Web y Estrategia de Negocios Digitales para Webunica.cl, la agencia líder en Shopify, Next.js y SaaS en Chile.
+    Actúa como Consultor Estratégico Senior y Redactor de Negocios para Webunica.cl, la agencia líder en desarrollo de Tiendas en Línea Shopify, Sitios Web Corporativos y Estrategia Digital en Chile.
     
     TEMA: ${topic}
     PALABRAS CLAVE INICIALES: ${keywords.join(', ')}
     FUENTES DE CONSULTA: ${sources || 'No se proporcionaron fuentes adicionales.'}
-    MODO: ${isAdvanced ? 'INGENIERÍA AVANZADA / MASTERCLASS' : 'ESTÁNDAR EDUCATIVO'}
+    MODO: ${isAdvanced ? 'ESTRATEGIA AVANZADA Y CRECIMIENTO B2B' : 'ESTÁNDAR EDUCATIVO COMERCIAL'}
+    
+    AUDIENCIA: Emprendedores, dueños de negocios, gerentes comerciales y tomadores de decisiones B2B en Chile. NO tienen conocimientos de programación ni tecnicismos informáticos. Buscan resultados de negocio, presencia profesional, aumento de ventas, credibilidad y optimización de conversión.
     
     REGLAS DE CONTENIDO:
-    1. EXTENSIÓN: ${isAdvanced ? 'Mínimo 1800 palabras. Desarrolla cada punto con profundidad técnica quirúrgica.' : 'Mínimo 1000 palabras.'}
-    2. ESTRUCTURA: HTML semántico (solo <p>, <h2>, <h3>, <h4>, <ul>, <li>, <strong>, <em>, <blockquote>, <pre>, <code>).
-    3. ${isAdvanced ? 'INCLUYE BLOQUES DE CÓDIGO (usando <pre><code>...</code></pre>) con ejemplos reales en React, Shopify Liquid, JSON o Shell según corresponda.' : 'Enfoque en conceptos claros y beneficios.'}
-    4. TONO: ${isAdvanced ? 'Experto, técnico, autoritario pero accesible. Habla de arquitectura, performance (LCP, INP), seguridad y escalabilidad.' : 'Profesional, persuasivo y educativo.'}
-    5. SEO: Utiliza la información de las FUENTES DE CONSULTA para enriquecer el contenido. Incluye al menos 5 subtítulos (H2 y H3) optimizados semánticamente.
-    6. CTA: Intro de alto impacto + conclusión con Call to Action estratégico hacia los servicios de consultoría avanzada de Webunica.cl.
-    7. Identifica y genera las mejores 8 PALABRAS CLAVE SEO para este artículo.
+    1. EXTENSIÓN: ${isAdvanced ? 'Mínimo 1500 palabras. Desarrolla a fondo estrategias comerciales, embudos de venta y mejores prácticas de ecommerce.' : 'Mínimo 1000 palabras.'}
+    2. ESTRUCTURA: HTML semántico limpio (solo <p>, <h2>, <h3>, <h4>, <ul>, <li>, <strong>, <em>, <blockquote>). NO uses etiquetas <pre> ni <code> de código técnico a menos que sea estrictamente necesario para un ejemplo conceptual muy simple de negocio.
+    3. ENFOQUE: Centrado en BENEFICIOS y RESULTADOS comerciales. Si hablas de velocidad web, explícalo como "carga rápida para no perder ventas y retener clientes" en lugar de tecnicismos como "LCP o Web Vitals". Explica conceptos difíciles de forma clara y amigable.
+    4. TONO: Cercano, empático, profesional, de confianza y de negocios. El lector debe sentir que Webunica entiende su dolor comercial (ventas bajas, sitio desactualizado, sistemas lentos) y que ofrece la solución perfecta.
+    5. SEO: Utiliza la información de las FUENTES DE CONSULTA de manera persuasiva. Incluye al menos 5 subtítulos (H2 y H3) atractivos para lectura rápida y escaneo visual.
+    6. CTA (Llamado a la Acción): Integrar un llamado a la acción persuasivo al final del artículo invitando a agendar una asesoría gratuita con Webunica.cl para diseñar su sitio web profesional o tienda Shopify a medida.
+    7. Genera las mejores 8 PALABRAS CLAVE SEO orientadas a búsquedas de clientes de negocios (búsquedas comerciales, no técnicas).
     
     RESPONDE ÚNICAMENTE EN JSON:
     {
-      "title": "Título H1 disruptivo con keyword principal",
+      "title": "Título H1 persuasivo orientado a negocios y beneficios, con la keyword principal",
       "slug": "url-amigable-seo",
-      "excerpt": "Resumen técnico de 150 chars máx",
+      "excerpt": "Resumen persuasivo enfocado en los beneficios del artículo (máx 150 chars)",
       "content": "<p>HTML del artículo...</p>",
-      "seo_title": "Título SEO (máx 60 chars)",
-      "seo_description": "Meta descripción SEO (máx 160 chars) con alto CTR",
+      "seo_title": "Título SEO comercial (máx 60 chars)",
+      "seo_description": "Meta descripción que despierte curiosidad e impulse el clic desde Google (máx 160 chars)",
       "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5", "keyword6", "keyword7", "keyword8"],
-      "cover_image_alt": "Alt descriptivo SEO para imagen (máx 120 chars)",
-      "cover_image_prompt": "Prompt en inglés para DALL-E 3: high-end 3D tech render or professional minimalist illustration of [tema], deep purple and emerald green neon accents, dark mode aesthetic, cinematic lighting, 8k, professional, no text"
+      "cover_image_alt": "Alt descriptivo comercial para SEO de la imagen (máx 120 chars)",
+      "cover_image_prompt": "Prompt en inglés para DALL-E 3: Elegant, clean, professional minimalist flat illustration or high-end 3D digital scene representing [tema] in a business/commerce context. Corporate theme, bright lighting, clean background, violet (#8B5CF6) and soft green/emerald accents, professional, modern B2B brand aesthetic, no text, no words"
     }
   `;
 
@@ -124,14 +126,14 @@ export async function generateBlogPost(topic: string, keywords: string[], source
     console.warn('[openai] DALL-E generation or upload failed, using placeholder:', imgError);
     cover_image_error = imgError?.message || String(imgError);
     
-    // Fallback: imagen variada de tecnología de Unsplash usando hash de la URL
+    // Fallback: imagen variada de negocios, ecommerce y crecimiento de Unsplash usando hash de la URL
     const placeholders = [
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80', // Laptop metrics
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80', // Code screen
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80', // Workspace Macbook
-      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80', // Abstract digital globe/tech
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80', // Laptop mockup
-      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80'  // Binary code matrix
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80', // Laptop metrics/growth
+      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80', // Corporate planning/consulting
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80', // Teamwork project kickoff
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80', // Ecommerce payments / credit card sales
+      'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=1200&q=80', // Elegant retail online shop background
+      'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1200&q=80'  // Business handshake deal
     ];
     const index = Math.abs((postData.slug || topic).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)) % placeholders.length;
     cover_image = placeholders[index];
