@@ -4,78 +4,60 @@ import { Sparkles, ChevronRight, TrendingUp } from 'lucide-react';
 const TOPIC_CATEGORIES = [
   {
     id: 'shopify',
-    label: 'Ingeniería Shopify',
+    label: 'Ventas Online & Shopify',
     color: 'bg-emerald-50 border-emerald-200 text-emerald-700',
     dot: 'bg-emerald-500',
-    icon: '💎',
+    icon: '🛍️',
     topics: [
-      { title: 'Cómo crear una tienda Shopify en Chile paso a paso', keywords: 'crear tienda shopify chile, shopify chile, abrir tienda shopify', published: true },
-      { title: 'Optimización avanzada de LCP y Core Web Vitals en Shopify Plus', keywords: 'lcp shopify chile, velocidad shopify avanzado, core web vitals shopify' },
-      { title: 'Cómo integrar Webpay en Shopify Chile', keywords: 'webpay shopify chile, transbank shopify, pago shopify chile', published: false },
-      { title: 'Arquitectura Headless: Shopify Hydrogen vs Next.js para Chile', keywords: 'shopify headless chile, hydrogen shopify, shopify nextjs' },
-      { title: 'Cómo configurar envíos con Starken y Chilexpress en Shopify', keywords: 'envios shopify chile, starken shopify, chilexpress shopify', published: true },
-      { title: 'Diferencia entre Shopify Basic, Shopify y Advanced en Chile', keywords: 'planes shopify chile, precio shopify chile, shopify costo', published: false },
-      { title: 'Custom Apps en Shopify: Extendiendo la funcionalidad con Remix', keywords: 'apps personalizadas shopify, remix shopify app, api shopify chile' },
-      { title: 'Cómo hacer SEO para tu tienda Shopify y aparecer en Google', keywords: 'seo shopify, posicionamiento shopify google, shopify seo chile', published: false },
+      { title: 'Cómo crear una tienda Shopify en Chile: Guía práctica para dueños de negocios', keywords: 'crear tienda shopify chile, shopify chile, abrir tienda shopify', published: true },
+      { title: 'Planes de Shopify en Chile: Cuál elegir para iniciar y escalar tu pyme', keywords: 'planes shopify chile, precio shopify chile, costos shopify pyme' },
+      { title: 'Métodos de pago en Chile (Webpay, Flow, Mercado Pago): Cuál conviene para tu e-commerce', keywords: 'metodos de pago shopify chile, transbank shopify, flow mercado pago chile', published: false },
+      { title: 'Shopify vs Jumpseller o WooCommerce: Comparativa real para el mercado chileno', keywords: 'shopify vs jumpseller chile, shopify vs woocommerce, mejor plataforma ecommerce' },
+      { title: 'Cómo organizar los envíos de tu tienda online: Starken, Chilexpress y Shipit en Shopify', keywords: 'envios shopify chile, logistica ecommerce chile, starken chilexpress shopify', published: true },
+      { title: 'Diseño de tiendas online: 7 elementos indispensables para inspirar confianza y vender más', keywords: 'diseño ecommerce exitoso, confianza tienda online, optimizar checkout' }
     ]
   },
   {
-    id: 'desarrollo-web',
-    label: 'Ingeniería & Backend',
+    id: 'sitios-corporativos',
+    label: 'Sitios Web & Diseño',
     color: 'bg-blue-50 border-blue-200 text-blue-700',
     dot: 'bg-blue-500',
-    icon: '⚡',
+    icon: '🏢',
     topics: [
-      { title: 'Seguridad en Next.js: RLS y Middleware con Supabase en 2025', keywords: 'seguridad nextjs chile, supabase rls chile, autenticacion nextjs' },
-      { title: 'Qué es una plataforma SaaS y cómo puede digitalizar tu negocio', keywords: 'saas chile, plataforma saas, software como servicio chile', published: true },
-      { title: 'React Server Actions: Manejo avanzado de estados y validaciones', keywords: 'react server actions chile, nextjs server actions, formularios avanzados' },
-      { title: 'Cómo crear un sistema de cotización online para tu empresa', keywords: 'sistema cotizacion online chile, cotizador web, formulario cotizacion', published: false },
-      { title: 'Arquitectura de Microservicios con Node.js para empresas chilenas', keywords: 'microservicios nodejs chile, arquitectura software chile, backend avanzado' },
-      { title: 'Qué es una API y cómo puede automatizar tu negocio en Chile', keywords: 'integracion api chile, automatizacion negocio web, api rest chile', published: false },
+      { title: 'Cuánto cuesta una página web profesional en Chile (Precios y presupuestos reales)', keywords: 'cuanto cuesta pagina web chile, precio pagina web corporativa, valor sitio web chile', published: false },
+      { title: 'Páginas web corporativas: 5 elementos clave para proyectar una imagen profesional', keywords: 'pagina web corporativa chile, sitio web empresarial, presencia digital profesional', published: true },
+      { title: 'Cómo estructurar el sitio web de tu empresa para captar clientes B2B automáticamente', keywords: 'captacion leads b2b web, sitio web vendedor, embudo ventas digital' },
+      { title: 'Rediseño de páginas web: 6 señales claras de que tu sitio actual te hace perder clientes', keywords: 'rediseno pagina web chile, actualizar sitio web, mejorar conversion web' },
+      { title: 'Dominio .cl: Cómo registrar y proteger el nombre de tu empresa en NIC Chile', keywords: 'dominio cl chile, registrar dominio cl, nic chile registro', published: false },
+      { title: 'Diseño web responsivo: cómo hacer que tu sitio venda en celulares y tablets', keywords: 'diseño web responsivo chile, web movil pyme, optimizar web para celulares', published: true }
     ]
   },
   {
-    id: 'cro-seo',
-    label: 'CRO & Datos',
+    id: 'seo-marketing',
+    label: 'SEO & Crecimiento',
     color: 'bg-violet-50 border-violet-200 text-violet-700',
     dot: 'bg-violet-500',
     icon: '📈',
     topics: [
-      { title: 'Configuración técnica de GA4 para medir el ROI real de tu ecommerce', keywords: 'ga4 ecommerce chile, medicion roi web, google analytics 4 avanzado' },
-      { title: 'Neurodivergencia y Accesibilidad: Cómo no perder 1 de cada 5 usuarios', keywords: 'accesibilidad web chile, neurodivergencia web, inclusividad digital', published: true },
-      { title: 'Psicología del consumo: Cómo optimizar el checkout para evitar rebotes', keywords: 'cro checkout chile, optimizar conversion chile, psicologia ventas online' },
-      { title: 'Implementación de Server-Side Tagging para mejorar el tracking', keywords: 'server side tagging chile, tracking avanzado web, privacidad datos chile' },
-      { title: 'A/B Testing en Next.js: Metodología técnica para validar cambios', keywords: 'ab testing nextjs, optimizacion conversion chile, experimentos web' },
+      { title: 'SEO para pymes en Chile: Cómo aparecer en los primeros lugares de Google sin pagar anuncios', keywords: 'seo pymes chile, posicionar web google chile, optimizar seo local' },
+      { title: 'Estrategia de contenidos digital: Cómo posicionar la marca de tu empresa en internet', keywords: 'estrategia marketing digital chile, contenido seo empresas, marca digital pyme' },
+      { title: 'Google Analytics (GA4) para principiantes: Cómo medir las visitas y ventas de tu web', keywords: 'google analytics 4 chile, medir visitas web, analitica web sencilla' },
+      { title: 'Cómo escribir artículos en el blog de tu empresa para atraer clientes calificados', keywords: 'blog corporativo seo chile, atraer clientes con blog, redaccion seo' }
     ]
   },
   {
-    id: 'diseno-web',
-    label: 'UI/UX Engineering',
-    color: 'bg-pink-50 border-pink-200 text-pink-700',
-    dot: 'bg-pink-500',
-    icon: '🎨',
-    topics: [
-      { title: 'Construcción de un Design System escalable con Tailwind CSS', keywords: 'design system chile, tailwind css avanzado, componentes react' },
-      { title: 'Diseño Web con Adobe XD: de prototipo a sitio real', keywords: 'adobe xd chile, diseño web adobe xd, prototipo web chile', published: true },
-      { title: 'Micro-interacciones con Framer Motion para mejorar el engagement', keywords: 'framer motion chile, animaciones react chile, ux moderno' },
-      { title: 'Diseño web responsivo: cómo hacer que tu sitio se vea bien en móviles', keywords: 'diseño web responsivo chile, mobile first chile, sitio web movil', published: true },
-      { title: 'Tendencias de diseño web para empresas chilenas en 2025', keywords: 'tendencias diseño web 2025, diseño web moderno chile, web design trends', published: true },
-    ]
-  },
-  {
-    id: 'paginas-web',
-    label: 'Negocio Web',
+    id: 'automatizacion-ventas',
+    label: 'Automatización & Negocios',
     color: 'bg-amber-50 border-amber-200 text-amber-700',
     dot: 'bg-amber-500',
-    icon: '🌐',
+    icon: '⚡',
     topics: [
-      { title: 'Cuánto cuesta una página web en Chile en 2025 (precios reales)', keywords: 'cuanto cuesta pagina web chile, precio pagina web, valor sitio web chile', published: false },
-      { title: 'Estrategia de contenidos SEO para sectores B2B altamente técnicos', keywords: 'seo b2b chile, estrategia contenido tecnico, marketing industrial chile' },
-      { title: 'Dominio .cl: cómo registrarlo y para qué sirve', keywords: 'dominio cl chile, registrar dominio cl, nic chile dominio', published: false },
-      { title: 'Cómo Crear un Sitio Web para Inmobiliaria que Venda Efectivamente', keywords: 'crear sitio web inmobiliaria chile, web inmobiliaria, venta casas web', published: true },
-      { title: 'Academia en Línea con WordPress y Tutor LMS Pro: Guía Completa', keywords: 'academia online chile, tutor lms pro chile, cursos online wordpress', published: true },
+      { title: 'Cómo automatizar las cotizaciones y consultas de clientes desde tu página web', keywords: 'automatizacion cotizaciones web, cotizador online chile, optimizar consultas clientes', published: false },
+      { title: 'Boleta electrónica y ERP: Cómo conectar la contabilidad de tu negocio a tu tienda online', keywords: 'boleta electronica shopify chile, conectar erp ecommerce, facturacion automatica shopify' },
+      { title: 'Sistemas de reservas y agendas online: Cómo optimizar la atención a tus clientes', keywords: 'agenda online chile, sistema reservas web, optimizar tiempo equipo', published: true },
+      { title: 'Por qué tu empresa necesita un catálogo digital interactivo en lugar de un PDF estático', keywords: 'catalogo digital chile, catalogo interactivo web, mostrar productos online' }
     ]
-  },
+  }
 ];
 
 export default function AdminBlogPage() {
