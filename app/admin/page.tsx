@@ -25,13 +25,13 @@ export default async function AdminDashboard() {
   }
   const adminModules = [
     {
-      title: "Generador de Blog",
-      desc: "Planifica y genera artículos SEO con IA para posicionar en Google.",
-      icon: <Sparkles className="w-8 h-8 text-violet-600" />,
-      href: "/admin-blog",
-      count: "8 Categorías",
+      title: "Artículos del Blog",
+      desc: "Administra, edita y elimina artículos publicados, o genera nuevos contenidos optimizados con IA.",
+      icon: <BookOpen className="w-8 h-8 text-violet-600" />,
+      href: "/admin/blog",
+      count: "Gestión & IA",
       color: "bg-violet-50 border-violet-100",
-      cta: "Ir al Blog"
+      cta: "Administrar Blog"
     },
     {
       title: "Testimonios",
