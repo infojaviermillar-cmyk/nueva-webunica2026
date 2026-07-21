@@ -104,3 +104,51 @@ export async function deleteBlogPost(id: string) {
   revalidatePath('/admin/blog');
   return { success: true };
 }
+
+export async function uploadCoverImage(formData: FormData) {
+  const file = formData.get('file') as File | null;
+  const slug = formData.get('slug') as string | null;
+
+  if (!file || !slug) {
+    return { success: false, error: 'Faltan archivo o slug.' };
+  }
+
+  // Validar tipo de archivo
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+  if (!allowedTypes.includes(file.type)) {
+    return { success: false, error: 'Solo se permiten imágenes JPG, PNG, WEBP o GIF.' };
+  }
+
+  // Validar tamaño (máx 5MB)
+  if (file.size > 5 * 1024 * 1024) {
+    return { success: false, error: 'La imagen no puede superar los 5 MB.' };
+  }
+
+  try {
+    const adminClient = getSupabaseAdmin();
+    const ext = file.type.split('/')[1].replace('jpeg', 'jpg');
+    const fileName = `${slug.substring(0, 40)}-cover-${Date.now()}.${ext}`;
+    const arrayBuffer = await file.arrayBuffer();
+
+    const { error: uploadError } = await adminClient.storage
+      .from('blog')
+      .upload(fileName, Buffer.from(arrayBuffer), { contentType: file.type, upsert: true });
+
+    if (uploadError) {
+      if (uploadError.message.toLowerCase().includes('not found')) {
+        await adminClient.storage.createBucket('blog', { public: true });
+        await adminClient.storage
+          .from('blog')
+          .upload(fileName, Buffer.from(arrayBuffer), { contentType: file.type, upsert: true });
+      } else {
+        throw uploadError;
+      }
+    }
+
+    const { data: pubData } = adminClient.storage.from('blog').getPublicUrl(fileName);
+    return { success: true, url: pubData.publicUrl };
+  } catch (err: any) {
+    console.error('[uploadCoverImage] Error:', err);
+    return { success: false, error: err.message || 'Error al subir la imagen.' };
+  }
+}
