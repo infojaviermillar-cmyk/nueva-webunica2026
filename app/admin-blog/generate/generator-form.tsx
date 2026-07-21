@@ -145,24 +145,34 @@ export function GeneratorForm() {
   };
 
   const handleSave = async () => {
-    if (!generatedPost) return;
+    if (!generatedPost) {
+      alert('Error: No hay artículo generado/cargado en el estado.');
+      return;
+    }
     setIsSaving(true);
     setError('');
 
     try {
-      const response = await saveBlogPost({ 
+      const payload = { 
         ...generatedPost, 
         id: isEditMode ? generatedPost.id : undefined,
-        category_id: categoryId 
-      });
+        category_id: categoryId || null
+      };
+      
+      const response = await saveBlogPost(payload);
+      
       if (response && response.success) {
         setSaved(true);
         setTimeout(() => router.push(`/blog/${response.post.slug}`), 1500);
       } else {
-        setError(response?.error || 'Error desconocido al guardar en la base de datos.');
+        const msg = response?.error || 'Error desconocido al guardar.';
+        setError(msg);
+        alert('Error al guardar: ' + msg);
       }
     } catch (err: any) {
-      setError(err.message || 'Error de conexión. Verifica las variables de entorno de Supabase.');
+      const msg = err.message || 'Error de conexión. Verifica las variables de entorno de Supabase.';
+      setError(msg);
+      alert('Excepción capturada al guardar: ' + msg);
     } finally {
       setIsSaving(false);
     }
