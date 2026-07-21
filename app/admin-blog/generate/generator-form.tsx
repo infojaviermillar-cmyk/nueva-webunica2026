@@ -3,10 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { 
   Sparkles, Save, Loader2, Wand2, Search, ArrowLeft, CheckCircle2,
-  ImageIcon, Upload, RefreshCw, Pencil, Check, X, Eye, EyeOff
+  ImageIcon, Upload, RefreshCw, Pencil, Check, X
 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { saveBlogPost, uploadCoverImage } from '@/lib/blog-actions';
+import { saveBlogPost, uploadCoverImage, getBlogPostBySlug } from '@/lib/blog-actions';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -26,7 +26,14 @@ export function GeneratorForm() {
   const [error, setError] = useState('');
   const [saved, setSaved] = useState(false);
 
-  // Edición inline
+  // Modo edición
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isLoadingPost, setIsLoadingPost] = useState(false);
+
+  // Opción para generar portada con IA
+  const [generateImageWithAI, setGenerateImageWithAI] = useState(false);
+
+  // Edición inline del post
   const [editingTitle, setEditingTitle] = useState(false);
   const [editingExcerpt, setEditingExcerpt] = useState(false);
   const [editingContent, setEditingContent] = useState(false);
@@ -37,6 +44,7 @@ export function GeneratorForm() {
   const [isRegeneratingImage, setIsRegeneratingImage] = useState(false);
   const [imageError, setImageError] = useState('');
 
+  // Cargar categorías al montar
   useEffect(() => {
     import('@/lib/blog-actions').then(m => {
       m.getCategoriesAction().then(cats => {
@@ -46,16 +54,43 @@ export function GeneratorForm() {
     });
   }, []);
 
+  // Cargar post para edición si vienen los parámetros edit y slug en la URL
   useEffect(() => {
-    const topicParam = searchParams.get('topic');
-    const keywordsParam = searchParams.get('keywords');
-    if (topicParam) setTopic(topicParam);
-    if (keywordsParam) setKeywords(keywordsParam);
+    const editParam = searchParams.get('edit');
+    const slugParam = searchParams.get('slug');
+    if (editParam === 'true' && slugParam) {
+      setIsEditMode(true);
+      setIsLoadingPost(true);
+      getBlogPostBySlug(slugParam).then(result => {
+        if (result.success && result.post) {
+          const post = result.post;
+          setTopic(post.title);
+          setKeywords(post.keywords ? post.keywords.join(', ') : '');
+          setCategoryId(post.category_id || '');
+          setGeneratedPost(post);
+          setRawHtml(post.content || '');
+        } else {
+          setError(result.error || 'No se pudo cargar el artículo para editar.');
+        }
+        setIsLoadingPost(false);
+      }).catch(err => {
+        setError(err.message || 'Error de red al obtener el post.');
+        setIsLoadingPost(false);
+      });
+    } else {
+      // Pre-rellenar parámetros de tema nuevo si vienen
+      const topicParam = searchParams.get('topic');
+      const keywordsParam = searchParams.get('keywords');
+      if (topicParam) setTopic(topicParam);
+      if (keywordsParam) setKeywords(keywordsParam);
+    }
   }, [searchParams]);
 
+  // Auto-generación inicial si viene de la lista de temas y no es modo edición
   useEffect(() => {
     const topicParam = searchParams.get('topic');
-    if (topicParam && !generatedPost) {
+    const editParam = searchParams.get('edit');
+    if (topicParam && !generatedPost && editParam !== 'true') {
       const timer = setTimeout(() => {
         handleGenerate(topicParam, searchParams.get('keywords') || '');
       }, 600);
@@ -84,7 +119,8 @@ export function GeneratorForm() {
           topic: useTopic,
           keywords: useKeywords.split(',').map((kw: string) => kw.trim()).filter(Boolean),
           sources: sources,
-          mode: searchParams.get('mode') || 'basic'
+          mode: searchParams.get('mode') || 'basic',
+          skipImage: !generateImageWithAI
         }),
       });
 
@@ -109,7 +145,11 @@ export function GeneratorForm() {
     setError('');
 
     try {
-      const response = await saveBlogPost({ ...generatedPost, category_id: categoryId });
+      const response = await saveBlogPost({ 
+        ...generatedPost, 
+        id: isEditMode ? generatedPost.id : undefined,
+        category_id: categoryId 
+      });
       if (response && response.success) {
         setSaved(true);
         setTimeout(() => router.push(`/blog/${response.post.slug}`), 1500);
@@ -123,7 +163,7 @@ export function GeneratorForm() {
     }
   };
 
-  // ── Edición de imagen ──────────────────────────────────────────────
+  // Subir imagen
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !generatedPost) return;
@@ -150,6 +190,7 @@ export function GeneratorForm() {
     }
   };
 
+  // Generar imagen con DALL-E 3
   const handleRegenerateImage = async () => {
     if (!generatedPost) return;
     setIsRegeneratingImage(true);
@@ -175,11 +216,19 @@ export function GeneratorForm() {
     }
   };
 
-  // ── Helpers de edición inline ──────────────────────────────────────
   const commitContent = () => {
     setGeneratedPost((prev: any) => ({ ...prev, content: rawHtml }));
     setEditingContent(false);
   };
+
+  if (isLoadingPost) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center py-20">
+        <Loader2 className="w-10 h-10 text-violet-600 animate-spin mb-4" />
+        <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Cargando artículo...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 pt-28 pb-20">
@@ -187,9 +236,9 @@ export function GeneratorForm() {
 
         {/* Top Nav */}
         <div className="flex items-center justify-between mb-10">
-          <Link href="/admin-blog" className="inline-flex items-center gap-2 text-slate-500 hover:text-violet-600 font-bold text-sm transition-colors group">
+          <Link href="/admin/blog" className="inline-flex items-center gap-2 text-slate-500 hover:text-violet-600 font-bold text-sm transition-colors group">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Volver a temas
+            Volver a la lista de posts
           </Link>
           {generatedPost && !saved && (
             <button
@@ -198,13 +247,13 @@ export function GeneratorForm() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-black rounded-xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 disabled:opacity-70"
             >
               {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-              Publicar Ahora
+              {isEditMode ? 'Guardar Cambios' : 'Publicar Ahora'}
             </button>
           )}
           {saved && (
             <div className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-black rounded-xl">
               <CheckCircle2 className="w-4 h-4" />
-              ¡Publicado! Redirigiendo...
+              {isEditMode ? '¡Cambios Guardados! Redirigiendo...' : '¡Publicado! Redirigiendo...'}
             </div>
           )}
         </div>
@@ -219,14 +268,18 @@ export function GeneratorForm() {
                   <Sparkles className="w-5 h-5 text-violet-600" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-black text-slate-900">Generador de Post</h1>
-                  <p className="text-xs text-slate-400 font-medium">Powered by GPT-4o + DALL-E 3</p>
+                  <h1 className="text-lg font-black text-slate-900">
+                    {isEditMode ? 'Editar Artículo' : 'Generador de Post'}
+                  </h1>
+                  <p className="text-xs text-slate-400 font-medium">
+                    {isEditMode ? 'Edita directamente el contenido' : 'Powered by GPT-4o + DALL-E 3'}
+                  </p>
                 </div>
               </div>
 
               <div className="space-y-5">
                 <div>
-                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Tema del Artículo</label>
+                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Tema / Título del Artículo</label>
                   <textarea
                     value={topic}
                     onChange={(e) => setTopic(e.target.value)}
@@ -236,28 +289,32 @@ export function GeneratorForm() {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Keywords SEO (separadas por coma)</label>
-                  <textarea
-                    value={keywords}
-                    onChange={(e) => setKeywords(e.target.value)}
-                    placeholder="webpay shopify, shopify chile, pago shopify"
-                    rows={2}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 transition-all font-medium text-sm resize-none"
-                  />
-                  <p className="mt-1 text-[10px] text-slate-400 font-medium italic">* La IA autogenerará keywords si se dejan en blanco o para mejorarlas.</p>
-                </div>
+                {!isEditMode && (
+                  <>
+                    <div>
+                      <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Keywords SEO (separadas por coma)</label>
+                      <textarea
+                        value={keywords}
+                        onChange={(e) => setKeywords(e.target.value)}
+                        placeholder="webpay shopify, shopify chile, pago shopify"
+                        rows={2}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 transition-all font-medium text-sm resize-none"
+                      />
+                      <p className="mt-1 text-[10px] text-slate-400 font-medium italic">* La IA autogenerará keywords si se dejan en blanco o para mejorarlas.</p>
+                    </div>
 
-                <div>
-                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Fuentes de Consulta (URLs o Texto)</label>
-                  <textarea
-                    value={sources}
-                    onChange={(e) => setSources(e.target.value)}
-                    placeholder="Pega links o información relevante aquí para que la IA la use de referencia..."
-                    rows={4}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 transition-all font-medium text-sm resize-none"
-                  />
-                </div>
+                    <div>
+                      <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Fuentes de Consulta (URLs o Texto)</label>
+                      <textarea
+                        value={sources}
+                        onChange={(e) => setSources(e.target.value)}
+                        placeholder="Pega links o información relevante aquí para que la IA la use de referencia..."
+                        rows={4}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 transition-all font-medium text-sm resize-none"
+                      />
+                    </div>
+                  </>
+                )}
 
                 <div>
                   <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Categoría del Blog</label>
@@ -276,23 +333,58 @@ export function GeneratorForm() {
                   </select>
                 </div>
 
-                <button
-                  onClick={() => handleGenerate()}
-                  disabled={isGenerating || !topic}
-                  className="w-full bg-violet-600 text-white font-black rounded-2xl py-4 flex items-center justify-center gap-3 hover:bg-violet-700 transition-all shadow-lg shadow-violet-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isGenerating ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Generando con IA…
-                    </>
-                  ) : (
-                    <>
-                      <Wand2 className="w-5 h-5" />
-                      {generatedPost ? 'Regenerar Artículo' : 'Generar Artículo'}
-                    </>
-                  )}
-                </button>
+                {!isEditMode && (
+                  <div className="flex items-center gap-3 py-1.5 px-1 bg-slate-50 border border-slate-100 rounded-2xl">
+                    <input
+                      type="checkbox"
+                      id="generateImageWithAI"
+                      checked={generateImageWithAI}
+                      onChange={(e) => setGenerateImageWithAI(e.target.checked)}
+                      className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500 cursor-pointer ml-3"
+                    />
+                    <label htmlFor="generateImageWithAI" className="text-xs font-black text-slate-700 cursor-pointer select-none py-2 pr-3">
+                      Generar portada con IA (DALL-E 3)
+                    </label>
+                  </div>
+                )}
+
+                {!isEditMode ? (
+                  <button
+                    onClick={() => handleGenerate()}
+                    disabled={isGenerating || !topic}
+                    className="w-full bg-violet-600 text-white font-black rounded-2xl py-4 flex items-center justify-center gap-3 hover:bg-violet-700 transition-all shadow-lg shadow-violet-600/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isGenerating ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Generando con IA…
+                      </>
+                    ) : (
+                      <>
+                        <Wand2 className="w-5 h-5" />
+                        {generatedPost ? 'Regenerar Artículo' : 'Generar Artículo'}
+                      </>
+                    )}
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleSave}
+                    disabled={isSaving}
+                    className="w-full bg-emerald-600 text-white font-black rounded-2xl py-4 flex items-center justify-center gap-3 hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 disabled:opacity-50"
+                  >
+                    {isSaving ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Guardando cambios…
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-5 h-5" />
+                        Guardar Cambios
+                      </>
+                    )}
+                  </button>
+                )}
               </div>
             </div>
 
@@ -300,28 +392,26 @@ export function GeneratorForm() {
             {isGenerating && (
               <div className="bg-white rounded-3xl p-6 border border-slate-100 space-y-4">
                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Procesando…</p>
-                {['Escribiendo artículo SEO', 'Generando imagen DALL-E 3', 'Optimizando metadatos'].map((step, i) => (
-                  <div key={i} className="flex items-center gap-3">
+                <div className="flex items-center gap-3">
+                  <Loader2 className="w-4 h-4 text-violet-500 animate-spin" />
+                  <span className="text-sm font-medium text-slate-600">Escribiendo artículo SEO...</span>
+                </div>
+                {generateImageWithAI && (
+                  <div className="flex items-center gap-3">
                     <Loader2 className="w-4 h-4 text-violet-500 animate-spin" />
-                    <span className="text-sm font-medium text-slate-600">{step}</span>
+                    <span className="text-sm font-medium text-slate-600">Generando imagen DALL-E 3...</span>
                   </div>
-                ))}
+                )}
+                <div className="flex items-center gap-3">
+                  <Loader2 className="w-4 h-4 text-violet-500 animate-spin" />
+                  <span className="text-sm font-medium text-slate-600">Optimizando metadatos...</span>
+                </div>
               </div>
             )}
 
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-2xl p-5 text-red-700 text-sm font-bold">
                 ⚠️ {error}
-              </div>
-            )}
-
-            {generatedPost?.cover_image_error && (
-              <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-amber-800 text-xs font-semibold space-y-1.5 shadow-sm">
-                <p className="font-black uppercase tracking-widest text-[10px] text-amber-600">⚠️ Respaldo de Imagen Activo</p>
-                <p className="leading-relaxed">DALL-E 3 falló: {generatedPost.cover_image_error}</p>
-                <p className="text-[10px] text-slate-400 font-medium pt-1">
-                  Puedes subir tu propia imagen o usar el botón "Regenerar con IA".
-                </p>
               </div>
             )}
 
@@ -354,21 +444,21 @@ export function GeneratorForm() {
 
                 {generatedPost.keywords && generatedPost.keywords.length > 0 && (
                   <div className="bg-slate-50 rounded-xl p-3">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Keywords Detectadas</p>
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Keywords</p>
                     <div className="flex flex-wrap gap-1">
-                      {generatedPost.keywords.map((kw: string, i: number) => (
-                        <span key={i} className="text-[10px] bg-white border border-slate-100 px-2 py-0.5 rounded-full text-slate-600 font-bold">
-                          {kw}
-                        </span>
-                      ))}
+                      {Array.isArray(generatedPost.keywords) 
+                        ? generatedPost.keywords.map((kw: string, i: number) => (
+                            <span key={i} className="text-[10px] bg-white border border-slate-100 px-2 py-0.5 rounded-full text-slate-600 font-bold">
+                              {kw}
+                            </span>
+                          ))
+                        : String(generatedPost.keywords).split(',').map((kw: string, i: number) => (
+                            <span key={i} className="text-[10px] bg-white border border-slate-100 px-2 py-0.5 rounded-full text-slate-600 font-bold">
+                              {kw.trim()}
+                            </span>
+                          ))
+                      }
                     </div>
-                  </div>
-                )}
-
-                {generatedPost.cover_image_alt && (
-                  <div className="bg-slate-50 rounded-xl p-3">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Alt Imagen SEO</p>
-                    <p className="text-xs text-slate-600 font-medium">{generatedPost.cover_image_alt}</p>
                   </div>
                 )}
               </div>
@@ -397,7 +487,7 @@ export function GeneratorForm() {
                   )}
 
                   {/* Overlay con acciones de imagen */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 text-center">
                     {/* Subir imagen propia */}
                     <button
                       onClick={() => fileInputRef.current?.click()}
@@ -412,7 +502,7 @@ export function GeneratorForm() {
                       {isUploadingImage ? 'Subiendo…' : 'Subir imagen'}
                     </button>
 
-                    {/* Regenerar con DALL-E */}
+                    {/* Generar/Regenerar con DALL-E */}
                     <button
                       onClick={handleRegenerateImage}
                       disabled={isUploadingImage || isRegeneratingImage}
@@ -423,11 +513,11 @@ export function GeneratorForm() {
                       ) : (
                         <RefreshCw className="w-4 h-4" />
                       )}
-                      {isRegeneratingImage ? 'Generando…' : 'Regenerar con IA'}
+                      {isRegeneratingImage ? 'Generando…' : 'Generar con IA'}
                     </button>
                   </div>
 
-                  {/* Badge DALL-E (si es imagen de IA) */}
+                  {/* Badge */}
                   {!isUploadingImage && !isRegeneratingImage && generatedPost.cover_image && (
                     <div className="absolute bottom-4 left-6">
                       <span className="px-3 py-1 bg-white/90 backdrop-blur text-violet-700 text-xs font-black rounded-full">
@@ -436,7 +526,7 @@ export function GeneratorForm() {
                     </div>
                   )}
 
-                  {/* Spinner central mientras carga imagen */}
+                  {/* Spinner central */}
                   {(isUploadingImage || isRegeneratingImage) && (
                     <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center gap-3">
                       <Loader2 className="w-10 h-10 text-white animate-spin" />
@@ -446,7 +536,7 @@ export function GeneratorForm() {
                     </div>
                   )}
 
-                  {/* Input oculto para subir archivo */}
+                  {/* Input oculto */}
                   <input
                     ref={fileInputRef}
                     type="file"
@@ -456,11 +546,10 @@ export function GeneratorForm() {
                   />
                 </div>
 
-                {/* Hint de hover */}
                 <div className="px-10 py-2 bg-slate-50 border-b border-slate-100 flex items-center gap-2">
                   <ImageIcon className="w-3.5 h-3.5 text-slate-400" />
                   <p className="text-[11px] text-slate-400 font-medium">
-                    Pasa el cursor sobre la imagen para subir la tuya o regenerar con IA
+                    Pasa el cursor sobre la portada para cargar tu imagen o generarla con IA (DALL-E 3)
                   </p>
                 </div>
 
@@ -596,26 +685,16 @@ export function GeneratorForm() {
               </div>
             ) : (
               <div className="h-full min-h-[500px] flex flex-col items-center justify-center text-center bg-white rounded-3xl border border-dashed border-slate-200">
-                {isGenerating ? (
-                  <div className="space-y-4">
-                    <div className="w-16 h-16 bg-violet-100 rounded-2xl flex items-center justify-center mx-auto">
-                      <Loader2 className="w-8 h-8 text-violet-600 animate-spin" />
-                    </div>
-                    <p className="text-lg font-black text-slate-900">La IA está escribiendo…</p>
-                    <p className="text-slate-400 text-sm max-w-xs">GPT-4o está generando el artículo y DALL-E 3 está creando la imagen. Puede tardar 15-20 segundos.</p>
+                <div className="space-y-4">
+                  <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto">
+                    <Search className="w-8 h-8 text-slate-300" />
                   </div>
-                ) : (
-                  <div className="space-y-4">
-                    <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto">
-                      <Search className="w-8 h-8 text-slate-300" />
-                    </div>
-                    <p className="text-lg font-black text-slate-900">Escoge un tema</p>
-                    <p className="text-slate-400 text-sm max-w-xs">Selecciona un tema de la lista o escribe uno personalizado y haz clic en Generar.</p>
-                    <Link href="/admin-blog" className="inline-flex items-center gap-2 text-violet-600 font-bold text-sm hover:underline">
-                      ← Ver lista de temas
-                    </Link>
-                  </div>
-                )}
+                  <p className="text-lg font-black text-slate-900">Escoge un tema o edita uno existente</p>
+                  <p className="text-slate-400 text-sm max-w-xs">Selecciona un tema de la lista, escribe uno personalizado o vuelve al admin para editar.</p>
+                  <Link href="/admin/blog" className="inline-flex items-center gap-2 text-violet-600 font-bold text-sm hover:underline">
+                    ← Ver lista de posts
+                  </Link>
+                </div>
               </div>
             )}
           </div>

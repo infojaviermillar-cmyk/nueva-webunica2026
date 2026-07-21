@@ -11,6 +11,7 @@ export async function getCategoriesAction() {
 }
 
 export async function saveBlogPost(postData: {
+  id?: string;
   title: string;
   slug: string;
   content: string;
@@ -43,6 +44,31 @@ export async function saveBlogPost(postData: {
     published_at: new Date().toISOString(),
   };
 
+  if (postData.id) {
+    // Actualizar post existente
+    const { data, error } = await adminClient
+      .from('webunica_blog_posts')
+      .update(insertData)
+      .eq('id', postData.id)
+      .select()
+      .single();
+
+    if (error) {
+      console.error('[saveBlogPost] Error Supabase al actualizar:', error);
+      return { success: false, error: `Error DB: ${error.message}` };
+    }
+
+    try {
+      revalidatePath('/blog');
+      revalidatePath(`/blog/${data.slug}`);
+      revalidatePath('/admin/blog');
+    } catch (e) {
+      console.warn('Error en revalidatePath', e);
+    }
+
+    return { success: true, post: data };
+  }
+
   // Verificar si el slug ya existe
   const { data: existing, error: existError } = await adminClient
     .from('webunica_blog_posts')
@@ -72,10 +98,23 @@ export async function saveBlogPost(postData: {
   try {
     revalidatePath('/blog');
     revalidatePath(`/blog/${data.slug}`);
+    revalidatePath('/admin/blog');
   } catch (e) {
     console.warn('Error en revalidatePath', e);
   }
 
+  return { success: true, post: data };
+}
+
+export async function getBlogPostBySlug(slug: string) {
+  if (!supabase) return { success: false, error: 'DB no disponible' };
+  const { data, error } = await supabase
+    .from('webunica_blog_posts')
+    .select('*')
+    .eq('slug', slug)
+    .maybeSingle();
+
+  if (error) return { success: false, error: error.message };
   return { success: true, post: data };
 }
 

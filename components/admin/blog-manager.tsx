@@ -127,6 +127,13 @@ export default function BlogManager() {
                       >
                         <ExternalLink className="w-4 h-4" />
                       </Link>
+                      <Link 
+                        href={`/admin-blog/generate?edit=true&slug=${post.slug}`}
+                        className="p-3 text-slate-300 hover:text-violet-600 hover:bg-violet-50 rounded-xl transition-all"
+                        title="Editar artículo"
+                      >
+                        <FileEdit className="w-4 h-4" />
+                      </Link>
                       <button 
                         onClick={() => handleDelete(post.id)}
                         className="p-3 text-slate-300 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all"

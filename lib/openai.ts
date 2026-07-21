@@ -26,7 +26,13 @@ export type GeneratedPost = {
 /**
  * Genera un artículo de blog SEO-optimizado con imagen de portada
  */
-export async function generateBlogPost(topic: string, keywords: string[], sources?: string, mode: 'basic' | 'advanced' = 'basic'): Promise<GeneratedPost & { cover_image: string; cover_image_error?: string }> {
+export async function generateBlogPost(
+  topic: string,
+  keywords: string[],
+  sources?: string,
+  mode: 'basic' | 'advanced' = 'basic',
+  skipImage = false
+): Promise<GeneratedPost & { cover_image: string; cover_image_error?: string }> {
   const isAdvanced = mode === 'advanced';
   
   const prompt = `
@@ -76,57 +82,11 @@ export async function generateBlogPost(topic: string, keywords: string[], source
 
   const postData = JSON.parse(textContent) as GeneratedPost;
 
-  // 2. Generamos la imagen de portada con DALL-E 3
+  // 2. Generamos la imagen de portada con DALL-E 3 (o usamos el placeholder directamente si skipImage es true)
   let cover_image = '';
   let cover_image_error = '';
-  try {
-    const openai = getOpenAI();
-    const imageResponse = await openai.images.generate({
-      model: 'dall-e-3',
-      prompt: postData.cover_image_prompt || 
-        `Modern flat design illustration about "${topic}" for a web development agency in Chile. Purple #8B5CF6 and green #10B981 brand colors, minimalist, professional, no text in image.`,
-      n: 1,
-      size: '1792x1024', // Landscape para imagen de portada de blog
-      quality: 'standard',
-    });
-    
-    const tempUrl = imageResponse.data?.[0]?.url;
-    
-    if (tempUrl) {
-      // DALL-E URLs caducan en 60 mins. Debemos descargarla y guardarla permanentemente.
-      const imgRes = await fetch(tempUrl);
-      const imgBuffer = await imgRes.arrayBuffer();
 
-      const { getSupabaseAdmin } = await import('./supabase/admin');
-      const adminClient = getSupabaseAdmin();
-      
-      const fileName = `${postData.slug.substring(0,40)}-${Date.now()}.png`;
-
-      // Subimos a Supabase Storage (Bucket "blog")
-      const { error } = await adminClient.storage
-        .from('blog')
-        .upload(fileName, Buffer.from(imgBuffer), { contentType: 'image/png', upsert: true });
-
-      if (error) {
-        // Fallback: intentar crear el bucket si no existe
-        if (error.message.toLowerCase().includes('bucket not found') || error.message.toLowerCase().includes('not found')) {
-            await adminClient.storage.createBucket('blog', { public: true });
-            await adminClient.storage.from('blog').upload(fileName, Buffer.from(imgBuffer), { contentType: 'image/png', upsert: true });
-        } else {
-            console.error('[openai] Error subiendo imagen a Supabase Storage:', error);
-            throw error; // Ir al catch
-        }
-      }
-
-      // Obtener URL pública
-      const { data: pubData } = adminClient.storage.from('blog').getPublicUrl(fileName);
-      cover_image = pubData.publicUrl;
-    }
-  } catch (imgError: any) {
-    console.warn('[openai] DALL-E generation or upload failed, using placeholder:', imgError);
-    cover_image_error = imgError?.message || String(imgError);
-    
-    // Fallback: imagen variada de negocios, ecommerce y crecimiento de Unsplash usando hash de la URL (DJB2 para evitar colisiones)
+  const getPlaceholderImage = () => {
     const placeholders = [
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80', // Laptop metrics/growth
       'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80', // Corporate planning/consulting
@@ -149,14 +109,64 @@ export async function generateBlogPost(topic: string, keywords: string[], source
       'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1200&q=80', // Flowcharts dashboard design UI
       'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80'  // Group pointing at screen
     ];
-    
-    // Algoritmo de hash DJB2 para asegurar excelente distribución y evitar colisiones
     const hash = (postData.slug || topic).split('').reduce((acc, char) => {
       return ((acc << 5) + acc) + char.charCodeAt(0);
     }, 5381);
-    
     const index = Math.abs(hash) % placeholders.length;
-    cover_image = placeholders[index];
+    return placeholders[index];
+  };
+
+  if (skipImage) {
+    cover_image = getPlaceholderImage();
+  } else {
+    try {
+      const openai = getOpenAI();
+      const imageResponse = await openai.images.generate({
+        model: 'dall-e-3',
+        prompt: postData.cover_image_prompt || 
+          `Modern flat design illustration about "${topic}" for a web development agency in Chile. Purple #8B5CF6 and green #10B981 brand colors, minimalist, professional, no text in image.`,
+        n: 1,
+        size: '1792x1024', // Landscape para imagen de portada de blog
+        quality: 'standard',
+      });
+      
+      const tempUrl = imageResponse.data?.[0]?.url;
+      
+      if (tempUrl) {
+        // DALL-E URLs caducan en 60 mins. Debemos descargarla y guardarla permanentemente.
+        const imgRes = await fetch(tempUrl);
+        const imgBuffer = await imgRes.arrayBuffer();
+
+        const { getSupabaseAdmin } = await import('./supabase/admin');
+        const adminClient = getSupabaseAdmin();
+        
+        const fileName = `${postData.slug.substring(0,40)}-${Date.now()}.png`;
+
+        // Subimos a Supabase Storage (Bucket "blog")
+        const { error } = await adminClient.storage
+          .from('blog')
+          .upload(fileName, Buffer.from(imgBuffer), { contentType: 'image/png', upsert: true });
+
+        if (error) {
+          // Fallback: intentar crear el bucket si no existe
+          if (error.message.toLowerCase().includes('bucket not found') || error.message.toLowerCase().includes('not found')) {
+              await adminClient.storage.createBucket('blog', { public: true });
+              await adminClient.storage.from('blog').upload(fileName, Buffer.from(imgBuffer), { contentType: 'image/png', upsert: true });
+          } else {
+              console.error('[openai] Error subiendo imagen a Supabase Storage:', error);
+              throw error; // Ir al catch
+          }
+        }
+
+        // Obtener URL pública
+        const { data: pubData } = adminClient.storage.from('blog').getPublicUrl(fileName);
+        cover_image = pubData.publicUrl;
+      }
+    } catch (imgError: any) {
+      console.warn('[openai] DALL-E generation or upload failed, using placeholder:', imgError);
+      cover_image_error = imgError?.message || String(imgError);
+      cover_image = getPlaceholderImage();
+    }
   }
 
   return {
