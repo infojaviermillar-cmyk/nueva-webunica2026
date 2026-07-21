@@ -29,6 +29,8 @@ export function GeneratorForm() {
   // Modo edición
   const [isEditMode, setIsEditMode] = useState(false);
   const [isLoadingPost, setIsLoadingPost] = useState(false);
+  const [originalPostId, setOriginalPostId] = useState<string | null>(null);
+  const [originalPostSlug, setOriginalPostSlug] = useState<string | null>(null);
 
   // Opción para generar portada con IA
   const [generateImageWithAI, setGenerateImageWithAI] = useState(false);
@@ -67,6 +69,8 @@ export function GeneratorForm() {
           setTopic(post.title);
           setKeywords(post.keywords ? post.keywords.join(', ') : '');
           setCategoryId(post.category_id || '');
+          setOriginalPostId(post.id);
+          setOriginalPostSlug(post.slug);
           setGeneratedPost(post);
           setRawHtml(post.content || '');
         } else {
@@ -155,7 +159,8 @@ export function GeneratorForm() {
     try {
       const payload = { 
         ...generatedPost, 
-        id: isEditMode ? generatedPost.id : undefined,
+        id: isEditMode ? originalPostId : undefined,
+        slug: isEditMode ? originalPostSlug : generatedPost?.slug,
         category_id: categoryId || null
       };
       
