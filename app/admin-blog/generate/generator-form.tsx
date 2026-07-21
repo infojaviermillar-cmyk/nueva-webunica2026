@@ -242,6 +242,16 @@ export function GeneratorForm() {
               </div>
             )}
 
+            {generatedPost?.cover_image_error && (
+              <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-amber-800 text-xs font-semibold space-y-1.5 shadow-sm">
+                <p className="font-black uppercase tracking-widest text-[10px] text-amber-600">⚠️ Respaldo de Imagen Activo</p>
+                <p className="leading-relaxed">DALL-E 3 falló: {generatedPost.cover_image_error}</p>
+                <p className="text-[10px] text-slate-400 font-medium pt-1">
+                  Se ha asignado una imagen tecnológica aleatoria para que el blog luzca variado.
+                </p>
+              </div>
+            )}
+
             {/* SEO Meta preview panel */}
             {generatedPost && (
               <div className="bg-white rounded-3xl p-6 border border-slate-100 space-y-4">

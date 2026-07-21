@@ -26,7 +26,7 @@ export type GeneratedPost = {
 /**
  * Genera un artículo de blog SEO-optimizado con imagen de portada
  */
-export async function generateBlogPost(topic: string, keywords: string[], sources?: string, mode: 'basic' | 'advanced' = 'basic'): Promise<GeneratedPost & { cover_image: string }> {
+export async function generateBlogPost(topic: string, keywords: string[], sources?: string, mode: 'basic' | 'advanced' = 'basic'): Promise<GeneratedPost & { cover_image: string; cover_image_error?: string }> {
   const isAdvanced = mode === 'advanced';
   
   const prompt = `
@@ -76,6 +76,7 @@ export async function generateBlogPost(topic: string, keywords: string[], source
 
   // 2. Generamos la imagen de portada con DALL-E 3
   let cover_image = '';
+  let cover_image_error = '';
   try {
     const openai = getOpenAI();
     const imageResponse = await openai.images.generate({
@@ -119,15 +120,26 @@ export async function generateBlogPost(topic: string, keywords: string[], source
       const { data: pubData } = adminClient.storage.from('blog').getPublicUrl(fileName);
       cover_image = pubData.publicUrl;
     }
-  } catch (imgError) {
+  } catch (imgError: any) {
     console.warn('[openai] DALL-E generation or upload failed, using placeholder:', imgError);
-    // Fallback: imagen genérica de Unsplash con query relevante
-    const query = encodeURIComponent(keywords[0] || topic);
-    cover_image = `https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80`;
+    cover_image_error = imgError?.message || String(imgError);
+    
+    // Fallback: imagen variada de tecnología de Unsplash usando hash de la URL
+    const placeholders = [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80', // Laptop metrics
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80', // Code screen
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80', // Workspace Macbook
+      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80', // Abstract digital globe/tech
+      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80', // Laptop mockup
+      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&q=80'  // Binary code matrix
+    ];
+    const index = Math.abs((postData.slug || topic).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)) % placeholders.length;
+    cover_image = placeholders[index];
   }
 
   return {
     ...postData,
     cover_image,
+    cover_image_error: cover_image_error || undefined,
   };
 }
