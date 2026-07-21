@@ -69,6 +69,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/rediseno/refresh',
     '/rediseno/transform',
     '/rediseno/elite',
+    '/recursos/conectar-meta-graph-api-shopify-chile',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
