@@ -126,16 +126,36 @@ export async function generateBlogPost(topic: string, keywords: string[], source
     console.warn('[openai] DALL-E generation or upload failed, using placeholder:', imgError);
     cover_image_error = imgError?.message || String(imgError);
     
-    // Fallback: imagen variada de negocios, ecommerce y crecimiento de Unsplash usando hash de la URL
+    // Fallback: imagen variada de negocios, ecommerce y crecimiento de Unsplash usando hash de la URL (DJB2 para evitar colisiones)
     const placeholders = [
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80', // Laptop metrics/growth
       'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80', // Corporate planning/consulting
       'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80', // Teamwork project kickoff
       'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80', // Ecommerce payments / credit card sales
       'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=1200&q=80', // Elegant retail online shop background
-      'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1200&q=80'  // Business handshake deal
+      'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=1200&q=80', // Business handshake deal
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&q=80', // Digital screen planning
+      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80', // Corporate skyscrapers
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1200&q=80', // Business executive presentation
+      'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80', // Team success startup
+      'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=80', // Workspace notebook and glasses
+      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&q=80', // Charts on table with keyboard
+      'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&q=80', // Corporate training speaker
+      'https://images.unsplash.com/photo-1542744094-3a31f103e35f?w=1200&q=80', // Meeting room graph explanation
+      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=1200&q=80', // Macbook and workspace tools
+      'https://images.unsplash.com/photo-1552581230-c01591d6f29a?w=1200&q=80', // Creative brainstorming notes
+      'https://images.unsplash.com/photo-1513258496099-48168024aec0?w=1200&q=80', // Typing on keyboard
+      'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=1200&q=80', // Grow plant / economy / B2B growth
+      'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1200&q=80', // Flowcharts dashboard design UI
+      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80'  // Group pointing at screen
     ];
-    const index = Math.abs((postData.slug || topic).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)) % placeholders.length;
+    
+    // Algoritmo de hash DJB2 para asegurar excelente distribución y evitar colisiones
+    const hash = (postData.slug || topic).split('').reduce((acc, char) => {
+      return ((acc << 5) + acc) + char.charCodeAt(0);
+    }, 5381);
+    
+    const index = Math.abs(hash) % placeholders.length;
     cover_image = placeholders[index];
   }
 
