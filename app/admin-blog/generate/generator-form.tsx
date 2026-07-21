@@ -126,7 +126,12 @@ export function GeneratorForm() {
 
       const data = await res.json();
       if (data.error) throw new Error(data.error);
-      setGeneratedPost(data);
+      
+      setGeneratedPost((prev: any) => ({
+        ...data,
+        id: isEditMode ? prev?.id : undefined,
+        slug: isEditMode ? prev?.slug : data.slug
+      }));
       setRawHtml(data.content || '');
       
       if (data.keywords && data.keywords.length > 0) {
@@ -289,32 +294,28 @@ export function GeneratorForm() {
                   />
                 </div>
 
-                {!isEditMode && (
-                  <>
-                    <div>
-                      <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Keywords SEO (separadas por coma)</label>
-                      <textarea
-                        value={keywords}
-                        onChange={(e) => setKeywords(e.target.value)}
-                        placeholder="webpay shopify, shopify chile, pago shopify"
-                        rows={2}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 transition-all font-medium text-sm resize-none"
-                      />
-                      <p className="mt-1 text-[10px] text-slate-400 font-medium italic">* La IA autogenerará keywords si se dejan en blanco o para mejorarlas.</p>
-                    </div>
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Keywords SEO (separadas por coma)</label>
+                  <textarea
+                    value={keywords}
+                    onChange={(e) => setKeywords(e.target.value)}
+                    placeholder="webpay shopify, shopify chile, pago shopify"
+                    rows={2}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 transition-all font-medium text-sm resize-none"
+                  />
+                  <p className="mt-1 text-[10px] text-slate-400 font-medium italic">* La IA autogenerará keywords si se dejan en blanco o para mejorarlas.</p>
+                </div>
 
-                    <div>
-                      <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Fuentes de Consulta (URLs o Texto)</label>
-                      <textarea
-                        value={sources}
-                        onChange={(e) => setSources(e.target.value)}
-                        placeholder="Pega links o información relevante aquí para que la IA la use de referencia..."
-                        rows={4}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 transition-all font-medium text-sm resize-none"
-                      />
-                    </div>
-                  </>
-                )}
+                <div>
+                  <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Fuentes de Consulta (URLs o Texto)</label>
+                  <textarea
+                    value={sources}
+                    onChange={(e) => setSources(e.target.value)}
+                    placeholder="Pega links o información relevante aquí para que la IA la use de referencia..."
+                    rows={4}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-300 transition-all font-medium text-sm resize-none"
+                  />
+                </div>
 
                 <div>
                   <label className="block text-xs font-black text-slate-700 uppercase tracking-widest mb-2">Categoría del Blog</label>
@@ -333,20 +334,18 @@ export function GeneratorForm() {
                   </select>
                 </div>
 
-                {!isEditMode && (
-                  <div className="flex items-center gap-3 py-1.5 px-1 bg-slate-50 border border-slate-100 rounded-2xl">
-                    <input
-                      type="checkbox"
-                      id="generateImageWithAI"
-                      checked={generateImageWithAI}
-                      onChange={(e) => setGenerateImageWithAI(e.target.checked)}
-                      className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500 cursor-pointer ml-3"
-                    />
-                    <label htmlFor="generateImageWithAI" className="text-xs font-black text-slate-700 cursor-pointer select-none py-2 pr-3">
-                      Generar portada con IA (DALL-E 3)
-                    </label>
-                  </div>
-                )}
+                <div className="flex items-center gap-3 py-1.5 px-1 bg-slate-50 border border-slate-100 rounded-2xl">
+                  <input
+                    type="checkbox"
+                    id="generateImageWithAI"
+                    checked={generateImageWithAI}
+                    onChange={(e) => setGenerateImageWithAI(e.target.checked)}
+                    className="w-4 h-4 text-violet-600 border-slate-300 rounded focus:ring-violet-500 cursor-pointer ml-3"
+                  />
+                  <label htmlFor="generateImageWithAI" className="text-xs font-black text-slate-700 cursor-pointer select-none py-2 pr-3">
+                    Generar portada con IA (DALL-E 3)
+                  </label>
+                </div>
 
                 {!isEditMode ? (
                   <button
@@ -367,23 +366,43 @@ export function GeneratorForm() {
                     )}
                   </button>
                 ) : (
-                  <button
-                    onClick={handleSave}
-                    disabled={isSaving}
-                    className="w-full bg-emerald-600 text-white font-black rounded-2xl py-4 flex items-center justify-center gap-3 hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 disabled:opacity-50"
-                  >
-                    {isSaving ? (
-                      <>
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                        Guardando cambios…
-                      </>
-                    ) : (
-                      <>
-                        <Save className="w-5 h-5" />
-                        Guardar Cambios
-                      </>
-                    )}
-                  </button>
+                  <div className="space-y-3">
+                    <button
+                      onClick={handleSave}
+                      disabled={isSaving || isGenerating}
+                      className="w-full bg-emerald-600 text-white font-black rounded-2xl py-4 flex items-center justify-center gap-3 hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 disabled:opacity-50"
+                    >
+                      {isSaving ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          Guardando cambios…
+                        </>
+                      ) : (
+                        <>
+                          <Save className="w-5 h-5" />
+                          Guardar Cambios
+                        </>
+                      )}
+                    </button>
+
+                    <button
+                      onClick={() => handleGenerate()}
+                      disabled={isGenerating || isSaving || !topic}
+                      className="w-full bg-violet-50 text-violet-700 border border-violet-200 font-bold rounded-2xl py-3 flex items-center justify-center gap-2 hover:bg-violet-100 transition-all disabled:opacity-50"
+                    >
+                      {isGenerating ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Regenerando texto…
+                        </>
+                      ) : (
+                        <>
+                          <Wand2 className="w-4 h-4" />
+                          Regenerar texto con IA
+                        </>
+                      )}
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
