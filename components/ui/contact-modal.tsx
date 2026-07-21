@@ -39,6 +39,11 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
       });
 
       if (response.success) {
+        if (typeof window !== 'undefined' && (window as any).clarity) {
+          (window as any).clarity("identify", formData.correo);
+          (window as any).clarity("set", "lead_name", formData.nombre);
+          (window as any).clarity("set", "lead_source", city ? `Lead Ciudad: ${city}` : 'Modal Web');
+        }
         setIsSuccess(true);
         setTimeout(() => {
           setIsSuccess(false);

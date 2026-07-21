@@ -35,6 +35,11 @@ export default function LeadResourceModal({ isOpen, onClose, resourceName, resou
         });
       }
 
+      if (typeof window !== 'undefined' && (window as any).clarity) {
+        (window as any).clarity("identify", email);
+        (window as any).clarity("set", "lead_source", `Recurso: ${resourceName}`);
+      }
+
       // 2. Iniciar registro/login vía Magic Link
       // Usamos el callback para procesar el inicio de sesión y luego ir a setup-password
       const redirectUrl = `${window.location.origin}/auth/callback?next=/login/setup-password?next=${resourceSlug}`;

@@ -9,6 +9,8 @@ import DesarrolloShopifyFooter from '@/components/layout/desarrollo-shopify-foot
 import FloatingWhatsApp from '@/components/layout/floating-whatsapp';
 import { ContactModalProvider } from '@/context/contact-modal-context';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
+import Script from 'next/script';
+
 
 const inter = Inter({
   variable: '--font-inter',
@@ -74,6 +76,17 @@ export default async function RootLayout({
     >
       <GoogleTagManager gtmId="GTM-TLZXRQCG" />
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-LXMLKX5Y7G'} />
+      {(process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || 'xpx6ltmpx6') && (
+        <Script id="clarity-tracking" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window,document,"clarity","script","${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || 'xpx6ltmpx6'}");
+          `}
+        </Script>
+      )}
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
         <ContactModalProvider>
           {isDisenoShopify ? <DisenoShopifyHeader /> : <Header domain={domain} />}

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {
   Calendar, Mail, Phone, Calculator, Search, X,
   CheckCircle2, Clock, MessageSquare, XCircle, Send, Loader2, ChevronDown,
-  AlertTriangle, Plus, Star
+  AlertTriangle, Plus, Star, Flame
 } from 'lucide-react';
 
 import { Lead, LeadStatus } from '@/types/lead';
@@ -503,6 +503,20 @@ export default function LeadsTable({ leads: initialLeads }: { leads: Lead[] }) {
                         {/* Acciones */}
                         <td className="p-5 align-top text-right">
                           <div className="flex items-center justify-end gap-2 flex-wrap">
+                            <button
+                              onClick={() => {
+                                const clarityProjectId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || 'xpx6ltmpx6';
+                                if (lead.email) {
+                                  navigator.clipboard.writeText(lead.email);
+                                }
+                                const url = `https://clarity.microsoft.com/projects/view/${clarityProjectId}/recordings?search=${encodeURIComponent(lead.email ?? '')}`;
+                                window.open(url, '_blank');
+                              }}
+                              title="Ver Grabación / Mapa de Calor en Clarity (copia el correo al portapapeles)"
+                              className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-orange-50 text-orange-600 hover:bg-orange-100 transition-colors border border-orange-200"
+                            >
+                              <Flame className="w-3.5 h-3.5" />
+                            </button>
                             <button
                               onClick={() => {
                                 const url = `${window.location.origin}/evaluacion?leadId=${lead.id}&name=${encodeURIComponent(lead.name ?? '')}`;

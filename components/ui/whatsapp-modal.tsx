@@ -65,6 +65,12 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
         console.error('Error saving lead:', result.error);
       }
 
+      if (typeof window !== 'undefined' && (window as any).clarity) {
+        (window as any).clarity("identify", formData.email);
+        (window as any).clarity("set", "lead_name", formData.name);
+        (window as any).clarity("set", "lead_source", 'WhatsApp Funnel');
+      }
+
       // 2. Redirigir a WhatsApp
       const message = `¡Hola Webunica! 👋 Mi nombre es ${formData.name}. Mi teléfono es ${formData.phone}. Estoy interesado en: ${formData.interest}. Mi correo es ${formData.email}. Me gustaría recibir más información y una cotización.`;
       const encodedMessage = encodeURIComponent(message);
