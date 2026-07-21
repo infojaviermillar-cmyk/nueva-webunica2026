@@ -36,7 +36,7 @@ export default function RealEstatePage() {
       answer: "Es 100% tuyo e independiente. Lo instalamos bajo tu propio dominio corporativo. No pagas comisiones por ventas ni mensualidades por subir propiedades. Solo mantienes tu dominio y hosting."
     },
     {
-      question: "¿Cómo funciona la publicación automática en Facebook e Instagram?",
+      question: "@Como funciona la publicación automática en Facebook e Instagram?",
       answer: "El panel de administración se conecta con Meta Graph API. Cuando ingresas una propiedad en tu sitio, con un solo clic se publica de forma automática en la FanPage de Facebook y en el Instagram comercial de tu corredora, ahorrando horas de trabajo."
     },
     {
@@ -53,129 +53,101 @@ export default function RealEstatePage() {
     }
   ];
 
-  const plans = [
-    {
-      name: "Inmo BASE (WordPress)",
-      price: "$580.000",
-      original: "$650.000",
-      highlight: "Ideal para iniciar",
-      desc: "Plataforma robusta autogestionable con todas las herramientas para mostrar tu catálogo de propiedades.",
-      features: [
-        "Desarrollo en WordPress",
-        "Plugin Inmobiliario Premium",
-        "Filtros de búsqueda estándar",
-        "Carga ilimitada de propiedades",
-        "Galería de fotos y videos",
-        "Formulario de contacto básico",
-        "Botón de WhatsApp directo",
-        "SEO local configurado",
-        "Soporte técnico por 3 meses"
-      ]
-    },
-    {
-      name: "Inmo CRM PRO (Next.js & Supabase)",
-      price: "$1.200.000",
-      original: "$1.500.000",
-      highlight: "Plataforma Independiente & CRM Pro",
-      desc: "Portal premium a medida de marca blanca total sin mensualidades. Next.js 14, Supabase, Meta API y CRM completo.",
-      features: [
-        "Todo lo de Inmo BASE +",
-        "CRM Ligero de Leads integrado (/admin/leads)",
-        "Marca Blanca 100% (Colores, logos, dominio)",
-        "Conector Meta Graph API (Publicación en 1 click)",
-        "Buscador dinámico avanzado (UF & CLP)",
-        "Calculadora Cap Rate para Inversionistas",
-        "Mapa interactivo (OpenStreetMap / Leaflet)",
-        "Embudo de captación 'Vender mi Propiedad'",
-        "Módulo de Simulación de Créditos",
-        "Roles de Usuario (Admin General y Agentes)",
-        "Notificaciones instantáneas vía Resend API",
-        "Garantía y Soporte Prioritario por 6 meses"
-      ],
-      recommended: true
-    }
+  const planFeatures = [
+    "Carga ilimitada de propiedades (sin límites)",
+    "CRM Ligero de Leads integrado (/admin/leads)",
+    "Marca Blanca 100% (Nombre, colores, logo y dominio)",
+    "Conector Meta Graph API (Publicación en 1 click a FB/IG)",
+    "Buscador dinámico en UF & Pesos CLP en tiempo real",
+    "Calculadora de Rentabilidad Cap Rate para Inversores",
+    "Mapshowcase interactivo (Leaflet / OpenStreetMap)",
+    "Embudo de captación 'Vender mi Propiedad'",
+    "Módulo de simulación de Créditos Hipotecarios",
+    "WhatsApp Directo & Flotante con mensaje estructurado",
+    "Gestión de Roles (Admin General y Agentes)",
+    "Envío de correos automáticos con API de Resend",
+    "Soporte prioritario y garantía 6 meses"
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-sans antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans antialiased overflow-x-hidden">
       <div className="pt-[22vh] lg:pt-48 pb-20">
         
         {/* Hero Section */}
         <section className="relative px-6 py-20 lg:py-36 overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/10 blur-[150px] rounded-full -z-10" />
-          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-600/5 blur-[120px] rounded-full -z-10" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/5 blur-[150px] rounded-full -z-10" />
           
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-white/5 border border-white/10 rounded-full">
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-blue-50 border border-blue-100 rounded-full">
                 <span className="flex h-2 w-2 relative">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
                 </span>
-                <span className="text-[10px] font-black tracking-[0.2em] text-blue-400 uppercase">Propuesta de Valor Comercial</span>
+                <span className="text-[10px] font-black tracking-[0.2em] text-blue-600 uppercase">Propuesta de Valor Comercial</span>
               </div>
               
-              <h1 className="text-5xl lg:text-[80px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-white">
+              <h1 className="text-5xl lg:text-[80px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-slate-900">
                 PORTAL INMOBILIARIO <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
                   & CRM PRO
                 </span>
               </h1>
               
-              <p className="text-lg text-zinc-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+              <p className="text-lg text-slate-600 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
                 Una plataforma 100% independiente, moderna y personalizable que reemplaza el pago de mensualidades a portales de terceros, otorgándole a tu corredora su propia marca blanca con herramientas avanzadas para captación en Chile.
               </p>
 
               {/* Pitch tags */}
               <div className="grid grid-cols-2 gap-4 max-w-md mx-auto lg:mx-0 mb-10 text-left">
-                <div className="flex items-center gap-2 text-zinc-300">
+                <div className="flex items-center gap-2 text-slate-700">
                   <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
                   <span className="text-xs font-bold uppercase tracking-wider">Marca Blanca Total</span>
                 </div>
-                <div className="flex items-center gap-2 text-zinc-300">
+                <div className="flex items-center gap-2 text-slate-700">
                   <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
                   <span className="text-xs font-bold uppercase tracking-wider">Meta API Autoposting</span>
                 </div>
-                <div className="flex items-center gap-2 text-zinc-300">
+                <div className="flex items-center gap-2 text-slate-700">
                   <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
                   <span className="text-xs font-bold uppercase tracking-wider">Manejo UF / CLP</span>
                 </div>
-                <div className="flex items-center gap-2 text-zinc-300">
+                <div className="flex items-center gap-2 text-slate-700">
                   <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
                   <span className="text-xs font-bold uppercase tracking-wider">Sin Comisiones</span>
                 </div>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-                 <LeadButton className="px-12 py-5 bg-white text-black font-black rounded-full hover:bg-zinc-200 transition-all shadow-xl shadow-white/5 uppercase tracking-widest text-xs">
+                 <LeadButton className="px-12 py-5 bg-blue-600 text-white font-black rounded-full hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/10 uppercase tracking-widest text-xs">
                     Cotizar mi Plataforma
                  </LeadButton>
-                 <Link href="/portafolio" className="px-12 py-5 border border-white/20 text-white font-black rounded-full hover:bg-white/5 transition-all uppercase tracking-widest text-xs text-center">
+                 <Link href="/portafolio" className="px-12 py-5 border border-slate-200 text-slate-700 font-black rounded-full hover:bg-slate-100 transition-all uppercase tracking-widest text-xs text-center">
                     Ver Proyectos
                  </Link>
               </div>
             </div>
             
             <div className="relative group hidden lg:block">
-               <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600/20 to-indigo-600/20 rounded-[4rem] blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
-               <div className="relative bg-zinc-900 border border-white/10 rounded-[4rem] p-4 overflow-hidden shadow-2xl">
+               <div className="absolute -inset-4 bg-gradient-to-tr from-blue-600/10 to-indigo-600/10 rounded-[4rem] blur-2xl opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+               <div className="relative bg-white border border-slate-100 rounded-[4rem] p-4 overflow-hidden shadow-2xl">
                   <Image 
                     src="/real_estate_hero_new.png"
                     alt="CRM Inmobiliario de Marca Blanca Next.js"
                     width={800}
                     height={800}
-                    className="w-full h-auto rounded-[3.5rem] grayscale group-hover:grayscale-0 transition-all duration-700"
+                    className="w-full h-auto rounded-[3.5rem] group-hover:scale-[1.01] transition-all duration-700"
                   />
-                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-black/85 backdrop-blur-md px-8 py-4 rounded-2xl border border-white/10 w-max">
+                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-8 py-4 rounded-2xl border border-slate-200 w-max shadow-lg">
                      <div className="flex items-center gap-6">
                         <div className="text-center">
-                           <div className="text-2xl font-black text-white">0%</div>
-                           <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Comisiones</div>
+                           <div className="text-2xl font-black text-slate-900">0%</div>
+                           <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Comisiones</div>
                         </div>
-                        <div className="w-px h-10 bg-white/10" />
+                        <div className="w-px h-10 bg-slate-200" />
                         <div className="text-center">
-                           <div className="text-2xl font-black text-blue-500">100%</div>
-                           <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Marca Propia</div>
+                           <div className="text-2xl font-black text-blue-600">100%</div>
+                           <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Marca Propia</div>
                         </div>
                      </div>
                   </div>
@@ -185,14 +157,14 @@ export default function RealEstatePage() {
         </section>
 
         {/* Value Proposition Highlights */}
-        <section className="py-24 bg-white text-zinc-950 rounded-[4rem] mx-4 relative overflow-hidden">
+        <section className="py-24 bg-white text-slate-900 border-y border-slate-100 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-20">
               <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-3 block">Ventajas Clave del Pitch</span>
-              <h2 className="text-4xl lg:text-7xl font-black tracking-tighter uppercase mb-6">
+              <h2 className="text-4xl lg:text-7xl font-black tracking-tighter uppercase mb-6 text-slate-900">
                 EL CONTROL VOLVIÓ <br/>A LA <span className="text-blue-600">CORREDORA</span>
               </h2>
-              <p className="text-lg text-zinc-500 font-light max-w-2xl mx-auto">
+              <p className="text-lg text-slate-500 font-light max-w-2xl mx-auto">
                 No envíes tus clientes a portales de terceros donde ven a tu competencia. Fidelízalos en tu propio ecosistema independiente y automatizado.
               </p>
             </div>
@@ -220,13 +192,13 @@ export default function RealEstatePage() {
                   icon: <Smartphone className="w-8 h-8" /> 
                 }
               ].map((item, i) => (
-                <div key={i} className="p-8 bg-zinc-50 rounded-[2.5rem] border border-zinc-100 hover:shadow-xl transition-all flex flex-col justify-between">
+                <div key={i} className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:shadow-xl hover:bg-white transition-all flex flex-col justify-between">
                   <div>
-                    <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm mb-6 border border-zinc-100">
+                    <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm mb-6 border border-slate-100">
                       {item.icon}
                     </div>
-                    <h3 className="text-lg font-black mb-3 uppercase tracking-tight text-zinc-900">{item.title}</h3>
-                    <p className="text-xs text-zinc-500 leading-relaxed font-light">{item.desc}</p>
+                    <h3 className="text-lg font-black mb-3 uppercase tracking-tight text-slate-900">{item.title}</h3>
+                    <p className="text-xs text-slate-500 leading-relaxed font-light">{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -237,25 +209,23 @@ export default function RealEstatePage() {
         {/* System Details & Modules Section */}
         <section className="py-32 max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
-            <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 mb-4 block">Ficha Técnica del Sistema</span>
-            <h2 className="text-4xl lg:text-7xl font-black mb-6 uppercase tracking-tighter">
-              Componentes del <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Sistema Pro</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-4 block">Ficha Técnica del Sistema</span>
+            <h2 className="text-4xl lg:text-7xl font-black mb-6 uppercase tracking-tighter text-slate-900">
+              Componentes del <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Sistema Pro</span>
             </h2>
-            <p className="text-lg text-zinc-400 font-light max-w-2xl mx-auto">
-              Una suite integral dividida en tres capas tecnológicas robustas para la máxima conversión y gestión.
+            <p className="text-lg text-slate-500 font-light max-w-2xl mx-auto">
+              Una suite de tres capas tecnológicas robustas diseñada para optimizar tu conversión comercial.
             </p>
           </div>
 
-          <div className="space-y-20">
+          <div className="space-y-16">
             {/* Layer 1: Portal Web Público */}
-            <div className="bg-zinc-900/50 border border-white/5 rounded-[3.5rem] p-10 lg:p-14 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-[100px] rounded-full" />
-              
+            <div className="bg-white border border-slate-200/60 rounded-[3.5rem] p-10 lg:p-14 shadow-sm relative overflow-hidden">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 bg-blue-900/30 rounded-xl flex items-center justify-center text-blue-400">
+                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
                   <Globe className="w-5 h-5" />
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-black uppercase tracking-tight">1. Portal Web Público (Cliente Final)</h3>
+                <h3 className="text-2xl lg:text-3xl font-black uppercase tracking-tight text-slate-900">1. Portal Web Público (Cliente Final)</h3>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -285,23 +255,21 @@ export default function RealEstatePage() {
                     d: "Guía informativa de simulación de créditos hipotecarios en instituciones financieras de Chile."
                   }
                 ].map((mod, idx) => (
-                  <div key={idx} className="bg-zinc-950 p-6 rounded-2xl border border-white/5 hover:border-blue-500/20 transition-colors">
-                    <h4 className="text-sm font-black uppercase tracking-tight text-white mb-2">{mod.t}</h4>
-                    <p className="text-xs text-zinc-400 font-light leading-relaxed">{mod.d}</p>
+                  <div key={idx} className="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:border-blue-500/20 hover:bg-white transition-colors">
+                    <h4 className="text-sm font-black uppercase tracking-tight text-slate-900 mb-2">{mod.t}</h4>
+                    <p className="text-xs text-slate-500 font-light leading-relaxed">{mod.d}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Layer 2: Panel de Admin */}
-            <div className="bg-zinc-900/50 border border-white/5 rounded-[3.5rem] p-10 lg:p-14 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 blur-[100px] rounded-full" />
-              
+            <div className="bg-white border border-slate-200/60 rounded-[3.5rem] p-10 lg:p-14 shadow-sm relative overflow-hidden">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 bg-indigo-900/30 rounded-xl flex items-center justify-center text-indigo-400">
+                <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600">
                   <Settings className="w-5 h-5" />
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-black uppercase tracking-tight">2. Panel de Administración Interno</h3>
+                <h3 className="text-2xl lg:text-3xl font-black uppercase tracking-tight text-slate-900">2. Panel de Administración Interno</h3>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -331,23 +299,21 @@ export default function RealEstatePage() {
                     d: "Permite asignar permisos diferenciados entre Administrador General (acceso total) y Agentes Inmobiliarios."
                   }
                 ].map((mod, idx) => (
-                  <div key={idx} className="bg-zinc-950 p-6 rounded-2xl border border-white/5 hover:border-indigo-500/20 transition-colors">
-                    <h4 className="text-sm font-black uppercase tracking-tight text-white mb-2">{mod.t}</h4>
-                    <p className="text-xs text-zinc-400 font-light leading-relaxed">{mod.d}</p>
+                  <div key={idx} className="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:border-indigo-500/20 hover:bg-white transition-colors">
+                    <h4 className="text-sm font-black uppercase tracking-tight text-slate-900 mb-2">{mod.t}</h4>
+                    <p className="text-xs text-slate-500 font-light leading-relaxed">{mod.d}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Layer 3: Infraestructura */}
-            <div className="bg-zinc-900/50 border border-white/5 rounded-[3.5rem] p-10 lg:p-14 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 blur-[100px] rounded-full" />
-              
+            <div className="bg-white border border-slate-200/60 rounded-[3.5rem] p-10 lg:p-14 shadow-sm relative overflow-hidden">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 bg-emerald-900/30 rounded-xl flex items-center justify-center text-emerald-400">
+                <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600">
                   <Database className="w-5 h-5" />
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-black uppercase tracking-tight">3. Tecnología & Infraestructura</h3>
+                <h3 className="text-2xl lg:text-3xl font-black uppercase tracking-tight text-slate-900">3. Tecnología & Infraestructura</h3>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -365,9 +331,9 @@ export default function RealEstatePage() {
                     d: "Ruteo de correos instantáneo y metadatos dinámicos para que las propiedades se compartan de forma atractiva en redes sociales."
                   }
                 ].map((mod, idx) => (
-                  <div key={idx} className="bg-zinc-950 p-6 rounded-2xl border border-white/5 hover:border-emerald-500/20 transition-colors">
-                    <h4 className="text-sm font-black uppercase tracking-tight text-white mb-2">{mod.t}</h4>
-                    <p className="text-xs text-zinc-400 font-light leading-relaxed">{mod.d}</p>
+                  <div key={idx} className="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:border-emerald-500/20 hover:bg-white transition-colors">
+                    <h4 className="text-sm font-black uppercase tracking-tight text-slate-900 mb-2">{mod.t}</h4>
+                    <p className="text-xs text-slate-500 font-light leading-relaxed">{mod.d}</p>
                   </div>
                 ))}
               </div>
@@ -376,58 +342,60 @@ export default function RealEstatePage() {
           </div>
         </section>
 
-        {/* Pricing Plans */}
+        {/* Pricing Plans - Centered Single Premium Card */}
         <section id="planes" className="py-24 max-w-7xl mx-auto px-6 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/5 blur-[120px] rounded-full -z-10" />
-          
-          <div className="text-center mb-20">
-            <span className="text-[10px] font-black uppercase tracking-widest text-blue-500 mb-4 block">Inversión y Retorno</span>
-            <h2 className="text-4xl lg:text-7xl font-black mb-6 uppercase tracking-tighter">Nuestros <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Planes Inmo</span></h2>
-            <p className="text-lg text-zinc-500 font-light">Elige la tecnología que impulsará tu corretaje este 2026.</p>
+          <div className="text-center mb-16">
+            <span className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-4 block">Inversión y Retorno</span>
+            <h2 className="text-4xl lg:text-7xl font-black mb-6 uppercase tracking-tighter text-slate-900">Nuestros <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Planes Inmo</span></h2>
+            <p className="text-lg text-slate-500 font-light">Adquiere tu propia oficina digital sin mensualidades recurrentes.</p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {plans.map((p, i) => (
-              <div key={i} className={`relative p-10 lg:p-14 rounded-[4rem] border transition-all duration-500 flex flex-col justify-between ${p.recommended ? 'bg-white text-zinc-950 border-blue-500 shadow-2xl scale-105 z-10' : 'bg-zinc-900 text-white border-white/5 hover:border-blue-500/30'}`}>
-                {p.recommended && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-lg">
-                    Recomendado
-                  </div>
-                )}
-                <div>
-                  <h3 className="text-3xl font-black mb-2 uppercase tracking-tight">{p.name}</h3>
-                  <p className={`text-xs font-bold uppercase mb-8 ${p.recommended ? 'text-blue-600' : 'text-blue-400'}`}>{p.highlight}</p>
-                  
-                  <div className="mb-10">
-                    <div className="text-sm line-through font-medium mb-1 opacity-50">{p.original} + iva</div>
-                    <div className="flex items-baseline gap-2">
-                       <span className="text-5xl font-black">{p.price}</span>
-                       <span className="text-sm opacity-50 font-medium">+ iva</span>
-                    </div>
-                  </div>
-
-                  <p className={`text-sm mb-10 font-light ${p.recommended ? 'text-zinc-500' : 'text-zinc-400'}`}>{p.desc}</p>
-
-                  <ul className="space-y-4 mb-12">
-                    {p.features.map((f, idx) => (
-                      <li key={idx} className={`flex items-start gap-3 text-sm font-medium ${p.recommended ? 'text-zinc-600' : 'text-zinc-400'}`}>
-                         <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                         {f}
-                      </li>
-                    ))}
-                  </ul>
+          <div className="max-w-4xl mx-auto bg-white border border-slate-200 rounded-[3.5rem] p-10 lg:p-14 shadow-xl shadow-slate-100 relative overflow-hidden">
+            {/* 10% discount badge */}
+            <div className="absolute top-10 right-10 bg-emerald-500 text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest animate-pulse shadow-sm">
+              10% DESCUENTO
+            </div>
+            
+            <div className="mb-8">
+              <span className="px-4 py-2 bg-blue-50 border border-blue-100 text-blue-600 text-xs font-black rounded-full uppercase tracking-widest">
+                CRM & Marca Blanca Total
+              </span>
+            </div>
+            
+            <h3 className="text-3xl lg:text-4xl font-black text-slate-900 mb-2 uppercase tracking-tight">
+              Inmo PRO (Next.js & Supabase)
+            </h3>
+            
+            <p className="text-sm text-slate-500 mb-10 font-light leading-relaxed max-w-xl">
+              Un verdadero sistema independiente y automatizado sin comisiones ni mensualidades. Configurado con Next.js, Supabase, Meta Graph API y CRM completo.
+            </p>
+            
+            <div className="mb-12 p-8 bg-slate-50 border border-slate-100 rounded-3xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+              <div>
+                <div className="text-xs line-through text-slate-400 font-bold mb-1 uppercase tracking-wider">$1.100.000 + iva</div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl lg:text-6xl font-black text-slate-900">$800.000</span>
+                  <span className="text-sm text-slate-500 font-bold uppercase tracking-wider">+ iva</span>
                 </div>
-
-                <LeadButton className={`w-full py-5 rounded-3xl font-black uppercase tracking-widest text-[11px] transition-all ${p.recommended ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-xl shadow-blue-600/20' : 'bg-white text-black hover:bg-zinc-200 shadow-xl shadow-white/5'}`}>
-                   Cotizar este Plan
-                </LeadButton>
               </div>
-            ))}
+              <LeadButton className="px-10 py-5 bg-blue-600 text-white hover:bg-blue-700 shadow-xl shadow-blue-600/10 rounded-2xl font-black uppercase tracking-widest text-[11px] transition-all shrink-0">
+                 Cotizar este Plan
+              </LeadButton>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+              {planFeatures.map((f, idx) => (
+                <div key={idx} className="flex items-start gap-3 text-sm text-slate-600 font-medium">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
+                  <span>{f}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <div className="rounded-[4rem] bg-white text-zinc-950 mx-4 overflow-hidden mt-20">
+        <div className="rounded-[4rem] bg-white border-y border-slate-100 mx-4 overflow-hidden mt-20">
           <FAQSection 
             faqs={realEstateFaqs}
             title="Dudas sobre Software Inmobiliario"
@@ -440,13 +408,13 @@ export default function RealEstatePage() {
 
         {/* Final CTA */}
         <section className="py-40 text-center px-6">
-           <h2 className="text-5xl lg:text-8xl font-black mb-12 tracking-tighter uppercase leading-[0.85]">
-              TU PROPIO <br/><span className="text-blue-500 italic font-serif lowercase font-light">portal inmobiliario.</span>
+           <h2 className="text-5xl lg:text-8xl font-black mb-12 tracking-tighter uppercase leading-[0.85] text-slate-900">
+              TU PROPIO <br/><span className="text-blue-600 italic font-serif lowercase font-light">portal inmobiliario.</span>
            </h2>
-           <p className="text-zinc-500 text-xl mb-16 max-w-2xl mx-auto font-light leading-relaxed">
+           <p className="text-slate-500 text-xl mb-16 max-w-2xl mx-auto font-light leading-relaxed">
               No dejes que tu competencia se lleve las captaciones. Posiciona tu corredora con la mejor solución del mercado chileno sin mensualidades.
            </p>
-           <LeadButton className="px-16 py-8 bg-white text-black font-black rounded-full hover:scale-105 transition-all shadow-2xl shadow-white/10 uppercase tracking-[0.2em] text-xs">
+           <LeadButton className="px-16 py-8 bg-slate-900 text-white font-black rounded-full hover:scale-105 transition-all shadow-2xl shadow-slate-900/10 uppercase tracking-[0.2em] text-xs">
               Configurar mi Plataforma
            </LeadButton>
         </section>
