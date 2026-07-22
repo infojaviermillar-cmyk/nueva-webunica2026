@@ -256,13 +256,6 @@ const PLAN_CARDS = [
   }
 ];
 
-// Inside shopify-plans-comparison table header:
-// Updated buttons for th columns
-// Line 362: Iniciar mi Tienda
-// Line 375: Elegir Plan Full
-// Line 385: Propuesta a Medida
-// Line 435: Agendar Asesoría E-commerce Gratis / Evaluar mi Proyecto por WhatsApp
-
 const MobilePlanCard = ({ plan, data, onFeatureClick }: { plan: any, data: PlanCategory[], onFeatureClick: (feature: FeatureInfo) => void }) => {
   const [isOpen, setIsOpen] = useState(plan.recommended || false);
 
@@ -275,12 +268,12 @@ const MobilePlanCard = ({ plan, data, onFeatureClick }: { plan: any, data: PlanC
       )}
       <div className={`p-8 ${plan.recommended ? 'pt-10' : ''} flex flex-col items-center text-center border-b border-zinc-100`}>
         <div className="flex justify-center mb-4">{plan.icon}</div>
-        <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">{plan.name}</h4>
+        <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">{plan.name}</h4>
         <div className={`text-xl font-black ${plan.recommended ? 'text-violet-700' : 'text-zinc-900'} mb-2`}>
           {plan.price} <span className={`text-xs uppercase font-bold ${plan.recommended ? 'text-violet-500' : 'text-zinc-400'}`}>{plan.subtitle}</span>
         </div>
         {plan.badge && (
-          <div className="text-[10px] font-black text-violet-600 bg-violet-100 px-2 py-0.5 rounded-full inline-block mb-3">{plan.badge}</div>
+          <div className="text-[10px] font-black text-violet-600 bg-violet-100 px-2.5 py-1 rounded-full inline-block mb-3">{plan.badge}</div>
         )}
         <LeadButton className={`w-full py-4 mt-2 text-[10px] rounded-xl uppercase font-black tracking-widest ${plan.ctaClass}`}>
           {plan.cta}
@@ -351,7 +344,7 @@ export default function ShopifyPlansComparison() {
         <X className="w-5 h-5 mx-auto text-zinc-300" strokeWidth={2} />
       );
     }
-    return <span className={`text-sm ${highlight ? 'font-black text-violet-700' : 'font-medium text-zinc-600'}`}>{val}</span>;
+    return <span className={`text-xs lg:text-sm ${highlight ? 'font-black text-violet-700' : 'font-medium text-zinc-600'}`}>{val}</span>;
   };
 
   return (
@@ -366,54 +359,54 @@ export default function ShopifyPlansComparison() {
       {/* Desktop Table (hidden on mobile) */}
       <div className="hidden lg:block bg-white rounded-[2rem] lg:rounded-[3rem] border border-zinc-100 shadow-xl overflow-hidden">
         <div className="overflow-x-auto custom-scrollbar">
-          <table className="w-full min-w-[800px] text-left border-collapse">
+          <table className="w-full min-w-[1100px] text-left border-collapse">
             <thead>
               <tr>
-                <th className="p-4 lg:p-10 w-[140px] min-w-[140px] max-w-[140px] lg:w-1/3 lg:min-w-0 lg:max-w-none bg-zinc-50 border-b border-zinc-100 sticky left-0 z-20 shadow-[4px_0_12px_rgba(0,0,0,0.03)] lg:shadow-none">
-                  <h3 className="text-sm lg:text-xl font-black text-zinc-900 tracking-tighter uppercase mb-1 lg:mb-2">Compara</h3>
-                  <p className="text-[9px] lg:text-xs text-zinc-500 font-light hidden lg:block">Haz clic en cada característica para ver el detalle de lo que incluye.</p>
+                <th className="p-4 lg:p-6 w-[180px] min-w-[180px] max-w-[180px] bg-zinc-50 border-b border-zinc-100 sticky left-0 z-20 shadow-[4px_0_12px_rgba(0,0,0,0.03)] lg:shadow-none">
+                  <h3 className="text-sm lg:text-lg font-black text-zinc-900 tracking-tight uppercase mb-1">Compara</h3>
+                  <p className="text-[9px] lg:text-[11px] text-zinc-500 font-light hidden lg:block leading-tight">Haz clic en cada característica para ver el detalle.</p>
                 </th>
                 
                 {/* PRENDE */}
-                <th className="p-8 lg:p-10 w-2/9 text-center border-b border-zinc-100 border-l border-zinc-50">
-                  <div className="flex justify-center mb-4"><TrendingUp className="w-8 h-8 text-emerald-500" /></div>
-                  <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Prende</h4>
-                  <div className="text-xl font-black text-zinc-900 mb-6">$580.000 <span className="text-xs text-zinc-400 uppercase font-bold">+ IVA</span></div>
-                  <LeadButton className="w-full py-4 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-widest hover:bg-zinc-50">
+                <th className="p-4 lg:p-6 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
+                  <div className="flex justify-center mb-3"><TrendingUp className="w-6 h-6 text-emerald-500" /></div>
+                  <h4 className="text-lg lg:text-xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Prende</h4>
+                  <div className="text-base lg:text-lg font-black text-zinc-900 mb-4">$580.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
+                  <LeadButton className="w-full py-3 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-wider hover:bg-zinc-50">
                     Iniciar mi Tienda
                   </LeadButton>
                 </th>
 
                 {/* FULL (Recommended) */}
-                <th className="p-8 lg:p-10 w-2/9 text-center border-b border-zinc-100 border-l border-zinc-50 bg-violet-50/50 relative">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-violet-600 text-white text-[9px] font-black px-4 py-1.5 rounded-b-lg uppercase tracking-widest">El Más Vendido</div>
-                  <div className="flex justify-center mb-4 mt-2"><Zap className="w-8 h-8 text-violet-500" /></div>
-                  <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Full</h4>
-                  <div className="text-xl font-black text-violet-700 mb-2">$780.000 <span className="text-xs text-violet-500 uppercase font-bold">+ IVA</span></div>
-                  <div className="text-[10px] font-black text-violet-600 bg-violet-100 px-2 py-0.5 rounded-full inline-block mb-3">CyberDay Ready • Boleta SII</div>
-                  <LeadButton className="w-full py-4 text-[10px] bg-violet-600 text-white rounded-xl uppercase font-black tracking-widest hover:bg-violet-700 shadow-lg shadow-violet-600/20">
+                <th className="p-4 lg:p-6 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50 bg-violet-50/50 relative">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-violet-600 text-white text-[9px] font-black px-3 py-1 rounded-b-lg uppercase tracking-widest">El Más Vendido</div>
+                  <div className="flex justify-center mb-3 mt-1"><Zap className="w-6 h-6 text-violet-500" /></div>
+                  <h4 className="text-lg lg:text-xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Full</h4>
+                  <div className="text-base lg:text-lg font-black text-violet-700 mb-1">$780.000 <span className="text-[10px] text-violet-500 uppercase font-bold">+ IVA</span></div>
+                  <div className="text-[9px] font-black text-violet-600 bg-violet-100 px-2 py-0.5 rounded-full inline-block mb-3">CyberDay Ready • Boleta SII</div>
+                  <LeadButton className="w-full py-3 text-[10px] bg-violet-600 text-white rounded-xl uppercase font-black tracking-wider hover:bg-violet-700 shadow-lg shadow-violet-600/20">
                     Elegir Plan Full
                   </LeadButton>
                 </th>
 
                 {/* CONVERSIÓN */}
-                <th className="p-8 lg:p-10 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
-                  <div className="flex justify-center mb-4"><Rocket className="w-8 h-8 text-blue-500" /></div>
-                  <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Conversión</h4>
-                  <div className="text-xl font-black text-zinc-900 mb-6">$1.200.000 <span className="text-xs text-zinc-400 uppercase font-bold">+ IVA</span></div>
-                  <LeadButton className="w-full py-4 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-widest hover:bg-zinc-50">
+                <th className="p-4 lg:p-6 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
+                  <div className="flex justify-center mb-3"><Rocket className="w-6 h-6 text-blue-500" /></div>
+                  <h4 className="text-lg lg:text-xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Conversión</h4>
+                  <div className="text-base lg:text-lg font-black text-zinc-900 mb-4">$1.200.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
+                  <LeadButton className="w-full py-3 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-wider hover:bg-zinc-50">
                     Plan Conversión
                   </LeadButton>
                 </th>
 
                 {/* CUSTOM ELITE */}
-                <th className="p-8 lg:p-10 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50 bg-amber-50/40">
-                  <div className="flex justify-center mb-4"><Crown className="w-8 h-8 text-amber-500" /></div>
-                  <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Custom Elite</h4>
-                  <div className="text-xl font-black text-amber-700 mb-2">A Cotizar</div>
-                  <div className="text-[10px] font-black text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full inline-block mb-3">Diseño Figma desde Cero</div>
-                  <LeadButton className="w-full py-4 text-[10px] bg-amber-600 text-white rounded-xl uppercase font-black tracking-widest hover:bg-amber-700 shadow-lg shadow-amber-600/20">
-                    Cotizar Custom Elite
+                <th className="p-4 lg:p-6 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50 bg-amber-50/40">
+                  <div className="flex justify-center mb-3"><Crown className="w-6 h-6 text-amber-500" /></div>
+                  <h4 className="text-lg lg:text-xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Custom Elite</h4>
+                  <div className="text-base lg:text-lg font-black text-amber-700 mb-1">A Cotizar</div>
+                  <div className="text-[9px] font-black text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full inline-block mb-3">Diseño Figma a Medida</div>
+                  <LeadButton className="w-full py-3 text-[10px] bg-amber-600 text-white rounded-xl uppercase font-black tracking-wider hover:bg-amber-700 shadow-lg shadow-amber-600/20">
+                    Cotizar Elite
                   </LeadButton>
                 </th>
               </tr>
