@@ -176,7 +176,6 @@ export default function MigrarAShopifyPage() {
             {/* Trust badges */}
             <div className="flex flex-wrap justify-center gap-8 mt-16">
               {[
-                { label: "Proyectos Migrados", value: "+80" },
                 { label: "Datos Preservados", value: "100%" },
                 { label: "SEO Protegido", value: "✓" },
                 { label: "Sin Downtime", value: "✓" },
