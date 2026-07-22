@@ -7,6 +7,7 @@ import FunnelAnimation from '@/components/ui/funnel-animation';
 import { MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Palette, Search, Puzzle, Rocket, LayoutTemplate, ShoppingBag, CreditCard, Truck, FileText } from 'lucide-react';
 import ShopifyPricingSection from '@/components/sections/shopify-pricing-section';
 import ShopifyVideoPortfolio from '@/components/sections/shopify-video-portfolio';
+import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
 export const metadata = {
   title: 'Desarrollo de Tiendas Shopify en Chile | Expertos Shopify Partner 2026',
   description: 'Expertos líderes en diseño y desarrollo de tiendas Shopify en Chile. Optimizamos tu ecommerce con Transbank, Webpay, Flow y Facturación SII. ¡Cotiza con Expertos Shopify!',
@@ -151,6 +152,9 @@ export default function ShopifyEnChilePage() {
             </div>
           </div>
         </section>
+
+        {/* Apps & Integrations Infinite Carousel */}
+        <ShopifyAppsCarousel />
 
         <ShopifyPricingSection />
 
