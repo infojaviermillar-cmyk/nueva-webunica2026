@@ -359,10 +359,10 @@ export default function ShopifyPlansComparison() {
       {/* Desktop Table (hidden on mobile) */}
       <div className="hidden lg:block bg-white rounded-[2rem] lg:rounded-[3rem] border border-zinc-100 shadow-xl overflow-hidden">
         <div className="overflow-x-auto custom-scrollbar">
-          <table className="w-full min-w-[1100px] text-left border-collapse">
+          <table className="w-full min-w-[1100px] table-fixed text-left border-collapse">
             <thead>
               <tr>
-                <th className="p-5 lg:p-8 w-[200px] min-w-[200px] max-w-[200px] bg-zinc-50 border-b border-zinc-100 sticky left-0 z-20 shadow-[4px_0_12px_rgba(0,0,0,0.03)] lg:shadow-none">
+                <th className="p-5 lg:p-8 w-1/5 bg-zinc-50 border-b border-zinc-100 sticky left-0 z-20 shadow-[4px_0_12px_rgba(0,0,0,0.03)] lg:shadow-none">
                   <h3 className="text-sm lg:text-xl font-black text-zinc-900 tracking-tight uppercase mb-1">Compara</h3>
                   <p className="text-[9px] lg:text-[11px] text-zinc-500 font-light hidden lg:block leading-tight">Haz clic en cada característica para ver el detalle.</p>
                 </th>
@@ -424,7 +424,7 @@ export default function ShopifyPlansComparison() {
                   {/* Features */}
                   {section.features.map((item, iIdx) => (
                     <tr key={iIdx} className="group hover:bg-zinc-50/50 transition-colors">
-                      <td className="p-3 lg:p-4 lg:px-8 w-[140px] min-w-[140px] max-w-[140px] lg:w-1/3 lg:min-w-0 lg:max-w-none border-b border-zinc-100 border-r border-r-zinc-50 sticky left-0 z-10 bg-white group-hover:bg-zinc-50/50 transition-colors shadow-[4px_0_12px_rgba(0,0,0,0.03)] lg:shadow-none">
+                      <td className="p-3 lg:p-4 lg:px-6 w-1/5 border-b border-zinc-100 border-r border-r-zinc-50 sticky left-0 z-10 bg-white group-hover:bg-zinc-50/50 transition-colors shadow-[4px_0_12px_rgba(0,0,0,0.03)] lg:shadow-none">
                         <button 
                           onClick={() => setActiveFeature(item.feature)}
                           className="flex items-center gap-2 lg:gap-3 text-left w-full group/btn"
@@ -437,16 +437,16 @@ export default function ShopifyPlansComparison() {
                           </span>
                         </button>
                       </td>
-                      <td className="p-4 text-center border-b border-zinc-100 border-r border-r-zinc-50">
+                      <td className="p-4 w-1/5 text-center border-b border-zinc-100 border-r border-r-zinc-50">
                         {renderValue(item.prende)}
                       </td>
-                      <td className="p-4 text-center border-b border-zinc-100 border-r border-r-zinc-50 bg-violet-50/50">
+                      <td className="p-4 w-1/5 text-center border-b border-zinc-100 border-r border-r-zinc-50 bg-violet-50/50">
                         {renderValue(item.full, true)}
                       </td>
-                      <td className="p-4 text-center border-b border-zinc-100 border-r border-r-zinc-50">
+                      <td className="p-4 w-1/5 text-center border-b border-zinc-100 border-r border-r-zinc-50">
                         {renderValue(item.pro)}
                       </td>
-                      <td className="p-4 text-center border-b border-zinc-100 bg-amber-50/30 font-bold text-amber-900">
+                      <td className="p-4 w-1/5 text-center border-b border-zinc-100 bg-amber-50/30 font-bold text-amber-900">
                         {renderValue(item.customElite !== undefined ? item.customElite : true)}
                       </td>
                     </tr>
