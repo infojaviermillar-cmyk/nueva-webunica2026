@@ -1144,9 +1144,15 @@ export const PLANS_BY_CATEGORY = ALL_PLANS.reduce(
 );
 
 // Helper para formatear precios en CLP
-export const formatCLP = (amount: number) =>
-  new Intl.NumberFormat('es-CL', {
+export const formatCLP = (amount: number | string) => {
+  if (typeof amount === 'string') {
+    const num = Number(amount.replace(/[^0-9.-]+/g, ""));
+    if (isNaN(num) || num === 0) return amount;
+    amount = num;
+  }
+  return new Intl.NumberFormat('es-CL', {
     style: 'currency',
     currency: 'CLP',
     maximumFractionDigits: 0,
   }).format(amount);
+};

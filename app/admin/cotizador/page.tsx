@@ -356,7 +356,10 @@ function CotizadorContent() {
   };
 
   // --- Calculations ---
-  const subtotal = selectedPlans.reduce((acc, p) => acc + p.price, 0);
+  const subtotal = selectedPlans.reduce((acc, p) => {
+    const priceNum = typeof p.price === 'number' ? p.price : Number(String(p.price).replace(/[^0-9.-]+/g, "")) || 0;
+    return acc + priceNum;
+  }, 0);
   const discountAmount = Math.round(subtotal * (discountPercent / 100));
   const subtotalWithDiscount = subtotal - discountAmount;
 
