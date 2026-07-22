@@ -235,11 +235,11 @@ const PLAN_CARDS = [
   },
   {
     id: "pro",
-    name: "Pro",
+    name: "Conversión",
     icon: <Rocket className="w-6 h-6 text-blue-500" />,
     price: "$1.200.000",
     subtitle: "+ IVA",
-    cta: "Solicitar Propuesta Pro",
+    cta: "Solicitar Plan Conversión",
     ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
     color: "blue"
   },
@@ -396,13 +396,13 @@ export default function ShopifyPlansComparison() {
                   </LeadButton>
                 </th>
 
-                {/* PRO */}
+                {/* CONVERSIÓN */}
                 <th className="p-8 lg:p-10 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
                   <div className="flex justify-center mb-4"><Rocket className="w-8 h-8 text-blue-500" /></div>
-                  <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Pro</h4>
+                  <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Conversión</h4>
                   <div className="text-xl font-black text-zinc-900 mb-6">$1.200.000 <span className="text-xs text-zinc-400 uppercase font-bold">+ IVA</span></div>
                   <LeadButton className="w-full py-4 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-widest hover:bg-zinc-50">
-                    Solicitar Propuesta
+                    Plan Conversión
                   </LeadButton>
                 </th>
 

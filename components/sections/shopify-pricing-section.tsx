@@ -140,24 +140,26 @@ export default function ShopifyPricingSection() {
     },
     {
       id: 'escala',
-      name: 'SHOPIFY PRO / ESCALA',
+      name: 'SHOPIFY CONVERSIÓN',
       price: '$1.200.000',
-      description: 'Ideal para empresas consolidadas, catálogo amplio, integración ERP (Bsale/Obuma), Klaviyo y campañas de alto volumen.',
-      time: 'Entrega en 8 a 10 semanas.',
-      cta: 'Solicitar Propuesta a Medida',
+      description: 'Ideal para marcas que buscan maximizar su tasa de ventas con theme propio para conversión, mejoras CRO en ficha de producto, integración ERP y Klaviyo.',
+      time: 'Entrega en 8 semanas.',
+      cta: 'Solicitar Plan Conversión',
       color: 'bg-zinc-900',
       lightColor: 'bg-zinc-100',
       textColor: 'text-zinc-900',
       features: [
-        { title: 'Todo lo del Plan FULL', detail: 'Incluye todas las funcionalidades del Plan FULL, incluyendo diseño personalizado, carga de productos, SEO técnico, Google Analytics 4, reviews, newsletter y soporte prioritario.' },
-        { title: 'Migración de hasta 300 productos', detail: 'Migración o carga de hasta 300 productos desde una tienda anterior, archivo Excel, CSV u otra fuente disponible. Incluye organización por colecciones, revisión de imágenes, precios, descripciones y variantes cuando corresponda.' },
-        { title: 'Integración ERP: Bsale, Obuma o Rex', detail: 'Configuración inicial de integración con ERP según disponibilidad técnica. Puede considerar sincronización de productos, stock, ventas o documentos tributarios dependiendo de la solución contratada y las condiciones del proveedor externo.' },
-        { title: 'Email Marketing con Klaviyo', detail: 'Instalación y configuración inicial de Klaviyo conectado con Shopify. Incluye formulario de captación, flujo de bienvenida, flujo básico de recuperación de carrito y segmentación inicial de contactos.' },
-        { title: 'Páginas de aterrizaje a medida', detail: 'Diseño de páginas especiales para campañas, productos destacados, colecciones o promociones. Las landing pages deben estar enfocadas en conversión, con beneficios, llamados a la acción, productos y elementos de confianza.' },
-        { title: 'Optimización de velocidad avanzada', detail: 'Revisión avanzada de rendimiento, optimización de imágenes, análisis de apps instaladas, reducción de scripts innecesarios cuando sea posible y mejoras orientadas a carga móvil.' },
-        { title: 'Configuración Meta Pixel & API', detail: 'Instalación de Meta Pixel, configuración de eventos principales y preparación de Conversion API cuando sea compatible. Esto permite mejorar la medición de campañas de Facebook e Instagram Ads.' },
-        { title: 'Carrier Calculated Shipping (CCS)', detail: 'Activación de tarifas de envío calculadas por transportistas en tiempo real (Starken, BlueExpress, etc.), permitiendo cobrar el valor exacto del despacho.' },
-        { title: 'Consultoría estratégica 1 a 1', detail: 'Sesión estratégica para revisar objetivos comerciales, estructura del catálogo, propuesta de valor, embudo de ventas, campañas, oportunidades de mejora y recomendaciones para escalar la tienda.' }
+        { title: 'Todo lo del Plan FULL', detail: 'Incluye todas las funcionalidades del Plan FULL, incluyendo carga de productos, SEO técnico, Google Analytics 4, reviews, newsletter y soporte prioritario.' },
+        { title: 'Personalización de Theme Propio para Conversión', detail: 'Personalización completa de theme propio enfocado en eliminar fricción de compra, velocidad extrema y máxima rentabilidad.' },
+        { title: 'Ficha de Producto con Mejoras CRO', detail: 'Optimización avanzada de Ficha de Producto con mejoras CRO (Conversion Rate Optimization), metacampos, badges de confianza y ofertas dinámicas.' },
+        { title: 'Migración de hasta 300 productos', detail: 'Migración o carga de hasta 300 productos desde una tienda anterior, archivo Excel, CSV u otra fuente disponible. Incluye organización por colecciones y variantes.' },
+        { title: 'Integración ERP: Bsale, Obuma o Rex', detail: 'Configuración inicial de integración con ERP según disponibilidad técnica para sincronización de stock y boleta electrónica.' },
+        { title: 'Email Marketing con Klaviyo', detail: 'Instalación y configuración inicial de Klaviyo conectado con Shopify para flujos automáticos de carrito abandonado y bienvenida.' },
+        { title: 'Páginas de aterrizaje a medida', detail: 'Diseño de páginas especiales para campañas, productos destacados y promociones enfocado en conversión.' },
+        { title: 'Optimización de velocidad avanzada', detail: 'Revisión avanzada de rendimiento, optimización de imágenes, análisis de scripts y mejoras móvil.' },
+        { title: 'Configuración Meta Pixel & API', detail: 'Instalación de Meta Pixel y Conversion API para campañas efectivas en Facebook e Instagram Ads.' },
+        { title: 'Carrier Calculated Shipping (CCS)', detail: 'Activación de tarifas de envío calculadas por transportistas en tiempo real (Starken, BlueExpress, etc.).' },
+        { title: 'Consultoría estratégica 1 a 1', detail: 'Sesión estratégica individual para revisar arquitectura e-commerce, propuesta de valor y optimización comercial.' }
       ]
     },
     {
@@ -204,8 +206,8 @@ export default function ShopifyPricingSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6 text-zinc-950">
-              Planes de Desarrollo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-600 italic font-serif font-normal">Shopify en Chile</span>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6 text-zinc-950 font-neue-haas">
+              Planes de Desarrollo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-600 italic font-serif font-normal font-neue-haas">Shopify en Chile</span>
             </h2>
             <p className="text-lg md:text-xl text-zinc-500 font-light max-w-3xl mx-auto leading-relaxed">
               Creamos tiendas Shopify profesionales en Chile, optimizadas para vender online, integrar medios de pago, mejorar la experiencia móvil y preparar tu ecommerce para campañas digitales. Elige el plan que mejor se adapta al estado actual de tu negocio.

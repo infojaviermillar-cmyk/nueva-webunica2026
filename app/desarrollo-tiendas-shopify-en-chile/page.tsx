@@ -107,8 +107,8 @@ export default function ShopifyEnChilePage() {
                 <span className="text-[10px] font-black tracking-[0.2em] text-violet-600 uppercase">Expertos Shopify Partner Chile</span>
               </div>
               
-              <h1 className="text-[2.4rem] xs:text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950 break-words">
-                Desarrollo de Tiendas <span className="text-violet-600 italic font-serif lowercase font-light">Shopify Chile</span>
+              <h1 className="text-[2.4rem] xs:text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950 break-words font-neue-haas">
+                Desarrollo de Tiendas <span className="text-violet-600 italic font-serif lowercase font-light font-neue-haas">Shopify Chile</span>
               </h1>
               
               <p className="text-lg lg:text-xl text-zinc-500 mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
