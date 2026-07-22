@@ -57,7 +57,7 @@ export const SHOPIFY_PLANS: Plan[] = [
     originalPrice: 650000,
     deliveryDays: '4 semanas',
     category: '🛍️ Shopify',
-    url: '/planes-de-desarrollo-shopify-en-chile',
+    url: '/planes-de-desarrollo-shopify-en-chile/plan-prende',
     features: [
       'Setup completo de Shopify (Dominio, SSL, Impuestos, checkout)',
       'Diseño basado en Plantilla Premium con personalización visual',
@@ -80,7 +80,7 @@ export const SHOPIFY_PLANS: Plan[] = [
     recommended: true,
     deliveryDays: '6 semanas',
     category: '🛍️ Shopify',
-    url: '/planes-de-desarrollo-shopify-en-chile',
+    url: '/planes-de-desarrollo-shopify-en-chile/plan-full',
     features: [
       'Todo lo del Plan PRENDE, más:',
       'Carga de hasta 120 productos con variaciones complejas',
@@ -102,7 +102,7 @@ export const SHOPIFY_PLANS: Plan[] = [
     originalPrice: 1400000,
     deliveryDays: '8 semanas',
     category: '🛍️ Shopify',
-    url: '/planes-de-desarrollo-shopify-en-chile',
+    url: '/planes-de-desarrollo-shopify-en-chile/plan-conversion',
     features: [
       'Todo lo del Plan FULL, más:',
       'Personalización completa de Theme Propio optimizado para conversión',
@@ -184,7 +184,7 @@ export const SHOPIFY_PLANS: Plan[] = [
     price: 'A cotizar',
     deliveryDays: 'A convenir',
     category: '🛍️ Shopify',
-    url: '/planes-de-desarrollo-shopify-en-chile',
+    url: '/planes-de-desarrollo-shopify-en-chile/plan-custom-elite',
     features: [
       'Setup inicial y configuración completa de Shopify (Dominio, SSL, Impuestos, Checkout).',
       'Diseño UX/UI a medida desde cero en Figma (sin uso de plantillas).',

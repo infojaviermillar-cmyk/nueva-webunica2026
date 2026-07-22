@@ -127,7 +127,39 @@ export default function Footer() {
               </ul>
             </nav>
 
-            {/* Links Col 3 */}
+            {/* Links Col 3 - Planes Shopify */}
+            <nav aria-labelledby="footer-plans-heading">
+              <h3 id="footer-plans-heading" className="text-white font-semibold mb-6 uppercase tracking-wider text-xs">Planes Shopify Chile</h3>
+              <ul className="space-y-4">
+                <li>
+                  <Link href="/planes-de-desarrollo-shopify-en-chile" className="text-sm font-bold text-violet-400 hover:text-white transition-colors pb-1 inline-block">
+                    Compara Todos los Planes 🛍️
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/planes-de-desarrollo-shopify-en-chile/plan-prende" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Plan Prende ($580k)
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/planes-de-desarrollo-shopify-en-chile/plan-full" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Plan Full ($780k)
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/planes-de-desarrollo-shopify-en-chile/plan-conversion" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Plan Conversión ($1.2M)
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/planes-de-desarrollo-shopify-en-chile/plan-custom-elite" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
+                    Plan Custom Elite
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+
+            {/* Links Col 4 */}
             <nav aria-labelledby="footer-community-heading">
               <h3 id="footer-community-heading" className="text-white font-semibold mb-6 uppercase tracking-wider text-xs">Comunidad & Partners</h3>
               <ul className="space-y-4">
