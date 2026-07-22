@@ -13,8 +13,8 @@ export interface Plan {
   name: string;
   highlight: string;
   desc: string;
-  price: number;            // precio neto en CLP (sin IVA)
-  originalPrice?: number;   // precio original tachado (sin IVA)
+  price: number | string;            // precio neto en CLP (sin IVA) o 'A cotizar'
+  originalPrice?: number | string;   // precio original tachado (sin IVA)
   recommended?: boolean;
   deliveryDays?: string;
   features: string[];
@@ -179,7 +179,7 @@ export const SHOPIFY_PLANS: Plan[] = [
     name: 'Shopify CUSTOM ELITE',
     highlight: 'Desarrollo a Medida Full',
     desc: 'La solución más completa con diseño desde cero, migración avanzada e integraciones ERP y georreferenciación.',
-    price: 1420002,
+    price: 'A cotizar',
     deliveryDays: 'A convenir',
     category: '🛍️ Shopify',
     url: '/planes-de-desarrollo-shopify-en-chile',

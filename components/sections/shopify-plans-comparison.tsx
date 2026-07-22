@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Info, Rocket, TrendingUp, Zap, X, ChevronDown } from 'lucide-react';
+import { Check, Info, Rocket, TrendingUp, Zap, X, ChevronDown, Crown } from 'lucide-react';
 import FeatureExplanationModal from '@/components/modals/feature-explanation-modal';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
@@ -17,6 +17,7 @@ interface PlanFeature {
   prende: string | boolean;
   full: string | boolean;
   pro: string | boolean;
+  customElite?: string | boolean;
 }
 
 interface PlanCategory {
@@ -35,10 +36,11 @@ const COMPARISON_DATA: PlanCategory[] = [
         pro: true
       },
       {
-        feature: { name: "Tema y Diseño", description: "Utilizamos plantillas premium de Shopify, optimizadas para conversión y velocidad. En planes superiores, personalizamos secciones a medida de la marca." },
+        feature: { name: "Tema y Diseño", description: "Utilizamos plantillas premium de Shopify, optimizadas para conversión y velocidad. En el Plan Custom Elite diseñamos desde cero en Figma sin uso de plantillas." },
         prende: "Plantilla Premium",
         full: "Secciones Personalizadas",
-        pro: "Diseño UX/UI a Medida"
+        pro: "Secciones Avanzadas Pro",
+        customElite: "Diseño UX/UI a Medida (Figma)"
       },
       {
         feature: { name: "Carga de Productos", description: "Cantidad de productos que nuestro equipo configurará inicialmente. Incluye carga de imágenes, descripciones, precios y variantes base." },
@@ -237,9 +239,20 @@ const PLAN_CARDS = [
     icon: <Rocket className="w-6 h-6 text-blue-500" />,
     price: "$1.200.000",
     subtitle: "+ IVA",
-    cta: "Solicitar Propuesta a Medida",
+    cta: "Solicitar Propuesta Pro",
     ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
     color: "blue"
+  },
+  {
+    id: "customElite",
+    name: "Custom Elite",
+    icon: <Crown className="w-6 h-6 text-amber-500" />,
+    price: "A Cotizar",
+    subtitle: "Desarrollo 100% a Medida",
+    badge: "Diseño Figma desde Cero",
+    cta: "Cotizar Proyecto Custom Elite",
+    ctaClass: "bg-amber-600 text-white hover:bg-amber-700 shadow-lg shadow-amber-600/20",
+    color: "amber"
   }
 ];
 
@@ -384,12 +397,23 @@ export default function ShopifyPlansComparison() {
                 </th>
 
                 {/* PRO */}
-                <th className="p-8 lg:p-10 w-2/9 text-center border-b border-zinc-100 border-l border-zinc-50">
+                <th className="p-8 lg:p-10 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
                   <div className="flex justify-center mb-4"><Rocket className="w-8 h-8 text-blue-500" /></div>
                   <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Pro</h4>
                   <div className="text-xl font-black text-zinc-900 mb-6">$1.200.000 <span className="text-xs text-zinc-400 uppercase font-bold">+ IVA</span></div>
                   <LeadButton className="w-full py-4 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-widest hover:bg-zinc-50">
                     Solicitar Propuesta
+                  </LeadButton>
+                </th>
+
+                {/* CUSTOM ELITE */}
+                <th className="p-8 lg:p-10 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50 bg-amber-50/40">
+                  <div className="flex justify-center mb-4"><Crown className="w-8 h-8 text-amber-500" /></div>
+                  <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Custom Elite</h4>
+                  <div className="text-xl font-black text-amber-700 mb-2">A Cotizar</div>
+                  <div className="text-[10px] font-black text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full inline-block mb-3">Diseño Figma desde Cero</div>
+                  <LeadButton className="w-full py-4 text-[10px] bg-amber-600 text-white rounded-xl uppercase font-black tracking-widest hover:bg-amber-700 shadow-lg shadow-amber-600/20">
+                    Cotizar Custom Elite
                   </LeadButton>
                 </th>
               </tr>
@@ -399,7 +423,7 @@ export default function ShopifyPlansComparison() {
                 <React.Fragment key={sIdx}>
                   {/* Category Header */}
                   <tr>
-                    <td colSpan={4} className="bg-zinc-50 py-3 lg:py-4 px-4 lg:px-8 text-[10px] lg:text-xs font-black uppercase tracking-[0.2em] text-zinc-400 sticky left-0 z-10">
+                    <td colSpan={5} className="bg-zinc-50 py-3 lg:py-4 px-4 lg:px-8 text-[10px] lg:text-xs font-black uppercase tracking-[0.2em] text-zinc-400 sticky left-0 z-10">
                       {section.category}
                     </td>
                   </tr>
@@ -426,8 +450,11 @@ export default function ShopifyPlansComparison() {
                       <td className="p-4 text-center border-b border-zinc-100 border-r border-r-zinc-50 bg-violet-50/50">
                         {renderValue(item.full, true)}
                       </td>
-                      <td className="p-4 text-center border-b border-zinc-100">
+                      <td className="p-4 text-center border-b border-zinc-100 border-r border-r-zinc-50">
                         {renderValue(item.pro)}
+                      </td>
+                      <td className="p-4 text-center border-b border-zinc-100 bg-amber-50/30 font-bold text-amber-900">
+                        {renderValue(item.customElite !== undefined ? item.customElite : true)}
                       </td>
                     </tr>
                   ))}

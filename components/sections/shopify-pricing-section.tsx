@@ -159,6 +159,32 @@ export default function ShopifyPricingSection() {
         { title: 'Carrier Calculated Shipping (CCS)', detail: 'Activación de tarifas de envío calculadas por transportistas en tiempo real (Starken, BlueExpress, etc.), permitiendo cobrar el valor exacto del despacho.' },
         { title: 'Consultoría estratégica 1 a 1', detail: 'Sesión estratégica para revisar objetivos comerciales, estructura del catálogo, propuesta de valor, embudo de ventas, campañas, oportunidades de mejora y recomendaciones para escalar la tienda.' }
       ]
+    },
+    {
+      id: 'custom-elite',
+      name: 'Shopify CUSTOM ELITE',
+      price: 'A cotizar',
+      description: 'La solución más completa con diseño desde cero en Figma, migración avanzada e integraciones ERP y georreferenciación.',
+      time: 'Entrega A convenir.',
+      cta: 'Cotizar Proyecto Custom Elite',
+      color: 'bg-amber-600',
+      lightColor: 'bg-amber-50',
+      textColor: 'text-amber-600',
+      features: [
+        { title: 'Setup completo de Shopify', detail: 'Setup inicial y configuración completa de Shopify (Dominio, SSL, Impuestos, Checkout).' },
+        { title: 'Diseño UX/UI a medida en Figma', detail: 'Diseño UX/UI a medida desde cero en Figma (sin uso de plantillas).' },
+        { title: 'Migración avanzada de productos y datos', detail: 'Migración o carga inicial de productos, clientes y contenido de la empresa.' },
+        { title: 'Diseño profesional para conversión (CRO)', detail: 'Diseño enfocado en maximizar la conversión en todos los puntos del embudo.' },
+        { title: 'Diseño Mobile-First Responsive', detail: 'Optimización total para dispositivos móviles y computadores.' },
+        { title: 'Plataforma autoadministrable', detail: 'Panel autoadministrable con capacitación incluida para operar tu tienda.' },
+        { title: 'Categorías, colecciones y fichas de producto', detail: 'Configuración de categorías, colecciones inteligentes y fichas de productos.' },
+        { title: 'Medios de Pago y Despacho', detail: 'Configuración de pasarelas de pago y opciones de despacho local e internacional.' },
+        { title: 'Integración ERP / Sistemas a Medida', detail: 'Integración con ERP (Bsale, Obuma, Defontana) u otros sistemas según requerimiento.' },
+        { title: 'Analítica y Medición Avanzada', detail: 'Configuración de GA4, Google Tag Manager, Meta Pixel + Conversion API y Google Merchant Center.' },
+        { title: 'Medición de Eventos para Ads', detail: 'Medición de eventos y conversiones para optimizar campañas publicitarias.' },
+        { title: 'SEO Técnico & Estructura Orgánica', detail: 'Optimización SEO técnica, SEO On-Page de categorías/productos y propuesta SEO mensual.' },
+        { title: 'Garantía 3 meses y Soporte VIP', detail: 'Garantía de 3 meses en su funcionamiento y soporte prioritario VIP.' }
+      ]
     }
   ];
 
