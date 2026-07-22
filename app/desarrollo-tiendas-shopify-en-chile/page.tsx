@@ -111,15 +111,22 @@ export default function ShopifyEnChilePage() {
               </h1>
               
               <p className="text-lg lg:text-xl text-zinc-500 mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
-                No arriesgues tu inversión. Creamos tiendas Shopify de alto rendimiento, optimizadas para el mercado chileno con <strong className="text-zinc-900">Pasarelas de Pago</strong>, <strong className="text-zinc-900">Logística</strong> y <strong className="text-zinc-900">Facturación SII</strong> integradas.
+                No arriesgues tu inversión. Creamos tiendas Shopify de alto rendimiento con <strong className="text-zinc-900">Garantía de Entrega (Pago 50/50)</strong>, integrando <strong className="text-zinc-900">Pasarelas de Pago</strong>, <strong className="text-zinc-900">Logística CCS</strong> y <strong className="text-zinc-900">Boleta SII Automática</strong>.
               </p>
+
+              {/* Guarantees Badges */}
+              <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8 text-[11px] font-bold text-zinc-600">
+                <span className="px-3 py-1 bg-zinc-100 rounded-full border border-zinc-200">✓ Pago 50% Inicio / 50% Entrega</span>
+                <span className="px-3 py-1 bg-zinc-100 rounded-full border border-zinc-200">✓ CyberDay & BlackFriday Ready</span>
+                <span className="px-3 py-1 bg-zinc-100 rounded-full border border-zinc-200">✓ Sin cobros sorpresa</span>
+              </div>
               
               <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
                 <LeadButton className="px-8 py-4 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/20 active:scale-95 text-center flex items-center justify-center gap-2">
-                  Solicitar Cotización Gratis
+                  Agendar Asesoría E-commerce Gratis
                 </LeadButton>
                 <WhatsAppButton className="px-8 py-4 bg-emerald-500 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-emerald-600 transition-all shadow-xl shadow-emerald-500/20 active:scale-95 text-center flex items-center justify-center gap-2">
-                  Hablar con un Experto
+                  Evaluar mi Proyecto por WhatsApp
                 </WhatsAppButton>
               </div>
             </div>

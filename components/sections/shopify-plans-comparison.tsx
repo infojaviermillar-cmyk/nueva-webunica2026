@@ -215,7 +215,7 @@ const PLAN_CARDS = [
     icon: <TrendingUp className="w-6 h-6 text-emerald-500" />,
     price: "$580.000",
     subtitle: "+ IVA",
-    cta: "Cotizar",
+    cta: "Iniciar mi Tienda",
     ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
     color: "emerald"
   },
@@ -225,9 +225,9 @@ const PLAN_CARDS = [
     icon: <Zap className="w-6 h-6 text-violet-500" />,
     price: "$780.000",
     subtitle: "+ IVA",
-    badge: "Ahorra en Apps y Comisiones",
+    badge: "El Más Solicitado • CyberDay Ready",
     recommended: true,
-    cta: "Cotizar Full",
+    cta: "Elegir Plan Full (Más Vendido)",
     ctaClass: "bg-violet-600 text-white hover:bg-violet-700 shadow-lg shadow-violet-600/20",
     color: "violet"
   },
@@ -237,11 +237,18 @@ const PLAN_CARDS = [
     icon: <Rocket className="w-6 h-6 text-blue-500" />,
     price: "$1.200.000",
     subtitle: "+ IVA",
-    cta: "Hablar con Experto",
+    cta: "Solicitar Propuesta a Medida",
     ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
     color: "blue"
   }
 ];
+
+// Inside shopify-plans-comparison table header:
+// Updated buttons for th columns
+// Line 362: Iniciar mi Tienda
+// Line 375: Elegir Plan Full
+// Line 385: Propuesta a Medida
+// Line 435: Agendar Asesoría E-commerce Gratis / Evaluar mi Proyecto por WhatsApp
 
 const MobilePlanCard = ({ plan, data, onFeatureClick }: { plan: any, data: PlanCategory[], onFeatureClick: (feature: FeatureInfo) => void }) => {
   const [isOpen, setIsOpen] = useState(plan.recommended || false);
@@ -360,19 +367,19 @@ export default function ShopifyPlansComparison() {
                   <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Prende</h4>
                   <div className="text-xl font-black text-zinc-900 mb-6">$580.000 <span className="text-xs text-zinc-400 uppercase font-bold">+ IVA</span></div>
                   <LeadButton className="w-full py-4 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-widest hover:bg-zinc-50">
-                    Cotizar
+                    Iniciar mi Tienda
                   </LeadButton>
                 </th>
 
                 {/* FULL (Recommended) */}
                 <th className="p-8 lg:p-10 w-2/9 text-center border-b border-zinc-100 border-l border-zinc-50 bg-violet-50/50 relative">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-violet-600 text-white text-[9px] font-black px-4 py-1.5 rounded-b-lg uppercase tracking-widest">Recomendado</div>
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-violet-600 text-white text-[9px] font-black px-4 py-1.5 rounded-b-lg uppercase tracking-widest">El Más Vendido</div>
                   <div className="flex justify-center mb-4 mt-2"><Zap className="w-8 h-8 text-violet-500" /></div>
                   <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Full</h4>
                   <div className="text-xl font-black text-violet-700 mb-2">$780.000 <span className="text-xs text-violet-500 uppercase font-bold">+ IVA</span></div>
-                  <div className="text-[10px] font-black text-violet-600 bg-violet-100 px-2 py-0.5 rounded-full inline-block mb-3">Ahorra en Apps y Comisiones</div>
+                  <div className="text-[10px] font-black text-violet-600 bg-violet-100 px-2 py-0.5 rounded-full inline-block mb-3">CyberDay Ready • Boleta SII</div>
                   <LeadButton className="w-full py-4 text-[10px] bg-violet-600 text-white rounded-xl uppercase font-black tracking-widest hover:bg-violet-700 shadow-lg shadow-violet-600/20">
-                    Cotizar Full
+                    Elegir Plan Full
                   </LeadButton>
                 </th>
 
@@ -382,7 +389,7 @@ export default function ShopifyPlansComparison() {
                   <h4 className="text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1">Pro</h4>
                   <div className="text-xl font-black text-zinc-900 mb-6">$1.200.000 <span className="text-xs text-zinc-400 uppercase font-bold">+ IVA</span></div>
                   <LeadButton className="w-full py-4 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-widest hover:bg-zinc-50">
-                    Hablar con Experto
+                    Solicitar Propuesta
                   </LeadButton>
                 </th>
               </tr>
@@ -433,10 +440,10 @@ export default function ShopifyPlansComparison() {
 
       <div className="mt-12 flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
         <LeadButton className="px-8 py-4 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/20 active:scale-95 text-center flex items-center justify-center gap-2">
-          Solicitar Cotización Gratis
+          Agendar Asesoría E-commerce Gratis
         </LeadButton>
         <WhatsAppButton className="px-8 py-4 bg-emerald-500 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-emerald-600 transition-all shadow-xl shadow-emerald-500/20 active:scale-95 text-center flex items-center justify-center gap-2">
-          Hablar con un Experto
+          Evaluar mi Proyecto por WhatsApp
         </WhatsAppButton>
       </div>
 
