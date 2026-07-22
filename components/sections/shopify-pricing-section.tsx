@@ -169,9 +169,9 @@ export default function ShopifyPricingSection() {
       description: 'La solución más completa con diseño desde cero en Figma, migración avanzada e integraciones ERP y georreferenciación.',
       time: 'Entrega A convenir.',
       cta: 'Cotizar Proyecto Custom Elite',
-      color: 'bg-amber-600',
-      lightColor: 'bg-amber-50',
-      textColor: 'text-amber-600',
+      color: 'bg-emerald-600',
+      lightColor: 'bg-emerald-50',
+      textColor: 'text-emerald-600',
       features: [
         { title: 'Setup completo de Shopify', detail: 'Setup inicial y configuración completa de Shopify (Dominio, SSL, Impuestos, Checkout).' },
         { title: 'Diseño UX/UI a medida en Figma', detail: 'Diseño UX/UI a medida desde cero en Figma (sin uso de plantillas).' },

@@ -246,13 +246,13 @@ const PLAN_CARDS = [
   {
     id: "customElite",
     name: "Custom Elite",
-    icon: <Crown className="w-6 h-6 text-amber-500" />,
+    icon: <Crown className="w-6 h-6 text-emerald-500" />,
     price: "A Cotizar",
     subtitle: "Desarrollo 100% a Medida",
     badge: "Diseño Figma desde Cero",
     cta: "Cotizar Proyecto Custom Elite",
-    ctaClass: "bg-amber-600 text-white hover:bg-amber-700 shadow-lg shadow-amber-600/20",
-    color: "amber"
+    ctaClass: "bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-600/20",
+    color: "emerald"
   }
 ];
 
@@ -400,12 +400,12 @@ export default function ShopifyPlansComparison() {
                 </th>
 
                 {/* CUSTOM ELITE */}
-                <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50 bg-amber-50/40">
-                  <div className="flex justify-center mb-3"><Crown className="w-7 h-7 text-amber-500" /></div>
+                <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50 bg-emerald-50/40">
+                  <div className="flex justify-center mb-3"><Crown className="w-7 h-7 text-emerald-500" /></div>
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Custom Elite</h4>
-                  <div className="text-lg lg:text-xl font-black text-amber-700 mb-2">A Cotizar</div>
-                  <div className="text-[9px] font-black text-amber-700 bg-amber-100 px-2.5 py-1 rounded-full inline-block mb-4">Diseño Figma a Medida</div>
-                  <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-amber-600 text-white rounded-xl uppercase font-black tracking-wider hover:bg-amber-700 shadow-lg shadow-amber-600/20">
+                  <div className="text-lg lg:text-xl font-black text-emerald-700 mb-2">A Cotizar</div>
+                  <div className="text-[9px] font-black text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full inline-block mb-4">Diseño Figma a Medida</div>
+                  <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-emerald-600 text-white rounded-xl uppercase font-black tracking-wider hover:bg-emerald-700 shadow-lg shadow-emerald-600/20">
                     Cotizar Elite
                   </LeadButton>
                 </th>
@@ -446,7 +446,7 @@ export default function ShopifyPlansComparison() {
                       <td className="p-4 w-1/5 text-center border-b border-zinc-100 border-r border-r-zinc-50">
                         {renderValue(item.pro)}
                       </td>
-                      <td className="p-4 w-1/5 text-center border-b border-zinc-100 bg-amber-50/30 font-bold text-amber-900">
+                      <td className="p-4 w-1/5 text-center border-b border-zinc-100 bg-emerald-50/30 font-bold text-emerald-900">
                         {renderValue(item.customElite !== undefined ? item.customElite : true)}
                       </td>
                     </tr>
