@@ -37,6 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/preguntas-frecuentes-sobre-tiendas-shopify-en-chile',
     '/comparacion-woocommerce-o-shopify-para-chile',
     '/como-instalar-mercado-pago-en-shopify-paso-a-paso-guia-2025',
+    '/como-estructurar-ficha-de-producto-shopify',
     '/comisiones-plataformas-de-pago-para-shopify-chile',
     '/desarrollo-tiendas-shopify-en-chile',
     '/planes-de-desarrollo-shopify-en-chile',
