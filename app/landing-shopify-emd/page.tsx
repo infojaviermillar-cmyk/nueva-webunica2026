@@ -26,6 +26,7 @@ export const metadata = {
 
 export default function ShopifyEmdLandingPage() {
   const projects = [
+    { title: "Oh My Skin", description: "Tienda online de cuidado de la piel y cosmética profesional en Chile, con diseño fluido y alta conversión.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.ohmyskinchile.cl%2F?w=1200", link: "https://www.ohmyskinchile.cl/" },
     { title: "Kinelawen", description: "Tienda Shopify con identidad limpia, navegación moderna y foco en experiencia de marca.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.kinelawen.com%2F?w=1200", link: "https://www.kinelawen.com/" },
     { title: "SpinMedical", description: "Proyecto ecommerce con estructura profesional, catálogo claro y presentación visual de confianza.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Fspinmedical.cl%2F?w=1200", link: "https://spinmedical.cl/" },
     { title: "Librería Bazarte", description: "Ecommerce visualmente atractivo, preparado para exhibir productos y facilitar exploración por colecciones.", image: "https://s.wordpress.com/mshots/v1/https%3A%2F%2Flibreriabazarte.cl%2F?w=1200", link: "https://libreriabazarte.cl/" },

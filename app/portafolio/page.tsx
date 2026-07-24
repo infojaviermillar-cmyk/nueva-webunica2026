@@ -12,6 +12,14 @@ export default function PortfolioPage() {
 
   const projects = [
     {
+      title: "Oh My Skin",
+      category: "Shopify",
+      description: "Tienda online de cuidado de la piel y cosmética profesional en Chile, con diseño responsivo, navegación fluida y experiencia de marca refinada.",
+      image: "https://api.microlink.io/?url=https://www.ohmyskinchile.cl&screenshot=true&meta=false&embed=screenshot.url",
+      link: "https://www.ohmyskinchile.cl/",
+      tags: ["Skincare", "Cosmética", "Shopify"]
+    },
+    {
       title: "Activos en Red",
       category: "SaaS",
       description: "Portal inmobiliario avanzado con filtros dinámicos, gestión de propiedades y diseño profesional.",

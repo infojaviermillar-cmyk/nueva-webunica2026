@@ -15,6 +15,14 @@ import WorkProcess from '@/components/sections/work-process';
 export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const projects = [
     { 
+      title: "Oh My Skin", 
+      category: "Shopify",
+      tags: ["Skincare", "Cosmética"],
+      description: "Tienda online de cuidado de la piel y cosmética profesional con navegación fluida.",
+      image: "https://api.microlink.io/?url=https://www.ohmyskinchile.cl&screenshot=true&meta=false&embed=screenshot.url",
+      link: "https://www.ohmyskinchile.cl/"
+    },
+    { 
       title: "Tecno-Mobile", 
       category: "Shopify",
       tags: ["Tecnología", "Gadgets"],
