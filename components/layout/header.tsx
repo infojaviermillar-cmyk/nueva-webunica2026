@@ -277,6 +277,12 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       </h4>
                       <ul className="flex flex-col gap-1">
                         <li>
+                          <Link href="/como-estructurar-ficha-de-producto-shopify" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors bg-emerald-50/50 border border-emerald-100">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors flex items-center gap-2">Ficha de Producto CRO <span className="text-[8px] bg-emerald-600 text-white px-1.5 py-0.5 rounded-sm uppercase font-black">NUEVO</span></span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Estructura para vender más</span>
+                          </Link>
+                        </li>
+                        <li>
                           <Link href="/comisiones-plataformas-de-pago-para-shopify-chile" className="group/item flex flex-col p-3 rounded-2xl hover:bg-emerald-50 transition-colors">
                             <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-emerald-600 transition-colors">Comisiones de Pago</span>
                             <span className="text-[11px] text-zinc-500 font-medium">Transbank, Mercado Pago, etc.</span>
@@ -648,6 +654,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/listas-de-verificacion-shopify-cro-basica" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-blue-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
                       Checklist CRO
+                    </Link>
+                    <Link href="/como-estructurar-ficha-de-producto-shopify" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-emerald-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                      Ficha de Producto CRO <span className="text-[9px] bg-emerald-600 text-white px-2 py-0.5 rounded-full uppercase font-black">Nuevo</span>
                     </Link>
                     <Link href="/comisiones-plataformas-de-pago-para-shopify-chile" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-blue-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
