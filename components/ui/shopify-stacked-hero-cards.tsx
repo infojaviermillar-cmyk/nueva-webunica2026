@@ -195,7 +195,6 @@ export default function ShopifyStackedHeroCards() {
               src={selectedImage.image} 
               alt={`Captura alta resolución de ${selectedImage.name}`}
               className="w-full h-auto object-contain rounded-xl"
-              style={{ imageRendering: 'high-quality' }}
             />
           </div>
 
