@@ -174,16 +174,16 @@ Revisa nuestra guía de tallas antes de comprar. Si dudas entre dos tallas, te r
         </section>
 
         {/* 1. Principio Central: Las 5 Preguntas en 3 Segundos */}
-        <section className="max-w-6xl mx-auto px-6 mb-20">
-          <div className="bg-zinc-950 text-white rounded-[2.5rem] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-violet-600/20 blur-[100px] rounded-full pointer-events-none" />
+        <section className="w-full bg-[#3c096c] text-white py-16 sm:py-20 lg:py-24 mb-20 relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/20 blur-[100px] rounded-full pointer-events-none" />
             
             <div className="max-w-3xl mb-10">
-              <span className="text-xs font-black uppercase tracking-[0.2em] text-violet-400">Regla de Oro</span>
+              <span className="text-xs font-black uppercase tracking-[0.2em] text-violet-300">Regla de Oro</span>
               <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight mt-2 mb-4">
                 Tu cliente decide en 3 segundos si se queda o se va
               </h2>
-              <p className="text-zinc-300 font-light text-base leading-relaxed">
+              <p className="text-purple-100 font-light text-base leading-relaxed">
                 Cuando una persona llega a tu producto desde Google, Instagram o un anuncio, no tiene tiempo para adivinar. La página debe responder de inmediato a estas 5 preguntas que todos se hacen mentalmente:
               </p>
             </div>
@@ -196,10 +196,10 @@ Revisa nuestra guía de tallas antes de comprar. Si dudas entre dos tallas, te r
                 { num: "04", q: "¿Qué garantía tengo si no me gusta o llega defectuoso?", desc: "Ofrece la seguridad del despacho verídico y la garantía legal SERNAC." },
                 { num: "05", q: "¿Cómo lo compro ahora mismo?", desc: "Un botón visible y fácil de presionar en celulares y computadores." },
               ].map((item, idx) => (
-                <div key={idx} className="bg-white/5 border border-white/10 p-6 rounded-2xl hover:border-violet-500/50 transition-colors">
-                  <div className="text-2xl font-black text-violet-400 mb-2">{item.num}</div>
+                <div key={idx} className="bg-white/10 border border-white/15 p-6 rounded-2xl hover:border-violet-300/50 transition-colors">
+                  <div className="text-2xl font-black text-violet-300 mb-2">{item.num}</div>
                   <h3 className="text-base font-bold text-white mb-2 leading-snug">{item.q}</h3>
-                  <p className="text-xs text-zinc-400 font-light leading-relaxed">{item.desc}</p>
+                  <p className="text-xs text-purple-100/80 font-light leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -586,20 +586,20 @@ Revisa nuestra guía de tallas antes de comprar. Si dudas entre dos tallas, te r
         </section>
 
         {/* 5. Normativa y Confianza en Chile (SERNAC) */}
-        <section className="max-w-6xl mx-auto px-6 mb-24">
-          <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 text-white rounded-[2.5rem] p-8 sm:p-12 relative overflow-hidden border border-zinc-800 shadow-xl">
+        <section className="w-full bg-[#3c096c] text-white py-16 sm:py-20 mb-24 relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-8 justify-between">
               <div className="space-y-4 max-w-2xl">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-bold uppercase tracking-widest">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full text-xs font-bold uppercase tracking-widest">
                   <ShieldCheck className="w-4 h-4" /> Normativa SERNAC &amp; Confianza en Chile
                 </div>
                 <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight">
                   Las Garantías Explicadas Generan Más Ventas que los Sellos Falsos
                 </h2>
-                <p className="text-zinc-400 text-sm font-light leading-relaxed">
+                <p className="text-purple-100/90 text-sm font-light leading-relaxed">
                   En Chile, la ley protege al comprador con la <strong className="text-white">Garantía Legal de 6 meses</strong> si el producto presenta fallas (reparación, cambio o devolución del dinero). Transmitir esta política con claridad en tu tienda elimina el miedo a comprar online.
                 </p>
-                <ul className="space-y-2 text-xs text-zinc-300">
+                <ul className="space-y-2 text-xs text-purple-100/90">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span><strong>Envíos Transparentes:</strong> Indica tiempos promedio según courier (Starken, BlueExpress, Chilexpress).</span>
@@ -611,11 +611,11 @@ Revisa nuestra guía de tallas antes de comprar. Si dudas entre dos tallas, te r
                 </ul>
               </div>
 
-              <div className="bg-white/5 border border-white/10 p-6 rounded-2xl w-full lg:w-80 text-center shrink-0">
-                <div className="text-3xl font-black text-emerald-400 mb-1">6 Meses</div>
-                <div className="text-xs uppercase font-bold text-zinc-300 mb-3">Garantía Legal en Chile</div>
-                <p className="text-[11px] text-zinc-400 font-light mb-4">Explícala en tu tienda y tus clientes comprarán con total tranquilidad.</p>
-                <div className="text-[10px] bg-white/10 px-3 py-1.5 rounded-lg text-zinc-300 font-mono">
+              <div className="bg-white/10 border border-white/15 p-6 rounded-2xl w-full lg:w-80 text-center shrink-0">
+                <div className="text-3xl font-black text-emerald-300 mb-1">6 Meses</div>
+                <div className="text-xs uppercase font-bold text-white mb-3">Garantía Legal en Chile</div>
+                <p className="text-[11px] text-purple-100/80 font-light mb-4">Explícala en tu tienda y tus clientes comprarán con total tranquilidad.</p>
+                <div className="text-[10px] bg-white/10 px-3 py-1.5 rounded-lg text-purple-200 font-mono">
                   SERNAC Cumplimiento 2026
                 </div>
               </div>
@@ -694,7 +694,7 @@ Revisa nuestra guía de tallas antes de comprar. Si dudas entre dos tallas, te r
               {checkedCount > 0 && (
                 <button
                   onClick={resetChecklist}
-                  className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-900 font-bold uppercase tracking-wider shrink-0"
+                  className="flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-900 font-bold uppercase tracking-wider shrink-0 cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" /> Reiniciar
                 </button>
@@ -704,22 +704,22 @@ Revisa nuestra guía de tallas antes de comprar. Si dudas entre dos tallas, te r
         </section>
 
         {/* 7. Plantilla Copiable para Copywriting de Producto */}
-        <section className="max-w-6xl mx-auto px-6 mb-24">
-          <div className="bg-zinc-900 text-white rounded-[2.5rem] p-8 sm:p-12 relative overflow-hidden border border-zinc-800 shadow-xl">
+        <section className="w-full bg-[#3c096c] text-white py-16 sm:py-20 mb-24 relative overflow-hidden">
+          <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-6">
               <div>
-                <span className="text-xs font-black uppercase tracking-widest text-violet-400">Recurso Reutilizable</span>
+                <span className="text-xs font-black uppercase tracking-widest text-violet-300">Recurso Reutilizable</span>
                 <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight mt-1">
                   Plantilla de Redacción para Copiar y Pegar en Shopify
                 </h2>
-                <p className="text-xs text-zinc-400 font-light mt-1">
+                <p className="text-xs text-purple-100/80 font-light mt-1">
                   Copia esta estructura base para redactar tus productos de forma ordenada y profesional:
                 </p>
               </div>
 
               <button
                 onClick={copyToClipboard}
-                className="flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shrink-0 shadow-lg shadow-violet-600/30"
+                className="flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shrink-0 shadow-lg shadow-violet-600/30 cursor-pointer"
               >
                 {copiedTemplate ? (
                   <>
@@ -735,30 +735,30 @@ Revisa nuestra guía de tallas antes de comprar. Si dudas entre dos tallas, te r
               </button>
             </div>
 
-            <pre className="p-6 bg-black/60 rounded-2xl border border-white/10 text-xs font-mono text-zinc-300 overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-96 custom-scrollbar">
+            <pre className="p-6 bg-black/40 rounded-2xl border border-white/15 text-xs font-mono text-purple-100 overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-96 custom-scrollbar">
               {templateText}
             </pre>
           </div>
         </section>
 
         {/* 8. Call to Action Final */}
-        <section className="max-w-4xl mx-auto px-6 text-center">
-          <div className="p-10 sm:p-16 bg-gradient-to-b from-violet-900 via-zinc-950 to-zinc-950 text-white rounded-[3rem] relative overflow-hidden shadow-2xl border border-violet-800/40">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-violet-500/20 blur-[120px] rounded-full pointer-events-none" />
+        <section className="w-full bg-[#3c096c] text-white py-20 sm:py-28 text-center relative overflow-hidden">
+          <div className="max-w-4xl mx-auto px-6 relative z-10">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-500/20 blur-[120px] rounded-full pointer-events-none" />
             
             <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tighter leading-none mb-6 relative z-10">
-              ¿Quieres que Diseñemos o Mejoremos tu <span className="text-violet-400 italic font-serif lowercase font-light">Tienda en Shopify?</span>
+              ¿Quieres que Diseñemos o Mejoremos tu <span className="text-violet-300 italic font-serif lowercase font-light">Tienda en Shopify?</span>
             </h2>
             
-            <p className="text-zinc-300 text-base sm:text-lg max-w-xl mx-auto font-light leading-relaxed mb-10 relative z-10">
+            <p className="text-purple-100 text-base sm:text-lg max-w-xl mx-auto font-light leading-relaxed mb-10 relative z-10">
               En Webunica creamos tiendas Shopify de alto rendimiento en Chile, con themes propios optimizados para conversión, boleta electrónica e integraciones locales.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-              <LeadButton className="px-10 py-5 bg-violet-600 hover:bg-violet-700 text-white font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-xl shadow-violet-600/30 text-center">
+              <LeadButton className="px-10 py-5 bg-violet-600 hover:bg-violet-500 text-white font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-xl shadow-violet-600/30 text-center cursor-pointer">
                 Cotizar Proyecto Shopify
               </LeadButton>
-              <WhatsAppButton className="px-10 py-5 bg-emerald-500 hover:bg-emerald-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-xl shadow-emerald-500/20 text-center">
+              <WhatsAppButton className="px-10 py-5 bg-emerald-500 hover:bg-emerald-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-xl shadow-emerald-500/20 text-center cursor-pointer">
                 Hablar por WhatsApp
               </WhatsAppButton>
             </div>
