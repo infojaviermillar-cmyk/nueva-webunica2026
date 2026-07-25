@@ -27,7 +27,7 @@ export type DesignStyle = {
 };
 
 export type CustomizerState = {
-  selectedWireframe: string; // 'home-simple' | 'home-alternativo' | 'home-completo' | 'categoria' | 'producto' | 'carrito'
+  selectedWireframe: string; // 'home-v1-actual' | 'home-v2-compacto' | 'home-v3-flash' | 'home-v4-sidebar' | 'categoria' | 'producto' | 'carrito'
   selectedStyleId: string;
   selectedPaletteId: string;
   colors: {
@@ -188,7 +188,7 @@ export const DESIGN_STYLES: DesignStyle[] = [
 ];
 
 export const useCustomizerStore = create<CustomizerState>((set, get) => ({
-  selectedWireframe: 'home-simple',
+  selectedWireframe: 'home-v1-actual',
   selectedStyleId: 'ecommerce',
   selectedPaletteId: 'ecom-stripe',
   colors: {
@@ -292,7 +292,7 @@ export const useCustomizerStore = create<CustomizerState>((set, get) => ({
   loadConfig: (config) => {
     if (!config) return;
     set({
-      selectedWireframe: config.selectedWireframe || 'home-simple',
+      selectedWireframe: config.selectedWireframe || 'home-v1-actual',
       selectedStyleId: config.selectedStyle || 'ecommerce',
       selectedPaletteId: config.selectedPalette || 'ecom-stripe',
       colors: config.colors ? { ...config.colors } : get().colors,

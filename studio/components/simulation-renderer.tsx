@@ -1394,12 +1394,14 @@ export function SimulationRenderer({
       {/* eslint-disable-next-line @next/next/no-page-custom-font */}
       <link rel="stylesheet" href={fontUrl} />
       
-      {wireframeId === 'home-simple' && renderHomeSimple()}
-      {wireframeId === 'home-alternativo' && renderHomeAlternativo()}
-      {wireframeId === 'home-completo' && renderHomeCompleto()}
+      {(wireframeId === 'home-v1-actual' || wireframeId === 'home-completo') && renderHomeCompleto()}
+      {(wireframeId === 'home-v2-compacto' || wireframeId === 'home-simple') && renderHomeSimple()}
+      {(wireframeId === 'home-v3-flash' || wireframeId === 'home-alternativo') && renderHomeAlternativo()}
+      {wireframeId === 'home-v4-sidebar' && renderHomeCompleto()}
       {wireframeId === 'categoria' && renderCategoria()}
       {wireframeId === 'producto' && renderProducto()}
       {wireframeId === 'carrito' && renderCarrito()}
+      {!['home-v1-actual', 'home-v2-compacto', 'home-v3-flash', 'home-v4-sidebar', 'home-simple', 'home-alternativo', 'home-completo', 'categoria', 'producto', 'carrito'].includes(wireframeId) && renderHomeCompleto()}
     </div>
   );
 }

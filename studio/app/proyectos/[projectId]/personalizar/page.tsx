@@ -233,7 +233,8 @@ export default function PersonalizarPage() {
   const currentStyle = DESIGN_STYLES.find(s => s.id === store.selectedStyleId) || DESIGN_STYLES[0];
 
   // Determinar ruta de imagen original
-  const originalImagePath = `/wireframes/maxxgo/${store.selectedWireframe}.png`;
+  const isJpg = ['home-v1-actual', 'home-v2-compacto', 'home-v3-flash', 'home-v4-sidebar'].includes(store.selectedWireframe);
+  const originalImagePath = `/wireframes/maxxgo/${store.selectedWireframe}.${isJpg ? 'jpg' : 'png'}`;
 
   // Cálculos de dimensiones físicas del simulador según Zoom
   const originalWidth = deviceView === 'desktop' ? 1440 : deviceView === 'tablet' ? 768 : 390;
@@ -268,7 +269,7 @@ export default function PersonalizarPage() {
           <div className="flex items-center gap-2">
             {pdfStatus === 'generating' && (
               <span className="text-xs text-indigo-600 font-bold flex items-center gap-1.5 animate-pulse">
-                <span className="w-2 h-2 rounded-full bg-indigo-500" /> Generando PDF...
+                Generando PDF...
               </span>
             )}
             {pdfStatus === 'success' && (
@@ -331,16 +332,17 @@ export default function PersonalizarPage() {
               <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-2">
                 <Layout className="w-4 h-4" /> 1. Wireframe Portada
               </h3>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 {[
-                  { id: 'home-completo', label: 'Completo' },
-                  { id: 'home-alternativo', label: 'Alternativo' },
-                  { id: 'home-simple', label: 'Simple' }
+                  { id: 'home-v1-actual', label: 'Clásico' },
+                  { id: 'home-v2-compacto', label: 'Compacto' },
+                  { id: 'home-v3-flash', label: 'Flash Sale' },
+                  { id: 'home-v4-sidebar', label: 'Sidebar Nav' }
                 ].map((item) => (
                   <button
                     key={item.id}
                     onClick={() => store.setWireframe(item.id)}
-                    className={`py-2 px-1 text-center rounded-xl text-[10px] font-bold border transition-all truncate cursor-pointer ${
+                    className={`py-2 px-2 text-center rounded-xl text-[10px] font-bold border transition-all truncate cursor-pointer ${
                       store.selectedWireframe === item.id 
                         ? 'border-indigo-600 bg-indigo-50 text-indigo-700' 
                         : 'border-slate-200 text-slate-600 hover:border-slate-300'
