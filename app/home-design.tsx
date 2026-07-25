@@ -11,6 +11,7 @@ import HomeFAQ from '@/components/sections/home-faq';
 import PricingPlans from '@/components/sections/pricing-plans';
 import ServicesTabs from '@/components/sections/services-tabs';
 import WorkProcess from '@/components/sections/work-process';
+import ViccaTransformationShowcase from '@/components/sections/vicca-transformation-showcase';
 
 export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const projects = [
@@ -333,6 +334,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
 
       <ServicesTabs />
       <WorkProcess />
+      <ViccaTransformationShowcase />
       <PricingPlans />
       <HomeFAQ />
       <TestimonialsSection />
