@@ -12,7 +12,7 @@ import { redesignPlans, redesignFeatures, type RedesignPlan } from '@/data/redes
 export const metadata: Metadata = {
   title: 'Rediseño de Tienda Shopify en Chile | Webunica',
   description:
-    'Tu tienda Shopify ya existe, nosotros la hacemos vender mejor. Rediseño completo de tema, UX y conversión. Planes desde $290.000. Expertos Shopify Partner en Chile.',
+    'Tu tienda Shopify ya existe, nosotros la hacemos vender mejor. Rediseño completo de tema, UX y conversión. Planes desde $390.000. Expertos Shopify Partner en Chile.',
   keywords: [
     'rediseño tienda shopify',
     'mejorar tienda shopify chile',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Rediseño de Tienda Shopify | Webunica Chile',
     description:
-      'Transforma tu tienda Shopify existente en una máquina de ventas. Nuevo diseño, mejor UX, mayor conversión. Planes desde $290.000.',
+      'Transforma tu tienda Shopify existente en una máquina de ventas. Nuevo diseño, mejor UX, mayor conversión. Planes desde $390.000.',
     url: 'https://webunica.cl/rediseno-tienda-shopify',
     siteName: 'Webunica',
     locale: 'es_CL',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Rediseño de Tienda Shopify | Webunica Chile',
     description:
-      'Tu tienda Shopify ya existe, nosotros la hacemos vender mejor. Planes desde $290.000.',
+      'Tu tienda Shopify ya existe, nosotros la hacemos vender mejor. Planes desde $390.000.',
     images: ['https://webunica.cl/og-rediseno-shopify.jpg'],
   },
 };

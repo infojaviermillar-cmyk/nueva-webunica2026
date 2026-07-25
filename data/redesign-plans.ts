@@ -22,7 +22,7 @@ export const redesignPlans: RedesignPlan[] = [
   {
     id: 'refresh',
     name: 'REFRESH',
-    price: '$290.000',
+    price: '$390.000',
     bonus: 'Revisión Core Web Vitals',
     desc: 'Para tiendas con buen catálogo pero diseño desactualizado.',
     shortDesc: 'Nuevo look, misma tienda.',
