@@ -373,15 +373,18 @@ export default function ShopifyEnChilePage() {
         {/* ========================================================= */}
         <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            
             {/* Carrusel de Casos con todos los proyectos */}
             <ShopifyInfiniteCasesCarousel />
+          </div>
+        </section>
 
-            {/* Vicca Transformation Flow Showcase */}
-            <ViccaTransformationShowcase />
+        {/* SECCIÓN ANCHO COMPLETO (#3c096c): CASO VICCA DE WIREFRAME A TIENDA FINAL */}
+        <ViccaTransformationShowcase />
 
-            {/* Testimonial Feature Card */}
-            <div className="mt-20 max-w-4xl mx-auto bg-violet-50 border border-violet-200/80 rounded-[3rem] p-8 sm:p-12 relative overflow-hidden shadow-sm">
+        {/* TESTIMONIAL DESTACADO */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto bg-violet-50 border border-violet-200/80 rounded-[3rem] p-8 sm:p-12 relative overflow-hidden shadow-sm">
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="w-20 h-20 rounded-full bg-violet-600 flex items-center justify-center text-white text-2xl font-black shrink-0 font-mono shadow-lg shadow-violet-600/30">
                   SM

@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
-import Image from 'next/image';
-import { CheckCircle2, ArrowRight, ExternalLink, ChevronLeft, ChevronRight, Sparkles, Maximize2, X } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { CheckCircle2, ExternalLink, ChevronLeft, ChevronRight, Sparkles, Maximize2, X, ZoomIn, ZoomOut } from 'lucide-react';
 
 type CaseItem = {
   id: string;
@@ -97,8 +96,36 @@ const cases: CaseItem[] = [
 ];
 
 export default function ShopifyInfiniteCasesCarousel() {
-  const [selectedCase, setSelectedCase] = useState<CaseItem | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [isZoomed100, setIsZoomed100] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const selectedCase = selectedIndex !== null ? cases[selectedIndex] : null;
+
+  const handlePrev = () => {
+    if (selectedIndex !== null) {
+      setSelectedIndex((selectedIndex - 1 + cases.length) % cases.length);
+    }
+  };
+
+  const handleNext = () => {
+    if (selectedIndex !== null) {
+      setSelectedIndex((selectedIndex + 1) % cases.length);
+    }
+  };
+
+  // Keyboard navigation for modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'Escape') setSelectedIndex(null);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIndex]);
 
   const handleScroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -108,8 +135,8 @@ export default function ShopifyInfiniteCasesCarousel() {
   };
 
   return (
-    <section className="py-20 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
+    <section className="py-16 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 mb-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 text-emerald-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
@@ -119,11 +146,11 @@ export default function ShopifyInfiniteCasesCarousel() {
               Casos Shopify que generan resultados
             </h2>
             <p className="text-zinc-600 text-base sm:text-lg font-light mt-2">
-              Explora algunos de los proyectos reales desarrollados para marcas líderes en Chile.
+              Explora nuestros proyectos reales desarrollados para marcas en Chile.
             </p>
           </div>
 
-          {/* Navigation Controls */}
+          {/* Track Controls */}
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={() => handleScroll('left')}
@@ -143,13 +170,13 @@ export default function ShopifyInfiniteCasesCarousel() {
         </div>
       </div>
 
-      {/* Infinite Horizontal Carousel Track */}
+      {/* Horizontal Carousel Track */}
       <div 
         ref={scrollRef}
         className="flex gap-6 overflow-x-auto scrollbar-none px-6 lg:px-12 py-4 scroll-smooth snap-x snap-mandatory"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {cases.map((item) => (
+        {cases.map((item, idx) => (
           <div
             key={item.id}
             className="w-[340px] sm:w-[380px] shrink-0 snap-start bg-zinc-50 rounded-[2.5rem] overflow-hidden border border-zinc-200 flex flex-col justify-between group hover:shadow-2xl hover:border-violet-300 transition-all duration-300"
@@ -158,7 +185,10 @@ export default function ShopifyInfiniteCasesCarousel() {
               {/* Image Preview Container */}
               <div 
                 className="relative w-full aspect-[16/10] bg-zinc-950 overflow-hidden cursor-pointer"
-                onClick={() => setSelectedCase(item)}
+                onClick={() => {
+                  setSelectedIndex(idx);
+                  setIsZoomed100(false);
+                }}
               >
                 <img
                   src={item.image}
@@ -175,7 +205,7 @@ export default function ShopifyInfiniteCasesCarousel() {
                 {/* Hover Zoom Indicator */}
                 <div className="absolute inset-0 bg-violet-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white uppercase tracking-wider backdrop-blur-[2px]">
                   <Maximize2 className="w-5 h-5 text-purple-200" />
-                  <span>Ver Detalle HD</span>
+                  <span>Abrir Galería HD</span>
                 </div>
               </div>
 
@@ -189,8 +219,8 @@ export default function ShopifyInfiniteCasesCarousel() {
                 </h3>
                 
                 <ul className="space-y-2.5 mb-6">
-                  {item.bullets.map((bullet, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-xs text-zinc-600 font-medium">
+                  {item.bullets.map((bullet, bIdx) => (
+                    <li key={bIdx} className="flex items-start gap-2 text-xs text-zinc-600 font-medium">
                       <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                       <span>{bullet}</span>
                     </li>
@@ -212,9 +242,12 @@ export default function ShopifyInfiniteCasesCarousel() {
               </a>
 
               <button
-                onClick={() => setSelectedCase(item)}
+                onClick={() => {
+                  setSelectedIndex(idx);
+                  setIsZoomed100(false);
+                }}
                 className="px-4 py-3 bg-violet-50 hover:bg-violet-600 hover:text-white text-violet-700 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer"
-                title="Ampliar captura"
+                title="Abrir en Galería HD"
               >
                 <Maximize2 className="w-4 h-4" />
               </button>
@@ -223,49 +256,133 @@ export default function ShopifyInfiniteCasesCarousel() {
         ))}
       </div>
 
-      {/* Lightbox Modal */}
+      {/* FULL INTERACTIVE GALLERY LIGHTBOX MODAL */}
       {selectedCase && (
         <div 
-          className="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] p-4 sm:p-8 flex flex-col items-center justify-center animate-in fade-in duration-200"
-          onClick={() => setSelectedCase(null)}
+          className="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] p-3 sm:p-6 flex flex-col items-center justify-center animate-in fade-in duration-200 select-none"
+          onClick={() => setSelectedIndex(null)}
         >
-          <div className="w-full max-w-6xl flex items-center justify-between pb-4 border-b border-white/10 mb-4 text-white">
+          {/* Top Gallery Bar */}
+          <div className="w-full max-w-7xl flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/15 mb-3 text-white">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-mono bg-violet-600 px-3 py-1 rounded-full font-bold uppercase">Caso Shopify</span>
-              <h4 className="text-xl font-black uppercase tracking-tight">{selectedCase.name}</h4>
-              <span className="text-xs text-zinc-400 font-mono hidden sm:inline-block">({selectedCase.url})</span>
+              <span className="text-xs font-mono bg-violet-600 text-white px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+                Proyecto {selectedIndex! + 1} / {cases.length}
+              </span>
+              <h4 className="text-lg sm:text-xl font-black uppercase tracking-tight">{selectedCase.name}</h4>
+              <span className="text-xs text-purple-300 font-mono hidden md:inline-block">({selectedCase.url})</span>
             </div>
             
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              {/* Zoom 100% Toggle */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsZoomed100(!isZoomed100);
+                }}
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all border ${
+                  isZoomed100 
+                    ? 'bg-purple-600 text-white border-purple-400 shadow-lg shadow-purple-600/40' 
+                    : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
+                }`}
+              >
+                {isZoomed100 ? (
+                  <>
+                    <ZoomOut className="w-4 h-4 text-purple-200" />
+                    <span className="hidden sm:inline">Ajustar Pantalla</span>
+                  </>
+                ) : (
+                  <>
+                    <ZoomIn className="w-4 h-4 text-emerald-400" />
+                    <span className="hidden sm:inline">Escala 100% HD</span>
+                  </>
+                )}
+              </button>
+
               <a 
                 href={`https://${selectedCase.url}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="hidden sm:flex items-center gap-1.5 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors border border-white/15"
+                className="hidden sm:flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-lg shadow-emerald-500/20"
               >
-                <span>Visitar Sitio Web</span>
+                <span>Visitar Sitio</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
 
               <button 
-                onClick={() => setSelectedCase(null)}
+                onClick={() => setSelectedIndex(null)}
                 className="p-2.5 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors cursor-pointer"
+                title="Cerrar galeria"
               >
                 <X className="w-6 h-6" />
               </button>
             </div>
           </div>
 
+          {/* Main Display Area with Left / Right Floating Navigation Buttons */}
           <div 
-            className="relative w-full max-w-6xl flex-1 max-h-[85vh] overflow-y-auto rounded-2xl bg-zinc-950 border border-white/15 shadow-2xl p-2 flex justify-center cursor-default custom-scrollbar"
+            className="relative w-full max-w-7xl flex-1 flex items-center justify-between"
             onClick={(e) => e.stopPropagation()}
           >
-            <img 
-              src={selectedCase.image} 
-              alt={`Captura alta resolución de ${selectedCase.name}`}
-              className="w-full h-auto object-contain rounded-xl"
-            />
+            {/* Prev Button */}
+            <button
+              onClick={handlePrev}
+              className="absolute left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-50 p-3.5 sm:p-4 rounded-full bg-zinc-900/90 text-white border border-white/20 hover:bg-violet-600 hover:border-violet-400 transition-all shadow-2xl hover:scale-110 cursor-pointer"
+              title="Anterior proyecto (Flecha Izquierda)"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            {/* High-Res Image Box */}
+            <div 
+              className={`w-full max-h-[82vh] overflow-auto rounded-2xl bg-zinc-950 border border-white/15 shadow-2xl p-2 flex justify-center custom-scrollbar ${
+                isZoomed100 ? 'items-start justify-start' : 'items-center justify-center'
+              }`}
+            >
+              <img 
+                src={selectedCase.image} 
+                alt={`Captura alta resolución de ${selectedCase.name}`}
+                className={`rounded-xl transition-all duration-300 ${
+                  isZoomed100 
+                    ? 'w-[1920px] max-w-none h-auto shrink-0 shadow-2xl' 
+                    : 'w-full h-auto max-h-[80vh] object-contain'
+                }`}
+              />
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={handleNext}
+              className="absolute right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-50 p-3.5 sm:p-4 rounded-full bg-zinc-900/90 text-white border border-white/20 hover:bg-violet-600 hover:border-violet-400 transition-all shadow-2xl hover:scale-110 cursor-pointer"
+              title="Siguiente proyecto (Flecha Derecha)"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Bottom Bar Info & Gallery Thumbs Indicator */}
+          <div className="w-full max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-2 mt-3 text-xs font-mono text-purple-200/80">
+            <span className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <span>Categoría: <strong>{selectedCase.category}</strong> • Usa las flechas ◀ ▶ para navegar</span>
+            </span>
+
+            {/* Quick Dots / Pager */}
+            <div className="flex items-center gap-1.5 overflow-x-auto max-w-xs py-1">
+              {cases.map((c, i) => (
+                <button
+                  key={c.id}
+                  onClick={() => {
+                    setSelectedIndex(i);
+                    setIsZoomed100(false);
+                  }}
+                  className={`h-2 rounded-full transition-all cursor-pointer ${
+                    i === selectedIndex ? 'w-6 bg-violet-400' : 'w-2 bg-white/30 hover:bg-white/60'
+                  }`}
+                  title={c.name}
+                />
+              ))}
+            </div>
           </div>
         </div>
       )}

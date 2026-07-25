@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { ShoppingBag, X, Maximize2, ExternalLink, Sparkles, ZoomIn, ZoomOut, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ShoppingBag, X, Maximize2, ExternalLink, Sparkles, ZoomIn, ZoomOut, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 
 type StoreCard = {
   id: string;
@@ -64,9 +64,35 @@ const storeCards: StoreCard[] = [
 ];
 
 export default function ShopifyStackedHeroCards() {
-  const [selectedImage, setSelectedImage] = useState<StoreCard | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [activeHoverId, setActiveHoverId] = useState<string | null>(null);
   const [isZoomed100, setIsZoomed100] = useState<boolean>(false);
+
+  const selectedImage = selectedIndex !== null ? storeCards[selectedIndex] : null;
+
+  const handlePrev = () => {
+    if (selectedIndex !== null) {
+      setSelectedIndex((selectedIndex - 1 + storeCards.length) % storeCards.length);
+    }
+  };
+
+  const handleNext = () => {
+    if (selectedIndex !== null) {
+      setSelectedIndex((selectedIndex + 1) % storeCards.length);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'Escape') setSelectedIndex(null);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedIndex]);
 
   return (
     <div className="relative w-full max-w-2xl mx-auto py-2 select-none">
@@ -79,7 +105,6 @@ export default function ShopifyStackedHeroCards() {
           const isVicca = index === 0;
           const isHovered = activeHoverId === store.id;
 
-          // Staggered horizontal positioning to reveal left vertical slice of each store
           const leftOffset = index * 12.5; 
           const zIndex = isHovered ? 60 : isVicca ? 50 : 40 - index;
 
@@ -87,7 +112,7 @@ export default function ShopifyStackedHeroCards() {
             <div
               key={store.id}
               onClick={() => {
-                setSelectedImage(store);
+                setSelectedIndex(index);
                 setIsZoomed100(false);
               }}
               onMouseEnter={() => setActiveHoverId(store.id)}
@@ -120,7 +145,7 @@ export default function ShopifyStackedHeroCards() {
                 </span>
               </div>
 
-              {/* Crisp Native Store Viewport (Top Header & Hero Focus) */}
+              {/* Crisp Native Store Viewport */}
               <div className="relative w-full h-[calc(100%-32px)] bg-zinc-950 overflow-hidden">
                 <img
                   src={store.image}
@@ -142,7 +167,7 @@ export default function ShopifyStackedHeroCards() {
                     
                     <div className="px-3 py-1.5 rounded-xl bg-white text-zinc-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-xl hover:bg-purple-100 transition-colors">
                       <Maximize2 className="w-3.5 h-3.5 text-violet-600" />
-                      <span>Ver Nitido 100%</span>
+                      <span>Abrir Galería HD</span>
                     </div>
                   </div>
                 </div>
@@ -167,21 +192,21 @@ export default function ShopifyStackedHeroCards() {
       <div className="text-center mt-10">
         <span className="inline-flex items-center gap-2 px-5 py-2 bg-zinc-900 text-white border border-zinc-700 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider shadow-lg">
           <Sparkles className="w-4 h-4 text-violet-400" />
-          Haz clic en cualquier tienda para abrirla a resolución HD 100% sin compresión
+          Haz clic en cualquier tienda para abrir la galeria HD interactiva
         </span>
       </div>
 
-      {/* High-Resolution Crisp Lightbox Modal */}
+      {/* High-Resolution Crisp Lightbox Gallery Modal */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] p-3 sm:p-6 flex flex-col items-center justify-center animate-in fade-in duration-200"
-          onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] p-3 sm:p-6 flex flex-col items-center justify-center animate-in fade-in duration-200 select-none"
+          onClick={() => setSelectedIndex(null)}
         >
           {/* Lightbox Top Control Bar */}
           <div className="w-full max-w-7xl flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/15 mb-3 text-white">
             <div className="flex items-center gap-3">
               <span className="text-xs font-mono bg-violet-600 px-3 py-1 rounded-full font-bold uppercase tracking-wider">
-                Shopify HD Live
+                Proyecto {selectedIndex! + 1} / {storeCards.length}
               </span>
               <h4 className="text-lg sm:text-xl font-black uppercase tracking-tight">{selectedImage.name}</h4>
               <span className="text-xs text-purple-300 font-mono hidden md:inline-block">
@@ -196,7 +221,7 @@ export default function ShopifyStackedHeroCards() {
                   e.stopPropagation();
                   setIsZoomed100(!isZoomed100);
                 }}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all border ${
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all border ${
                   isZoomed100 
                     ? 'bg-purple-600 text-white border-purple-400 shadow-lg shadow-purple-600/40' 
                     : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
@@ -205,12 +230,12 @@ export default function ShopifyStackedHeroCards() {
                 {isZoomed100 ? (
                   <>
                     <ZoomOut className="w-4 h-4 text-purple-200" />
-                    <span>Ajustar a Pantalla</span>
+                    <span className="hidden sm:inline">Ajustar Pantalla</span>
                   </>
                 ) : (
                   <>
                     <ZoomIn className="w-4 h-4 text-emerald-400" />
-                    <span>Ver Escala 100% Nitida (1920px)</span>
+                    <span className="hidden sm:inline">Escala 100% HD</span>
                   </>
                 )}
               </button>
@@ -227,7 +252,7 @@ export default function ShopifyStackedHeroCards() {
               </a>
 
               <button 
-                onClick={() => setSelectedImage(null)}
+                onClick={() => setSelectedIndex(null)}
                 className="p-2.5 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors cursor-pointer"
                 title="Cerrar vista previa"
               >
@@ -236,31 +261,69 @@ export default function ShopifyStackedHeroCards() {
             </div>
           </div>
 
-          {/* Crisp High-Res Container */}
+          {/* Main Display Area with Left / Right Floating Navigation Buttons */}
           <div 
-            className={`relative w-full max-w-7xl flex-1 max-h-[86vh] overflow-auto rounded-2xl bg-zinc-950 border border-white/20 shadow-2xl p-2 flex justify-center custom-scrollbar ${
-              isZoomed100 ? 'items-start justify-start cursor-grab active:cursor-grabbing' : 'items-center justify-center cursor-default'
-            }`}
+            className="relative w-full max-w-7xl flex-1 flex items-center justify-between"
             onClick={(e) => e.stopPropagation()}
           >
-            <img 
-              src={selectedImage.image} 
-              alt={`Captura nitida 100% de ${selectedImage.name}`}
-              className={`rounded-xl transition-all duration-300 ${
-                isZoomed100 
-                  ? 'w-[1920px] max-w-none h-auto shrink-0 shadow-2xl' 
-                  : 'w-full h-auto max-h-[82vh] object-contain'
+            {/* Prev Button */}
+            <button
+              onClick={handlePrev}
+              className="absolute left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-50 p-3.5 sm:p-4 rounded-full bg-zinc-900/90 text-white border border-white/20 hover:bg-violet-600 hover:border-violet-400 transition-all shadow-2xl hover:scale-110 cursor-pointer"
+              title="Anterior proyecto (Flecha Izquierda)"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            {/* High-Res Container */}
+            <div 
+              className={`w-full max-h-[82vh] overflow-auto rounded-2xl bg-zinc-950 border border-white/20 shadow-2xl p-2 flex justify-center custom-scrollbar ${
+                isZoomed100 ? 'items-start justify-start' : 'items-center justify-center'
               }`}
-            />
+            >
+              <img 
+                src={selectedImage.image} 
+                alt={`Captura alta resolución de ${selectedImage.name}`}
+                className={`rounded-xl transition-all duration-300 ${
+                  isZoomed100 
+                    ? 'w-[1920px] max-w-none h-auto shrink-0 shadow-2xl' 
+                    : 'w-full h-auto max-h-[80vh] object-contain'
+                }`}
+              />
+            </div>
+
+            {/* Next Button */}
+            <button
+              onClick={handleNext}
+              className="absolute right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-50 p-3.5 sm:p-4 rounded-full bg-zinc-900/90 text-white border border-white/20 hover:bg-violet-600 hover:border-violet-400 transition-all shadow-2xl hover:scale-110 cursor-pointer"
+              title="Siguiente proyecto (Flecha Derecha)"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
           </div>
 
-          {/* Bottom Bar Info */}
-          <div className="w-full max-w-7xl flex items-center justify-between mt-3 text-xs font-mono text-purple-200/80">
+          {/* Bottom Bar Info & Indicator */}
+          <div className="w-full max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-2 mt-3 text-xs font-mono text-purple-200/80">
             <span className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span>Resolución original 1920x945 px • Theme Shopify Personalizado</span>
+              <span>Categoría: <strong>{selectedImage.category}</strong> • Navega con ◀ ▶ o teclado</span>
             </span>
-            <span className="hidden sm:inline-block">Haz clic fuera o presiona X para salir</span>
+
+            <div className="flex items-center gap-1.5 overflow-x-auto max-w-xs py-1">
+              {storeCards.map((c, i) => (
+                <button
+                  key={c.id}
+                  onClick={() => {
+                    setSelectedIndex(i);
+                    setIsZoomed100(false);
+                  }}
+                  className={`h-2 rounded-full transition-all cursor-pointer ${
+                    i === selectedIndex ? 'w-6 bg-violet-400' : 'w-2 bg-white/30 hover:bg-white/60'
+                  }`}
+                  title={c.name}
+                />
+              ))}
+            </div>
           </div>
         </div>
       )}
