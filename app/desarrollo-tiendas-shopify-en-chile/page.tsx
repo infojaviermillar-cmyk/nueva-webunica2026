@@ -8,6 +8,7 @@ import { MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Pale
 import ShopifyPricingSection from '@/components/sections/shopify-pricing-section';
 import ShopifyVideoPortfolio from '@/components/sections/shopify-video-portfolio';
 import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
+import ViccaTransformationShowcase from '@/components/sections/vicca-transformation-showcase';
 export const metadata = {
   title: 'Desarrollo de Tiendas Shopify en Chile | Expertos Shopify Partner 2026',
   description: 'Expertos líderes en diseño y desarrollo de tiendas Shopify en Chile. Optimizamos tu ecommerce con Transbank, Webpay, Flow y Facturación SII. ¡Cotiza con Expertos Shopify!',
@@ -157,6 +158,8 @@ export default function ShopifyEnChilePage() {
         <ShopifyAppsCarousel />
 
         <ShopifyPricingSection />
+
+        <ViccaTransformationShowcase />
 
         {/* Video Portfolio Section */}
         <ShopifyVideoPortfolio />
