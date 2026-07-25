@@ -8,6 +8,7 @@ import ViccaTransformationShowcase from '@/components/sections/vicca-transformat
 import ShopifyStackedHeroCards from '@/components/ui/shopify-stacked-hero-cards';
 import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
 import ShopifyInfiniteCasesCarousel from '@/components/sections/shopify-infinite-cases-carousel';
+import ShopifyClientTestimonials from '@/components/sections/shopify-client-testimonials';
 import { 
   Sparkles, 
   CheckCircle2, 
@@ -381,31 +382,10 @@ export default function ShopifyEnChilePage() {
         {/* SECCIÓN ANCHO COMPLETO (#3c096c): CASO VICCA DE WIREFRAME A TIENDA FINAL */}
         <ViccaTransformationShowcase />
 
-        {/* TESTIMONIAL DESTACADO */}
+        {/* TESTIMONIALES DESTACADOS DE CLIENTES */}
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto bg-violet-50 border border-violet-200/80 rounded-[3rem] p-8 sm:p-12 relative overflow-hidden shadow-sm">
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="w-20 h-20 rounded-full bg-violet-600 flex items-center justify-center text-white text-2xl font-black shrink-0 font-mono shadow-lg shadow-violet-600/30">
-                  SM
-                </div>
-                <div>
-                  <div className="flex items-center gap-1 text-amber-400 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-                  <blockquote className="text-base sm:text-lg text-zinc-800 italic font-serif leading-relaxed mb-4">
-                    "Necesitábamos integrar nuestra tienda con los medios de pago, despacho y facturación. Webunica entendió nuestro negocio y nos entregó una tienda que hoy opera sin problemas. Recomendados 100%."
-                  </blockquote>
-                  <div>
-                    <strong className="text-sm font-black uppercase text-zinc-950 block">Carolina Muñoz</strong>
-                    <span className="text-xs text-zinc-500 font-medium">Gerente de Operaciones — SpinMedical</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            <ShopifyClientTestimonials />
           </div>
         </section>
 
