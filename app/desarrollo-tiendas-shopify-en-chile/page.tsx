@@ -117,20 +117,20 @@ export default function ShopifyEnChilePage() {
 
   const caseStudies = [
     {
-      name: "SpinMedical",
-      category: "Insumos Médicos & Salud",
-      image: "/clientes/Spinmedical.png",
+      name: "Vicca",
+      category: "Moda & Ergonomía",
+      image: "/clientes-2/vicca.cl.png",
       bullets: [
-        "Diseño y desarrollo Shopify a medida",
-        "Integración de pagos Webpay y despachos",
-        "Capacitación al equipo operativo"
+        "Diseño Liquid a medida",
+        "Integración Webpay & Flow",
+        "Despacho por zonas en Chile"
       ],
-      link: "https://spinmedical.cl/"
+      link: "https://vicca.cl/"
     },
     {
       name: "PHY Waters",
       category: "Purificadores de Agua & Bienestar",
-      image: "/clientes/PHY Waters.png",
+      image: "/clientes-2/phywaters.com.png",
       bullets: [
         "Diseño e-commerce de alta conversión",
         "Integración Webpay y despachos regionales",
@@ -141,7 +141,7 @@ export default function ShopifyEnChilePage() {
     {
       name: "Altavista Chile",
       category: "Equipamiento Industrial & Outdoor",
-      image: "/clientes/altavista.png",
+      image: "/clientes-2/altavistachile.cl.png",
       bullets: [
         "Migración completa a Shopify",
         "Catálogo avanzado + Integración ERP",

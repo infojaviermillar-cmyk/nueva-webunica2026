@@ -55,6 +55,20 @@ const storeCards: StoreCard[] = [
     image: '/clientes-2/terraandesplus.cl.png',
   },
   {
+    id: 'phywaters',
+    name: 'PHY Waters',
+    url: 'phywaters.com',
+    category: 'Bienestar & Purificadores',
+    image: '/clientes-2/phywaters.com.png',
+  },
+  {
+    id: 'altavista',
+    name: 'Altavista Chile',
+    url: 'altavistachile.cl',
+    category: 'Industrial & Outdoor',
+    image: '/clientes-2/altavistachile.cl.png',
+  },
+  {
     id: 'tuupos',
     name: 'Tuupos',
     url: 'tuupos.cl',

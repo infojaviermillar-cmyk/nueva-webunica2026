@@ -30,14 +30,6 @@ const cases: CaseItem[] = [
     bullets: ['Ficha de producto con CRO', 'Reseñas & Social Proof', 'Navegación Mobile-First 100%']
   },
   {
-    id: 'spinmedical',
-    name: 'SpinMedical',
-    url: 'spinmedical.cl',
-    category: 'Salud & Insumos Médicos',
-    image: '/clientes/Spinmedical.png',
-    bullets: ['Diseño e-commerce a medida', 'Integración de pagos & ERP', 'Capacitación al equipo']
-  },
-  {
     id: 'tecno',
     name: 'Tecno-Mobile',
     url: 'tecno-mobile.cl',
@@ -50,7 +42,7 @@ const cases: CaseItem[] = [
     name: 'PHY Waters',
     url: 'phywaters.com',
     category: 'Bienestar & Purificadores',
-    image: '/clientes/PHY Waters.png',
+    image: '/clientes-2/phywaters.com.png',
     bullets: ['Theme propio optimizado', 'Checkout de baja fricción', 'Optimización de conversión']
   },
   {
@@ -66,7 +58,7 @@ const cases: CaseItem[] = [
     name: 'Altavista Chile',
     url: 'altavistachile.cl',
     category: 'Industrial & Outdoor',
-    image: '/clientes/altavista.png',
+    image: '/clientes-2/altavistachile.cl.png',
     bullets: ['Migración a Shopify', 'Catálogo técnico + ERP', 'SEO orgánico estratégico']
   },
   {
