@@ -5,23 +5,42 @@ import { useRouter, useParams } from 'next/navigation';
 import { 
   Bot, 
   ArrowLeft, 
-  Eye, 
   Check, 
   ZoomIn, 
   X,
   FileText,
   LayoutGrid,
   ShoppingBag,
-  ShoppingCart
+  ShoppingCart,
+  Zap,
+  LayoutTemplate,
+  Rows3,
+  Layers
 } from 'lucide-react';
 import Link from 'next/link';
 
-type WireframeOption = {
+type FeatureTag = {
+  label: string;
+  color: string;
+};
+
+type HomeOption = {
   id: string;
   name: string;
   description: string;
-  svgPath: string;
-  type: 'home' | 'internal';
+  imagePath: string;
+  badge?: string;
+  badgeColor?: string;
+  features: FeatureTag[];
+  type: 'home';
+};
+
+type InternalPage = {
+  id: string;
+  name: string;
+  description: string;
+  imagePath: string;
+  type: 'internal';
 };
 
 export default function WireframesPage() {
@@ -33,31 +52,66 @@ export default function WireframesPage() {
   const [selectedHome, setSelectedHome] = useState<string | null>(null);
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
 
-  const homeOptions = [
+  const homeOptions: HomeOption[] = [
     {
-      id: 'home-completo',
-      name: 'Home Completo',
-      description: 'Mayor densidad de secciones comerciales: categorías destacadas, múltiples grillas de productos, ofertas por tiempo limitado, carrusel de marcas y sección de testimonios. Ideal para tiendas con catálogos amplios y alto enfoque promocional.',
-      imagePath: '/wireframes/maxxgo/home-completo.png',
+      id: 'home-v1-actual',
+      name: 'Home Clásico',
+      description: 'Layout tradicional de marketplace con buscador prominente, hero dividido con product cards, grilla 2×3 de categorías, carrusel de ofertas destacadas y banner gaming. Alta densidad comercial con estructura probada.',
+      imagePath: '/wireframes/maxxgo/home-v1-actual.jpg',
+      badge: 'Referencia',
+      badgeColor: 'bg-slate-200 text-slate-700',
+      features: [
+        { label: '🛍 Carrusel Ofertas', color: 'bg-blue-50 text-blue-700' },
+        { label: '🎮 Banner Gaming', color: 'bg-purple-50 text-purple-700' },
+        { label: '📦 6 Categorías', color: 'bg-slate-50 text-slate-600' },
+      ],
       type: 'home'
     },
     {
-      id: 'home-alternativo',
-      name: 'Home Alternativo',
-      description: 'Diseño enfocado en branding e impacto visual. Destaca por un banner de héroe de pantalla completa, menor densidad de elementos, y un equilibrio óptimo entre la narrativa de la marca y la conversión.',
-      imagePath: '/wireframes/maxxgo/home-alternativo.png',
+      id: 'home-v2-compacto',
+      name: 'Home Compacto Pro',
+      description: 'Hero compacto con oferta destacada lateral. Incluye 10 categorías en grid, 4 bloques de promociones imperdibles (Ofertas del día, Cyber, Cuotas, Envíos gratis), productos trending con tabs y sección de testimonios.',
+      imagePath: '/wireframes/maxxgo/home-v2-compacto.jpg',
+      badge: 'Más completo',
+      badgeColor: 'bg-indigo-100 text-indigo-700',
+      features: [
+        { label: '🎯 4 Bloques Promo', color: 'bg-indigo-50 text-indigo-700' },
+        { label: '⭐ Testimonios', color: 'bg-amber-50 text-amber-700' },
+        { label: '📱 10 Categorías', color: 'bg-slate-50 text-slate-600' },
+      ],
       type: 'home'
     },
     {
-      id: 'home-simple',
-      name: 'Home Simple',
-      description: 'Aproximadamente 50% menos secciones que el modelo completo. Navegación extremadamente directa, libre de ruido visual, centrándose exclusivamente en el catálogo de productos esenciales y buscador destacado.',
-      imagePath: '/wireframes/maxxgo/home-simple.png',
+      id: 'home-v3-flash',
+      name: 'Home Flash Sale',
+      description: 'Hero carrusel con sidebar de Oferta del Día y countdown. Sección de Ofertas Flash cronometradas con 6 productos. Destacados MAXXGO con comparación visual (Mejor Rendimiento / Equilibrio / Precio). Ideal para campañas de alta conversión.',
+      imagePath: '/wireframes/maxxgo/home-v3-flash.jpg',
+      badge: 'Alta conversión',
+      badgeColor: 'bg-red-100 text-red-700',
+      features: [
+        { label: '⚡ Flash Sale Timer', color: 'bg-red-50 text-red-700' },
+        { label: '🏆 Top 3 Productos', color: 'bg-orange-50 text-orange-700' },
+        { label: '⏱ Countdown Hero', color: 'bg-slate-50 text-slate-600' },
+      ],
       type: 'home'
-    }
+    },
+    {
+      id: 'home-v4-sidebar',
+      name: 'Home Sidebar Nav',
+      description: 'Inspirado en grandes marketplaces (Amazon / Mercado Libre). Nav lateral de categorías con hero de 3 columnas y paneles derechos (Ofertas, Novedades, Cuotas). Acceso rápido horizontal, banners por necesidad (Oficina / Gamer / Móvil) y Más Vendidos rankeados.',
+      imagePath: '/wireframes/maxxgo/home-v4-sidebar.jpg',
+      badge: 'Marketplace style',
+      badgeColor: 'bg-emerald-100 text-emerald-700',
+      features: [
+        { label: '🗂 Nav Sidebar', color: 'bg-emerald-50 text-emerald-700' },
+        { label: '🏅 Más Vendidos', color: 'bg-amber-50 text-amber-700' },
+        { label: '🖥 Hero 3 Columnas', color: 'bg-slate-50 text-slate-600' },
+      ],
+      type: 'home'
+    },
   ];
 
-  const internalPages = [
+  const internalPages: InternalPage[] = [
     { id: 'categoria', name: 'Página de Categoría', description: 'Vista de catálogo con barra lateral de filtros avanzados y ordenamiento.', imagePath: '/wireframes/maxxgo/categoria.png', type: 'internal' },
     { id: 'producto', name: 'Ficha de Producto', description: 'Detalle técnico, selector de atributos (color, tamaño), cantidad y botones de compra.', imagePath: '/wireframes/maxxgo/producto.png', type: 'internal' },
     { id: 'carrito', name: 'Carro de Compras', description: 'Resumen del pedido, tabla de ítems y desglose de totales.', imagePath: '/wireframes/maxxgo/carrito.png', type: 'internal' }
@@ -71,7 +125,6 @@ export default function WireframesPage() {
       router.push('/login');
     }
 
-    // Cargar si ya había una propuesta seleccionada
     const savedConfig = localStorage.getItem(`project_config_${projectId}`);
     if (savedConfig) {
       const config = JSON.parse(savedConfig);
@@ -84,7 +137,6 @@ export default function WireframesPage() {
   const handleSelectProposal = (id: string) => {
     setSelectedHome(id);
     
-    // Guardar selección preliminar en local
     const savedConfig = localStorage.getItem(`project_config_${projectId}`);
     const existing = savedConfig ? JSON.parse(savedConfig) : {
       projectId,
@@ -107,9 +159,14 @@ export default function WireframesPage() {
     
     existing.selectedWireframe = id;
     localStorage.setItem(`project_config_${projectId}`, JSON.stringify(existing));
-
-    // Redirigir al personalizador
     router.push(`/proyectos/${projectId}/personalizar`);
+  };
+
+  const wireframeIcons: Record<string, React.ReactNode> = {
+    'home-v1-actual': <LayoutTemplate className="w-4 h-4" />,
+    'home-v2-compacto': <Rows3 className="w-4 h-4" />,
+    'home-v3-flash': <Zap className="w-4 h-4" />,
+    'home-v4-sidebar': <Layers className="w-4 h-4" />,
   };
 
   return (
@@ -131,9 +188,17 @@ export default function WireframesPage() {
               <span className="text-xs text-slate-400 font-medium">/ Proyecto: {projectId.toUpperCase()}</span>
             </div>
           </div>
-          <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full uppercase">
-            Paso 1: Estructura
-          </span>
+          <div className="flex items-center gap-3">
+            {selectedHome && (
+              <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 border border-indigo-100 px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                <Check className="w-3 h-3" />
+                {homeOptions.find(o => o.id === selectedHome)?.name}
+              </span>
+            )}
+            <span className="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full uppercase">
+              Paso 1: Estructura
+            </span>
+          </div>
         </div>
       </header>
 
@@ -142,67 +207,93 @@ export default function WireframesPage() {
         <div className="mb-12">
           <h1 className="text-3xl font-extrabold tracking-tight text-slate-800">Selecciona el Wireframe Base</h1>
           <p className="text-slate-500 mt-2 max-w-3xl">
-            Revisa los modelos estructurales originales antes de aplicar tipografías y colores. Selecciona la propuesta de portada que mejor se ajuste a la estrategia comercial del cliente.
+            Revisa los 4 modelos estructurales del proyecto MAXXGO antes de aplicar tipografías y colores. Selecciona la propuesta de portada que mejor se ajuste a la estrategia comercial del cliente.
           </p>
         </div>
 
-        {/* Home Wireframes Section */}
+        {/* Home Wireframes Grid — 2×2 */}
         <div className="mb-16">
           <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-            <LayoutGrid className="w-5 h-5 text-indigo-600" /> Propuestas de Portada (Home)
+            <LayoutGrid className="w-5 h-5 text-indigo-600" />
+            Propuestas de Portada (Home)
+            <span className="ml-auto text-xs font-medium text-slate-400 bg-slate-100 px-3 py-1 rounded-full">4 variantes</span>
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+
+          <div className="grid md:grid-cols-2 gap-8">
             {homeOptions.map((opt) => (
               <div 
                 key={opt.id}
                 className={`bg-white border-2 rounded-[2rem] overflow-hidden transition-all flex flex-col justify-between ${
                   selectedHome === opt.id 
-                    ? "border-indigo-600 ring-4 ring-indigo-50" 
-                    : "border-slate-200 hover:border-slate-300"
+                    ? 'border-indigo-600 ring-4 ring-indigo-50' 
+                    : 'border-slate-200 hover:border-slate-300 hover:shadow-lg hover:shadow-slate-200/50'
                 }`}
               >
-                <div>
-                  {/* Image container */}
-                  <div className="aspect-[4/5] bg-slate-100 relative group overflow-hidden border-b border-slate-100">
-                    <img 
-                      src={opt.imagePath} 
-                      alt={opt.name}
-                      className="w-full h-full object-cover object-top select-none"
-                    />
-                    <div className="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                      <button 
-                        onClick={() => setZoomedImage(opt.imagePath)}
-                        className="bg-white/90 hover:bg-white text-slate-800 p-3.5 rounded-full shadow-lg transition-transform hover:scale-115 cursor-pointer"
-                        title="Ampliar Wireframe"
-                      >
-                        <ZoomIn className="w-5 h-5" />
-                      </button>
-                    </div>
+                {/* Image */}
+                <div className="aspect-[16/10] bg-slate-100 relative group overflow-hidden border-b border-slate-100">
+                  <img 
+                    src={opt.imagePath} 
+                    alt={opt.name}
+                    className="w-full h-full object-cover object-top select-none transition-transform duration-500 group-hover:scale-105"
+                  />
+
+                  {/* Badge top-left */}
+                  {opt.badge && (
+                    <span className={`absolute top-4 left-4 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full ${opt.badgeColor}`}>
+                      {opt.badge}
+                    </span>
+                  )}
+
+                  {/* Zoom overlay */}
+                  <div className="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                    <button 
+                      onClick={() => setZoomedImage(opt.imagePath)}
+                      className="bg-white/90 hover:bg-white text-slate-800 p-3.5 rounded-full shadow-lg transition-transform hover:scale-110 cursor-pointer"
+                      title="Ampliar Wireframe"
+                    >
+                      <ZoomIn className="w-5 h-5" />
+                    </button>
                   </div>
 
-                  <div className="p-8">
-                    <h3 className="text-xl font-bold mb-2 flex items-center justify-between">
-                      {opt.name}
-                      {selectedHome === opt.id && (
-                        <span className="p-1 bg-indigo-100 text-indigo-700 rounded-full">
-                          <Check className="w-4 h-4" />
-                        </span>
-                      )}
-                    </h3>
-                    <p className="text-slate-500 text-sm leading-relaxed">{opt.description}</p>
-                  </div>
+                  {/* Selected check */}
+                  {selectedHome === opt.id && (
+                    <div className="absolute top-4 right-4 bg-indigo-600 text-white p-1.5 rounded-full shadow-lg">
+                      <Check className="w-4 h-4" />
+                    </div>
+                  )}
                 </div>
 
-                <div className="px-8 pb-8">
+                {/* Content */}
+                <div className="p-7 flex flex-col flex-1">
+                  <div className="flex items-start justify-between gap-3 mb-3">
+                    <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                      <span className={`p-1.5 rounded-xl ${selectedHome === opt.id ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-500'}`}>
+                        {wireframeIcons[opt.id]}
+                      </span>
+                      {opt.name}
+                    </h3>
+                  </div>
+
+                  <p className="text-slate-500 text-sm leading-relaxed mb-5">{opt.description}</p>
+
+                  {/* Feature chips */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {opt.features.map((f, i) => (
+                      <span key={i} className={`text-xs font-semibold px-3 py-1 rounded-full ${f.color}`}>
+                        {f.label}
+                      </span>
+                    ))}
+                  </div>
+
                   <button 
                     onClick={() => handleSelectProposal(opt.id)}
-                    className={`w-full py-4 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                    className={`mt-auto w-full py-4 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                       selectedHome === opt.id 
-                        ? "bg-indigo-600 text-white shadow-lg shadow-indigo-600/15" 
-                        : "bg-slate-900 text-white hover:bg-slate-800"
+                        ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/15' 
+                        : 'bg-slate-900 text-white hover:bg-slate-700'
                     }`}
                   >
-                    {selectedHome === opt.id ? "Propuesta Seleccionada" : "Seleccionar esta propuesta"}
+                    {selectedHome === opt.id ? '✓ Propuesta Seleccionada' : 'Seleccionar esta propuesta'}
                   </button>
                 </div>
               </div>
@@ -219,7 +310,7 @@ export default function WireframesPage() {
             {internalPages.map((opt) => (
               <div 
                 key={opt.id}
-                className="bg-white border border-slate-200 rounded-[2rem] overflow-hidden flex flex-col justify-between hover:border-slate-300 transition-colors"
+                className="bg-white border border-slate-200 rounded-[2rem] overflow-hidden flex flex-col justify-between hover:border-slate-300 hover:shadow-lg hover:shadow-slate-200/40 transition-all"
               >
                 <div>
                   <div className="aspect-[4/3] bg-slate-100 relative group overflow-hidden border-b border-slate-100">
@@ -262,11 +353,11 @@ export default function WireframesPage() {
           >
             <X className="w-6 h-6" />
           </button>
-          <div className="w-full max-w-4xl max-h-[85vh] bg-white rounded-[2rem] overflow-hidden p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 flex items-center justify-center">
+          <div className="w-full max-w-5xl max-h-[90vh] bg-white rounded-[2rem] overflow-auto p-4 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
             <img 
               src={zoomedImage} 
               alt="Ampliado"
-              className="max-w-full max-h-[75vh] object-contain rounded-xl"
+              className="w-full h-auto object-contain rounded-xl"
             />
           </div>
         </div>
