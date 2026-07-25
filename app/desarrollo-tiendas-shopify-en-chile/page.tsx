@@ -338,59 +338,8 @@ export default function ShopifyEnChilePage() {
           </div>
         </section>
 
-        {/* SECCIÓN ANCHO COMPLETO (#09090b): GARANTÍA Y ACOMPAÑAMIENTO */}
-        <section className="w-full bg-zinc-950 text-white py-20 lg:py-28 my-16 relative overflow-hidden border-y border-zinc-800">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/20 blur-[140px] rounded-full pointer-events-none" />
-          
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="max-w-3xl mb-12">
-              <span className="text-sm font-mono font-bold uppercase tracking-widest text-violet-400 block mb-3">
-                Garantía & Acompañamiento
-              </span>
-              <h3 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight font-heading">
-                Tu proyecto no termina cuando publicamos la tienda
-              </h3>
-              <p className="text-zinc-200 font-normal text-lg sm:text-xl mt-4 leading-relaxed">
-                Nos aseguramos de que el proceso sea transparente, seguro y sin imprevistos desde el primer día:
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-              {guaranteeItems.map((item, idx) => (
-                <div key={idx} className="bg-white/5 border border-white/15 p-6 rounded-3xl hover:bg-white/10 transition-colors">
-                  <div className="w-9 h-9 rounded-full bg-violet-600/30 border border-violet-400/40 flex items-center justify-center text-violet-300 mb-4 font-mono font-bold text-sm">
-                    0{idx + 1}
-                  </div>
-                  <h4 className="text-lg font-bold text-white mb-2 leading-snug">{item.title}</h4>
-                  <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* ========================================================= */}
-        {/* ZONA 3: CASOS DE ÉXITO SHOPIFY (CARRUSEL DE PROYECTOS)    */}
-        {/* ========================================================= */}
-        <section className="py-12 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            {/* Carrusel de Casos con todos los proyectos */}
-            <ShopifyInfiniteCasesCarousel />
-          </div>
-        </section>
-
-        {/* SECCIÓN ANCHO COMPLETO (#3c096c): CASO VICCA DE WIREFRAME A TIENDA FINAL */}
-        <ViccaTransformationShowcase />
-
-        {/* TESTIMONIALES DESTACADOS DE CLIENTES */}
-        <section className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <ShopifyClientTestimonials />
-          </div>
-        </section>
-
-        {/* ========================================================= */}
-        {/* ZONA 4: PLANES Y PRECIOS (FACILITAR DECISIÓN)            */}
+        {/* ZONA 3: PLANES Y PRECIOS (FACILITAR DECISIÓN TEMPRANA)    */}
         {/* ========================================================= */}
         <section id="planes" className="py-24 bg-zinc-50 rounded-[3.5rem] mx-4 my-8">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -541,6 +490,57 @@ export default function ShopifyEnChilePage() {
             {/* Interactive Plans Detailed Comparison Table */}
             <ShopifyPricingSection />
 
+          </div>
+        </section>
+
+        {/* SECCIÓN ANCHO COMPLETO (#09090b): GARANTÍA Y ACOMPAÑAMIENTO */}
+        <section className="w-full bg-zinc-950 text-white py-20 lg:py-28 my-16 relative overflow-hidden border-y border-zinc-800">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/20 blur-[140px] rounded-full pointer-events-none" />
+          
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div className="max-w-3xl mb-12">
+              <span className="text-sm font-mono font-bold uppercase tracking-widest text-violet-400 block mb-3">
+                Garantía & Acompañamiento
+              </span>
+              <h3 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight font-heading">
+                Tu proyecto no termina cuando publicamos la tienda
+              </h3>
+              <p className="text-zinc-200 font-normal text-lg sm:text-xl mt-4 leading-relaxed">
+                Nos aseguramos de que el proceso sea transparente, seguro y sin imprevistos desde el primer día:
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {guaranteeItems.map((item, idx) => (
+                <div key={idx} className="bg-white/5 border border-white/15 p-6 rounded-3xl hover:bg-white/10 transition-colors">
+                  <div className="w-9 h-9 rounded-full bg-violet-600/30 border border-violet-400/40 flex items-center justify-center text-violet-300 mb-4 font-mono font-bold text-sm">
+                    0{idx + 1}
+                  </div>
+                  <h4 className="text-lg font-bold text-white mb-2 leading-snug">{item.title}</h4>
+                  <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================= */}
+        {/* ZONA 4: CASOS DE ÉXITO SHOPIFY (CARRUSEL DE PROYECTOS)    */}
+        {/* ========================================================= */}
+        <section className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            {/* Carrusel de Casos con todos los proyectos */}
+            <ShopifyInfiniteCasesCarousel />
+          </div>
+        </section>
+
+        {/* SECCIÓN ANCHO COMPLETO (#3c096c): CASO VICCA DE WIREFRAME A TIENDA FINAL */}
+        <ViccaTransformationShowcase />
+
+        {/* TESTIMONIALES DESTACADOS DE CLIENTES */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <ShopifyClientTestimonials />
           </div>
         </section>
 
