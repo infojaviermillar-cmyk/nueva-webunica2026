@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Plus_Jakarta_Sans, Caveat } from 'next/font/google';
+import { Bricolage_Grotesque, Plus_Jakarta_Sans, JetBrains_Mono, Caveat, Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
@@ -11,9 +11,8 @@ import { ContactModalProvider } from '@/context/contact-modal-context';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 
-
-const inter = Inter({
-  variable: '--font-inter',
+const bricolage = Bricolage_Grotesque({
+  variable: '--font-bricolage',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -24,8 +23,20 @@ const plusJakarta = Plus_Jakarta_Sans({
   display: 'swap',
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
 const caveat = Caveat({
   variable: '--font-caveat',
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
   display: 'swap',
 });
@@ -72,7 +83,7 @@ export default async function RootLayout({
   return (
     <html
       lang="es"
-      className={`${inter.variable} ${plusJakarta.variable} ${caveat.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${caveat.variable} ${inter.variable} h-full antialiased`}
     >
       <GoogleTagManager gtmId="GTM-TLZXRQCG" />
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-LXMLKX5Y7G'} />

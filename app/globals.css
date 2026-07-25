@@ -75,8 +75,9 @@
   --color-brand-purple: var(--brand-purple);
   --color-brand-green: var(--brand-green);
 
-  --font-sans: var(--font-inter), sans-serif;
-  --font-heading: var(--font-plus-jakarta), sans-serif;
+  --font-sans: var(--font-plus-jakarta), sans-serif;
+  --font-heading: var(--font-bricolage), sans-serif;
+  --font-mono: var(--font-jetbrains), monospace;
   --font-caveat: var(--font-caveat), cursive;
   --font-neue-haas: 'Neue Haas Grotesk', 'Neue Haas Grotesk Text', 'Helvetica Neue', Arial, sans-serif;
 }
@@ -95,8 +96,19 @@ body {
   font-family: 'Neue Haas Grotesk', 'Neue Haas Grotesk Text', 'Helvetica Neue', Arial, sans-serif;
 }
 
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
 @layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
   h1 {
-    @apply font-black tracking-tighter leading-[0.9] uppercase;
+    @apply tracking-tighter leading-[0.95] uppercase;
   }
 }
