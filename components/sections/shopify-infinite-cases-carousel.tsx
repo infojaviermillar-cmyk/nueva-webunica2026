@@ -87,9 +87,13 @@ const cases: CaseItem[] = [
   },
 ];
 
+// Tripled list for endless seamless infinite looping
+const duplicatedCases = [...cases, ...cases, ...cases];
+
 export default function ShopifyInfiniteCasesCarousel() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isZoomed100, setIsZoomed100] = useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const selectedCase = selectedIndex !== null ? cases[selectedIndex] : null;
@@ -119,6 +123,25 @@ export default function ShopifyInfiniteCasesCarousel() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex]);
 
+  // CONTINUOUS INFINITE AUTO-SCROLL LOOP
+  useEffect(() => {
+    if (isPaused || selectedIndex !== null) return;
+
+    const interval = setInterval(() => {
+      if (scrollRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+        // If reached end of first set of duplicated items, reset smoothly to beginning
+        if (scrollLeft >= (scrollWidth - clientWidth) * 0.66) {
+          scrollRef.current.scrollLeft = scrollLeft - (scrollWidth / 3);
+        } else {
+          scrollRef.current.scrollLeft += 1.5;
+        }
+      }
+    }, 20);
+
+    return () => clearInterval(interval);
+  }, [isPaused, selectedIndex]);
+
   const handleScroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const scrollAmount = direction === 'left' ? -420 : 420;
@@ -132,7 +155,7 @@ export default function ShopifyInfiniteCasesCarousel() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 text-emerald-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> Carrusel de Proyectos Shopify
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> Carrusel Continuo de Proyectos Shopify
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
               Casos Shopify que generan resultados
@@ -162,90 +185,97 @@ export default function ShopifyInfiniteCasesCarousel() {
         </div>
       </div>
 
-      {/* Horizontal Carousel Track */}
+      {/* Horizontal Carousel Track with Infinite Smooth Auto-Scroll */}
       <div 
         ref={scrollRef}
-        className="flex gap-6 overflow-x-auto scrollbar-none px-6 lg:px-12 py-4 scroll-smooth snap-x snap-mandatory"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
+        className="flex gap-6 overflow-x-auto scrollbar-none px-6 lg:px-12 py-4 select-none cursor-grab active:cursor-grabbing"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {cases.map((item, idx) => (
-          <div
-            key={item.id}
-            className="w-[340px] sm:w-[380px] shrink-0 snap-start bg-zinc-50 rounded-[2.5rem] overflow-hidden border border-zinc-200 flex flex-col justify-between group hover:shadow-2xl hover:border-violet-300 transition-all duration-300"
-          >
-            <div>
-              {/* Image Preview Container */}
-              <div 
-                className="relative w-full aspect-[16/10] bg-zinc-950 overflow-hidden cursor-pointer"
-                onClick={() => {
-                  setSelectedIndex(idx);
-                  setIsZoomed100(false);
-                }}
-              >
-                <img
-                  src={item.image}
-                  alt={`Caso de éxito ${item.name} - Webunica`}
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                />
-                
-                {/* URL Tag */}
-                <div className="absolute top-3 left-3 z-10 px-3 py-1 bg-zinc-950/80 backdrop-blur-md border border-white/20 rounded-full text-[10px] font-mono text-white font-bold tracking-wider">
-                  https://{item.url}
+        {duplicatedCases.map((item, idx) => {
+          const originalIndex = idx % cases.length;
+          return (
+            <div
+              key={`${item.id}-${idx}`}
+              className="w-[340px] sm:w-[380px] shrink-0 bg-zinc-50 rounded-[2.5rem] overflow-hidden border border-zinc-200 flex flex-col justify-between group hover:shadow-2xl hover:border-violet-300 transition-all duration-300"
+            >
+              <div>
+                {/* Image Preview Container */}
+                <div 
+                  className="relative w-full aspect-[16/10] bg-zinc-950 overflow-hidden cursor-pointer"
+                  onClick={() => {
+                    setSelectedIndex(originalIndex);
+                    setIsZoomed100(false);
+                  }}
+                >
+                  <img
+                    src={item.image}
+                    alt={`Caso de éxito ${item.name} - Webunica`}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                  
+                  {/* URL Tag */}
+                  <div className="absolute top-3 left-3 z-10 px-3 py-1 bg-zinc-950/80 backdrop-blur-md border border-white/20 rounded-full text-[10px] font-mono text-white font-bold tracking-wider">
+                    https://{item.url}
+                  </div>
+
+                  {/* Hover Zoom Indicator */}
+                  <div className="absolute inset-0 bg-violet-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white uppercase tracking-wider backdrop-blur-[2px]">
+                    <Maximize2 className="w-5 h-5 text-purple-200" />
+                    <span>Abrir Galería HD</span>
+                  </div>
                 </div>
 
-                {/* Hover Zoom Indicator */}
-                <div className="absolute inset-0 bg-violet-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white uppercase tracking-wider backdrop-blur-[2px]">
-                  <Maximize2 className="w-5 h-5 text-purple-200" />
-                  <span>Abrir Galería HD</span>
+                {/* Content */}
+                <div className="p-6">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-violet-600 block mb-1">
+                    {item.category}
+                  </span>
+                  <h3 className="text-2xl font-black text-zinc-950 uppercase tracking-tight mb-4 font-heading">
+                    {item.name}
+                  </h3>
+                  
+                  <ul className="space-y-2.5 mb-6">
+                    {item.bullets.map((bullet, bIdx) => (
+                      <li key={bIdx} className="flex items-start gap-2 text-sm text-zinc-800 font-medium">
+                        <CheckCircle2 className="w-4.5 h-4.5 text-emerald-500 shrink-0 mt-0.5" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-violet-600 block mb-1">
-                  {item.category}
-                </span>
-                <h3 className="text-2xl font-black text-zinc-950 uppercase tracking-tight mb-4 font-heading">
-                  {item.name}
-                </h3>
-                
-                <ul className="space-y-2.5 mb-6">
-                  {item.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-start gap-2 text-sm text-zinc-800 font-medium">
-                      <CheckCircle2 className="w-4.5 h-4.5 text-emerald-500 shrink-0 mt-0.5" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Bottom Actions */}
+              <div className="p-6 pt-0 flex gap-3">
+                <a
+                  href={`https://${item.url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 py-3.5 px-4 bg-white border border-zinc-200 hover:bg-zinc-900 hover:text-white text-zinc-900 font-bold text-sm uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 text-center"
+                >
+                  <span>Sitio Live</span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+
+                <button
+                  onClick={() => {
+                    setSelectedIndex(originalIndex);
+                    setIsZoomed100(false);
+                  }}
+                  className="px-4 py-3.5 bg-violet-50 hover:bg-violet-600 hover:text-white text-violet-700 rounded-xl font-bold text-sm uppercase tracking-wider transition-colors cursor-pointer"
+                  title="Abrir en Galería HD"
+                >
+                  <Maximize2 className="w-4 h-4" />
+                </button>
               </div>
             </div>
-
-            {/* Bottom Actions */}
-            <div className="p-6 pt-0 flex gap-3">
-              <a
-                href={`https://${item.url}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 py-3.5 px-4 bg-white border border-zinc-200 hover:bg-zinc-900 hover:text-white text-zinc-900 font-bold text-sm uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 text-center"
-              >
-                <span>Sitio Live</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
-
-              <button
-                onClick={() => {
-                  setSelectedIndex(idx);
-                  setIsZoomed100(false);
-                }}
-                className="px-4 py-3.5 bg-violet-50 hover:bg-violet-600 hover:text-white text-violet-700 rounded-xl font-bold text-sm uppercase tracking-wider transition-colors cursor-pointer"
-                title="Abrir en Galería HD"
-              >
-                <Maximize2 className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* FULL INTERACTIVE GALLERY LIGHTBOX MODAL */}
