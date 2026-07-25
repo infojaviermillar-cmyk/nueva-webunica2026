@@ -3,25 +3,48 @@ import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
-import FunnelAnimation from '@/components/ui/funnel-animation';
-import { MessageSquare, Users, FileSignature, ThumbsUp, Route, UploadCloud, Palette, Search, Puzzle, Rocket, LayoutTemplate, ShoppingBag, CreditCard, Truck, FileText } from 'lucide-react';
 import ShopifyPricingSection from '@/components/sections/shopify-pricing-section';
-import ShopifyVideoPortfolio from '@/components/sections/shopify-video-portfolio';
-import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
 import ViccaTransformationShowcase from '@/components/sections/vicca-transformation-showcase';
 import ShopifyStackedHeroCards from '@/components/ui/shopify-stacked-hero-cards';
+import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
+import { 
+  Sparkles, 
+  CheckCircle2, 
+  ArrowRight, 
+  ShieldCheck, 
+  Clock, 
+  Smartphone, 
+  Search, 
+  BarChart3, 
+  ShoppingBag, 
+  CreditCard, 
+  Truck, 
+  Puzzle, 
+  Check, 
+  ChevronRight,
+  Zap,
+  TrendingUp,
+  Rocket,
+  MessageSquare,
+  Star,
+  Users,
+  Award,
+  Layers,
+  Tag
+} from 'lucide-react';
+
 export const metadata = {
-  title: 'Desarrollo de Tiendas Shopify en Chile | Expertos Shopify Partner 2026',
-  description: 'Expertos líderes en diseño y desarrollo de tiendas Shopify en Chile. Optimizamos tu ecommerce con Transbank, Webpay, Flow y Facturación SII. ¡Cotiza con Expertos Shopify!',
-  keywords: 'desarrollo tiendas shopify chile, diseño tienda shopify, expertos shopify chile, expertos shopify partner santiago, ecommerce shopify chile, pasarelas de pago shopify chile, factura electronica shopify',
+  title: 'Desarrollo de Tiendas Shopify en Chile | Agencia Shopify Partner 2026',
+  description: 'Creamos tu tienda Shopify lista para vender, operar y crecer en Chile. Integración de Webpay, Mercado Pago, Flow, Starken, BlueExpress y Boleta SII.',
+  keywords: 'desarrollo tiendas shopify chile, agencia shopify partner chile, diseño tienda shopify, pasarelas de pago shopify chile, factura electronica shopify, integracion erp shopify',
 };
 
 export default function ShopifyEnChilePage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Desarrollo de Tiendas Shopify Profesionales",
-    "description": "Servicios integrales de diseño, configuración y optimización de tiendas Shopify para el mercado chileno.",
+    "name": "Desarrollo de Tiendas Shopify Profesionales en Chile",
+    "description": "Servicios integrales de diseño, desarrollo, migración e integración de tiendas Shopify orientadas a conversión en Chile.",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Webunica",
@@ -36,193 +59,664 @@ export default function ShopifyEnChilePage() {
     "serviceType": "E-commerce Development"
   };
 
+  const trustBadges = [
+    { text: "+100 Tiendas desarrolladas", icon: ShoppingBag },
+    { text: "Shopify Partner verificado", icon: Award },
+    { text: "Diseño Mobile-First 100%", icon: Smartphone },
+    { text: "Soporte post lanzamiento & capacitación", icon: ShieldCheck },
+    { text: "Analítica & SEO técnico incluidos", icon: BarChart3 },
+  ];
 
-  const processSteps = [
-    { step: "01", name: "Briefing Inicial", desc: "Entendemos tu modelo de negocio y objetivos comerciales.", icon: <MessageSquare className="w-6 h-6" /> },
-    { step: "02", name: "Estrategia", desc: "Definimos la arquitectura de información y el funnel de ventas.", icon: <Users className="w-6 h-6" /> },
-    { step: "03", name: "Propuesta", desc: "Diseñamos un presupuesto a medida con hitos claros.", icon: <FileSignature className="w-6 h-6" /> },
-    { step: "04", name: "Onboarding", desc: "Formalización del proyecto y acceso a plataformas.", icon: <ThumbsUp className="w-6 h-6" /> },
-    { step: "05", name: "Arquitectura", desc: "Estructura de colecciones y navegación estratégica.", icon: <Route className="w-6 h-6" /> },
-    { step: "06", name: "Contenido", desc: "Optimización de imágenes y textos para SEO.", icon: <UploadCloud className="w-6 h-6" /> },
-    { step: "07", name: "Diseño Liquid", desc: "Personalización avanzada del theme Shopify.", icon: <Palette className="w-6 h-6" /> },
-    { step: "08", name: "Testing QA", desc: "Pruebas de checkout, pagos y navegación mobile.", icon: <Search className="w-6 h-6" /> },
-    { step: "09", name: "Integraciones", desc: "Configuración de ERP, Boleta SII y Logística.", icon: <Puzzle className="w-6 h-6" /> },
-    { step: "10", name: "Lanzamiento", desc: "Tu tienda en vivo en 4 a 6 semanas.", icon: <Rocket className="w-6 h-6" /> }
+  const benefitCards = [
+    {
+      title: "Diseño que convierte (CRO)",
+      desc: "Estructuramos tu tienda para guiar al cliente hasta la compra, eliminando fricción y aumentando tu tasa de conversión.",
+      icon: TrendingUp,
+      badge: "Ventas & UX"
+    },
+    {
+      title: "Pagos y facturación automática",
+      desc: "Integramos Webpay, Flow, Mercado Pago y conectamos la emisión de boletas y facturas electrónicas ante el SII.",
+      icon: CreditCard,
+      badge: "Finanzas Chile"
+    },
+    {
+      title: "Despachos en Chile en tiempo real",
+      desc: "Conectamos Starken, BlueExpress, Chilexpress y multi-couriers para calcular tarifas exactas por región en el checkout.",
+      icon: Truck,
+      badge: "Logística"
+    },
+    {
+      title: "Sincronización & ERP",
+      desc: "Sincronizamos inventario y ventas con tu ERP (Bsale, Obuma, Defontana, Laudus) para automatizar tu operación.",
+      icon: Puzzle,
+      badge: "Automatización"
+    },
+    {
+      title: "Analítica y campañas publicitarias",
+      desc: "Medición confiable con GA4, Meta Pixel, Conversion API y Merchant Center para tomar decisiones comerciales reales.",
+      icon: BarChart3,
+      badge: "Medición 360°"
+    },
+    {
+      title: "SEO técnico de alto rendimiento",
+      desc: "Estructura optimizada, código limpio, metadatos y velocidad de carga instantánea para posicionar en Google desde el día 1.",
+      icon: Search,
+      badge: "Tráfico Orgánico"
+    },
+  ];
+
+  const guaranteeItems = [
+    { title: "Revisión & pruebas QA", desc: "Testeo completo de checkout, navegación móvil y pasarelas antes de salir en vivo." },
+    { title: "Capacitación 1 a 1", desc: "Entrenamiento práctico para que tú y tu equipo operen la tienda autónomamente." },
+    { title: "30 a 90 días de soporte", desc: "Acompañamiento técnico post lanzamiento para responder dudas y hacer ajustes." },
+    { title: "Entrega total de accesos", desc: "Propiedad 100% tuya del dominio, tienda e integraciones sin amarres." },
+    { title: "Alcance claro desde el inicio", desc: "Presupuesto y plazos cerrados sin cobros sorpresa durante el desarrollo." },
+  ];
+
+  const caseStudies = [
+    {
+      name: "SpinMedical",
+      category: "Insumos Médicos & Salud",
+      image: "/clientes/Spinmedical.png",
+      bullets: [
+        "Diseño y desarrollo Shopify a medida",
+        "Integración de pagos Webpay y despachos",
+        "Capacitación al equipo operativo"
+      ],
+      link: "https://spinmedical.cl/"
+    },
+    {
+      name: "PHY Waters",
+      category: "Purificadores de Agua & Bienestar",
+      image: "/clientes/PHY Waters.png",
+      bullets: [
+        "Diseño e-commerce de alta conversión",
+        "Integración Webpay y despachos regionales",
+        "Optimización CRO en ficha de producto"
+      ],
+      link: "https://phywaters.com/"
+    },
+    {
+      name: "Altavista Chile",
+      category: "Equipamiento Industrial & Outdoor",
+      image: "/clientes/altavista.png",
+      bullets: [
+        "Migración completa a Shopify",
+        "Catálogo avanzado + Integración ERP",
+        "SEO técnico y analítica avanzada"
+      ],
+      link: "https://altavistachile.cl/"
+    }
+  ];
+
+  const crossSellServices = [
+    { title: "SEO para E-commerce", desc: "Posiciona tu catálogo en Google para atraer clientes calificados de forma orgánica.", icon: Search },
+    { title: "Publicidad Meta & Google Ads", desc: "Campañas orientadas a retorno de inversión (ROAS) con medición avanzada.", icon: TrendingUp },
+    { title: "Email Marketing con Klaviyo", desc: "Automatizaciones de bienvenida y carritos abandonados para aumentar recompras.", icon: Sparkles },
+    { title: "Soporte & Mantenimiento", desc: "Asistencia técnica continua, actualización de banners y optimización constante.", icon: ShieldCheck },
+    { title: "Optimización CRO Avanzada", desc: "Pruebas y mejoras en la ficha de producto para maximizar el ticket promedio.", icon: BarChart3 },
   ];
 
   const shopifyFaqs = [
     {
-      question: "¿Cuánto cobra Shopify por vender en Chile?",
-      answer: "Shopify cobra una suscripción mensual (Basic desde $19 USD) y una comisión por transacción (0.5% a 2% según el plan) si usas pasarelas externas como Flow o Mercado Pago en Chile."
+      question: "¿Qué incluye cada plan de desarrollo Shopify?",
+      answer: "Todos los planes incluyen setup completo de Shopify, diseño adaptado a tu marca, carga inicial de catálogo, configuración de pasarelas de pago (Webpay/Flow/Mercado Pago), métodos de despacho en Chile, diseño 100% mobile-first, capacitación de uso y período de soporte post lanzamiento."
     },
     {
-      question: "¿Cuáles son las mejores pasarelas de pago para Shopify Chile?",
-      answer: "Recomendamos Transbank Webpay, Mercado Pago por su alta tasa de aprobación y Flow por su facilidad. Revisa nuestra guía de 'Comisiones de Pago Shopify Chile' en la sección de Herramientas para comparar tarifas exactas de este año."
+      question: "¿Cuánto cuesta la suscripción mensual de Shopify?",
+      answer: "Shopify cobra un plan mensual independiente (Basic desde aprox $19 USD/mes en plan anual). Nosotros te asesoramos para elegir la versión adecuada según tu volumen de ventas."
     },
     {
-      question: "¿Qué opciones de empresas de transporte y envíos hay para Shopify Chile?",
-      answer: "Para automatizar envíos (Carrier Calculated Shipping) en Chile recomendamos multi-couriers como Shipit o Sendu, o conexiones directas con Bluexpress o Starken. Puedes revisar nuestra guía completa de 'Empresas de Transporte Shopify Chile' en el menú inferior para conocer los costos de integración."
+      question: "¿Qué aplicaciones se pagan aparte?",
+      answer: "La mayoría de tiendas estándar operan con aplicaciones gratuitas o incluidas. Si necesitas herramientas avanzadas de Klaviyo, ERPs específicos o multi-courier con Carrier Calculated Shipping (CCS), te explicaremos transparente los costos antes de iniciar."
     },
     {
-      question: "¿Cómo funciona la Facturación Electrónica con el SII?",
-      answer: "Integramos el checkout de Shopify con tu ERP mediante un conector para emitir boletas y facturas automáticamente al realizar la venta. Trabajamos con Bsale, Obuma, Defontana y Laudus. Revisa nuestra comparativa 'Sistemas ERP para Shopify Chile' en el menú de Herramientas."
+      question: "¿Puedo migrar mi tienda desde WooCommerce, Jumpseller o Magento?",
+      answer: "Sí, realizamos migraciones integrales de productos, categorías, imágenes e historial de clientes preservando las URLs y redirecciones 301 para no perder tu posicionamiento SEO en Google."
     },
     {
-      question: "¿Puedo migrar mi tienda desde Jumpseller o WooCommerce?",
-      answer: "Sí, realizamos migraciones completas de catálogo, clientes e historial de pedidos manteniendo tu autoridad SEO intacta durante el proceso."
+      question: "¿Necesito tener logo, productos y textos listos para empezar?",
+      answer: "Es ideal contar con tu logotipo y lista base de productos. Si no los tienes listos, nuestro equipo te guía con plantillas de carga masiva y estructuras sugeridas."
     },
     {
-      question: "¿Cuánto tiempo toma tener mi tienda lista?",
-      answer: "Un proyecto profesional de desarrollo Shopify toma entre 4 y 6 semanas, incluyendo diseño a medida e integraciones técnicas complejas."
+      question: "¿Integran medios de pago y despacho locales en Chile?",
+      answer: "De forma nativa. Configuramos Webpay Plus, Mercado Pago, Flow, Ventipay, así como integraciones de despacho con Starken, BlueExpress, Chilexpress y Shipit."
+    },
+    {
+      question: "¿Pueden conectar la tienda con mi ERP o facturación ante el SII?",
+      answer: "Sí. Integramos Shopify con Bsale, Obuma, Defontana, Laudus o conectores certificados para emitir boletas y facturas electrónicas automáticamente en cada venta."
+    },
+    {
+      question: "¿Qué soporte entregan después de publicar la tienda?",
+      answer: "Entregamos entre 30 y 90 días de soporte post lanzamiento (según plan) para resolver dudas, realizar ajustes menores y garantizar que tu tienda funcione 100% fluida."
     }
   ];
 
-  const sitemap = [
-    { title: "Home Estratégico", desc: "Diseñado para la máxima retención y conversión." },
-    { title: "Landing de Colecciones", desc: "Estructura de Silos SEO para posicionar en Google." },
-    { title: "Ficha de Producto (CRO)", desc: "Enfoque en beneficios, social proof y CTA claro." },
-    { title: "Checkout Optimizado", desc: "Reducción de fricción para evitar carritos abandonados." },
-    { title: "Página de Ayuda/FAQ", desc: "Mejora la confianza y reduce consultas de soporte." }
-  ];
-
-
-
   return (
-    <div className="min-h-screen bg-white font-sans antialiased text-zinc-900 overflow-x-hidden">
+    <div className="min-h-screen bg-white font-sans antialiased text-zinc-950 overflow-x-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="pt-[22vh] lg:pt-48">
-        {/* Hero Section */}
-        <section id="inicio" className="relative pt-0 pb-32 lg:pt-0 lg:pb-40 overflow-hidden">
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-violet-600/5 blur-[120px] rounded-full pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3" />
+      <div className="pt-[20vh] lg:pt-40">
+        
+        {/* ========================================================= */}
+        {/* ZONA 1: HERO (SEDUCIR Y ACLARAR)                          */}
+        {/* ========================================================= */}
+        <section id="inicio" className="relative pt-0 pb-20 lg:pb-32 overflow-hidden">
+          <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-violet-600/10 blur-[130px] rounded-full pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3" />
+          <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-pink-500/10 blur-[120px] rounded-full pointer-events-none -z-10 -translate-x-1/3" />
           
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative z-10 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-violet-50 border border-violet-100 rounded-full">
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
-                </span>
-                <span className="text-[10px] font-black tracking-[0.2em] text-violet-600 uppercase">Expertos Shopify Partner Chile</span>
-              </div>
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
               
-              <h1 className="text-[2.4rem] xs:text-5xl lg:text-[75px] font-black tracking-tighter leading-[0.9] mb-8 uppercase text-zinc-950 break-words font-neue-haas">
-                Desarrollo de Tiendas <span className="text-violet-600 italic font-serif lowercase font-light font-neue-haas">Shopify Chile</span>
-              </h1>
-              
-              <p className="text-lg lg:text-xl text-zinc-500 mb-6 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
-                No arriesgues tu inversión. Creamos tiendas Shopify de alto rendimiento con <strong className="text-zinc-900">Garantía de Entrega (Pago 50/50)</strong>, integrando <strong className="text-zinc-900">Pasarelas de Pago</strong>, <strong className="text-zinc-900">Logística CCS</strong> y <strong className="text-zinc-900">Boleta SII Automática</strong>.
-              </p>
+              {/* Left Content Column */}
+              <div className="lg:col-span-7 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2.5 px-4 py-2 mb-6 bg-violet-50 border border-violet-200/80 rounded-full shadow-sm">
+                  <span className="flex h-2 w-2 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-600"></span>
+                  </span>
+                  <span className="text-[11px] font-mono font-bold tracking-widest text-violet-700 uppercase">
+                    Agencia Shopify Partner en Chile
+                  </span>
+                </div>
+                
+                <h1 className="text-[2.2rem] xs:text-4xl sm:text-5xl lg:text-[62px] font-black tracking-tighter leading-[0.92] mb-6 uppercase text-zinc-950 font-heading">
+                  Creamos tu tienda Shopify <br className="hidden sm:inline" />
+                  lista para <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]">vender, operar y crecer</span> en Chile
+                </h1>
+                
+                <p className="text-base sm:text-lg lg:text-xl text-zinc-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                  Diseñamos e implementamos tiendas Shopify orientadas a conversión, con <strong className="text-zinc-950 font-bold">medios de pago locales</strong>, <strong className="text-zinc-950 font-bold">despacho automático</strong>, <strong className="text-zinc-950 font-bold">boleta SII</strong>, analítica y SEO configurados para el mercado chileno.
+                </p>
+                
+                {/* CTA Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-6">
+                  <LeadButton className="px-8 py-5 bg-[#2C02A5] text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-violet-900 transition-all shadow-xl shadow-violet-900/25 active:scale-95 text-center flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer">
+                    Agenda un diagnóstico Shopify <ArrowRight className="w-4 h-4" />
+                  </LeadButton>
 
-              {/* Guarantees Badges */}
-              <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-8 text-[11px] font-bold text-zinc-600">
-                <span className="px-3 py-1 bg-zinc-100 rounded-full border border-zinc-200">✓ Pago 50% Inicio / 50% Entrega</span>
-                <span className="px-3 py-1 bg-zinc-100 rounded-full border border-zinc-200">✓ CyberDay & BlackFriday Ready</span>
-                <span className="px-3 py-1 bg-zinc-100 rounded-full border border-zinc-200">✓ Sin cobros sorpresa</span>
+                  <a 
+                    href="#planes" 
+                    className="px-8 py-5 border-2 border-zinc-200 text-zinc-900 font-black rounded-2xl hover:bg-zinc-50 hover:border-zinc-300 transition-all uppercase tracking-widest text-xs text-center w-full sm:w-auto"
+                  >
+                    Ver planes y precios
+                  </a>
+                </div>
+
+                {/* Trust guarantee microcopy */}
+                <div className="flex items-center justify-center lg:justify-start gap-2 text-xs font-mono text-zinc-500 mb-8">
+                  <Clock className="w-4 h-4 text-emerald-500" />
+                  <span>Respondemos en menos de 2 horas hábiles</span>
+                </div>
               </div>
-              
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start">
-                <LeadButton className="px-8 py-4 bg-violet-600 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-violet-700 transition-all shadow-xl shadow-violet-600/20 active:scale-95 text-center flex items-center justify-center gap-2">
-                  Agendar Asesoría E-commerce Gratis
-                </LeadButton>
-                <WhatsAppButton className="px-8 py-4 bg-emerald-500 text-white rounded-[2rem] font-black uppercase tracking-widest text-[11px] hover:bg-emerald-600 transition-all shadow-xl shadow-emerald-500/20 active:scale-95 text-center flex items-center justify-center gap-2">
-                  Evaluar mi Proyecto por WhatsApp
-                </WhatsAppButton>
+
+              {/* Right Mockup Stack Column */}
+              <div className="lg:col-span-5 w-full">
+                <ShopifyStackedHeroCards />
+              </div>
+
+            </div>
+
+            {/* TRUST BAR STRIP */}
+            <div className="mt-16 pt-10 border-t border-zinc-200/80">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6 text-center">
+                {trustBadges.map((badge, idx) => {
+                  const Icon = badge.icon;
+                  return (
+                    <div key={idx} className="p-4 rounded-2xl bg-zinc-50 border border-zinc-100 flex flex-col items-center justify-center gap-2 group hover:border-violet-200 transition-colors">
+                      <Icon className="w-5 h-5 text-violet-600 group-hover:scale-110 transition-transform" />
+                      <span className="text-xs font-bold text-zinc-800 leading-tight">{badge.text}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-            
-            <div className="relative z-10 block w-full">
-              <ShopifyStackedHeroCards />
-            </div>
+
           </div>
         </section>
 
-        {/* Apps & Integrations Infinite Carousel */}
+        {/* Apps Carousel */}
         <ShopifyAppsCarousel />
 
-        <ShopifyPricingSection />
-
-        <ViccaTransformationShowcase />
-
-        {/* Video Portfolio Section */}
-        <ShopifyVideoPortfolio />
-
-        {/* Local Advantage Section */}
-        <section className="bg-zinc-950 py-32 rounded-[4rem] mx-4 text-white overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.15),transparent)] pointer-events-none" />
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <h2 className="text-4xl lg:text-6xl font-black mb-8 tracking-tighter uppercase leading-tight">
-                Potencia tu Marca en el <br/><span className="text-violet-400">Mercado Chileno</span>
+        {/* ========================================================= */}
+        {/* ZONA 2: BENEFICIOS + OBJECIONES + DIFERENCIACIÓN         */}
+        {/* ========================================================= */}
+        <section className="py-24 bg-zinc-50 rounded-[3.5rem] mx-4 my-8 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-violet-100 text-violet-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
+                <Zap className="w-3.5 h-3.5" /> Ecosistema Completo de Ventas
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
+                Más que una tienda, <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-[#FF0085]">un sistema que impulsa tu negocio</span>
               </h2>
-              <p className="text-xl text-zinc-400 mb-10 font-light leading-relaxed">
-                Desarrollamos soluciones que eliminan la fricción de compra. Integramos todo lo que tu tienda necesita para operar legal y eficientemente en Chile.
+              <p className="text-zinc-600 text-base sm:text-lg font-light mt-4 leading-relaxed">
+                Resolvemos los desafíos reales del e-commerce en Chile para que puedas vender más y preocuparte menos de la parte técnica.
               </p>
+            </div>
+
+            {/* 6 Commercial Benefit Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+              {benefitCards.map((card, idx) => {
+                const Icon = card.icon;
+                return (
+                  <div 
+                    key={idx} 
+                    className="bg-white rounded-3xl p-8 border border-zinc-200/80 shadow-md hover:shadow-xl hover:border-violet-400/50 transition-all duration-300 flex flex-col justify-between group"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="w-12 h-12 rounded-2xl bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-600 group-hover:bg-violet-600 group-hover:text-white transition-colors">
+                          <Icon className="w-6 h-6" />
+                        </div>
+                        <span className="text-[10px] font-mono font-bold text-violet-600 bg-violet-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                          {card.badge}
+                        </span>
+                      </div>
+
+                      <h3 className="text-xl font-black uppercase text-zinc-950 mb-3 font-heading group-hover:text-violet-700 transition-colors">
+                        {card.title}
+                      </h3>
+                      <p className="text-sm text-zinc-600 font-light leading-relaxed">
+                        {card.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* ANTI-OBJECIÓN & TRUST COMMITMENT BANNER */}
+            <div className="bg-zinc-950 text-white rounded-[3rem] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-2xl border border-zinc-800">
+              <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-violet-600/20 blur-[130px] rounded-full pointer-events-none" />
               
-              <div className="grid gap-8">
-                <article className="flex gap-6 items-start group">
-                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-violet-600/20 group-hover:border-violet-600/50 transition-all">
-                    <CreditCard className="w-7 h-7 text-violet-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2 uppercase tracking-tight">Pasarelas Webpay & Flow</h3>
-                    <p className="text-zinc-500 text-sm font-light">Configuramos Mercado Pago, Flow, Ventipay o Transbank para que recibas pagos de inmediato con total seguridad.</p>
-                  </div>
-                </article>
+              <div className="relative z-10">
+                <div className="max-w-3xl mb-10">
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-violet-400 block mb-2">
+                    Garantía & Acompañamiento
+                  </span>
+                  <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tight font-heading">
+                    Tu proyecto no termina cuando publicamos la tienda
+                  </h3>
+                  <p className="text-zinc-300 font-light text-base mt-2">
+                    Nos aseguramos de que el proceso sea transparente, seguro y sin imprevistos desde el primer día:
+                  </p>
+                </div>
 
-                <article className="flex gap-6 items-start group">
-                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-violet-600/20 group-hover:border-violet-600/50 transition-all">
-                    <Truck className="w-7 h-7 text-violet-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2 uppercase tracking-tight">Logística Starken & Blue Express</h3>
-                    <p className="text-zinc-500 text-sm font-light">Automatización de envíos con Shipit, Sendu o integraciones directas para calcular tarifas en tiempo real por región.</p>
-                  </div>
-                </article>
-
-                <article className="flex gap-6 items-start group">
-                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-violet-600/20 group-hover:border-violet-600/50 transition-all">
-                    <FileText className="w-7 h-7 text-violet-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2 uppercase tracking-tight">Boleta Electrónica SII</h3>
-                    <p className="text-zinc-500 text-sm font-light">Conexión con Bsale, Obuma o plugins certificados para emitir documentos tributarios automáticamente en cada venta.</p>
-                  </div>
-                </article>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                  {guaranteeItems.map((item, idx) => (
+                    <div key={idx} className="bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition-colors">
+                      <div className="w-7 h-7 rounded-full bg-violet-500/20 border border-violet-400/30 flex items-center justify-center text-violet-300 mb-3 font-mono font-bold text-xs">
+                        0{idx + 1}
+                      </div>
+                      <h4 className="text-sm font-bold text-white mb-2 leading-snug">{item.title}</h4>
+                      <p className="text-xs text-zinc-400 font-light leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+
+          </div>
+        </section>
+
+        {/* ========================================================= */}
+        {/* ZONA 3: CASOS DE ÉXITO SHOPIFY (PRUEBA SOCIAL)            */}
+        {/* ========================================================= */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
             
-            <div className="bg-white/5 p-10 lg:p-14 rounded-[3rem] border border-white/10 backdrop-blur-sm">
-               <h3 className="text-2xl font-black mb-6 uppercase">¿Por qué Shopify es líder en Chile?</h3>
-               <p className="text-zinc-400 leading-relaxed mb-10 font-light text-lg">
-                 En eventos masivos como el <strong className="text-white">CyberDay</strong>, la estabilidad es tu mejor aliado. Shopify garantiza un 99.9% de uptime mientras otras plataformas colapsan.
-               </p>
-               <div className="grid grid-cols-2 gap-8">
-                  <div className="p-8 bg-white/5 rounded-3xl border border-white/5 hover:bg-white/10 transition-all">
-                    <div className="text-4xl font-black mb-2 text-violet-400">99.9%</div>
-                    <div className="text-[10px] uppercase font-bold text-zinc-500 tracking-widest">Uptime Garantizado</div>
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 text-emerald-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
+                <Award className="w-3.5 h-3.5 text-emerald-600" /> Resultados Demostrables
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
+                Casos Shopify que generan resultados
+              </h2>
+              <p className="text-zinc-600 text-base sm:text-lg font-light mt-3">
+                Algunos proyectos reales desarrollados para marcas líderes en Chile.
+              </p>
+            </div>
+
+            {/* 3 Featured Case Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              {caseStudies.map((item, idx) => (
+                <div key={idx} className="bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-200 flex flex-col justify-between group hover:shadow-xl transition-all">
+                  <div>
+                    <div className="relative w-full aspect-[16/10] bg-zinc-900 overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={`Caso de éxito ${item.name} - Webunica`}
+                        fill
+                        className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        sizes="(max-width: 768px) 100vw, 400px"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-violet-600 block mb-1">
+                        {item.category}
+                      </span>
+                      <h3 className="text-2xl font-black text-zinc-950 uppercase tracking-tight mb-4 font-heading">
+                        {item.name}
+                      </h3>
+                      <ul className="space-y-2 mb-6">
+                        {item.bullets.map((b, bIdx) => (
+                          <li key={bIdx} className="flex items-start gap-2 text-xs text-zinc-600 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  <div className="p-8 bg-white/5 rounded-3xl border border-white/5 hover:bg-white/10 transition-all">
-                    <div className="text-4xl font-black mb-2 text-violet-400">+100</div>
-                    <div className="text-[10px] uppercase font-bold text-zinc-500 tracking-widest">Apps Locales</div>
+
+                  <div className="p-6 pt-0">
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-3 px-4 bg-white border border-zinc-200 hover:bg-zinc-900 hover:text-white text-zinc-900 font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2"
+                    >
+                      <span>Ver proyecto en vivo</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
                   </div>
-               </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mb-20">
+              <Link 
+                href="/portafolio" 
+                className="inline-flex items-center gap-2 text-sm font-bold text-violet-600 hover:text-violet-800 uppercase tracking-wider underline underline-offset-4"
+              >
+                Ver más proyectos Shopify en nuestro Portafolio <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Vicca Transformation Flow Showcase */}
+            <ViccaTransformationShowcase />
+
+            {/* Testimonial Feature Card */}
+            <div className="mt-20 max-w-4xl mx-auto bg-violet-50 border border-violet-200/80 rounded-[3rem] p-8 sm:p-12 relative overflow-hidden shadow-sm">
+              <div className="flex flex-col md:flex-row items-center gap-8">
+                <div className="w-20 h-20 rounded-full bg-violet-600 flex items-center justify-center text-white text-2xl font-black shrink-0 font-mono shadow-lg shadow-violet-600/30">
+                  SM
+                </div>
+                <div>
+                  <div className="flex items-center gap-1 text-amber-400 mb-3">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <blockquote className="text-base sm:text-lg text-zinc-800 italic font-serif leading-relaxed mb-4">
+                    "Necesitábamos integrar nuestra tienda con los medios de pago, despacho y facturación. Webunica entendió nuestro negocio y nos entregó una tienda que hoy opera sin problemas. Recomendados 100%."
+                  </blockquote>
+                  <div>
+                    <strong className="text-sm font-black uppercase text-zinc-950 block">Carolina Muñoz</strong>
+                    <span className="text-xs text-zinc-500 font-medium">Gerente de Operaciones — SpinMedical</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ========================================================= */}
+        {/* ZONA 4: PLANES Y PRECIOS (FACILITAR DECISIÓN)            */}
+        {/* ========================================================= */}
+        <section id="planes" className="py-24 bg-zinc-50 rounded-[3.5rem] mx-4 my-8">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-violet-100 text-violet-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
+                <Tag className="w-3.5 h-3.5" /> Inversión Transparente
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
+                Elige el plan ideal para tu proyecto
+              </h2>
+              <p className="text-zinc-600 text-base sm:text-lg font-light mt-3">
+                Tres alternativas claras, diseñadas para diferentes etapas de crecimiento.
+              </p>
+            </div>
+
+            {/* 3 Main Plans Summary Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+              
+              {/* PLAN PRENDE */}
+              <div className="bg-white rounded-[2.5rem] p-8 border border-zinc-200 shadow-lg flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full inline-block mb-4">
+                    Lanzamiento
+                  </span>
+                  <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Prende</h3>
+                  <p className="text-xs text-zinc-500 font-light mb-6">Para empezar a vender con tienda funcional y profesional.</p>
+                  
+                  <div className="mb-6 pb-6 border-b border-zinc-100">
+                    <span className="text-4xl font-black text-zinc-950 font-mono">$580.000</span>
+                    <span className="text-xs font-bold text-zinc-400 uppercase ml-2">+ IVA</span>
+                  </div>
+
+                  <ul className="space-y-3 mb-8">
+                    {[
+                      "Diseño basado en plantilla premium",
+                      "Hasta 100 productos configurados",
+                      "Medios de pago (Webpay / Flow / MP)",
+                      "Despacho con tarifas fijas / zonas",
+                      "Diseño Mobile-First 100%",
+                      "Capacitación básica de uso",
+                      "1 mes de soporte post lanzamiento"
+                    ].map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-xs text-zinc-700 font-medium">
+                        <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" strokeWidth={3} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer">
+                  Cotizar Plan Prende
+                </LeadButton>
+              </div>
+
+              {/* PLAN FULL (DESTACADO / MÁS ELEGIDO) */}
+              <div className="bg-gradient-to-b from-violet-900 via-[#2C02A5] to-zinc-950 text-white rounded-[2.5rem] p-8 border-2 border-[#FF0085] shadow-2xl relative flex flex-col justify-between scale-[1.02] transform">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FF0085] text-white text-[10px] font-mono font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">
+                  ★ MÁS ELEGIDO • CYBERDAY READY
+                </div>
+
+                <div>
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-violet-300 bg-white/10 px-3 py-1 rounded-full inline-block mb-4 mt-2">
+                    Crecimiento & Automatización
+                  </span>
+                  <h3 className="text-3xl font-black uppercase text-white mb-1 font-heading">Plan Full</h3>
+                  <p className="text-xs text-purple-200 font-light mb-6">Tienda optimizada para vender, medir y automatizar.</p>
+                  
+                  <div className="mb-6 pb-6 border-b border-white/15">
+                    <span className="text-4xl font-black text-white font-mono">$780.000</span>
+                    <span className="text-xs font-bold text-purple-300 uppercase ml-2">+ IVA</span>
+                  </div>
+
+                  <ul className="space-y-3 mb-8">
+                    {[
+                      "Diseño con plantilla premium + secciones a medida",
+                      "Hasta 500 productos configurados",
+                      "Integración pasarelas de pago + Despacho local",
+                      "Boleta Electrónica SII automática",
+                      "SEO Técnico + GA4 + Meta Pixel + Conversion API",
+                      "Capacitación avanzada de administración",
+                      "2 meses de soporte prioritario"
+                    ].map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-xs text-purple-100 font-medium">
+                        <Check className="w-4 h-4 text-pink-400 shrink-0 mt-0.5" strokeWidth={3} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <LeadButton className="w-full py-4 bg-[#FF0085] hover:bg-pink-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-pink-600/30 text-center cursor-pointer">
+                  Revisar mi proyecto (Plan Full)
+                </LeadButton>
+              </div>
+
+              {/* PLAN PRO / CONVERSIÓN */}
+              <div className="bg-white rounded-[2.5rem] p-8 border border-zinc-200 shadow-lg flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1 rounded-full inline-block mb-4">
+                    Operaciones Avanzadas
+                  </span>
+                  <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Pro</h3>
+                  <p className="text-xs text-zinc-500 font-light mb-6">Solución a medida para catálogos grandes e integraciones.</p>
+                  
+                  <div className="mb-6 pb-6 border-b border-zinc-100">
+                    <span className="text-4xl font-black text-zinc-950 font-mono">$1.200.000</span>
+                    <span className="text-xs font-bold text-zinc-400 uppercase ml-2">+ IVA</span>
+                  </div>
+
+                  <ul className="space-y-3 mb-8">
+                    {[
+                      "Diseño UX/UI personalizado para conversión",
+                      "Productos ilimitados (migración masiva)",
+                      "Integración ERP (Bsale / Obuma / Defontana)",
+                      "Automatización Email Marketing con Klaviyo",
+                      "Analítica avanzada & reportes de ventas",
+                      "Optimización CRO en ficha de producto",
+                      "3 meses de soporte técnico VIP"
+                    ].map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-xs text-zinc-700 font-medium">
+                        <Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" strokeWidth={3} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer">
+                  Solicitar evaluación técnica
+                </LeadButton>
+              </div>
+
+            </div>
+
+            {/* Assistance micro-banner */}
+            <div className="bg-white border border-zinc-200 rounded-3xl p-6 text-center max-w-2xl mx-auto mb-16 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-left">
+                <h4 className="text-sm font-black uppercase text-zinc-950">¿No sabes cuál plan elegir?</h4>
+                <p className="text-xs text-zinc-500 font-light">Te ayudamos a definir el plan que mejor se adapta a tu negocio.</p>
+              </div>
+              <LeadButton className="px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shrink-0 cursor-pointer">
+                Agenda una reunión gratuita
+              </LeadButton>
+            </div>
+
+            {/* Interactive Plans Detailed Comparison Table */}
+            <ShopifyPricingSection />
+
+          </div>
+        </section>
+
+        {/* ========================================================= */}
+        {/* ZONA 5: SERVICIOS COMPLEMENTARIOS (CROSS-SELL)             */}
+        {/* ========================================================= */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-violet-50 text-violet-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
+                <Layers className="w-3.5 h-3.5" /> Ecosistema de Crecimiento
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
+                Servicios complementarios
+              </h2>
+              <p className="text-zinc-600 text-base sm:text-lg font-light mt-3">
+                Si lo necesitas, te acompañamos más allá del desarrollo para escalar tus ventas.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
+              {crossSellServices.map((service, idx) => {
+                const Icon = service.icon;
+                return (
+                  <div key={idx} className="bg-zinc-50 border border-zinc-200 rounded-3xl p-6 hover:border-violet-300 hover:shadow-lg transition-all flex flex-col justify-between group">
+                    <div>
+                      <div className="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center mb-4 group-hover:bg-violet-600 group-hover:text-white transition-colors">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-base font-bold text-zinc-950 mb-2 leading-snug">{service.title}</h3>
+                      <p className="text-xs text-zinc-500 font-light leading-relaxed">{service.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="text-center">
+              <Link 
+                href="/servicios-seo-posicionamiento-google" 
+                className="inline-flex items-center gap-2 text-xs font-bold text-zinc-600 hover:text-violet-600 uppercase tracking-wider underline"
+              >
+                Ver todos los servicios complementarios <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ========================================================= */}
+        {/* ZONA 6: CTA FINAL                                         */}
+        {/* ========================================================= */}
+        <section className="py-20 px-4 sm:px-6">
+          <div className="max-w-6xl mx-auto bg-gradient-to-br from-violet-950 via-[#2C02A5] to-zinc-950 rounded-[3.5rem] p-10 sm:p-16 lg:p-20 text-center text-white relative overflow-hidden shadow-3xl border border-violet-800/40">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#FF0085]/20 blur-[150px] rounded-full pointer-events-none" />
+            
+            <div className="relative z-10">
+              <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black mb-6 tracking-tighter uppercase leading-[0.9] font-heading">
+                ¿Listo para construir <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-indigo-200">tu tienda Shopify?</span>
+              </h2>
+              
+              <p className="text-purple-100 text-base sm:text-xl mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                Cuéntanos tu proyecto y te entregamos una propuesta a medida. Te acompañamos desde la estrategia hasta la implementación en Chile.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+                <LeadButton className="px-10 py-5 bg-[#FF0085] hover:bg-pink-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-xl shadow-pink-600/30 text-center cursor-pointer w-full sm:w-auto">
+                  Solicitar diagnóstico
+                </LeadButton>
+                
+                <WhatsAppButton className="px-10 py-5 bg-emerald-500 hover:bg-emerald-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl transition-all shadow-xl shadow-emerald-500/20 text-center cursor-pointer w-full sm:w-auto">
+                  Hablar por WhatsApp
+                </WhatsAppButton>
+              </div>
+
+              <p className="text-xs font-mono text-purple-300/80">
+                ⚡ Respondemos en menos de 2 horas hábiles
+              </p>
             </div>
           </div>
         </section>
 
-
-        {/* FAQ Section */}
+        {/* ========================================================= */}
+        {/* ZONA 7: FAQ                                               */}
+        {/* ========================================================= */}
         <div className="pb-32 bg-white">
-           <FAQSection 
-             faqs={shopifyFaqs} 
-             title="Dudas sobre Shopify en Chile"
-             description="Todo lo que necesitas saber sobre costos, integraciones y tiempos antes de iniciar tu proyecto."
-           />
+          <FAQSection 
+            faqs={shopifyFaqs} 
+            title="Preguntas Frecuentes sobre Shopify en Chile"
+            description="Respuestas claras a las dudas más comunes sobre costos, integraciones, migraciones y tiempos de desarrollo."
+          />
         </div>
+
       </div>
     </div>
   );
