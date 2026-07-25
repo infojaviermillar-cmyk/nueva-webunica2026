@@ -9,6 +9,7 @@ import ShopifyPricingSection from '@/components/sections/shopify-pricing-section
 import ShopifyVideoPortfolio from '@/components/sections/shopify-video-portfolio';
 import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
 import ViccaTransformationShowcase from '@/components/sections/vicca-transformation-showcase';
+import ShopifyStackedHeroCards from '@/components/ui/shopify-stacked-hero-cards';
 export const metadata = {
   title: 'Desarrollo de Tiendas Shopify en Chile | Expertos Shopify Partner 2026',
   description: 'Expertos líderes en diseño y desarrollo de tiendas Shopify en Chile. Optimizamos tu ecommerce con Transbank, Webpay, Flow y Facturación SII. ¡Cotiza con Expertos Shopify!',
@@ -133,23 +134,8 @@ export default function ShopifyEnChilePage() {
               </div>
             </div>
             
-            <div className="relative z-10 hidden lg:block">
-              <div className="absolute inset-0 bg-gradient-to-tr from-violet-500 to-indigo-400 rounded-full blur-[80px] opacity-20 animate-pulse" />
-              <Image
-                src="/tecno.png"
-                alt="Expertos en Desarrollo Shopify en Chile - Webunica"
-                width={800}
-                height={600}
-                className="relative w-full h-auto object-contain transform rotate-2 hover:rotate-0 transition-transform duration-700 z-10"
-                priority
-              />
-              <div className="absolute -bottom-6 -right-6 bg-white shadow-xl px-6 py-4 rounded-3xl border border-zinc-100 flex items-center gap-4 z-20">
-                 <ShoppingBag className="w-6 h-6 text-violet-600" />
-                 <div>
-                   <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 block leading-tight">Certificados</span>
-                   <span className="text-sm font-bold text-zinc-900">Shopify Partner 2026</span>
-                 </div>
-              </div>
+            <div className="relative z-10 block w-full">
+              <ShopifyStackedHeroCards />
             </div>
           </div>
         </section>
