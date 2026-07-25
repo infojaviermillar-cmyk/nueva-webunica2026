@@ -335,37 +335,37 @@ export default function ShopifyEnChilePage() {
               })}
             </div>
 
-            {/* ANTI-OBJECIÓN & TRUST COMMITMENT BANNER */}
-            <div className="bg-zinc-950 text-white rounded-[3rem] p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-2xl border border-zinc-800">
-              <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-violet-600/20 blur-[130px] rounded-full pointer-events-none" />
-              
-              <div className="relative z-10">
-                <div className="max-w-3xl mb-10">
-                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-violet-400 block mb-2">
-                    Garantía & Acompañamiento
-                  </span>
-                  <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tight font-heading">
-                    Tu proyecto no termina cuando publicamos la tienda
-                  </h3>
-                  <p className="text-zinc-300 font-normal text-base sm:text-lg mt-2">
-                    Nos aseguramos de que el proceso sea transparente, seguro y sin imprevistos desde el primer día:
-                  </p>
-                </div>
+          </div>
+        </section>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-                  {guaranteeItems.map((item, idx) => (
-                    <div key={idx} className="bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition-colors">
-                      <div className="w-7 h-7 rounded-full bg-violet-500/20 border border-violet-400/30 flex items-center justify-center text-violet-300 mb-3 font-mono font-bold text-xs">
-                        0{idx + 1}
-                      </div>
-                      <h4 className="text-base font-bold text-white mb-2 leading-snug">{item.title}</h4>
-                      <p className="text-sm text-zinc-300 font-light leading-relaxed">{item.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
+        {/* SECCIÓN ANCHO COMPLETO (#09090b): GARANTÍA Y ACOMPAÑAMIENTO */}
+        <section className="w-full bg-zinc-950 text-white py-20 lg:py-28 my-16 relative overflow-hidden border-y border-zinc-800">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/20 blur-[140px] rounded-full pointer-events-none" />
+          
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div className="max-w-3xl mb-12">
+              <span className="text-sm font-mono font-bold uppercase tracking-widest text-violet-400 block mb-3">
+                Garantía & Acompañamiento
+              </span>
+              <h3 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight font-heading">
+                Tu proyecto no termina cuando publicamos la tienda
+              </h3>
+              <p className="text-zinc-200 font-normal text-lg sm:text-xl mt-4 leading-relaxed">
+                Nos aseguramos de que el proceso sea transparente, seguro y sin imprevistos desde el primer día:
+              </p>
             </div>
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {guaranteeItems.map((item, idx) => (
+                <div key={idx} className="bg-white/5 border border-white/15 p-6 rounded-3xl hover:bg-white/10 transition-colors">
+                  <div className="w-9 h-9 rounded-full bg-violet-600/30 border border-violet-400/40 flex items-center justify-center text-violet-300 mb-4 font-mono font-bold text-sm">
+                    0{idx + 1}
+                  </div>
+                  <h4 className="text-lg font-bold text-white mb-2 leading-snug">{item.title}</h4>
+                  <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
