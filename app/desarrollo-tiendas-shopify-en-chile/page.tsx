@@ -7,6 +7,7 @@ import ShopifyPricingSection from '@/components/sections/shopify-pricing-section
 import ViccaTransformationShowcase from '@/components/sections/vicca-transformation-showcase';
 import ShopifyStackedHeroCards from '@/components/ui/shopify-stacked-hero-cards';
 import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
+import ShopifyInfiniteCasesCarousel from '@/components/sections/shopify-infinite-cases-carousel';
 import { 
   Sparkles, 
   CheckCircle2, 
@@ -368,78 +369,13 @@ export default function ShopifyEnChilePage() {
         </section>
 
         {/* ========================================================= */}
-        {/* ZONA 3: CASOS DE ÉXITO SHOPIFY (PRUEBA SOCIAL)            */}
+        {/* ZONA 3: CASOS DE ÉXITO SHOPIFY (CARRUSEL DE PROYECTOS)    */}
         {/* ========================================================= */}
-        <section className="py-24 bg-white">
+        <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 text-emerald-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
-                <Award className="w-3.5 h-3.5 text-emerald-600" /> Resultados Demostrables
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
-                Casos Shopify que generan resultados
-              </h2>
-              <p className="text-zinc-600 text-base sm:text-lg font-light mt-3">
-                Algunos proyectos reales desarrollados para marcas líderes en Chile.
-              </p>
-            </div>
-
-            {/* 3 Featured Case Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-              {caseStudies.map((item, idx) => (
-                <div key={idx} className="bg-zinc-50 rounded-3xl overflow-hidden border border-zinc-200 flex flex-col justify-between group hover:shadow-xl transition-all">
-                  <div>
-                    <div className="relative w-full aspect-[16/10] bg-zinc-900 overflow-hidden">
-                      <Image
-                        src={item.image}
-                        alt={`Caso de éxito ${item.name} - Webunica`}
-                        fill
-                        className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, 400px"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-violet-600 block mb-1">
-                        {item.category}
-                      </span>
-                      <h3 className="text-2xl font-black text-zinc-950 uppercase tracking-tight mb-4 font-heading">
-                        {item.name}
-                      </h3>
-                      <ul className="space-y-2 mb-6">
-                        {item.bullets.map((b, bIdx) => (
-                          <li key={bIdx} className="flex items-start gap-2 text-xs text-zinc-600 font-medium">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="p-6 pt-0">
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-3 px-4 bg-white border border-zinc-200 hover:bg-zinc-900 hover:text-white text-zinc-900 font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2"
-                    >
-                      <span>Ver proyecto en vivo</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center mb-20">
-              <Link 
-                href="/portafolio" 
-                className="inline-flex items-center gap-2 text-sm font-bold text-violet-600 hover:text-violet-800 uppercase tracking-wider underline underline-offset-4"
-              >
-                Ver más proyectos Shopify en nuestro Portafolio <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+            {/* Carrusel de Casos con todos los proyectos */}
+            <ShopifyInfiniteCasesCarousel />
 
             {/* Vicca Transformation Flow Showcase */}
             <ViccaTransformationShowcase />
