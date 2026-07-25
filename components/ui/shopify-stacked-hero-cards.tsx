@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { ShoppingBag, X, Maximize2, ExternalLink, Sparkles } from 'lucide-react';
 
 type StoreCard = {
@@ -69,19 +68,18 @@ export default function ShopifyStackedHeroCards() {
   const [activeHoverId, setActiveHoverId] = useState<string | null>(null);
 
   return (
-    <div className="relative w-full max-w-xl mx-auto py-4 select-none">
+    <div className="relative w-full max-w-2xl mx-auto py-2 select-none">
       {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/30 via-purple-500/20 to-pink-500/30 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/30 via-purple-500/20 to-pink-500/30 rounded-full blur-[110px] pointer-events-none" />
 
-      {/* Vertical Overlapping Slices Stack Container */}
-      <div className="relative w-full h-[450px] sm:h-[520px] flex items-center justify-start overflow-visible">
+      {/* Vertical Overlapping Slices Stack Container with Desktop Aspect Ratio */}
+      <div className="relative w-full h-[320px] sm:h-[400px] lg:h-[430px] flex items-center justify-start overflow-visible my-4">
         {storeCards.map((store, index) => {
           const isVicca = index === 0;
           const isHovered = activeHoverId === store.id;
 
-          // Calculate staggered horizontal position so left slice of every image is visible
-          // index 0 (Vicca) is at the front (left: 0%), subsequent cards shift right
-          const leftOffset = index * 13; // percentage shift
+          // Staggered horizontal position so left slice of every image is clearly visible
+          const leftOffset = index * 12.5; // percentage shift
           const zIndex = isHovered ? 60 : isVicca ? 50 : 40 - index;
 
           return (
@@ -94,31 +92,29 @@ export default function ShopifyStackedHeroCards() {
                 left: `${leftOffset}%`,
                 zIndex: zIndex,
               }}
-              className={`absolute top-1/2 -translate-y-1/2 w-[62%] sm:w-[68%] aspect-[9/16] max-h-[460px] sm:max-h-[500px] rounded-2xl overflow-hidden border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer group ${
+              className={`absolute top-1/2 -translate-y-1/2 w-[72%] sm:w-[76%] aspect-[16/10] rounded-2xl overflow-hidden border border-zinc-200/80 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.18)] transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer group ${
                 isHovered
-                  ? '-translate-y-[55%] scale-105 shadow-[0_30px_70px_rgba(124,58,237,0.4)] border-purple-400/80 ring-4 ring-purple-500/30'
-                  : 'hover:-translate-y-[52%]'
+                  ? '-translate-y-[56%] scale-105 shadow-[0_30px_70px_rgba(124,58,237,0.35)] border-purple-500 ring-4 ring-purple-500/20'
+                  : 'hover:-translate-y-[53%]'
               }`}
             >
-              {/* Full Native High-Res Image (left aligned) */}
+              {/* Native High-Res Image (Desktop Ratio Aspect 16/10) */}
               <div className="relative w-full h-full bg-zinc-950 overflow-hidden">
-                <Image
+                <img
                   src={store.image}
                   alt={`Tienda Shopify ${store.name} - Webunica`}
-                  fill
-                  className="object-cover object-left-top transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 768px) 300px, 450px"
-                  priority={isVicca}
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  loading={isVicca ? 'eager' : 'lazy'}
                 />
 
-                {/* Left Edge Indicator Badge / Strip */}
-                <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-3 py-1 bg-zinc-950/80 backdrop-blur-md border border-white/20 rounded-full text-[10px] font-mono text-white font-bold tracking-wider shadow-lg">
+                {/* Left Edge URL Pill */}
+                <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-3 py-1 bg-zinc-950/85 backdrop-blur-md border border-white/20 rounded-full text-[10px] font-mono text-white font-bold tracking-wider shadow-lg">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   <span>{store.url}</span>
                 </div>
 
                 {/* Hover Reveal Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                   <div className="flex items-center justify-between text-white">
                     <div>
                       <h4 className="text-sm font-black uppercase tracking-wider">{store.name}</h4>
@@ -136,7 +132,7 @@ export default function ShopifyStackedHeroCards() {
       </div>
 
       {/* Floating Shopify Partner Badge */}
-      <div className="absolute -bottom-4 right-0 sm:right-2 bg-white/95 backdrop-blur-md shadow-2xl px-5 py-3.5 rounded-3xl border border-zinc-200/80 flex items-center gap-3.5 z-50">
+      <div className="absolute -bottom-6 right-0 sm:right-2 bg-white/95 backdrop-blur-md shadow-2xl px-5 py-3.5 rounded-3xl border border-zinc-200/80 flex items-center gap-3.5 z-50">
         <div className="w-10 h-10 rounded-2xl bg-violet-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-violet-600/30">
           <ShoppingBag className="w-5 h-5" />
         </div>
@@ -147,7 +143,7 @@ export default function ShopifyStackedHeroCards() {
       </div>
 
       {/* Instruction hint */}
-      <div className="text-center mt-6">
+      <div className="text-center mt-8">
         <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-zinc-100 border border-zinc-200 rounded-full text-[11px] font-mono text-zinc-600 font-semibold uppercase tracking-wider">
           <Sparkles className="w-3.5 h-3.5 text-violet-600" />
           Haz clic en cualquier tienda para verla a resolución completa
@@ -190,15 +186,16 @@ export default function ShopifyStackedHeroCards() {
             </div>
           </div>
 
-          {/* Native Crisp High-Res Image Container (No frame borders) */}
+          {/* Full High-Resolution Uncompressed Image Container */}
           <div 
-            className="relative w-full max-w-6xl flex-1 max-h-[84vh] overflow-y-auto rounded-2xl bg-zinc-950 border border-white/15 shadow-2xl p-2 flex justify-center cursor-default custom-scrollbar"
+            className="relative w-full max-w-6xl flex-1 max-h-[85vh] overflow-y-auto rounded-2xl bg-zinc-950 border border-white/15 shadow-2xl p-2 flex justify-center cursor-default custom-scrollbar"
             onClick={(e) => e.stopPropagation()}
           >
             <img 
               src={selectedImage.image} 
               alt={`Captura alta resolución de ${selectedImage.name}`}
               className="w-full h-auto object-contain rounded-xl"
+              style={{ imageRendering: 'high-quality' }}
             />
           </div>
 
