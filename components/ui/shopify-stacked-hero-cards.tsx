@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShoppingBag, X, Maximize2, ExternalLink, Sparkles } from 'lucide-react';
+import { ShoppingBag, X, Maximize2, ExternalLink, Sparkles, ZoomIn, ZoomOut, CheckCircle2 } from 'lucide-react';
 
 type StoreCard = {
   id: string;
@@ -16,7 +16,7 @@ const storeCards: StoreCard[] = [
     id: 'vicca',
     name: 'Vicca',
     url: 'vicca.cl',
-    category: 'Moda & Vestuario',
+    category: 'Moda & Ergonómicos',
     image: '/clientes-2/vicca.cl.png',
   },
   {
@@ -66,40 +66,62 @@ const storeCards: StoreCard[] = [
 export default function ShopifyStackedHeroCards() {
   const [selectedImage, setSelectedImage] = useState<StoreCard | null>(null);
   const [activeHoverId, setActiveHoverId] = useState<string | null>(null);
+  const [isZoomed100, setIsZoomed100] = useState<boolean>(false);
 
   return (
     <div className="relative w-full max-w-2xl mx-auto py-2 select-none">
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/30 via-purple-500/20 to-pink-500/30 rounded-full blur-[110px] pointer-events-none" />
+      {/* Ambient background glow */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/30 via-purple-500/20 to-pink-500/30 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Vertical Overlapping Slices Stack Container with Desktop Aspect Ratio */}
-      <div className="relative w-full h-[320px] sm:h-[400px] lg:h-[430px] flex items-center justify-start overflow-visible my-4">
+      {/* Stacked Vertical Slices Container */}
+      <div className="relative w-full h-[360px] sm:h-[440px] lg:h-[480px] flex items-center justify-start overflow-visible my-4">
         {storeCards.map((store, index) => {
           const isVicca = index === 0;
           const isHovered = activeHoverId === store.id;
 
-          // Staggered horizontal position so left slice of every image is clearly visible
-          const leftOffset = index * 12.5; // percentage shift
+          // Staggered horizontal positioning to reveal left vertical slice of each store
+          const leftOffset = index * 12.5; 
           const zIndex = isHovered ? 60 : isVicca ? 50 : 40 - index;
 
           return (
             <div
               key={store.id}
-              onClick={() => setSelectedImage(store)}
+              onClick={() => {
+                setSelectedImage(store);
+                setIsZoomed100(false);
+              }}
               onMouseEnter={() => setActiveHoverId(store.id)}
               onMouseLeave={() => setActiveHoverId(null)}
               style={{
                 left: `${leftOffset}%`,
                 zIndex: zIndex,
               }}
-              className={`absolute top-1/2 -translate-y-1/2 w-[72%] sm:w-[76%] aspect-[16/10] rounded-2xl overflow-hidden border border-zinc-200/80 bg-white shadow-[0_20px_50px_rgba(0,0,0,0.18)] transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer group ${
+              className={`absolute top-1/2 -translate-y-1/2 w-[74%] sm:w-[78%] aspect-[192/105] rounded-2xl overflow-hidden border border-zinc-200/90 bg-zinc-950 shadow-[0_25px_60px_rgba(0,0,0,0.22)] transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer group ${
                 isHovered
-                  ? '-translate-y-[56%] scale-105 shadow-[0_30px_70px_rgba(124,58,237,0.35)] border-purple-500 ring-4 ring-purple-500/20'
+                  ? '-translate-y-[56%] scale-105 shadow-[0_35px_80px_rgba(124,58,237,0.4)] border-purple-500 ring-4 ring-purple-500/30'
                   : 'hover:-translate-y-[53%]'
               }`}
             >
-              {/* Native High-Res Image (Desktop Ratio Aspect 16/10) */}
-              <div className="relative w-full h-full bg-zinc-950 overflow-hidden">
+              {/* macOS Browser Header Bar */}
+              <div className="bg-zinc-900/95 backdrop-blur-md px-3.5 py-2 border-b border-white/10 flex items-center justify-between z-30 relative">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                </div>
+
+                <div className="flex items-center gap-1.5 px-3 py-0.5 bg-white/10 border border-white/15 rounded-full text-[10px] font-mono text-white font-bold tracking-wider">
+                  <span className="text-emerald-400">https://</span>
+                  <span>{store.url}</span>
+                </div>
+
+                <span className="text-[9px] font-mono text-purple-300 font-bold uppercase tracking-widest hidden sm:inline-block">
+                  HD 1920px
+                </span>
+              </div>
+
+              {/* Crisp Native Store Viewport (Top Header & Hero Focus) */}
+              <div className="relative w-full h-[calc(100%-32px)] bg-zinc-950 overflow-hidden">
                 <img
                   src={store.image}
                   alt={`Tienda Shopify ${store.name} - Webunica`}
@@ -107,21 +129,20 @@ export default function ShopifyStackedHeroCards() {
                   loading={isVicca ? 'eager' : 'lazy'}
                 />
 
-                {/* Left Edge URL Pill */}
-                <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 px-3 py-1 bg-zinc-950/85 backdrop-blur-md border border-white/20 rounded-full text-[10px] font-mono text-white font-bold tracking-wider shadow-lg">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>{store.url}</span>
-                </div>
-
-                {/* Hover Reveal Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                {/* Hover Reveal Details Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 z-20">
                   <div className="flex items-center justify-between text-white">
                     <div>
-                      <h4 className="text-sm font-black uppercase tracking-wider">{store.name}</h4>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-xs font-mono bg-violet-600 px-2 py-0.5 rounded text-white font-bold uppercase">HD Nitido</span>
+                        <h4 className="text-sm font-black uppercase tracking-wider">{store.name}</h4>
+                      </div>
                       <p className="text-[11px] text-purple-200 font-light">{store.category}</p>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-violet-600 flex items-center justify-center text-white shadow-lg">
-                      <Maximize2 className="w-4 h-4" />
+                    
+                    <div className="px-3 py-1.5 rounded-xl bg-white text-zinc-950 font-black text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-xl hover:bg-purple-100 transition-colors">
+                      <Maximize2 className="w-3.5 h-3.5 text-violet-600" />
+                      <span>Ver Nitido 100%</span>
                     </div>
                   </div>
                 </div>
@@ -143,36 +164,65 @@ export default function ShopifyStackedHeroCards() {
       </div>
 
       {/* Instruction hint */}
-      <div className="text-center mt-8">
-        <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-zinc-100 border border-zinc-200 rounded-full text-[11px] font-mono text-zinc-600 font-semibold uppercase tracking-wider">
-          <Sparkles className="w-3.5 h-3.5 text-violet-600" />
-          Haz clic en cualquier tienda para verla a resolución completa
+      <div className="text-center mt-10">
+        <span className="inline-flex items-center gap-2 px-5 py-2 bg-zinc-900 text-white border border-zinc-700 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider shadow-lg">
+          <Sparkles className="w-4 h-4 text-violet-400" />
+          Haz clic en cualquier tienda para abrirla a resolución HD 100% sin compresión
         </span>
       </div>
 
-      {/* Full Native High-Res Image Lightbox Modal */}
+      {/* High-Resolution Crisp Lightbox Modal */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] p-4 sm:p-8 flex flex-col items-center justify-center animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/95 backdrop-blur-md z-[100] p-3 sm:p-6 flex flex-col items-center justify-center animate-in fade-in duration-200"
           onClick={() => setSelectedImage(null)}
         >
-          {/* Top Bar */}
-          <div className="w-full max-w-6xl flex items-center justify-between pb-4 border-b border-white/10 mb-4 text-white">
+          {/* Lightbox Top Control Bar */}
+          <div className="w-full max-w-7xl flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-white/15 mb-3 text-white">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-mono bg-violet-600 px-3 py-1 rounded-full font-bold uppercase">Tienda Shopify</span>
-              <h4 className="text-xl font-black uppercase tracking-tight">{selectedImage.name}</h4>
-              <span className="text-xs text-zinc-400 font-mono hidden sm:inline-block">({selectedImage.url})</span>
+              <span className="text-xs font-mono bg-violet-600 px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+                Shopify HD Live
+              </span>
+              <h4 className="text-lg sm:text-xl font-black uppercase tracking-tight">{selectedImage.name}</h4>
+              <span className="text-xs text-purple-300 font-mono hidden md:inline-block">
+                ({selectedImage.url})
+              </span>
             </div>
-            
-            <div className="flex items-center gap-4">
+
+            {/* Resolution Toggle & External Link Actions */}
+            <div className="flex items-center gap-3">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsZoomed100(!isZoomed100);
+                }}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all border ${
+                  isZoomed100 
+                    ? 'bg-purple-600 text-white border-purple-400 shadow-lg shadow-purple-600/40' 
+                    : 'bg-white/10 hover:bg-white/20 text-white border-white/20'
+                }`}
+              >
+                {isZoomed100 ? (
+                  <>
+                    <ZoomOut className="w-4 h-4 text-purple-200" />
+                    <span>Ajustar a Pantalla</span>
+                  </>
+                ) : (
+                  <>
+                    <ZoomIn className="w-4 h-4 text-emerald-400" />
+                    <span>Ver Escala 100% Nitida (1920px)</span>
+                  </>
+                )}
+              </button>
+
               <a 
                 href={`https://${selectedImage.url}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="hidden sm:flex items-center gap-1.5 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors border border-white/15"
+                className="hidden sm:flex items-center gap-1.5 px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-lg shadow-emerald-500/20"
               >
-                <span>Visitar Sitio Web</span>
+                <span>Visitar Sitio</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
 
@@ -186,21 +236,32 @@ export default function ShopifyStackedHeroCards() {
             </div>
           </div>
 
-          {/* Full High-Resolution Uncompressed Image Container */}
+          {/* Crisp High-Res Container */}
           <div 
-            className="relative w-full max-w-6xl flex-1 max-h-[85vh] overflow-y-auto rounded-2xl bg-zinc-950 border border-white/15 shadow-2xl p-2 flex justify-center cursor-default custom-scrollbar"
+            className={`relative w-full max-w-7xl flex-1 max-h-[86vh] overflow-auto rounded-2xl bg-zinc-950 border border-white/20 shadow-2xl p-2 flex justify-center custom-scrollbar ${
+              isZoomed100 ? 'items-start justify-start cursor-grab active:cursor-grabbing' : 'items-center justify-center cursor-default'
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             <img 
               src={selectedImage.image} 
-              alt={`Captura alta resolución de ${selectedImage.name}`}
-              className="w-full h-auto object-contain rounded-xl"
+              alt={`Captura nitida 100% de ${selectedImage.name}`}
+              className={`rounded-xl transition-all duration-300 ${
+                isZoomed100 
+                  ? 'w-[1920px] max-w-none h-auto shrink-0 shadow-2xl' 
+                  : 'w-full h-auto max-h-[82vh] object-contain'
+              }`}
             />
           </div>
 
-          <p className="text-xs text-zinc-400 mt-3 font-mono">
-            Haz clic fuera o presiona X para cerrar la vista previa
-          </p>
+          {/* Bottom Bar Info */}
+          <div className="w-full max-w-7xl flex items-center justify-between mt-3 text-xs font-mono text-purple-200/80">
+            <span className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <span>Resolución original 1920x945 px • Theme Shopify Personalizado</span>
+            </span>
+            <span className="hidden sm:inline-block">Haz clic fuera o presiona X para salir</span>
+          </div>
         </div>
       )}
     </div>
