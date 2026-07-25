@@ -318,7 +318,7 @@ export default function ShopifyEnChilePage() {
                         <div className="w-12 h-12 rounded-2xl bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-600 group-hover:bg-violet-600 group-hover:text-white transition-colors">
                           <Icon className="w-6 h-6" />
                         </div>
-                        <span className="text-[10px] font-mono font-bold text-violet-600 bg-violet-50 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                        <span className="text-xs font-mono font-bold text-violet-600 bg-violet-50 px-3 py-1 rounded-full uppercase tracking-wider">
                           {card.badge}
                         </span>
                       </div>
@@ -326,7 +326,7 @@ export default function ShopifyEnChilePage() {
                       <h3 className="text-xl font-black uppercase text-zinc-950 mb-3 font-heading group-hover:text-violet-700 transition-colors">
                         {card.title}
                       </h3>
-                      <p className="text-sm text-zinc-600 font-light leading-relaxed">
+                      <p className="text-base text-zinc-700 font-normal leading-relaxed">
                         {card.desc}
                       </p>
                     </div>
@@ -347,7 +347,7 @@ export default function ShopifyEnChilePage() {
                   <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tight font-heading">
                     Tu proyecto no termina cuando publicamos la tienda
                   </h3>
-                  <p className="text-zinc-300 font-light text-base mt-2">
+                  <p className="text-zinc-300 font-normal text-base sm:text-lg mt-2">
                     Nos aseguramos de que el proceso sea transparente, seguro y sin imprevistos desde el primer día:
                   </p>
                 </div>
@@ -358,8 +358,8 @@ export default function ShopifyEnChilePage() {
                       <div className="w-7 h-7 rounded-full bg-violet-500/20 border border-violet-400/30 flex items-center justify-center text-violet-300 mb-3 font-mono font-bold text-xs">
                         0{idx + 1}
                       </div>
-                      <h4 className="text-sm font-bold text-white mb-2 leading-snug">{item.title}</h4>
-                      <p className="text-xs text-zinc-400 font-light leading-relaxed">{item.desc}</p>
+                      <h4 className="text-base font-bold text-white mb-2 leading-snug">{item.title}</h4>
+                      <p className="text-sm text-zinc-300 font-light leading-relaxed">{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -417,7 +417,7 @@ export default function ShopifyEnChilePage() {
                     Lanzamiento
                   </span>
                   <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Prende</h3>
-                  <p className="text-xs text-zinc-500 font-light mb-6">Para empezar a vender con tienda funcional y profesional.</p>
+                  <p className="text-sm text-zinc-600 font-medium mb-6">Para empezar a vender con tienda funcional y profesional.</p>
                   
                   <div className="mb-6 pb-6 border-b border-zinc-100">
                     <span className="text-4xl font-black text-zinc-950 font-mono">$580.000</span>
@@ -434,8 +434,8 @@ export default function ShopifyEnChilePage() {
                       "Capacitación básica de uso",
                       "1 mes de soporte post lanzamiento"
                     ].map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-zinc-700 font-medium">
-                        <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" strokeWidth={3} />
+                      <li key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-zinc-800 font-medium">
+                        <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" strokeWidth={3} />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -458,7 +458,7 @@ export default function ShopifyEnChilePage() {
                     Crecimiento & Automatización
                   </span>
                   <h3 className="text-3xl font-black uppercase text-white mb-1 font-heading">Plan Full</h3>
-                  <p className="text-xs text-purple-200 font-light mb-6">Tienda optimizada para vender, medir y automatizar.</p>
+                  <p className="text-sm text-purple-200 font-medium mb-6">Tienda optimizada para vender, medir y automatizar.</p>
                   
                   <div className="mb-6 pb-6 border-b border-white/15">
                     <span className="text-4xl font-black text-white font-mono">$780.000</span>
@@ -475,8 +475,8 @@ export default function ShopifyEnChilePage() {
                       "Capacitación avanzada de administración",
                       "2 meses de soporte prioritario"
                     ].map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-purple-100 font-medium">
-                        <Check className="w-4 h-4 text-pink-400 shrink-0 mt-0.5" strokeWidth={3} />
+                      <li key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-purple-50 font-medium">
+                        <Check className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" strokeWidth={3} />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -495,7 +495,7 @@ export default function ShopifyEnChilePage() {
                     Operaciones Avanzadas
                   </span>
                   <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Pro</h3>
-                  <p className="text-xs text-zinc-500 font-light mb-6">Solución a medida para catálogos grandes e integraciones.</p>
+                  <p className="text-sm text-zinc-600 font-medium mb-6">Solución a medida para catálogos grandes e integraciones.</p>
                   
                   <div className="mb-6 pb-6 border-b border-zinc-100">
                     <span className="text-4xl font-black text-zinc-950 font-mono">$1.200.000</span>
@@ -512,8 +512,8 @@ export default function ShopifyEnChilePage() {
                       "Optimización CRO en ficha de producto",
                       "3 meses de soporte técnico VIP"
                     ].map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-zinc-700 font-medium">
-                        <Check className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" strokeWidth={3} />
+                      <li key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-zinc-800 font-medium">
+                        <Check className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" strokeWidth={3} />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -530,10 +530,10 @@ export default function ShopifyEnChilePage() {
             {/* Assistance micro-banner */}
             <div className="bg-white border border-zinc-200 rounded-3xl p-6 text-center max-w-2xl mx-auto mb-16 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-left">
-                <h4 className="text-sm font-black uppercase text-zinc-950">¿No sabes cuál plan elegir?</h4>
-                <p className="text-xs text-zinc-500 font-light">Te ayudamos a definir el plan que mejor se adapta a tu negocio.</p>
+                <h4 className="text-base font-black uppercase text-zinc-950">¿No sabes cuál plan elegir?</h4>
+                <p className="text-sm text-zinc-600 font-normal">Te ayudamos a definir el plan que mejor se adapta a tu negocio.</p>
               </div>
-              <LeadButton className="px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shrink-0 cursor-pointer">
+              <LeadButton className="px-6 py-3.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shrink-0 cursor-pointer">
                 Agenda una reunión gratuita
               </LeadButton>
             </div>
@@ -571,8 +571,8 @@ export default function ShopifyEnChilePage() {
                       <div className="w-10 h-10 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center mb-4 group-hover:bg-violet-600 group-hover:text-white transition-colors">
                         <Icon className="w-5 h-5" />
                       </div>
-                      <h3 className="text-base font-bold text-zinc-950 mb-2 leading-snug">{service.title}</h3>
-                      <p className="text-xs text-zinc-500 font-light leading-relaxed">{service.desc}</p>
+                      <h3 className="text-lg font-bold text-zinc-950 mb-2 leading-snug">{service.title}</h3>
+                      <p className="text-sm text-zinc-700 font-normal leading-relaxed">{service.desc}</p>
                     </div>
                   </div>
                 );

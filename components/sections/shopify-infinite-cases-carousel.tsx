@@ -203,7 +203,7 @@ export default function ShopifyInfiniteCasesCarousel() {
 
               {/* Content */}
               <div className="p-6">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-violet-600 block mb-1">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-violet-600 block mb-1">
                   {item.category}
                 </span>
                 <h3 className="text-2xl font-black text-zinc-950 uppercase tracking-tight mb-4 font-heading">
@@ -212,8 +212,8 @@ export default function ShopifyInfiniteCasesCarousel() {
                 
                 <ul className="space-y-2.5 mb-6">
                   {item.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-start gap-2 text-xs text-zinc-600 font-medium">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <li key={bIdx} className="flex items-start gap-2 text-sm text-zinc-800 font-medium">
+                      <CheckCircle2 className="w-4.5 h-4.5 text-emerald-500 shrink-0 mt-0.5" />
                       <span>{bullet}</span>
                     </li>
                   ))}
@@ -227,10 +227,10 @@ export default function ShopifyInfiniteCasesCarousel() {
                 href={`https://${item.url}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 py-3 px-4 bg-white border border-zinc-200 hover:bg-zinc-900 hover:text-white text-zinc-900 font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 text-center"
+                className="flex-1 py-3.5 px-4 bg-white border border-zinc-200 hover:bg-zinc-900 hover:text-white text-zinc-900 font-bold text-sm uppercase tracking-wider rounded-xl transition-all flex items-center justify-center gap-2 text-center"
               >
                 <span>Sitio Live</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <ExternalLink className="w-4 h-4" />
               </a>
 
               <button
@@ -238,7 +238,7 @@ export default function ShopifyInfiniteCasesCarousel() {
                   setSelectedIndex(idx);
                   setIsZoomed100(false);
                 }}
-                className="px-4 py-3 bg-violet-50 hover:bg-violet-600 hover:text-white text-violet-700 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer"
+                className="px-4 py-3.5 bg-violet-50 hover:bg-violet-600 hover:text-white text-violet-700 rounded-xl font-bold text-sm uppercase tracking-wider transition-colors cursor-pointer"
                 title="Abrir en Galería HD"
               >
                 <Maximize2 className="w-4 h-4" />

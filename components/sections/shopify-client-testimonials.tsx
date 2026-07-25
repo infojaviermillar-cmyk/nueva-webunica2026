@@ -101,7 +101,7 @@ export default function ShopifyClientTestimonials() {
               {current.initials}
             </div>
             
-            <span className="mt-3 text-[10px] font-mono font-bold uppercase tracking-wider text-violet-600 bg-violet-100/80 px-3 py-1 rounded-full">
+            <span className="mt-3 text-xs font-mono font-bold uppercase tracking-wider text-violet-700 bg-violet-100/90 px-3 py-1 rounded-full">
               {current.category}
             </span>
           </div>
@@ -112,19 +112,19 @@ export default function ShopifyClientTestimonials() {
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
               ))}
-              <span className="text-xs font-mono font-bold text-zinc-500 ml-2">5.0 / 5.0</span>
+              <span className="text-sm font-mono font-bold text-zinc-600 ml-2">5.0 / 5.0</span>
             </div>
 
-            <blockquote className="text-lg sm:text-xl lg:text-2xl text-zinc-900 font-medium italic leading-relaxed mb-6">
+            <blockquote className="text-xl sm:text-2xl lg:text-3xl text-zinc-900 font-medium italic leading-relaxed mb-6">
               "{current.quote}"
             </blockquote>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-violet-100">
               <div>
-                <strong className="text-base font-black text-zinc-950 uppercase tracking-tight block">
+                <strong className="text-lg font-black text-zinc-950 uppercase tracking-tight block">
                   {current.author}
                 </strong>
-                <span className="text-xs text-zinc-500 font-medium">
+                <span className="text-sm text-zinc-600 font-medium">
                   {current.role}
                 </span>
               </div>
@@ -133,7 +133,7 @@ export default function ShopifyClientTestimonials() {
                 href={`https://${current.url}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-white border border-zinc-200 hover:border-violet-400 text-zinc-900 font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-sm hover:shadow-md"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white border border-zinc-200 hover:border-violet-400 text-zinc-900 font-bold text-sm uppercase tracking-wider rounded-xl transition-all shadow-sm hover:shadow-md"
               >
                 <ShieldCheck className="w-4 h-4 text-emerald-500" />
                 <span>Ver {current.store} en vivo</span>
