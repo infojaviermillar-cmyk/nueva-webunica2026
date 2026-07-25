@@ -1388,20 +1388,528 @@ export function SimulationRenderer({
     </div>
   );
 
+  // ── 1. HOME V1 CLÁSICO (Referencia) ──
+  const renderHomeV1Actual = () => (
+    <div className="flex flex-col min-h-full bg-white">
+      <div className="bg-[#ebdcb9] text-[#5c4a24] px-6 py-2 flex flex-wrap justify-between items-center text-xs font-secondary gap-4">
+        <span>Despacho a todo Chile</span>
+        <span>Pago seguro Webpay / Mercado Pago</span>
+        <span>Facturación para Empresas</span>
+      </div>
+      {renderMainHeader(true, true)}
+      <nav className="bg-slate-950 text-white py-3 px-6 hidden md:block sticky top-[72px] z-20">
+        <div className="max-w-6xl mx-auto flex items-center justify-between font-secondary text-xs uppercase font-bold tracking-wider">
+          <div className="flex items-center gap-2 cursor-pointer hover:text-custom-primary bg-slate-900 px-4 py-2 rounded-lg border border-slate-800">
+            <Menu className="w-4 h-4" />
+            <span>Todas las Categorías</span>
+          </div>
+          <div className="flex gap-8 text-slate-300">
+            {['Tecnología', 'Audio', 'Computación', 'Hogar', 'Iluminación', 'Fitness', 'Ofertas'].map((link) => (
+              <span key={link} className="cursor-pointer hover:text-custom-primary transition-colors">{link}</span>
+            ))}
+          </div>
+        </div>
+      </nav>
+      <section className="max-w-6xl mx-auto w-full px-6 py-12">
+        <div className="border border-custom-border rounded-[2.5rem] p-10 md:p-16 grid md:grid-cols-2 gap-8 items-center bg-custom-surface">
+          <div className="text-left space-y-6">
+            <span className="text-xs font-bold text-custom-primary tracking-widest uppercase">TECNOLOGÍA QUE MUEVE TU MUNDO</span>
+            <h1 className="font-primary font-black text-4xl md:text-5xl uppercase tracking-tighter text-custom-text leading-none">
+              Calidad, innovación y rendimiento en cada producto
+            </h1>
+            <p className="font-secondary text-sm text-custom-muted max-w-sm leading-relaxed font-light">
+              Descubre lo mejor en tecnología, audio, hogar, fitness y más. En Maxxgo tenemos lo que necesitas, al mejor precio.
+            </p>
+            <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-8 py-3.5 text-xs uppercase tracking-wider hover:opacity-90 transition-opacity cursor-pointer">
+              Ver Productos
+            </button>
+            <div className="flex gap-2 pt-2 justify-start">
+              <span className="w-2.5 h-2.5 bg-custom-primary rounded-full" />
+              <span className="w-2.5 h-2.5 bg-slate-300 rounded-full" />
+              <span className="w-2.5 h-2.5 bg-slate-300 rounded-full" />
+            </div>
+          </div>
+          <div className="aspect-[4/3] w-full">
+            {heroProductImage ? (
+              <img src={heroProductImage} alt="Producto" className="w-full h-full object-contain rounded-[2rem]" />
+            ) : (
+              <ImagePlaceholder className="rounded-[2rem]" />
+            )}
+          </div>
+        </div>
+      </section>
+      <section className="max-w-6xl mx-auto w-full px-6 py-8">
+        <h2 className="font-primary font-bold text-xl uppercase text-custom-text mb-6 tracking-wider">Categorías Principales</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          {[
+            { label: 'Computación', icon: Laptop },
+            { label: 'Audio', icon: Headphones },
+            { label: 'Hogar', icon: Home },
+            { label: 'Móvil', icon: Laptop },
+            { label: 'Iluminación', icon: Lightbulb },
+            { label: 'Oficina', icon: FileText }
+          ].map((cat, i) => (
+            <div key={i} className={`p-5 ${cardStyle} bg-custom-surface flex flex-col items-center justify-center h-28 gap-2 hover:border-custom-primary cursor-pointer`}>
+              <cat.icon className="w-6 h-6 text-custom-primary" />
+              <span className="font-secondary text-xs font-bold text-custom-text">{cat.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="max-w-6xl mx-auto w-full px-6 py-12">
+        <h2 className="font-primary font-bold text-xl uppercase text-custom-text mb-6 tracking-wider">Ofertas Destacadas</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className={`p-4 ${cardStyle} bg-custom-surface flex flex-col justify-between`}>
+              <div className="aspect-square w-full mb-3">
+                {productImages[i] ? <img src={productImages[i]!} alt={`Prod ${i}`} className="w-full h-full object-contain rounded-xl" /> : <ImagePlaceholder className="rounded-xl" />}
+              </div>
+              <h3 className="font-primary font-bold text-xs text-custom-text mb-1">Producto Maxxgo #{i + 1}</h3>
+              <p className="font-primary font-black text-custom-primary text-sm">$49.990</p>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="max-w-6xl mx-auto w-full px-6 py-6">
+        <div className="bg-slate-950 text-white rounded-[2rem] p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <span className="text-xs font-bold text-custom-primary uppercase tracking-widest">EDICIÓN ESPECIAL GAMING</span>
+            <h3 className="font-primary font-black text-3xl uppercase tracking-tight mt-1">LO MEJOR EN GAMING ESTÁ EN MAXXGO</h3>
+            <p className="font-secondary text-xs text-slate-400 mt-2 max-w-lg">Monitores, teclados mecánicos, audífonos 7.1 y sillas ergonómicas con garantía oficial.</p>
+          </div>
+          <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-8 py-3.5 text-xs uppercase tracking-wider whitespace-nowrap cursor-pointer">
+            Explorar Setup Gamer
+          </button>
+        </div>
+      </section>
+      {renderNewsletter()}
+      {renderFooterDetailed(5)}
+    </div>
+  );
+
+  // ── 2. HOME V2 COMPACTO PRO (4 Promo Blocks + Testimonios + 10 Categorías) ──
+  const renderHomeV2Compacto = () => (
+    <div className="flex flex-col min-h-full bg-white">
+      <div className="bg-slate-950 text-white px-6 py-2 flex flex-wrap justify-between items-center text-xs font-secondary gap-4">
+        <span>Envíos a todo Chile</span>
+        <span>Ofertas exclusivas online</span>
+        <span>Compra segura SSL</span>
+        <span>Centro de Ayuda</span>
+      </div>
+      {renderMainHeader(true, true)}
+      <section className="max-w-6xl mx-auto w-full px-6 py-8">
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="md:col-span-2 border border-custom-border rounded-[2rem] p-8 md:p-12 bg-custom-surface flex flex-col justify-center">
+            <span className="text-xs font-bold text-custom-primary tracking-widest uppercase">TECNOLOGÍA PARA CADA PASIÓN</span>
+            <h1 className="font-primary font-black text-3xl md:text-4xl uppercase tracking-tight text-custom-text mt-2 mb-4">
+              Encuentra tu equipo ideal en catálogo reducido
+            </h1>
+            <p className="font-secondary text-xs text-custom-muted mb-6 max-w-md">
+              Selección optimizada de productos de alto rendimiento con garantía directa.
+            </p>
+            <div>
+              <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold px-6 py-3 text-xs uppercase tracking-wider cursor-pointer">
+                Comprar Ahora →
+              </button>
+            </div>
+          </div>
+          <div className={`p-6 ${cardStyle} bg-custom-surface flex flex-col justify-between border-2 border-custom-primary`}>
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-wider bg-custom-primary text-white px-2.5 py-1 rounded-full">
+                OFERTA DESTACADA
+              </span>
+              <h3 className="font-primary font-bold text-lg text-custom-text mt-4 mb-1">Pack Gamer Pro MAX</h3>
+              <p className="font-secondary text-xs text-custom-muted mb-4">Teclado + Mouse + Mousepad XL</p>
+              <div className="flex items-baseline gap-2 mb-4">
+                <span className="font-primary font-black text-2xl text-custom-primary">$69.990</span>
+                <span className="font-secondary text-xs text-custom-muted line-through">$99.990</span>
+              </div>
+            </div>
+            <button className="btn-custom-radius bg-slate-900 text-white font-primary font-bold py-3 text-xs uppercase tracking-wider w-full cursor-pointer">
+              Agregar al Carrito
+            </button>
+          </div>
+        </div>
+      </section>
+      <section className="max-w-6xl mx-auto w-full px-6 py-6">
+        <h2 className="font-primary font-bold text-lg uppercase text-custom-text mb-4 tracking-wider">Promociones Imperdibles</h2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { title: 'Ofertas del Día', sub: 'Hasta 40% OFF', icon: RotateCcw, bg: 'bg-indigo-50 text-indigo-700 border-indigo-200' },
+            { title: 'Cyber Ofertas', sub: 'Descuentos Flash', icon: BadgeAlert, bg: 'bg-rose-50 text-rose-700 border-rose-200' },
+            { title: 'Hasta 12 Cuotas', sub: 'Sin interés con Webpay', icon: Lock, bg: 'bg-amber-50 text-amber-700 border-amber-200' },
+            { title: 'Envíos Gratis', sub: 'En compras sobre $30.000', icon: Truck, bg: 'bg-emerald-50 text-emerald-700 border-emerald-200' }
+          ].map((promo, i) => (
+            <div key={i} className={`p-5 rounded-2xl border ${promo.bg} flex items-center gap-3 cursor-pointer hover:scale-102 transition-transform`}>
+              <promo.icon className="w-6 h-6 shrink-0" />
+              <div>
+                <h4 className="font-primary font-bold text-xs uppercase">{promo.title}</h4>
+                <p className="font-secondary text-[11px] opacity-80">{promo.sub}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="max-w-6xl mx-auto w-full px-6 py-8">
+        <h2 className="font-primary font-bold text-lg uppercase text-custom-text mb-4 tracking-wider">Categorías Destacadas (10)</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+          {['Computación', 'Audio', 'Hogar', 'Móvil', 'Iluminación', 'Oficina', 'Gaming', 'Fitness', 'Cámaras', 'Accesorios'].map((cat, i) => (
+            <div key={i} className={`p-4 ${cardStyle} bg-custom-surface text-center hover:border-custom-primary cursor-pointer`}>
+              <span className="font-secondary text-xs font-bold text-custom-text block">{cat}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="max-w-6xl mx-auto w-full px-6 py-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="font-primary font-bold text-lg uppercase text-custom-text tracking-wider">Productos Trending</h2>
+          <div className="flex gap-2">
+            <span className="text-xs font-bold px-3 py-1 bg-custom-primary text-white rounded-full cursor-pointer">Todo</span>
+            <span className="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-full cursor-pointer hover:bg-slate-200">Gaming</span>
+            <span className="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-full cursor-pointer hover:bg-slate-200">Audio</span>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className={`p-4 ${cardStyle} bg-custom-surface`}>
+              <div className="aspect-square w-full mb-3"><ImagePlaceholder className="rounded-xl" /></div>
+              <h3 className="font-primary font-bold text-xs text-custom-text mb-1">Producto Trending #{i + 1}</h3>
+              <p className="font-primary font-black text-custom-primary text-sm">$39.990</p>
+              {renderStars(5, 18)}
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="bg-slate-50 py-12 px-6 border-y border-slate-200">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-primary font-bold text-center text-lg uppercase text-custom-text mb-8 tracking-wider">Lo que dicen nuestros clientes</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { name: 'Matías R.', comment: 'Excelente atención y los audífonos llegaron en 24 horas a Santiago.', rating: 5 },
+              { name: 'Camila S.', comment: 'Compré la silla gamer y es súper cómoda. La garantía respondió de inmediato.', rating: 5 },
+              { name: 'Gonzalo V.', comment: 'Muy buena experiencia de compra. Todo bien empaquetado y boleta rápida.', rating: 5 }
+            ].map((test, i) => (
+              <div key={i} className={`p-6 ${cardStyle} bg-white space-y-3`}>
+                {renderStars(test.rating, 1)}
+                <p className="font-secondary text-xs text-slate-600 italic">"{test.comment}"</p>
+                <span className="font-primary font-bold text-xs text-custom-text block">— {test.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {renderFooterDetailed(4)}
+    </div>
+  );
+
+  // ── 3. HOME V3 FLASH SALE (Countdown + Comparador 3 Columnas) ──
+  const renderHomeV3Flash = () => (
+    <div className="flex flex-col min-h-full bg-white">
+      <div className="bg-rose-950 text-rose-200 px-6 py-2 flex justify-between items-center text-xs font-secondary">
+        <span className="flex items-center gap-1.5 font-bold"><BadgeAlert className="w-4 h-4 text-rose-400" /> EVENTO FLASH SALE ONLINE</span>
+        <span className="font-mono">TERMINA EN: 00:14:23:47</span>
+        <span className="hidden sm:inline">Despachos Express 24h</span>
+      </div>
+      {renderMainHeader(true, true)}
+      <section className="max-w-6xl mx-auto w-full px-6 py-8">
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="md:col-span-2 border border-custom-border rounded-[2rem] p-8 md:p-12 bg-custom-surface relative overflow-hidden">
+            <span className="text-xs font-bold text-rose-600 tracking-widest uppercase">CADA SEGUNDO CUENTA</span>
+            <h1 className="font-primary font-black text-3xl md:text-4xl uppercase tracking-tight text-custom-text mt-2 mb-4">
+              Tecnología con hasta 50% de descuento flash
+            </h1>
+            <p className="font-secondary text-xs text-custom-muted mb-6 max-w-md">
+              Unidades limitadas por tiempo determinado. Revisa las ofertas del día.
+            </p>
+            <button className="btn-custom-radius bg-rose-600 text-white font-primary font-bold px-8 py-3.5 text-xs uppercase tracking-wider cursor-pointer shadow-lg shadow-rose-600/20">
+              ⚡ Ver Ofertas Flash
+            </button>
+          </div>
+          <div className={`p-6 ${cardStyle} bg-rose-50/50 border-2 border-rose-500 rounded-[2rem] flex flex-col justify-between`}>
+            <div>
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-wider bg-rose-600 text-white px-2.5 py-1 rounded-full flex items-center gap-1">
+                  ⚡ OFERTA DEL DÍA
+                </span>
+                <span className="font-mono text-xs font-bold text-rose-700">00:14:23</span>
+              </div>
+              <h3 className="font-primary font-bold text-base text-custom-text mt-4 mb-1">Audífonos Gamer Wireless Pro</h3>
+              <p className="font-secondary text-xs text-custom-muted mb-3">Audio 7.1 Surround + Micrófono Noise Cancelling</p>
+              <div className="w-full bg-slate-200 h-2 rounded-full mb-2 overflow-hidden">
+                <div className="bg-rose-500 h-full w-[70%]" />
+              </div>
+              <p className="text-[10px] font-bold text-rose-700 mb-4">🔥 70% Vendido (Quedan 6 unidades)</p>
+              <div className="flex items-baseline gap-2 mb-4">
+                <span className="font-primary font-black text-2xl text-rose-600">$34.990</span>
+                <span className="font-secondary text-xs text-custom-muted line-through">$69.990</span>
+              </div>
+            </div>
+            <button className="btn-custom-radius bg-rose-600 text-white font-primary font-bold py-3 text-xs uppercase tracking-wider w-full cursor-pointer">
+              ¡Comprar Oferta Flash!
+            </button>
+          </div>
+        </div>
+      </section>
+      <section className="max-w-6xl mx-auto w-full px-6 py-8">
+        <div className="bg-rose-600 text-white p-6 rounded-[2rem] mb-6 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <BadgeAlert className="w-8 h-8 shrink-0" />
+            <div>
+              <h2 className="font-primary font-black text-xl uppercase">OFERTAS FLASH EN VIVO</h2>
+              <p className="font-secondary text-xs text-rose-100">Descuentos por tiempo limitado hasta agotar stock.</p>
+            </div>
+          </div>
+          <div className="bg-white/10 px-4 py-2 rounded-xl font-mono text-sm font-bold">
+            TIEMPO RESTANTE: 00:14:23:47
+          </div>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          {[
+            { name: 'Monitor Curved 24" 144Hz', price: '$129.990', old: '$189.990', disc: '-31%' },
+            { name: 'Teclado Mecánico RGB', price: '$29.990', old: '$49.990', disc: '-40%' },
+            { name: 'Silla Gamer Ergonómica', price: '$99.990', old: '$159.990', disc: '-37%' },
+            { name: 'Mouse Gamer 16.000 DPI', price: '$19.990', old: '$34.990', disc: '-42%' },
+            { name: 'Micrófono Condensador USB', price: '$24.990', old: '$39.990', disc: '-37%' },
+            { name: 'Barra de Luz Monitor LED', price: '$17.990', old: '$29.990', disc: '-40%' }
+          ].map((item, i) => (
+            <div key={i} className={`p-5 ${cardStyle} bg-custom-surface relative group`}>
+              <span className="absolute top-3 right-3 bg-rose-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full z-10">
+                {item.disc}
+              </span>
+              <div className="aspect-square w-full mb-3"><ImagePlaceholder className="rounded-xl" /></div>
+              <h3 className="font-primary font-bold text-xs text-custom-text mb-1">{item.name}</h3>
+              <div className="flex items-baseline gap-2 mb-2">
+                <span className="font-primary font-black text-rose-600 text-base">{item.price}</span>
+                <span className="font-secondary text-xs text-custom-muted line-through">{item.old}</span>
+              </div>
+              <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                <div className="bg-rose-500 h-full w-[65%]" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="max-w-6xl mx-auto w-full px-6 py-12">
+        <h2 className="font-primary font-black text-2xl uppercase text-custom-text mb-2 text-center">DESTACADOS MAXXGO</h2>
+        <p className="font-secondary text-xs text-custom-muted text-center mb-8">Elige el equipo ideal según tus prioridades</p>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className={`p-8 ${cardStyle} bg-custom-surface border-2 border-amber-400 flex flex-col justify-between relative`}>
+            <span className="bg-amber-400 text-slate-900 font-black text-[10px] uppercase tracking-wider px-3 py-1 rounded-full absolute -top-3 left-6">
+              🌟 MEJOR RENDIMIENTO
+            </span>
+            <div>
+              <h3 className="font-primary font-black text-xl text-custom-text mt-2 mb-2">PC Master Gamer Extreme</h3>
+              <p className="font-secondary text-xs text-custom-muted mb-4">RTX 4070 + Ryzen 7 + 32GB RAM</p>
+              <div className="aspect-video w-full mb-4"><ImagePlaceholder className="rounded-xl" /></div>
+              <ul className="font-secondary text-xs space-y-2 text-custom-text mb-6">
+                <li>✓ Máxima tasa de FPS en 4K</li>
+                <li>✓ Refracción líquida RGB</li>
+                <li>✓ 3 años de garantía oficial</li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-primary font-black text-2xl text-custom-primary mb-3">$1.299.990</p>
+              <button className="btn-custom-radius bg-custom-primary text-white font-primary font-bold py-3 text-xs uppercase w-full cursor-pointer">Comprar Rendimiento Top</button>
+            </div>
+          </div>
+          <div className={`p-8 ${cardStyle} bg-custom-surface border-2 border-indigo-600 flex flex-col justify-between relative shadow-xl`}>
+            <span className="bg-indigo-600 text-white font-black text-[10px] uppercase tracking-wider px-3 py-1 rounded-full absolute -top-3 left-6">
+              ⚖️ MEJOR EQUILIBRIO (RECOMENDADO)
+            </span>
+            <div>
+              <h3 className="font-primary font-black text-xl text-custom-text mt-2 mb-2">Setup Gamer Pro Balance</h3>
+              <p className="font-secondary text-xs text-custom-muted mb-4">RTX 4060 + i5 13th + 16GB RAM</p>
+              <div className="aspect-video w-full mb-4"><ImagePlaceholder className="rounded-xl" /></div>
+              <ul className="font-secondary text-xs space-y-2 text-custom-text mb-6">
+                <li>✓ Rendimiento óptimo en 1080p y 1440p</li>
+                <li>✓ Consumo energético eficiente</li>
+                <li>✓ Relación precio/calidad #1</li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-primary font-black text-2xl text-indigo-600 mb-3">$749.990</p>
+              <button className="btn-custom-radius bg-indigo-600 text-white font-primary font-bold py-3 text-xs uppercase w-full cursor-pointer">Comprar Recomendado</button>
+            </div>
+          </div>
+          <div className={`p-8 ${cardStyle} bg-custom-surface border-2 border-emerald-500 flex flex-col justify-between relative`}>
+            <span className="bg-emerald-500 text-white font-black text-[10px] uppercase tracking-wider px-3 py-1 rounded-full absolute -top-3 left-6">
+              🏷️ MEJOR PRECIO
+            </span>
+            <div>
+              <h3 className="font-primary font-black text-xl text-custom-text mt-2 mb-2">Notebook Gamer Entry</h3>
+              <p className="font-secondary text-xs text-custom-muted mb-4">GTX 1650 + i5 + 8GB RAM</p>
+              <div className="aspect-video w-full mb-4"><ImagePlaceholder className="rounded-xl" /></div>
+              <ul className="font-secondary text-xs space-y-2 text-custom-text mb-6">
+                <li>✓ Para iniciarse en el gaming</li>
+                <li>✓ Portátil y liviano</li>
+                <li>✓ Cuotas accesibles</li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-primary font-black text-2xl text-emerald-600 mb-3">$499.990</p>
+              <button className="btn-custom-radius bg-emerald-600 text-white font-primary font-bold py-3 text-xs uppercase w-full cursor-pointer">Comprar Mejor Precio</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      {renderFooterDetailed(4)}
+    </div>
+  );
+
+  // ── 4. HOME V4 SIDEBAR NAV (Amazon style sidebar + 3 columnas + Banners por necesidad + Ranking) ──
+  const renderHomeV4Sidebar = () => (
+    <div className="flex flex-col min-h-full bg-slate-50">
+      <div className="bg-slate-900 text-slate-300 px-6 py-2 flex justify-between items-center text-xs font-secondary">
+        <span>Envíos a todo Chile</span>
+        <span>Marketplace Oficial MAXXGO</span>
+        <span>Atención 24/7</span>
+      </div>
+      {renderMainHeader(true, true)}
+      <section className="max-w-7xl mx-auto w-full px-6 py-6">
+        <div className="grid lg:grid-cols-12 gap-6 items-start">
+          <div className={`lg:col-span-3 ${cardStyle} bg-white p-4 shadow-sm space-y-1`}>
+            <div className="flex items-center gap-2 px-3 py-2 text-xs font-black uppercase text-custom-primary border-b border-slate-100 mb-2">
+              <Menu className="w-4 h-4" /> Categorías
+            </div>
+            {[
+              '💻 Computación',
+              '🎧 Audio',
+              '🏠 Hogar',
+              '📱 Móvil y Accesorios',
+              '🎮 Gaming',
+              '💡 Iluminación',
+              '💼 Oficina',
+              '⚡ Ofertas Flash',
+              '➕ Ver todas'
+            ].map((cat, i) => (
+              <div key={i} className="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-secondary font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 cursor-pointer transition-colors">
+                <span>{cat}</span>
+                <ChevronRight className="w-3.5 h-3.5 opacity-40" />
+              </div>
+            ))}
+          </div>
+          <div className="lg:col-span-6 border border-custom-border rounded-[2rem] p-8 md:p-12 bg-white min-h-[380px] flex flex-col justify-between shadow-sm">
+            <div>
+              <span className="text-xs font-bold text-custom-primary tracking-widest uppercase">MARKETPLACE TECH</span>
+              <h1 className="font-primary font-black text-3xl md:text-4xl uppercase tracking-tight text-slate-900 mt-2 mb-3">
+                Tecnología que impulsa tu día
+              </h1>
+              <p className="font-secondary text-xs text-slate-500 max-w-md">
+                Navega por categorías o encuentra las ofertas destacadas de la semana.
+              </p>
+            </div>
+            <div className="pt-6">
+              <button className="btn-custom-radius bg-slate-900 text-white font-primary font-bold px-8 py-3 text-xs uppercase tracking-wider cursor-pointer">
+                Explorar Catálogo →
+              </button>
+            </div>
+          </div>
+          <div className="lg:col-span-3 space-y-4">
+            <div className={`p-4 ${cardStyle} bg-white border-l-4 border-l-amber-500`}>
+              <span className="text-[10px] font-bold text-amber-600 uppercase">⚡ Oferta del Día</span>
+              <h4 className="font-primary font-bold text-xs text-slate-800 mt-1">Audífonos BT Noise Cancel</h4>
+              <p className="font-primary font-black text-indigo-600 text-sm mt-1">$29.990</p>
+            </div>
+            <div className={`p-4 ${cardStyle} bg-white border-l-4 border-l-indigo-600`}>
+              <span className="text-[10px] font-bold text-indigo-600 uppercase">🆕 Novedad de la Semana</span>
+              <h4 className="font-primary font-bold text-xs text-slate-800 mt-1">Teclado 60% RGB Hotswap</h4>
+              <p className="font-primary font-black text-indigo-600 text-sm mt-1">$39.990</p>
+            </div>
+            <div className={`p-4 ${cardStyle} bg-white border-l-4 border-l-emerald-500`}>
+              <span className="text-[10px] font-bold text-emerald-600 uppercase">💳 Cuotas Sin Interés</span>
+              <h4 className="font-primary font-bold text-xs text-slate-800 mt-1">Hasta 12 cuotas tasa 0%</h4>
+              <p className="font-secondary text-[11px] text-slate-500 mt-0.5">Con tarjetas Webpay</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="max-w-7xl mx-auto w-full px-6 py-4">
+        <div className={`p-4 ${cardStyle} bg-white flex items-center justify-between gap-4 overflow-x-auto`}>
+          {[
+            { name: 'Notebooks', icon: Laptop },
+            { name: 'Auriculares', icon: Headphones },
+            { name: 'Smartphones', icon: Laptop },
+            { name: 'Monitores', icon: Laptop },
+            { name: 'Teclados', icon: FileText },
+            { name: 'Parlantes', icon: Headphones },
+            { name: 'Sillas Gamer', icon: Home },
+            { name: 'Impresoras', icon: FileText }
+          ].map((item, i) => (
+            <div key={i} className="flex flex-col items-center gap-1.5 shrink-0 px-4 py-2 hover:bg-slate-50 rounded-xl cursor-pointer">
+              <item.icon className="w-5 h-5 text-indigo-600" />
+              <span className="font-secondary text-[11px] font-bold text-slate-700">{item.name}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="max-w-7xl mx-auto w-full px-6 py-8">
+        <h2 className="font-primary font-bold text-lg uppercase text-slate-900 mb-6 tracking-wider">Banners por Necesidad</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-gradient-to-br from-blue-900 to-indigo-900 text-white rounded-[2rem] p-8 flex flex-col justify-between min-h-[200px]">
+            <div>
+              <span className="text-[10px] font-bold text-blue-300 uppercase tracking-widest">HOME OFFICE</span>
+              <h3 className="font-primary font-bold text-xl uppercase mt-1">Setup Oficina en Casa</h3>
+            </div>
+            <button className="btn-custom-radius bg-white text-blue-900 font-bold px-4 py-2 text-xs uppercase w-fit cursor-pointer">Ver Equipos</button>
+          </div>
+          <div className="bg-slate-950 text-white rounded-[2rem] p-8 flex flex-col justify-between min-h-[200px] border border-purple-500/30">
+            <div>
+              <span className="text-[10px] font-bold text-purple-400 uppercase tracking-widest">GAMING CORNER</span>
+              <h3 className="font-primary font-bold text-xl uppercase mt-1">Luces RGB & Periféricos</h3>
+            </div>
+            <button className="btn-custom-radius bg-purple-600 text-white font-bold px-4 py-2 text-xs uppercase w-fit cursor-pointer">Ver Setup</button>
+          </div>
+          <div className="bg-gradient-to-br from-emerald-800 to-teal-900 text-white rounded-[2rem] p-8 flex flex-col justify-between min-h-[200px]">
+            <div>
+              <span className="text-[10px] font-bold text-emerald-300 uppercase tracking-widest">EN MOVIMIENTO</span>
+              <h3 className="font-primary font-bold text-xl uppercase mt-1">Móvil, Baterías & Cables</h3>
+            </div>
+            <button className="btn-custom-radius bg-white text-emerald-900 font-bold px-4 py-2 text-xs uppercase w-fit cursor-pointer">Ver Accesorios</button>
+          </div>
+        </div>
+      </section>
+      <section className="max-w-7xl mx-auto w-full px-6 py-8">
+        <h2 className="font-primary font-bold text-lg uppercase text-slate-900 mb-6 tracking-wider">Ranking Más Vendidos</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            { rank: '#1 MÁS VENDIDO', name: 'Audífonos Inalámbricos Bluetooth', price: '$24.990', badgeBg: 'bg-amber-400 text-slate-900' },
+            { rank: '#2 POPULAR', name: 'Mouse Inalámbrico Silencioso', price: '$14.990', badgeBg: 'bg-slate-300 text-slate-900' },
+            { rank: '#3 TENDENCIA', name: 'Soporte de Laptop Aluminio', price: '$19.990', badgeBg: 'bg-amber-700 text-white' }
+          ].map((item, i) => (
+            <div key={i} className={`p-6 ${cardStyle} bg-white flex gap-4 items-center relative`}>
+              <span className={`absolute top-3 right-3 text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${item.badgeBg}`}>
+                {item.rank}
+              </span>
+              <div className="w-20 h-20 shrink-0"><ImagePlaceholder className="rounded-xl" /></div>
+              <div>
+                <h4 className="font-primary font-bold text-xs text-slate-800">{item.name}</h4>
+                <p className="font-primary font-black text-indigo-600 text-sm mt-1">{item.price}</p>
+                {renderStars(5, 40 - i * 10)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      {renderFooterDetailed(5)}
+    </div>
+  );
+
   return (
     <div style={customVariables} className="theme-customizer w-full h-full min-h-screen flex flex-col transition-colors duration-200">
-      {/* Carga dinámica de la fuente de Google Fonts */}
       {/* eslint-disable-next-line @next/next/no-page-custom-font */}
       <link rel="stylesheet" href={fontUrl} />
       
-      {(wireframeId === 'home-v1-actual' || wireframeId === 'home-completo') && renderHomeCompleto()}
-      {(wireframeId === 'home-v2-compacto' || wireframeId === 'home-simple') && renderHomeSimple()}
-      {(wireframeId === 'home-v3-flash' || wireframeId === 'home-alternativo') && renderHomeAlternativo()}
-      {wireframeId === 'home-v4-sidebar' && renderHomeCompleto()}
+      {wireframeId === 'home-v1-actual' && renderHomeV1Actual()}
+      {wireframeId === 'home-v2-compacto' && renderHomeV2Compacto()}
+      {wireframeId === 'home-v3-flash' && renderHomeV3Flash()}
+      {wireframeId === 'home-v4-sidebar' && renderHomeV4Sidebar()}
+      {wireframeId === 'home-completo' && renderHomeV1Actual()}
+      {wireframeId === 'home-simple' && renderHomeV2Compacto()}
+      {wireframeId === 'home-alternativo' && renderHomeV3Flash()}
       {wireframeId === 'categoria' && renderCategoria()}
       {wireframeId === 'producto' && renderProducto()}
       {wireframeId === 'carrito' && renderCarrito()}
-      {!['home-v1-actual', 'home-v2-compacto', 'home-v3-flash', 'home-v4-sidebar', 'home-simple', 'home-alternativo', 'home-completo', 'categoria', 'producto', 'carrito'].includes(wireframeId) && renderHomeCompleto()}
+      {!['home-v1-actual', 'home-v2-compacto', 'home-v3-flash', 'home-v4-sidebar', 'home-simple', 'home-alternativo', 'home-completo', 'categoria', 'producto', 'carrito'].includes(wireframeId) && renderHomeV1Actual()}
     </div>
   );
 }
