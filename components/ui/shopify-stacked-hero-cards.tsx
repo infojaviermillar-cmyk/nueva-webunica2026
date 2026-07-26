@@ -165,7 +165,8 @@ export default function ShopifyStackedHeroCards() {
                   src={store.image}
                   alt={`Tienda Shopify ${store.name} - Webunica`}
                   className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  loading={isVicca ? 'eager' : 'lazy'}
+                  loading="eager"
+                  decoding="async"
                 />
 
                 {/* Hover Reveal Details Overlay */}

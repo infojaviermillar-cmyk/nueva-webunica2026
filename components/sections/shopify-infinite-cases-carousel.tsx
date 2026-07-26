@@ -215,7 +215,8 @@ export default function ShopifyInfiniteCasesCarousel() {
                     src={item.image}
                     alt={`Caso de éxito ${item.name} - Webunica`}
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
+                    loading="eager"
+                    decoding="async"
                   />
                   
                   {/* URL Tag */}
