@@ -226,9 +226,9 @@ export default function ShopifyEnChilePage() {
                   </span>
                 </div>
                 
-                <h1 className="text-[2.2rem] xs:text-4xl sm:text-5xl lg:text-[62px] font-black tracking-tighter leading-[0.92] mb-6 uppercase text-zinc-950 font-heading">
+                <h1 className="text-[2rem] xs:text-3xl sm:text-4xl lg:text-[58px] font-black tracking-tighter leading-[0.92] mb-6 uppercase text-zinc-950 font-heading">
                   Creamos tu tienda Shopify <br className="hidden sm:inline" />
-                  lista para <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]">vender, operar y crecer</span> en Chile
+                  lista para <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]">vender y crecer</span> en Chile
                 </h1>
                 
                 <p className="text-base sm:text-lg lg:text-xl text-zinc-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
@@ -238,7 +238,7 @@ export default function ShopifyEnChilePage() {
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-6">
                   <LeadButton className="px-8 py-5 bg-[#2C02A5] text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-violet-900 transition-all shadow-xl shadow-violet-900/25 active:scale-95 text-center flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer">
-                    Agenda un diagnóstico Shopify <ArrowRight className="w-4 h-4" />
+                    Obtén un presupuesto gratuito <ArrowRight className="w-4 h-4" />
                   </LeadButton>
 
                   <a 
