@@ -191,24 +191,7 @@ export default function ShopifyStackedHeroCards() {
         })}
       </div>
 
-      {/* Floating Shopify Partner Badge */}
-      <div className="absolute -bottom-6 right-0 sm:right-2 bg-white/95 backdrop-blur-md shadow-2xl px-5 py-3.5 rounded-3xl border border-zinc-200/80 flex items-center gap-3.5 z-50">
-        <div className="w-10 h-10 rounded-2xl bg-violet-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-violet-600/30">
-          <ShoppingBag className="w-5 h-5" />
-        </div>
-        <div>
-          <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400 block leading-none mb-1">Certificados</span>
-          <span className="text-xs font-black text-zinc-950 tracking-tight">Shopify Partner 2026</span>
-        </div>
-      </div>
 
-      {/* Instruction hint */}
-      <div className="text-center mt-10">
-        <span className="inline-flex items-center gap-2 px-5 py-2 bg-zinc-900 text-white border border-zinc-700 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider shadow-lg">
-          <Sparkles className="w-4 h-4 text-violet-400" />
-          Haz clic en cualquier tienda para abrir la galeria HD interactiva
-        </span>
-      </div>
 
       {/* High-Resolution Crisp Lightbox Gallery Modal */}
       {selectedImage && (
