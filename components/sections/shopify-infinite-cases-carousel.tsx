@@ -197,9 +197,11 @@ export default function ShopifyInfiniteCasesCarousel() {
       >
         {duplicatedCases.map((item, idx) => {
           const originalIndex = idx % cases.length;
+          const isClone = idx >= cases.length;
           return (
             <div
               key={`${item.id}-${idx}`}
+              aria-hidden={isClone}
               className="w-[340px] sm:w-[380px] shrink-0 bg-zinc-50 rounded-[2.5rem] overflow-hidden border border-zinc-200 flex flex-col justify-between group hover:shadow-2xl hover:border-violet-300 transition-all duration-300"
             >
               <div>

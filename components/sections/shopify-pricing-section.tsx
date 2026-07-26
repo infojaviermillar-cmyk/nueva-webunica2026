@@ -231,7 +231,7 @@ export default function ShopifyPricingSection() {
             <div className="lg:col-span-5">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-600/30 border border-violet-400/40 text-violet-300 rounded-full text-xs font-mono font-bold uppercase tracking-widest mb-6">
                 <Zap className="w-4 h-4 text-violet-400" />
-                Requisito Técnico Importante
+                Factibilidad Logística
               </div>
               
               <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-tight mb-4 font-heading">
@@ -240,55 +240,30 @@ export default function ShopifyPricingSection() {
               </h3>
 
               <p className="text-zinc-300 text-base sm:text-lg leading-relaxed font-normal">
-                Para que aplicaciones como <strong className="text-white font-bold">Shipit, Sendu o BlueExpress</strong> puedan inyectar el valor real del envío en el checkout de tu cliente (calculado por dirección y peso).
+                Algunas integraciones logísticas requieren que la tienda tenga habilitadas las tarifas de envío calculadas por terceros (CCS).
               </p>
             </div>
             
             {/* Right Details */}
             <div className="lg:col-span-7">
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 mb-8">
+              <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 mb-6">
                 <p className="text-zinc-200 text-base sm:text-lg leading-relaxed font-normal">
-                  Tu tienda Shopify <strong className="text-violet-300 font-black uppercase text-sm sm:text-base px-2.5 py-1 bg-violet-950 border border-violet-700/60 rounded">DEBE</strong> tener habilitada la función oficial de <strong className="text-white font-bold">"Tarifas de envío calculadas por terceros"</strong>.
+                  Su disponibilidad depende del <strong className="text-white font-bold">plan Shopify contratado</strong>, la aplicación seleccionada y las condiciones vigentes del proveedor. Antes de comenzar <strong className="text-violet-300 font-bold">validamos la factibilidad técnica</strong> y los costos externos asociados.
                 </p>
               </div>
 
-              <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-violet-400 block mb-4">
-                ¿Cómo obtener esta función gratis?
-              </span>
-              
-              <div className="space-y-4">
-                <div className="p-6 bg-white/5 rounded-3xl border border-white/15 hover:bg-white/10 transition-colors">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center shrink-0 mt-1 text-emerald-400">
-                      <Check className="w-5 h-5" strokeWidth={3} />
-                    </div>
-                    <div>
-                      <h4 className="text-lg sm:text-xl font-bold text-white mb-2">
-                        Opción Recomendada (Plan Anual)
-                      </h4>
-                      <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
-                        Paga tu plan <strong className="text-white">Basic o Shopify</strong> de forma <strong className="text-violet-300 font-bold uppercase">ANUAL</strong> en lugar de mensual, y comunícate con el soporte de Shopify para que te la activen 100% gratis.
-                      </p>
-                      <div className="mt-3 inline-block px-3.5 py-1.5 bg-emerald-950/80 border border-emerald-500/40 rounded-xl text-xs sm:text-sm font-bold text-emerald-400">
-                        🎉 Ahorras un 25% en tu plan anual y consigues la función CCS totalmente gratis.
-                      </div>
-                    </div>
+              <div className="p-6 bg-white/5 rounded-3xl border border-white/15">
+                <div className="flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center shrink-0 mt-1 text-emerald-400">
+                    <Check className="w-5 h-5" strokeWidth={3} />
                   </div>
-                </div>
-
-                <div className="p-6 bg-white/5 rounded-3xl border border-white/15 hover:bg-white/10 transition-colors">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-violet-500/20 border border-violet-400 flex items-center justify-center shrink-0 mt-1 text-violet-300">
-                      <Check className="w-5 h-5" strokeWidth={3} />
-                    </div>
-                    <div>
-                      <h4 className="text-lg sm:text-xl font-bold text-white mb-2">
-                        Opción Corporativa (Plan Advanced)
-                      </h4>
-                      <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
-                        Al contratar el plan <strong className="text-white">Advanced Shopify</strong>, esta función ya viene activada por defecto de forma nativa.
-                      </p>
-                    </div>
+                  <div>
+                    <h4 className="text-lg sm:text-xl font-bold text-white mb-2">
+                      Integración Logística Transparente
+                    </h4>
+                    <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
+                      Te asesoramos para activar CCS con soporte de Shopify (por ejemplo en modalidad de pago anual) o configurar tarifas dinámicas estructuradas según dirección, peso y zonas de cobertura.
+                    </p>
                   </div>
                 </div>
               </div>

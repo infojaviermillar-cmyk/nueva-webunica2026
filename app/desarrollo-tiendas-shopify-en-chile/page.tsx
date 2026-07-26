@@ -331,7 +331,7 @@ export default function ShopifyEnChilePage() {
         </section>
 
         {/* ========================================================= */}
-        {/* ZONA 3: PLANES Y PRECIOS (FACILITAR DECISIÓN TEMPRANA)    */}
+        {/* ZONA 3: PLANES Y PRECIOS (ESTANDARIZADOS + UNIFICADOS)    */}
         {/* ========================================================= */}
         <section id="planes" className="py-24 bg-zinc-50 rounded-[3.5rem] mx-4 my-8">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -349,7 +349,7 @@ export default function ShopifyEnChilePage() {
             </div>
 
             {/* 3 Main Plans Summary Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
               
               {/* PLAN PRENDE */}
               <div className="bg-white rounded-[2.5rem] p-8 border border-zinc-200 shadow-lg flex flex-col justify-between">
@@ -368,12 +368,12 @@ export default function ShopifyEnChilePage() {
                   <ul className="space-y-3 mb-8">
                     {[
                       "Diseño basado en plantilla premium",
-                      "Hasta 100 productos configurados",
+                      "Carga inicial de hasta 70 productos",
                       "Medios de pago (Webpay / Flow / MP)",
                       "Despacho con tarifas fijas / zonas",
                       "Diseño Mobile-First 100%",
-                      "Capacitación básica de uso",
-                      "1 mes de soporte post lanzamiento"
+                      "Capacitación básica de administración",
+                      "30 días de soporte técnico postlanzamiento"
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-zinc-800 font-medium">
                         <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" strokeWidth={3} />
@@ -408,13 +408,13 @@ export default function ShopifyEnChilePage() {
 
                   <ul className="space-y-3 mb-8">
                     {[
-                      "Diseño con plantilla premium + secciones a medida",
-                      "Hasta 500 productos configurados",
+                      "Diseño en plantilla premium + secciones a medida",
+                      "Importación o configuración de hasta 500 productos*",
                       "Integración pasarelas de pago + Despacho local",
                       "Boleta Electrónica SII automática",
                       "SEO Técnico + GA4 + Meta Pixel + Conversion API",
-                      "Capacitación avanzada de administración",
-                      "2 meses de soporte prioritario"
+                      "Capacitación avanzada 1 a 1",
+                      "60 días de soporte técnico postlanzamiento"
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-purple-50 font-medium">
                         <Check className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" strokeWidth={3} />
@@ -422,6 +422,10 @@ export default function ShopifyEnChilePage() {
                       </li>
                     ))}
                   </ul>
+
+                  <p className="text-[11px] text-purple-300/80 italic leading-tight mb-6">
+                    * Según calidad del archivo entregado (CSV/Excel). Edición manual y contenidos masivos se cotizan aparte.
+                  </p>
                 </div>
 
                 <LeadButton className="w-full py-4 bg-[#FF0085] hover:bg-pink-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-pink-600/30 text-center cursor-pointer">
@@ -429,14 +433,14 @@ export default function ShopifyEnChilePage() {
                 </LeadButton>
               </div>
 
-              {/* PLAN PRO / CONVERSIÓN */}
+              {/* PLAN CONVERSIÓN */}
               <div className="bg-white rounded-[2.5rem] p-8 border border-zinc-200 shadow-lg flex flex-col justify-between">
                 <div>
                   <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1 rounded-full inline-block mb-4">
-                    Operaciones Avanzadas
+                    Performance & CRO Avanzado
                   </span>
-                  <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Pro</h3>
-                  <p className="text-sm text-zinc-600 font-medium mb-6">Solución a medida para catálogos grandes e integraciones.</p>
+                  <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Conversión</h3>
+                  <p className="text-sm text-zinc-600 font-medium mb-6">Solución para catálogos grandes e integraciones avanzadas.</p>
                   
                   <div className="mb-6 pb-6 border-b border-zinc-100">
                     <span className="text-4xl font-black text-zinc-950 font-mono">$1.200.000</span>
@@ -445,13 +449,13 @@ export default function ShopifyEnChilePage() {
 
                   <ul className="space-y-3 mb-8">
                     {[
-                      "Diseño UX/UI personalizado para conversión",
-                      "Productos ilimitados (migración masiva)",
+                      "Diseño UX/UI personalizado para máxima conversión",
+                      "Importación o migración de hasta 1.000 productos",
                       "Integración ERP (Bsale / Obuma / Defontana)",
-                      "Automatización Email Marketing con Klaviyo",
+                      "Email Marketing automático con Klaviyo",
                       "Analítica avanzada & reportes de ventas",
                       "Optimización CRO en ficha de producto",
-                      "3 meses de soporte técnico VIP"
+                      "90 días de soporte técnico postlanzamiento"
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-zinc-800 font-medium">
                         <Check className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" strokeWidth={3} />
@@ -468,8 +472,32 @@ export default function ShopifyEnChilePage() {
 
             </div>
 
+            {/* SECCIÓN INDEPENDIENTE PARA CUSTOM ELITE (VIP / ENTERPRISE) */}
+            <div className="bg-gradient-to-r from-zinc-900 via-zinc-950 to-purple-950 border border-purple-500/30 rounded-3xl p-6 sm:p-8 text-white mb-16 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 shrink-0">
+                  <Crown className="w-6 h-6" />
+                </div>
+                <div>
+                  <span className="text-xs font-mono font-bold text-amber-300 uppercase tracking-widest block mb-1">
+                    Enterprise & Proyectos a Medida
+                  </span>
+                  <h4 className="text-xl sm:text-2xl font-black uppercase text-white font-heading">
+                    ¿Necesitas diseño Figma desde cero, canal B2B o integraciones avanzadas?
+                  </h4>
+                  <p className="text-sm sm:text-base text-zinc-300 font-normal mt-1 leading-relaxed">
+                    Conoce <strong className="text-white">Shopify Custom Elite</strong>: desarrollo exclusivo para marcas con requerimientos corporativos complejos.
+                  </p>
+                </div>
+              </div>
+
+              <LeadButton className="px-6 py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-zinc-950 font-black text-xs uppercase tracking-widest rounded-xl transition-all shrink-0 cursor-pointer shadow-lg">
+                Cotizar Custom Elite
+              </LeadButton>
+            </div>
+
             {/* Assistance micro-banner */}
-            <div className="bg-white border border-zinc-200 rounded-3xl p-6 text-center max-w-2xl mx-auto mb-16 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="bg-white border border-zinc-200 rounded-3xl p-6 text-center max-w-2xl mx-auto shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-left">
                 <h4 className="text-base font-black uppercase text-zinc-950">¿No sabes cuál plan elegir?</h4>
                 <p className="text-sm text-zinc-600 font-normal">Te ayudamos a definir el plan que mejor se adapta a tu negocio.</p>
@@ -479,13 +507,10 @@ export default function ShopifyEnChilePage() {
               </LeadButton>
             </div>
 
-            {/* Interactive Plans Detailed Comparison Table */}
-            <ShopifyPricingSection />
-
           </div>
         </section>
 
-        {/* SECCIÓN ANCHO COMPLETO (#09090b): GARANTÍA Y ACOMPAÑAMIENTO */}
+        {/* SECCIÓN ANCHO COMPLETO (#09090b): GARANTÍA Y ACOMPAÑAMIENTO (UBICADO INMEDIATAMENTE TRAS LOS PLANES) */}
         <section className="w-full bg-zinc-950 text-white py-20 lg:py-28 my-16 relative overflow-hidden border-y border-zinc-800">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/20 blur-[140px] rounded-full pointer-events-none" />
           
@@ -513,6 +538,31 @@ export default function ShopifyEnChilePage() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* COMPARACIÓN TÉCNICA EXTENSA DESPLEGABLE */}
+        <section className="py-12 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <details className="group bg-zinc-50 rounded-3xl border border-zinc-200/80 p-6 lg:p-8">
+              <summary className="flex items-center justify-between cursor-pointer list-none select-none">
+                <div>
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-violet-600 block mb-1">
+                    Tabla de Especificaciones
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-black uppercase text-zinc-950">
+                    Ver comparación técnica completa entre planes
+                  </h3>
+                </div>
+                <div className="w-10 h-10 rounded-full bg-zinc-200 group-open:rotate-180 transition-transform duration-300 flex items-center justify-center text-zinc-800 shrink-0">
+                  ↓
+                </div>
+              </summary>
+
+              <div className="mt-8 pt-8 border-t border-zinc-200">
+                <ShopifyPricingSection />
+              </div>
+            </details>
           </div>
         </section>
 

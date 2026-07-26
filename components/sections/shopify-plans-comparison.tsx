@@ -43,10 +43,10 @@ const COMPARISON_DATA: PlanCategory[] = [
         customElite: "Diseño UX/UI a Medida (Figma)"
       },
       {
-        feature: { name: "Carga de Productos", description: "Cantidad de productos que nuestro equipo configurará inicialmente. Incluye carga de imágenes, descripciones, precios y variantes base." },
-        prende: "Carga inicial de productos",
-        full: "Carga ampliada de productos",
-        pro: "Carga masiva de productos"
+        feature: { name: "Carga de Productos", description: "Cantidad de productos que nuestro equipo configurará o importará inicialmente. La edición manual excesiva o normalización avanzada se cotiza por separado." },
+        prende: "Hasta 70 productos",
+        full: "Hasta 500 productos (según archivo entregado)",
+        pro: "Hasta 1.000 productos (migración masiva)"
       },
       {
         feature: { name: "Categorías y Colecciones", description: "Configuración de árboles de navegación, categorías principales y colecciones inteligentes para ordenar el catálogo." },
@@ -90,16 +90,16 @@ const COMPARISON_DATA: PlanCategory[] = [
         pro: "Múltiples + B2B"
       },
       {
-        feature: { name: "Logística y Envíos", description: "Integración con empresas de transporte chilenas para calcular costos en tiempo real o definir tarifas planas." },
-        prende: "Tarifas Planas",
-        full: "Integración (Starken/Chilexpress)",
+        feature: { name: "Logística y Envíos", description: "Configuración de tarifas dinámicas según dirección, peso y cobertura cuando la integración y plan sean compatibles." },
+        prende: "Tarifas Planas / Zonas",
+        full: "Integración (Starken/Chilexpress/Blue)",
         pro: "Integración Avanzada (Envíame/Shipit)"
       },
       {
         feature: { name: "Integración ERP / Boletas", description: "Conexión con sistemas de facturación y control de inventario locales para emitir boletas electrónicas automáticamente." },
         prende: false,
-        full: "Básico (1 Integración)",
-        pro: "Múltiples / Avanzado"
+        full: "Boleta SII Automática",
+        pro: "Bsale / Obuma / Defontana"
       },
       {
         feature: { name: "Carro de Compra Optimizado", description: "Formulario especial en el carrito para guardar datos de facturación (RUT, Razón Social, Giro) antes del pago, facilitando la emisión automática de facturas." },
@@ -119,7 +119,7 @@ const COMPARISON_DATA: PlanCategory[] = [
     category: "Implementación Técnica y Analítica",
     features: [
       {
-        feature: { name: "Google Analytics 4", description: "Configuración de la propiedad de GA4 para medir visitas, comportamiento y rendimiento general." },
+        feature: { name: "Analítica Web (Google Analytics 4)", description: "Configuración de GA4 para medir visitas, comportamiento de navegación y embudo de conversión." },
         prende: "Básico",
         full: true,
         pro: true
@@ -160,7 +160,7 @@ const COMPARISON_DATA: PlanCategory[] = [
     category: "SEO y Posicionamiento",
     features: [
       {
-        feature: { name: "Optimización SEO Técnica", description: "Configuración de mapa del sitio, archivo robots.txt, velocidad de carga y solución de errores técnicos para Google." },
+        feature: { name: "Optimización SEO Técnica", description: "Tienda preparada técnicamente para ser rastreada, indexada y desarrollar posicionamiento orgánico desde su lanzamiento." },
         prende: "Básica",
         full: "Avanzada",
         pro: "Auditoría y Setup Completo"
@@ -192,19 +192,19 @@ const COMPARISON_DATA: PlanCategory[] = [
         feature: { name: "Tiempo de Entrega", description: "Tiempo estimado para tener tu tienda lista y operando, desde la entrega de la información inicial." },
         prende: "2 a 3 Semanas",
         full: "4 a 5 Semanas",
-        pro: "5 a 6 Semanas"
+        pro: "6 a 8 Semanas"
       },
       {
         feature: { name: "Capacitación", description: "Entrenamiento para que tú y tu equipo puedan administrar la tienda, procesar pedidos y actualizar inventario." },
-        prende: "Video Tutorial",
-        full: "Sesión 1 a 1",
-        pro: "Consultoría Estratégica"
+        prende: "Video Tutorial / Básica",
+        full: "Sesión 1 a 1 Avanzada",
+        pro: "Consultoría Estratégica 1 a 1"
       },
       {
-        feature: { name: "Soporte Post-Lanzamiento", description: "Atención prioritaria para resolver dudas técnicas y asegurar que la tienda funcione perfectamente tras salir a vivo." },
-        prende: "1 Mes de Garantía",
-        full: "1 Mes de Garantía",
-        pro: "3 Meses + 1 Extra"
+        feature: { name: "Soporte Técnico Postlanzamiento", description: "Atención prioritaria para resolver dudas técnicas y asegurar que la tienda funcione perfectamente tras salir a vivo." },
+        prende: "30 Días de Soporte Técnico",
+        full: "60 Días de Soporte Técnico",
+        pro: "90 Días de Soporte Técnico"
       }
     ]
   }
@@ -213,7 +213,7 @@ const COMPARISON_DATA: PlanCategory[] = [
 const PLAN_CARDS = [
   {
     id: "prende",
-    name: "Prende",
+    name: "Plan Prende",
     icon: <TrendingUp className="w-6 h-6 text-emerald-500" />,
     price: "$580.000",
     subtitle: "+ IVA",
@@ -223,20 +223,20 @@ const PLAN_CARDS = [
   },
   {
     id: "full",
-    name: "Full",
-    icon: <Zap className="w-6 h-6 text-violet-500" />,
+    name: "Plan Full",
+    icon: <Zap className="w-6 h-6 text-[#FF0085]" />,
     price: "$780.000",
     subtitle: "+ IVA",
     badge: "El Más Solicitado • CyberDay Ready",
     recommended: true,
-    cta: "Elegir Plan Full (Más Vendido)",
-    ctaClass: "bg-violet-600 text-white hover:bg-violet-700 shadow-lg shadow-violet-600/20",
-    color: "violet"
+    cta: "Elegir Plan Full",
+    ctaClass: "bg-[#FF0085] text-white hover:bg-pink-700 shadow-lg shadow-pink-600/20",
+    color: "pink"
   },
   {
     id: "pro",
-    name: "Conversión",
-    icon: <Rocket className="w-6 h-6 text-blue-500" />,
+    name: "Plan Conversión",
+    icon: <Crown className="w-6 h-6 text-blue-500" />,
     price: "$1.200.000",
     subtitle: "+ IVA",
     cta: "Solicitar Plan Conversión",
