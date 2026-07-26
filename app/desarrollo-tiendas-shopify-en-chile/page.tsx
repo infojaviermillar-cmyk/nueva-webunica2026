@@ -32,7 +32,8 @@ import {
   Users,
   Award,
   Layers,
-  Tag
+  Tag,
+  Crown
 } from 'lucide-react';
 
 export const metadata = {
