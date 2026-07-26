@@ -207,7 +207,7 @@ export default function ShopifyEnChilePage() {
         {/* ========================================================= */}
         {/* ZONA 1: HERO (SEDUCIR Y ACLARAR)                          */}
         {/* ========================================================= */}
-        <section id="inicio" className="relative pt-0 pb-20 lg:pb-32 overflow-hidden">
+        <section id="inicio" className="relative pt-0 pb-6 lg:pb-8 overflow-hidden">
           <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-violet-600/10 blur-[130px] rounded-full pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3" />
           <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-pink-500/10 blur-[120px] rounded-full pointer-events-none -z-10 -translate-x-1/3" />
           
@@ -250,7 +250,7 @@ export default function ShopifyEnChilePage() {
                 </div>
 
                 {/* Trust guarantee microcopy */}
-                <div className="flex items-center justify-center lg:justify-start gap-2 text-xs font-mono text-zinc-500 mb-8">
+                <div className="flex items-center justify-center lg:justify-start gap-2 text-xs font-mono text-zinc-500 mb-4">
                   <Clock className="w-4 h-4 text-emerald-500" />
                   <span>Respondemos en menos de 2 horas hábiles</span>
                 </div>
@@ -267,7 +267,17 @@ export default function ShopifyEnChilePage() {
         </section>
 
         {/* ========================================================= */}
-        {/* ZONA 2: BENEFICIOS + OBJECIONES + DIFERENCIACIÓN         */}
+        {/* ZONA 2: CASOS DE ÉXITO SHOPIFY (CARRUSEL JUSTO DEBAJO DEL HERO) */}
+        {/* ========================================================= */}
+        <section className="py-6 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            {/* Carrusel de Casos con todos los proyectos */}
+            <ShopifyInfiniteCasesCarousel />
+          </div>
+        </section>
+
+        {/* ========================================================= */}
+        {/* ZONA 3: BENEFICIOS + OBJECIONES + DIFERENCIACIÓN         */}
         {/* ========================================================= */}
         <section className="py-24 bg-zinc-50 rounded-[3.5rem] mx-4 my-8 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -506,15 +516,7 @@ export default function ShopifyEnChilePage() {
           </div>
         </section>
 
-        {/* ========================================================= */}
-        {/* ZONA 4: CASOS DE ÉXITO SHOPIFY (CARRUSEL DE PROYECTOS)    */}
-        {/* ========================================================= */}
-        <section className="py-12 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            {/* Carrusel de Casos con todos los proyectos */}
-            <ShopifyInfiniteCasesCarousel />
-          </div>
-        </section>
+
 
         {/* SECCIÓN ANCHO COMPLETO (#3c096c): CASO VICCA DE WIREFRAME A TIENDA FINAL */}
         <ViccaTransformationShowcase />
