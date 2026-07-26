@@ -37,29 +37,145 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Desarrollo de Tiendas Shopify en Chile | Agencia Shopify Partner 2026',
-  description: 'Creamos tu tienda Shopify lista para vender, operar y crecer en Chile. Integración de Webpay, Mercado Pago, Flow, Starken, BlueExpress y Boleta SII.',
-  keywords: 'desarrollo tiendas shopify chile, agencia shopify partner chile, diseño tienda shopify, pasarelas de pago shopify chile, factura electronica shopify, integracion erp shopify',
+  title: 'Desarrollo de Tiendas Shopify en Chile | Agencia Partner',
+  description: 'Agencia de desarrollo de tiendas Shopify en Chile. Creamos tu e-commerce listo para vender y crecer: Webpay, Mercado Pago, Flow, Starken, BlueExpress, Bsale y Boleta SII.',
+  keywords: [
+    'desarrollo tiendas shopify chile',
+    'agencia shopify partner chile',
+    'diseño tienda shopify chile',
+    'crear tienda shopify chile',
+    'pasarelas de pago shopify chile',
+    'factura electronica shopify',
+    'integracion erp shopify',
+    'expertos shopify chile',
+    'migrar a shopify chile'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile',
+  },
+  openGraph: {
+    title: 'Desarrollo de Tiendas Shopify en Chile | Agencia Partner',
+    description: 'Creamos tiendas Shopify listas para vender y crecer en Chile. Integraciones locales con Webpay, Mercado Pago, Starken, BlueExpress y Boleta SII.',
+    url: 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile',
+    siteName: 'Webunica',
+    locale: 'es_CL',
+    type: 'website',
+    images: [
+      {
+        url: 'https://webunica.cl/clientes-2/vicca.cl.png',
+        width: 1200,
+        height: 630,
+        alt: 'Desarrollo de Tiendas Shopify en Chile - Webunica',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Desarrollo de Tiendas Shopify en Chile | Agencia Partner',
+    description: 'Desarrollo e-commerce Shopify profesional en Chile con integraciones locales.',
+    images: ['https://webunica.cl/clientes-2/vicca.cl.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+    },
+  },
 };
 
 export default function ShopifyEnChilePage() {
+  const shopifyFaqs = [
+    {
+      question: "¿Qué incluye cada plan de desarrollo Shopify?",
+      answer: "Todos los planes incluyen setup completo de Shopify, diseño adaptado a tu marca, carga inicial de catálogo, configuración de pasarelas de pago (Webpay/Flow/Mercado Pago), métodos de despacho en Chile, diseño 100% mobile-first, capacitación de uso y período de soporte técnico postlanzamiento."
+    },
+    {
+      question: "¿Cuánto cuesta la suscripción mensual de Shopify?",
+      answer: "Shopify cobra un plan mensual independiente (Basic desde aprox $19 USD/mes en plan anual). Nosotros te asesoramos para elegir la versión adecuada según tu volumen de ventas."
+    },
+    {
+      question: "¿Qué aplicaciones se pagan aparte?",
+      answer: "La mayoría de tiendas estándar operan con aplicaciones gratuitas o incluidas. Si necesitas herramientas avanzadas de Klaviyo, ERPs específicos o multi-courier con Carrier Calculated Shipping (CCS), te explicaremos transparente los costos antes de iniciar."
+    },
+    {
+      question: "¿Puedo migrar mi tienda desde WooCommerce, Jumpseller o Magento?",
+      answer: "Sí, realizamos migraciones integrales de productos, categorías, imágenes e historial de clientes preservando las URLs y redirecciones 301 para no perder tu posicionamiento SEO en Google."
+    },
+    {
+      question: "¿Necesito tener logo, productos y textos listos para empezar?",
+      answer: "Es ideal contar con tu logotipo y lista base de productos. Si no los tienes listos, nuestro equipo te guía con plantillas de carga masiva y estructuras sugeridas."
+    },
+    {
+      question: "¿Integran medios de pago y despacho locales en Chile?",
+      answer: "De forma nativa. Configuramos Webpay Plus, Mercado Pago, Flow, Ventipay, así como integraciones de despacho con Starken, BlueExpress, Chilexpress y Shipit."
+    },
+    {
+      question: "¿Pueden conectar la tienda con mi ERP o facturación ante el SII?",
+      answer: "Sí. Integramos Shopify con Bsale, Obuma, Defontana, Laudus o conectores certificados para emitir boletas y facturas electrónicas automáticamente en cada venta."
+    },
+    {
+      question: "¿Qué soporte entregan después de publicar la tienda?",
+      answer: "Entregamos entre 30 y 90 días de soporte técnico postlanzamiento (según plan) para resolver dudas, realizar ajustes menores y garantizar que tu tienda funcione 100% fluida."
+    }
+  ];
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Desarrollo de Tiendas Shopify Profesionales en Chile",
-    "description": "Servicios integrales de diseño, desarrollo, migración e integración de tiendas Shopify orientadas a conversión en Chile.",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Webunica",
-      "image": "https://webunica.cl/logo-webunica.png.webp",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santiago",
-        "addressCountry": "CL"
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://webunica.cl/#agencia",
+        "name": "Webunica - Agencia Desarrollo Shopify Chile",
+        "url": "https://webunica.cl/desarrollo-tiendas-shopify-en-chile",
+        "logo": "https://webunica.cl/logo-webunica.png.webp",
+        "image": "https://webunica.cl/clientes-2/vicca.cl.png",
+        "priceRange": "$$",
+        "telephone": "+56991089527",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santiago",
+          "addressRegion": "Región Metropolitana",
+          "addressCountry": "CL"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "48",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Chile"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://webunica.cl/desarrollo-tiendas-shopify-en-chile/#service",
+        "name": "Desarrollo de Tiendas Shopify en Chile",
+        "serviceType": "E-commerce Web Development",
+        "provider": {
+          "@id": "https://webunica.cl/#agencia"
+        },
+        "areaServed": "CL",
+        "description": "Servicios profesionales de diseño, desarrollo, migración y optimización CRO para tiendas Shopify en Chile con pasarelas de pago y facturación SII."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://webunica.cl/desarrollo-tiendas-shopify-en-chile/#faq",
+        "mainEntity": shopifyFaqs.map((faq) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
       }
-    },
-    "areaServed": "CL",
-    "serviceType": "E-commerce Development"
+    ]
   };
 
   const trustBadges = [
@@ -85,7 +201,7 @@ export default function ShopifyEnChilePage() {
     },
     {
       title: "Despachos en Chile en tiempo real",
-      desc: "Conectamos Starken, BlueExpress, Chilexpress y multi-couriers para calcular tarifas exactas por región en el checkout.",
+      desc: "Conectamos Starken, BlueExpress, Chilexpress y multi-couriers para configurar tarifas dinámicas según dirección, peso y cobertura.",
       icon: Truck,
       badge: "Logística"
     },
@@ -103,7 +219,7 @@ export default function ShopifyEnChilePage() {
     },
     {
       title: "SEO técnico de alto rendimiento",
-      desc: "Estructura optimizada, código limpio, metadatos y velocidad de carga instantánea para posicionar en Google desde el día 1.",
+      desc: "Estructura optimizada, código limpio, metadatos y velocidad mobile-first para ser rastreada, indexada y ganar tráfico orgánico desde su lanzamiento.",
       icon: Search,
       badge: "Tráfico Orgánico"
     },
@@ -159,41 +275,6 @@ export default function ShopifyEnChilePage() {
     { title: "Email Marketing con Klaviyo", desc: "Automatizaciones de bienvenida y carritos abandonados para aumentar recompras.", icon: Sparkles },
     { title: "Soporte & Mantenimiento", desc: "Asistencia técnica continua, actualización de banners y optimización constante.", icon: ShieldCheck },
     { title: "Optimización CRO Avanzada", desc: "Pruebas y mejoras en la ficha de producto para maximizar el ticket promedio.", icon: BarChart3 },
-  ];
-
-  const shopifyFaqs = [
-    {
-      question: "¿Qué incluye cada plan de desarrollo Shopify?",
-      answer: "Todos los planes incluyen setup completo de Shopify, diseño adaptado a tu marca, carga inicial de catálogo, configuración de pasarelas de pago (Webpay/Flow/Mercado Pago), métodos de despacho en Chile, diseño 100% mobile-first, capacitación de uso y período de soporte post lanzamiento."
-    },
-    {
-      question: "¿Cuánto cuesta la suscripción mensual de Shopify?",
-      answer: "Shopify cobra un plan mensual independiente (Basic desde aprox $19 USD/mes en plan anual). Nosotros te asesoramos para elegir la versión adecuada según tu volumen de ventas."
-    },
-    {
-      question: "¿Qué aplicaciones se pagan aparte?",
-      answer: "La mayoría de tiendas estándar operan con aplicaciones gratuitas o incluidas. Si necesitas herramientas avanzadas de Klaviyo, ERPs específicos o multi-courier con Carrier Calculated Shipping (CCS), te explicaremos transparente los costos antes de iniciar."
-    },
-    {
-      question: "¿Puedo migrar mi tienda desde WooCommerce, Jumpseller o Magento?",
-      answer: "Sí, realizamos migraciones integrales de productos, categorías, imágenes e historial de clientes preservando las URLs y redirecciones 301 para no perder tu posicionamiento SEO en Google."
-    },
-    {
-      question: "¿Necesito tener logo, productos y textos listos para empezar?",
-      answer: "Es ideal contar con tu logotipo y lista base de productos. Si no los tienes listos, nuestro equipo te guía con plantillas de carga masiva y estructuras sugeridas."
-    },
-    {
-      question: "¿Integran medios de pago y despacho locales en Chile?",
-      answer: "De forma nativa. Configuramos Webpay Plus, Mercado Pago, Flow, Ventipay, así como integraciones de despacho con Starken, BlueExpress, Chilexpress y Shipit."
-    },
-    {
-      question: "¿Pueden conectar la tienda con mi ERP o facturación ante el SII?",
-      answer: "Sí. Integramos Shopify con Bsale, Obuma, Defontana, Laudus o conectores certificados para emitir boletas y facturas electrónicas automáticamente en cada venta."
-    },
-    {
-      question: "¿Qué soporte entregan después de publicar la tienda?",
-      answer: "Entregamos entre 30 y 90 días de soporte post lanzamiento (según plan) para resolver dudas, realizar ajustes menores y garantizar que tu tienda funcione 100% fluida."
-    }
   ];
 
   return (
