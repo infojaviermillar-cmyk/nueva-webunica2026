@@ -263,26 +263,8 @@ export default function ShopifyEnChilePage() {
 
             </div>
 
-            {/* TRUST BAR STRIP */}
-            <div className="mt-16 pt-10 border-t border-zinc-200/80">
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6 text-center">
-                {trustBadges.map((badge, idx) => {
-                  const Icon = badge.icon;
-                  return (
-                    <div key={idx} className="p-4 rounded-2xl bg-zinc-50 border border-zinc-100 flex flex-col items-center justify-center gap-2 group hover:border-violet-200 transition-colors">
-                      <Icon className="w-5 h-5 text-violet-600 group-hover:scale-110 transition-transform" />
-                      <span className="text-xs font-bold text-zinc-800 leading-tight">{badge.text}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
           </div>
         </section>
-
-        {/* Apps Carousel */}
-        <ShopifyAppsCarousel />
 
         {/* ========================================================= */}
         {/* ZONA 2: BENEFICIOS + OBJECIONES + DIFERENCIACIÓN         */}
