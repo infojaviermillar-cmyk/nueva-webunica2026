@@ -9,6 +9,7 @@ import ShopifyStackedHeroCards from '@/components/ui/shopify-stacked-hero-cards'
 import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
 import ShopifyInfiniteCasesCarousel from '@/components/sections/shopify-infinite-cases-carousel';
 import ShopifyClientTestimonials from '@/components/sections/shopify-client-testimonials';
+import ShopifyAiAssistantSimulator from '@/components/sections/shopify-ai-assistant-simulator';
 import { 
   Sparkles, 
   CheckCircle2, 
@@ -378,36 +379,8 @@ export default function ShopifyEnChilePage() {
               </p>
             </div>
 
-            {/* 6 Commercial Benefit Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-              {benefitCards.map((card, idx) => {
-                const Icon = card.icon;
-                return (
-                  <div 
-                    key={idx} 
-                    className="bg-white rounded-3xl p-8 border border-zinc-200/80 shadow-md hover:shadow-xl hover:border-violet-400/50 transition-all duration-300 flex flex-col justify-between group"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="w-12 h-12 rounded-2xl bg-violet-50 border border-violet-100 flex items-center justify-center text-violet-600 group-hover:bg-violet-600 group-hover:text-white transition-colors">
-                          <Icon className="w-6 h-6" />
-                        </div>
-                        <span className="text-xs font-mono font-bold text-violet-600 bg-violet-50 px-3 py-1 rounded-full uppercase tracking-wider">
-                          {card.badge}
-                        </span>
-                      </div>
-
-                      <h3 className="text-xl font-black uppercase text-zinc-950 mb-3 font-heading group-hover:text-violet-700 transition-colors">
-                        {card.title}
-                      </h3>
-                      <p className="text-base text-zinc-700 font-normal leading-relaxed">
-                        {card.desc}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            {/* Asistente IA Simulator Interactivo para las 6 áreas comerciales */}
+            <ShopifyAiAssistantSimulator />
 
           </div>
         </section>
