@@ -30,7 +30,7 @@ export default function ShopifyInteractivePlansCarousel() {
           </span>
           <p className="text-sm text-zinc-600">
             {activeSlide === 0 
-              ? "Mostrando los 3 planes estandarizados principales. Haz clic en la flecha para ver Custom Elite." 
+              ? "Mostrando los 3 planes estandarizados principales. Haz clic en la flecha para revisar Plan Custom Elite." 
               : "Mostrando Plan Enterprise Custom Elite a medida."}
           </p>
         </div>
@@ -59,22 +59,22 @@ export default function ShopifyInteractivePlansCarousel() {
                 : 'bg-amber-400 text-zinc-950 hover:bg-amber-500 shadow-md shadow-amber-400/20 cursor-pointer font-black'
             }`}
           >
-            <span>Ver Custom Elite</span>
+            <span>Revisa Plan Custom Elite</span>
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* CAROUSEL CONTAINER */}
+      {/* CAROUSEL CONTAINER (Con Padding Superior para que el Badge flotante de Plan Full no se corte) */}
       <div 
         ref={scrollRef}
-        className="w-full overflow-x-auto scrollbar-none snap-x snap-mandatory rounded-[2.5rem]"
+        className="w-full overflow-x-auto scrollbar-none snap-x snap-mandatory pt-6 pb-4 -mt-4 rounded-[2.5rem]"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         <div className="flex w-[200%] transition-transform duration-500 ease-out">
           
           {/* SLIDE 01: LOS 3 PLANES PRINCIPALES (100% WIDE) */}
-          <div className="w-1/2 snap-start shrink-0 pr-0 sm:pr-4">
+          <div className="w-1/2 snap-start shrink-0 pr-0 sm:pr-4 pt-4">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
               
               {/* PLAN PRENDE */}
@@ -116,7 +116,7 @@ export default function ShopifyInteractivePlansCarousel() {
 
               {/* PLAN FULL (DESTACADO / MÁS ELEGIDO) */}
               <div id="plan-full" className="bg-gradient-to-b from-violet-900 via-[#2C02A5] to-zinc-950 text-white rounded-[2.5rem] p-6 lg:p-8 border-2 border-[#FF0085] shadow-2xl relative flex flex-col justify-between transform">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FF0085] text-white text-[9px] font-mono font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest shadow-lg text-center whitespace-nowrap">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FF0085] text-white text-[9px] font-mono font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest shadow-lg text-center whitespace-nowrap z-20">
                   ★ MÁS ELEGIDO • PREPARADO PARA CAMPAÑAS Y CRECIMIENTO
                 </div>
 
@@ -169,9 +169,9 @@ export default function ShopifyInteractivePlansCarousel() {
                     <button 
                       onClick={() => scrollToSlide(1)}
                       className="inline-flex items-center gap-1.5 text-[11px] font-bold text-amber-700 bg-amber-100/80 hover:bg-amber-200 px-3 py-1 rounded-full transition-all cursor-pointer shadow-sm" 
-                      title="Haz clic para ver el siguiente plan Custom Elite"
+                      title="Haz clic para revisar el Plan Custom Elite"
                     >
-                      <span>Custom Elite</span>
+                      <span>Revisa Plan Custom Elite</span>
                       <ArrowRight className="w-3.5 h-3.5 text-amber-700" />
                     </button>
                   </div>
@@ -191,7 +191,7 @@ export default function ShopifyInteractivePlansCarousel() {
                       className="p-3 bg-amber-400 hover:bg-amber-500 text-zinc-950 rounded-2xl shadow-md transition-transform hover:scale-105 cursor-pointer flex items-center gap-1 font-bold text-xs"
                       title="Ver siguiente plan: Custom Elite"
                     >
-                      <span className="hidden sm:inline">Ver Elite</span>
+                      <span className="hidden sm:inline">Revisa Custom Elite</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
