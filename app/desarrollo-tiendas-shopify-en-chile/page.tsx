@@ -647,10 +647,8 @@ export default function ShopifyEnChilePage() {
                   <LeadButton className="w-full py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-zinc-950 font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-amber-500/20 text-center cursor-pointer">
                     Evaluar proyecto Custom Elite
                   </LeadButton>
-                </div>
-
+              </div>
             </div>
-
           </div>
         </section>
 

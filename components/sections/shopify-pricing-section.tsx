@@ -204,48 +204,48 @@ export default function ShopifyPricingSection() {
         </div>
       </div>
 
-      {/* SECCIÓN ANCHO COMPLETO: CARRIER CALCULATED SHIPPING (CCS) */}
-      <div className="w-full bg-zinc-950 text-white py-20 lg:py-28 my-20 border-y border-zinc-800 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/20 blur-[140px] rounded-full pointer-events-none" />
+      {/* SECCIÓN ANCHO COMPLETO: CARRIER CALCULATED SHIPPING (CCS) - DISEÑO CLARO */}
+      <div className="w-full bg-zinc-50 text-zinc-950 py-16 lg:py-24 my-16 border-y border-zinc-200/80 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-100/60 blur-[140px] rounded-full pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             
             {/* Left Header */}
             <div className="lg:col-span-5">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-600/30 border border-violet-400/40 text-violet-300 rounded-full text-xs font-mono font-bold uppercase tracking-widest mb-6">
-                <Zap className="w-4 h-4 text-violet-400" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 border border-violet-200 text-violet-700 rounded-full text-xs font-mono font-bold uppercase tracking-widest mb-6">
+                <Zap className="w-4 h-4 text-violet-600" />
                 Factibilidad Logística
               </div>
               
-              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-tight mb-4 font-heading">
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight leading-tight mb-4 font-heading text-zinc-950">
                 Carrier Calculated <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-amber-300 italic">Shipping (CCS)</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-pink-600 to-purple-600 italic">Shipping (CCS)</span>
               </h3>
 
-              <p className="text-zinc-300 text-base sm:text-lg leading-relaxed font-normal">
+              <p className="text-zinc-600 text-base sm:text-lg leading-relaxed font-normal">
                 Algunas integraciones logísticas requieren que la tienda tenga habilitadas las tarifas de envío calculadas por terceros (CCS).
               </p>
             </div>
             
             {/* Right Details */}
             <div className="lg:col-span-7">
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 mb-6">
-                <p className="text-zinc-200 text-base sm:text-lg leading-relaxed font-normal">
-                  Su disponibilidad depende del <strong className="text-white font-bold">plan Shopify contratado</strong>, la aplicación seleccionada y las condiciones vigentes del proveedor. Antes de comenzar <strong className="text-violet-300 font-bold">validamos la factibilidad técnica</strong> y los costos externos asociados.
+              <div className="bg-white border border-zinc-200/90 rounded-3xl p-6 sm:p-8 mb-6 shadow-sm">
+                <p className="text-zinc-700 text-base sm:text-lg leading-relaxed font-normal">
+                  Su disponibilidad depende del <strong className="text-zinc-950 font-bold">plan Shopify contratado</strong>, la aplicación seleccionada y las condiciones vigentes del proveedor. Antes de comenzar <strong className="text-violet-700 font-bold">validamos la factibilidad técnica</strong> y los costos externos asociados.
                 </p>
               </div>
 
-              <div className="p-6 bg-white/5 rounded-3xl border border-white/15">
+              <div className="p-6 bg-white rounded-3xl border border-zinc-200/90 shadow-sm">
                 <div className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center shrink-0 mt-1 text-emerald-400">
+                  <div className="w-8 h-8 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center shrink-0 mt-1 text-emerald-700">
                     <Check className="w-5 h-5" strokeWidth={3} />
                   </div>
                   <div>
-                    <h4 className="text-lg sm:text-xl font-bold text-white mb-2">
+                    <h4 className="text-lg sm:text-xl font-bold text-zinc-950 mb-2 font-heading">
                       Integración Logística Transparente
                     </h4>
-                    <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">
+                    <p className="text-sm sm:text-base text-zinc-600 font-normal leading-relaxed">
                       Te asesoramos para activar CCS con soporte de Shopify (por ejemplo en modalidad de pago anual) o configurar tarifas dinámicas estructuradas según dirección, peso y zonas de cobertura.
                     </p>
                   </div>
