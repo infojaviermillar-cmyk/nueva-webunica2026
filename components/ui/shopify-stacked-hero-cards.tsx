@@ -123,7 +123,6 @@ export default function ShopifyStackedHeroCards() {
                   <div className="flex items-center justify-between text-white">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-xs font-mono bg-violet-600 px-2 py-0.5 rounded text-white font-bold uppercase">HD Nitido</span>
                         <h4 className="text-sm font-black uppercase tracking-wider">{store.name}</h4>
                       </div>
                       <p className="text-[11px] text-purple-200 font-light">{store.category}</p>
