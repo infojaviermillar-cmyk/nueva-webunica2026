@@ -113,7 +113,7 @@ export default function ShopifyStackedHeroCards() {
                 <img
                   src={store.image}
                   alt={`Tienda Shopify ${store.name} - Webunica`}
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover object-left-top transition-transform duration-700 group-hover:scale-105"
                   loading="eager"
                   decoding="async"
                 />
