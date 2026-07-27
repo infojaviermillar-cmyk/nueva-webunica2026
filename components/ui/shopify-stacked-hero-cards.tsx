@@ -27,53 +27,11 @@ const storeCards: StoreCard[] = [
     image: '/clientes-2/ohmyskinchile.cl.png',
   },
   {
-    id: 'tecno',
-    name: 'Tecno-Mobile',
-    url: 'tecno-mobile.cl',
-    category: 'Tecnología & Gadgets',
-    image: '/clientes-2/tecno-mobile.cl.png',
-  },
-  {
-    id: 'bodymuscle',
-    name: 'Body Muscle',
-    url: 'bodymuscle.cl',
-    category: 'Suplementos & Fitness',
-    image: '/clientes-2/bodymuscle.cl.png',
-  },
-  {
-    id: 'chiletronics',
-    name: 'Chiletronics',
-    url: 'chiletronics.cl',
-    category: 'Retail Electrónica',
-    image: '/clientes-2/chiletronics.cl.png',
-  },
-  {
     id: 'terraandes',
     name: 'Terra Andes',
     url: 'terraandesplus.com',
     category: 'Alimentos & Exportación',
     image: '/clientes-2/terraandesplus.cl.png',
-  },
-  {
-    id: 'phywaters',
-    name: 'PHY Waters',
-    url: 'phywaters.com',
-    category: 'Bienestar & Purificadores',
-    image: '/clientes-2/phywaters.com.png',
-  },
-  {
-    id: 'altavista',
-    name: 'Altavista Chile',
-    url: 'altavistachile.cl',
-    category: 'Industrial & Outdoor',
-    image: '/clientes-2/altavistachile.cl.png',
-  },
-  {
-    id: 'tuupos',
-    name: 'Tuupos',
-    url: 'tuupos.cl',
-    category: 'General Store',
-    image: '/clientes-2/tuupos.cl.png',
   },
 ];
 
@@ -119,7 +77,7 @@ export default function ShopifyStackedHeroCards() {
           const isVicca = index === 0;
           const isHovered = activeHoverId === store.id;
 
-          const leftOffset = index * 12.5; 
+          const leftOffset = index * 18; 
           const zIndex = isHovered ? 60 : isVicca ? 50 : 40 - index;
 
           return (
