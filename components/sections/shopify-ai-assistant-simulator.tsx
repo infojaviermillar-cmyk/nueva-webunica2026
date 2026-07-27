@@ -1,11 +1,8 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { 
-  Bot, 
   Sparkles, 
-  Send, 
-  User, 
   CheckCircle2, 
   TrendingUp, 
   CreditCard, 
@@ -13,454 +10,392 @@ import {
   Puzzle, 
   BarChart3, 
   Search, 
-  RefreshCw,
-  Zap,
   ArrowRight,
   ShieldCheck,
-  MessageSquare
+  Zap,
+  ChevronRight,
+  FileCheck
 } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
 
-interface TopicAiData {
+interface TopicSeoData {
   id: string;
   badge: string;
-  title: string;
+  question: string;
   shortDesc: string;
   icon: React.ElementType;
-  question: string;
-  aiResponse: {
+  seoKeywords: string[];
+  response: {
     heading: string;
     summary: string;
-    bullets: string[];
-    technicalNote: string;
+    highlights: Array<{ title: string; desc: string }>;
+    technicalBox: {
+      title: string;
+      desc: string;
+    };
   };
 }
 
-const TOPICS: TopicAiData[] = [
+const SEO_TOPICS: TopicSeoData[] = [
   {
     id: 'cro',
-    badge: 'VENTAS & UX',
-    title: 'DISEÑO QUE CONVIERTE (CRO)',
-    shortDesc: 'Estructuramos tu tienda para guiar al cliente hasta la compra, eliminando fricción y aumentando tu tasa de conversión.',
+    badge: 'Ventas & UX Chile',
+    question: '¿Cómo adaptan el diseño para maximizar ventas (CRO) en Chile?',
+    shortDesc: 'Diseño e-commerce mobile-first enfocado en conversión y retorno de inversión.',
     icon: TrendingUp,
-    question: '✨ ¿Cómo logran aumentar la tasa de conversión (CRO) en mi tienda Shopify?',
-    aiResponse: {
-      heading: 'Arquitectura de Ficha de Producto Orientada a la Venta',
-      summary: 'Diseñamos cada pantalla eliminando puntos de fuga y aplicando principios de psicología del consumidor:',
-      bullets: [
-        'Botones de compra principales y fijos (Sticky Add to Cart) en móviles.',
-        'Pruebas sociales integradas (sistema de reseñas de clientes con foto).',
-        'Badges de confianza, garantías claras y calculador de envíos antes del checkout.',
-        'Velocidad de carga extrema sin scripts innecesarios que ralenticen la compra.'
+    seoKeywords: ['diseño tiendas shopify chile', 'optimización cro shopify', 'agencia shopify partner chile'],
+    response: {
+      heading: 'Diseño de Tiendas Shopify Orientado a Conversión (CRO)',
+      summary: 'Como agencia Shopify Partner en Chile, estructuramos tu tienda virtual eliminando fricciones de compra y aplicando las mejores prácticas de Conversion Rate Optimization (CRO) para el mercado chileno.',
+      highlights: [
+        {
+          title: 'Navegación Mobile-First 100%',
+          desc: 'Más del 80% del tráfico e-commerce en Chile proviene de smartphones. Optimizamos velocidad, menús táctiles y checkout rápido en celulares.'
+        },
+        {
+          title: 'Ficha de Producto de Alto Rendimiento',
+          desc: 'Layout enfocado en destacar beneficios, fotos HD, galerías interactivas, llamado a la acción fijo (Sticky Cart) y elementos de confianza.'
+        },
+        {
+          title: 'Prueba Social & Reviews Verificadas',
+          desc: 'Integración de opiniones de clientes reales con imágenes y estrellas para aumentar la credibilidad y acelerar la decisión de compra.'
+        },
+        {
+          title: 'Proceso de Pago Fluido sin Fricción',
+          desc: 'Minimizamos los pasos desde la selección del producto hasta la confirmación de la venta.'
+        }
       ],
-      technicalNote: 'Resultado: Tiendas diseñadas no solo para verse bien, sino para maximizar el retorno por cada visita.'
+      technicalBox: {
+        title: 'Impacto Comercial Directo',
+        desc: 'Una tienda Shopify con diseño CRO profesional incrementa la tasa de conversión promedio y reduce el costo de adquisición de clientes (CAC).'
+      }
     }
   },
   {
     id: 'pagos-sii',
-    badge: 'FINANZAS CHILE',
-    title: 'PAGOS Y FACTURACIÓN AUTOMÁTICA',
-    shortDesc: 'Integramos Webpay, Flow, Mercado Pago y conectamos la emisión de boletas y facturas electrónicas ante el SII.',
+    badge: 'Finanzas & Pasarelas',
+    question: '¿Cómo funcionan Webpay, Mercado Pago y la boleta automática SII?',
+    shortDesc: 'Pasarelas de pago chilenas e integración de emisión tributaria automática.',
     icon: CreditCard,
-    question: '💳 ¿Cómo funciona la integración de pasarelas de pago y boleta automática del SII?',
-    aiResponse: {
-      heading: 'Flujo 100% Automatizado de Cobro y Facturación en Chile',
-      summary: 'Configuramos pasarelas locales e internacionales asegurando cobros en pesos chilenos (CLP):',
-      bullets: [
-        'Integración con Webpay Plus, Mercado Pago, Flow, VentiPay y Transferencias.',
-        'Emisión automática de Boletas o Facturas electrónicas conectadas al SII (Bsale, Openfactura, SimpleBoleta).',
-        'Envío automático del documento tributario PDF al correo del cliente al confirmar el pago.',
-        'Soporte multi-moneda si planeas vender internacionalmente.'
+    seoKeywords: ['pasarelas de pago shopify chile', 'webpay plus shopify', 'boleta electronica sii shopify'],
+    response: {
+      heading: 'Integración de Pasarelas de Pago Locales y Boleta Electrónica SII',
+      summary: 'Configuramos un ecosistema de pagos seguro y compatible con el comercio electrónico en Chile, permitiendo que tu tienda reciba pagos en pesos chilenos (CLP) y emita documentos tributarios de forma 100% automatizada.',
+      highlights: [
+        {
+          title: 'Pasarelas Locales Integradas',
+          desc: 'Conexión oficial con Webpay Plus (Transbank), Mercado Pago Chile, Flow y VentiPay para recibir Tarjetas de Crédito, Débito (Redcompra) y transferencias.'
+        },
+        {
+          title: 'Emisión Automática de Boletas y Facturas SII',
+          desc: 'Al confirmarse la compra en Shopify, el sistema emite automáticamente la Boleta Electrónica tributaria ante el Servicio de Impuestos Internos (SII).'
+        },
+        {
+          title: 'Envío de Documento Tributario por E-mail',
+          desc: 'El cliente recibe el comprobante PDF de su boleta en su correo electrónico al instante sin requerir gestión manual de tu equipo.'
+        },
+        {
+          title: 'Sin Cobros Manuales ni Retrasos Operativos',
+          desc: 'Conciliación limpia de ventas para facilitar tu contabilidad mensual.'
+        }
       ],
-      technicalNote: 'Ahorra horas de trabajo manual diario en emisión tributaria y conciliación de cuentas.'
+      technicalBox: {
+        title: 'Automatización Tributaria en Chile',
+        desc: 'Conectamos tu tienda Shopify con sistemas certificados como Bsale, Openfactura o SimpleBoleta para cumplir con la normativa legal chilena.'
+      }
     }
   },
   {
     id: 'despachos',
-    badge: 'LOGÍSTICA',
-    title: 'DESPACHOS EN CHILE EN TIEMPO REAL',
-    shortDesc: 'Conectamos Starken, BlueExpress, Chilexpress y multi-couriers para configurar tarifas dinámicas según dirección, peso y cobertura.',
+    badge: 'Logística & Couriers',
+    question: '¿Cómo se integran los envíos automáticos con Starken y BlueExpress?',
+    shortDesc: 'Cálculo de tarifas dinámicas en tiempo real por región y comuna en Chile.',
     icon: Truck,
-    question: '🚚 ¿Cómo funcionan los envíos automáticos con Starken, BlueExpress y Chilexpress?',
-    aiResponse: {
-      heading: 'Cálculo de Despachos Transparente por Comuna y Región',
-      summary: 'Configuramos las mejores opciones de despacho vigentes para el mercado chileno:',
-      bullets: [
-        'Tarifas dinámicas en tiempo real según dirección de entrega, dimensiones y peso.',
-        'Integración nativa o vía multi-courier (Starken, BlueExpress, Chilexpress, Shipit, Envíame).',
-        'Configuración de reglas de Envío Gratis por monto mínimo de compra.',
-        'Integración de retiros en tienda (Click & Collect) y zonas con tarifa plana local.'
+    seoKeywords: ['envios shopify chile', 'integracion starken shopify', 'blueexpress shopify chile'],
+    response: {
+      heading: 'Integración Logística y Tarifas de Envíos en Tiempo Real para Chile',
+      summary: 'Resolvemos la logística e-commerce en Chile conectando las principales empresas de transporte para mostrar cotizaciones precisas de despacho en el checkout.',
+      highlights: [
+        {
+          title: 'Integración Multi-Courier en Chile',
+          desc: 'Conexión con Starken, BlueExpress, Chilexpress, Shipit y Envíame para despacho en todo el territorio nacional.'
+        },
+        {
+          title: 'Cálculo Dinámico según Dirección y Peso',
+          desc: 'Cotización automática de tarifas en tiempo real según la comuna de destino, dimensiones y peso total del pedido.'
+        },
+        {
+          title: 'Reglas de Envío Gratis y Tarifas Planas',
+          desc: 'Configuración flexible de promociones como "Envío Gratis por compras sobre $50.000" o tarifas fijas por región.'
+        },
+        {
+          title: 'Retiro en Tienda (Click & Collect)',
+          desc: 'Opción de retiro en sucursal física habilitada directamente en la pantalla de despacho.'
+        }
       ],
-      technicalNote: 'Eliminamos la incertidumbre en el checkout entregando el precio exacto de despacho a tu comprador.'
+      technicalBox: {
+        title: 'Carrier Calculated Shipping (CCS)',
+        desc: 'Te asesoramos técnicamente para habilitar la función de tarifas calculadas por terceros oficial de Shopify según las condiciones de tu plan.'
+      }
     }
   },
   {
     id: 'erp',
-    badge: 'AUTOMATIZACIÓN',
-    title: 'SINCRONIZACIÓN & ERP',
-    shortDesc: 'Sincronizamos inventario y ventas con tu ERP (Bsale, Obuma, Defontana, Laudus) para automatizar tu operación.',
+    badge: 'Automatización ERP',
+    question: '¿Cómo sincronizan el inventario con Bsale, Obuma o Defontana?',
+    shortDesc: 'Sincronización de stock y ventas en tiempo real entre Shopify y tu ERP contable.',
     icon: Puzzle,
-    question: '🔄 ¿Cómo sincronizan el stock y las ventas entre Shopify y mi sistema ERP?',
-    aiResponse: {
-      heading: 'Inventario Unificado y Sincronizado en Tiempo Real',
-      summary: 'Evitamos quiebres de stock conectando tu tienda web con tu software contable o de bodega:',
-      bullets: [
-        'Conexión API bidireccional con Bsale, Obuma, Defontana, Laudus y relacionales.',
-        'Descuento automático de stock cuando vendes tanto en la web como en tu tienda física.',
-        'Sincronización masiva de precios, familias de productos y descripciones.',
-        'Reducción total de errores de digitación e inventario duplicado.'
+    seoKeywords: ['integracion erp shopify chile', 'bsale shopify chile', 'sincronizacion stock shopify'],
+    response: {
+      heading: 'Sincronización de Inventario y Ventas con ERPs en Chile',
+      summary: 'Conectamos tu tienda online Shopify directamente con tu sistema ERP o software contable local para mantener el inventario unificado entre tu tienda física y tu canal web.',
+      highlights: [
+        {
+          title: 'Sincronización de Stock en Tiempo Real',
+          desc: 'Cada venta en la web o en tienda física descuenta inventario automáticamente en ambas plataformas, evitando ventas sin stock.'
+        },
+        {
+          title: 'Integración con ERPs Líderes en Chile',
+          desc: 'Conexión probada con Bsale, Obuma, Defontana, Laudus y desarrollo de conectores personalizados vía API.'
+        },
+        {
+          title: 'Actualización Masiva de Catálogo',
+          desc: 'Sincronización periódica de precios, nombres de productos, categorías y variantes sin trabajo manual.'
+        },
+        {
+          title: 'Control Operativo Centralizado',
+          desc: 'Gestiona toda tu empresa desde un solo panel de administración consolidado.'
+        }
       ],
-      technicalNote: 'Tu operación comercial funciona en piloto automático con inventario siempre al día.'
+      technicalBox: {
+        title: 'Operación Sin Errores',
+        desc: 'Eliminamos la digitación manual y los quiebres de stock en periodos de alto tráfico como CyberDay o Navidad.'
+      }
     }
   },
   {
     id: 'analitica',
-    badge: 'MEDICIÓN 360°',
-    title: 'ANALÍTICA Y CAMPAÑAS PUBLICITARIAS',
-    shortDesc: 'Medición confiable con GA4, Meta Pixel, Conversion API y Merchant Center para tomar decisiones comerciales reales.',
+    badge: 'Analítica & Ads',
+    question: '¿Qué herramientas de medición para Google Ads y Meta Ads incluyen?',
+    shortDesc: 'Setup avanzado de GA4, Meta Pixel con Conversion API (CAPI) y Merchant Center.',
     icon: BarChart3,
-    question: '📊 ¿Qué herramientas de analítica y medición para Ads dejan configuradas?',
-    aiResponse: {
-      heading: 'Medición Precisa de Datos para Maximizar tu ROAS',
-      summary: 'Medimos con exactitud el comportamiento de tus usuarios y el retorno de inversión publicitaria:',
-      bullets: [
-        'Google Analytics 4 (GA4) con seguimiento de eventos e-commerce (Purchase, AddToCart, Checkout).',
-        'Meta Pixel + Conversion API (CAPI) desde el servidor para sobrepasar bloqueos de iOS y navegadores.',
-        'Catálogo sincronizado con Google Merchant Center para publicidad en Google Shopping.',
-        'Trazabilidad limpia para campañas de Facebook, Instagram y TikTok Ads.'
+    seoKeywords: ['meta pixel shopify chile', 'ga4 e-commerce shopify', 'google merchant center shopify'],
+    response: {
+      heading: 'Analítica Web y Medición de Conversiones para Marketing Digital',
+      summary: 'Configuramos una infraestructura de medición completa para que puedas evaluar el retorno exacto de tu inversión en campañas de publicidad digital en Facebook, Instagram y Google.',
+      highlights: [
+        {
+          title: 'Google Analytics 4 (GA4) E-commerce',
+          desc: 'Configuración de eventos clave del embudo: vistas de producto, agregar al carrito, inicio de pago y ventas completadas.'
+        },
+        {
+          title: 'Meta Pixel + Conversion API (CAPI)',
+          desc: 'Instalación del pixel con API de conversiones desde el servidor para garantizar la captura de datos ante bloqueos de navegadores.'
+        },
+        {
+          title: 'Sincronización Google Merchant Center',
+          desc: 'Catálogo de productos conectado con Google Shopping para aparecer en búsquedas comerciales.'
+        },
+        {
+          title: 'Trazabilidad de Campañas Publicitarias',
+          desc: 'Datos precisos para optimizar campañas enfocadas en retorno sobre la inversión publicitaria (ROAS).'
+        }
       ],
-      technicalNote: 'Obtienes datos 100% fiables para escalar la inversión en tus campañas de marketing digital.'
+      technicalBox: {
+        title: 'Medición 100% Confiable',
+        desc: 'Garantizamos que el 100% de los datos de conversión lleguen limpios a tus plataformas de anuncios.'
+      }
     }
   },
   {
     id: 'seo',
-    badge: 'TRÁFICO ORGÁNICO',
-    title: 'SEO TÉCNICO DE ALTO RENDIMIENTO',
-    shortDesc: 'Estructura optimizada, código limpio, metadatos y velocidad mobile-first para ser rastreada, indexada y ganar tráfico orgánico.',
+    badge: 'Posicionamiento Google',
+    question: '¿Cómo preparan la tienda para posicionar orgánicamente en Google?',
+    shortDesc: 'Optimización SEO técnica, velocidad mobile-first y marcado de datos estructurados.',
     icon: Search,
-    question: '🔍 ¿Cómo está optimizada la tienda para posicionar orgánicamente en Google?',
-    aiResponse: {
-      heading: 'Infraestructura Técnica Preparada para Motores de Búsqueda',
-      summary: 'Optimizamos la tienda a nivel de arquitectura y código para que Google indexe rápido tu catálogo:',
-      bullets: [
-        'Jerarquía SEO correcta: etiquetas H1, H2, H3, meta-títulos y meta-descripciones.',
-        'Marcado de datos estructurados Schema.org (JSON-LD) para productos, precios y stock.',
-        'Optimización de imágenes en formato WebP con atributos ALT descriptivos.',
-        'Sitemap XML automático enviado a Google Search Console.'
+    seoKeywords: ['seo tiendas shopify chile', 'posicionamiento seo shopify', 'experto shopify chile'],
+    response: {
+      heading: 'Optimización SEO Técnico para Tiendas Shopify en Chile',
+      summary: 'Entregamos tu tienda Shopify preparada técnicamente para ser rastreada, indexada y ganar tráfico orgánico constante en los primeros resultados de búsqueda de Google Chile.',
+      highlights: [
+        {
+          title: 'Estructura SEO On-Page de Catálogo',
+          desc: 'Optimización estratégica de títulos SEO, meta-descripciones, URLs amigables y jerarquía H1-H3 en productos y colecciones.'
+        },
+        {
+          title: 'Datos Estructurados Schema.org (JSON-LD)',
+          desc: 'Marcado de datos técnico para que Google muestre precio, stock, valoraciones e imágenes destacadas en los resultados.'
+        },
+        {
+          title: 'Rendimiento y Carga Rápida Mobile',
+          desc: 'Compresión de imágenes WebP y optimización de código para obtener puntajes altos en Core Web Vitals.'
+        },
+        {
+          title: 'Indexación Rápida en Google',
+          desc: 'Generación y envío automático del mapa del sitio XML a Google Search Console.'
+        }
       ],
-      technicalNote: 'Tu e-commerce nace técnicamente preparado para escalar orgánicamente sin depender solo de publicidad pagada.'
+      technicalBox: {
+        title: 'Tráfico Orgánico Sostenible',
+        desc: 'Construimos una base sólida para atraer clientes de forma orgánica sin depender únicamente del gasto publicitario diario.'
+      }
     }
   }
 ];
 
 export default function ShopifyAiAssistantSimulator() {
-  const [selectedTopic, setSelectedTopic] = useState<TopicAiData>(TOPICS[0]);
-  const [messages, setMessages] = useState<Array<{ sender: 'user' | 'ai'; text: string; topicData?: TopicAiData }>>([
-    {
-      sender: 'ai',
-      text: '¡Hola! 👋 Soy el Asistente Virtual de Webunica. Haz clic en cualquiera de las 6 áreas técnicas de abajo o selecciona una pregunta sugerida para ver cómo resolvemos la arquitectura e-commerce de tu tienda Shopify en Chile.',
-      topicData: TOPICS[0]
-    }
-  ]);
+  const [activeTopicId, setActiveTopicId] = useState<string>(SEO_TOPICS[0].id);
 
-  const [isTyping, setIsTyping] = useState<boolean>(false);
-  const [customQuery, setCustomQuery] = useState<string>('');
-  const chatBottomRef = useRef<HTMLDivElement>(null);
-
-  const handleSelectTopic = (topic: TopicAiData) => {
-    setSelectedTopic(topic);
-    setIsTyping(true);
-
-    // Append user question
-    const newMessages = [
-      ...messages,
-      { sender: 'user' as const, text: topic.question }
-    ];
-    setMessages(newMessages);
-
-    // Simulate AI response after typing delay
-    setTimeout(() => {
-      setMessages([
-        ...newMessages,
-        {
-          sender: 'ai',
-          text: topic.aiResponse.heading,
-          topicData: topic
-        }
-      ]);
-      setIsTyping(false);
-    }, 600);
-  };
-
-  const handleCustomSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!customQuery.trim()) return;
-
-    const queryText = customQuery.trim();
-    setCustomQuery('');
-    setIsTyping(true);
-
-    // Find if custom query matches any keywords or default to closest topic
-    const matchedTopic = TOPICS.find(t => 
-      queryText.toLowerCase().includes(t.id) || 
-      queryText.toLowerCase().includes(t.title.toLowerCase().split(' ')[0])
-    ) || selectedTopic;
-
-    const userMsg = { sender: 'user' as const, text: `💬 ${queryText}` };
-    setMessages(prev => [...prev, userMsg]);
-
-    setTimeout(() => {
-      setMessages(prev => [
-        ...prev,
-        {
-          sender: 'ai',
-          text: `Respuesta para tu consulta sobre: "${queryText}":`,
-          topicData: matchedTopic
-        }
-      ]);
-      setIsTyping(false);
-    }, 700);
-  };
-
-  useEffect(() => {
-    chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isTyping]);
+  const activeTopic = SEO_TOPICS.find((t) => t.id === activeTopicId) || SEO_TOPICS[0];
+  const TopicIcon = activeTopic.icon;
 
   return (
     <div className="w-full">
       
-      {/* Header Badge */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-violet-100 text-violet-700 text-xs font-mono font-bold uppercase tracking-widest rounded-full mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-violet-600 animate-pulse" />
-            Asistente IA Interactivo E-commerce
-          </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-zinc-950 uppercase font-heading tracking-tight">
-            Explora las capacidades de tu futura tienda Shopify
-          </h3>
+      {/* Header Section */}
+      <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-violet-100 border border-violet-200/80 text-violet-700 text-xs font-mono font-bold uppercase tracking-widest rounded-full mb-4">
+          <Sparkles className="w-4 h-4 text-violet-600" />
+          <span>Preguntas Frecuentes & Arquitectura Shopify Chile</span>
         </div>
 
-        <div className="flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 border border-emerald-200/80 rounded-full text-xs font-mono text-emerald-700 font-bold">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-          <span>IA en vivo • Asistente Webunica Chile</span>
-        </div>
+        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-950 uppercase font-heading tracking-tight leading-tight">
+          Todo lo que necesitas saber <br className="hidden sm:inline" />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]">
+            antes de crear tu tienda Shopify
+          </span>
+        </h3>
+        
+        <p className="text-zinc-600 text-base sm:text-lg font-light mt-3 leading-relaxed">
+          Haz clic en cualquier pregunta de la izquierda para ver en detalle las soluciones técnicas e integraciones locales incluidas.
+        </p>
       </div>
 
-      {/* Main Container: 6 Interactive Cards + AI Terminal */}
+      {/* 2-Column Layout Container */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* Left Column: 6 Commercial Benefit Cards (Clickable) */}
-        <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {TOPICS.map((topic) => {
+        {/* LEFT COLUMN: 6 Questions / Topics List */}
+        <div className="lg:col-span-5 space-y-3">
+          {SEO_TOPICS.map((topic) => {
             const Icon = topic.icon;
-            const isSelected = selectedTopic.id === topic.id;
+            const isActive = topic.id === activeTopicId;
 
             return (
               <button
                 key={topic.id}
                 type="button"
-                onClick={() => handleSelectTopic(topic)}
-                className={`text-left p-6 rounded-3xl border transition-all duration-300 flex flex-col justify-between group cursor-pointer relative overflow-hidden ${
-                  isSelected
-                    ? 'bg-zinc-950 text-white border-violet-500 shadow-2xl ring-2 ring-violet-500/40 scale-[1.02]'
-                    : 'bg-white text-zinc-950 border-zinc-200/90 hover:border-violet-300 hover:shadow-lg'
+                onClick={() => setActiveTopicId(topic.id)}
+                className={`w-full text-left p-5 rounded-3xl border transition-all duration-300 flex items-center justify-between gap-4 cursor-pointer group relative ${
+                  isActive
+                    ? 'bg-zinc-950 text-white border-violet-500 shadow-xl ring-2 ring-violet-500/30 translate-x-1'
+                    : 'bg-white text-zinc-900 border-zinc-200/90 hover:border-violet-300 hover:shadow-md hover:bg-zinc-50/80'
                 }`}
               >
-                {isSelected && (
-                  <div className="absolute top-0 right-0 px-3 py-1 bg-gradient-to-r from-violet-600 to-pink-600 text-white text-[10px] font-mono font-bold uppercase tracking-widest rounded-bl-xl">
-                    Activo en IA
+                <div className="flex items-center gap-4 min-w-0">
+                  <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${
+                    isActive
+                      ? 'bg-gradient-to-tr from-violet-600 to-pink-600 text-white shadow-md'
+                      : 'bg-violet-50 text-violet-600 group-hover:bg-violet-600 group-hover:text-white'
+                  }`}>
+                    <Icon className="w-5 h-5" />
                   </div>
-                )}
 
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-colors ${
-                      isSelected
-                        ? 'bg-violet-600 text-white'
-                        : 'bg-violet-50 text-violet-600 group-hover:bg-violet-600 group-hover:text-white'
-                    }`}>
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <span className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
-                      isSelected
-                        ? 'bg-white/10 text-violet-300 border border-white/10'
-                        : 'bg-violet-50 text-violet-600'
+                  <div className="min-w-0">
+                    <span className={`text-[10px] font-mono font-bold uppercase tracking-widest block mb-0.5 ${
+                      isActive ? 'text-pink-400' : 'text-violet-600'
                     }`}>
                       {topic.badge}
                     </span>
+                    <h4 className={`text-sm sm:text-base font-bold leading-tight truncate font-heading ${
+                      isActive ? 'text-white font-black' : 'text-zinc-900 group-hover:text-violet-700'
+                    }`}>
+                      {topic.question}
+                    </h4>
                   </div>
-
-                  <h4 className={`text-base font-black uppercase mb-2 font-heading tracking-tight ${
-                    isSelected ? 'text-white' : 'text-zinc-950 group-hover:text-violet-700'
-                  }`}>
-                    {topic.title}
-                  </h4>
-                  
-                  <p className={`text-xs font-normal leading-relaxed ${
-                    isSelected ? 'text-zinc-300' : 'text-zinc-600'
-                  }`}>
-                    {topic.shortDesc}
-                  </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-current/10 flex items-center justify-between text-[11px] font-mono font-bold uppercase tracking-wider">
-                  <span className={isSelected ? 'text-pink-400' : 'text-violet-600'}>
-                    Ver respuesta IA →
-                  </span>
-                  <Sparkles className={`w-3.5 h-3.5 ${isSelected ? 'text-pink-400' : 'text-zinc-400'}`} />
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-all ${
+                  isActive
+                    ? 'bg-violet-600 text-white'
+                    : 'bg-zinc-100 text-zinc-400 group-hover:bg-violet-100 group-hover:text-violet-600'
+                }`}>
+                  <ChevronRight className={`w-4 h-4 transition-transform ${isActive ? 'translate-x-0.5' : ''}`} />
                 </div>
               </button>
             );
           })}
         </div>
 
-        {/* Right Column: Simulated AI Terminal Window */}
-        <div className="lg:col-span-6 bg-zinc-950 text-white rounded-[2.5rem] border border-zinc-800 shadow-2xl overflow-hidden flex flex-col h-[600px] lg:h-[640px]">
+        {/* RIGHT COLUMN: Explained Response Panel */}
+        <div className="lg:col-span-7 bg-white rounded-[2.5rem] p-8 sm:p-10 border border-zinc-200 shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[580px]">
           
-          {/* AI Window Titlebar */}
-          <div className="bg-zinc-900 px-6 py-4 border-b border-zinc-800 flex items-center justify-between shrink-0">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-violet-600 to-pink-500 flex items-center justify-center text-white font-bold shadow-md">
-                <Bot className="w-4 h-4" />
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-white leading-none">Asistente IA Webunica</h4>
-                <p className="text-[11px] font-mono text-zinc-400 mt-0.5">Shopify E-commerce Expert v2.5</p>
-              </div>
-            </div>
+          {/* Top Decoration */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-violet-100/60 to-pink-100/20 rounded-bl-full pointer-events-none" />
 
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => handleSelectTopic(selectedTopic)}
-                title="Reiniciar chat"
-                className="p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
-              >
-                <RefreshCw className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* Quick Preset Question Chips */}
-          <div className="px-4 py-3 bg-zinc-900/60 border-b border-zinc-800/80 flex items-center gap-2 overflow-x-auto scrollbar-none shrink-0 text-xs font-mono">
-            <span className="text-zinc-500 uppercase tracking-widest text-[10px] shrink-0 font-bold">Chips IA:</span>
-            {TOPICS.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => handleSelectTopic(t)}
-                className={`px-3 py-1 rounded-full shrink-0 transition-all font-medium border ${
-                  selectedTopic.id === t.id
-                    ? 'bg-violet-600 text-white border-violet-400'
-                    : 'bg-white/5 text-zinc-300 border-white/10 hover:bg-white/10'
-                }`}
-              >
-                {t.title.split(' ')[0]}
-              </button>
-            ))}
-          </div>
-
-          {/* Chat Messages Log Area */}
-          <div className="flex-1 p-6 overflow-y-auto space-y-6 scrollbar-thin scrollbar-thumb-zinc-800">
-            {messages.map((msg, index) => {
-              const isUser = msg.sender === 'user';
-
-              return (
-                <div
-                  key={index}
-                  className={`flex items-start gap-3 ${isUser ? 'flex-row-reverse' : ''}`}
-                >
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5 ${
-                    isUser 
-                      ? 'bg-pink-600 text-white' 
-                      : 'bg-gradient-to-tr from-violet-600 to-purple-600 text-white'
-                  }`}>
-                    {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
-                  </div>
-
-                  <div className={`max-w-[85%] rounded-3xl p-5 text-sm leading-relaxed ${
-                    isUser
-                      ? 'bg-violet-600 text-white font-medium rounded-tr-none'
-                      : 'bg-zinc-900 border border-zinc-800 text-zinc-100 rounded-tl-none shadow-lg'
-                  }`}>
-                    <p className="font-medium">{msg.text}</p>
-
-                    {/* Rich AI Topic Card Details */}
-                    {!isUser && msg.topicData && (
-                      <div className="mt-4 pt-4 border-t border-zinc-800/80 space-y-3">
-                        <div className="text-xs font-mono font-bold text-violet-400 uppercase tracking-widest flex items-center gap-1.5">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                          {msg.topicData.aiResponse.heading}
-                        </div>
-
-                        <p className="text-xs text-zinc-300 leading-relaxed font-normal">
-                          {msg.topicData.aiResponse.summary}
-                        </p>
-
-                        <ul className="space-y-2 my-2">
-                          {msg.topicData.aiResponse.bullets.map((b, bIdx) => (
-                            <li key={bIdx} className="flex items-start gap-2 text-xs text-zinc-200">
-                              <span className="w-1.5 h-1.5 rounded-full bg-pink-400 shrink-0 mt-1.5" />
-                              <span>{b}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        <div className="p-3 bg-violet-950/60 border border-violet-800/40 rounded-xl text-[11px] text-violet-200 font-mono">
-                          💡 <span className="font-bold text-violet-300">Nota Técnica:</span> {msg.topicData.aiResponse.technicalNote}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* Typing Indicator */}
-            {isTyping && (
+          <div>
+            {/* Header of Active Response */}
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-6 border-b border-zinc-100 relative z-10">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-violet-600 to-purple-600 flex items-center justify-center text-white shrink-0">
-                  <Bot className="w-4 h-4" />
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-violet-600 via-purple-600 to-pink-600 text-white flex items-center justify-center shadow-lg">
+                  <TopicIcon className="w-6 h-6" />
                 </div>
-                <div className="bg-zinc-900 border border-zinc-800 px-4 py-3 rounded-2xl rounded-tl-none text-xs text-zinc-400 flex items-center gap-2 font-mono">
-                  <span className="w-2 h-2 rounded-full bg-violet-500 animate-bounce" />
-                  <span className="w-2 h-2 rounded-full bg-pink-500 animate-bounce delay-100" />
-                  <span className="w-2 h-2 rounded-full bg-purple-500 animate-bounce delay-200" />
-                  <span>Procesando respuesta técnica...</span>
+                <div>
+                  <span className="text-xs font-mono font-bold text-violet-600 bg-violet-50 px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-1">
+                    {activeTopic.badge}
+                  </span>
+                  <h4 className="text-lg sm:text-xl font-black uppercase text-zinc-950 font-heading leading-tight">
+                    {activeTopic.response.heading}
+                  </h4>
                 </div>
               </div>
-            )}
+            </div>
 
-            <div ref={chatBottomRef} />
+            {/* Executive Summary */}
+            <p className="text-base sm:text-lg text-zinc-700 font-normal leading-relaxed mb-8 relative z-10">
+              {activeTopic.response.summary}
+            </p>
+
+            {/* Detailed Bullet Points Grid */}
+            <div className="space-y-4 mb-8 relative z-10">
+              {activeTopic.response.highlights.map((item, idx) => (
+                <div key={idx} className="flex items-start gap-3.5 p-4 rounded-2xl bg-zinc-50/80 border border-zinc-200/80 hover:bg-violet-50/40 transition-colors">
+                  <div className="w-6 h-6 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                    <CheckCircle2 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h5 className="text-sm font-bold text-zinc-950 mb-0.5 font-heading">
+                      {item.title}
+                    </h5>
+                    <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* High-Impact Technical Scope Box */}
+            <div className="p-5 bg-gradient-to-r from-zinc-900 to-zinc-950 text-white rounded-2xl border border-zinc-800 mb-8 relative z-10 shadow-md">
+              <div className="flex items-center gap-2 text-xs font-mono font-bold text-pink-400 uppercase tracking-widest mb-1">
+                <Zap className="w-4 h-4" />
+                {activeTopic.response.technicalBox.title}
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-300 font-normal leading-relaxed">
+                {activeTopic.response.technicalBox.desc}
+              </p>
+            </div>
           </div>
 
-          {/* Input Box & CTA Bar */}
-          <div className="p-4 bg-zinc-900 border-t border-zinc-800 shrink-0">
-            <form onSubmit={handleCustomSubmit} className="flex items-center gap-2 mb-3">
-              <input
-                type="text"
-                value={customQuery}
-                onChange={(e) => setCustomQuery(e.target.value)}
-                placeholder="Escribe una pregunta sobre tu tienda Shopify..."
-                className="flex-1 bg-zinc-950 border border-zinc-800 text-white rounded-xl px-4 py-3 text-xs sm:text-sm focus:outline-none focus:border-violet-500 transition-colors font-mono placeholder:text-zinc-600"
-              />
-              <button
-                type="submit"
-                className="px-4 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer"
-              >
-                <span>Preguntar</span>
-                <Send className="w-3.5 h-3.5" />
-              </button>
-            </form>
-
-            <div className="flex items-center justify-between text-xs text-zinc-400">
-              <span className="font-mono text-[10px]">¿Tienes dudas complejas?</span>
-              <LeadButton className="text-pink-400 hover:text-pink-300 font-bold uppercase text-[11px] tracking-wider transition-colors flex items-center gap-1 cursor-pointer">
-                <span>Hablar con un Ingeniero Humano</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </LeadButton>
+          {/* Bottom Action Footer */}
+          <div className="pt-6 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+            <div className="text-xs text-zinc-500 font-mono text-center sm:text-left">
+              <span>SEO & Arquitectura Shopify Chile • Webunica Partner</span>
             </div>
+
+            <LeadButton className="w-full sm:w-auto px-6 py-3.5 bg-[#2C02A5] hover:bg-violet-900 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-violet-900/20 text-center flex items-center justify-center gap-2 cursor-pointer">
+              <span>Agenda una asesoría técnica gratuita</span>
+              <ArrowRight className="w-4 h-4" />
+            </LeadButton>
           </div>
 
         </div>
