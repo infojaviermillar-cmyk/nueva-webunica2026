@@ -155,13 +155,13 @@ export default function ShopifyInfiniteCasesCarousel() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 text-emerald-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> Carrusel Continuo de Proyectos Shopify
+              <Sparkles className="w-3.5 h-3.5 text-emerald-600" /> Proyectos Shopify en Chile
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
-              Casos Shopify que generan resultados
+              Tiendas Shopify desarrolladas por Webunica
             </h2>
             <p className="text-zinc-600 text-base sm:text-lg font-light mt-2">
-              Explora nuestros proyectos reales desarrollados para marcas en Chile.
+              Proyectos creados para marcas chilenas, con diseño personalizado, integraciones locales y una experiencia orientada a conversión.
             </p>
           </div>
 
