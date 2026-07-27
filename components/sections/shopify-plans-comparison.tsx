@@ -237,8 +237,8 @@ const PLAN_CARDS = [
     id: "pro",
     name: "Plan Conversión",
     icon: <Crown className="w-6 h-6 text-blue-500" />,
-    price: "$1.200.000",
-    subtitle: "+ IVA",
+    price: "A Cotizar",
+    subtitle: "Desarrollo a Medida",
     cta: "Evaluar mi proyecto con este plan",
     ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
     color: "blue"
@@ -393,7 +393,7 @@ export default function ShopifyPlansComparison() {
                 <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
                   <div className="flex justify-center mb-3"><Rocket className="w-7 h-7 text-blue-500" /></div>
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Conversión</h4>
-                  <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">$1.200.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
+                  <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">A Cotizar</div>
                   <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-wider hover:bg-zinc-50">
                     Evaluar mi proyecto con este plan
                   </LeadButton>

@@ -478,152 +478,177 @@ export default function ShopifyEnChilePage() {
               </p>
             </div>
 
-            {/* 3 Main Plans Summary Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-              
-              {/* PLAN PRENDE */}
-              <div id="plan-prende" className="bg-white rounded-[2.5rem] p-8 border border-zinc-200 shadow-lg flex flex-col justify-between">
-                <div>
-                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full inline-block mb-4">
-                    Lanzamiento
-                  </span>
-                  <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Prende</h3>
-                  <p className="text-sm text-zinc-600 font-medium mb-6">Para empezar a vender con tienda funcional y profesional.</p>
-                  
-                  <div className="mb-6 pb-6 border-b border-zinc-100">
-                    <span className="text-4xl font-black text-zinc-950 font-mono">$580.000</span>
-                    <span className="text-xs font-bold text-zinc-400 uppercase ml-2">+ IVA</span>
+            {/* 4 Main Plans Cards Grid with Horizontal Scroll on Mobile & 4 Columns on Large Desktop */}
+            <div className="relative">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 items-stretch">
+                
+                {/* PLAN PRENDE */}
+                <div id="plan-prende" className="bg-white rounded-[2.5rem] p-6 lg:p-8 border border-zinc-200 shadow-lg flex flex-col justify-between">
+                  <div>
+                    <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full inline-block mb-4">
+                      Lanzamiento
+                    </span>
+                    <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Prende</h3>
+                    <p className="text-sm text-zinc-600 font-medium mb-6">Para empezar a vender con tienda funcional y profesional.</p>
+                    
+                    <div className="mb-6 pb-6 border-b border-zinc-100">
+                      <span className="text-3xl sm:text-4xl font-black text-zinc-950 font-mono">$580.000</span>
+                      <span className="text-xs font-bold text-zinc-400 uppercase ml-2">+ IVA</span>
+                    </div>
+
+                    <ul className="space-y-3 mb-8">
+                      {[
+                        "Diseño basado en plantilla premium",
+                        "Carga inicial de hasta 70 productos",
+                        "Medios de pago (Webpay / Flow / MP)",
+                        "Despacho con tarifas fijas / zonas",
+                        "Diseño Mobile-First 100%",
+                        "Capacitación básica de administración",
+                        "30 días de soporte técnico postlanzamiento"
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-800 font-medium">
+                          <Check className="w-4.5 h-4.5 text-emerald-500 shrink-0 mt-0.5" strokeWidth={3} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  <ul className="space-y-3 mb-8">
-                    {[
-                      "Diseño basado en plantilla premium",
-                      "Carga inicial de hasta 70 productos",
-                      "Medios de pago (Webpay / Flow / MP)",
-                      "Despacho con tarifas fijas / zonas",
-                      "Diseño Mobile-First 100%",
-                      "Capacitación básica de administración",
-                      "30 días de soporte técnico postlanzamiento"
-                    ].map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-zinc-800 font-medium">
-                        <Check className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" strokeWidth={3} />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer">
+                    Evaluar mi proyecto con este plan
+                  </LeadButton>
                 </div>
 
-                <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer">
-                  Evaluar mi proyecto con este plan
-                </LeadButton>
-              </div>
-
-              {/* PLAN FULL (DESTACADO / MÁS ELEGIDO) */}
-              <div id="plan-full" className="bg-gradient-to-b from-violet-900 via-[#2C02A5] to-zinc-950 text-white rounded-[2.5rem] p-8 border-2 border-[#FF0085] shadow-2xl relative flex flex-col justify-between scale-[1.02] transform">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FF0085] text-white text-[10px] font-mono font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg text-center whitespace-nowrap">
-                  ★ MÁS ELEGIDO • PREPARADO PARA CAMPAÑAS Y CRECIMIENTO
-                </div>
-
-                <div>
-                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-violet-300 bg-white/10 px-3 py-1 rounded-full inline-block mb-4 mt-2">
-                    Crecimiento & Automatización
-                  </span>
-                  <h3 className="text-3xl font-black uppercase text-white mb-1 font-heading">Plan Full</h3>
-                  <p className="text-sm text-purple-200 font-medium mb-6">Tienda optimizada para vender, medir y automatizar.</p>
-                  
-                  <div className="mb-6 pb-6 border-b border-white/15">
-                    <span className="text-4xl font-black text-white font-mono">$780.000</span>
-                    <span className="text-xs font-bold text-purple-300 uppercase ml-2">+ IVA</span>
+                {/* PLAN FULL (DESTACADO / MÁS ELEGIDO) */}
+                <div id="plan-full" className="bg-gradient-to-b from-violet-900 via-[#2C02A5] to-zinc-950 text-white rounded-[2.5rem] p-6 lg:p-8 border-2 border-[#FF0085] shadow-2xl relative flex flex-col justify-between transform">
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FF0085] text-white text-[9px] font-mono font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest shadow-lg text-center whitespace-nowrap">
+                    ★ MÁS ELEGIDO • PREPARADO PARA CAMPAÑAS Y CRECIMIENTO
                   </div>
 
-                  <ul className="space-y-3 mb-8">
-                    {[
-                      "Diseño en plantilla premium + secciones a medida",
-                      "Importación o configuración de hasta 500 productos*",
-                      "Integración pasarelas de pago + Despacho local",
-                      "Boleta Electrónica SII automática",
-                      "SEO Técnico + GA4 + Meta Pixel + Conversion API",
-                      "Capacitación avanzada 1 a 1",
-                      "60 días de soporte técnico postlanzamiento"
-                    ].map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-purple-50 font-medium">
-                        <Check className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" strokeWidth={3} />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    <span className="text-xs font-mono font-bold uppercase tracking-widest text-violet-300 bg-white/10 px-3 py-1 rounded-full inline-block mb-4 mt-2">
+                      Crecimiento & Automatización
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-black uppercase text-white mb-1 font-heading">Plan Full</h3>
+                    <p className="text-sm text-purple-200 font-medium mb-6">Tienda optimizada para vender, medir y automatizar.</p>
+                    
+                    <div className="mb-6 pb-6 border-b border-white/15">
+                      <span className="text-3xl sm:text-4xl font-black text-white font-mono">$780.000</span>
+                      <span className="text-xs font-bold text-purple-300 uppercase ml-2">+ IVA</span>
+                    </div>
 
-                  <p className="text-[11px] text-purple-300/80 italic leading-tight mb-6">
-                    * Según calidad del archivo entregado (CSV/Excel). Edición manual y contenidos masivos se cotizan aparte.
-                  </p>
-                </div>
+                    <ul className="space-y-3 mb-8">
+                      {[
+                        "Diseño en plantilla premium + secciones a medida",
+                        "Importación o configuración de hasta 500 productos*",
+                        "Integración pasarelas de pago + Despacho local",
+                        "Boleta Electrónica SII automática",
+                        "SEO Técnico + GA4 + Meta Pixel + Conversion API",
+                        "Capacitación avanzada 1 a 1",
+                        "60 días de soporte técnico postlanzamiento"
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-purple-50 font-medium">
+                          <Check className="w-4.5 h-4.5 text-pink-400 shrink-0 mt-0.5" strokeWidth={3} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
 
-                <LeadButton className="w-full py-4 bg-[#FF0085] hover:bg-pink-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-pink-600/30 text-center cursor-pointer">
-                  Evaluar mi proyecto con este plan
-                </LeadButton>
-              </div>
-
-              {/* PLAN CONVERSIÓN */}
-              <div id="plan-conversion" className="bg-white rounded-[2.5rem] p-8 border border-zinc-200 shadow-lg flex flex-col justify-between">
-                <div>
-                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1 rounded-full inline-block mb-4">
-                    Performance & CRO Avanzado
-                  </span>
-                  <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Conversión</h3>
-                  <p className="text-sm text-zinc-600 font-medium mb-6">Solución para catálogos grandes e integraciones avanzadas.</p>
-                  
-                  <div className="mb-6 pb-6 border-b border-zinc-100">
-                    <span className="text-4xl font-black text-zinc-950 font-mono">$1.200.000</span>
-                    <span className="text-xs font-bold text-zinc-400 uppercase ml-2">+ IVA</span>
+                    <p className="text-[11px] text-purple-300/80 italic leading-tight mb-6">
+                      * Según calidad del archivo entregado (CSV/Excel).
+                    </p>
                   </div>
 
-                  <ul className="space-y-3 mb-8">
-                    {[
-                      "Diseño UX/UI personalizado para máxima conversión",
-                      "Importación o migración de hasta 1.000 productos",
-                      "Integración ERP (Bsale / Obuma / Defontana)",
-                      "Email Marketing automático con Klaviyo",
-                      "Analítica avanzada & reportes de ventas",
-                      "Optimización CRO en ficha de producto",
-                      "90 días de soporte técnico postlanzamiento"
-                    ].map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-sm sm:text-base text-zinc-800 font-medium">
-                        <Check className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" strokeWidth={3} />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <LeadButton className="w-full py-4 bg-[#FF0085] hover:bg-pink-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-pink-600/30 text-center cursor-pointer">
+                    Evaluar mi proyecto con este plan
+                  </LeadButton>
                 </div>
 
-                <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer">
-                  Evaluar mi proyecto con este plan
-                </LeadButton>
-              </div>
+                {/* PLAN CONVERSIÓN (A COTIZAR) */}
+                <div id="plan-conversion" className="bg-white rounded-[2.5rem] p-6 lg:p-8 border border-zinc-200 shadow-lg flex flex-col justify-between relative group">
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                        Performance & CRO
+                      </span>
+                      <a href="#custom-elite" className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 bg-amber-50 hover:bg-amber-100 px-2.5 py-1 rounded-full transition-colors" title="Ver Plan Custom Elite a continuación">
+                        <span>Ver Custom Elite</span>
+                        <ArrowRight className="w-3.5 h-3.5 text-amber-600" />
+                      </a>
+                    </div>
+                    <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Conversión</h3>
+                    <p className="text-sm text-zinc-600 font-medium mb-6">Solución para catálogos grandes e integraciones avanzadas.</p>
+                    
+                    <div className="mb-6 pb-6 border-b border-zinc-100 flex items-baseline justify-between">
+                      <div>
+                        <span className="text-3xl sm:text-4xl font-black text-zinc-950 font-mono">A cotizar</span>
+                        <span className="text-xs font-bold text-zinc-400 block mt-0.5 uppercase">Propuesta a medida</span>
+                      </div>
+                      <a href="#custom-elite" className="p-2 bg-zinc-100 hover:bg-amber-100 rounded-full text-zinc-700 hover:text-amber-700 transition-colors shrink-0" title="Siguiente plan: Custom Elite">
+                        <ArrowRight className="w-5 h-5" />
+                      </a>
+                    </div>
 
-            </div>
+                    <ul className="space-y-3 mb-8">
+                      {[
+                        "Diseño UX/UI personalizado para máxima conversión",
+                        "Importación o migración de hasta 1.000 productos",
+                        "Integración ERP (Bsale / Obuma / Defontana)",
+                        "Email Marketing automático con Klaviyo",
+                        "Analítica avanzada & reportes de ventas",
+                        "Optimización CRO en ficha de producto",
+                        "90 días de soporte técnico postlanzamiento"
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-800 font-medium">
+                          <Check className="w-4.5 h-4.5 text-blue-500 shrink-0 mt-0.5" strokeWidth={3} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-            {/* SECCIÓN INDEPENDIENTE PARA CUSTOM ELITE (VIP / ENTERPRISE) */}
-            <div id="custom-elite" className="bg-gradient-to-r from-zinc-900 via-zinc-950 to-purple-950 border-y sm:border border-purple-500/30 rounded-none sm:rounded-3xl -mx-6 sm:mx-0 p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 shrink-0">
-                  <Crown className="w-6 h-6" />
+                  <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer">
+                    Evaluar mi proyecto con este plan
+                  </LeadButton>
                 </div>
-                <div>
-                  <span className="text-xs font-mono font-bold text-amber-300 uppercase tracking-widest block mb-1">
-                    Enterprise & Proyectos a Medida
-                  </span>
-                  <h4 className="text-xl sm:text-2xl font-black uppercase text-white font-heading">
-                    ¿Necesitas diseño Figma desde cero, canal B2B o integraciones avanzadas?
-                  </h4>
-                  <p className="text-sm sm:text-base text-zinc-300 font-normal mt-1 leading-relaxed">
-                    Conoce <strong className="text-white">Shopify Custom Elite</strong>: desarrollo exclusivo para marcas con requerimientos corporativos complejos.
-                  </p>
-                </div>
-              </div>
 
-              <LeadButton className="px-6 py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-zinc-950 font-black text-xs uppercase tracking-widest rounded-xl transition-all shrink-0 cursor-pointer shadow-lg">
-                Evaluar proyecto Custom Elite
-              </LeadButton>
+                {/* 4TO PLAN: CUSTOM ELITE */}
+                <div id="custom-elite" className="bg-gradient-to-b from-zinc-900 via-zinc-950 to-purple-950 text-white rounded-[2.5rem] p-6 lg:p-8 border-2 border-amber-400/50 shadow-2xl flex flex-col justify-between">
+                  <div>
+                    <span className="text-xs font-mono font-bold uppercase tracking-widest text-amber-300 bg-amber-400/20 border border-amber-400/30 px-3 py-1 rounded-full inline-block mb-4">
+                      ★ Enterprise & Figma
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-black uppercase text-white mb-1 font-heading">Custom Elite</h3>
+                    <p className="text-sm text-zinc-300 font-medium mb-6">Desarrollo 100% exclusivo desde cero para requerimientos complejos.</p>
+                    
+                    <div className="mb-6 pb-6 border-b border-white/15">
+                      <span className="text-3xl sm:text-4xl font-black text-amber-300 font-mono">A cotizar</span>
+                      <span className="text-xs font-bold text-zinc-400 block mt-0.5 uppercase">Proyecto a medida</span>
+                    </div>
+
+                    <ul className="space-y-3 mb-8">
+                      {[
+                        "Diseño UX/UI a medida desde cero en Figma",
+                        "Migración avanzada de catálogo, clientes y datos",
+                        "Integración ERP (Bsale / Obuma / Defontana / Laudus)",
+                        "Canal B2B / Venta mayorista o funciones especiales",
+                        "SEO Técnico + Analítica avanzada + Conversion API",
+                        "Capacitación ejecutiva y documentación",
+                        "90 días de soporte técnico VIP prioritario"
+                      ].map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-200 font-medium">
+                          <Check className="w-4.5 h-4.5 text-amber-400 shrink-0 mt-0.5" strokeWidth={3} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <LeadButton className="w-full py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-zinc-950 font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-amber-500/20 text-center cursor-pointer">
+                    Evaluar proyecto Custom Elite
+                  </LeadButton>
+                </div>
+
             </div>
 
           </div>
