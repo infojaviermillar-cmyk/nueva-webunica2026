@@ -428,41 +428,101 @@ export default function ShopifyEnChilePage() {
         <section id="planes" className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             
-            {/* Orientación para Escoger un Plan */}
-            <div className="bg-zinc-900 text-white rounded-none sm:rounded-3xl -mx-6 sm:mx-0 p-6 sm:p-8 mb-16 border-y sm:border border-zinc-800">
+            {/* Recomendador Interactivo de Toma de Decisiones (Diseño Claro Destacado) */}
+            <div className="bg-gradient-to-br from-violet-50 via-purple-50/70 to-pink-50/50 border border-violet-200/90 rounded-[2.5rem] p-6 sm:p-10 mb-16 shadow-lg relative overflow-hidden">
               <div className="text-center max-w-2xl mx-auto mb-8">
-                <span className="text-xs font-mono font-bold text-pink-400 uppercase tracking-widest block mb-2">
-                  Guía de Selección
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-violet-600 text-white text-[10px] font-mono font-bold uppercase tracking-widest rounded-full mb-3 shadow-sm">
+                  <Sparkles className="w-3.5 h-3.5" /> Recomendador Rápido
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-black uppercase text-white font-heading">
-                  ¿Qué plan Shopify se adapta a tu proyecto?
+                <h3 className="text-2xl sm:text-4xl font-black uppercase text-zinc-950 font-heading tracking-tight">
+                  ¿En qué etapa está tu proyecto?
                 </h3>
+                <p className="text-zinc-600 text-sm sm:text-base font-normal mt-2">
+                  Selecciona tu objetivo actual para dirigirte de inmediato a la solución ideal:
+                </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <a href="#plan-prende" className="p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all block text-left">
-                  <span className="text-xs font-mono font-bold text-emerald-400 uppercase block mb-1">"Estoy comenzando"</span>
-                  <h4 className="text-sm font-bold text-white mb-1">Recomendación: Plan Prende</h4>
-                  <p className="text-xs text-zinc-400">Setup completo profesional para lanzar sin complicaciones.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                
+                {/* OPCIÓN 1 */}
+                <a href="#plan-prende" className="bg-white hover:bg-zinc-900 border border-zinc-200/90 hover:border-zinc-900 text-zinc-950 hover:text-white rounded-2xl p-6 transition-all duration-300 shadow-sm hover:shadow-xl group flex flex-col justify-between cursor-pointer transform hover:-translate-y-1">
+                  <div>
+                    <span className="text-[11px] font-mono font-bold text-emerald-600 group-hover:text-emerald-400 uppercase tracking-wider block mb-2">
+                      01. Lanzamiento
+                    </span>
+                    <h4 className="text-base font-black uppercase font-heading mb-2 leading-snug">
+                      "Estoy comenzando mi tienda"
+                    </h4>
+                    <p className="text-xs text-zinc-600 group-hover:text-zinc-300 font-normal leading-relaxed mb-4">
+                      Setup profesional completo para lanzar rápido sin imprevistos.
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between pt-4 border-t border-zinc-100 group-hover:border-zinc-800 text-xs font-bold text-emerald-600 group-hover:text-emerald-400">
+                    <span>Ver Plan Prende</span>
+                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </a>
 
-                <a href="#plan-full" className="p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all block text-left">
-                  <span className="text-xs font-mono font-bold text-purple-400 uppercase block mb-1">"Necesito una tienda más completa"</span>
-                  <h4 className="text-sm font-bold text-white mb-1">Recomendación: Plan Full</h4>
-                  <p className="text-xs text-zinc-400">Boleta SII, envíos y secciones personalizadas.</p>
+                {/* OPCIÓN 2 */}
+                <a href="#plan-full" className="bg-white hover:bg-zinc-900 border-2 border-purple-300 hover:border-zinc-900 text-zinc-950 hover:text-white rounded-2xl p-6 transition-all duration-300 shadow-sm hover:shadow-xl group flex flex-col justify-between cursor-pointer transform hover:-translate-y-1 relative">
+                  <div className="absolute -top-3 right-4 bg-[#FF0085] text-white text-[9px] font-mono font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
+                    Popular
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-mono font-bold text-purple-600 group-hover:text-pink-400 uppercase tracking-wider block mb-2">
+                      02. Crecimiento
+                    </span>
+                    <h4 className="text-base font-black uppercase font-heading mb-2 leading-snug">
+                      "Quiero vender y medir mejor"
+                    </h4>
+                    <p className="text-xs text-zinc-600 group-hover:text-zinc-300 font-normal leading-relaxed mb-4">
+                      Boleta SII, envíos automatizados y secciones personalizadas.
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between pt-4 border-t border-zinc-100 group-hover:border-zinc-800 text-xs font-bold text-purple-600 group-hover:text-pink-400">
+                    <span>Ver Plan Full</span>
+                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </a>
 
-                <a href="#plan-conversion" className="p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all block text-left">
-                  <span className="text-xs font-mono font-bold text-blue-400 uppercase block mb-1">"Ya vendo y quiero aumentar la conversión"</span>
-                  <h4 className="text-sm font-bold text-white mb-1">Recomendación: Plan Conversión</h4>
-                  <p className="text-xs text-zinc-400">CRO avanzado, Klaviyo y migración masiva.</p>
+                {/* OPCIÓN 3 */}
+                <a href="#plan-conversion" className="bg-white hover:bg-zinc-900 border border-zinc-200/90 hover:border-zinc-900 text-zinc-950 hover:text-white rounded-2xl p-6 transition-all duration-300 shadow-sm hover:shadow-xl group flex flex-col justify-between cursor-pointer transform hover:-translate-y-1">
+                  <div>
+                    <span className="text-[11px] font-mono font-bold text-blue-600 group-hover:text-blue-400 uppercase tracking-wider block mb-2">
+                      03. CRO & Ventas
+                    </span>
+                    <h4 className="text-base font-black uppercase font-heading mb-2 leading-snug">
+                      "Quiero aumentar conversión"
+                    </h4>
+                    <p className="text-xs text-zinc-600 group-hover:text-zinc-300 font-normal leading-relaxed mb-4">
+                      Optimización CRO, Klaviyo automático y migración masiva.
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between pt-4 border-t border-zinc-100 group-hover:border-zinc-800 text-xs font-bold text-blue-600 group-hover:text-blue-400">
+                    <span>Ver Plan Conversión</span>
+                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </a>
 
-                <a href="#custom-elite" className="p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all block text-left">
-                  <span className="text-xs font-mono font-bold text-amber-400 uppercase block mb-1">"Diseño exclusivo o ERP"</span>
-                  <h4 className="text-sm font-bold text-white mb-1">Recomendación: Custom Elite</h4>
-                  <p className="text-xs text-zinc-400">Diseño Figma a medida e integraciones corporativas.</p>
+                {/* OPCIÓN 4 */}
+                <a href="#custom-elite" className="bg-white hover:bg-zinc-900 border border-zinc-200/90 hover:border-zinc-900 text-zinc-950 hover:text-white rounded-2xl p-6 transition-all duration-300 shadow-sm hover:shadow-xl group flex flex-col justify-between cursor-pointer transform hover:-translate-y-1">
+                  <div>
+                    <span className="text-[11px] font-mono font-bold text-amber-600 group-hover:text-amber-400 uppercase tracking-wider block mb-2">
+                      04. Enterprise
+                    </span>
+                    <h4 className="text-base font-black uppercase font-heading mb-2 leading-snug">
+                      "Requiero Figma o ERP"
+                    </h4>
+                    <p className="text-xs text-zinc-600 group-hover:text-zinc-300 font-normal leading-relaxed mb-4">
+                      Diseño 100% exclusivo en Figma e integraciones corporativas.
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between pt-4 border-t border-zinc-100 group-hover:border-zinc-800 text-xs font-bold text-amber-600 group-hover:text-amber-400">
+                    <span>Ver Custom Elite</span>
+                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </a>
+
               </div>
             </div>
 
@@ -647,6 +707,7 @@ export default function ShopifyEnChilePage() {
                   <LeadButton className="w-full py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-zinc-950 font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-amber-500/20 text-center cursor-pointer">
                     Evaluar proyecto Custom Elite
                   </LeadButton>
+                </div>
               </div>
             </div>
           </div>
