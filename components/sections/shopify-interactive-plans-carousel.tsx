@@ -159,21 +159,13 @@ export default function ShopifyInteractivePlansCarousel() {
                 </LeadButton>
               </div>
 
-              {/* PLAN CONVERSIÓN (A COTIZAR) + BOTÓN FLECHA A CUSTOM ELITE */}
+              {/* PLAN CONVERSIÓN (COTIZAR) */}
               <div id="plan-conversion" className="bg-white rounded-[2.5rem] p-6 lg:p-8 border border-zinc-200 shadow-lg flex flex-col justify-between relative group">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
                       Performance & CRO
                     </span>
-                    <button 
-                      onClick={() => scrollToSlide(1)}
-                      className="inline-flex items-center gap-1.5 text-[11px] font-bold text-amber-700 bg-amber-100/80 hover:bg-amber-200 px-3 py-1 rounded-full transition-all cursor-pointer shadow-sm" 
-                      title="Haz clic para revisar el Plan Custom Elite"
-                    >
-                      <span>Revisa Plan Custom Elite</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-amber-700" />
-                    </button>
                   </div>
                   
                   <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Conversión</h3>
@@ -181,18 +173,17 @@ export default function ShopifyInteractivePlansCarousel() {
                   
                   <div className="mb-6 pb-6 border-b border-zinc-100 flex items-center justify-between">
                     <div>
-                      <span className="text-3xl sm:text-4xl font-black text-zinc-950 font-mono">A cotizar</span>
+                      <span className="text-3xl sm:text-4xl font-black text-zinc-950 font-mono">Cotizar</span>
                       <span className="text-xs font-bold text-zinc-400 block mt-0.5 uppercase">Propuesta a medida</span>
                     </div>
 
                     {/* Botón Flotante de Flecha a la Derecha para deslizar a Custom Elite */}
                     <button 
                       onClick={() => scrollToSlide(1)}
-                      className="p-3 bg-amber-400 hover:bg-amber-500 text-zinc-950 rounded-2xl shadow-md transition-transform hover:scale-105 cursor-pointer flex items-center gap-1 font-bold text-xs"
+                      className="p-3 bg-amber-400 hover:bg-amber-500 text-zinc-950 rounded-2xl shadow-md transition-transform hover:scale-105 cursor-pointer flex items-center justify-center"
                       title="Ver siguiente plan: Custom Elite"
                     >
-                      <span className="hidden sm:inline">Revisa Custom Elite</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-5 h-5" />
                     </button>
                   </div>
 
@@ -253,7 +244,7 @@ export default function ShopifyInteractivePlansCarousel() {
                   
                   <div className="mb-8 pb-8 border-b border-white/15 flex items-baseline gap-4">
                     <div>
-                      <span className="text-4xl sm:text-5xl font-black text-amber-300 font-mono">A cotizar</span>
+                      <span className="text-4xl sm:text-5xl font-black text-amber-300 font-mono">Cotizar</span>
                       <span className="text-xs font-bold text-zinc-400 block mt-1 uppercase tracking-widest">Proyecto Corporativo a Medida</span>
                     </div>
                   </div>
