@@ -8,7 +8,6 @@ import ViccaTransformationShowcase from '@/components/sections/vicca-transformat
 import ShopifyStackedHeroCards from '@/components/ui/shopify-stacked-hero-cards';
 import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
 import ShopifyInfiniteCasesCarousel from '@/components/sections/shopify-infinite-cases-carousel';
-import ShopifyClientTestimonials from '@/components/sections/shopify-client-testimonials';
 import ShopifyAiAssistantSimulator from '@/components/sections/shopify-ai-assistant-simulator';
 import { 
   Sparkles, 
@@ -612,12 +611,6 @@ export default function ShopifyEnChilePage() {
         {/* SECCIÓN ANCHO COMPLETO (#3c096c): CASO VICCA DE WIREFRAME A TIENDA FINAL */}
         <ViccaTransformationShowcase />
 
-        {/* TESTIMONIALES DESTACADOS DE CLIENTES */}
-        <section className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <ShopifyClientTestimonials />
-          </div>
-        </section>
 
         {/* ========================================================= */}
         {/* ZONA 5: SERVICIOS COMPLEMENTARIOS (CROSS-SELL)             */}
