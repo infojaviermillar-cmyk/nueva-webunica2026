@@ -397,7 +397,7 @@ export default function ShopifyEnChilePage() {
                 ¿Qué necesitas resolver con tu tienda Shopify?
               </h2>
               <p className="text-zinc-600 text-base sm:text-lg font-light mt-3">
-                Identifica la situación actual de tu negocio y te ayudaremos a implementar la solución técnica precisa.
+                Identifica en qué etapa está tu negocio y descubre qué solución Shopify necesitas.
               </p>
             </div>
 
@@ -419,15 +419,6 @@ export default function ShopifyEnChilePage() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ========================================================= */}
-        {/* ZONA 5: SOLUCIONES Y CENTRO DE ARQUITECTURA              */}
-        {/* ========================================================= */}
-        <section className="py-20 bg-zinc-50 rounded-[3.5rem] mx-4 my-8 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <ShopifyAiAssistantSimulator />
           </div>
         </section>
 
@@ -462,7 +453,7 @@ export default function ShopifyEnChilePage() {
                 </a>
 
                 <a href="#plan-conversion" className="p-5 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all block text-left">
-                  <span className="text-xs font-mono font-bold text-blue-400 uppercase block mb-1">"Ya vendo y quiero optimizar"</span>
+                  <span className="text-xs font-mono font-bold text-blue-400 uppercase block mb-1">"Ya vendo y quiero aumentar la conversión"</span>
                   <h4 className="text-sm font-bold text-white mb-1">Recomendación: Plan Conversión</h4>
                   <p className="text-xs text-zinc-400">CRO avanzado, Klaviyo y migración masiva.</p>
                 </a>
@@ -612,7 +603,7 @@ export default function ShopifyEnChilePage() {
             </div>
 
             {/* SECCIÓN INDEPENDIENTE PARA CUSTOM ELITE (VIP / ENTERPRISE) */}
-            <div className="bg-gradient-to-r from-zinc-900 via-zinc-950 to-purple-950 border border-purple-500/30 rounded-3xl p-6 sm:p-8 text-white mb-16 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+            <div id="custom-elite" className="bg-gradient-to-r from-zinc-900 via-zinc-950 to-purple-950 border border-purple-500/30 rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 shrink-0">
                   <Crown className="w-6 h-6" />
@@ -631,52 +622,10 @@ export default function ShopifyEnChilePage() {
               </div>
 
               <LeadButton className="px-6 py-4 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-zinc-950 font-black text-xs uppercase tracking-widest rounded-xl transition-all shrink-0 cursor-pointer shadow-lg">
-                Cotizar Custom Elite
+                Evaluar proyecto Custom Elite
               </LeadButton>
             </div>
 
-            {/* Assistance micro-banner */}
-            <div className="bg-white border border-zinc-200 rounded-3xl p-6 text-center max-w-2xl mx-auto shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-left">
-                <h4 className="text-base font-black uppercase text-zinc-950">¿No sabes cuál plan elegir?</h4>
-                <p className="text-sm text-zinc-600 font-normal">Te ayudamos a definir el plan que mejor se adapta a tu negocio.</p>
-              </div>
-              <LeadButton className="px-6 py-3.5 bg-violet-600 hover:bg-violet-700 text-white text-xs font-black uppercase tracking-wider rounded-xl transition-all shrink-0 cursor-pointer">
-                Agenda una reunión gratuita
-              </LeadButton>
-            </div>
-
-          </div>
-        </section>
-
-        {/* SECCIÓN ANCHO COMPLETO (#09090b): GARANTÍA Y ACOMPAÑAMIENTO (UBICADO INMEDIATAMENTE TRAS LOS PLANES) */}
-        <section className="w-full bg-zinc-950 text-white py-20 lg:py-28 my-16 relative overflow-hidden border-y border-zinc-800">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/20 blur-[140px] rounded-full pointer-events-none" />
-          
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-            <div className="max-w-3xl mb-12">
-              <span className="text-sm font-mono font-bold uppercase tracking-widest text-violet-400 block mb-3">
-                Garantía & Acompañamiento
-              </span>
-              <h3 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight font-heading">
-                Tu proyecto no termina cuando publicamos la tienda
-              </h3>
-              <p className="text-zinc-200 font-normal text-lg sm:text-xl mt-4 leading-relaxed">
-                Nos aseguramos de que el proceso sea transparente, seguro y sin imprevistos desde el primer día:
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-              {guaranteeItems.map((item, idx) => (
-                <div key={idx} className="bg-white/5 border border-white/15 p-6 rounded-3xl hover:bg-white/10 transition-colors">
-                  <div className="w-9 h-9 rounded-full bg-violet-600/30 border border-violet-400/40 flex items-center justify-center text-violet-300 mb-4 font-mono font-bold text-sm">
-                    0{idx + 1}
-                  </div>
-                  <h4 className="text-lg font-bold text-white mb-2 leading-snug">{item.title}</h4>
-                  <p className="text-sm sm:text-base text-zinc-300 font-normal leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -748,7 +697,16 @@ export default function ShopifyEnChilePage() {
         <ViccaTransformationShowcase />
 
         {/* ========================================================= */}
-        {/* ZONA 11: PREGUNTAS FRECUENTES                             */}
+        {/* ZONA 11: CONTENIDO TÉCNICO Y ARQUITECTURA SHOPIFY CHILE    */}
+        {/* ========================================================= */}
+        <section className="py-20 bg-zinc-50 rounded-[3.5rem] mx-4 my-8 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <ShopifyAiAssistantSimulator />
+          </div>
+        </section>
+
+        {/* ========================================================= */}
+        {/* ZONA 12: PREGUNTAS FRECUENTES                             */}
         {/* ========================================================= */}
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">

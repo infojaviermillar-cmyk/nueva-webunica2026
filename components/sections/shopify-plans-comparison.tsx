@@ -217,7 +217,7 @@ const PLAN_CARDS = [
     icon: <TrendingUp className="w-6 h-6 text-emerald-500" />,
     price: "$580.000",
     subtitle: "+ IVA",
-    cta: "Iniciar mi Tienda",
+    cta: "Evaluar mi proyecto con este plan",
     ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
     color: "emerald"
   },
@@ -227,9 +227,9 @@ const PLAN_CARDS = [
     icon: <Zap className="w-6 h-6 text-[#FF0085]" />,
     price: "$780.000",
     subtitle: "+ IVA",
-    badge: "El Más Solicitado • CyberDay Ready",
+    badge: "El Más Solicitado • Preparado para campañas y crecimiento",
     recommended: true,
-    cta: "Elegir Plan Full",
+    cta: "Evaluar mi proyecto con este plan",
     ctaClass: "bg-[#FF0085] text-white hover:bg-pink-700 shadow-lg shadow-pink-600/20",
     color: "pink"
   },
@@ -239,7 +239,7 @@ const PLAN_CARDS = [
     icon: <Crown className="w-6 h-6 text-blue-500" />,
     price: "$1.200.000",
     subtitle: "+ IVA",
-    cta: "Solicitar Plan Conversión",
+    cta: "Evaluar mi proyecto con este plan",
     ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
     color: "blue"
   },
@@ -250,14 +250,14 @@ const PLAN_CARDS = [
     price: "A Cotizar",
     subtitle: "Desarrollo 100% a Medida",
     badge: "Diseño Figma desde Cero",
-    cta: "Cotizar Proyecto Custom Elite",
+    cta: "Evaluar proyecto Custom Elite",
     ctaClass: "bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-600/20",
     color: "emerald"
   }
 ];
 
 const MobilePlanCard = ({ plan, data, onFeatureClick }: { plan: any, data: PlanCategory[], onFeatureClick: (feature: FeatureInfo) => void }) => {
-  const [isOpen, setIsOpen] = useState(plan.recommended || false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className={`rounded-[2rem] border ${plan.recommended ? 'border-violet-200 bg-violet-50/50' : 'border-zinc-200 bg-white'} overflow-hidden relative shadow-xl`}>
@@ -370,10 +370,10 @@ export default function ShopifyPlansComparison() {
                 {/* PRENDE */}
                 <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
                   <div className="flex justify-center mb-3"><TrendingUp className="w-7 h-7 text-emerald-500" /></div>
-                  <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Prende</h4>
+                  <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Prende</h4>
                   <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">$580.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
                   <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-wider hover:bg-zinc-50">
-                    Iniciar mi Tienda
+                    Evaluar mi proyecto con este plan
                   </LeadButton>
                 </th>
 
@@ -381,21 +381,21 @@ export default function ShopifyPlansComparison() {
                 <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50 bg-violet-50/50 relative">
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-violet-600 text-white text-[9px] font-black px-3.5 py-1 rounded-b-lg uppercase tracking-widest">El Más Vendido</div>
                   <div className="flex justify-center mb-3 mt-1"><Zap className="w-7 h-7 text-violet-500" /></div>
-                  <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Full</h4>
+                  <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Full</h4>
                   <div className="text-lg lg:text-xl font-black text-violet-700 mb-2">$780.000 <span className="text-[10px] text-violet-500 uppercase font-bold">+ IVA</span></div>
-                  <div className="text-[9px] font-black text-violet-600 bg-violet-100 px-2.5 py-1 rounded-full inline-block mb-4">CyberDay Ready • Boleta SII</div>
+                  <div className="text-[9px] font-black text-violet-600 bg-violet-100 px-2.5 py-1 rounded-full inline-block mb-4">Boleta SII • Envíos</div>
                   <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-violet-600 text-white rounded-xl uppercase font-black tracking-wider hover:bg-violet-700 shadow-lg shadow-violet-600/20">
-                    Elegir Plan Full
+                    Evaluar mi proyecto con este plan
                   </LeadButton>
                 </th>
 
                 {/* CONVERSIÓN */}
                 <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
                   <div className="flex justify-center mb-3"><Rocket className="w-7 h-7 text-blue-500" /></div>
-                  <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Conversión</h4>
+                  <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Conversión</h4>
                   <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">$1.200.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
                   <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-white text-zinc-900 border border-zinc-200 rounded-xl uppercase font-black tracking-wider hover:bg-zinc-50">
-                    Plan Conversión
+                    Evaluar mi proyecto con este plan
                   </LeadButton>
                 </th>
 
@@ -406,7 +406,7 @@ export default function ShopifyPlansComparison() {
                   <div className="text-lg lg:text-xl font-black text-emerald-700 mb-2">A Cotizar</div>
                   <div className="text-[9px] font-black text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full inline-block mb-4">Diseño Figma a Medida</div>
                   <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-emerald-600 text-white rounded-xl uppercase font-black tracking-wider hover:bg-emerald-700 shadow-lg shadow-emerald-600/20">
-                    Cotizar Elite
+                    Evaluar proyecto Custom Elite
                   </LeadButton>
                 </th>
               </tr>

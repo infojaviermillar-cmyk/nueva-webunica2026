@@ -161,7 +161,7 @@ export default function ShopifyInfiniteCasesCarousel() {
               Tiendas Shopify desarrolladas por Webunica
             </h2>
             <p className="text-zinc-600 text-base sm:text-lg font-light mt-2">
-              Proyectos creados para marcas chilenas, con diseño personalizado, integraciones locales y una experiencia orientada a conversión.
+              Proyectos creados para marcas de distintos sectores, con diseño personalizado, integraciones locales y experiencias orientadas a conversión.
             </p>
           </div>
 

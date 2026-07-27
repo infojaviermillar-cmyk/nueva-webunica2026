@@ -50,7 +50,7 @@ const SEO_TOPICS: TopicSeoData[] = [
       highlights: [
         {
           title: 'Navegación Mobile-First 100%',
-          desc: 'Más del 80% del tráfico e-commerce en Chile proviene de smartphones. Optimizamos velocidad, menús táctiles y checkout rápido en celulares.'
+          desc: 'Gran parte de las visitas a tiendas online ocurre desde dispositivos móviles. Por eso diseñamos cada proyecto con enfoque mobile-first, optimizando velocidad, menús táctiles y checkout rápido.'
         },
         {
           title: 'Ficha de Producto de Alto Rendimiento',
@@ -67,7 +67,7 @@ const SEO_TOPICS: TopicSeoData[] = [
       ],
       technicalBox: {
         title: 'Impacto Comercial Directo',
-        desc: 'Una tienda Shopify con diseño CRO profesional incrementa la tasa de conversión promedio y reduce el costo de adquisición de clientes (CAC).'
+        desc: 'Una tienda diseñada con principios CRO reduce fricciones, facilita la compra y mejora las oportunidades de conversión.'
       }
     }
   },
@@ -393,7 +393,7 @@ export default function ShopifyAiAssistantSimulator() {
             </div>
 
             <LeadButton className="w-full sm:w-auto px-6 py-3.5 bg-[#2C02A5] hover:bg-violet-900 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all shadow-lg shadow-violet-900/20 text-center flex items-center justify-center gap-2 cursor-pointer">
-              <span>Agenda una asesoría técnica gratuita</span>
+              <span>Solicitar evaluación Shopify</span>
               <ArrowRight className="w-4 h-4" />
             </LeadButton>
           </div>

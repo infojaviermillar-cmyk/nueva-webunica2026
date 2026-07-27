@@ -199,23 +199,7 @@ export default function ShopifyPricingSection() {
       </div>
 
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6 text-zinc-950 font-neue-haas">
-              Planes de Desarrollo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-fuchsia-600 italic font-serif font-normal font-neue-haas">Shopify en Chile</span>
-            </h2>
-            <p className="text-lg md:text-xl text-zinc-500 font-light max-w-3xl mx-auto leading-relaxed">
-              Creamos tiendas Shopify profesionales en Chile, optimizadas para vender online, integrar medios de pago, mejorar la experiencia móvil y preparar tu ecommerce para campañas digitales. Elige el plan que mejor se adapta al estado actual de tu negocio.
-            </p>
-          </motion.div>
-        </div>
-
-        <div className="mb-16">
+        <div className="mb-12">
           <ShopifyPlansComparison />
         </div>
       </div>
