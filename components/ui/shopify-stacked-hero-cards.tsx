@@ -71,13 +71,13 @@ export default function ShopifyStackedHeroCards() {
       {/* Ambient background glow */}
       <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/30 via-purple-500/20 to-pink-500/30 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Stacked Vertical Slices Container */}
-      <div className="relative w-full h-[360px] sm:h-[440px] lg:h-[480px] flex items-center justify-start overflow-visible my-4">
+      {/* Stacked Vertical Slices Container (Alto ajustado a la sección izquierda) */}
+      <div className="relative w-full h-[400px] sm:h-[460px] lg:h-[500px] flex items-center justify-start overflow-visible my-2">
         {storeCards.map((store, index) => {
           const isVicca = index === 0;
           const isHovered = activeHoverId === store.id;
 
-          const leftOffset = index * 18; 
+          const leftOffset = index * 24; 
           const zIndex = isHovered ? 60 : isVicca ? 50 : 40 - index;
 
           return (
@@ -93,14 +93,14 @@ export default function ShopifyStackedHeroCards() {
                 left: `${leftOffset}%`,
                 zIndex: zIndex,
               }}
-              className={`absolute top-1/2 -translate-y-1/2 w-[74%] sm:w-[78%] aspect-[192/105] rounded-2xl overflow-hidden border border-zinc-200/90 bg-zinc-950 shadow-[0_25px_60px_rgba(0,0,0,0.22)] transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer group ${
+              className={`absolute top-1/2 -translate-y-1/2 w-[62%] sm:w-[65%] lg:w-[66%] h-[380px] sm:h-[440px] lg:h-[480px] rounded-3xl overflow-hidden border border-zinc-200/90 bg-zinc-950 shadow-[0_25px_60px_rgba(0,0,0,0.25)] transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] cursor-pointer group ${
                 isHovered
-                  ? '-translate-y-[56%] scale-105 shadow-[0_35px_80px_rgba(124,58,237,0.4)] border-purple-500 ring-4 ring-purple-500/30'
-                  : 'hover:-translate-y-[53%]'
+                  ? '-translate-y-[54%] scale-105 shadow-[0_35px_80px_rgba(124,58,237,0.4)] border-purple-500 ring-4 ring-purple-500/30'
+                  : 'hover:-translate-y-[52%]'
               }`}
             >
-              {/* macOS Browser Header Bar */}
-              <div className="bg-zinc-900/95 backdrop-blur-md px-3.5 py-2 border-b border-white/10 flex items-center justify-between z-30 relative">
+              {/* macOS Browser Header Bar (Tablet View) */}
+              <div className="bg-zinc-900/95 backdrop-blur-md px-3.5 py-2.5 border-b border-white/10 flex items-center justify-between z-30 relative">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
@@ -113,7 +113,7 @@ export default function ShopifyStackedHeroCards() {
                 </div>
 
                 <span className="text-[9px] font-mono text-purple-300 font-bold uppercase tracking-widest hidden sm:inline-block">
-                  HD 1920px
+                  Tablet View
                 </span>
               </div>
 
