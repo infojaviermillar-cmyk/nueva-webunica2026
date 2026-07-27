@@ -15,7 +15,7 @@ export default function PortfolioPage() {
       title: "Oh My Skin",
       category: "Shopify",
       description: "Tienda online de cuidado de la piel y cosmética profesional en Chile, con diseño responsivo, navegación fluida y experiencia de marca refinada.",
-      image: "https://api.microlink.io/?url=https://www.ohmyskinchile.cl&screenshot=true&meta=false&embed=screenshot.url",
+      image: "/clientes-2/ohmyskinchile.cl.png",
       link: "https://www.ohmyskinchile.cl/",
       tags: ["Skincare", "Cosmética", "Shopify"]
     },
@@ -31,7 +31,7 @@ export default function PortfolioPage() {
       title: "BodyMuscle",
       category: "Shopify",
       description: "Tienda online de suplementación deportiva (en desarrollo), enfocada en alto rendimiento y conversiones.",
-      image: "https://api.microlink.io/?url=https://bodymuscle-89.myshopify.com&screenshot=true&meta=false&embed=screenshot.url",
+      image: "/clientes-2/bodymuscle.cl.png",
       link: "https://bodymuscle-89.myshopify.com/",
       tags: ["En Desarrollo", "Deportes"]
     },

@@ -20,7 +20,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
       category: "Shopify",
       tags: ["Skincare", "Cosmética"],
       description: "Tienda online de cuidado de la piel y cosmética profesional con navegación fluida.",
-      image: "https://api.microlink.io/?url=https://www.ohmyskinchile.cl&screenshot=true&meta=false&embed=screenshot.url",
+      image: "/clientes-2/ohmyskinchile.cl.png",
       link: "https://www.ohmyskinchile.cl/"
     },
     { 
