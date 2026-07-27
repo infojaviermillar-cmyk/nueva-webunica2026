@@ -99,22 +99,13 @@ export default function ShopifyStackedHeroCards() {
                   : 'hover:-translate-y-[52%]'
               }`}
             >
-              {/* macOS Browser Header Bar (Tablet View) */}
+              {/* macOS Browser Header Bar */}
               <div className="bg-zinc-900/95 backdrop-blur-md px-3.5 py-2.5 border-b border-white/10 flex items-center justify-between z-30 relative">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
                   <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
                 </div>
-
-                <div className="flex items-center gap-1.5 px-3 py-0.5 bg-white/10 border border-white/15 rounded-full text-[10px] font-mono text-white font-bold tracking-wider">
-                  <span className="text-emerald-400">https://</span>
-                  <span>{store.url}</span>
-                </div>
-
-                <span className="text-[9px] font-mono text-purple-300 font-bold uppercase tracking-widest hidden sm:inline-block">
-                  Tablet View
-                </span>
               </div>
 
               {/* Crisp Native Store Viewport */}
