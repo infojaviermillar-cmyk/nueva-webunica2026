@@ -429,7 +429,7 @@ export default function ShopifyEnChilePage() {
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             
             {/* Orientación para Escoger un Plan */}
-            <div className="bg-zinc-900 text-white rounded-3xl p-8 mb-16 border border-zinc-800">
+            <div className="bg-zinc-900 text-white rounded-none sm:rounded-3xl -mx-6 sm:mx-0 p-6 sm:p-8 mb-16 border-y sm:border border-zinc-800">
               <div className="text-center max-w-2xl mx-auto mb-8">
                 <span className="text-xs font-mono font-bold text-pink-400 uppercase tracking-widest block mb-2">
                   Guía de Selección
@@ -603,7 +603,7 @@ export default function ShopifyEnChilePage() {
             </div>
 
             {/* SECCIÓN INDEPENDIENTE PARA CUSTOM ELITE (VIP / ENTERPRISE) */}
-            <div id="custom-elite" className="bg-gradient-to-r from-zinc-900 via-zinc-950 to-purple-950 border border-purple-500/30 rounded-3xl p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+            <div id="custom-elite" className="bg-gradient-to-r from-zinc-900 via-zinc-950 to-purple-950 border-y sm:border border-purple-500/30 rounded-none sm:rounded-3xl -mx-6 sm:mx-0 p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-amber-400/20 border border-amber-400/40 flex items-center justify-center text-amber-300 shrink-0">
                   <Crown className="w-6 h-6" />
@@ -699,7 +699,7 @@ export default function ShopifyEnChilePage() {
         {/* ========================================================= */}
         {/* ZONA 11: CONTENIDO TÉCNICO Y ARQUITECTURA SHOPIFY CHILE    */}
         {/* ========================================================= */}
-        <section className="py-20 bg-zinc-50 rounded-[3.5rem] mx-4 my-8 relative overflow-hidden">
+        <section className="py-16 sm:py-20 bg-zinc-50 rounded-none sm:rounded-[3.5rem] my-8 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <ShopifyAiAssistantSimulator />
           </div>
@@ -721,8 +721,8 @@ export default function ShopifyEnChilePage() {
         {/* ========================================================= */}
         {/* ZONA 12: CTA FINAL DE CONVERSIÓN                          */}
         {/* ========================================================= */}
-        <section className="py-20 px-4 sm:px-6">
-          <div className="max-w-6xl mx-auto bg-gradient-to-br from-violet-950 via-[#2C02A5] to-zinc-950 rounded-[3.5rem] p-10 sm:p-16 lg:p-20 text-center text-white relative overflow-hidden shadow-3xl border border-violet-800/40">
+        <section className="py-12 sm:py-20 px-0 sm:px-6">
+          <div className="w-full max-w-6xl mx-auto bg-gradient-to-br from-violet-950 via-[#2C02A5] to-zinc-950 rounded-none sm:rounded-[3.5rem] p-8 sm:p-16 lg:p-20 text-center text-white relative overflow-hidden shadow-3xl border-y sm:border border-violet-800/40">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#FF0085]/20 blur-[150px] rounded-full pointer-events-none" />
             
             <div className="relative z-10">

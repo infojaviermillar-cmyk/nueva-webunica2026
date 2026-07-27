@@ -221,11 +221,6 @@ export default function ShopifyInfiniteCasesCarousel() {
                     decoding="async"
                   />
                   
-                  {/* URL Tag */}
-                  <div className="absolute top-3 left-3 z-10 px-3 py-1 bg-zinc-950/80 backdrop-blur-md border border-white/20 rounded-full text-[10px] font-mono text-white font-bold tracking-wider">
-                    https://{item.url}
-                  </div>
-
                   {/* Hover Zoom Indicator */}
                   <div className="absolute inset-0 bg-violet-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white uppercase tracking-wider backdrop-blur-[2px]">
                     <Maximize2 className="w-5 h-5 text-purple-200" />
