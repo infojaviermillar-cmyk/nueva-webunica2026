@@ -365,21 +365,7 @@ export default function ShopifyEnChilePage() {
         <section className="py-24 bg-zinc-50 rounded-[3.5rem] mx-4 my-8 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             
-            {/* Header */}
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-violet-100 text-violet-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
-                <Zap className="w-3.5 h-3.5" /> Ecosistema Completo de Ventas
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
-                Más que una tienda, <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-[#FF0085]">un sistema que impulsa tu negocio</span>
-              </h2>
-              <p className="text-zinc-600 text-base sm:text-lg font-light mt-4 leading-relaxed">
-                Resolvemos los desafíos reales del e-commerce en Chile para que puedas vender más y preocuparte menos de la parte técnica.
-              </p>
-            </div>
-
-            {/* Asistente IA Simulator Interactivo para las 6 áreas comerciales */}
+            {/* Asistente e Integraciones SEO Shopify Chile */}
             <ShopifyAiAssistantSimulator />
 
           </div>

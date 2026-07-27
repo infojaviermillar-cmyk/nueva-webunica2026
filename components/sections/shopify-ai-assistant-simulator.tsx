@@ -255,19 +255,19 @@ export default function ShopifyAiAssistantSimulator() {
       {/* Header Section */}
       <div className="text-center max-w-3xl mx-auto mb-14">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-violet-100 border border-violet-200/80 text-violet-700 text-xs font-mono font-bold uppercase tracking-widest rounded-full mb-4">
-          <Sparkles className="w-4 h-4 text-violet-600" />
-          <span>Preguntas Frecuentes & Arquitectura Shopify Chile</span>
+          <Zap className="w-4 h-4 text-violet-600" />
+          <span>Arquitectura E-commerce & Preguntas Frecuentes</span>
         </div>
 
-        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-950 uppercase font-heading tracking-tight leading-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-zinc-950 uppercase font-heading tracking-tight leading-tight">
           Todo lo que necesitas saber <br className="hidden sm:inline" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]">
-            antes de crear tu tienda Shopify
+            para crear tu tienda Shopify en Chile
           </span>
-        </h3>
+        </h2>
         
         <p className="text-zinc-600 text-base sm:text-lg font-light mt-3 leading-relaxed">
-          Haz clic en cualquier pregunta de la izquierda para ver en detalle las soluciones técnicas e integraciones locales incluidas.
+          Resolvemos pasarelas de pago, boleta SII, envíos automáticos y SEO técnico para que puedas vender y crecer sin fricciones. Haz clic en cualquier pregunta para ver el alcance técnico.
         </p>
       </div>
 
