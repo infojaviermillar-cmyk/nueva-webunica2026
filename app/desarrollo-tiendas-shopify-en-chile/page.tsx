@@ -90,26 +90,6 @@ export const metadata = {
 };
 
 export default function ShopifyEnChilePage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Desarrollo de Tiendas Shopify en Chile",
-    "description": "Desarrollo profesional de e-commerce Shopify en Chile con pasarelas de pago, boleta electrónica SII y logística.",
-    "brand": {
-      "@type": "Brand",
-      "name": "Webunica"
-    },
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "CLP",
-      "lowPrice": "580000",
-      "offerCount": "3",
-      "priceValidUntil": "2027-12-31",
-      "availability": "https://schema.org/InStock",
-      "url": "https://webunica.cl/desarrollo-tiendas-shopify-en-chile"
-    }
-  };
-
   const shopifyFaqs = [
     {
       question: "¿Qué incluye cada plan de desarrollo Shopify?",
@@ -185,6 +165,25 @@ export default function ShopifyEnChilePage() {
         },
         "areaServed": "CL",
         "description": "Servicios profesionales de diseño, desarrollo, migración y optimización CRO para tiendas Shopify en Chile con pasarelas de pago y facturación SII."
+      },
+      {
+        "@type": "Product",
+        "@id": "https://webunica.cl/desarrollo-tiendas-shopify-en-chile/#product",
+        "name": "Desarrollo de Tiendas Shopify en Chile",
+        "description": "Desarrollo profesional de e-commerce Shopify en Chile con pasarelas de pago, boleta electrónica SII y logística.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Webunica"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "CLP",
+          "lowPrice": "580000",
+          "offerCount": "3",
+          "priceValidUntil": "2027-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://webunica.cl/desarrollo-tiendas-shopify-en-chile"
+        }
       },
       {
         "@type": "FAQPage",
