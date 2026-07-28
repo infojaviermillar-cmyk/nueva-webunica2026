@@ -68,7 +68,8 @@ export const metadata: Metadata = {
   },
 };
 
-import { headers } from 'next/headers';
+import NavigationProgressBar from '@/components/ui/navigation-progress-bar';
+import { Suspense } from 'react';
 
 export default async function RootLayout({
   children,
@@ -99,6 +100,9 @@ export default async function RootLayout({
         </Script>
       )}
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
+        <Suspense fallback={null}>
+          <NavigationProgressBar />
+        </Suspense>
         <ContactModalProvider>
           {isDisenoShopify ? <DisenoShopifyHeader /> : <Header domain={domain} />}
           <main className="flex-grow">

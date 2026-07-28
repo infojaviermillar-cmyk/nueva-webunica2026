@@ -10,6 +10,7 @@ import { User, LogIn, ShoppingBag } from 'lucide-react';
 export default function Header({ domain = '' }: { domain?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const { openModal, openWhatsApp } = useContactModal();
   const pathname = usePathname();
   const [user, setUser] = useState<any>(null);
@@ -46,9 +47,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Cerrar menú móvil al cambiar de ruta
+  // Cerrar menús al cambiar de ruta
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsMegaMenuOpen(false);
   }, [pathname]);
 
   // Páginas con Hero OSCURO (Texto Blanco)
@@ -162,13 +164,32 @@ export default function Header({ domain = '' }: { domain?: string }) {
                   </Link>
               
               {/* Servicios Dropdown */}
-              <div className="relative group">
-                <button className={`${textColor} ${hoverColor} font-bold transition-all flex items-center gap-1 text-[11px] xl:text-[12px] uppercase tracking-widest py-4`}>
+              <div 
+                className="relative group"
+                onMouseEnter={() => setIsMegaMenuOpen(true)}
+                onMouseLeave={() => setIsMegaMenuOpen(false)}
+              >
+                <button 
+                  onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
+                  className={`${textColor} ${hoverColor} font-bold transition-all flex items-center gap-1 text-[11px] xl:text-[12px] uppercase tracking-widest py-4 cursor-pointer`}
+                >
                   Servicios
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
+                  <svg className={`w-4 h-4 transition-transform duration-200 ${isMegaMenuOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
                 </button>
                 
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[1240px] bg-white/95 backdrop-blur-xl border border-white/40 rounded-[3rem] shadow-[0_45px_100px_rgba(0,0,0,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden transform group-hover:translate-y-2 z-[100]">
+                <div 
+                  onClick={(e) => {
+                    const target = e.target as HTMLElement;
+                    if (target.closest('a')) {
+                      setIsMegaMenuOpen(false);
+                    }
+                  }}
+                  className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[1240px] bg-white/95 backdrop-blur-xl border border-white/40 rounded-[3rem] shadow-[0_45px_100px_rgba(0,0,0,0.15)] transition-all duration-300 overflow-hidden transform z-[100] ${
+                    isMegaMenuOpen 
+                      ? 'opacity-100 visible translate-y-2 pointer-events-auto' 
+                      : 'opacity-0 invisible translate-y-0 pointer-events-none'
+                  }`}
+                >
                   <div className="p-10 grid grid-cols-5 gap-8 relative z-10">
                     
                     {/* Col 1: E-commerce & SaaS */}
