@@ -35,9 +35,56 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Plataforma Inmobiliaria & Portal Pro | Tecnología Activos en Red Chile',
-  description: 'Desarrollamos portales inmobiliarios de alta ingeniería basados en Activos en Red: Multidifusión automática en Mercado Libre, Portal Inmobiliario, Yapo y Meta, IA de redacción, CRM de Leads y UF/CLP.',
-  keywords: 'portal inmobiliario marca blanca, software inmobiliario chile, crm inmobiliario, activosenred, mercado libre portal inmobiliario api, yapo inmobiliario, autopublicacion redes sociales inmobiliaria, liquidaciones bancarias',
+  title: 'Plataforma Inmobiliaria Chile | Software Corredoras & Marca Blanca Pro',
+  description: 'Desarrollo de portales inmobiliarios de marca blanca en Chile. Incluye multidifusión automática en Mercado Libre, Portal Inmobiliario, Yapo y Meta, redacción IA, CRM y UF/CLP.',
+  keywords: [
+    'software inmobiliario chile',
+    'portal inmobiliario marca blanca',
+    'pagina web corredora de propiedades',
+    'crm inmobiliario chile',
+    'activosenred',
+    'mercado libre portal inmobiliario api',
+    'yapo inmobiliario api',
+    'autopublicacion redes sociales inmobiliaria',
+    'sistema de liquidaciones bancarias chile',
+    'remates de propiedades chile',
+    'calculadora cap rate chile',
+    'desarrollo web inmobiliario'
+  ].join(', '),
+  alternates: {
+    canonical: 'https://webunica.cl/diseno-paginas-web-inmobiliaria',
+  },
+  openGraph: {
+    title: 'Plataforma Inmobiliaria Chile | Software Corredoras & Marca Blanca Pro',
+    description: 'Portales inmobiliarios de alta ingeniería con multidifusión en Mercado Libre, Yapo, Meta API, redacción por IA y CRM de prospectos en Chile.',
+    url: 'https://webunica.cl/diseno-paginas-web-inmobiliaria',
+    siteName: 'Webunica',
+    locale: 'es_CL',
+    type: 'website',
+    images: [
+      {
+        url: 'https://webunica.cl/real_estate_hero_new.png',
+        width: 1200,
+        height: 630,
+        alt: 'Plataforma Inmobiliaria Pro & CRM Marca Blanca Chile',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Plataforma Inmobiliaria Chile | Software Corredoras Pro',
+    description: 'Portales inmobiliarios marca blanca con multidifusión API Mercado Libre, Yapo y Meta en Chile.',
+    images: ['https://webunica.cl/real_estate_hero_new.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+    },
+  },
 };
 
 export default function RealEstatePage() {
@@ -68,6 +115,72 @@ export default function RealEstatePage() {
     }
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://webunica.cl/diseno-paginas-web-inmobiliaria/#software",
+        "name": "Plataforma Inmobiliaria Pro & CRM Marca Blanca",
+        "operatingSystem": "Web-based (Next.js & Supabase Cloud)",
+        "applicationCategory": "BusinessApplication",
+        "description": "Software y portal inmobiliario marca blanca para corredoras en Chile con multidifusión a Mercado Libre, Yapo, Meta API, redacción por IA y gestión UF/CLP.",
+        "brand": {
+          "@type": "Brand",
+          "name": "Webunica"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "CLP",
+          "lowPrice": "800000",
+          "offerCount": "1",
+          "priceValidUntil": "2027-12-31",
+          "availability": "https://schema.org/InStock",
+          "url": "https://webunica.cl/diseno-paginas-web-inmobiliaria"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "48",
+          "bestRating": "5",
+          "worstRating": "1"
+        }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://webunica.cl/#agencia",
+        "name": "Webunica - Agencia de Desarrollo Web e Inmobiliario Chile",
+        "url": "https://webunica.cl",
+        "logo": "https://webunica.cl/logo-webunica.png.webp",
+        "image": "https://webunica.cl/real_estate_hero_new.png",
+        "priceRange": "$$",
+        "telephone": "+56991089527",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santiago",
+          "addressRegion": "Región Metropolitana",
+          "addressCountry": "CL"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Chile"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://webunica.cl/diseno-paginas-web-inmobiliaria/#faq",
+        "mainEntity": realEstateFaqs.map((faq) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      }
+    ]
+  };
+
   const planFeatures = [
     "Carga ilimitada de propiedades (sin límites por plan)",
     "Códigos Únicos de Propiedad automáticos (CÓD-XXXX)",
@@ -88,7 +201,11 @@ export default function RealEstatePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white font-sans antialiased overflow-x-hidden selection:bg-[#FFE600] selection:text-zinc-950">
+    <main className="min-h-screen bg-zinc-950 text-white font-sans antialiased overflow-x-hidden selection:bg-[#FFE600] selection:text-zinc-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="pt-[20vh] lg:pt-40 pb-20">
         
         {/* ========================================================= */}
@@ -611,6 +728,6 @@ export default function RealEstatePage() {
         </section>
 
       </div>
-    </div>
+    </main>
   );
 }
