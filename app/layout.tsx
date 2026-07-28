@@ -70,6 +70,7 @@ export const metadata: Metadata = {
 
 import NavigationProgressBar from '@/components/ui/navigation-progress-bar';
 import { Suspense } from 'react';
+import { headers } from 'next/headers';
 
 export default async function RootLayout({
   children,
