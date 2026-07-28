@@ -6,28 +6,30 @@ import ShopifyPlansComparison from '@/components/sections/shopify-plans-comparis
 import { ShieldCheck, Globe, Smartphone, CheckCircle2, Award, Clock, Users, ArrowRight } from 'lucide-react';
 
 export const metadata = {
-  title: 'Planes de Desarrollo Shopify en Chile | Precios 2026',
-  description: 'Compara nuestros planes de desarrollo Shopify en Chile. Desde optimización básica hasta escalamiento Pro con integraciones ERP, SII y Webpay.',
+  title: 'Planes de Desarrollo Shopify en Chile | Desde $580.000 + IVA',
+  description: 'Compara nuestros planes de desarrollo Shopify en Chile desde $580.000 + IVA. Incluye plantilla premium, pasarelas de pago local (Webpay, Mercado Pago), despacho y boleta SII.',
   keywords: 'planes shopify chile, precios desarrollo shopify, cuanto cuesta shopify chile, tarifas shopify partner, crear tienda shopify santiago, planes ecommerce chile',
 };
 
 export default function PlanesShopifyChilePage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": "Product",
     "name": "Planes de Desarrollo Shopify en Chile",
-    "description": "Lista de precios y servicios para el desarrollo de tiendas Shopify en el mercado chileno.",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "Webunica",
-      "image": "https://webunica.cl/logo-webunica.png.webp",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santiago",
-        "addressCountry": "CL"
-      }
+    "description": "Compara nuestros planes de desarrollo Shopify en Chile desde $580.000 + IVA con integraciones locales.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Webunica"
     },
-    "areaServed": "CL"
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "CLP",
+      "lowPrice": "580000",
+      "offerCount": "3",
+      "priceValidUntil": "2027-12-31",
+      "availability": "https://schema.org/InStock",
+      "url": "https://webunica.cl/planes-de-desarrollo-shopify-en-chile"
+    }
   };
 
   const shopifyFaqs = [

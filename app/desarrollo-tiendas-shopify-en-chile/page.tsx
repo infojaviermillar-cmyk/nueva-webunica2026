@@ -38,10 +38,12 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Desarrollo de Tiendas Shopify en Chile | Agencia Partner',
-  description: 'Agencia de desarrollo de tiendas Shopify en Chile. Creamos tu e-commerce listo para vender y crecer: Webpay, Mercado Pago, Flow, Starken, BlueExpress, Bsale y Boleta SII.',
+  title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $580.000 + IVA',
+  description: 'Agencia Partner Shopify en Chile. Desarrollo de tiendas online con planes desde $580.000 + IVA. Incluye pasarelas de pago local (Webpay, Mercado Pago), despacho, boleta SII y soporte.',
   keywords: [
     'desarrollo tiendas shopify chile',
+    'precios shopify chile',
+    'cuanto cuesta tienda shopify chile',
     'agencia shopify partner chile',
     'diseño tienda shopify chile',
     'crear tienda shopify chile',
@@ -55,8 +57,8 @@ export const metadata = {
     canonical: 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile',
   },
   openGraph: {
-    title: 'Desarrollo de Tiendas Shopify en Chile | Agencia Partner',
-    description: 'Creamos tiendas Shopify listas para vender y crecer en Chile. Integraciones locales con Webpay, Mercado Pago, Starken, BlueExpress y Boleta SII.',
+    title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $580.000 + IVA',
+    description: 'Creamos tiendas Shopify listas para vender y crecer en Chile. Planes desde $580.000 + IVA con integraciones locales Webpay, Mercado Pago, Starken y Boleta SII.',
     url: 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile',
     siteName: 'Webunica',
     locale: 'es_CL',
@@ -72,8 +74,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Desarrollo de Tiendas Shopify en Chile | Agencia Partner',
-    description: 'Desarrollo e-commerce Shopify profesional en Chile con integraciones locales.',
+    title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $580.000 + IVA',
+    description: 'Desarrollo e-commerce Shopify profesional en Chile. Planes desde $580.000 + IVA con integraciones locales.',
     images: ['https://webunica.cl/clientes-2/vicca.cl.png'],
   },
   robots: {
@@ -88,6 +90,26 @@ export const metadata = {
 };
 
 export default function ShopifyEnChilePage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Desarrollo de Tiendas Shopify en Chile",
+    "description": "Desarrollo profesional de e-commerce Shopify en Chile con pasarelas de pago, boleta electrónica SII y logística.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Webunica"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "CLP",
+      "lowPrice": "580000",
+      "offerCount": "3",
+      "priceValidUntil": "2027-12-31",
+      "availability": "https://schema.org/InStock",
+      "url": "https://webunica.cl/desarrollo-tiendas-shopify-en-chile"
+    }
+  };
+
   const shopifyFaqs = [
     {
       question: "¿Qué incluye cada plan de desarrollo Shopify?",
@@ -299,14 +321,24 @@ export default function ShopifyEnChilePage() {
               
               {/* Left Content Column */}
               <div className="lg:col-span-7 text-center lg:text-left">
-                <div className="inline-flex items-center gap-2.5 px-4 py-2 mb-6 bg-violet-50 border border-violet-200/80 rounded-full shadow-sm">
-                  <span className="flex h-2 w-2 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-600"></span>
-                  </span>
-                  <span className="text-[11px] font-mono font-bold tracking-widest text-violet-700 uppercase">
-                    Agencia Shopify Partner en Chile
-                  </span>
+                {/* Badges Row */}
+                <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start mb-6">
+                  <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-50 border border-violet-200/80 rounded-full shadow-sm">
+                    <span className="flex h-2 w-2 relative">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-600"></span>
+                    </span>
+                    <span className="text-[11px] font-mono font-bold tracking-widest text-violet-700 uppercase">
+                      Agencia Shopify Partner en Chile
+                    </span>
+                  </div>
+
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 border border-emerald-200/80 rounded-full shadow-sm">
+                    <Tag className="w-3.5 h-3.5 text-emerald-600" />
+                    <span className="text-[11px] font-mono font-black tracking-widest text-emerald-800 uppercase">
+                      Planes desde $580.000 + IVA
+                    </span>
+                  </div>
                 </div>
                 
                 <h1 className="text-[2rem] xs:text-3xl sm:text-4xl lg:text-[58px] font-black tracking-tighter leading-[0.92] mb-6 uppercase text-zinc-950 font-heading">
@@ -315,7 +347,7 @@ export default function ShopifyEnChilePage() {
                 </h1>
                 
                 <p className="text-base sm:text-lg lg:text-xl text-zinc-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-                  Diseñamos tiendas Shopify preparadas para vender en Chile, con pagos locales, despacho, facturación electrónica, analítica, SEO y una experiencia de compra optimizada.
+                  Diseñamos tiendas Shopify preparadas para vender en Chile, con <strong className="font-bold text-zinc-950 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60">planes desde $580.000 + IVA</strong>, integradas con pagos locales, despacho, facturación electrónica, analítica y SEO.
                 </p>
                 
                 {/* CTA Buttons */}
