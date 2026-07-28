@@ -107,8 +107,46 @@ body {
 @layer base {
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    text-wrap: balance;
   }
   h1 {
     @apply tracking-tighter leading-[0.95] uppercase;
   }
+  p, li {
+    text-wrap: pretty;
+  }
 }
+
+/* ========================================================= */
+/* UI VISUAL QUALITY AUDITOR - DESIGN TOKENS & ACCESSIBILITY */
+/* ========================================================= */
+:root {
+  --container-max-width: 80rem;
+  --focus-ring-color: #10b981;
+  --focus-ring-offset: 2px;
+}
+
+/* Universal Focus States (WCAG 2.2 AA) */
+:focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Standardized Page Container Utility */
+.page-container {
+  width: min(100% - 2rem, var(--container-max-width));
+  margin-inline: auto;
+}
+

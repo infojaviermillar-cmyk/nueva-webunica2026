@@ -77,7 +77,8 @@ export default function FAQSection({
                 >
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full px-8 py-6 text-left flex justify-between items-center gap-4 group"
+                    aria-expanded={openIndex === index}
+                    className="w-full px-8 py-6 text-left flex justify-between items-center gap-4 group cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 rounded-3xl"
                   >
                     <span className="font-bold text-zinc-800 text-lg group-hover:text-black transition-colors">
                       {faq.question}
