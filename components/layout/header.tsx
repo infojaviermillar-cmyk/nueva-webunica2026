@@ -216,12 +216,19 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       </h4>
                       <ul className="flex flex-col gap-1">
                         <li>
-                          <Link href="/desarrollo-tiendas-shopify-en-chile" className="group/item flex flex-col p-4 bg-violet-600 rounded-[2.2rem] mb-2 group/shopify transition-all hover:bg-zinc-950 relative overflow-hidden">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="text-[15px] font-black text-white uppercase">Tiendas Shopify</span>
-                              <span className="text-[9px] bg-white/20 text-white px-2 py-0.5 rounded-full font-black">ESTRELLA</span>
+                          <Link 
+                            href="/desarrollo-tiendas-shopify-en-chile" 
+                            className="group/item flex flex-col p-3 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 text-white shadow-md hover:shadow-lg hover:brightness-110 transition-all border border-violet-400/30 mb-1"
+                          >
+                            <div className="flex items-center justify-between gap-2 mb-0.5">
+                              <span className="text-[14px] font-black uppercase tracking-tight flex items-center gap-1.5">
+                                Tiendas Shopify
+                              </span>
+                              <span className="text-[8px] bg-white/25 backdrop-blur-sm text-white px-2 py-0.5 rounded-full font-black uppercase tracking-wider">
+                                ⭐ ESTRELLA
+                              </span>
                             </div>
-                            <span className="text-[11px] text-white/80 font-medium leading-tight">Diseño y desarrollo pro en Chile</span>
+                            <span className="text-[11px] text-white/85 font-medium">Diseño y desarrollo pro en Chile</span>
                           </Link>
                         </li>
                         <li>
