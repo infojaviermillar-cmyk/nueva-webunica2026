@@ -614,11 +614,3 @@ export default function RealEstatePage() {
     </div>
   );
 }
- Plataforma
-           </LeadButton>
-        </section>
-
-      </div>
-    </div>
-  );
-}
