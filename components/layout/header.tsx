@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useContactModal } from '@/context/contact-modal-context';
@@ -11,6 +11,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+  const megaMenuRef = useRef<HTMLDivElement>(null);
   const { openModal, openWhatsApp } = useContactModal();
   const pathname = usePathname();
   const [user, setUser] = useState<any>(null);
@@ -52,6 +53,21 @@ export default function Header({ domain = '' }: { domain?: string }) {
     setIsMobileMenuOpen(false);
     setIsMegaMenuOpen(false);
   }, [pathname]);
+
+  // Listener para cerrar Mega Menú al hacer clic fuera
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (megaMenuRef.current && !megaMenuRef.current.contains(event.target as Node)) {
+        setIsMegaMenuOpen(false);
+      }
+    };
+    if (isMegaMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMegaMenuOpen]);
 
   // Páginas con Hero OSCURO (Texto Blanco)
   const darkPages = [
@@ -165,9 +181,9 @@ export default function Header({ domain = '' }: { domain?: string }) {
               
               {/* Servicios Dropdown */}
               <div 
+                ref={megaMenuRef}
                 className="relative group"
                 onMouseEnter={() => setIsMegaMenuOpen(true)}
-                onMouseLeave={() => setIsMegaMenuOpen(false)}
               >
                 <button 
                   onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
