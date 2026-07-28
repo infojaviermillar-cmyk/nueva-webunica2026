@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Smartphone, Code2, Rocket, Zap, Gauge, ShieldCheck, Activity } from 'lucide-react';
+import { ArrowRight, Smartphone, Code2, Rocket, Zap, Gauge, ShieldCheck, Activity, ShoppingBag, TrendingUp, CheckCircle2, Sparkles, Check } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
 import { BlogPost } from '@/lib/blog';
 import FeaturedBlogSection from '@/components/sections/featured-blog';
@@ -260,75 +260,287 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
         </div>
       </section>
 
-      <section className="py-32 bg-zinc-50 rounded-[4rem] mx-4 relative overflow-hidden">
+      <section className="py-24 bg-zinc-50 rounded-[3.5rem] mx-4 relative overflow-hidden border border-zinc-200/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="mb-16 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-violet-100 text-violet-600 text-[10px] font-black uppercase tracking-widest rounded-full mb-4">
-              <Activity className="w-3 h-3" />
+          
+          {/* Header de Sección Manteniendo Alta Ingeniería & Tecnología */}
+          <div className="mb-14 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-violet-100 text-violet-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
+              <Activity className="w-3.5 h-3.5" />
               Alta Ingeniería de Rendimiento
             </div>
-            <h2 className="text-3xl lg:text-5xl font-black text-zinc-950 tracking-tighter uppercase">Tecnología que <br/> <span className="text-violet-600 italic font-serif lowercase font-light">impulsa</span> tu negocio</h2>
+            <h2 className="text-3xl lg:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
+              Tecnología que <br className="hidden sm:inline" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600">impulsa tu negocio</span>
+            </h2>
+            <p className="text-zinc-600 text-base sm:text-lg font-light mt-3 max-w-2xl">
+              Portafolio de soluciones especializadas para vender, automatizar e integrar tu empresa en Chile.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            {/* Main Performance Card */}
-            <div className="md:col-span-8 bg-white/70 backdrop-blur-md rounded-[4rem] p-8 sm:p-12 lg:p-16 text-zinc-950 relative overflow-hidden group border border-zinc-200/60 shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:border-violet-500/20 transition-all duration-700">
-              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 group-hover:bg-violet-500/15 transition-colors" />
-              
-              <div className="relative z-10 h-full flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between mb-8">
-                    <Zap className="w-12 h-12 text-violet-600 animate-pulse" />
-                    <div className="px-4 py-2 bg-emerald-500/5 border border-emerald-500/20 rounded-2xl flex items-center gap-3">
-                      <Gauge className="w-5 h-5 text-emerald-600" />
-                      <span className="text-xl font-mono font-black text-emerald-600 tracking-tighter">100/100</span>
-                    </div>
+          {/* Lista Ordenada de Servicios Especializados */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+            
+            {/* SERVICIO 1: Tiendas Shopify */}
+            <div className="bg-white rounded-[2.5rem] p-8 border border-zinc-200/90 shadow-lg hover:shadow-xl hover:border-violet-300 transition-all flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-violet-50 rounded-2xl flex items-center justify-center text-violet-600 group-hover:bg-violet-600 group-hover:text-white transition-all">
+                    <ShoppingBag className="w-6 h-6" />
                   </div>
-                  
-                  <h3 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tighter uppercase mb-6 leading-[0.9] break-words text-zinc-950">Expertos en <br/>E-commerce</h3>
-                  <p className="text-zinc-600 text-lg font-light max-w-lg leading-relaxed mb-8">
-                    Eliminamos la latencia. Cada milisegundo cuenta para tu conversión. Arquitectura <span className="text-zinc-950 font-bold italic">server-side</span> con Next.js para una velocidad de carga instantánea que Google ama.
-                  </p>
+                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-violet-700 bg-violet-50 px-3 py-1 rounded-full border border-violet-200/50">
+                    E-commerce • Partner
+                  </span>
                 </div>
-                
-                <div className="mt-12 grid grid-cols-2 gap-8 border-t border-zinc-200/80 pt-10">
-                  <div className="group/item">
-                    <div className="text-3xl font-black text-zinc-900 mb-2 uppercase italic tracking-tighter group-hover/item:text-violet-600 transition-colors">SEO Técnico</div>
-                    <div className="text-[12px] font-black text-zinc-400 uppercase tracking-widest leading-none">Indexación Semántica Avanzada</div>
-                  </div>
-                  <div className="group/item">
-                    <div className="text-3xl font-black text-zinc-900 mb-2 uppercase italic tracking-tighter group-hover/item:text-violet-600 transition-colors">99.99%</div>
-                    <div className="text-[12px] font-black text-zinc-400 uppercase tracking-widest leading-none">Escalabilidad Garantizada</div>
-                  </div>
-                </div>
+
+                <h3 className="text-2xl font-black uppercase text-zinc-950 mb-3 font-heading group-hover:text-violet-600 transition-colors">
+                  Desarrollo & Rediseño Shopify
+                </h3>
+                <p className="text-sm text-zinc-600 font-normal leading-relaxed mb-6">
+                  Creación de tiendas online listas para vender en Chile con pasarelas locales, despacho, facturación SII y diseño Mobile-First.
+                </p>
+
+                <ul className="space-y-2.5 mb-8 border-t border-zinc-100 pt-6">
+                  {[
+                    "Integración Webpay / Mercado Pago / Flow",
+                    "Despacho automatizado (Shipit / Starken)",
+                    "Boleta Electrónica SII automática",
+                    "Optimización CRO en Ficha de Producto"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-xs text-zinc-700 font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
+
+              <Link 
+                href="/desarrollo-tiendas-shopify-en-chile" 
+                className="w-full py-3.5 px-5 bg-zinc-950 hover:bg-violet-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-between transition-all"
+              >
+                <span>Ver Tiendas Shopify</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
 
-            {/* Mobile First Card */}
-            <div className="md:col-span-4 group h-full">
-              <div className="bg-violet-600 rounded-[4rem] p-12 border border-violet-500/50 flex flex-col justify-end h-full relative overflow-hidden min-h-[550px] shadow-2xl hover:shadow-violet-600/40 hover:-translate-y-2 transition-all duration-700">
-                <div className="absolute inset-0 z-0">
-                  <Image 
-                    src="/mobile-mockup.png" 
-                    alt="Diseño Web Mobile-First Chile" 
-                    fill 
-                    className="object-cover opacity-30 grayscale group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-50 transition-all duration-1000" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-violet-950 via-violet-900/40 to-transparent"></div>
-                </div>
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl flex items-center justify-center mb-10">
-                    <Smartphone className="w-7 h-7 text-white" />
+            {/* SERVICIO 2: Next.js & SaaS */}
+            <div className="bg-white rounded-[2.5rem] p-8 border border-zinc-200/90 shadow-lg hover:shadow-xl hover:border-violet-300 transition-all flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <Code2 className="w-6 h-6" />
                   </div>
-                  <h3 className="text-3xl font-black text-white uppercase tracking-tighter leading-none mb-6">Experiencia <br/>Impecable</h3>
-                  <p className="text-violet-100 text-lg font-light leading-snug">
-                    Diseño centrado en el pulgar. El <span className="text-white font-bold">85%</span> de tu tráfico es móvil; nos aseguramos que cada tap sea una <span className="italic font-serif">conversión</span>.
-                  </p>
+                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-blue-700 bg-blue-50 px-3 py-1 rounded-full border border-blue-200/50">
+                    Alto Rendimiento
+                  </span>
                 </div>
+
+                <h3 className="text-2xl font-black uppercase text-zinc-950 mb-3 font-heading group-hover:text-blue-600 transition-colors">
+                  Next.js & Software SaaS a Medida
+                </h3>
+                <p className="text-sm text-zinc-600 font-normal leading-relaxed mb-6">
+                  Desarrollo de aplicaciones web ultra-rápidas con arquitectura Server-Side Rendering (SSR) y velocidad 100/100 en Google.
+                </p>
+
+                <ul className="space-y-2.5 mb-8 border-t border-zinc-100 pt-6">
+                  {[
+                    "Carga ultra-rápida y latencia mínima",
+                    "Plataformas SaaS & Portales Corporativos",
+                    "APIs & Microservicios escalables",
+                    "Indexación semántica avanzada"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-xs text-zinc-700 font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-blue-500 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
+
+              <Link 
+                href="/desarrollo-web-nextjs-saas-custom" 
+                className="w-full py-3.5 px-5 bg-zinc-950 hover:bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-between transition-all"
+              >
+                <span>Ver Next.js & SaaS</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
+
+            {/* SERVICIO 3: SEO Avanzado & GEO AI */}
+            <div className="bg-white rounded-[2.5rem] p-8 border border-zinc-200/90 shadow-lg hover:shadow-xl hover:border-emerald-300 transition-all flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                    <TrendingUp className="w-6 h-6" />
+                  </div>
+                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/50">
+                    IA & Posicionamiento
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-black uppercase text-zinc-950 mb-3 font-heading group-hover:text-emerald-600 transition-colors">
+                  SEO Avanzado & GEO AI Visibility
+                </h3>
+                <p className="text-sm text-zinc-600 font-normal leading-relaxed mb-6">
+                  Estrategias para dominar Google y asegurar que tu marca aparezca en las respuestas de la Inteligencia Artificial.
+                </p>
+
+                <ul className="space-y-2.5 mb-8 border-t border-zinc-100 pt-6">
+                  {[
+                    "Auditoría SEO Técnico de Carga & Estructura",
+                    "Optimización para ChatGPT, Perplexity y Gemini",
+                    "Palabras clave comerciales de alta conversión",
+                    "Generación de contenido optimizado"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-xs text-zinc-700 font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Link 
+                href="/geo-ai-visibility" 
+                className="w-full py-3.5 px-5 bg-zinc-950 hover:bg-emerald-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-between transition-all"
+              >
+                <span>Ver SEO & GEO AI</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* SERVICIO 4: WooCommerce & Dropshipping */}
+            <div className="bg-white rounded-[2.5rem] p-8 border border-zinc-200/90 shadow-lg hover:shadow-xl hover:border-pink-300 transition-all flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center text-pink-600 group-hover:bg-pink-600 group-hover:text-white transition-all">
+                    <Rocket className="w-6 h-6" />
+                  </div>
+                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-pink-700 bg-pink-50 px-3 py-1 rounded-full border border-pink-200/50">
+                    Catálogos & B2B
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-black uppercase text-zinc-950 mb-3 font-heading group-hover:text-pink-600 transition-colors">
+                  WooCommerce & Dropshipping Shopi+Dropi
+                </h3>
+                <p className="text-sm text-zinc-600 font-normal leading-relaxed mb-6">
+                  Desarrollo de tiendas e-commerce con catálogos extensos, reglas mayoristas B2B o modelos automatizados de Dropshipping.
+                </p>
+
+                <ul className="space-y-2.5 mb-8 border-t border-zinc-100 pt-6">
+                  {[
+                    "Venta mayorista B2B & Precios segmentados",
+                    "Integración directa con plataformas Dropi",
+                    "Optimización de velocidad WooCommerce",
+                    "Pasarelas de pago locales múltiples"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-xs text-zinc-700 font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-pink-500 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Link 
+                href="/desarrollo-tienda-en-linea-woocommerce" 
+                className="w-full py-3.5 px-5 bg-zinc-950 hover:bg-pink-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-between transition-all"
+              >
+                <span>Ver WooCommerce & B2B</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* SERVICIO 5: Integración ERP & SII */}
+            <div className="bg-white rounded-[2.5rem] p-8 border border-zinc-200/90 shadow-lg hover:shadow-xl hover:border-amber-300 transition-all flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition-all">
+                    <Zap className="w-6 h-6" />
+                  </div>
+                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-amber-800 bg-amber-50 px-3 py-1 rounded-full border border-amber-200/50">
+                    Automatización Local
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-black uppercase text-zinc-950 mb-3 font-heading group-hover:text-amber-600 transition-colors">
+                  Integración ERP & Boletas SII Automáticas
+                </h3>
+                <p className="text-sm text-zinc-600 font-normal leading-relaxed mb-6">
+                  Conexión directa de tu e-commerce con Bsale, Obuma, Defontana y sistemas DTE para emisión automática de facturas y stock.
+                </p>
+
+                <ul className="space-y-2.5 mb-8 border-t border-zinc-100 pt-6">
+                  {[
+                    "Sincronización de Stock en tiempo real",
+                    "Emisión automática de Boletas SII",
+                    "Conexión con Bsale, Obuma y Defontana",
+                    "Integración de Fintoc & transferencias"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-xs text-zinc-700 font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Link 
+                href="/integracion-erp-shopify-chile" 
+                className="w-full py-3.5 px-5 bg-zinc-950 hover:bg-amber-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-between transition-all"
+              >
+                <span>Ver ERP & SII</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* SERVICIO 6: Academias Tutor LMS */}
+            <div className="bg-white rounded-[2.5rem] p-8 border border-zinc-200/90 shadow-lg hover:shadow-xl hover:border-orange-300 transition-all flex flex-col justify-between group">
+              <div>
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-all">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-orange-800 bg-orange-50 px-3 py-1 rounded-full border border-orange-200/50">
+                    E-Learning & Sence
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-black uppercase text-zinc-950 mb-3 font-heading group-hover:text-orange-600 transition-colors">
+                  Academias Tutor LMS & Plugin Sence Pro
+                </h3>
+                <p className="text-sm text-zinc-600 font-normal leading-relaxed mb-6">
+                  Implementación de aulas virtuales profesionales para la venta de cursos online y cumplimiento de normativas Sence Chile.
+                </p>
+
+                <ul className="space-y-2.5 mb-8 border-t border-zinc-100 pt-6">
+                  {[
+                    "Aulas virtuales con Tutor LMS Pro",
+                    "Cumplimiento y reportes Sence Chile",
+                    "Venta automatizada de suscripciones",
+                    "Certificados digitales & evaluaciones"
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-xs text-zinc-700 font-medium">
+                      <CheckCircle2 className="w-4 h-4 text-orange-500 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <Link 
+                href="/desarrollo-diseno-elearning-tutor-lms" 
+                className="w-full py-3.5 px-5 bg-zinc-950 hover:bg-orange-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-between transition-all"
+              >
+                <span>Ver Academias LMS</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
           </div>
+
         </div>
       </section>
 
