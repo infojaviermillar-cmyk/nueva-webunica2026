@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Sparkles, Maximize2, X, ArrowRight, CheckCircle2, Eye, Palette, Layout } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
+import ScrollRevealText from '@/components/ui/scroll-reveal-text';
 
 type ShowcaseStep = {
   id: string;
@@ -66,19 +67,20 @@ export default function ViccaTransformationShowcase() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-4xl mx-auto mb-16 sm:mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/15 rounded-full text-violet-200 text-xs font-mono font-bold uppercase tracking-widest mb-6">
             <Sparkles className="w-4 h-4 text-violet-300" />
             Caso de Éxito • Proceso Real Shopify
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-none mb-6">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-none mb-6 font-heading">
             De Wireframe a <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-indigo-200">Resultado Final</span>
           </h2>
 
-          <p className="text-purple-100/90 text-base sm:text-lg font-light leading-relaxed">
-            Así transformamos la tienda <strong className="text-white font-bold">Vicca</strong>: desde el boceto estructural UX, la elección cromática de la marca, hasta la tienda Shopify 100% optimizada para vender.
-          </p>
+          <ScrollRevealText 
+            text="Así transformamos la tienda Vicca: desde el boceto estructural UX, la elección cromática de la marca, hasta la tienda Shopify 100% optimizada para vender."
+            className="text-lg sm:text-xl md:text-2xl text-purple-100 font-light leading-relaxed max-w-3xl mx-auto"
+          />
         </div>
 
         {/* 3 Step Flow Grid */}
