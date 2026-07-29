@@ -135,7 +135,7 @@ export default function ContratoGeneratorPage() {
       const html2pdfModule = await import('html2pdf.js');
       const html2pdf = html2pdfModule.default;
 
-      const filename = `Contrato_${data.planNombre.replace(/[^a-[#7850FA]0-9]/gi, '_')}_${data.clienteRazonSocial.replace(/[^a-zA-Z0-9]/gi, '_')}.pdf`;
+      const filename = `Contrato_${data.planNombre.replace(/[^a-zA-Z0-9]/gi, '_')}_${data.clienteRazonSocial.replace(/[^a-zA-Z0-9]/gi, '_')}.pdf`;
 
       const opt = {
         margin: [12, 12, 12, 12],
