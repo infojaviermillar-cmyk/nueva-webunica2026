@@ -778,7 +778,7 @@ export default function DropshippingPage() {
                     plan.recommended ? 'border-zinc-800' : 'border-zinc-200'
                   }`}>
                     {plan.features.map((feat, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-2.5 text-xs font-normal">
+                      <li key={fIdx} className="flex items-start gap-2.5 text-sm font-normal">
                         <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </li>

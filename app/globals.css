@@ -77,6 +77,10 @@
   --color-ap-accent: #7850FA;
   --color-brand-green: var(--brand-green);
 
+  /* Minimum Font Size Rule (14px = 0.875rem minimum) */
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.25rem;
+
   --font-sans: var(--font-questrial), Questrial, Futura, "Segoe UI", Arial, sans-serif;
   --font-heading: var(--font-questrial), Questrial, Futura, "Segoe UI", Arial, sans-serif;
   --font-questrial: var(--font-questrial), Questrial, Futura, "Segoe UI", Arial, sans-serif;
@@ -93,6 +97,7 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-size: 0.875rem; /* 14px minimum */
 }
 
 .ap-accent, .text-ap-accent {
