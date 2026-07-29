@@ -2,6 +2,7 @@
 
 import { CheckCircle2, ArrowRight, Zap } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
+import ScrollRevealText from '@/components/ui/scroll-reveal-text';
 
 const plans = [
   {
@@ -20,33 +21,33 @@ const plans = [
     popular: false
   },
   {
-    name: "Web Corporativa SEO",
-    price: "$360.000",
-    desc: "La mejor opción para PYMES que buscan profesionalizar su imagen completa con SEO técnico.",
+    name: "Sitio PyME / Catálogo",
+    price: "$520.000",
+    desc: "Para empresas que necesitan presencia sólida, catálogo de productos y posicionamiento local.",
     features: [
-      "Hasta 5 secciones internas",
-      "Arquitectura de conversión PRO",
-      "GA4 & Meta Pixel Profesional",
-      "8 Imágenes Full HD con IA",
-      "Diseño 100% Mobile-First",
-      "Entrega en 10-15 días"
+      "Hasta 5 secciones personalizadas",
+      "Estructura SEO de alto nivel",
+      "Integración WhatsApp & Formularios",
+      "Velocidad de carga Turbo",
+      "Capacitación autoadministrable",
+      "Entrega en 10 días hábiles"
     ],
-    cta: "Elegir Corporativa",
+    cta: "Elegir Sitio PyME",
     popular: true
   },
   {
-    name: "Pyme WordPress Pro SEO",
-    price: "$580.000",
-    desc: "Sitio web avanzado con gestión de contenido y estrategia SEO Full de dominio orgánico.",
+    name: "Shopify / WooCommerce",
+    price: "$850.000",
+    desc: "Plataforma e-Commerce profesional lista para vender con medios de pago locales.",
     features: [
-      "WordPress autogestionable",
-      "Estrategia SEO Full (Silos)",
-      "GA4, Meta Pixel & API Conversiones",
-      "15 Imágenes Full HD con IA",
-      "Capacitación de uso avanzada",
-      "Soporte técnico prioritario"
+      "Configuración de Tienda completa",
+      "Webpay, MercadoPago & Flow",
+      "Integración Envíos (Starken/Blue)",
+      "Optimización de Conversión CRO",
+      "Diseño de banners e identidad",
+      "Soporte post-lanzamiento"
     ],
-    cta: "Elegir WordPress Pro",
+    cta: "Crear mi Tienda",
     popular: false
   }
 ];
@@ -55,24 +56,27 @@ export default function PricingPlans() {
   return (
     <section className="py-32 bg-zinc-50 relative overflow-hidden" id="planes">
       {/* Decorative background */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-100/50 blur-[120px] rounded-full -z-0"></div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-100/40 blur-[120px] rounded-full -z-0"></div>
       
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-24">
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-white border border-zinc-200 rounded-full">
-             <Zap className="w-4 h-4 text-violet-600" />
-             <span className="text-[10px] font-black tracking-widest text-zinc-500 uppercase">Precios Transparentes 2026</span>
+        <div className="text-center max-w-4xl mx-auto mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-white border border-zinc-200/80 rounded-full shadow-xs">
+             <Zap className="w-4 h-4 text-[#7850FA]" />
+             <span className="text-[11px] font-mono font-bold tracking-widest text-zinc-600 uppercase">Precios Transparentes 2026</span>
           </div>
           
-          <h2 className="text-5xl lg:text-7xl font-black mb-8 uppercase tracking-tighter text-zinc-950">
-            Planes de <span className="text-violet-600 italic font-serif lowercase font-light">Ingeniería</span> Web
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black mb-6 uppercase tracking-tighter text-zinc-950 font-heading">
+            Planes de <span className="text-[#7850FA]">Ingeniería Web</span>
           </h2>
-          <p className="text-xl text-zinc-500 font-light max-w-2xl mx-auto mb-4">
-            Inversiones diseñadas para escalar tu facturación, no solo para tener un sitio bonito.
-          </p>
-          <div className="flex items-center justify-center gap-4 text-[10px] font-black text-violet-600 uppercase tracking-widest">
+          
+          <ScrollRevealText 
+            text="Inversiones diseñadas para escalar tu facturación, no solo para tener un sitio bonito."
+            className="text-lg sm:text-xl md:text-2xl text-zinc-800 font-light leading-relaxed max-w-3xl mx-auto mb-6"
+          />
+
+          <div className="flex items-center justify-center gap-4 text-[11px] font-mono font-bold text-[#7850FA] uppercase tracking-widest">
              <span>Valores + IVA</span>
-             <span className="w-1 h-1 bg-violet-300 rounded-full"></span>
+             <span className="w-1.5 h-1.5 bg-purple-300 rounded-full"></span>
              <span>6 cuotas sin interés</span>
           </div>
         </div>
