@@ -138,7 +138,7 @@ export default function ContratoGeneratorPage() {
       const filename = `Contrato_${data.planNombre.replace(/[^a-zA-Z0-9]/gi, '_')}_${data.clienteRazonSocial.replace(/[^a-zA-Z0-9]/gi, '_')}.pdf`;
 
       const opt = {
-        margin: [12, 12, 12, 12],
+        margin: 12,
         filename: filename,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { 
