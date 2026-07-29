@@ -125,39 +125,60 @@ export default function ContratoGeneratorPage() {
 
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
-  // Real PDF Engine using html2pdf.js
+  // Real 1-Click PDF Generation Engine using jsPDF + html2canvas
   const handleGenerateRealPdf = async () => {
     setIsGeneratingPdf(true);
     try {
       const el = document.getElementById('legal-contract-print-area');
       if (!el) return;
 
-      const html2pdfModule = await import('html2pdf.js');
-      const html2pdf = html2pdfModule.default;
+      const html2canvas = (await import('html2canvas')).default;
+      const { jsPDF } = await import('jspdf');
 
-      const filename = `Contrato_${data.planNombre.replace(/[^a-zA-Z0-9]/gi, '_')}_${data.clienteRazonSocial.replace(/[^a-zA-Z0-9]/gi, '_')}.pdf`;
+      const canvas = await html2canvas(el, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff'
+      });
 
-      const opt = {
-        margin: 12,
-        filename: filename,
-        image: { type: 'jpeg' as const, quality: 0.98 },
-        html2canvas: { 
-          scale: 2, 
-          useCORS: true,
-          letterRendering: true,
-          logging: false
-        },
-        jsPDF: { 
-          unit: 'mm' as const, 
-          format: 'letter' as const, 
-          orientation: 'portrait' as const 
-        },
-        pagebreak: { mode: ['avoid-all' as const, 'css' as const, 'legacy' as const] }
-      };
+      const pdf = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'letter'
+      });
 
-      await html2pdf().set(opt).from(el).save();
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const margin = 10;
+      
+      const contentWidth = pageWidth - margin * 2;
+      const contentHeight = (canvas.height * contentWidth) / canvas.width;
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+
+      let heightLeft = contentHeight;
+      let position = margin;
+
+      // Page 1
+      pdf.addImage(imgData, 'JPEG', margin, position, contentWidth, contentHeight);
+      heightLeft -= (pageHeight - margin * 2);
+
+      // Subsequent pages if content overflows 1 page
+      while (heightLeft > 0) {
+        pdf.addPage();
+        position = heightLeft - contentHeight + margin;
+        pdf.addImage(imgData, 'JPEG', margin, position, contentWidth, contentHeight);
+        heightLeft -= (pageHeight - margin * 2);
+      }
+
+      const cleanPlan = data.planNombre.replace(/[^a-zA-Z0-9]/g, '_');
+      const cleanCliente = data.clienteRazonSocial.replace(/[^a-zA-Z0-9]/g, '_');
+      const filename = `Contrato_${cleanPlan}_${cleanCliente}.pdf`;
+
+      pdf.save(filename);
     } catch (err) {
-      console.error('PDF Generation Error:', err);
+      console.error('PDF Engine Error:', err);
       window.print();
     } finally {
       setIsGeneratingPdf(false);
@@ -636,6 +657,19 @@ export default function ContratoGeneratorPage() {
               
               <div id="legal-contract-print-area" className="space-y-6">
                 
+                {/* LOGO Y MARCA OFICIAL WEBUNICA */}
+                <div className="flex flex-col items-center justify-center pb-5 border-b border-zinc-300 mb-6 text-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img 
+                    src="/logo-webunica.png.webp" 
+                    alt="Webunica Expertos en E-commerce" 
+                    className="h-10 w-auto brightness-0 mb-1"
+                  />
+                  <span className="text-[9px] font-medium uppercase tracking-[0.20em] text-zinc-600">
+                    UNA NUEVA ERA WEB
+                  </span>
+                </div>
+
                 {/* TITLE HEADER */}
                 <div className="text-center pb-6 border-b border-zinc-300">
                   <h1 className="text-xl sm:text-2xl font-black uppercase tracking-tight font-heading mb-1 text-zinc-950">
