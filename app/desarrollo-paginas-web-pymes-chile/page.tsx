@@ -745,14 +745,6 @@ export default function PymesPage() {
            </div>
         </section>
 
-      </div>
     </main>
   );
-}
-/div>
-           </div>
-        </section>
-      </div>
-    </div>
-  );
-}
+}
