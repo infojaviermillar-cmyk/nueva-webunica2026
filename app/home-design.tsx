@@ -12,6 +12,7 @@ import PricingPlans from '@/components/sections/pricing-plans';
 import ServicesTabs from '@/components/sections/services-tabs';
 import WorkProcess from '@/components/sections/work-process';
 import ViccaTransformationShowcase from '@/components/sections/vicca-transformation-showcase';
+import ScrollRevealText from '@/components/ui/scroll-reveal-text';
 
 export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const projects = [
@@ -264,18 +265,18 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           
           {/* Header de Sección Manteniendo Alta Ingeniería & Tecnología */}
-          <div className="mb-14 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-violet-100 text-violet-700 text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4">
-              <Activity className="w-3.5 h-3.5" />
+          <div className="mb-14 text-center max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-purple-50 border border-purple-200/80 text-[#7850FA] text-[11px] font-mono font-bold uppercase tracking-widest rounded-full mb-4 shadow-xs">
+              <Activity className="w-3.5 h-3.5 text-[#7850FA]" />
               Alta Ingeniería de Rendimiento
             </div>
-            <h2 className="text-3xl lg:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
-              Tecnología que <br className="hidden sm:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600">impulsa tu negocio</span>
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-zinc-950 tracking-tighter uppercase font-heading mb-4">
+              Tecnología que <span className="text-[#7850FA]">impulsa tu negocio</span>
             </h2>
-            <p className="text-zinc-600 text-base sm:text-lg font-light mt-3 max-w-2xl">
-              Portafolio de soluciones especializadas para vender, automatizar e integrar tu empresa en Chile.
-            </p>
+            <ScrollRevealText 
+              text="Portafolio de soluciones especializadas para vender, automatizar e integrar tu empresa en Chile."
+              className="text-lg sm:text-xl md:text-2xl text-zinc-800 font-light leading-relaxed max-w-3xl mx-auto"
+            />
           </div>
 
           {/* Lista Ordenada de Servicios Especializados */}
