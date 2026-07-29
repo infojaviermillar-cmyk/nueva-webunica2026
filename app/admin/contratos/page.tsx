@@ -151,62 +151,69 @@ export default function ContratoGeneratorPage() {
   const totalConIva = data.valorNeto + totalIva;
 
   return (
-    <div className="min-h-screen bg-zinc-100 text-zinc-900 pt-28 pb-20 print:pt-0 print:pb-0 print:bg-white">
+    <div className="min-h-screen bg-zinc-100 text-zinc-900 pt-28 sm:pt-36 lg:pt-40 pb-20 print:pt-0 print:pb-0 print:bg-white">
       
-      {/* HEADER NAVBAR / ACTIONS (Hidden on print) */}
-      <div className="print:hidden fixed top-0 left-0 right-0 z-50 bg-zinc-950 text-white border-b border-zinc-800 shadow-xl px-6 py-4">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <Link href="/admin" className="p-2 bg-zinc-800 hover:bg-zinc-700 rounded-xl transition-all text-zinc-300">
-              <ArrowLeft className="w-5 h-5" />
+      {/* HEADER BANNER / ACTIONS (Hidden on print) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8 print:hidden">
+        <div className="bg-zinc-950 text-white rounded-3xl p-6 sm:p-8 border border-zinc-800 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4 text-center sm:text-left">
+            <Link href="/admin" className="p-3 bg-zinc-800 hover:bg-zinc-700 rounded-2xl transition-all text-zinc-300 shrink-0">
+              <ArrowLeft className="w-6 h-6" />
             </Link>
             <div>
-              <div className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-[#7850FA]" />
-                <h1 className="text-lg font-black uppercase tracking-tight text-white font-heading">Generador de Contratos Webunica</h1>
+              <div className="flex items-center gap-2 justify-center sm:justify-start">
+                <FileText className="w-6 h-6 text-[#7850FA]" />
+                <h1 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white font-heading">Generador de Contratos Webunica</h1>
               </div>
-              <p className="text-xs text-zinc-400 font-mono">Generador Legal Automatizado • Cotizaciones N° {data.cotizacionNumero}</p>
+              <p className="text-xs sm:text-sm text-zinc-400 font-mono mt-1">Generador Legal Automatizado • Cotizaciones N° {data.cotizacionNumero}</p>
             </div>
           </div>
 
           {/* Quick Presets */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2.5 justify-center">
             <button 
               onClick={() => setData(PACIFIC_COLOR_PRESET)}
-              className="px-3.5 py-2 bg-purple-900/60 hover:bg-purple-800 text-purple-200 border border-purple-500/40 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+              className="px-4 py-2.5 bg-purple-900/80 hover:bg-purple-800 text-purple-100 border border-purple-400/50 rounded-2xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-purple-900/40 active:scale-95"
             >
-              <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+              <Sparkles className="w-4 h-4 text-purple-300" />
               Ejemplo Pacific Color
             </button>
             <button 
               onClick={() => setData(PRESET_FULL_SHOPIFY)}
-              className="px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+              className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-95"
             >
               Shopify Full ($850k)
             </button>
           </div>
+        </div>
 
-          {/* Export Actions */}
-          <div className="flex items-center gap-2">
+        {/* PRIMARY BIG ACTION BUTTONS BAR */}
+        <div className="mt-4 bg-white p-4 sm:p-5 rounded-3xl border border-zinc-200 shadow-md flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-600">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <span>Documento generado en tiempo real para: <strong className="text-zinc-950">{data.clienteRazonSocial}</strong></span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
             <button 
               onClick={handleCopyText}
-              className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer"
+              className="flex-1 sm:flex-none px-5 py-3 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 rounded-2xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer border border-zinc-300"
             >
-              {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+              {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-zinc-600" />}
               {copied ? '¡Copiado!' : 'Copiar Texto'}
             </button>
 
             <button 
               onClick={handleDownloadDoc}
-              className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer"
+              className="flex-1 sm:flex-none px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/25 active:scale-95 cursor-pointer"
             >
-              <Download className="w-4 h-4 text-blue-400" />
+              <Download className="w-4 h-4" />
               Descargar Word (.doc)
             </button>
 
             <button 
               onClick={handlePrint}
-              className="px-5 py-2.5 bg-[#7850FA] hover:bg-[#683fe4] text-white rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-[#7850FA]/30 transition-all active:scale-95 cursor-pointer"
+              className="flex-1 sm:flex-none px-7 py-3 bg-[#7850FA] hover:bg-[#683fe4] text-white rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-[#7850FA]/30 transition-all active:scale-95 cursor-pointer"
             >
               <Printer className="w-4 h-4" />
               Imprimir / Guardar PDF
