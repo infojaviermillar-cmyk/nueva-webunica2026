@@ -140,7 +140,7 @@ export default function ContratoGeneratorPage() {
       const opt = {
         margin: 12,
         filename: filename,
-        image: { type: 'jpeg', quality: 0.98 },
+        image: { type: 'jpeg' as const, quality: 0.98 },
         html2canvas: { 
           scale: 2, 
           useCORS: true,
@@ -148,11 +148,11 @@ export default function ContratoGeneratorPage() {
           logging: false
         },
         jsPDF: { 
-          unit: 'mm', 
-          format: 'letter', 
-          orientation: 'portrait' 
+          unit: 'mm' as const, 
+          format: 'letter' as const, 
+          orientation: 'portrait' as const 
         },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        pagebreak: { mode: ['avoid-all' as const, 'css' as const, 'legacy' as const] }
       };
 
       await html2pdf().set(opt).from(el).save();
