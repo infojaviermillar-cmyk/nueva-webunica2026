@@ -152,7 +152,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
                   </div>
                 </Link>
               ) : (
-                <Link href="/" className="group block focus:outline-none cursor-pointer">
+                <Link href="/" className="group flex flex-col items-center justify-center focus:outline-none cursor-pointer">
                   <img 
                     src="/logo-webunica.png.webp" 
                     alt="Webunica Expertos en E-commerce" 
@@ -160,6 +160,9 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     width={135}
                     height={36}
                   />
+                  <span className={`hidden md:block mt-[4px] text-[9px] font-medium uppercase tracking-[0.20em] leading-none whitespace-nowrap text-center transition-colors duration-300 ${isDarkHero && !scrolled ? 'text-white/70' : 'text-[rgba(20,24,39,0.60)]'}`}>
+                    UNA NUEVA ERA WEB
+                  </span>
                 </Link>
               )}
             </div>
