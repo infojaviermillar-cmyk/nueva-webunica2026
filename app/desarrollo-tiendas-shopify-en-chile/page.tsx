@@ -306,23 +306,23 @@ export default function ShopifyEnChilePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="pt-[20vh] lg:pt-40">
+      <div className="pt-28 sm:pt-36 lg:pt-44">
         
         {/* ========================================================= */}
         {/* ZONA 1: HERO (SEDUCIR Y ACLARAR)                          */}
         {/* ========================================================= */}
-        <section id="inicio" className="relative pt-0 pb-6 lg:pb-8 overflow-hidden">
+        <section id="inicio" className="relative py-12 sm:py-20 lg:py-28 overflow-hidden">
           <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-violet-600/10 blur-[130px] rounded-full pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3" />
           <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-pink-500/10 blur-[120px] rounded-full pointer-events-none -z-10 -translate-x-1/3" />
           
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center">
               
               {/* Left Content Column */}
               <div className="lg:col-span-7 text-center lg:text-left">
                 {/* Badges Row */}
-                <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start mb-6">
-                  <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-50 border border-violet-200/80 rounded-full shadow-sm">
+                <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start mb-8">
+                  <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-50 border border-violet-200/80 rounded-full shadow-xs">
                     <span className="flex h-2 w-2 relative">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-600"></span>
@@ -332,7 +332,7 @@ export default function ShopifyEnChilePage() {
                     </span>
                   </div>
 
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-50 border border-emerald-200/80 rounded-full shadow-sm">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200/80 rounded-full shadow-xs">
                     <Tag className="w-3.5 h-3.5 text-emerald-600" />
                     <span className="text-[11px] font-mono font-black tracking-widest text-emerald-800 uppercase">
                       Planes desde $580.000 + IVA
@@ -340,18 +340,18 @@ export default function ShopifyEnChilePage() {
                   </div>
                 </div>
                 
-                <h1 className="text-[2rem] xs:text-3xl sm:text-4xl lg:text-[58px] font-black tracking-tighter leading-[0.92] mb-6 uppercase text-zinc-950 font-heading">
+                <h1 className="text-[2.2rem] xs:text-4xl sm:text-5xl lg:text-[62px] font-black tracking-tighter leading-[0.94] mb-8 uppercase text-zinc-950 font-heading">
                   Creamos tu tienda Shopify <br className="hidden sm:inline" />
                   lista para <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]">vender y crecer</span> en Chile
                 </h1>
                 
-                <p className="text-base sm:text-lg lg:text-xl text-zinc-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-                  Diseñamos tiendas Shopify preparadas para vender en Chile, con <strong className="font-bold text-zinc-950 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200/60">planes desde $580.000 + IVA</strong>, integradas con pagos locales, despacho, facturación electrónica, analítica y SEO.
+                <p className="text-lg sm:text-xl lg:text-2xl text-zinc-600 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                  Diseñamos tiendas Shopify preparadas para vender en Chile, con <strong className="font-bold text-zinc-950 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/60">planes desde $580.000 + IVA</strong>, integradas con pagos locales, despacho, facturación electrónica, analítica y SEO.
                 </p>
                 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-4">
-                  <LeadButton className="px-8 py-5 bg-[#2C02A5] text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-violet-900 transition-all shadow-xl shadow-violet-900/25 active:scale-95 text-center flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center mb-6">
+                  <LeadButton className="px-8 py-5 bg-[#2C02A5] hover:bg-[#230184] text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-xl shadow-violet-900/25 active:scale-95 text-center flex items-center justify-center gap-2.5 w-full sm:w-auto cursor-pointer">
                     Solicitar evaluación Shopify <ArrowRight className="w-4 h-4" />
                   </LeadButton>
 
@@ -364,7 +364,7 @@ export default function ShopifyEnChilePage() {
                 </div>
 
                 {/* Trust guarantee microcopy */}
-                <div className="flex items-center justify-center lg:justify-start gap-2 text-xs font-mono text-zinc-500 mb-4">
+                <div className="flex items-center justify-center lg:justify-start gap-2.5 text-xs font-mono text-zinc-500">
                   <Clock className="w-4 h-4 text-emerald-500 shrink-0" />
                   <span>Evaluamos tu proyecto y te recomendamos el plan adecuado, sin compromiso.</span>
                 </div>
