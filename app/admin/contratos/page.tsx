@@ -122,16 +122,16 @@ export default function ContratoGeneratorPage() {
     });
   };
 
-  // Direct 1-Click PDF Generation Engine using jsPDF + html2canvas
+  // Direct Page-by-Page High Precision PDF Exporter
   const handleGenerateRealPdf = async () => {
     setIsGeneratingPdf(true);
     document.body.classList.add('generating-pdf');
     try {
-      const documentEl = document.getElementById('legal-contract-print-area');
-      if (!documentEl) return;
-
       const html2canvas = (await import('html2canvas')).default;
       const { jsPDF } = await import('jspdf');
+
+      const sheets = Array.from(document.querySelectorAll('.contract-sheet')) as HTMLElement[];
+      if (sheets.length === 0) return;
 
       const pdf = new jsPDF({
         orientation: 'p',
@@ -141,36 +141,25 @@ export default function ContratoGeneratorPage() {
 
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
-      const margin = 15;
+      const margin = 10;
       const contentWidth = pageWidth - margin * 2;
+      const contentHeight = pageHeight - margin * 2;
 
-      const canvas = await html2canvas(documentEl, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-        backgroundColor: '#ffffff',
-        windowWidth: 1200
-      });
+      for (let i = 0; i < sheets.length; i++) {
+        const sheet = sheets[i];
+        const canvas = await html2canvas(sheet, {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          backgroundColor: '#ffffff',
+          windowWidth: 1000
+        });
 
-      const imgWidth = contentWidth;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      const usablePageHeight = pageHeight - margin * 2;
-      
-      let heightLeft = imgHeight;
-      let position = margin;
-
-      const imgData = canvas.toDataURL('image/jpeg', 0.95);
-
-      // Page 1
-      pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight);
-      heightLeft -= usablePageHeight;
-
-      // Multi-page rendering
-      while (heightLeft > 0) {
-        pdf.addPage();
-        position = margin - (imgHeight - heightLeft);
-        pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight);
-        heightLeft -= usablePageHeight;
+        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+        if (i > 0) {
+          pdf.addPage();
+        }
+        pdf.addImage(imgData, 'JPEG', margin, margin, contentWidth, contentHeight);
       }
 
       const cleanPlan = data.planNombre.replace(/[^a-zA-Z0-9]/g, '_');
@@ -278,45 +267,28 @@ export default function ContratoGeneratorPage() {
   return (
     <div className="min-h-screen bg-zinc-100 text-zinc-900 pt-28 sm:pt-36 lg:pt-40 pb-20 print:pt-0 print:pb-0 print:bg-white">
       
-      {/* PRINT CSS STYLES FOR CLEAN B&W LEGAL DOCUMENT */}
+      {/* PRINT STYLES FOR PAGE BREAKS & FOOTER POSITIONS */}
       <style jsx global>{`
         @media print {
           body { background: white !important; color: black !important; }
           header, footer, .print\\:hidden, nav { display: none !important; }
-          #legal-contract-print-area {
-            width: 100% !important;
+          .contract-sheet {
+            border: none !important;
+            box-shadow: none !important;
             margin: 0 !important;
             padding: 0 !important;
-            color: black !important;
-            font-size: 11pt !important;
-            line-height: 1.5 !important;
-          }
-          .clause-block, tr, table, .avoid-break {
-            break-inside: avoid !important;
-            page-break-inside: avoid !important;
-          }
-          .page-break {
-            break-before: page !important;
-            page-break-before: always !important;
+            width: 100% !important;
+            height: 100vh !important;
+            page-break-after: always !important;
+            break-after: page !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
           }
           @page {
             size: letter;
-            margin: 18mm 15mm 18mm 15mm;
+            margin: 15mm 15mm 15mm 15mm;
           }
-          input, textarea {
-            border: none !important;
-            background: transparent !important;
-            resize: none !important;
-            outline: none !important;
-            padding: 0 !important;
-          }
-        }
-        .generating-pdf .pdf-hide {
-          display: none !important;
-        }
-        .avoid-break {
-          break-inside: avoid !important;
-          page-break-inside: avoid !important;
         }
       `}</style>
 
@@ -692,132 +664,162 @@ export default function ContratoGeneratorPage() {
           </div>
 
           {/* ========================================================= */}
-          {/* RIGHT PANEL: LIVE FORMAL MONOCHROME LEGAL CONTRACT PREVIEW */}
+          {/* RIGHT PANEL: LIVE MULTI-PAGE SHEET CONTRACT PREVIEW       */}
           {/* ========================================================= */}
-          <div className={`lg:col-span-8 ${activeTab === 'editor' ? 'hidden lg:block' : 'block'}`}>
-            <div className="bg-white p-8 sm:p-14 rounded-3xl border border-zinc-300 shadow-xl print:shadow-none print:border-none print:p-0 text-black leading-relaxed font-sans text-xs sm:text-sm print:text-xs">
+          <div className={`lg:col-span-8 space-y-8 ${activeTab === 'editor' ? 'hidden lg:block' : 'block'}`}>
+            <div id="legal-contract-print-area" className="space-y-8 text-black">
               
-              <div id="legal-contract-print-area" className="space-y-6 text-black">
-                
-                {/* FORMAL DOCUMENT TITLE HEADER (MONOCHROME, NO LOGO) */}
-                <div className="text-center pb-6 border-b border-black">
-                  <h1 className="text-xl sm:text-2xl font-black uppercase tracking-tight mb-1 text-black font-heading">
-                    CONTRATO DE PRESTACIÓN DE SERVICIOS
-                  </h1>
-                  <h2 className="text-base sm:text-lg font-bold text-black uppercase tracking-wider font-mono">
-                    {data.planNombre}
-                  </h2>
-                  <p className="text-xs font-mono text-zinc-700 mt-1">
-                    COTIZACIÓN N° {data.cotizacionNumero}
+              {/* HOJA 1 (PÁGINA 1 DE 4) */}
+              <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
+                <div className="space-y-5">
+                  {/* FORMAL DOCUMENT TITLE HEADER */}
+                  <div className="text-center pb-5 border-b border-black">
+                    <h1 className="text-xl sm:text-2xl font-black uppercase tracking-tight mb-1 text-black font-heading">
+                      CONTRATO DE PRESTACIÓN DE SERVICIOS
+                    </h1>
+                    <h2 className="text-base sm:text-lg font-bold text-black uppercase tracking-wider font-mono">
+                      {data.planNombre}
+                    </h2>
+                    <p className="text-xs font-mono text-zinc-800 mt-1">
+                      COTIZACIÓN N° {data.cotizacionNumero}
+                    </p>
+                  </div>
+
+                  {/* COMPARECIENTES */}
+                  <p className="text-justify leading-relaxed text-black text-xs sm:text-sm">
+                    En Santiago de Chile, a <strong>{formatDateSpanish(data.fechaContrato)}</strong>, entre <strong>{data.proveedorRazonSocial}</strong>, RUT N° <strong>{data.proveedorRut}</strong>, representada por don <strong>{data.proveedorRepresentante}</strong>, RUT N° <strong>{data.proveedorRepresentanteRut}</strong>, ambos domiciliados en {data.proveedorDireccion}, en adelante &apos;EL PROVEEDOR&apos;; y, por la otra, <strong>{data.clienteRazonSocial}</strong>, RUT N° <strong>{data.clienteRut}</strong>, representada por don <strong>{data.clienteRepresentante}</strong>, RUT N° <strong>{data.clienteRepresentanteRut}</strong>, domiciliada en {data.clienteDireccion}, en adelante &apos;EL CLIENTE&apos;, se celebra el presente Contrato de Prestación de Servicios.
                   </p>
-                </div>
 
-                {/* COMPARECIENTES */}
-                <p className="text-justify leading-relaxed text-black">
-                  En Santiago de Chile, a <strong>{formatDateSpanish(data.fechaContrato)}</strong>, entre <strong>{data.proveedorRazonSocial}</strong>, RUT N° <strong>{data.proveedorRut}</strong>, representada por don <strong>{data.proveedorRepresentante}</strong>, RUT N° <strong>{data.proveedorRepresentanteRut}</strong>, ambos domiciliados en {data.proveedorDireccion}, en adelante &apos;EL PROVEEDOR&apos;; y, por la otra, <strong>{data.clienteRazonSocial}</strong>, RUT N° <strong>{data.clienteRut}</strong>, representada por don <strong>{data.clienteRepresentante}</strong>, RUT N° <strong>{data.clienteRepresentanteRut}</strong>, domiciliada en {data.clienteDireccion}, en adelante &apos;EL CLIENTE&apos;, se celebra el presente Contrato de Prestación de Servicios.
-                </p>
+                  {/* CLAUSULAS LEGALES 1 A 7 */}
+                  <div className="space-y-3.5 text-justify text-black text-xs">
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">PRIMERO: ANTECEDENTES</h3>
+                      <p>EL PROVEEDOR declara contar con la experiencia, conocimientos, infraestructura y recursos necesarios para desarrollar e implementar soluciones de comercio electrónico sobre la plataforma Shopify y arquitecturas web avanzadas.</p>
+                    </div>
 
-                {/* CLAUSULAS LEGALES (MONOCHROME UNIFORM STYLING) */}
-                <div className="space-y-4 text-justify text-black">
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">PRIMERO: ANTECEDENTES</h3>
-                    <p>EL PROVEEDOR declara contar con la experiencia, conocimientos, infraestructura y recursos necesarios para desarrollar e implementar soluciones de comercio electrónico sobre la plataforma Shopify y arquitecturas web avanzadas.</p>
-                  </div>
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEGUNDO: OBJETO</h3>
+                      <p>EL PROVEEDOR se obliga a desarrollar e implementar el proyecto <strong>{data.planNombre}</strong> conforme a la Cotización N° <strong>{data.cotizacionNumero}</strong> y sus anexos, incluyendo la configuración e integración técnica de un sistema de facturación electrónica compatible.</p>
+                    </div>
 
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEGUNDO: OBJETO</h3>
-                    <p>EL PROVEEDOR se obliga a desarrollar e implementar el proyecto <strong>{data.planNombre}</strong> conforme a la Cotización N° <strong>{data.cotizacionNumero}</strong> y sus anexos, incluyendo la configuración e integración técnica de un sistema de facturación electrónica compatible.</p>
-                  </div>
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">TERCERO: ALCANCE</h3>
+                      <p>El detalle de los servicios, actividades, pagos, requisitos de inicio y servicios de terceros se encuentra en los Anexos N°1, N°2, N°3, N°4 y N°5, todos los cuales forman parte integrante e inseparable del presente contrato.</p>
+                    </div>
 
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">TERCERO: ALCANCE</h3>
-                    <p>El detalle de los servicios, actividades, pagos, requisitos de inicio y servicios de terceros se encuentra en los Anexos N°1, N°2, N°3, N°4 y N°5, todos los cuales forman parte integrante e inseparable del presente contrato.</p>
-                  </div>
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">CUARTO: HABILITACIÓN SHOPIFY Y PLATAFORMAS</h3>
+                      <p>EL PROVEEDOR creará la cuenta Shopify Partner correspondiente. EL CLIENTE deberá aceptar la invitación de propiedad, contratar un plan Shopify, aceptar sus términos y registrar una tarjeta válida para cobros recurrentes. La demora en estas gestiones suspenderá automáticamente los plazos del proyecto.</p>
+                    </div>
 
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">CUARTO: HABILITACIÓN SHOPIFY Y PLATAFORMAS</h3>
-                    <p>EL PROVEEDOR creará la cuenta Shopify Partner correspondiente. EL CLIENTE deberá aceptar la invitación de propiedad, contratar un plan Shopify, aceptar sus términos y registrar una tarjeta válida para cobros recurrentes. La demora en estas gestiones suspenderá automáticamente los plazos del proyecto.</p>
-                  </div>
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">QUINTO: INFORMACIÓN DE MARCA Y UX/UI</h3>
+                      <p>EL CLIENTE proporcionará logotipos, colores corporativos, manual de marca, tipografías, banners, fotografías, catálogos y referencias visuales. Las partes reconocen que el proyecto contempla dos líneas de trabajo paralelas: Diseño UX/UI y Desarrollo de Software.</p>
+                    </div>
 
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">QUINTO: INFORMACIÓN DE MARCA Y UX/UI</h3>
-                    <p>EL CLIENTE proporcionará logotipos, colores corporativos, manual de marca, tipografías, banners, fotografías, catálogos y referencias visuales. Las partes reconocen que el proyecto contempla dos líneas de trabajo paralelas: Diseño UX/UI y Desarrollo de Software.</p>
-                  </div>
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEXTO: MIGRACIÓN Y ACCESOS</h3>
+                      <p>EL CLIENTE entregará oportunamente los accesos a plataformas previas (WordPress, WooCommerce, hosting, ERP, sistema de facturación electrónica) y demás credenciales necesarias para la migración e integración de contenidos, productos y servicios.</p>
+                    </div>
 
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEXTO: MIGRACIÓN Y ACCESOS</h3>
-                    <p>EL CLIENTE entregará oportunamente los accesos a plataformas previas (WordPress, WooCommerce, hosting, ERP, sistema de facturación electrónica) y demás credenciales necesarias para la migración e integración de contenidos, productos y servicios.</p>
-                  </div>
-
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SÉPTIMO: PRODUCTOS Y OPTIMIZACIÓN SEO</h3>
-                    <p>EL CLIENTE proporcionará títulos, precios, SKU, descripciones e imágenes de productos. EL PROVEEDOR podrá utilizar herramientas de inteligencia artificial para optimizar títulos, descripciones y metadatos con fines SEO.</p>
-                  </div>
-
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">OCTAVO: APLICACIONES Y FACTURACIÓN ELECTRÓNICA</h3>
-                    <p>EL CLIENTE reconoce que determinadas funcionalidades podrán requerir aplicaciones o servicios de terceros (Shopify Apps, ERP, email marketing, logística, pasarelas de pago y sistemas de facturación electrónica como <strong>{data.sistemaFacturacion}</strong> o equivalente), cuyos planes, licencias y costos recurrentes serán de su exclusiva responsabilidad, salvo pacto escrito en contrario.</p>
-                    <p className="mt-2">En particular, EL PROVEEDOR realizará la configuración e integración técnica básica del sistema de facturación electrónica <strong>{data.sistemaFacturacion}</strong> o equivalente compatible. El servicio comprende la instalación o conexión del aplicativo disponible, vinculación con las credenciales proporcionadas por EL CLIENTE, parametrización inicial y pruebas de emisión de documentos tributarios.</p>
-                  </div>
-
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">NOVENO: PLATAFORMAS DE TERCEROS</h3>
-                    <p>EL CLIENTE reconoce que Shopify, Google, Meta y proveedores de pasarelas son servicios de terceros y que sus precios, políticas y funcionalidades pueden variar sin intervención de EL PROVEEDOR.</p>
-                  </div>
-
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO: PLAZOS Y CUMPLIMIENTO</h3>
-                    <p>El proyecto iniciará el <strong>{formatDateSpanish(data.fechaContrato)}</strong> y tendrá una duración estimada de <strong>{data.duracionSemanas} semanas</strong>, más <strong>{data.holguraSemanas} semanas</strong> de holgura operacional. Las actividades podrán ejecutarse en paralelo cuando ello resulte técnica y operativamente conveniente.</p>
-                  </div>
-
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO PRIMERO: PRECIO Y FORMA DE PAGO</h3>
-                    <p>El valor neto del proyecto asciende a <strong>{formatCLP(data.valorNeto)} más IVA (19%)</strong>, equivalente a <strong>{formatCLP(totalIva)}</strong>, totalizando <strong>{formatCLP(totalConIva)}</strong>, pagaderos en los hitos establecidos en el Anexo N°3.</p>
-                  </div>
-
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO SEGUNDO: APROBACIÓN DE ENTREGABLES</h3>
-                    <p>EL CLIENTE dispondrá de cinco (5) días hábiles para aprobar u observar cada entregable. En ausencia de observaciones dentro de dicho plazo, éstos se entenderán aprobados en forma definitiva.</p>
-                  </div>
-
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO TERCERO: GARANTÍA Y SOPORTE</h3>
-                    <p>EL PROVEEDOR otorgará una garantía de treinta (30) días corridos contados desde la puesta en producción respecto de errores atribuibles al desarrollo. El soporte posterior será cotizado separadamente.</p>
-                  </div>
-
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO CUARTO: PROPIEDAD INTELECTUAL Y CONFIDENCIALIDAD</h3>
-                    <p>EL CLIENTE será titular de los desarrollos específicos del proyecto. Las partes se obligan a mantener reserva sobre toda información confidencial obtenida por un plazo de dos (2) años.</p>
-                  </div>
-
-                  <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO QUINTO: FIRMA ELECTRÓNICA Y JURISDICCIÓN</h3>
-                    <p>Las partes reconocen plena validez a la firma electrónica simple o avanzada. Para todos los efectos legales, las partes fijan domicilio en la ciudad de Santiago y se someten a la jurisdicción de sus Tribunales Ordinarios de Justicia.</p>
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SÉPTIMO: PRODUCTOS Y OPTIMIZACIÓN SEO</h3>
+                      <p>EL CLIENTE proporcionará títulos, precios, SKU, descripciones e imágenes de productos. EL PROVEEDOR podrá utilizar herramientas de inteligencia artificial para optimizar títulos, descripciones y metadatos con fines SEO.</p>
+                    </div>
                   </div>
                 </div>
 
-                {/* FIRMAS */}
-                <div className="pt-16 pb-8 border-t border-black mt-12 grid grid-cols-2 gap-8 text-center print:pt-10 print:mt-8 avoid-break clause-block">
-                  <div>
-                    <div className="border-b border-black mb-2 pb-16"></div>
-                    <p className="font-bold uppercase text-xs text-black">{data.proveedorRepresentante}</p>
-                    <p className="text-[11px] font-mono text-zinc-700">RUT N° {data.proveedorRepresentanteRut}</p>
-                    <p className="text-[11px] font-bold uppercase text-black">{data.proveedorRazonSocial}</p>
-                    <p className="text-[10px] text-zinc-600 font-mono uppercase">EL PROVEEDOR</p>
+                {/* PIE DE PÁGINA OFICIAL HOJA 1 */}
+                <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
+                  <span>Contrato {data.planNombre} • Cotización N° {data.cotizacionNumero}</span>
+                  <span>Página 1 de 4</span>
+                </div>
+              </div>
+
+              {/* HOJA 2 (PÁGINA 2 DE 4) */}
+              <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
+                <div className="space-y-4">
+                  <div className="text-center pb-3 border-b border-black mb-4">
+                    <p className="text-xs font-mono font-bold text-black uppercase">
+                      CONTRATO DE PRESTACIÓN DE SERVICIOS — CONTINUACIÓN CLÁUSULAS
+                    </p>
                   </div>
 
-                  <div>
-                    <div className="border-b border-black mb-2 pb-16"></div>
-                    <p className="font-bold uppercase text-xs text-black">{data.clienteRepresentante}</p>
-                    <p className="text-[11px] font-mono text-zinc-700">RUT N° {data.clienteRepresentanteRut}</p>
-                    <p className="text-[11px] font-bold uppercase text-black">{data.clienteRazonSocial}</p>
-                    <p className="text-[10px] text-zinc-600 font-mono uppercase">EL CLIENTE</p>
+                  {/* CLAUSULAS LEGALES 8 A 15 */}
+                  <div className="space-y-3.5 text-justify text-black text-xs">
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">OCTAVO: APLICACIONES Y FACTURACIÓN ELECTRÓNICA</h3>
+                      <p>EL CLIENTE reconoce que determinadas funcionalidades podrán requerir aplicaciones o servicios de terceros (Shopify Apps, ERP, email marketing, logística, pasarelas de pago y sistemas de facturación electrónica como <strong>{data.sistemaFacturacion}</strong> o equivalente), cuyos planes, licencias y costos recurrentes serán de su exclusiva responsabilidad, salvo pacto escrito en contrario.</p>
+                      <p className="mt-1.5">En particular, EL PROVEEDOR realizará la configuración e integración técnica básica del sistema de facturación electrónica <strong>{data.sistemaFacturacion}</strong> o equivalente compatible. El servicio comprende la instalación o conexión del aplicativo disponible, vinculación con las credenciales proporcionadas por EL CLIENTE, parametrización inicial y pruebas de emisión de documentos tributarios.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">NOVENO: PLATAFORMAS DE TERCEROS</h3>
+                      <p>EL CLIENTE reconoce que Shopify, Google, Meta y proveedores de pasarelas son servicios de terceros y que sus precios, políticas y funcionalidades pueden variar sin intervención de EL PROVEEDOR.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO: PLAZOS Y CUMPLIMIENTO</h3>
+                      <p>El proyecto iniciará el <strong>{formatDateSpanish(data.fechaContrato)}</strong> y tendrá una duración estimada de <strong>{data.duracionSemanas} semanas</strong>, más <strong>{data.holguraSemanas} semanas</strong> de holgura operacional. Las actividades podrán ejecutarse en paralelo cuando ello resulte técnica y operativamente conveniente.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO PRIMERO: PRECIO Y FORMA DE PAGO</h3>
+                      <p>El valor neto del proyecto asciende a <strong>{formatCLP(data.valorNeto)} más IVA (19%)</strong>, equivalente a <strong>{formatCLP(totalIva)}</strong>, totalizando <strong>{formatCLP(totalConIva)}</strong>, pagaderos en los hitos establecidos en el Anexo N°3.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO SEGUNDO: APROBACIÓN DE ENTREGABLES</h3>
+                      <p>EL CLIENTE dispondrá de cinco (5) días hábiles para aprobar u observar cada entregable. En ausencia de observaciones dentro de dicho plazo, éstos se entenderán aprobados en forma definitiva.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO TERCERO: GARANTÍA Y SOPORTE</h3>
+                      <p>EL PROVEEDOR otorgará una garantía de treinta (30) días corridos contados desde la puesta en producción respecto de errores atribuibles al desarrollo. El soporte posterior será cotizado separadamente.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO CUARTO: PROPIEDAD INTELECTUAL Y CONFIDENCIALIDAD</h3>
+                      <p>EL CLIENTE será titular de los desarrollos específicos del proyecto. Las partes se obligan a mantener reserva sobre toda información confidencial obtenida por un plazo de dos (2) años.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO QUINTO: FIRMA ELECTRÓNICA Y JURISDICCIÓN</h3>
+                      <p>Las partes reconocen plena validez a la firma electrónica simple o avanzada. Para todos los efectos legales, las partes fijan domicilio en la ciudad de Santiago y se someten a la jurisdicción de sus Tribunales Ordinarios de Justicia.</p>
+                    </div>
+                  </div>
+
+                  {/* FIRMAS */}
+                  <div className="pt-12 pb-4 border-t border-black mt-8 grid grid-cols-2 gap-8 text-center">
+                    <div>
+                      <div className="border-b border-black mb-2 pb-14"></div>
+                      <p className="font-bold uppercase text-xs text-black">{data.proveedorRepresentante}</p>
+                      <p className="text-[11px] font-mono text-zinc-700">RUT N° {data.proveedorRepresentanteRut}</p>
+                      <p className="text-[11px] font-bold uppercase text-black">{data.proveedorRazonSocial}</p>
+                      <p className="text-[10px] text-zinc-600 font-mono uppercase">EL PROVEEDOR</p>
+                    </div>
+
+                    <div>
+                      <div className="border-b border-black mb-2 pb-14"></div>
+                      <p className="font-bold uppercase text-xs text-black">{data.clienteRepresentante}</p>
+                      <p className="text-[11px] font-mono text-zinc-700">RUT N° {data.clienteRepresentanteRut}</p>
+                      <p className="text-[11px] font-bold uppercase text-black">{data.clienteRazonSocial}</p>
+                      <p className="text-[10px] text-zinc-600 font-mono uppercase">EL CLIENTE</p>
+                    </div>
                   </div>
                 </div>
 
-                {/* PAGE BREAK FOR PRINTING ANNEXES */}
-                <div className="page-break print:break-before-page pt-10 html2pdf__page-break">
-                  <div className="text-center pb-4 border-b border-black mb-6">
+                {/* PIE DE PÁGINA OFICIAL HOJA 2 */}
+                <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
+                  <span>Contrato {data.planNombre} • {data.clienteRazonSocial}</span>
+                  <span>Página 2 de 4</span>
+                </div>
+              </div>
+
+              {/* HOJA 3 (PÁGINA 3 DE 4) */}
+              <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
+                <div className="space-y-5">
+                  <div className="text-center pb-4 border-b border-black mb-4">
                     <h2 className="text-lg font-black uppercase tracking-tight text-black">
                       ANEXOS INTEGRANTES DEL CONTRATO
                     </h2>
@@ -827,7 +829,7 @@ export default function ContratoGeneratorPage() {
                   </div>
 
                   {/* ANEXO 1 */}
-                  <div className="mb-8 space-y-2 avoid-break clause-block">
+                  <div className="space-y-2">
                     <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
                       ANEXO N°1 - DETALLE DE SERVICIOS Y ALCANCE DEL PROYECTO
                     </h3>
@@ -847,7 +849,7 @@ export default function ContratoGeneratorPage() {
                   </div>
 
                   {/* ANEXO 2: CARTA GANTT DETALLADA */}
-                  <div className="mb-8 space-y-3 avoid-break clause-block">
+                  <div className="space-y-2 pt-2">
                     <div className="bg-zinc-100 p-2 border border-black">
                       <h3 className="font-black text-xs uppercase text-black">
                         ANEXO N°2 - CARTA GANTT DETALLADA Y CRONOGRAMA DE CUMPLIMIENTO
@@ -871,7 +873,7 @@ export default function ContratoGeneratorPage() {
                         </thead>
                         <tbody>
                           {data.ganttEtapas.map((g, idx) => (
-                            <tr key={idx} className={`${idx % 2 === 0 ? 'bg-white' : 'bg-zinc-50'} avoid-break`}>
+                            <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-zinc-50'}>
                               <td className="border border-black p-1.5 align-top font-bold text-[8.5px] text-black break-words">
                                 {g.semana}
                               </td>
@@ -896,9 +898,26 @@ export default function ContratoGeneratorPage() {
                       </table>
                     </div>
                   </div>
+                </div>
+
+                {/* PIE DE PÁGINA OFICIAL HOJA 3 */}
+                <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
+                  <span>Anexos Integrantes • {data.clienteRazonSocial}</span>
+                  <span>Página 3 de 4</span>
+                </div>
+              </div>
+
+              {/* HOJA 4 (PÁGINA 4 DE 4) */}
+              <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
+                <div className="space-y-6">
+                  <div className="text-center pb-3 border-b border-black mb-4">
+                    <p className="text-xs font-mono font-bold text-black uppercase">
+                      ANEXOS N°3, N°4 Y N°5 — CONTINUACIÓN
+                    </p>
+                  </div>
 
                   {/* ANEXO 3: CRONOGRAMA DE PAGOS */}
-                  <div className="mb-8 space-y-3 avoid-break clause-block">
+                  <div className="space-y-3">
                     <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
                       ANEXO N°3 - CRONOGRAMA DE PAGOS E HITOS
                     </h3>
@@ -915,7 +934,7 @@ export default function ContratoGeneratorPage() {
                       </thead>
                       <tbody>
                         {data.hitosPago.map((h, idx) => (
-                          <tr key={idx} className="bg-white avoid-break">
+                          <tr key={idx} className="bg-white">
                             <td className="border border-black p-1.5 font-bold">{h.nombre}</td>
                             <td className="border border-black p-1.5 text-center font-mono text-[9px]">{h.porcentaje}%</td>
                             <td className="border border-black p-1.5 text-right font-mono text-[9px]">{formatCLP(h.montoNeto)}</td>
@@ -936,7 +955,7 @@ export default function ContratoGeneratorPage() {
                   </div>
 
                   {/* ANEXO 4: CHECKLIST DE INICIO */}
-                  <div className="mb-8 space-y-2 avoid-break clause-block">
+                  <div className="space-y-2 pt-2">
                     <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
                       ANEXO N°4 - CHECKLIST DE INICIO DEL PROYECTO
                     </h3>
@@ -969,7 +988,7 @@ export default function ContratoGeneratorPage() {
                   </div>
 
                   {/* ANEXO 5: SERVICIOS DE TERCEROS */}
-                  <div className="space-y-2 avoid-break clause-block">
+                  <div className="space-y-2 pt-2">
                     <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
                       ANEXO N°5 - APLICACIONES Y SERVICIOS DE TERCEROS
                     </h3>
@@ -983,9 +1002,13 @@ export default function ContratoGeneratorPage() {
                       <li><strong>Aplicaciones Shopify (Klaviyo, Judge.me, etc.):</strong> Licencias mensuales según volumen de uso.</li>
                     </ul>
                   </div>
-
                 </div>
 
+                {/* PIE DE PÁGINA OFICIAL HOJA 4 */}
+                <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
+                  <span>Anexos Integrantes • {data.clienteRazonSocial}</span>
+                  <span>Página 4 de 4</span>
+                </div>
               </div>
 
             </div>
