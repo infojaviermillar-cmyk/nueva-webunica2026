@@ -18,8 +18,7 @@ import {
   Plus,
   Trash2,
   RefreshCw,
-  CheckCircle2,
-  Edit3
+  CheckCircle2
 } from 'lucide-react';
 import { 
   ContractData, 
@@ -74,6 +73,7 @@ export default function ContratoGeneratorPage() {
   const [data, setData] = useState<ContractData>(PACIFIC_COLOR_PRESET);
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState<'editor' | 'preview'>('preview');
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
   // Format Spanish date for document header
   const formatDateSpanish = (dateString: string) => {
@@ -103,7 +103,6 @@ export default function ContratoGeneratorPage() {
   // Recalculate payments based on net value
   const handleNetoChange = (newNeto: number) => {
     const iva = Math.round(newNeto * (data.ivaPorcentaje / 100));
-    const total = newNeto + iva;
 
     const newHitos = data.hitosPago.map(hito => {
       const hitoNeto = Math.round(newNeto * (hito.porcentaje / 100));
@@ -123,9 +122,7 @@ export default function ContratoGeneratorPage() {
     });
   };
 
-  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
-
-  // Real 1-Click PDF Generation Engine using jsPDF + html2canvas
+  // Direct 1-Click PDF Generation Engine using jsPDF + html2canvas
   const handleGenerateRealPdf = async () => {
     setIsGeneratingPdf(true);
     document.body.classList.add('generating-pdf');
@@ -144,7 +141,7 @@ export default function ContratoGeneratorPage() {
 
       const pageWidth = pdf.internal.pageSize.getWidth();
       const pageHeight = pdf.internal.pageSize.getHeight();
-      const margin = 12;
+      const margin = 15;
       const contentWidth = pageWidth - margin * 2;
 
       const canvas = await html2canvas(documentEl, {
@@ -214,11 +211,11 @@ export default function ContratoGeneratorPage() {
         <meta charset="utf-8">
         <title>Contrato ${data.clienteRazonSocial}</title>
         <style>
-          body { font-family: 'Arial', sans-serif; font-size: 11pt; line-height: 1.5; color: #111; }
+          body { font-family: 'Arial', sans-serif; font-size: 11pt; line-height: 1.5; color: #000; }
           h1, h2, h3 { text-align: center; text-transform: uppercase; font-weight: bold; }
           .clause-title { font-weight: bold; margin-top: 14pt; }
           table { width: 100%; border-collapse: collapse; margin: 12pt 0; }
-          th, td { border: 1px solid #999; padding: 6pt; font-size: 10pt; text-align: left; }
+          th, td { border: 1px solid #000; padding: 6pt; font-size: 10pt; text-align: left; }
           th { background-color: #f2f2f2; font-weight: bold; }
           .signature-box { margin-top: 40pt; width: 100%; }
           .signature-col { width: 48%; float: left; text-align: center; }
@@ -281,6 +278,48 @@ export default function ContratoGeneratorPage() {
   return (
     <div className="min-h-screen bg-zinc-100 text-zinc-900 pt-28 sm:pt-36 lg:pt-40 pb-20 print:pt-0 print:pb-0 print:bg-white">
       
+      {/* PRINT CSS STYLES FOR CLEAN B&W LEGAL DOCUMENT */}
+      <style jsx global>{`
+        @media print {
+          body { background: white !important; color: black !important; }
+          header, footer, .print\\:hidden, nav { display: none !important; }
+          #legal-contract-print-area {
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            color: black !important;
+            font-size: 11pt !important;
+            line-height: 1.5 !important;
+          }
+          .clause-block, tr, table, .avoid-break {
+            break-inside: avoid !important;
+            page-break-inside: avoid !important;
+          }
+          .page-break {
+            break-before: page !important;
+            page-break-before: always !important;
+          }
+          @page {
+            size: letter;
+            margin: 18mm 15mm 18mm 15mm;
+          }
+          input, textarea {
+            border: none !important;
+            background: transparent !important;
+            resize: none !important;
+            outline: none !important;
+            padding: 0 !important;
+          }
+        }
+        .generating-pdf .pdf-hide {
+          display: none !important;
+        }
+        .avoid-break {
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+        }
+      `}</style>
+
       {/* HEADER BANNER / ACTIONS (Hidden on print) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8 print:hidden">
         <div className="bg-zinc-950 text-white rounded-3xl p-6 sm:p-8 border border-zinc-800 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6">
@@ -293,7 +332,7 @@ export default function ContratoGeneratorPage() {
                 <FileText className="w-6 h-6 text-[#7850FA]" />
                 <h1 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white font-heading">Generador de Contratos Webunica</h1>
               </div>
-              <p className="text-xs sm:text-sm text-zinc-400 font-mono mt-1">Generador Legal Automatizado con Motor PDF Real • Cotizaciones N° {data.cotizacionNumero}</p>
+              <p className="text-xs sm:text-sm text-zinc-400 font-mono mt-1">Generador Legal Automatizado • Cotizaciones N° {data.cotizacionNumero}</p>
             </div>
           </div>
 
@@ -315,11 +354,11 @@ export default function ContratoGeneratorPage() {
           </div>
         </div>
 
-        {/* PRIMARY BIG ACTION BUTTONS BAR WITH MOTOR PDF REAL */}
+        {/* PRIMARY BIG ACTION BUTTONS BAR */}
         <div className="mt-4 bg-white p-4 sm:p-5 rounded-3xl border border-zinc-200 shadow-md flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-600">
             <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-            <span>Documento generado en tiempo real para: <strong className="text-zinc-950">{data.clienteRazonSocial}</strong></span>
+            <span>Documento formal generado para: <strong className="text-zinc-950">{data.clienteRazonSocial}</strong></span>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
@@ -333,7 +372,7 @@ export default function ContratoGeneratorPage() {
 
             <button 
               onClick={handleDownloadDoc}
-              className="flex-1 sm:flex-none px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/25 active:scale-95 cursor-pointer"
+              className="flex-1 sm:flex-none px-5 py-3 bg-zinc-800 hover:bg-zinc-700 text-white rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               <Download className="w-4 h-4" />
               Descargar Word (.doc)
@@ -347,23 +386,22 @@ export default function ContratoGeneratorPage() {
               {isGeneratingPdf ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Generando PDF Real...
+                  Generando PDF...
                 </>
               ) : (
                 <>
                   <Download className="w-4 h-4" />
-                  Descargar PDF Real (.pdf)
+                  Descargar PDF (.pdf)
                 </>
               )}
             </button>
 
             <button 
               onClick={handlePrint}
-              className="flex-1 sm:flex-none px-5 py-3 bg-zinc-900 hover:bg-zinc-800 text-white rounded-2xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
-              title="Vista previa e impresión de navegador"
+              className="flex-1 sm:flex-none px-6 py-3 bg-zinc-950 hover:bg-zinc-800 text-white rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
             >
-              <Printer className="w-4 h-4 text-zinc-400" />
-              Imprimir
+              <Printer className="w-4 h-4" />
+              Imprimir / Guardar PDF
             </button>
           </div>
         </div>
@@ -642,7 +680,7 @@ export default function ContratoGeneratorPage() {
                           type="text" 
                           value={etapa.pagoPct}
                           onChange={(e) => updateGanttCell(index, 'pagoPct', e.target.value)}
-                          className="bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-xs font-bold text-[#7850FA] w-20 text-center"
+                          className="bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-xs font-bold text-zinc-950 w-20 text-center"
                         />
                       </div>
                     </div>
@@ -654,157 +692,146 @@ export default function ContratoGeneratorPage() {
           </div>
 
           {/* ========================================================= */}
-          {/* RIGHT PANEL: LIVE FORMAL LEGAL CONTRACT PREVIEW           */}
+          {/* RIGHT PANEL: LIVE FORMAL MONOCHROME LEGAL CONTRACT PREVIEW */}
           {/* ========================================================= */}
           <div className={`lg:col-span-8 ${activeTab === 'editor' ? 'hidden lg:block' : 'block'}`}>
-            <div className="bg-white p-8 sm:p-14 rounded-3xl border border-zinc-200 shadow-xl print:shadow-none print:border-none print:p-0 text-zinc-900 leading-relaxed font-sans text-sm print:text-xs">
+            <div className="bg-white p-8 sm:p-14 rounded-3xl border border-zinc-300 shadow-xl print:shadow-none print:border-none print:p-0 text-black leading-relaxed font-sans text-xs sm:text-sm print:text-xs">
               
-              <div id="legal-contract-print-area" className="space-y-6">
+              <div id="legal-contract-print-area" className="space-y-6 text-black">
                 
-                {/* LOGO Y MARCA OFICIAL WEBUNICA */}
-                <div className="flex flex-col items-center justify-center pb-5 border-b border-zinc-300 mb-6 text-center">
-                  <div className="flex items-center gap-1 text-zinc-950 font-black text-2xl tracking-tighter uppercase font-heading">
-                    <span>web</span>
-                    <span className="text-[#7850FA]">unica</span>
-                  </div>
-                  <span className="text-[9px] font-medium uppercase tracking-[0.20em] text-zinc-600 mt-0.5">
-                    UNA NUEVA ERA WEB
-                  </span>
-                </div>
-
-                {/* TITLE HEADER */}
-                <div className="text-center pb-6 border-b border-zinc-300">
-                  <h1 className="text-xl sm:text-2xl font-black uppercase tracking-tight font-heading mb-1 text-zinc-950">
+                {/* FORMAL DOCUMENT TITLE HEADER (MONOCHROME, NO LOGO) */}
+                <div className="text-center pb-6 border-b border-black">
+                  <h1 className="text-xl sm:text-2xl font-black uppercase tracking-tight mb-1 text-black font-heading">
                     CONTRATO DE PRESTACIÓN DE SERVICIOS
                   </h1>
-                  <h2 className="text-lg font-bold text-[#7850FA] uppercase tracking-wider font-mono">
+                  <h2 className="text-base sm:text-lg font-bold text-black uppercase tracking-wider font-mono">
                     {data.planNombre}
                   </h2>
-                  <p className="text-xs font-mono text-zinc-500 mt-1">
+                  <p className="text-xs font-mono text-zinc-700 mt-1">
                     COTIZACIÓN N° {data.cotizacionNumero}
                   </p>
                 </div>
 
                 {/* COMPARECIENTES */}
-                <p className="text-justify leading-relaxed text-zinc-900">
+                <p className="text-justify leading-relaxed text-black">
                   En Santiago de Chile, a <strong>{formatDateSpanish(data.fechaContrato)}</strong>, entre <strong>{data.proveedorRazonSocial}</strong>, RUT N° <strong>{data.proveedorRut}</strong>, representada por don <strong>{data.proveedorRepresentante}</strong>, RUT N° <strong>{data.proveedorRepresentanteRut}</strong>, ambos domiciliados en {data.proveedorDireccion}, en adelante &apos;EL PROVEEDOR&apos;; y, por la otra, <strong>{data.clienteRazonSocial}</strong>, RUT N° <strong>{data.clienteRut}</strong>, representada por don <strong>{data.clienteRepresentante}</strong>, RUT N° <strong>{data.clienteRepresentanteRut}</strong>, domiciliada en {data.clienteDireccion}, en adelante &apos;EL CLIENTE&apos;, se celebra el presente Contrato de Prestación de Servicios.
                 </p>
 
-                {/* CLAUSULAS LEGALES */}
-                <div className="space-y-4 text-justify">
+                {/* CLAUSULAS LEGALES (MONOCHROME UNIFORM STYLING) */}
+                <div className="space-y-4 text-justify text-black">
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">PRIMERO: ANTECEDENTES</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">PRIMERO: ANTECEDENTES</h3>
                     <p>EL PROVEEDOR declara contar con la experiencia, conocimientos, infraestructura y recursos necesarios para desarrollar e implementar soluciones de comercio electrónico sobre la plataforma Shopify y arquitecturas web avanzadas.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">SEGUNDO: OBJETO</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEGUNDO: OBJETO</h3>
                     <p>EL PROVEEDOR se obliga a desarrollar e implementar el proyecto <strong>{data.planNombre}</strong> conforme a la Cotización N° <strong>{data.cotizacionNumero}</strong> y sus anexos, incluyendo la configuración e integración técnica de un sistema de facturación electrónica compatible.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">TERCERO: ALCANCE</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">TERCERO: ALCANCE</h3>
                     <p>El detalle de los servicios, actividades, pagos, requisitos de inicio y servicios de terceros se encuentra en los Anexos N°1, N°2, N°3, N°4 y N°5, todos los cuales forman parte integrante e inseparable del presente contrato.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">CUARTO: HABILITACIÓN SHOPIFY Y PLATAFORMAS</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">CUARTO: HABILITACIÓN SHOPIFY Y PLATAFORMAS</h3>
                     <p>EL PROVEEDOR creará la cuenta Shopify Partner correspondiente. EL CLIENTE deberá aceptar la invitación de propiedad, contratar un plan Shopify, aceptar sus términos y registrar una tarjeta válida para cobros recurrentes. La demora en estas gestiones suspenderá automáticamente los plazos del proyecto.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">QUINTO: INFORMACIÓN DE MARCA Y UX/UI</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">QUINTO: INFORMACIÓN DE MARCA Y UX/UI</h3>
                     <p>EL CLIENTE proporcionará logotipos, colores corporativos, manual de marca, tipografías, banners, fotografías, catálogos y referencias visuales. Las partes reconocen que el proyecto contempla dos líneas de trabajo paralelas: Diseño UX/UI y Desarrollo de Software.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">SEXTO: MIGRACIÓN Y ACCESOS</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEXTO: MIGRACIÓN Y ACCESOS</h3>
                     <p>EL CLIENTE entregará oportunamente los accesos a plataformas previas (WordPress, WooCommerce, hosting, ERP, sistema de facturación electrónica) y demás credenciales necesarias para la migración e integración de contenidos, productos y servicios.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">SÉPTIMO: PRODUCTOS Y OPTIMIZACIÓN SEO</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SÉPTIMO: PRODUCTOS Y OPTIMIZACIÓN SEO</h3>
                     <p>EL CLIENTE proporcionará títulos, precios, SKU, descripciones e imágenes de productos. EL PROVEEDOR podrá utilizar herramientas de inteligencia artificial para optimizar títulos, descripciones y metadatos con fines SEO.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">OCTAVO: APLICACIONES Y FACTURACIÓN ELECTRÓNICA</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">OCTAVO: APLICACIONES Y FACTURACIÓN ELECTRÓNICA</h3>
                     <p>EL CLIENTE reconoce que determinadas funcionalidades podrán requerir aplicaciones o servicios de terceros (Shopify Apps, ERP, email marketing, logística, pasarelas de pago y sistemas de facturación electrónica como <strong>{data.sistemaFacturacion}</strong> o equivalente), cuyos planes, licencias y costos recurrentes serán de su exclusiva responsabilidad, salvo pacto escrito en contrario.</p>
                     <p className="mt-2">En particular, EL PROVEEDOR realizará la configuración e integración técnica básica del sistema de facturación electrónica <strong>{data.sistemaFacturacion}</strong> o equivalente compatible. El servicio comprende la instalación o conexión del aplicativo disponible, vinculación con las credenciales proporcionadas por EL CLIENTE, parametrización inicial y pruebas de emisión de documentos tributarios.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">NOVENO: PLATAFORMAS DE TERCEROS</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">NOVENO: PLATAFORMAS DE TERCEROS</h3>
                     <p>EL CLIENTE reconoce que Shopify, Google, Meta y proveedores de pasarelas son servicios de terceros y que sus precios, políticas y funcionalidades pueden variar sin intervención de EL PROVEEDOR.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">DÉCIMO: PLAZOS Y CUMPLIMIENTO</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO: PLAZOS Y CUMPLIMIENTO</h3>
                     <p>El proyecto iniciará el <strong>{formatDateSpanish(data.fechaContrato)}</strong> y tendrá una duración estimada de <strong>{data.duracionSemanas} semanas</strong>, más <strong>{data.holguraSemanas} semanas</strong> de holgura operacional. Las actividades podrán ejecutarse en paralelo cuando ello resulte técnica y operativamente conveniente.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">DÉCIMO PRIMERO: PRECIO Y FORMA DE PAGO</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO PRIMERO: PRECIO Y FORMA DE PAGO</h3>
                     <p>El valor neto del proyecto asciende a <strong>{formatCLP(data.valorNeto)} más IVA (19%)</strong>, equivalente a <strong>{formatCLP(totalIva)}</strong>, totalizando <strong>{formatCLP(totalConIva)}</strong>, pagaderos en los hitos establecidos en el Anexo N°3.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">DÉCIMO SEGUNDO: APROBACIÓN DE ENTREGABLES</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO SEGUNDO: APROBACIÓN DE ENTREGABLES</h3>
                     <p>EL CLIENTE dispondrá de cinco (5) días hábiles para aprobar u observar cada entregable. En ausencia de observaciones dentro de dicho plazo, éstos se entenderán aprobados en forma definitiva.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">DÉCIMO TERCERO: GARANTÍA Y SOPORTE</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO TERCERO: GARANTÍA Y SOPORTE</h3>
                     <p>EL PROVEEDOR otorgará una garantía de treinta (30) días corridos contados desde la puesta en producción respecto de errores atribuibles al desarrollo. El soporte posterior será cotizado separadamente.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">DÉCIMO CUARTO: PROPIEDAD INTELECTUAL Y CONFIDENCIALIDAD</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO CUARTO: PROPIEDAD INTELECTUAL Y CONFIDENCIALIDAD</h3>
                     <p>EL CLIENTE será titular de los desarrollos específicos del proyecto. Las partes se obligan a mantener reserva sobre toda información confidencial obtenida por un plazo de dos (2) años.</p>
                   </div>
 
                   <div className="clause-block avoid-break">
-                    <h3 className="font-bold uppercase text-zinc-950 text-xs tracking-wider mb-1">DÉCIMO QUINTO: FIRMA ELECTRÓNICA Y JURISDICCIÓN</h3>
+                    <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO QUINTO: FIRMA ELECTRÓNICA Y JURISDICCIÓN</h3>
                     <p>Las partes reconocen plena validez a la firma electrónica simple o avanzada. Para todos los efectos legales, las partes fijan domicilio en la ciudad de Santiago y se someten a la jurisdicción de sus Tribunales Ordinarios de Justicia.</p>
                   </div>
                 </div>
 
                 {/* FIRMAS */}
-                <div className="pt-16 pb-8 border-t border-zinc-300 mt-12 grid grid-cols-2 gap-8 text-center print:pt-10 print:mt-8 avoid-break clause-block">
+                <div className="pt-16 pb-8 border-t border-black mt-12 grid grid-cols-2 gap-8 text-center print:pt-10 print:mt-8 avoid-break clause-block">
                   <div>
-                    <div className="border-b border-zinc-950 mb-2 pb-16"></div>
-                    <p className="font-bold uppercase text-xs text-zinc-950">{data.proveedorRepresentante}</p>
-                    <p className="text-[11px] font-mono text-zinc-600">RUT N° {data.proveedorRepresentanteRut}</p>
-                    <p className="text-[11px] font-bold uppercase text-zinc-800">{data.proveedorRazonSocial}</p>
-                    <p className="text-[10px] text-zinc-500 font-mono uppercase">EL PROVEEDOR</p>
+                    <div className="border-b border-black mb-2 pb-16"></div>
+                    <p className="font-bold uppercase text-xs text-black">{data.proveedorRepresentante}</p>
+                    <p className="text-[11px] font-mono text-zinc-700">RUT N° {data.proveedorRepresentanteRut}</p>
+                    <p className="text-[11px] font-bold uppercase text-black">{data.proveedorRazonSocial}</p>
+                    <p className="text-[10px] text-zinc-600 font-mono uppercase">EL PROVEEDOR</p>
                   </div>
 
                   <div>
-                    <div className="border-b border-zinc-950 mb-2 pb-16"></div>
-                    <p className="font-bold uppercase text-xs text-zinc-950">{data.clienteRepresentante}</p>
-                    <p className="text-[11px] font-mono text-zinc-600">RUT N° {data.clienteRepresentanteRut}</p>
-                    <p className="text-[11px] font-bold uppercase text-zinc-800">{data.clienteRazonSocial}</p>
-                    <p className="text-[10px] text-zinc-500 font-mono uppercase">EL CLIENTE</p>
+                    <div className="border-b border-black mb-2 pb-16"></div>
+                    <p className="font-bold uppercase text-xs text-black">{data.clienteRepresentante}</p>
+                    <p className="text-[11px] font-mono text-zinc-700">RUT N° {data.clienteRepresentanteRut}</p>
+                    <p className="text-[11px] font-bold uppercase text-black">{data.clienteRazonSocial}</p>
+                    <p className="text-[10px] text-zinc-600 font-mono uppercase">EL CLIENTE</p>
                   </div>
                 </div>
 
                 {/* PAGE BREAK FOR PRINTING ANNEXES */}
                 <div className="page-break print:break-before-page pt-10 html2pdf__page-break">
-                  <div className="text-center pb-4 border-b border-zinc-300 mb-6">
-                    <h2 className="text-lg font-black uppercase tracking-tight text-zinc-950">
+                  <div className="text-center pb-4 border-b border-black mb-6">
+                    <h2 className="text-lg font-black uppercase tracking-tight text-black">
                       ANEXOS INTEGRANTES DEL CONTRATO
                     </h2>
-                    <p className="text-xs font-mono text-zinc-500">
+                    <p className="text-xs font-mono text-zinc-700">
                       Cotización N° {data.cotizacionNumero} • {data.clienteRazonSocial}
                     </p>
                   </div>
 
                   {/* ANEXO 1 */}
                   <div className="mb-8 space-y-2 avoid-break clause-block">
-                    <h3 className="font-black text-sm uppercase text-zinc-950 bg-zinc-100 p-2 rounded-lg border border-zinc-200">
+                    <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
                       ANEXO N°1 - DETALLE DE SERVICIOS Y ALCANCE DEL PROYECTO
                     </h3>
-                    <div className="pl-2 space-y-2 text-xs">
+                    <div className="pl-2 space-y-2 text-xs text-black">
                       <p><strong>Servicio Contratado:</strong> {data.planNombre}.</p>
                       <p>{data.planDescripcion}</p>
                       <ul className="list-disc pl-5 space-y-1">
@@ -819,81 +846,78 @@ export default function ContratoGeneratorPage() {
                     </div>
                   </div>
 
-                  {/* ANEXO 2: CARTA GANTT DETALLADA CON EDICIÓN DIRECTA */}
+                  {/* ANEXO 2: CARTA GANTT DETALLADA */}
                   <div className="mb-8 space-y-3 avoid-break clause-block">
-                    <div className="flex items-center justify-between bg-zinc-100 p-2 rounded-lg border border-zinc-200">
-                      <h3 className="font-black text-sm uppercase text-zinc-950">
+                    <div className="bg-zinc-100 p-2 border border-black">
+                      <h3 className="font-black text-xs uppercase text-black">
                         ANEXO N°2 - CARTA GANTT DETALLADA Y CRONOGRAMA DE CUMPLIMIENTO
                       </h3>
-                      <span className="text-[10px] font-bold uppercase text-[#7850FA] bg-purple-50 px-2 py-0.5 rounded border border-purple-200 print:hidden pdf-hide">
-                        ✏️ Editable en pantalla
-                      </span>
                     </div>
-                    <p className="text-xs text-zinc-600">
+                    <p className="text-xs text-black">
                       Fechas y actividades estimadas. Las etapas se ajustarán en caso de demoras imputables a entrega de información o accesos por parte de EL CLIENTE.
                     </p>
 
                     <div className="overflow-x-auto">
-                      <table className="w-full text-xs text-left border-collapse border border-zinc-300">
+                      <table className="w-full text-xs text-left border-collapse border border-black">
                         <thead>
-                          <tr className="bg-zinc-100 font-bold uppercase text-[10px] text-zinc-800">
-                            <th className="border border-zinc-300 p-2 w-24">Semana</th>
-                            <th className="border border-zinc-300 p-2 w-32">Fechas</th>
-                            <th className="border border-zinc-300 p-2">Diseño UX/UI</th>
-                            <th className="border border-zinc-300 p-2">Desarrollo Shopify / Integraciones</th>
-                            <th className="border border-zinc-300 p-2">Entregable</th>
-                            <th className="border border-zinc-300 p-2 text-center w-20">Hito Pago</th>
+                          <tr className="bg-zinc-100 font-bold uppercase text-[10px] text-black">
+                            <th className="border border-black p-2 w-24">Semana</th>
+                            <th className="border border-black p-2 w-32">Fechas</th>
+                            <th className="border border-black p-2">Diseño UX/UI</th>
+                            <th className="border border-black p-2">Desarrollo Shopify / Integraciones</th>
+                            <th className="border border-black p-2">Entregable</th>
+                            <th className="border border-black p-2 text-center w-20">Hito Pago</th>
                           </tr>
                         </thead>
                         <tbody>
                           {data.ganttEtapas.map((g, idx) => (
-                            <tr key={idx} className={`${idx % 2 === 0 ? 'bg-white' : 'bg-zinc-50/70'} avoid-break`}>
-                              <td className="border border-zinc-300 p-1.5 font-bold">
+                            <tr key={idx} className={`${idx % 2 === 0 ? 'bg-white' : 'bg-zinc-50'} avoid-break`}>
+                              <td className="border border-black p-1.5 font-bold">
                                 <input 
                                   type="text" 
                                   value={g.semana}
                                   onChange={(e) => updateGanttCell(idx, 'semana', e.target.value)}
-                                  className="w-full bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 font-bold text-xs text-zinc-950"
+                                  className="w-full bg-transparent border-0 focus:outline-none p-0 font-bold text-xs text-black"
                                 />
                               </td>
-                              <td className="border border-zinc-300 p-1.5 font-mono text-[11px]">
+                              <td className="border border-black p-1.5 font-mono text-[11px]">
                                 <input 
                                   type="text" 
                                   value={g.fechas}
                                   onChange={(e) => updateGanttCell(idx, 'fechas', e.target.value)}
-                                  className="w-full bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 font-mono text-[11px] text-zinc-900"
+                                  className="w-full bg-transparent border-0 focus:outline-none p-0 font-mono text-[11px] text-black"
                                 />
                               </td>
-                              <td className="border border-zinc-300 p-1.5">
+                              <td className="border border-black p-1.5">
                                 <textarea 
                                   rows={2}
                                   value={g.disenoUxUi}
                                   onChange={(e) => updateGanttCell(idx, 'disenoUxUi', e.target.value)}
-                                  className="w-full bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 text-xs text-zinc-900 resize-none"
+                                  className="w-full bg-transparent border-0 focus:outline-none p-0 text-xs text-black resize-none"
                                 />
                               </td>
-                              <td className="border border-zinc-300 p-1.5">
+                              <td className="border border-black p-1.5">
                                 <textarea 
                                   rows={2}
                                   value={g.desarrolloShopify}
                                   onChange={(e) => updateGanttCell(idx, 'desarrolloShopify', e.target.value)}
-                                  className="w-full bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 text-xs text-zinc-900 resize-none"
+                                  className="w-full bg-transparent border-0 focus:outline-none p-0 text-xs text-black resize-none"
                                 />
                               </td>
-                              <td className="border border-zinc-300 p-1.5 font-semibold text-zinc-900">
+                              <td className="border border-black p-1.5 font-semibold text-black">
                                 <textarea 
                                   rows={2}
                                   value={g.entregable}
                                   onChange={(e) => updateGanttCell(idx, 'entregable', e.target.value)}
-                                  className="w-full bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 text-xs font-semibold text-zinc-950 resize-none"
+                                  className="w-full bg-transparent border-0 focus:outline-none p-0 text-xs font-semibold text-black resize-none"
                                 />
                               </td>
-                              <td className="border border-zinc-300 p-1.5 text-center font-bold text-[#7850FA]">
+                              <td className="border border-black p-1.5 text-center font-bold text-black">
                                 <input 
                                   type="text" 
                                   value={g.pagoPct}
                                   onChange={(e) => updateGanttCell(idx, 'pagoPct', e.target.value)}
-                                  className="w-full text-center bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 font-bold text-xs text-[#7850FA]"
+                                  className="w-full text-center bg-transparent border-0 focus:outline-none p-0 font-bold text-xs text-black"
                                 />
                               </td>
                             </tr>
@@ -905,37 +929,37 @@ export default function ContratoGeneratorPage() {
 
                   {/* ANEXO 3: CRONOGRAMA DE PAGOS */}
                   <div className="mb-8 space-y-3 avoid-break clause-block">
-                    <h3 className="font-black text-sm uppercase text-zinc-950 bg-zinc-100 p-2 rounded-lg border border-zinc-200">
+                    <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
                       ANEXO N°3 - CRONOGRAMA DE PAGOS E HITOS
                     </h3>
 
-                    <table className="w-full text-xs text-left border-collapse border border-zinc-300">
+                    <table className="w-full text-xs text-left border-collapse border border-black">
                       <thead>
-                        <tr className="bg-zinc-100 font-bold uppercase text-[10px] text-zinc-800">
-                          <th className="border border-zinc-300 p-2">Hito de Cumplimiento</th>
-                          <th className="border border-zinc-300 p-2 text-center">% Hito</th>
-                          <th className="border border-zinc-300 p-2 text-right">Monto Neto</th>
-                          <th className="border border-zinc-300 p-2 text-right">IVA (19%)</th>
-                          <th className="border border-zinc-300 p-2 text-right">Total a Pagar</th>
+                        <tr className="bg-zinc-100 font-bold uppercase text-[10px] text-black">
+                          <th className="border border-black p-2">Hito de Cumplimiento</th>
+                          <th className="border border-black p-2 text-center">% Hito</th>
+                          <th className="border border-black p-2 text-right">Monto Neto</th>
+                          <th className="border border-black p-2 text-right">IVA (19%)</th>
+                          <th className="border border-black p-2 text-right">Total a Pagar</th>
                         </tr>
                       </thead>
                       <tbody>
                         {data.hitosPago.map((h, idx) => (
                           <tr key={idx} className="bg-white avoid-break">
-                            <td className="border border-zinc-300 p-2 font-bold">{h.nombre}</td>
-                            <td className="border border-zinc-300 p-2 text-center font-mono">{h.porcentaje}%</td>
-                            <td className="border border-zinc-300 p-2 text-right font-mono">{formatCLP(h.montoNeto)}</td>
-                            <td className="border border-zinc-300 p-2 text-right font-mono">{formatCLP(h.montoIva)}</td>
-                            <td className="border border-zinc-300 p-2 text-right font-black font-mono text-[#7850FA]">{formatCLP(h.montoTotal)}</td>
+                            <td className="border border-black p-2 font-bold">{h.nombre}</td>
+                            <td className="border border-black p-2 text-center font-mono">{h.porcentaje}%</td>
+                            <td className="border border-black p-2 text-right font-mono">{formatCLP(h.montoNeto)}</td>
+                            <td className="border border-black p-2 text-right font-mono">{formatCLP(h.montoIva)}</td>
+                            <td className="border border-black p-2 text-right font-black font-mono text-black">{formatCLP(h.montoTotal)}</td>
                           </tr>
                         ))}
                       </tbody>
                       <tfoot>
                         <tr className="bg-zinc-100 font-black uppercase text-xs">
-                          <td colSpan={2} className="border border-zinc-300 p-2">TOTAL PROYECTO CONTRATADO</td>
-                          <td className="border border-zinc-300 p-2 text-right font-mono">{formatCLP(data.valorNeto)}</td>
-                          <td className="border border-zinc-300 p-2 text-right font-mono">{formatCLP(totalIva)}</td>
-                          <td className="border border-zinc-300 p-2 text-right font-mono text-emerald-700">{formatCLP(totalConIva)}</td>
+                          <td colSpan={2} className="border border-black p-2">TOTAL PROYECTO CONTRATADO</td>
+                          <td className="border border-black p-2 text-right font-mono">{formatCLP(data.valorNeto)}</td>
+                          <td className="border border-black p-2 text-right font-mono">{formatCLP(totalIva)}</td>
+                          <td className="border border-black p-2 text-right font-mono text-black font-black">{formatCLP(totalConIva)}</td>
                         </tr>
                       </tfoot>
                     </table>
@@ -943,32 +967,32 @@ export default function ContratoGeneratorPage() {
 
                   {/* ANEXO 4: CHECKLIST DE INICIO */}
                   <div className="mb-8 space-y-2 avoid-break clause-block">
-                    <h3 className="font-black text-sm uppercase text-zinc-950 bg-zinc-100 p-2 rounded-lg border border-zinc-200">
+                    <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
                       ANEXO N°4 - CHECKLIST DE INICIO DEL PROYECTO
                     </h3>
-                    <div className="grid grid-cols-2 gap-2 text-xs">
-                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 rounded border border-zinc-200">
-                        <span className="w-4 h-4 rounded border border-zinc-400 flex items-center justify-center text-[10px] font-bold text-zinc-700">✓</span>
+                    <div className="grid grid-cols-2 gap-2 text-xs text-black">
+                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
+                        <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
                         <span>Cuenta Shopify creada</span>
                       </div>
-                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 rounded border border-zinc-200">
-                        <span className="w-4 h-4 rounded border border-zinc-400 flex items-center justify-center text-[10px] font-bold text-zinc-700">✓</span>
+                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
+                        <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
                         <span>Invitación de propietario aceptada</span>
                       </div>
-                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 rounded border border-zinc-200">
-                        <span className="w-4 h-4 rounded border border-zinc-400 flex items-center justify-center text-[10px] font-bold text-zinc-700">✓</span>
+                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
+                        <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
                         <span>Plan Shopify contratado</span>
                       </div>
-                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 rounded border border-zinc-200">
-                        <span className="w-4 h-4 rounded border border-zinc-400 flex items-center justify-center text-[10px] font-bold text-zinc-700">✓</span>
+                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
+                        <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
                         <span>Accesos WordPress/WooCommerce</span>
                       </div>
-                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 rounded border border-zinc-200">
-                        <span className="w-4 h-4 rounded border border-zinc-400 flex items-center justify-center text-[10px] font-bold text-zinc-700">✓</span>
+                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
+                        <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
                         <span>Material de marca y manual entregados</span>
                       </div>
-                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 rounded border border-zinc-200">
-                        <span className="w-4 h-4 rounded border border-zinc-400 flex items-center justify-center text-[10px] font-bold text-zinc-700">✓</span>
+                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
+                        <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
                         <span>Servicio {data.sistemaFacturacion} activo</span>
                       </div>
                     </div>
@@ -976,13 +1000,13 @@ export default function ContratoGeneratorPage() {
 
                   {/* ANEXO 5: SERVICIOS DE TERCEROS */}
                   <div className="space-y-2 avoid-break clause-block">
-                    <h3 className="font-black text-sm uppercase text-zinc-950 bg-zinc-100 p-2 rounded-lg border border-zinc-200">
+                    <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
                       ANEXO N°5 - APLICACIONES Y SERVICIOS DE TERCEROS
                     </h3>
-                    <p className="text-xs text-zinc-600">
+                    <p className="text-xs text-black">
                       Los siguientes servicios son prestados por proveedores independientes. Sus costos de plan, suscripción o consumo mensual corresponden a EL CLIENTE:
                     </p>
-                    <ul className="list-disc pl-5 text-xs space-y-1">
+                    <ul className="list-disc pl-5 text-xs text-black space-y-1">
                       <li><strong>Plan Shopify:</strong> Cobrado por Shopify directamente a la tarjeta registrada por EL CLIENTE.</li>
                       <li><strong>Sistema Facturación ({data.sistemaFacturacion}):</strong> Suscripción y soporte del proveedor de facturación.</li>
                       <li><strong>Pasarelas de Pago (Webpay, Flow, Mercado Pago):</strong> Comisiones por transacción cobradas por la pasarela.</li>
