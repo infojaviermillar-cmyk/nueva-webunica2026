@@ -753,10 +753,4 @@ export default function WooCommercePage() {
     </main>
   );
 }
-ión WooCommerce"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
+
