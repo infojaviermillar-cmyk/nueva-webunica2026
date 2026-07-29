@@ -125,47 +125,64 @@ export default function ContratoGeneratorPage() {
 
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
-  // Real 1-Click PDF Generation Engine using html2pdf.js with smart page break avoidance
+  // Real 1-Click PDF Generation Engine using jsPDF + html2canvas
   const handleGenerateRealPdf = async () => {
     setIsGeneratingPdf(true);
     document.body.classList.add('generating-pdf');
     try {
-      const el = document.getElementById('legal-contract-print-area');
-      if (!el) return;
+      const documentEl = document.getElementById('legal-contract-print-area');
+      if (!documentEl) return;
 
-      const html2pdfModule = await import('html2pdf.js');
-      const html2pdf = (html2pdfModule.default || html2pdfModule) as any;
+      const html2canvas = (await import('html2canvas')).default;
+      const { jsPDF } = await import('jspdf');
+
+      const pdf = new jsPDF({
+        orientation: 'p',
+        unit: 'mm',
+        format: 'letter'
+      });
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const margin = 12;
+      const contentWidth = pageWidth - margin * 2;
+
+      const canvas = await html2canvas(documentEl, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        windowWidth: 1200
+      });
+
+      const imgWidth = contentWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const usablePageHeight = pageHeight - margin * 2;
+      
+      let heightLeft = imgHeight;
+      let position = margin;
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+
+      // Page 1
+      pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight);
+      heightLeft -= usablePageHeight;
+
+      // Multi-page rendering
+      while (heightLeft > 0) {
+        pdf.addPage();
+        position = margin - (imgHeight - heightLeft);
+        pdf.addImage(imgData, 'JPEG', margin, position, imgWidth, imgHeight);
+        heightLeft -= usablePageHeight;
+      }
 
       const cleanPlan = data.planNombre.replace(/[^a-zA-Z0-9]/g, '_');
       const cleanCliente = data.clienteRazonSocial.replace(/[^a-zA-Z0-9]/g, '_');
       const filename = `Contrato_${cleanPlan}_${cleanCliente}.pdf`;
 
-      const opt = {
-        margin: [15, 12, 15, 12] as [number, number, number, number],
-        filename: filename,
-        image: { type: 'jpeg' as const, quality: 0.98 },
-        html2canvas: { 
-          scale: 2, 
-          useCORS: true,
-          letterRendering: true,
-          logging: false,
-          backgroundColor: '#ffffff'
-        },
-        jsPDF: { 
-          unit: 'mm' as const, 
-          format: 'letter' as const, 
-          orientation: 'portrait' as const 
-        },
-        pagebreak: { 
-          mode: ['avoid-all' as const, 'css' as const, 'legacy' as const],
-          avoid: ['tr', 'h1', 'h2', 'h3', 'h4', '.avoid-break', 'p', '.clause-block']
-        }
-      };
-
-      await html2pdf().set(opt).from(el).save();
+      pdf.save(filename);
     } catch (err) {
-      console.error('PDF Engine Error:', err);
-      window.print();
+      console.error('PDF Export Error:', err);
     } finally {
       document.body.classList.remove('generating-pdf');
       setIsGeneratingPdf(false);
@@ -646,13 +663,11 @@ export default function ContratoGeneratorPage() {
                 
                 {/* LOGO Y MARCA OFICIAL WEBUNICA */}
                 <div className="flex flex-col items-center justify-center pb-5 border-b border-zinc-300 mb-6 text-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img 
-                    src="/logo-webunica.png.webp" 
-                    alt="Webunica Expertos en E-commerce" 
-                    className="h-10 w-auto brightness-0 mb-1"
-                  />
-                  <span className="text-[9px] font-medium uppercase tracking-[0.20em] text-zinc-600">
+                  <div className="flex items-center gap-1 text-zinc-950 font-black text-2xl tracking-tighter uppercase font-heading">
+                    <span>web</span>
+                    <span className="text-[#7850FA]">unica</span>
+                  </div>
+                  <span className="text-[9px] font-medium uppercase tracking-[0.20em] text-zinc-600 mt-0.5">
                     UNA NUEVA ERA WEB
                   </span>
                 </div>
