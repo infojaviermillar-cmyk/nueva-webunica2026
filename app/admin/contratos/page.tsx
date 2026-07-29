@@ -123,6 +123,47 @@ export default function ContratoGeneratorPage() {
     });
   };
 
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+
+  // Real PDF Engine using html2pdf.js
+  const handleGenerateRealPdf = async () => {
+    setIsGeneratingPdf(true);
+    try {
+      const el = document.getElementById('legal-contract-print-area');
+      if (!el) return;
+
+      const html2pdfModule = await import('html2pdf.js');
+      const html2pdf = html2pdfModule.default;
+
+      const filename = `Contrato_${data.planNombre.replace(/[^a-[#7850FA]0-9]/gi, '_')}_${data.clienteRazonSocial.replace(/[^a-zA-Z0-9]/gi, '_')}.pdf`;
+
+      const opt = {
+        margin: [12, 12, 12, 12],
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2, 
+          useCORS: true,
+          letterRendering: true,
+          logging: false
+        },
+        jsPDF: { 
+          unit: 'mm', 
+          format: 'letter', 
+          orientation: 'portrait' 
+        },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      };
+
+      await html2pdf().set(opt).from(el).save();
+    } catch (err) {
+      console.error('PDF Generation Error:', err);
+      window.print();
+    } finally {
+      setIsGeneratingPdf(false);
+    }
+  };
+
   // Print function
   const handlePrint = () => {
     window.print();
@@ -227,7 +268,7 @@ export default function ContratoGeneratorPage() {
                 <FileText className="w-6 h-6 text-[#7850FA]" />
                 <h1 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white font-heading">Generador de Contratos Webunica</h1>
               </div>
-              <p className="text-xs sm:text-sm text-zinc-400 font-mono mt-1">Generador Legal Automatizado • Cotizaciones N° {data.cotizacionNumero}</p>
+              <p className="text-xs sm:text-sm text-zinc-400 font-mono mt-1">Generador Legal Automatizado con Motor PDF Real • Cotizaciones N° {data.cotizacionNumero}</p>
             </div>
           </div>
 
@@ -249,7 +290,7 @@ export default function ContratoGeneratorPage() {
           </div>
         </div>
 
-        {/* PRIMARY BIG ACTION BUTTONS BAR */}
+        {/* PRIMARY BIG ACTION BUTTONS BAR WITH MOTOR PDF REAL */}
         <div className="mt-4 bg-white p-4 sm:p-5 rounded-3xl border border-zinc-200 shadow-md flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-600">
             <CheckCircle2 className="w-4 h-4 text-emerald-600" />
@@ -259,7 +300,7 @@ export default function ContratoGeneratorPage() {
           <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
             <button 
               onClick={handleCopyText}
-              className="flex-1 sm:flex-none px-5 py-3 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 rounded-2xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer border border-zinc-300"
+              className="flex-1 sm:flex-none px-4 py-3 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 rounded-2xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer border border-zinc-300"
             >
               {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4 text-zinc-600" />}
               {copied ? '¡Copiado!' : 'Copiar Texto'}
@@ -267,18 +308,37 @@ export default function ContratoGeneratorPage() {
 
             <button 
               onClick={handleDownloadDoc}
-              className="flex-1 sm:flex-none px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/25 active:scale-95 cursor-pointer"
+              className="flex-1 sm:flex-none px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/25 active:scale-95 cursor-pointer"
             >
               <Download className="w-4 h-4" />
               Descargar Word (.doc)
             </button>
 
             <button 
-              onClick={handlePrint}
-              className="flex-1 sm:flex-none px-7 py-3 bg-[#7850FA] hover:bg-[#683fe4] text-white rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-[#7850FA]/30 transition-all active:scale-95 cursor-pointer"
+              onClick={handleGenerateRealPdf}
+              disabled={isGeneratingPdf}
+              className="flex-1 sm:flex-none px-6 py-3 bg-[#7850FA] hover:bg-[#683fe4] text-white rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-[#7850FA]/30 transition-all active:scale-95 cursor-pointer disabled:opacity-50"
             >
-              <Printer className="w-4 h-4" />
-              Imprimir / Guardar PDF
+              {isGeneratingPdf ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Generando PDF Real...
+                </>
+              ) : (
+                <>
+                  <Download className="w-4 h-4" />
+                  Descargar PDF Real (.pdf)
+                </>
+              )}
+            </button>
+
+            <button 
+              onClick={handlePrint}
+              className="flex-1 sm:flex-none px-5 py-3 bg-zinc-900 hover:bg-zinc-800 text-white rounded-2xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
+              title="Vista previa e impresión de navegador"
+            >
+              <Printer className="w-4 h-4 text-zinc-400" />
+              Imprimir
             </button>
           </div>
         </div>
