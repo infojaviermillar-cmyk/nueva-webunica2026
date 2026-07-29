@@ -18,7 +18,8 @@ import {
   Plus,
   Trash2,
   RefreshCw,
-  CheckCircle2
+  CheckCircle2,
+  Edit3
 } from 'lucide-react';
 import { 
   ContractData, 
@@ -26,6 +27,48 @@ import {
   PRESET_FULL_SHOPIFY, 
   formatCLP 
 } from '@/lib/contract-templates';
+
+// Recalculate Gantt dates based on start date
+function recalculateGanttDates(startDateStr: string, currentGantt: ContractData['ganttEtapas']) {
+  if (!startDateStr) return currentGantt;
+  
+  const parts = startDateStr.split('-').map(Number);
+  if (parts.length !== 3) return currentGantt;
+  const [year, month, day] = parts;
+  if (!year || !month || !day) return currentGantt;
+
+  const startDate = new Date(year, month - 1, day);
+
+  return currentGantt.map((etapa, idx) => {
+    if (idx === 0) {
+      const dd = String(startDate.getDate()).padStart(2, '0');
+      const mm = String(startDate.getMonth() + 1).padStart(2, '0');
+      const yyyy = startDate.getFullYear();
+      return {
+        ...etapa,
+        fechas: `${dd}-${mm}-${yyyy}`
+      };
+    }
+
+    const weekStart = new Date(startDate);
+    weekStart.setDate(startDate.getDate() + (idx - 1) * 7);
+
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
+
+    const d1 = String(weekStart.getDate()).padStart(2, '0');
+    const m1 = String(weekStart.getMonth() + 1).padStart(2, '0');
+    const d2 = String(weekEnd.getDate()).padStart(2, '0');
+    const m2 = String(weekEnd.getMonth() + 1).padStart(2, '0');
+
+    const dateFormatted = m1 === m2 ? `${d1}-${m1} al ${d2}-${m2}` : `${d1}-${m1} al ${d2}-${m2}`;
+
+    return {
+      ...etapa,
+      fechas: dateFormatted
+    };
+  });
+}
 
 export default function ContratoGeneratorPage() {
   const [data, setData] = useState<ContractData>(PACIFIC_COLOR_PRESET);
@@ -47,12 +90,20 @@ export default function ContratoGeneratorPage() {
     return `${day} de ${months[monthIndex] || 'julio'} de ${year}`;
   };
 
+  // Handle start date change + auto recalculate dates
+  const handleDateChange = (newDateStr: string) => {
+    const updatedGantt = recalculateGanttDates(newDateStr, data.ganttEtapas);
+    setData({
+      ...data,
+      fechaContrato: newDateStr,
+      ganttEtapas: updatedGantt
+    });
+  };
+
   // Recalculate payments based on net value
   const handleNetoChange = (newNeto: number) => {
     const iva = Math.round(newNeto * (data.ivaPorcentaje / 100));
     const total = newNeto + iva;
-    const hitosCount = data.hitosPago.length || 4;
-    const pctEach = 100 / hitosCount;
 
     const newHitos = data.hitosPago.map(hito => {
       const hitoNeto = Math.round(newNeto * (hito.porcentaje / 100));
@@ -125,16 +176,17 @@ export default function ContratoGeneratorPage() {
 
   // Add Gantt row
   const addGanttRow = () => {
+    const newIdx = data.ganttEtapas.length;
     setData({
       ...data,
       ganttEtapas: [
         ...data.ganttEtapas,
         {
-          semana: `Semana ${data.ganttEtapas.length}`,
+          semana: `Semana ${newIdx}`,
           fechas: "Fechas a definir",
-          disenoUxUi: "Actividad de diseño",
-          desarrolloShopify: "Actividad de desarrollo",
-          entregable: "Entregables definidos",
+          disenoUxUi: "Actividades de Diseño",
+          desarrolloShopify: "Actividades de Desarrollo",
+          entregable: "Entregables de la etapa",
           pagoPct: "-"
         }
       ]
@@ -144,6 +196,16 @@ export default function ContratoGeneratorPage() {
   // Delete Gantt row
   const removeGanttRow = (index: number) => {
     const updated = data.ganttEtapas.filter((_, i) => i !== index);
+    setData({ ...data, ganttEtapas: updated });
+  };
+
+  // Update Gantt cell in array
+  const updateGanttCell = (index: number, field: keyof ContractData['ganttEtapas'][0], value: string) => {
+    const updated = [...data.ganttEtapas];
+    updated[index] = {
+      ...updated[index],
+      [field]: value
+    };
     setData({ ...data, ganttEtapas: updated });
   };
 
@@ -366,20 +428,31 @@ export default function ContratoGeneratorPage() {
               </div>
             </div>
 
-            {/* CARD 3: FECHAS Y DURACIÓN */}
+            {/* CARD 3: FECHAS Y DURACIÓN CON AUTO-RECALCULADOR */}
             <div className="bg-white p-6 rounded-3xl border border-zinc-200 shadow-sm space-y-4">
-              <div className="flex items-center gap-2 text-purple-900 border-b border-zinc-100 pb-3">
-                <Calendar className="w-5 h-5 text-blue-600" />
-                <h2 className="font-black text-sm uppercase tracking-wider">Fechas de Inicio y Plazos</h2>
+              <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+                <div className="flex items-center gap-2 text-purple-900">
+                  <Calendar className="w-5 h-5 text-blue-600" />
+                  <h2 className="font-black text-sm uppercase tracking-wider">Fechas de Inicio y Plazos</h2>
+                </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Fecha de Firma / Inicio</label>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-[11px] font-bold uppercase text-zinc-600">Fecha de Firma / Inicio</label>
+                  <button 
+                    type="button"
+                    onClick={() => handleDateChange(data.fechaContrato)}
+                    className="text-[10px] font-bold text-[#7850FA] hover:underline flex items-center gap-1 cursor-pointer"
+                  >
+                    <RefreshCw className="w-3 h-3" /> Auto-recalcular Fechas
+                  </button>
+                </div>
                 <input 
                   type="date" 
                   value={data.fechaContrato}
-                  onChange={(e) => setData({...data, fechaContrato: e.target.value})}
-                  className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
+                  onChange={(e) => handleDateChange(e.target.value)}
+                  className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-bold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
                 />
               </div>
 
@@ -405,65 +478,88 @@ export default function ContratoGeneratorPage() {
               </div>
             </div>
 
-            {/* CARD 4: EDICIÓN DE GANTT */}
+            {/* CARD 4: EDICIÓN COMPLETA DE ETAPAS GANTT */}
             <div className="bg-white p-6 rounded-3xl border border-zinc-200 shadow-sm space-y-4">
               <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
                 <div className="flex items-center gap-2 text-purple-900">
                   <Layers className="w-5 h-5 text-indigo-600" />
-                  <h2 className="font-black text-sm uppercase tracking-wider">Etapas de Desarrollo (Gantt)</h2>
+                  <h2 className="font-black text-sm uppercase tracking-wider">Carta Gantt Edit (Todas las Filas)</h2>
                 </div>
                 <button 
                   onClick={addGanttRow}
                   className="p-1.5 bg-purple-50 hover:bg-purple-100 text-[#7850FA] rounded-lg transition-all text-xs font-bold flex items-center gap-1 cursor-pointer"
                 >
-                  <Plus className="w-4 h-4" /> Agregar
+                  <Plus className="w-4 h-4" /> Agregar Etapa
                 </button>
               </div>
 
-              <div className="space-y-3 max-h-80 overflow-y-auto pr-1 custom-scrollbar">
+              <div className="space-y-4 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
                 {data.ganttEtapas.map((etapa, index) => (
-                  <div key={index} className="p-3 bg-zinc-50 rounded-2xl border border-zinc-200 text-xs space-y-2 relative group">
-                    <div className="flex items-center justify-between font-bold text-zinc-900">
+                  <div key={index} className="p-4 bg-zinc-50 rounded-2xl border border-zinc-200 text-xs space-y-2 relative group">
+                    <div className="flex items-center justify-between gap-2 border-b border-zinc-200 pb-2">
                       <input 
                         type="text" 
                         value={etapa.semana}
-                        onChange={(e) => {
-                          const updated = [...data.ganttEtapas];
-                          updated[index].semana = e.target.value;
-                          setData({...data, ganttEtapas: updated});
-                        }}
-                        className="bg-white px-2 py-1 rounded border border-zinc-300 w-24 font-bold text-xs"
+                        onChange={(e) => updateGanttCell(index, 'semana', e.target.value)}
+                        className="bg-white px-2.5 py-1 rounded-lg border border-zinc-300 w-28 font-bold text-xs text-zinc-950"
+                        placeholder="Ej: Semana 1"
                       />
                       <input 
                         type="text" 
                         value={etapa.fechas}
-                        onChange={(e) => {
-                          const updated = [...data.ganttEtapas];
-                          updated[index].fechas = e.target.value;
-                          setData({...data, ganttEtapas: updated});
-                        }}
-                        className="bg-white px-2 py-1 rounded border border-zinc-300 w-28 text-right font-mono text-[11px]"
+                        onChange={(e) => updateGanttCell(index, 'fechas', e.target.value)}
+                        className="bg-white px-2.5 py-1 rounded-lg border border-zinc-300 flex-1 font-mono text-[11px] text-zinc-900 text-right"
+                        placeholder="Ej: 27-07 al 02-08"
                       />
                       <button 
                         onClick={() => removeGanttRow(index)}
-                        className="text-red-500 hover:text-red-700 p-1 cursor-pointer"
-                        title="Eliminar fila"
+                        className="text-red-500 hover:text-red-700 p-1.5 bg-white rounded-lg border border-red-200 hover:bg-red-50 cursor-pointer"
+                        title="Eliminar esta fila"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
-                    <div>
-                      <span className="text-[10px] font-bold text-zinc-500 uppercase block">Entregables:</span>
-                      <input 
-                        type="text" 
-                        value={etapa.entregable}
-                        onChange={(e) => {
-                          const updated = [...data.ganttEtapas];
-                          updated[index].entregable = e.target.value;
-                          setData({...data, ganttEtapas: updated});
-                        }}
-                        className="w-full bg-white px-2 py-1 rounded border border-zinc-300 text-xs"
-                      />
+
+                    <div className="grid grid-cols-1 gap-2 pt-1">
+                      <div>
+                        <span className="text-[10px] font-bold text-zinc-500 uppercase block mb-0.5">Diseño UX/UI:</span>
+                        <input 
+                          type="text" 
+                          value={etapa.disenoUxUi}
+                          onChange={(e) => updateGanttCell(index, 'disenoUxUi', e.target.value)}
+                          className="w-full bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-xs text-zinc-900"
+                        />
+                      </div>
+
+                      <div>
+                        <span className="text-[10px] font-bold text-zinc-500 uppercase block mb-0.5">Desarrollo Shopify / Integraciones:</span>
+                        <input 
+                          type="text" 
+                          value={etapa.desarrolloShopify}
+                          onChange={(e) => updateGanttCell(index, 'desarrolloShopify', e.target.value)}
+                          className="w-full bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-xs text-zinc-900"
+                        />
+                      </div>
+
+                      <div>
+                        <span className="text-[10px] font-bold text-zinc-500 uppercase block mb-0.5">Entregable Principal:</span>
+                        <input 
+                          type="text" 
+                          value={etapa.entregable}
+                          onChange={(e) => updateGanttCell(index, 'entregable', e.target.value)}
+                          className="w-full bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-xs font-semibold text-zinc-950"
+                        />
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-bold text-zinc-500 uppercase shrink-0">Hito Pago (%):</span>
+                        <input 
+                          type="text" 
+                          value={etapa.pagoPct}
+                          onChange={(e) => updateGanttCell(index, 'pagoPct', e.target.value)}
+                          className="bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-xs font-bold text-[#7850FA] w-20 text-center"
+                        />
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -627,11 +723,16 @@ export default function ContratoGeneratorPage() {
                     </div>
                   </div>
 
-                  {/* ANEXO 2: CARTA GANTT DETALLADA */}
+                  {/* ANEXO 2: CARTA GANTT DETALLADA CON EDICIÓN DIRECTA */}
                   <div className="mb-8 space-y-3">
-                    <h3 className="font-black text-sm uppercase text-zinc-950 bg-zinc-100 p-2 rounded-lg border border-zinc-200">
-                      ANEXO N°2 - CARTA GANTT DETALLADA Y CRONOGRAMA DE CUMPLIMIENTO
-                    </h3>
+                    <div className="flex items-center justify-between bg-zinc-100 p-2 rounded-lg border border-zinc-200">
+                      <h3 className="font-black text-sm uppercase text-zinc-950">
+                        ANEXO N°2 - CARTA GANTT DETALLADA Y CRONOGRAMA DE CUMPLIMIENTO
+                      </h3>
+                      <span className="text-[10px] font-bold uppercase text-[#7850FA] bg-purple-50 px-2 py-0.5 rounded border border-purple-200 print:hidden">
+                        ✏️ Editable en pantalla
+                      </span>
+                    </div>
                     <p className="text-xs text-zinc-600">
                       Fechas y actividades estimadas. Las etapas se ajustarán en caso de demoras imputables a entrega de información o accesos por parte de EL CLIENTE.
                     </p>
@@ -640,23 +741,65 @@ export default function ContratoGeneratorPage() {
                       <table className="w-full text-xs text-left border-collapse border border-zinc-300">
                         <thead>
                           <tr className="bg-zinc-100 font-bold uppercase text-[10px] text-zinc-800">
-                            <th className="border border-zinc-300 p-2">Semana</th>
-                            <th className="border border-zinc-300 p-2">Fechas</th>
+                            <th className="border border-zinc-300 p-2 w-24">Semana</th>
+                            <th className="border border-zinc-300 p-2 w-32">Fechas</th>
                             <th className="border border-zinc-300 p-2">Diseño UX/UI</th>
                             <th className="border border-zinc-300 p-2">Desarrollo Shopify / Integraciones</th>
                             <th className="border border-zinc-300 p-2">Entregable</th>
-                            <th className="border border-zinc-300 p-2 text-center">Hito Pago</th>
+                            <th className="border border-zinc-300 p-2 text-center w-20">Hito Pago</th>
                           </tr>
                         </thead>
                         <tbody>
                           {data.ganttEtapas.map((g, idx) => (
                             <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-zinc-50/70'}>
-                              <td className="border border-zinc-300 p-2 font-bold whitespace-nowrap">{g.semana}</td>
-                              <td className="border border-zinc-300 p-2 font-mono text-[11px] whitespace-nowrap">{g.fechas}</td>
-                              <td className="border border-zinc-300 p-2">{g.disenoUxUi}</td>
-                              <td className="border border-zinc-300 p-2">{g.desarrolloShopify}</td>
-                              <td className="border border-zinc-300 p-2 font-semibold text-zinc-900">{g.entregable}</td>
-                              <td className="border border-zinc-300 p-2 text-center font-bold text-[#7850FA]">{g.pagoPct}</td>
+                              <td className="border border-zinc-300 p-1.5 font-bold">
+                                <input 
+                                  type="text" 
+                                  value={g.semana}
+                                  onChange={(e) => updateGanttCell(idx, 'semana', e.target.value)}
+                                  className="w-full bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 font-bold text-xs text-zinc-950"
+                                />
+                              </td>
+                              <td className="border border-zinc-300 p-1.5 font-mono text-[11px]">
+                                <input 
+                                  type="text" 
+                                  value={g.fechas}
+                                  onChange={(e) => updateGanttCell(idx, 'fechas', e.target.value)}
+                                  className="w-full bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 font-mono text-[11px] text-zinc-900"
+                                />
+                              </td>
+                              <td className="border border-zinc-300 p-1.5">
+                                <textarea 
+                                  rows={2}
+                                  value={g.disenoUxUi}
+                                  onChange={(e) => updateGanttCell(idx, 'disenoUxUi', e.target.value)}
+                                  className="w-full bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 text-xs text-zinc-900 resize-none"
+                                />
+                              </td>
+                              <td className="border border-zinc-300 p-1.5">
+                                <textarea 
+                                  rows={2}
+                                  value={g.desarrolloShopify}
+                                  onChange={(e) => updateGanttCell(idx, 'desarrolloShopify', e.target.value)}
+                                  className="w-full bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 text-xs text-zinc-900 resize-none"
+                                />
+                              </td>
+                              <td className="border border-zinc-300 p-1.5 font-semibold text-zinc-900">
+                                <textarea 
+                                  rows={2}
+                                  value={g.entregable}
+                                  onChange={(e) => updateGanttCell(idx, 'entregable', e.target.value)}
+                                  className="w-full bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 text-xs font-semibold text-zinc-950 resize-none"
+                                />
+                              </td>
+                              <td className="border border-zinc-300 p-1.5 text-center font-bold text-[#7850FA]">
+                                <input 
+                                  type="text" 
+                                  value={g.pagoPct}
+                                  onChange={(e) => updateGanttCell(idx, 'pagoPct', e.target.value)}
+                                  className="w-full text-center bg-transparent border-0 focus:ring-1 focus:ring-[#7850FA] rounded px-1 font-bold text-xs text-[#7850FA]"
+                                />
+                              </td>
                             </tr>
                           ))}
                         </tbody>
