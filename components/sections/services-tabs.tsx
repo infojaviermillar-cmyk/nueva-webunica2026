@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowRight, ShoppingBag, Building2, Cpu, BarChart3, CheckCircle2, Sparkles } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
 import { motion, AnimatePresence } from 'framer-motion';
+import ScrollRevealText from '@/components/ui/scroll-reveal-text';
 
 const serviceData = [
   {
@@ -241,23 +242,26 @@ export default function ServicesTabs() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
-        <div className="text-center md:text-left mb-16 md:mb-24">
+        <div className="text-center max-w-4xl mx-auto mb-16 md:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 bg-violet-50 rounded-full border border-violet-100">
-               <span className="w-1.5 h-1.5 bg-violet-600 rounded-full animate-pulse"></span>
-               <span className="text-[10px] font-black tracking-widest text-violet-600 uppercase">Ecosistema de Soluciones</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 bg-purple-50 rounded-full border border-purple-200/80 shadow-xs">
+               <span className="w-2 h-2 bg-[#7850FA] rounded-full animate-pulse"></span>
+               <span className="text-[11px] font-mono font-bold tracking-widest text-[#7850FA] uppercase">Ecosistema de Soluciones</span>
             </div>
-            <h2 className="text-4xl lg:text-7xl font-black text-zinc-950 tracking-tighter uppercase leading-[0.95] mb-8">
-              Centros de <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 italic font-serif lowercase font-normal">Ingeniería Web</span>
+            
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-zinc-950 tracking-tighter uppercase leading-[0.95] mb-6 font-heading">
+              Centros de <span className="text-[#7850FA]">Ingeniería Web</span>
             </h2>
-            <p className="text-lg md:text-xl text-zinc-500 font-light leading-relaxed max-w-2xl">
-              Estrategias digitales de alto rendimiento para cada etapa de tu negocio. Desde el lanzamiento hasta el dominio total de tu nicho.
-            </p>
+            
+            <ScrollRevealText 
+              text="Estrategias digitales de alto rendimiento para cada etapa de tu negocio. Desde el lanzamiento hasta el dominio total de tu nicho."
+              className="text-lg sm:text-xl md:text-2xl text-zinc-800 font-light leading-relaxed max-w-3xl mx-auto"
+            />
           </motion.div>
         </div>
 
