@@ -61,6 +61,15 @@ export default async function AdminDashboard() {
       cta: "Ver Vista Pública"
     },
     {
+      title: "Generador de Contratos",
+      desc: "Crea contratos tipo personalizados con Carta Gantt, anexos e hitos de pago listos para imprimir o guardar en PDF/Word.",
+      icon: <FileText className="w-8 h-8 text-[#7850FA]" />,
+      href: "/admin/contratos",
+      count: "Legal & Anexos",
+      color: "bg-purple-50 border-purple-100",
+      cta: "Generar Contrato"
+    },
+    {
       title: "Revisión de Diseños",
       desc: "Sube proyectos y diseños para que los clientes dejen su feedback visual.",
       icon: <PenTool className="w-8 h-8 text-fuchsia-600" />,
