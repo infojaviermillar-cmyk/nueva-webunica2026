@@ -257,7 +257,7 @@ export default function DropshippingPage() {
               
               <h1 className="text-4xl xs:text-5xl sm:text-6xl lg:text-[70px] font-black tracking-tighter leading-[0.92] mb-8 uppercase font-heading text-zinc-950">
                 Vende Online Sin Manejar <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-violet-600 to-emerald-600">
+                <span className="text-[#7850FA]">
                   Inventarios ni Envíos
                 </span>
               </h1>

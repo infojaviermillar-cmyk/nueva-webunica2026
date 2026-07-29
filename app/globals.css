@@ -24,7 +24,8 @@
   --radius: 0.5rem;
 
   /* Webunica Brand Colors */
-  --brand-purple: #7c3aed;
+  --brand-purple: #7850FA;
+  --ap-accent: #7850FA;
   --brand-green: #10b981;
 }
 
@@ -72,14 +73,16 @@
   --color-ring: var(--ring);
 
   /* Webunica Brand */
-  --color-brand-purple: var(--brand-purple);
+  --color-brand-purple: #7850FA;
+  --color-ap-accent: #7850FA;
   --color-brand-green: var(--brand-green);
 
-  --font-sans: var(--font-plus-jakarta), sans-serif;
-  --font-heading: var(--font-bricolage), sans-serif;
+  --font-sans: var(--font-questrial), Questrial, Futura, "Segoe UI", Arial, sans-serif;
+  --font-heading: var(--font-questrial), Questrial, Futura, "Segoe UI", Arial, sans-serif;
+  --font-questrial: var(--font-questrial), Questrial, Futura, "Segoe UI", Arial, sans-serif;
   --font-mono: var(--font-jetbrains), monospace;
   --font-caveat: var(--font-caveat), cursive;
-  --font-neue-haas: 'Neue Haas Grotesk', 'Neue Haas Grotesk Text', 'Helvetica Neue', Arial, sans-serif;
+  --font-neue-haas: var(--font-questrial), Questrial, Futura, "Segoe UI", Arial, sans-serif;
 }
 
 * {
@@ -92,8 +95,16 @@ body {
   font-family: var(--font-sans);
 }
 
+.ap-accent, .text-ap-accent {
+  color: #7850FA;
+}
+
+.font-questrial {
+  font-family: var(--font-questrial), Questrial, Futura, "Segoe UI", Arial, sans-serif;
+}
+
 .font-neue-haas {
-  font-family: 'Neue Haas Grotesk', 'Neue Haas Grotesk Text', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-questrial), Questrial, Futura, "Segoe UI", Arial, sans-serif;
 }
 
 .font-heading {

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Bricolage_Grotesque, Plus_Jakarta_Sans, JetBrains_Mono, Caveat, Inter } from 'next/font/google';
+import { Questrial, Plus_Jakarta_Sans, JetBrains_Mono, Caveat, Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
@@ -11,9 +11,10 @@ import { ContactModalProvider } from '@/context/contact-modal-context';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 
-const bricolage = Bricolage_Grotesque({
-  variable: '--font-bricolage',
+const questrial = Questrial({
+  weight: '400',
   subsets: ['latin'],
+  variable: '--font-questrial',
   display: 'swap',
 });
 
@@ -85,7 +86,7 @@ export default async function RootLayout({
   return (
     <html
       lang="es"
-      className={`${bricolage.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${caveat.variable} ${inter.variable} h-full antialiased`}
+      className={`${questrial.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${caveat.variable} ${inter.variable} h-full antialiased`}
     >
       <GoogleTagManager gtmId="GTM-TLZXRQCG" />
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-LXMLKX5Y7G'} />
