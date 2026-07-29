@@ -135,7 +135,7 @@ export default function Header({ domain = '' }: { domain?: string }) {
         }
       `}</style>
       
-      <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#f5f3ff]/70 backdrop-blur-lg backdrop-saturate-150 border-b border-white/60 shadow-lg shadow-violet-900/5 h-[95px]' : `h-[116px] ${isDarkHero ? 'bg-transparent' : 'bg-[#f5f3ff]/80 backdrop-blur-sm border-b border-white/30'}`} flex items-center`}>
+      <header className={`fixed top-0 inset-x-0 z-[9999] transition-all duration-300 ${scrolled ? 'bg-[#f5f3ff]/70 backdrop-blur-lg backdrop-saturate-150 border-b border-white/60 shadow-lg shadow-violet-900/5 h-[95px]' : `h-[116px] ${isDarkHero ? 'bg-transparent' : 'bg-[#f5f3ff]/80 backdrop-blur-sm border-b border-white/30'}`} flex items-center`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
           <div className="flex items-center justify-between h-full">
             

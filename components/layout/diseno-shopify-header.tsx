@@ -28,7 +28,7 @@ export default function DisenoShopifyHeader() {
 
   return (
     <>
-      <header className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-lg border-b border-zinc-200 shadow-sm h-[80px]' : 'bg-white/50 backdrop-blur-sm h-[100px]'} flex items-center`}>
+      <header className={`fixed top-0 inset-x-0 z-[9999] transition-all duration-300 ${scrolled ? 'bg-white/80 backdrop-blur-lg border-b border-zinc-200 shadow-sm h-[80px]' : 'bg-white/50 backdrop-blur-sm h-[100px]'} flex items-center`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full flex items-center justify-between h-full">
           <Link href="#inicio" className="flex items-center gap-2 group">
             <div className="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center group-hover:bg-pink-100 transition-colors">

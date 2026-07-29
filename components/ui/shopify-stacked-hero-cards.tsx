@@ -67,7 +67,7 @@ export default function ShopifyStackedHeroCards() {
   }, [selectedIndex]);
 
   return (
-    <div className="relative w-full max-w-2xl mx-auto py-2 select-none">
+    <div className="relative w-full max-w-2xl mx-auto py-2 select-none z-10">
       {/* Ambient background glow */}
       <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/30 via-purple-500/20 to-pink-500/30 rounded-full blur-[120px] pointer-events-none" />
 
