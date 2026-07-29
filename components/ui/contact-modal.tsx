@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createLead } from '@/lib/lead-actions';
+import { detectServiceFromUrl, DetectedServiceInfo } from '@/lib/service-detector';
+import { Sparkles, MapPin, CheckCircle2, ChevronDown } from 'lucide-react';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -17,9 +19,30 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
     ciudad: city,
     servicio: 'Diseño Web & SEO'
   });
+
+  const [detectedInfo, setDetectedInfo] = useState<DetectedServiceInfo>({
+    serviceName: 'Diseño Web & E-commerce',
+    pageUrl: 'https://webunica.cl',
+    pagePath: '/'
+  });
+
+  const [isChangingService, setIsChangingService] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (isOpen) {
+      const info = detectServiceFromUrl();
+      setDetectedInfo(info);
+      setFormData(prev => ({
+        ...prev,
+        ciudad: city || prev.ciudad,
+        servicio: info.serviceName
+      }));
+      setIsChangingService(false);
+    }
+  }, [isOpen, city]);
 
   if (!isOpen) return null;
 
@@ -33,16 +56,16 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
         name: formData.nombre,
         email: formData.correo,
         phone: formData.telefono,
-        city: formData.ciudad,
+        city: formData.ciudad || 'No especificada',
         project_type: formData.servicio,
- source: city ? `Lead Ciudad: ${city}` : 'Modal Web'
+        source: detectedInfo.pageUrl || (city ? `Lead Ciudad: ${city}` : 'Modal Web')
       });
 
       if (response.success) {
         if (typeof window !== 'undefined' && (window as any).clarity) {
           (window as any).clarity("identify", formData.correo);
           (window as any).clarity("set", "lead_name", formData.nombre);
-          (window as any).clarity("set", "lead_source", city ? `Lead Ciudad: ${city}` : 'Modal Web');
+          (window as any).clarity("set", "lead_source", detectedInfo.pageUrl);
         }
         setIsSuccess(true);
         setTimeout(() => {
@@ -94,13 +117,67 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
             <>
               <div className="mb-6 text-center px-2">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-purple-50 text-[#7850FA] border border-purple-200/80 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider mb-3">
+                  <Sparkles className="w-3.5 h-3.5 text-[#7850FA]" />
                   <span>Asesoría & Propuesta Comercial</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tighter mb-2 text-zinc-950 font-heading">Cotización Gratis</h3>
-                <p className="text-zinc-600 font-normal text-xs sm:text-sm">Completa tus datos para iniciar tu proyecto digital con nosotros.</p>
+                <p className="text-zinc-600 font-normal text-xs sm:text-sm">Completa tus datos para recibir tu propuesta comercial personalizada.</p>
+              </div>
+
+              {/* Smart Auto-Detected Origin Badge Card */}
+              <div className="mb-5 p-4 bg-purple-50/70 border border-purple-200/90 rounded-2xl flex flex-col gap-1.5 shadow-xs">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#7850FA] animate-ping" />
+                    <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-purple-900">
+                      Servicio Solicitado
+                    </span>
+                  </div>
+                  <button 
+                    type="button" 
+                    onClick={() => setIsChangingService(!isChangingService)}
+                    className="text-[10px] font-bold text-[#7850FA] hover:underline uppercase tracking-wider cursor-pointer"
+                  >
+                    {isChangingService ? 'Conservar Detectado' : 'Cambiar Servicio'}
+                  </button>
+                </div>
+                <div className="text-sm font-black text-zinc-950 font-heading flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#7850FA] shrink-0" />
+                  <span>{formData.servicio}</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[11px] text-zinc-500 font-mono truncate">
+                  <MapPin className="w-3 h-3 text-purple-500 shrink-0" />
+                  <span className="truncate">Origen: {detectedInfo.pagePath || '/'}</span>
+                </div>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                {isChangingService && (
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 mb-1.5 ml-1">
+                      Seleccionar Otro Servicio
+                    </label>
+                    <div className="relative">
+                      <select 
+                        className="w-full px-5 py-3.5 bg-zinc-50/80 border border-zinc-300 rounded-2xl text-zinc-950 font-semibold text-sm focus:bg-white focus:border-[#7850FA] focus:ring-4 focus:ring-[#7850FA]/15 outline-none transition-all appearance-none cursor-pointer shadow-xs"
+                        value={formData.servicio}
+                        onChange={(e) => setFormData({...formData, servicio: e.target.value})}
+                      >
+                        <option value="Rediseño Tienda Shopify">Rediseño Tienda Shopify</option>
+                        <option value="Diseño Web & SEO">Diseño Web & SEO</option>
+                        <option value="E-commerce Shopify">E-commerce Shopify</option>
+                        <option value="Next.js & SaaS Custom">Next.js & SaaS Custom</option>
+                        <option value="WooCommerce Empresas">WooCommerce Empresas</option>
+                        <option value="Dropshipping Shopify & Dropi">Dropshipping Shopify & Dropi</option>
+                        <option value="Diseño Web Pymes Chile">Diseño Web Pymes Chile</option>
+                      </select>
+                      <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
+                        <ChevronDown className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 mb-1.5 ml-1">
                     Nombre Completo <span className="text-purple-600">*</span>
@@ -145,38 +222,15 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
                   </div>
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 mb-1.5 ml-1">
-                      Ciudad <span className="text-purple-600">*</span>
+                      Ciudad
                     </label>
                     <input 
-                      required
                       type="text"
                       placeholder="Ej: Santiago, Temuco..."
                       className="w-full px-5 py-3.5 bg-zinc-50/80 border border-zinc-300 rounded-2xl text-zinc-950 font-semibold text-sm placeholder:text-zinc-400 focus:bg-white focus:border-[#7850FA] focus:ring-4 focus:ring-[#7850FA]/15 outline-none transition-all shadow-xs"
                       value={formData.ciudad}
                       onChange={(e) => setFormData({...formData, ciudad: e.target.value})}
                     />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 mb-1.5 ml-1">
-                    Servicio Requerido
-                  </label>
-                  <div className="relative">
-                    <select 
-                      className="w-full px-5 py-3.5 bg-zinc-50/80 border border-zinc-300 rounded-2xl text-zinc-950 font-semibold text-sm focus:bg-white focus:border-[#7850FA] focus:ring-4 focus:ring-[#7850FA]/15 outline-none transition-all appearance-none cursor-pointer shadow-xs"
-                      value={formData.servicio}
-                      onChange={(e) => setFormData({...formData, servicio: e.target.value})}
-                    >
-                      <option value="Diseño Web & SEO">Diseño Web & SEO</option>
-                      <option value="E-commerce Shopify">E-commerce Shopify</option>
-                      <option value="SaaS & Aplicaciones">Next.js, SaaS & Aplicaciones</option>
-                      <option value="WooCommerce">WooCommerce Empresas</option>
-                      <option value="Dropshipping">Dropshipping Shopify & Dropi</option>
-                    </select>
-                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" /></svg>
-                    </div>
                   </div>
                 </div>
 
@@ -201,4 +255,3 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
     </div>
   );
 }
-
