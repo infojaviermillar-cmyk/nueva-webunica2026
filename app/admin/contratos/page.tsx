@@ -858,67 +858,37 @@ export default function ContratoGeneratorPage() {
                     </p>
 
                     <div className="overflow-x-auto">
-                      <table className="w-full text-xs text-left border-collapse border border-black">
+                      <table className="w-full text-[8.5px] text-left border-collapse border border-black leading-tight table-fixed">
                         <thead>
-                          <tr className="bg-zinc-100 font-bold uppercase text-[10px] text-black">
-                            <th className="border border-black p-2 w-24">Semana</th>
-                            <th className="border border-black p-2 w-32">Fechas</th>
-                            <th className="border border-black p-2">Diseño UX/UI</th>
-                            <th className="border border-black p-2">Desarrollo Shopify / Integraciones</th>
-                            <th className="border border-black p-2">Entregable</th>
-                            <th className="border border-black p-2 text-center w-20">Hito Pago</th>
+                          <tr className="bg-zinc-100 font-bold uppercase text-[8.5px] text-black tracking-tight">
+                            <th className="border border-black p-1.5 w-[12%]">Semana</th>
+                            <th className="border border-black p-1.5 w-[15%]">Fechas</th>
+                            <th className="border border-black p-1.5 w-[25%]">Diseño UX/UI</th>
+                            <th className="border border-black p-1.5 w-[25%]">Desarrollo Shopify / Integraciones</th>
+                            <th className="border border-black p-1.5 w-[15%]">Entregable</th>
+                            <th className="border border-black p-1.5 text-center w-[8%]">Hito Pago</th>
                           </tr>
                         </thead>
                         <tbody>
                           {data.ganttEtapas.map((g, idx) => (
                             <tr key={idx} className={`${idx % 2 === 0 ? 'bg-white' : 'bg-zinc-50'} avoid-break`}>
-                              <td className="border border-black p-1.5 font-bold">
-                                <input 
-                                  type="text" 
-                                  value={g.semana}
-                                  onChange={(e) => updateGanttCell(idx, 'semana', e.target.value)}
-                                  className="w-full bg-transparent border-0 focus:outline-none p-0 font-bold text-xs text-black"
-                                />
+                              <td className="border border-black p-1.5 align-top font-bold text-[8.5px] text-black break-words">
+                                {g.semana}
                               </td>
-                              <td className="border border-black p-1.5 font-mono text-[11px]">
-                                <input 
-                                  type="text" 
-                                  value={g.fechas}
-                                  onChange={(e) => updateGanttCell(idx, 'fechas', e.target.value)}
-                                  className="w-full bg-transparent border-0 focus:outline-none p-0 font-mono text-[11px] text-black"
-                                />
+                              <td className="border border-black p-1.5 align-top font-mono text-[8px] text-black break-words">
+                                {g.fechas}
                               </td>
-                              <td className="border border-black p-1.5">
-                                <textarea 
-                                  rows={2}
-                                  value={g.disenoUxUi}
-                                  onChange={(e) => updateGanttCell(idx, 'disenoUxUi', e.target.value)}
-                                  className="w-full bg-transparent border-0 focus:outline-none p-0 text-xs text-black resize-none"
-                                />
+                              <td className="border border-black p-1.5 align-top text-[8.5px] leading-tight text-black break-words whitespace-pre-wrap">
+                                {g.disenoUxUi}
                               </td>
-                              <td className="border border-black p-1.5">
-                                <textarea 
-                                  rows={2}
-                                  value={g.desarrolloShopify}
-                                  onChange={(e) => updateGanttCell(idx, 'desarrolloShopify', e.target.value)}
-                                  className="w-full bg-transparent border-0 focus:outline-none p-0 text-xs text-black resize-none"
-                                />
+                              <td className="border border-black p-1.5 align-top text-[8.5px] leading-tight text-black break-words whitespace-pre-wrap">
+                                {g.desarrolloShopify}
                               </td>
-                              <td className="border border-black p-1.5 font-semibold text-black">
-                                <textarea 
-                                  rows={2}
-                                  value={g.entregable}
-                                  onChange={(e) => updateGanttCell(idx, 'entregable', e.target.value)}
-                                  className="w-full bg-transparent border-0 focus:outline-none p-0 text-xs font-semibold text-black resize-none"
-                                />
+                              <td className="border border-black p-1.5 align-top text-[8.5px] leading-tight font-bold text-black break-words whitespace-pre-wrap">
+                                {g.entregable}
                               </td>
-                              <td className="border border-black p-1.5 text-center font-bold text-black">
-                                <input 
-                                  type="text" 
-                                  value={g.pagoPct}
-                                  onChange={(e) => updateGanttCell(idx, 'pagoPct', e.target.value)}
-                                  className="w-full text-center bg-transparent border-0 focus:outline-none p-0 font-bold text-xs text-black"
-                                />
+                              <td className="border border-black p-1.5 align-top text-center font-bold text-[8.5px] text-black">
+                                {g.pagoPct}
                               </td>
                             </tr>
                           ))}
@@ -933,33 +903,33 @@ export default function ContratoGeneratorPage() {
                       ANEXO N°3 - CRONOGRAMA DE PAGOS E HITOS
                     </h3>
 
-                    <table className="w-full text-xs text-left border-collapse border border-black">
+                    <table className="w-full text-[9.5px] text-left border-collapse border border-black leading-tight">
                       <thead>
-                        <tr className="bg-zinc-100 font-bold uppercase text-[10px] text-black">
-                          <th className="border border-black p-2">Hito de Cumplimiento</th>
-                          <th className="border border-black p-2 text-center">% Hito</th>
-                          <th className="border border-black p-2 text-right">Monto Neto</th>
-                          <th className="border border-black p-2 text-right">IVA (19%)</th>
-                          <th className="border border-black p-2 text-right">Total a Pagar</th>
+                        <tr className="bg-zinc-100 font-bold uppercase text-[9px] text-black tracking-tight">
+                          <th className="border border-black p-1.5">Hito de Cumplimiento</th>
+                          <th className="border border-black p-1.5 text-center">% Hito</th>
+                          <th className="border border-black p-1.5 text-right">Monto Neto</th>
+                          <th className="border border-black p-1.5 text-right">IVA (19%)</th>
+                          <th className="border border-black p-1.5 text-right">Total a Pagar</th>
                         </tr>
                       </thead>
                       <tbody>
                         {data.hitosPago.map((h, idx) => (
                           <tr key={idx} className="bg-white avoid-break">
-                            <td className="border border-black p-2 font-bold">{h.nombre}</td>
-                            <td className="border border-black p-2 text-center font-mono">{h.porcentaje}%</td>
-                            <td className="border border-black p-2 text-right font-mono">{formatCLP(h.montoNeto)}</td>
-                            <td className="border border-black p-2 text-right font-mono">{formatCLP(h.montoIva)}</td>
-                            <td className="border border-black p-2 text-right font-black font-mono text-black">{formatCLP(h.montoTotal)}</td>
+                            <td className="border border-black p-1.5 font-bold">{h.nombre}</td>
+                            <td className="border border-black p-1.5 text-center font-mono text-[9px]">{h.porcentaje}%</td>
+                            <td className="border border-black p-1.5 text-right font-mono text-[9px]">{formatCLP(h.montoNeto)}</td>
+                            <td className="border border-black p-1.5 text-right font-mono text-[9px]">{formatCLP(h.montoIva)}</td>
+                            <td className="border border-black p-1.5 text-right font-black font-mono text-[9px] text-black">{formatCLP(h.montoTotal)}</td>
                           </tr>
                         ))}
                       </tbody>
                       <tfoot>
-                        <tr className="bg-zinc-100 font-black uppercase text-xs">
-                          <td colSpan={2} className="border border-black p-2">TOTAL PROYECTO CONTRATADO</td>
-                          <td className="border border-black p-2 text-right font-mono">{formatCLP(data.valorNeto)}</td>
-                          <td className="border border-black p-2 text-right font-mono">{formatCLP(totalIva)}</td>
-                          <td className="border border-black p-2 text-right font-mono text-black font-black">{formatCLP(totalConIva)}</td>
+                        <tr className="bg-zinc-100 font-black uppercase text-[9px]">
+                          <td colSpan={2} className="border border-black p-1.5">TOTAL PROYECTO CONTRATADO</td>
+                          <td className="border border-black p-1.5 text-right font-mono">{formatCLP(data.valorNeto)}</td>
+                          <td className="border border-black p-1.5 text-right font-mono">{formatCLP(totalIva)}</td>
+                          <td className="border border-black p-1.5 text-right font-mono text-black font-black">{formatCLP(totalConIva)}</td>
                         </tr>
                       </tfoot>
                     </table>
