@@ -331,13 +331,6 @@ export default function ShopifyEnChilePage() {
                       Agencia Shopify Partner en Chile
                     </span>
                   </div>
-
-                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200/80 rounded-full shadow-xs">
-                    <Tag className="w-3.5 h-3.5 text-emerald-600" />
-                    <span className="text-[11px] font-mono font-black tracking-widest text-emerald-800 uppercase">
-                      Planes desde $580.000 + IVA
-                    </span>
-                  </div>
                 </div>
                 
                 <h1 className="text-[2.2rem] xs:text-4xl sm:text-5xl lg:text-[62px] font-black tracking-tighter leading-[0.94] mb-8 uppercase text-zinc-950 font-heading">
@@ -346,7 +339,7 @@ export default function ShopifyEnChilePage() {
                 </h1>
                 
                 <p className="text-lg sm:text-xl lg:text-2xl text-zinc-600 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-                  Diseñamos tiendas Shopify preparadas para vender en Chile, con <strong className="font-bold text-zinc-950 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/60">planes desde $580.000 + IVA</strong>, integradas con pagos locales, despacho, facturación electrónica, analítica y SEO.
+                  Diseñamos tiendas Shopify preparadas para vender en Chile, integradas con pagos locales, despacho, facturación electrónica, analítica y SEO.
                 </p>
                 
                 {/* CTA Buttons */}
@@ -357,9 +350,9 @@ export default function ShopifyEnChilePage() {
 
                   <a 
                     href="#planes" 
-                    className="px-8 py-5 border-2 border-zinc-200 text-zinc-900 font-black rounded-2xl hover:bg-zinc-50 hover:border-zinc-300 transition-all uppercase tracking-widest text-xs text-center w-full sm:w-auto"
+                    className="px-8 py-5 border-2 border-[#FF0085]/30 bg-pink-50/50 text-[#FF0085] font-black rounded-2xl hover:bg-pink-100/50 hover:border-[#FF0085]/60 transition-all uppercase tracking-widest text-xs text-center w-full sm:w-auto shadow-sm"
                   >
-                    Ver planes
+                    Ver Planes con desc. -5%, -8%, -10%
                   </a>
                 </div>
 
