@@ -21,6 +21,7 @@ interface Plan {
   time: string;
   features: Feature[];
   cta: string;
+  discountBadge?: string;
   recommended?: boolean;
   color: string;
   lightColor: string;
