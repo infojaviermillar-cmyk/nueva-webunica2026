@@ -18,7 +18,8 @@ import {
   Plus,
   Trash2,
   RefreshCw,
-  CheckCircle2
+  CheckCircle2,
+  PackageCheck
 } from 'lucide-react';
 import { 
   ContractData, 
@@ -102,8 +103,6 @@ export default function ContratoGeneratorPage() {
 
   // Recalculate payments based on net value
   const handleNetoChange = (newNeto: number) => {
-    const iva = Math.round(newNeto * (data.ivaPorcentaje / 100));
-
     const newHitos = data.hitosPago.map(hito => {
       const hitoNeto = Math.round(newNeto * (hito.porcentaje / 100));
       const hitoIva = Math.round(hitoNeto * (data.ivaPorcentaje / 100));
@@ -200,14 +199,15 @@ export default function ContratoGeneratorPage() {
         <meta charset="utf-8">
         <title>Contrato ${data.clienteRazonSocial}</title>
         <style>
-          body { font-family: 'Arial', sans-serif; font-size: 11pt; line-height: 1.5; color: #000; }
-          h1, h2, h3 { text-align: center; text-transform: uppercase; font-weight: bold; }
-          .clause-title { font-weight: bold; margin-top: 14pt; }
-          table { width: 100%; border-collapse: collapse; margin: 12pt 0; }
-          th, td { border: 1px solid #000; padding: 6pt; font-size: 10pt; text-align: left; }
-          th { background-color: #f2f2f2; font-weight: bold; }
-          .signature-box { margin-top: 40pt; width: 100%; }
-          .signature-col { width: 48%; float: left; text-align: center; }
+          body { font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5; color: #000000; }
+          h1 { font-size: 16pt; font-weight: bold; text-align: center; text-transform: uppercase; margin-bottom: 5px; }
+          h2 { font-size: 13pt; font-weight: bold; text-align: center; text-transform: uppercase; margin-bottom: 5px; }
+          h3 { font-size: 11pt; font-weight: bold; text-transform: uppercase; margin-top: 15px; margin-bottom: 5px; }
+          p { text-align: justify; margin-bottom: 10px; }
+          table { width: 100%; border-collapse: collapse; margin-top: 10px; margin-bottom: 10px; }
+          th, td { border: 1pt solid #000000; padding: 5pt; font-size: 10pt; text-align: left; }
+          th { background-color: #f2f2f2; font-weight: bold; text-transform: uppercase; }
+          .contract-sheet { page-break-after: always; }
         </style>
       </head>
       <body>
@@ -223,80 +223,19 @@ export default function ContratoGeneratorPage() {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
-
-  // Add Gantt row
-  const addGanttRow = () => {
-    const newIdx = data.ganttEtapas.length;
-    setData({
-      ...data,
-      ganttEtapas: [
-        ...data.ganttEtapas,
-        {
-          semana: `Semana ${newIdx}`,
-          fechas: "Fechas a definir",
-          disenoUxUi: "Actividades de Diseño",
-          desarrolloShopify: "Actividades de Desarrollo",
-          entregable: "Entregables de la etapa",
-          pagoPct: "-"
-        }
-      ]
-    });
-  };
-
-  // Delete Gantt row
-  const removeGanttRow = (index: number) => {
-    const updated = data.ganttEtapas.filter((_, i) => i !== index);
-    setData({ ...data, ganttEtapas: updated });
-  };
-
-  // Update Gantt cell in array
-  const updateGanttCell = (index: number, field: keyof ContractData['ganttEtapas'][0], value: string) => {
-    const updated = [...data.ganttEtapas];
-    updated[index] = {
-      ...updated[index],
-      [field]: value
-    };
-    setData({ ...data, ganttEtapas: updated });
   };
 
   const totalIva = Math.round(data.valorNeto * (data.ivaPorcentaje / 100));
   const totalConIva = data.valorNeto + totalIva;
 
   return (
-    <div className="min-h-screen bg-zinc-100 text-zinc-900 pt-28 sm:pt-36 lg:pt-40 pb-20 print:pt-0 print:pb-0 print:bg-white">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 pb-24 selection:bg-purple-500 selection:text-white print:bg-white print:text-black print:pb-0">
       
-      {/* PRINT STYLES FOR PAGE BREAKS & FOOTER POSITIONS */}
-      <style jsx global>{`
-        @media print {
-          body { background: white !important; color: black !important; }
-          header, footer, .print\\:hidden, nav { display: none !important; }
-          .contract-sheet {
-            border: none !important;
-            box-shadow: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-            height: 100vh !important;
-            page-break-after: always !important;
-            break-after: page !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: space-between !important;
-          }
-          @page {
-            size: letter;
-            margin: 15mm 15mm 15mm 15mm;
-          }
-        }
-      `}</style>
-
-      {/* HEADER BANNER / ACTIONS (Hidden on print) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8 print:hidden">
-        <div className="bg-zinc-950 text-white rounded-3xl p-6 sm:p-8 border border-zinc-800 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6">
+      {/* HEADER BAR */}
+      <div className="border-b border-zinc-800 bg-zinc-900/80 backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-4 print:hidden">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4 text-center sm:text-left">
-            <Link href="/admin" className="p-3 bg-zinc-800 hover:bg-zinc-700 rounded-2xl transition-all text-zinc-300 shrink-0">
+            <Link href="/admin/leads" className="p-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-2xl transition-all border border-zinc-700">
               <ArrowLeft className="w-6 h-6" />
             </Link>
             <div>
@@ -304,7 +243,7 @@ export default function ContratoGeneratorPage() {
                 <FileText className="w-6 h-6 text-[#7850FA]" />
                 <h1 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white font-heading">Generador de Contratos Webunica</h1>
               </div>
-              <p className="text-xs sm:text-sm text-zinc-400 font-mono mt-1">Generador Legal Automatizado • Cotizaciones N° {data.cotizacionNumero}</p>
+              <p className="text-xs sm:text-sm text-zinc-400 font-mono mt-1">Generador Legal Automatizado • Cotización N° {data.cotizacionNumero}</p>
             </div>
           </div>
 
@@ -315,7 +254,7 @@ export default function ContratoGeneratorPage() {
               className="px-4 py-2.5 bg-purple-900/80 hover:bg-purple-800 text-purple-100 border border-purple-400/50 rounded-2xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-purple-900/40 active:scale-95"
             >
               <Sparkles className="w-4 h-4 text-purple-300" />
-              Ejemplo Pacific Color
+              Contrato Custom Elite (Pacific Color)
             </button>
             <button 
               onClick={() => setData(PRESET_FULL_SHOPIFY)}
@@ -326,8 +265,8 @@ export default function ContratoGeneratorPage() {
           </div>
         </div>
 
-        {/* PRIMARY BIG ACTION BUTTONS BAR */}
-        <div className="mt-4 bg-white p-4 sm:p-5 rounded-3xl border border-zinc-200 shadow-md flex flex-wrap items-center justify-between gap-4">
+        {/* PRIMARY ACTION BUTTONS BAR */}
+        <div className="max-w-7xl mx-auto mt-4 bg-white p-4 sm:p-5 rounded-3xl border border-zinc-200 shadow-md flex flex-wrap items-center justify-between gap-4 text-black">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-600">
             <CheckCircle2 className="w-4 h-4 text-emerald-600" />
             <span>Documento formal generado para: <strong className="text-zinc-950">{data.clienteRazonSocial}</strong></span>
@@ -379,19 +318,19 @@ export default function ContratoGeneratorPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 print:px-0 print:max-w-none">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-6 print:px-0 print:max-w-none">
         
         {/* VIEW MODE TOGGLE ON MOBILE */}
-        <div className="lg:hidden print:hidden mb-6 flex bg-zinc-200 p-1.5 rounded-2xl">
+        <div className="lg:hidden print:hidden mb-6 flex bg-zinc-800 p-1.5 rounded-2xl">
           <button 
             onClick={() => setActiveTab('editor')} 
-            className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider rounded-xl transition-all ${activeTab === 'editor' ? 'bg-white text-zinc-950 shadow-md' : 'text-zinc-600'}`}
+            className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider rounded-xl transition-all ${activeTab === 'editor' ? 'bg-white text-zinc-950 shadow-md' : 'text-zinc-400'}`}
           >
             ✏️ Editar Campos
           </button>
           <button 
             onClick={() => setActiveTab('preview')} 
-            className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider rounded-xl transition-all ${activeTab === 'preview' ? 'bg-white text-zinc-950 shadow-md' : 'text-zinc-600'}`}
+            className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider rounded-xl transition-all ${activeTab === 'preview' ? 'bg-white text-zinc-950 shadow-md' : 'text-zinc-400'}`}
           >
             📄 Ver Documento
           </button>
@@ -404,11 +343,11 @@ export default function ContratoGeneratorPage() {
           {/* ========================================================= */}
           <div className={`lg:col-span-4 space-y-6 print:hidden ${activeTab === 'preview' ? 'hidden lg:block' : 'block'}`}>
             
-            {/* CARD 1: CLIENTE */}
-            <div className="bg-white p-6 rounded-3xl border border-zinc-200 shadow-sm space-y-4">
+            {/* CARD 1: CLIENTE & MARCA */}
+            <div className="bg-white p-6 rounded-3xl border border-zinc-200 shadow-sm space-y-4 text-black">
               <div className="flex items-center gap-2 text-purple-900 border-b border-zinc-100 pb-3">
                 <Building2 className="w-5 h-5 text-[#7850FA]" />
-                <h2 className="font-black text-sm uppercase tracking-wider">Datos de la Empresa Cliente</h2>
+                <h2 className="font-black text-sm uppercase tracking-wider">Datos Empresa Cliente & Marca</h2>
               </div>
 
               <div>
@@ -440,6 +379,17 @@ export default function ContratoGeneratorPage() {
                     className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Nombre de Marca / Tienda</label>
+                <input 
+                  type="text" 
+                  value={data.nombreMarca || ''}
+                  onChange={(e) => setData({...data, nombreMarca: e.target.value})}
+                  placeholder="Ej: Maxxgo"
+                  className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
+                />
               </div>
 
               <div>
@@ -478,11 +428,11 @@ export default function ContratoGeneratorPage() {
               </div>
             </div>
 
-            {/* CARD 2: PLAN Y VALORES */}
-            <div className="bg-white p-6 rounded-3xl border border-zinc-200 shadow-sm space-y-4">
+            {/* CARD 2: PLAN, VALORES Y PARÁMETROS DINÁMICOS */}
+            <div className="bg-white p-6 rounded-3xl border border-zinc-200 shadow-sm space-y-4 text-black">
               <div className="flex items-center gap-2 text-purple-900 border-b border-zinc-100 pb-3">
                 <DollarSign className="w-5 h-5 text-emerald-600" />
-                <h2 className="font-black text-sm uppercase tracking-wider">Plan, Valores & Facturación</h2>
+                <h2 className="font-black text-sm uppercase tracking-wider">Plan, Valores & Parámetros</h2>
               </div>
 
               <div>
@@ -511,20 +461,65 @@ export default function ContratoGeneratorPage() {
                 <div className="flex justify-between font-black text-zinc-950 text-sm border-t border-zinc-200 pt-1 mt-1"><span>Total IVA Incluido:</span><span>{formatCLP(totalConIva)}</span></div>
               </div>
 
-              <div>
-                <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Sistema Facturación Electrónica</label>
-                <input 
-                  type="text" 
-                  value={data.sistemaFacturacion}
-                  onChange={(e) => setData({...data, sistemaFacturacion: e.target.value})}
-                  placeholder="Ej: Wasabil, Bsale..."
-                  className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
-                />
+              {/* NUEVOS CAMPOS SOLICITADOS POR EL USUARIO */}
+              <div className="pt-3 border-t border-zinc-100 space-y-3">
+                <div className="flex items-center gap-2 text-zinc-800 font-bold text-xs uppercase">
+                  <PackageCheck className="w-4 h-4 text-violet-600" />
+                  <span>Configuración Dinámica del Proyecto</span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Cant. Productos</label>
+                    <input 
+                      type="number" 
+                      value={data.cantidadProductos ?? 1000}
+                      onChange={(e) => setData({...data, cantidadProductos: parseInt(e.target.value, 10) || 0})}
+                      placeholder="Ej: 1000"
+                      className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-bold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Días Garantía</label>
+                    <input 
+                      type="number" 
+                      value={data.diasGarantia ?? 90}
+                      onChange={(e) => setData({...data, diasGarantia: parseInt(e.target.value, 10) || 0})}
+                      placeholder="Ej: 90"
+                      className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-bold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Nombre del ERP</label>
+                    <input 
+                      type="text" 
+                      value={data.nombreErp ?? 'Nebula'}
+                      onChange={(e) => setData({...data, nombreErp: e.target.value})}
+                      placeholder="Ej: Nebula, Bsale"
+                      className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Facturación Elec.</label>
+                    <input 
+                      type="text" 
+                      value={data.sistemaFacturacion ?? 'Wasabil'}
+                      onChange={(e) => setData({...data, sistemaFacturacion: e.target.value})}
+                      placeholder="Ej: Wasabil, Haulmer"
+                      className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
             {/* CARD 3: FECHAS Y DURACIÓN CON AUTO-RECALCULADOR */}
-            <div className="bg-white p-6 rounded-3xl border border-zinc-200 shadow-sm space-y-4">
+            <div className="bg-white p-6 rounded-3xl border border-zinc-200 shadow-sm space-y-4 text-black">
               <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
                 <div className="flex items-center gap-2 text-purple-900">
                   <Calendar className="w-5 h-5 text-blue-600" />
@@ -574,85 +569,121 @@ export default function ContratoGeneratorPage() {
             </div>
 
             {/* CARD 4: EDICIÓN COMPLETA DE ETAPAS GANTT */}
-            <div className="bg-white p-6 rounded-3xl border border-zinc-200 shadow-sm space-y-4">
+            <div className="bg-white p-6 rounded-3xl border border-zinc-200 shadow-sm space-y-4 text-black">
               <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
                 <div className="flex items-center gap-2 text-purple-900">
                   <Layers className="w-5 h-5 text-indigo-600" />
-                  <h2 className="font-black text-sm uppercase tracking-wider">Carta Gantt Edit (Todas las Filas)</h2>
+                  <h2 className="font-black text-sm uppercase tracking-wider">Editar Filas de Carta Gantt</h2>
                 </div>
                 <button 
-                  onClick={addGanttRow}
-                  className="p-1.5 bg-purple-50 hover:bg-purple-100 text-[#7850FA] rounded-lg transition-all text-xs font-bold flex items-center gap-1 cursor-pointer"
+                  type="button"
+                  onClick={() => {
+                    const newEtapas = [...data.ganttEtapas, {
+                      semana: `Semana ${data.ganttEtapas.length}`,
+                      fechas: "Por definir",
+                      disenoUxUi: "Nuevas tareas UX",
+                      desarrolloShopify: "Nuevas tareas dev",
+                      entregable: "Entregable clave",
+                      pagoPct: "-"
+                    }];
+                    setData({...data, ganttEtapas: newEtapas});
+                  }}
+                  className="px-3 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-xl text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer border border-indigo-200"
                 >
-                  <Plus className="w-4 h-4" /> Agregar Etapa
+                  <Plus className="w-3 h-3" /> Agregar Fila
                 </button>
               </div>
 
-              <div className="space-y-4 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
-                {data.ganttEtapas.map((etapa, index) => (
-                  <div key={index} className="p-4 bg-zinc-50 rounded-2xl border border-zinc-200 text-xs space-y-2 relative group">
-                    <div className="flex items-center justify-between gap-2 border-b border-zinc-200 pb-2">
+              <div className="space-y-4 max-h-[450px] overflow-y-auto pr-1">
+                {data.ganttEtapas.map((etapa, idx) => (
+                  <div key={idx} className="p-3.5 bg-zinc-50 rounded-2xl border border-zinc-200 space-y-2 text-xs relative group">
+                    <div className="flex items-center justify-between gap-2">
                       <input 
-                        type="text" 
+                        type="text"
                         value={etapa.semana}
-                        onChange={(e) => updateGanttCell(index, 'semana', e.target.value)}
-                        className="bg-white px-2.5 py-1 rounded-lg border border-zinc-300 w-28 font-bold text-xs text-zinc-950"
-                        placeholder="Ej: Semana 1"
+                        onChange={(e) => {
+                          const updated = [...data.ganttEtapas];
+                          updated[idx].semana = e.target.value;
+                          setData({...data, ganttEtapas: updated});
+                        }}
+                        className="font-bold text-zinc-900 bg-transparent border-b border-zinc-300 w-1/3 text-xs focus:border-[#7850FA] outline-none"
                       />
                       <input 
-                        type="text" 
+                        type="text"
                         value={etapa.fechas}
-                        onChange={(e) => updateGanttCell(index, 'fechas', e.target.value)}
-                        className="bg-white px-2.5 py-1 rounded-lg border border-zinc-300 flex-1 font-mono text-[11px] text-zinc-900 text-right"
-                        placeholder="Ej: 27-07 al 02-08"
+                        onChange={(e) => {
+                          const updated = [...data.ganttEtapas];
+                          updated[idx].fechas = e.target.value;
+                          setData({...data, ganttEtapas: updated});
+                        }}
+                        className="font-mono text-zinc-600 bg-transparent border-b border-zinc-300 w-1/3 text-xs focus:border-[#7850FA] outline-none"
                       />
                       <button 
-                        onClick={() => removeGanttRow(index)}
-                        className="text-red-500 hover:text-red-700 p-1.5 bg-white rounded-lg border border-red-200 hover:bg-red-50 cursor-pointer"
-                        title="Eliminar esta fila"
+                        type="button"
+                        onClick={() => {
+                          const updated = data.ganttEtapas.filter((_, i) => i !== idx);
+                          setData({...data, ganttEtapas: updated});
+                        }}
+                        className="text-red-500 hover:text-red-700 p-1 cursor-pointer"
+                        title="Eliminar fila"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
 
-                    <div className="grid grid-cols-1 gap-2 pt-1">
-                      <div>
-                        <span className="text-[10px] font-bold text-zinc-500 uppercase block mb-0.5">Diseño UX/UI:</span>
-                        <input 
-                          type="text" 
-                          value={etapa.disenoUxUi}
-                          onChange={(e) => updateGanttCell(index, 'disenoUxUi', e.target.value)}
-                          className="w-full bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-xs text-zinc-900"
-                        />
-                      </div>
+                    <div>
+                      <label className="block text-[9px] font-bold text-zinc-400 uppercase">Diseño UX/UI</label>
+                      <input 
+                        type="text"
+                        value={etapa.disenoUxUi}
+                        onChange={(e) => {
+                          const updated = [...data.ganttEtapas];
+                          updated[idx].disenoUxUi = e.target.value;
+                          setData({...data, ganttEtapas: updated});
+                        }}
+                        className="w-full px-2 py-1 bg-white border border-zinc-200 rounded-lg text-xs text-zinc-800 focus:border-[#7850FA] outline-none"
+                      />
+                    </div>
 
-                      <div>
-                        <span className="text-[10px] font-bold text-zinc-500 uppercase block mb-0.5">Desarrollo Shopify / Integraciones:</span>
-                        <input 
-                          type="text" 
-                          value={etapa.desarrolloShopify}
-                          onChange={(e) => updateGanttCell(index, 'desarrolloShopify', e.target.value)}
-                          className="w-full bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-xs text-zinc-900"
-                        />
-                      </div>
+                    <div>
+                      <label className="block text-[9px] font-bold text-zinc-400 uppercase">Desarrollo Shopify / Integraciones</label>
+                      <input 
+                        type="text"
+                        value={etapa.desarrolloShopify}
+                        onChange={(e) => {
+                          const updated = [...data.ganttEtapas];
+                          updated[idx].desarrolloShopify = e.target.value;
+                          setData({...data, ganttEtapas: updated});
+                        }}
+                        className="w-full px-2 py-1 bg-white border border-zinc-200 rounded-lg text-xs text-zinc-800 focus:border-[#7850FA] outline-none"
+                      />
+                    </div>
 
-                      <div>
-                        <span className="text-[10px] font-bold text-zinc-500 uppercase block mb-0.5">Entregable Principal:</span>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="col-span-2">
+                        <label className="block text-[9px] font-bold text-zinc-400 uppercase">Entregable Clave</label>
                         <input 
-                          type="text" 
+                          type="text"
                           value={etapa.entregable}
-                          onChange={(e) => updateGanttCell(index, 'entregable', e.target.value)}
-                          className="w-full bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-xs font-semibold text-zinc-950"
+                          onChange={(e) => {
+                            const updated = [...data.ganttEtapas];
+                            updated[idx].entregable = e.target.value;
+                            setData({...data, ganttEtapas: updated});
+                          }}
+                          className="w-full px-2 py-1 bg-white border border-zinc-200 rounded-lg text-xs text-zinc-800 font-bold focus:border-[#7850FA] outline-none"
                         />
                       </div>
-
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold text-zinc-500 uppercase shrink-0">Hito Pago (%):</span>
+                      <div>
+                        <label className="block text-[9px] font-bold text-zinc-400 uppercase">Hito Pago</label>
                         <input 
-                          type="text" 
+                          type="text"
                           value={etapa.pagoPct}
-                          onChange={(e) => updateGanttCell(index, 'pagoPct', e.target.value)}
-                          className="bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-xs font-bold text-zinc-950 w-20 text-center"
+                          onChange={(e) => {
+                            const updated = [...data.ganttEtapas];
+                            updated[idx].pagoPct = e.target.value;
+                            setData({...data, ganttEtapas: updated});
+                          }}
+                          className="w-full px-2 py-1 bg-white border border-zinc-200 rounded-lg text-xs text-center font-bold focus:border-[#7850FA] outline-none"
                         />
                       </div>
                     </div>
@@ -669,7 +700,7 @@ export default function ContratoGeneratorPage() {
           <div className={`lg:col-span-8 space-y-8 ${activeTab === 'editor' ? 'hidden lg:block' : 'block'}`}>
             <div id="legal-contract-print-area" className="space-y-8 text-black">
               
-              {/* HOJA 1 (PÁGINA 1 DE 4) */}
+              {/* HOJA 1 (PÁGINA 1 DE 5) */}
               <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
                 <div className="space-y-5">
                   {/* FORMAL DOCUMENT TITLE HEADER */}
@@ -681,62 +712,67 @@ export default function ContratoGeneratorPage() {
                       {data.planNombre}
                     </h2>
                     <p className="text-xs font-mono text-zinc-800 mt-1">
-                      COTIZACIÓN N° {data.cotizacionNumero}
+                      COTIZACIÓN N.º {data.cotizacionNumero}
                     </p>
                   </div>
 
                   {/* COMPARECIENTES */}
                   <p className="text-justify leading-relaxed text-black text-xs sm:text-sm">
-                    En Santiago de Chile, a <strong>{formatDateSpanish(data.fechaContrato)}</strong>, entre <strong>{data.proveedorRazonSocial}</strong>, RUT N° <strong>{data.proveedorRut}</strong>, representada por don <strong>{data.proveedorRepresentante}</strong>, RUT N° <strong>{data.proveedorRepresentanteRut}</strong>, ambos domiciliados en {data.proveedorDireccion}, en adelante &apos;EL PROVEEDOR&apos;; y, por la otra, <strong>{data.clienteRazonSocial}</strong>, RUT N° <strong>{data.clienteRut}</strong>, representada por don <strong>{data.clienteRepresentante}</strong>, RUT N° <strong>{data.clienteRepresentanteRut}</strong>, domiciliada en {data.clienteDireccion}, en adelante &apos;EL CLIENTE&apos;, se celebra el presente Contrato de Prestación de Servicios.
+                    En Santiago de Chile, a <strong>{formatDateSpanish(data.fechaContrato)}</strong>, entre <strong>{data.proveedorRazonSocial}</strong>, RUT N.º <strong>{data.proveedorRut}</strong>, nombre de fantasía <strong>WEBUNICA CHILE</strong>, representada por don <strong>{data.proveedorRepresentante}</strong>, RUT N.º <strong>{data.proveedorRepresentanteRut}</strong>, ambos domiciliados en {data.proveedorDireccion}, en adelante &ldquo;EL PROVEEDOR&rdquo;; y, por la otra, <strong>{data.clienteRazonSocial}</strong>, RUT N.º <strong>{data.clienteRut}</strong>, representada por don <strong>{data.clienteRepresentante}</strong>, RUT N.º <strong>{data.clienteRepresentanteRut}</strong>, domiciliada en {data.clienteDireccion}, en adelante &ldquo;EL CLIENTE&rdquo;; conjuntamente, &ldquo;LAS PARTES&rdquo;, se celebra el siguiente Contrato de Prestación de Servicios:
                   </p>
 
                   {/* CLAUSULAS LEGALES 1 A 7 */}
                   <div className="space-y-3.5 text-justify text-black text-xs">
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">PRIMERO: ANTECEDENTES</h3>
-                      <p>EL PROVEEDOR declara contar con la experiencia, conocimientos, infraestructura y recursos necesarios para desarrollar e implementar soluciones de comercio electrónico sobre la plataforma Shopify y arquitecturas web avanzadas.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">PRIMERO: ANTECEDENTES Y DEFINICIONES</h3>
+                      <p>EL PROVEEDOR declara contar con experiencia, conocimientos y recursos para diseñar, configurar e implementar soluciones de comercio electrónico sobre Shopify. EL CLIENTE desea desarrollar una nueva tienda de comercio electrónico para la marca {data.nombreMarca || 'su negocio'}, conforme a la Cotización N.º <strong>{data.cotizacionNumero}</strong> y a los anexos de este contrato.</p>
+                      <p className="mt-1">Para este contrato se entenderá por: (a) &ldquo;Proyecto&rdquo;, el conjunto de servicios descritos en este instrumento; (b) &ldquo;Entregable&rdquo;, toda pieza de diseño, configuración, desarrollo, migración, integración o documentación sometida a revisión; (c) &ldquo;Día hábil&rdquo;, de lunes a viernes, excluidos feriados legales en Chile; y (d) &ldquo;Integraciones críticas&rdquo;, el checkout, la pasarela de pago acordada, los métodos de despacho acordados, la facturación electrónica incluida y la conexión estándar con ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>, dentro de los límites del alcance contratado.</p>
                     </div>
 
                     <div className="clause-block">
                       <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEGUNDO: OBJETO</h3>
-                      <p>EL PROVEEDOR se obliga a desarrollar e implementar el proyecto <strong>{data.planNombre}</strong> conforme a la Cotización N° <strong>{data.cotizacionNumero}</strong> y sus anexos, incluyendo la configuración e integración técnica de un sistema de facturación electrónica compatible.</p>
+                      <p>EL PROVEEDOR se obliga a diseñar, desarrollar, configurar e implementar una tienda Shopify <strong>{data.planNombre}</strong> para EL CLIENTE, incluyendo diseño UX/UI, implementación responsive, migración de hasta <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas de producto, configuración de comercio electrónico, integración técnica básica con ERP <strong>{data.nombreErp ?? 'Nebula'}</strong> y con un sistema de facturación electrónica <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong> o equivalente, analítica, SEO técnico inicial, capacitación y puesta en producción, todo conforme al alcance y exclusiones de este contrato.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">TERCERO: ALCANCE</h3>
-                      <p>El detalle de los servicios, actividades, pagos, requisitos de inicio y servicios de terceros se encuentra en los Anexos N°1, N°2, N°3, N°4 y N°5, todos los cuales forman parte integrante e inseparable del presente contrato.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">TERCERO: DOCUMENTOS INTEGRANTES Y PRELACIÓN</h3>
+                      <p>Forman parte integrante del contrato: el cuerpo principal, el Anexo N.º 1 (Alcance y responsabilidades), el Anexo N.º 2 (Carta Gantt), el Anexo N.º 3 (Cronograma de pagos), el Anexo N.º 4 (Checklist de inicio), el Anexo N.º 5 (Servicios de terceros) y el Anexo N.º 6 (Criterios de aceptación y cierre).</p>
+                      <p className="mt-1">En caso de contradicción, prevalecerá el cuerpo principal del contrato; luego, los anexos en orden numérico; y finalmente, la Cotización N.º <strong>{data.cotizacionNumero}</strong>. Correos, mensajes, reuniones o documentos anteriores no modificarán el alcance, precio o plazo salvo que consten en un anexo o solicitud de cambio aceptada por escrito por ambas partes.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">CUARTO: HABILITACIÓN SHOPIFY Y PLATAFORMAS</h3>
-                      <p>EL PROVEEDOR creará la cuenta Shopify Partner correspondiente. EL CLIENTE deberá aceptar la invitación de propiedad, contratar un plan Shopify, aceptar sus términos y registrar una tarjeta válida para cobros recurrentes. La demora en estas gestiones suspenderá automáticamente los plazos del proyecto.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">CUARTO: INICIO, DURACIÓN Y CONDICIONES PREVIAS</h3>
+                      <p>La fecha estimada de inicio operativo será el <strong>{formatDateSpanish(data.fechaContrato)}</strong>. El inicio efectivo quedará condicionado a que concurran conjuntamente: (a) la firma del contrato; (b) el pago íntegro del primer hito; y (c) la entrega de los accesos, información y materiales esenciales indicados en el Anexo N.º 4.</p>
+                      <p className="mt-1">El Proyecto tendrá una duración estimada de <strong>{data.duracionSemanas} semanas</strong> de ejecución, más <strong>{data.holguraSemanas} semanas</strong> de holgura operacional. Si alguna condición previa se cumple después del <strong>{formatDateSpanish(data.fechaContrato)}</strong>, la planificación se desplazará proporcionalmente y EL PROVEEDOR podrá reasignar la fecha de inicio según su programación disponible, sin que ello constituya incumplimiento.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">QUINTO: INFORMACIÓN DE MARCA Y UX/UI</h3>
-                      <p>EL CLIENTE proporcionará logotipos, colores corporativos, manual de marca, tipografías, banners, fotografías, catálogos y referencias visuales. Las partes reconocen que el proyecto contempla dos líneas de trabajo paralelas: Diseño UX/UI y Desarrollo de Software.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">QUINTO: HABILITACIÓN DE SHOPIFY</h3>
+                      <p>EL PROVEEDOR creará o administrará inicialmente la tienda mediante su cuenta Shopify Partner y transferirá la propiedad a EL CLIENTE cuando corresponda. EL CLIENTE deberá aceptar la invitación, contratar y mantener un plan Shopify activo, aceptar los términos de Shopify y registrar un medio de pago válido para cobros recurrentes. La demora o rechazo de estas gestiones suspenderá las actividades dependientes.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEXTO: MIGRACIÓN Y ACCESOS</h3>
-                      <p>EL CLIENTE entregará oportunamente los accesos a plataformas previas (WordPress, WooCommerce, hosting, ERP, sistema de facturación electrónica) y demás credenciales necesarias para la migración e integración de contenidos, productos y servicios.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEXTO: DISEÑO UX/UI, MARCA Y CONTENIDOS</h3>
+                      <p>EL CLIENTE proporcionará oportunamente logotipos, colores corporativos, manual de marca, tipografías, fotografías, banners, catálogos, referencias visuales, textos legales, información comercial y demás contenidos necesarios. El Proyecto contempla líneas de trabajo paralelas de Diseño UX/UI y Desarrollo Shopify.</p>
+                      <p className="mt-1">El diseño comprenderá las vistas y componentes expresamente descritos en el Anexo N.º 1. Se incluyen hasta dos (2) rondas consolidadas de ajustes sobre la propuesta UX/UI presentada. Cambios posteriores a su aprobación, reconstrucciones derivadas de nuevas instrucciones o solicitudes no contempladas constituirán cambio de alcance.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SÉPTIMO: PRODUCTOS Y OPTIMIZACIÓN SEO</h3>
-                      <p>EL CLIENTE proporcionará títulos, precios, SKU, descripciones e imágenes de productos. EL PROVEEDOR podrá utilizar herramientas de inteligencia artificial para optimizar títulos, descripciones y metadatos con fines SEO.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SÉPTIMO: MIGRACIÓN DE PRODUCTOS</h3>
+                      <p>La migración comprende hasta <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas principales de producto desde WordPress/WooCommerce u otra fuente acordada, incluyendo las variantes e imágenes que se encuentren correctamente asociadas y disponibles en una exportación estructurada o mediante mecanismos técnicamente accesibles.</p>
+                      <p className="mt-1">La migración incluye una importación inicial y una ronda de correcciones de incidencias directamente atribuibles al proceso de importación. No incluye reconstrucción manual masiva, creación de fotografías, edición gráfica individual, traducción, levantamiento de información faltante, depuración comercial, homologación de SKU, normalización compleja de variantes, carga posterior de nuevos productos ni corrección de datos defectuosos en el sistema de origen. EL CLIENTE será responsable de revisar y validar títulos, precios, SKU, inventario, impuestos, descripciones, variantes, imágenes, categorías y datos tributarios antes de la publicación.</p>
                     </div>
                   </div>
                 </div>
 
                 {/* PIE DE PÁGINA OFICIAL HOJA 1 */}
                 <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
-                  <span>Contrato {data.planNombre} • Cotización N° {data.cotizacionNumero}</span>
-                  <span>Página 1 de 4</span>
+                  <span>Contrato {data.planNombre} • Cotización N.º {data.cotizacionNumero}</span>
+                  <span>Página 1 de 5</span>
                 </div>
               </div>
 
-              {/* HOJA 2 (PÁGINA 2 DE 4) */}
+              {/* HOJA 2 (PÁGINA 2 DE 5) */}
               <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
                 <div className="space-y-4">
                   <div className="text-center pb-3 border-b border-black mb-4">
@@ -745,66 +781,49 @@ export default function ContratoGeneratorPage() {
                     </p>
                   </div>
 
-                  {/* CLAUSULAS LEGALES 8 A 15 */}
+                  {/* CLAUSULAS LEGALES 8 A 14 */}
                   <div className="space-y-3.5 text-justify text-black text-xs">
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">OCTAVO: APLICACIONES Y FACTURACIÓN ELECTRÓNICA</h3>
-                      <p>EL CLIENTE reconoce que determinadas funcionalidades podrán requerir aplicaciones o servicios de terceros (Shopify Apps, ERP, email marketing, logística, pasarelas de pago y sistemas de facturación electrónica como <strong>{data.sistemaFacturacion}</strong> o equivalente), cuyos planes, licencias y costos recurrentes serán de su exclusiva responsabilidad, salvo pacto escrito en contrario.</p>
-                      <p className="mt-1.5">En particular, EL PROVEEDOR realizará la configuración e integración técnica básica del sistema de facturación electrónica <strong>{data.sistemaFacturacion}</strong> o equivalente compatible. El servicio comprende la instalación o conexión del aplicativo disponible, vinculación con las credenciales proporcionadas por EL CLIENTE, parametrización inicial y pruebas de emisión de documentos tributarios.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">OCTAVO: INTEGRACIÓN CON ERP {(data.nombreErp ?? 'NEBULA').toUpperCase()}</h3>
+                      <p>EL PROVEEDOR realizará la conexión técnica básica de Shopify con ERP <strong>{data.nombreErp ?? 'Nebula'}</strong> mediante el conector estándar disponible y contratado por EL CLIENTE. La configuración se limitará a las funciones compatibles ofrecidas por dicho conector, tales como sincronización de productos, SKU, precios, inventario y pedidos, según las capacidades efectivamente habilitadas por <strong>{data.nombreErp ?? 'Nebula'}</strong> y Shopify.</p>
+                      <p className="mt-1">EL CLIENTE deberá contratar y mantener activo <strong>{data.nombreErp ?? 'Nebula'}</strong> y su conector, entregar credenciales, accesos, documentación, datos maestros y soporte del proveedor cuando sea necesario, además de validar las pruebas de sincronización. No se incluyen desarrollos API a medida, modificaciones internas del ERP, homologaciones especiales, saneamiento de datos, migración histórica, conciliación contable, integraciones con módulos no soportados ni soporte propio del proveedor de ERP. Si el conector estándar no permite una función solicitada, presenta incompatibilidades, requiere certificación, intervención del proveedor o desarrollo personalizado, LAS PARTES evaluarán una cotización y plazo adicionales.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">NOVENO: PLATAFORMAS DE TERCEROS</h3>
-                      <p>EL CLIENTE reconoce que Shopify, Google, Meta y proveedores de pasarelas son servicios de terceros y que sus precios, políticas y funcionalidades pueden variar sin intervención de EL PROVEEDOR.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">NOVENO: FACTURACIÓN ELECTRÓNICA</h3>
+                      <p>EL PROVEEDOR realizará la instalación o conexión, parametrización inicial y pruebas técnicas de <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong> o de otro sistema de facturación electrónica compatible con Shopify que LAS PARTES acuerden por escrito.</p>
+                      <p className="mt-1">EL CLIENTE será responsable de contratar y mantener activo el servicio, entregar sus datos tributarios, certificados, credenciales y autorizaciones, y aprobar los documentos de prueba. No se incluyen licencias, certificaciones ante el SII, regularización tributaria, migración histórica, desarrollo API a medida ni soporte propio del proveedor de facturación.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO: PLAZOS Y CUMPLIMIENTO</h3>
-                      <p>El proyecto iniciará el <strong>{formatDateSpanish(data.fechaContrato)}</strong> y tendrá una duración estimada de <strong>{data.duracionSemanas} semanas</strong>, más <strong>{data.holguraSemanas} semanas</strong> de holgura operacional. Las actividades podrán ejecutarse en paralelo cuando ello resulte técnica y operativamente conveniente.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO: SERVICIOS DE TERCEROS</h3>
+                      <p>Shopify, ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>, <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong>, pasarelas de pago, operadores logísticos, aplicaciones, Google, Meta y demás servicios externos son prestados por terceros. Sus precios, políticas, aprobaciones, continuidad, APIs, tiempos de respuesta y funcionalidades pueden cambiar sin intervención de EL PROVEEDOR.</p>
+                      <p className="mt-1">Salvo estipulación expresa, los planes, licencias, consumos, transacciones, certificados y costos recurrentes de terceros serán de cargo exclusivo de EL CLIENTE. EL PROVEEDOR no responderá por rechazos de cuentas, bloqueos, interrupciones, modificaciones de API, pérdidas de servicio, cambios tarifarios o errores atribuibles a dichos proveedores.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO PRIMERO: PRECIO Y FORMA DE PAGO</h3>
-                      <p>El valor neto del proyecto asciende a <strong>{formatCLP(data.valorNeto)} más IVA (19%)</strong>, equivalente a <strong>{formatCLP(totalIva)}</strong>, totalizando <strong>{formatCLP(totalConIva)}</strong>, pagaderos en los hitos establecidos en el Anexo N°3.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO PRIMERO: PRECIO, IMPUESTOS Y FORMA DE PAGO</h3>
+                      <p>El valor neto del Proyecto asciende a <strong>{formatCLP(data.valorNeto)}</strong>, más IVA (19%) por <strong>{formatCLP(totalIva)}</strong>, totalizando <strong>{formatCLP(totalConIva)} IVA incluido</strong>. El precio se pagará en <strong>{data.hitosPago.length} hitos</strong> conforme al Anexo N.º 3.</p>
+                      <p className="mt-1">El primer pago es anticipado y constituye condición para reservar la programación e iniciar actividades. Cada pago posterior deberá efectuarse al cumplirse el hito respectivo, aun cuando existan observaciones menores que no impidan la continuidad del Proyecto. El atraso en cualquier pago facultará a EL PROVEEDOR para suspender inmediatamente los servicios, accesos, publicación, transferencia de propiedad o entrega de archivos y reprogramar los plazos. Los hitos iniciados, ejecutados o aprobados no serán reembolsables.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO SEGUNDO: APROBACIÓN DE ENTREGABLES</h3>
-                      <p>EL CLIENTE dispondrá de cinco (5) días hábiles para aprobar u observar cada entregable. En ausencia de observaciones dentro de dicho plazo, éstos se entenderán aprobados en forma definitiva.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO SEGUNDO: REVISIÓN Y APROBACIÓN DE ENTREGABLES</h3>
+                      <p>EL CLIENTE dispondrá de cinco (5) días hábiles desde la entrega para aprobar u observar cada Entregable. Las observaciones deberán remitirse en un único documento o comunicación consolidada, ser concretas, reproducibles y referirse al alcance contratado.</p>
+                      <p className="mt-1">Si EL CLIENTE no formula observaciones dentro del plazo, el Entregable se entenderá aprobado de forma definitiva. La utilización, publicación, entrega a terceros o instrucción de continuar con la etapa siguiente también constituirá aprobación.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO TERCERO: GARANTÍA Y SOPORTE</h3>
-                      <p>EL PROVEEDOR otorgará una garantía de treinta (30) días corridos contados desde la puesta en producción respecto de errores atribuibles al desarrollo. El soporte posterior será cotizado separadamente.</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO TERCERO: CAMBIOS DE ALCANCE</h3>
+                      <p>Toda solicitud que exceda el alcance, las cantidades, las rondas de revisión, las integraciones o los entregables definidos se gestionará mediante una solicitud de cambio. EL PROVEEDOR informará su impacto en precio y plazo, y solo la ejecutará una vez aceptada por escrito por EL CLIENTE.</p>
+                      <p className="mt-1">Se considerarán cambios de alcance, entre otros: nuevas plantillas o vistas; más de <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> productos; reconstrucciones manuales; nuevas integraciones; API a medida; nuevas rondas de diseño; cambios posteriores a una aprobación; funciones no soportadas por Shopify, ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>, <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong> o aplicaciones; y tareas solicitadas después de la puesta en producción.</p>
                     </div>
 
                     <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO CUARTO: PROPIEDAD INTELECTUAL Y CONFIDENCIALIDAD</h3>
-                      <p>EL CLIENTE será titular de los desarrollos específicos del proyecto. Las partes se obligan a mantener reserva sobre toda información confidencial obtenida por un plazo de dos (2) años.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO QUINTO: FIRMA ELECTRÓNICA Y JURISDICCIÓN</h3>
-                      <p>Las partes reconocen plena validez a la firma electrónica simple o avanzada. Para todos los efectos legales, las partes fijan domicilio en la ciudad de Santiago y se someten a la jurisdicción de sus Tribunales Ordinarios de Justicia.</p>
-                    </div>
-                  </div>
-
-                  {/* FIRMAS */}
-                  <div className="pt-12 pb-4 border-t border-black mt-8 grid grid-cols-2 gap-8 text-center">
-                    <div>
-                      <div className="border-b border-black mb-2 pb-14"></div>
-                      <p className="font-bold uppercase text-xs text-black">{data.proveedorRepresentante}</p>
-                      <p className="text-[11px] font-mono text-zinc-700">RUT N° {data.proveedorRepresentanteRut}</p>
-                      <p className="text-[11px] font-bold uppercase text-black">{data.proveedorRazonSocial}</p>
-                      <p className="text-[10px] text-zinc-600 font-mono uppercase">EL PROVEEDOR</p>
-                    </div>
-
-                    <div>
-                      <div className="border-b border-black mb-2 pb-14"></div>
-                      <p className="font-bold uppercase text-xs text-black">{data.clienteRepresentante}</p>
-                      <p className="text-[11px] font-mono text-zinc-700">RUT N° {data.clienteRepresentanteRut}</p>
-                      <p className="text-[11px] font-bold uppercase text-black">{data.clienteRazonSocial}</p>
-                      <p className="text-[10px] text-zinc-600 font-mono uppercase">EL CLIENTE</p>
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO CUARTO: GARANTÍA Y ACOMPAÑAMIENTO</h3>
+                      <p>EL PROVEEDOR otorgará una garantía de <strong>{data.diasGarantia ?? 90} días corridos</strong>, contados desde la recepción conforme, exclusivamente para corregir errores reproducibles y directamente atribuibles a los trabajos ejecutados por EL PROVEEDOR dentro del alcance contratado.</p>
+                      <p className="mt-1">La garantía no cubre cambios o intervenciones de EL CLIENTE o terceros; errores de contenido o datos; fallas de Shopify, ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>, <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong>, aplicaciones, APIs, pagos, logística, Google o Meta; actualizaciones de plataformas; pérdida o rechazo de credenciales; nuevos requerimientos; carga de productos; capacitación adicional; incidentes de seguridad ajenos al código implementado; ni uso distinto del previsto.</p>
+                      <p className="mt-1">Adicionalmente, EL PROVEEDOR prestará acompañamiento remoto funcional durante seis (6) meses desde la recepción conforme, limitado a una (1) sesión mensual de hasta cuarenta y cinco (45) minutos, no acumulable, previa coordinación. Este acompañamiento comprende consultas sobre el uso general de la configuración entregada y no incluye ejecución de tareas, soporte de urgencia, nuevos desarrollos, cambios de diseño, carga de contenido, administración comercial ni soporte técnico de terceros.</p>
                     </div>
                   </div>
                 </div>
@@ -812,39 +831,101 @@ export default function ContratoGeneratorPage() {
                 {/* PIE DE PÁGINA OFICIAL HOJA 2 */}
                 <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
                   <span>Contrato {data.planNombre} • {data.clienteRazonSocial}</span>
-                  <span>Página 2 de 4</span>
+                  <span>Página 2 de 5</span>
                 </div>
               </div>
 
-              {/* HOJA 3 (PÁGINA 3 DE 4) */}
+              {/* HOJA 3 (PÁGINA 3 DE 5) */}
+              <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
+                <div className="space-y-4">
+                  <div className="text-center pb-3 border-b border-black mb-4">
+                    <p className="text-xs font-mono font-bold text-black uppercase">
+                      CONTRATO DE PRESTACIÓN DE SERVICIOS — CONTINUACIÓN Y FIRMAS
+                    </p>
+                  </div>
+
+                  {/* CLAUSULAS LEGALES 15 A 26 Y FIRMAS */}
+                  <div className="space-y-3.5 text-justify text-black text-xs">
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO QUINTO: PROPIEDAD INTELECTUAL Y LICENCIAS</h3>
+                      <p>Una vez pagado íntegramente el precio y los servicios adicionales que correspondan, EL CLIENTE será titular de los desarrollos específicos creados exclusivamente para el Proyecto, en la medida en que sean transferibles.</p>
+                      <p className="mt-1">Permanecerán excluidos de la transferencia y bajo la titularidad o licencia de sus respectivos propietarios: Shopify, themes, aplicaciones, conectores, tipografías, fotografías, librerías, código abierto, componentes preexistentes, metodologías, herramientas, plantillas, fragmentos genéricos y componentes reutilizables de EL PROVEEDOR. EL CLIENTE declara contar con derechos suficientes sobre los materiales proporcionados y mantendrá indemne a EL PROVEEDOR frente a reclamaciones derivadas de dichos contenidos.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO SEXTO: CONFIDENCIALIDAD</h3>
+                      <p>LAS PARTES mantendrán reserva sobre la información técnica, comercial, financiera, estratégica, de clientes, credenciales y demás información no pública conocida con ocasión del Proyecto, durante la vigencia del contrato y por cinco (5) años desde su término.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO SÉPTIMO: PROTECCIÓN DE DATOS Y SEGURIDAD</h3>
+                      <p>Cada parte tratará los datos personales y credenciales a los que acceda únicamente para ejecutar el contrato y conforme a la legislación chilena vigente. EL CLIENTE será responsable de sus políticas de privacidad, textos legales, bases de legitimación, consentimiento y cumplimiento aplicable a su operación comercial. EL PROVEEDOR aplicará medidas razonables de seguridad sobre sus accesos y entregables.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO OCTAVO: ESTÁNDAR TÉCNICO Y RESULTADOS COMERCIALES</h3>
+                      <p>EL PROVEEDOR desarrollará el Proyecto aplicando buenas prácticas generalmente aceptadas, vigentes a la fecha de ejecución y pertinentes al alcance contratado, en materias de UX/UI, optimización de conversión (CRO), SEO técnico, rendimiento, seguridad del código implementado y mantenibilidad. Estas obligaciones constituyen un estándar de diligencia técnica y no una garantía de niveles de venta, tasa de conversión, posicionamiento orgánico, tráfico, aprobación de campañas o cuentas, retorno de inversión, disponibilidad absoluta ni puntajes específicos en herramientas automáticas de medición.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO NOVENO: RECEPCIÓN CONFORME</h3>
+                      <p>La recepción conforme se verificará conforme al Anexo N.º 6. EL CLIENTE dispondrá de diez (10) días hábiles desde la puesta en producción o desde la notificación de disponibilidad para validación final, lo que ocurra primero, para informar observaciones críticas en un único reporte consolidado. Se considerará observación crítica únicamente aquella que impida totalmente el funcionamiento del checkout, el procesamiento de la pasarela acordada, un método de despacho contratado, la emisión tributaria de prueba o una integración crítica expresamente incluida. La operación normal del sitio durante dicho período o la ausencia de observaciones críticas constituirá recepción conforme.</p>
+                    </div>
+
+                    <div className="clause-block">
+                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">VIGÉSIMO A VIGÉSIMO SEXTO: DISPOSICIONES GENERALES Y JURISDICCIÓN</h3>
+                      <p>EL PROVEEDOR podrá mencionar la marca e incluir capturas del sitio en su portafolio sin revelar información confidencial. La responsabilidad acumulada de EL PROVEEDOR no excederá el monto neto efectivamente pagado por el Proyecto, salvo dolo o culpa grave. Ninguna parte responderá por casos de fuerza mayor o eventos imprevisibles fuera de su control razonable. Cualquiera de LAS PARTES podrá poner término anticipado mediante aviso escrito con 30 días de anticipación pagando los hitos ejecutados. LAS PARTES reconocen plena validez a la firma electrónica simple o avanzada, fijan domicilio en la ciudad de Santiago de Chile y se someten a sus Tribunales Ordinarios de Justicia.</p>
+                    </div>
+                  </div>
+
+                  {/* FIRMAS FORMALES */}
+                  <div className="pt-10 pb-4 border-t border-black mt-6 grid grid-cols-2 gap-8 text-center">
+                    <div>
+                      <div className="border-b border-black mb-2 pb-14"></div>
+                      <p className="font-bold uppercase text-xs text-black">{data.proveedorRepresentante}</p>
+                      <p className="text-[11px] font-mono text-zinc-700">RUT N.º {data.proveedorRepresentanteRut}</p>
+                      <p className="text-[11px] font-bold uppercase text-black">{data.proveedorRazonSocial}</p>
+                      <p className="text-[10px] text-zinc-600 font-mono uppercase">POR EL PROVEEDOR</p>
+                    </div>
+
+                    <div>
+                      <div className="border-b border-black mb-2 pb-14"></div>
+                      <p className="font-bold uppercase text-xs text-black">{data.clienteRepresentante}</p>
+                      <p className="text-[11px] font-mono text-zinc-700">RUT N.º {data.clienteRepresentanteRut}</p>
+                      <p className="text-[11px] font-bold uppercase text-black">{data.clienteRazonSocial}</p>
+                      <p className="text-[10px] text-zinc-600 font-mono uppercase">POR EL CLIENTE</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* PIE DE PÁGINA OFICIAL HOJA 3 */}
+                <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
+                  <span>Contrato {data.planNombre} • {data.clienteRazonSocial}</span>
+                  <span>Página 3 de 5</span>
+                </div>
+              </div>
+
+              {/* HOJA 4 (PÁGINA 4 DE 5) */}
               <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
                 <div className="space-y-5">
                   <div className="text-center pb-4 border-b border-black mb-4">
                     <h2 className="text-lg font-black uppercase tracking-tight text-black">
-                      ANEXOS INTEGRANTES DEL CONTRATO
+                      ANEXOS INTEGRANTES DEL CONTRATO (ANEXO N.º 1 Y N.º 2)
                     </h2>
                     <p className="text-xs font-mono text-zinc-700">
-                      Cotización N° {data.cotizacionNumero} • {data.clienteRazonSocial}
+                      Cotización N.º {data.cotizacionNumero} • {data.clienteRazonSocial}
                     </p>
                   </div>
 
                   {/* ANEXO 1 */}
                   <div className="space-y-2">
                     <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
-                      ANEXO N°1 - DETALLE DE SERVICIOS Y ALCANCE DEL PROYECTO
+                      ANEXO N.º 1 — ALCANCE DEL PROYECTO Y RESPONSABILIDADES
                     </h3>
-                    <div className="pl-2 space-y-2 text-xs text-black">
-                      <p><strong>Servicio Contratado:</strong> {data.planNombre}.</p>
-                      <p>{data.planDescripcion}</p>
-                      <ul className="list-disc pl-5 space-y-1">
-                        <li>Creación de cuenta Shopify Partner y transferencia de propiedad a EL CLIENTE.</li>
-                        <li>Diseño UX/UI responsive para escritorio, tablet y dispositivos móviles.</li>
-                        <li>Configuración completa de plataforma: dominio, SSL, checkout e impuestos.</li>
-                        <li>Configuración e integración técnica del sistema de facturación electrónica <strong>{data.sistemaFacturacion}</strong> o equivalente.</li>
-                        <li>Configuración de pasarelas de pago locales (Webpay, Mercado Pago, Flow) y métodos de despacho en Chile.</li>
-                        <li>Configuración de Google Analytics 4, GTM, Meta Pixel y SEO técnico inicial.</li>
-                        <li>Capacitación personalizada y documentación de entrega.</li>
-                      </ul>
+                    <div className="pl-2 space-y-2 text-xs text-black text-justify">
+                      <p><strong>1. Servicios incluidos:</strong> Levantamiento inicial y arquitectura de información; Diseño UX/UI en Figma para Home, colección, ficha de producto, carrito y componentes; Hasta 2 rondas consolidadas de ajustes UX/UI; Implementación responsive; Configuración de dominio, SSL, impuestos y checkout; Migración de hasta <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas de producto con variantes e imágenes importables; Pasarela de pago principal y despacho acordados; Conexión estándar con ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>; Configuración técnica de <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong> o equivalente; GA4, GTM, Meta Pixel, Google Search Console y Merchant Center; SEO técnico inicial; Capacitación remota de 90 min y entrega final.</p>
+                      <p><strong>2. Responsabilidades de EL CLIENTE:</strong> Pagar oportunamente los hitos; Contratar planes y licencias de terceros; Aceptar la propiedad de Shopify; Entregar accesos, credenciales, bases de datos y datos maestros completos; Suministrar logotipos, banners, textos legales y catálogos; Validar títulos, SKU, inventario y documentos tributarios; Emitir aprobaciones en los plazos contractuales.</p>
+                      <p><strong>3. Exclusiones principales:</strong> Más de <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas de producto; Rediseño de identidad de marca o fotografía; Depuración manual masiva o homologación compleja de SKU; Desarrollos API a medida o modificaciones internas de ERP/Facturación; Licencias, comisiones o soporte propio de terceros; Garantías de venta, tráfico o posicionamiento.</p>
                     </div>
                   </div>
 
@@ -852,44 +933,44 @@ export default function ContratoGeneratorPage() {
                   <div className="space-y-2 pt-2">
                     <div className="bg-zinc-100 p-2 border border-black">
                       <h3 className="font-black text-xs uppercase text-black">
-                        ANEXO N°2 - CARTA GANTT DETALLADA Y CRONOGRAMA DE CUMPLIMIENTO
+                        ANEXO N.º 2 — CARTA GANTT DETALLADA Y CRONOGRAMA DE CUMPLIMIENTO
                       </h3>
                     </div>
                     <p className="text-xs text-black">
-                      Fechas y actividades estimadas. Las etapas se ajustarán en caso de demoras imputables a entrega de información o accesos por parte de EL CLIENTE.
+                      Planificación iniciada estimativamente el {formatDateSpanish(data.fechaContrato)}. Las fechas se desplazarán proporcionalmente ante demoras en accesos o entregables del CLIENTE.
                     </p>
 
                     <div className="overflow-x-auto">
-                      <table className="w-full text-[10.5px] text-left border-collapse border border-black leading-snug table-fixed">
+                      <table className="w-full text-[10px] text-left border-collapse border border-black leading-snug table-fixed">
                         <thead>
-                          <tr className="bg-zinc-100 font-bold uppercase text-[10.5px] text-black tracking-tight">
-                            <th className="border border-black p-1.5 w-[12%]">Semana</th>
+                          <tr className="bg-zinc-100 font-bold uppercase text-[10px] text-black tracking-tight">
+                            <th className="border border-black p-1.5 w-[10%]">Semana</th>
                             <th className="border border-black p-1.5 w-[15%]">Fechas</th>
                             <th className="border border-black p-1.5 w-[25%]">Diseño UX/UI</th>
-                            <th className="border border-black p-1.5 w-[25%]">Desarrollo Shopify / Integraciones</th>
-                            <th className="border border-black p-1.5 w-[15%]">Entregable</th>
-                            <th className="border border-black p-1.5 text-center w-[8%]">Hito Pago</th>
+                            <th className="border border-black p-1.5 w-[28%]">Desarrollo Shopify / Integraciones</th>
+                            <th className="border border-black p-1.5 w-[14%]">Entregable</th>
+                            <th className="border border-black p-1.5 text-center w-[8%]">Hito</th>
                           </tr>
                         </thead>
                         <tbody>
                           {data.ganttEtapas.map((g, idx) => (
                             <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-zinc-50'}>
-                              <td className="border border-black p-1.5 align-top font-bold text-[10.5px] text-black break-words">
+                              <td className="border border-black p-1.5 align-top font-bold text-[10px] text-black break-words">
                                 {g.semana}
                               </td>
-                              <td className="border border-black p-1.5 align-top font-mono text-[10px] text-black break-words">
+                              <td className="border border-black p-1.5 align-top font-mono text-[9.5px] text-black break-words">
                                 {g.fechas}
                               </td>
-                              <td className="border border-black p-1.5 align-top text-[10.5px] leading-snug text-black break-words whitespace-pre-wrap">
+                              <td className="border border-black p-1.5 align-top text-[10px] leading-snug text-black break-words whitespace-pre-wrap">
                                 {g.disenoUxUi}
                               </td>
-                              <td className="border border-black p-1.5 align-top text-[10.5px] leading-snug text-black break-words whitespace-pre-wrap">
+                              <td className="border border-black p-1.5 align-top text-[10px] leading-snug text-black break-words whitespace-pre-wrap">
                                 {g.desarrolloShopify}
                               </td>
-                              <td className="border border-black p-1.5 align-top text-[10.5px] leading-snug font-bold text-black break-words whitespace-pre-wrap">
+                              <td className="border border-black p-1.5 align-top text-[10px] leading-snug font-bold text-black break-words whitespace-pre-wrap">
                                 {g.entregable}
                               </td>
-                              <td className="border border-black p-1.5 align-top text-center font-bold text-[10.5px] text-black">
+                              <td className="border border-black p-1.5 align-top text-center font-bold text-[10px] text-black">
                                 {g.pagoPct}
                               </td>
                             </tr>
@@ -900,36 +981,36 @@ export default function ContratoGeneratorPage() {
                   </div>
                 </div>
 
-                {/* PIE DE PÁGINA OFICIAL HOJA 3 */}
+                {/* PIE DE PÁGINA OFICIAL HOJA 4 */}
                 <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
                   <span>Anexos Integrantes • {data.clienteRazonSocial}</span>
-                  <span>Página 3 de 4</span>
+                  <span>Página 4 de 5</span>
                 </div>
               </div>
 
-              {/* HOJA 4 (PÁGINA 4 DE 4) */}
+              {/* HOJA 5 (PÁGINA 5 DE 5) */}
               <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
                 <div className="space-y-6">
                   <div className="text-center pb-3 border-b border-black mb-4">
                     <p className="text-xs font-mono font-bold text-black uppercase">
-                      ANEXOS N°3, N°4 Y N°5 — CONTINUACIÓN
+                      ANEXOS N.º 3, N.º 4, N.º 5 Y N.º 6 — CONTINUACIÓN Y CIERRE
                     </p>
                   </div>
 
                   {/* ANEXO 3: CRONOGRAMA DE PAGOS */}
                   <div className="space-y-3">
                     <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
-                      ANEXO N°3 - CRONOGRAMA DE PAGOS E HITOS
+                      ANEXO N.º 3 — CRONOGRAMA DE PAGOS
                     </h3>
 
-                    <table className="w-full text-[11.5px] text-left border-collapse border border-black leading-snug">
+                    <table className="w-full text-[11px] text-left border-collapse border border-black leading-snug">
                       <thead>
-                        <tr className="bg-zinc-100 font-bold uppercase text-[11px] text-black tracking-tight">
+                        <tr className="bg-zinc-100 font-bold uppercase text-[10.5px] text-black tracking-tight">
                           <th className="border border-black p-2">Hito de Cumplimiento</th>
-                          <th className="border border-black p-2 text-center">% Hito</th>
-                          <th className="border border-black p-2 text-right">Monto Neto</th>
+                          <th className="border border-black p-2 text-center">%</th>
+                          <th className="border border-black p-2 text-right">Neto</th>
                           <th className="border border-black p-2 text-right">IVA (19%)</th>
-                          <th className="border border-black p-2 text-right">Total a Pagar</th>
+                          <th className="border border-black p-2 text-right">Total IVA Inc.</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -955,59 +1036,60 @@ export default function ContratoGeneratorPage() {
                   </div>
 
                   {/* ANEXO 4: CHECKLIST DE INICIO */}
-                  <div className="space-y-2 pt-2">
+                  <div className="space-y-2 pt-1">
                     <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
-                      ANEXO N°4 - CHECKLIST DE INICIO DEL PROYECTO
+                      ANEXO N.º 4 — CHECKLIST DE INICIO DEL PROYECTO
                     </h3>
                     <div className="grid grid-cols-2 gap-2 text-xs text-black">
                       <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
                         <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
-                        <span>Cuenta Shopify creada</span>
+                        <span>Contrato firmado y 1er hito pagado</span>
                       </div>
                       <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
                         <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
-                        <span>Invitación de propietario aceptada</span>
+                        <span>Cuenta Shopify Partner e invitación aceptada</span>
                       </div>
                       <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
                         <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
-                        <span>Plan Shopify contratado</span>
+                        <span>Accesos WordPress/WooCommerce y hosting</span>
                       </div>
                       <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
                         <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
-                        <span>Accesos WordPress/WooCommerce</span>
+                        <span>Accesos y conector de ERP {data.nombreErp ?? 'Nebula'}</span>
                       </div>
                       <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
                         <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
-                        <span>Material de marca y manual entregados</span>
+                        <span>Servicio {data.sistemaFacturacion ?? 'Wasabil'} activo y credenciales</span>
                       </div>
                       <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
                         <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
-                        <span>Servicio {data.sistemaFacturacion} activo</span>
+                        <span>Material de marca, textos y catálogos</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* ANEXO 5: SERVICIOS DE TERCEROS */}
-                  <div className="space-y-2 pt-2">
-                    <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
-                      ANEXO N°5 - APLICACIONES Y SERVICIOS DE TERCEROS
-                    </h3>
-                    <p className="text-xs text-black">
-                      Los siguientes servicios son prestados por proveedores independientes. Sus costos de plan, suscripción o consumo mensual corresponden a EL CLIENTE:
-                    </p>
-                    <ul className="list-disc pl-5 text-xs text-black space-y-1">
-                      <li><strong>Plan Shopify:</strong> Cobrado por Shopify directamente a la tarjeta registrada por EL CLIENTE.</li>
-                      <li><strong>Sistema Facturación ({data.sistemaFacturacion}):</strong> Suscripción y soporte del proveedor de facturación.</li>
-                      <li><strong>Pasarelas de Pago (Webpay, Flow, Mercado Pago):</strong> Comisiones por transacción cobradas por la pasarela.</li>
-                      <li><strong>Aplicaciones Shopify (Klaviyo, Judge.me, etc.):</strong> Licencias mensuales según volumen de uso.</li>
-                    </ul>
+                  {/* ANEXO 5 & ANEXO 6 */}
+                  <div className="grid grid-cols-2 gap-4 text-xs text-black pt-1">
+                    <div className="space-y-1.5 border border-black p-3 bg-zinc-50">
+                      <h4 className="font-black uppercase text-[11px] text-black border-b border-black pb-1">
+                        ANEXO N.º 5 — TERCEROS
+                      </h4>
+                      <p className="text-[11px] leading-snug">Shopify, ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>, <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong>, pasarelas de pago y operadores logísticos son independientes. Sus planes, consumos y comisiones son de cargo exclusivo de EL CLIENTE.</p>
+                    </div>
+
+                    <div className="space-y-1.5 border border-black p-3 bg-zinc-50">
+                      <h4 className="font-black uppercase text-[11px] text-black border-b border-black pb-1">
+                        ANEXO N.º 6 — CERRADO & GARANTÍA
+                      </h4>
+                      <p className="text-[11px] leading-snug">Recepción conforme tras 10 días de producción sin observaciones críticas. Garantía de <strong>{data.diasGarantia ?? 90} días corridos</strong> para corrección de código y 6 meses de acompañamiento remoto mensual.</p>
+                    </div>
                   </div>
                 </div>
 
-                {/* PIE DE PÁGINA OFICIAL HOJA 4 */}
+                {/* PIE DE PÁGINA OFICIAL HOJA 5 */}
                 <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
                   <span>Anexos Integrantes • {data.clienteRazonSocial}</span>
-                  <span>Página 4 de 4</span>
+                  <span>Página 5 de 5</span>
                 </div>
               </div>
 
