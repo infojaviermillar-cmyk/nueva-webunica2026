@@ -17,6 +17,7 @@ export async function sendLeadNotification(leadData: {
   email: string;
   service: string;
   phone: string;
+  city?: string;
 }) {
   try {
     const resend = getResend();
@@ -106,17 +107,18 @@ export async function sendLeadNotification(leadData: {
       html: `
         <div style="font-family: sans-serif; color: #18181b; padding: 20px; border: 1px solid #e4e4e7; border-radius: 12px;">
           <h2 style="color: #7c3aed; margin-top: 0;">¡Nuevo prospecto capturado!</h2>
-          <p>Se ha recibido una nueva solicitud de información desde el Funnel de WhatsApp.</p>
+          <p>Se ha recibido una nueva solicitud de información desde la plataforma.</p>
           <div style="background: #f4f4f5; padding: 20px; border-radius: 10px;">
             <ul style="list-style: none; padding: 0; margin: 0;">
               <li style="margin-bottom: 10px;"><strong>Nombre:</strong> ${leadData.name}</li>
               <li style="margin-bottom: 10px;"><strong>Email:</strong> ${leadData.email}</li>
               <li style="margin-bottom: 10px;"><strong>Interés:</strong> ${leadData.service}</li>
-              <li><strong>Teléfono:</strong> ${leadData.phone || 'No proporcionado'}</li>
+              <li style="margin-bottom: 10px;"><strong>Teléfono:</strong> ${leadData.phone || 'No proporcionado'}</li>
+              <li style="margin-bottom: 10px; color: #0284c7;"><strong>📍 Ubicación/Ciudad Detectada por IP:</strong> ${leadData.city || 'No detectada'}</li>
             </ul>
           </div>
           <div style="margin-top: 30px; text-align: center;">
-            <a href="https://wa.me/56984410379" style="background: #25d366; color: #fff; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-block;">Contactar Lead</a>
+            <a href="https://wa.me/56984410379" style="background: #25d366; color: #fff; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-block;">Contactar Lead por WhatsApp</a>
           </div>
         </div>
       `

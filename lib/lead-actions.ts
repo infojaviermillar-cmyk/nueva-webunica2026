@@ -2,12 +2,13 @@
 
 import { supabase } from '@/lib/supabase/client';
 import { sendLeadNotification } from './mail-service';
+import { detectLocationFromIP } from './geo-service';
 
 export async function createLead(leadData: {
   name: string;
   email: string;
   phone: string;
-  city: string;
+  city?: string;
   project_type: string;
   source?: string;
 }) {
@@ -15,12 +16,17 @@ export async function createLead(leadData: {
     return { success: false, error: 'DB no disponible' };
   }
 
+  // Detectar automáticamente la ubicación/ciudad por IP si no viene definida
+  const finalCity = leadData.city && leadData.city.trim() !== '' 
+    ? leadData.city 
+    : await detectLocationFromIP();
+
   // Usamos RPC para evitar el bug de schema cache de PostgREST (PGRST204)
   const { error } = await supabase.rpc('insert_lead', {
     p_name: leadData.name,
     p_email: leadData.email,
     p_phone: leadData.phone,
-    p_city: leadData.city,
+    p_city: finalCity,
     p_project_type: leadData.project_type,
     p_source: leadData.source || 'Modal de Contacto',
   });
@@ -36,7 +42,8 @@ export async function createLead(leadData: {
       name: leadData.name,
       email: leadData.email,
       service: leadData.project_type,
-      phone: leadData.phone
+      phone: leadData.phone,
+      city: finalCity,
     });
   }
 
