@@ -58,7 +58,7 @@ export const PACIFIC_COLOR_PRESET: ContractData = {
   cotizacionNumero: "WU_2026-1770",
   nombreMarca: "Maxxgo",
   
-  proveedorRazonSocial: "SERVICIOS INFORMÁTICOS Y DESARROLLO DE SITIOS WEB JOSÉ JAVIER MILLAR VELÁSQUEZ E.I.R.L.",
+  proveedorRazonSocial: "WEBUNICA CHILE E.I.R.L.",
   proveedorRut: "76.371.864-6",
   proveedorRepresentante: "JOSÉ JAVIER MILLAR VELÁSQUEZ",
   proveedorRepresentanteRut: "12.933.896-2",
@@ -108,7 +108,7 @@ export const PRESET_FULL_SHOPIFY: ContractData = {
   cotizacionNumero: "WU_2026-FULL",
   nombreMarca: "Mi Marca",
   
-  proveedorRazonSocial: "SERVICIOS INFORMÁTICOS Y DESARROLLO DE SITIOS WEB JOSÉ JAVIER MILLAR VELÁSQUEZ E.I.R.L.",
+  proveedorRazonSocial: "WEBUNICA CHILE E.I.R.L.",
   proveedorRut: "76.371.864-6",
   proveedorRepresentante: "JOSÉ JAVIER MILLAR VELÁSQUEZ",
   proveedorRepresentanteRut: "12.933.896-2",
