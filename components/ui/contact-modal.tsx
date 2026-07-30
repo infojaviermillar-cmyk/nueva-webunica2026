@@ -80,12 +80,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6">
       <div 
         className="absolute inset-0 bg-zinc-950/70 backdrop-blur-md transition-opacity" 
         onClick={onClose}
       />
-      
+
       <div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-lg max-h-[92vh] overflow-hidden flex flex-col transform transition-all animate-in fade-in zoom-in-95 duration-300 border border-zinc-100">
         <button 
           onClick={onClose}
@@ -199,20 +199,18 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 mb-1.5 ml-1">
-                      Teléfono / WhatsApp <span className="text-purple-600">*</span>
-                    </label>
-                    <input 
-                      required
-                      type="tel" 
-                      placeholder="+56 9 1234 5678"
-                      className="w-full px-5 py-3.5 bg-zinc-50/80 border border-zinc-300 rounded-2xl text-zinc-950 font-semibold text-sm placeholder:text-zinc-400 focus:bg-white focus:border-[#7850FA] focus:ring-4 focus:ring-[#7850FA]/15 outline-none transition-all shadow-xs"
-                      value={formData.telefono}
-                      onChange={(e) => setFormData({...formData, telefono: e.target.value})}
-                    />
-                  </div>
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 mb-1.5 ml-1">
+                    Teléfono / WhatsApp <span className="text-purple-600">*</span>
+                  </label>
+                  <input 
+                    required
+                    type="tel" 
+                    placeholder="+56 9 1234 5678"
+                    className="w-full px-5 py-3.5 bg-zinc-50/80 border border-zinc-300 rounded-2xl text-zinc-950 font-semibold text-sm placeholder:text-zinc-400 focus:bg-white focus:border-[#7850FA] focus:ring-4 focus:ring-[#7850FA]/15 outline-none transition-all shadow-xs"
+                    value={formData.telefono}
+                    onChange={(e) => setFormData({...formData, telefono: e.target.value})}
+                  />
                 </div>
 
                 {error && (
