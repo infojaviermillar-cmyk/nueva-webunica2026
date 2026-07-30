@@ -68,18 +68,19 @@ export default function ViccaTransformationShowcase() {
         
         {/* Section Header */}
         <div className="text-center max-w-4xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/15 rounded-full text-violet-200 text-xs font-mono font-bold uppercase tracking-widest mb-6">
-            <Sparkles className="w-4 h-4 text-violet-300" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 border border-white/30 rounded-full text-white text-xs font-mono font-bold uppercase tracking-widest mb-6 shadow-sm">
+            <Sparkles className="w-4 h-4 text-amber-300" />
             Caso de Éxito • Proceso Real Shopify
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-none mb-6 font-heading">
-            De Wireframe a <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-indigo-200">Resultado Final</span>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tighter leading-none mb-6 font-heading text-white">
+            De Wireframe a <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-purple-100 to-white">Resultado Final</span>
           </h2>
 
           <ScrollRevealText 
             text="Así transformamos la tienda Vicca: desde el boceto estructural UX, la elección cromática de la marca, hasta la tienda Shopify 100% optimizada para vender."
-            className="text-lg sm:text-xl md:text-2xl text-purple-100 font-light leading-relaxed max-w-3xl mx-auto"
+            className="text-lg sm:text-xl md:text-2xl font-normal leading-relaxed max-w-3xl mx-auto"
+            mode="dark"
           />
         </div>
 
