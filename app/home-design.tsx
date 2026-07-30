@@ -274,8 +274,8 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
               Tecnología que <span className="text-[#7850FA]">impulsa tu negocio</span>
             </h2>
             <ScrollRevealText 
-              text="Portafolio de soluciones especializadas para vender, automatizar e integrar tu empresa en Chile."
-              className="text-lg sm:text-xl md:text-2xl text-zinc-800 font-light leading-relaxed max-w-3xl mx-auto"
+              text="Portafolio de soluciones especializadas para vender, automatizar e integrar tu empresa en Chile. En el entorno digital actual, tu sitio web tiene menos de 3 segundos para capturar la atención, proyectar máxima autoridad y comunicar tu propuesta de valor antes de perder una oportunidad. Desarrollamos sitios web y e-commerce de alto rendimiento diseñados estratégicamente para causar un impacto inmediato en esa primera impresión crucial y convertir visitas en clientes reales."
+              className="text-base sm:text-lg md:text-xl text-zinc-800 font-normal leading-relaxed max-w-4xl mx-auto"
             />
           </div>
 
