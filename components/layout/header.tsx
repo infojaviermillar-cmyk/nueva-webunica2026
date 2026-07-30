@@ -137,10 +137,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
       
       <header className={`fixed top-0 inset-x-0 z-[9999] transition-all duration-300 ${scrolled ? 'bg-[#f5f3ff]/70 backdrop-blur-lg backdrop-saturate-150 border-b border-white/60 shadow-lg shadow-violet-900/5 h-[95px]' : `h-[116px] ${isDarkHero ? 'bg-transparent' : 'bg-[#f5f3ff]/80 backdrop-blur-sm border-b border-white/30'}`} flex items-center`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-          <div className="flex items-center justify-between h-full">
+          <div className="flex items-center justify-between h-full relative">
             
             {/* Logo Oficial Webunica */}
-            <div className="flex-shrink-0 flex items-center relative z-20">
+            <div className="flex-shrink-0 flex items-center justify-center z-20 absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0 lg:left-auto">
               {isShopifyLanding ? (
                 <Link href={`${basePath}#inicio`} className="group flex items-center gap-3 bg-white px-5 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all border border-zinc-100">
                   <div className="flex flex-col leading-none">
@@ -156,11 +156,11 @@ export default function Header({ domain = '' }: { domain?: string }) {
                   <img 
                     src="/logo-webunica.png.webp" 
                     alt="Webunica Expertos en E-commerce" 
-                    className={`h-10 w-auto transition-all duration-500 group-hover:scale-105 ${isDarkHero && !scrolled ? 'violet-filter' : 'brightness-[0.1] opacity-100 gris-img'}`}
+                    className={`h-8 sm:h-10 w-auto transition-all duration-500 group-hover:scale-105 ${isDarkHero && !scrolled ? 'violet-filter' : 'brightness-[0.1] opacity-100 gris-img'}`}
                     width={135}
                     height={36}
                   />
-                  <span className={`hidden md:block mt-[4px] text-[9px] font-medium uppercase tracking-[0.20em] leading-none whitespace-nowrap text-center transition-colors duration-300 ${isDarkHero && !scrolled ? 'text-white/70' : 'text-[rgba(20,24,39,0.60)]'}`}>
+                  <span className={`block mt-[3px] text-[7.5px] sm:text-[9px] font-bold uppercase tracking-[0.20em] leading-none whitespace-nowrap text-center transition-colors duration-300 ${isDarkHero && !scrolled ? 'text-white/80' : 'text-[rgba(20,24,39,0.70)]'}`}>
                     UNA NUEVA ERA WEB
                   </span>
                 </Link>
