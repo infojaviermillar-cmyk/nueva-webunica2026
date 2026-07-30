@@ -79,12 +79,9 @@ export default function ShopifyInteractivePlansCarousel() {
                             {/* PLAN PRENDE */}
               <div id="plan-prende" className="bg-white rounded-[2.5rem] p-6 lg:p-8 border border-zinc-200 shadow-lg flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-2 mb-4 flex-wrap">
+                  <div className="mb-4">
                     <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full inline-block">
                       Lanzamiento
-                    </span>
-                    <span className="text-xs font-mono font-black uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full inline-block border border-emerald-200">
-                      🏷️ 5% Descuento Especial
                     </span>
                   </div>
                   <h3 className="text-2xl font-black uppercase text-zinc-950 mb-1 font-heading">Plan Prende</h3>
@@ -113,9 +110,14 @@ export default function ShopifyInteractivePlansCarousel() {
                   </ul>
                 </div>
 
-                <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
-                  Solicita asesoría gratis
-                </LeadButton>
+                <div className="flex flex-col items-center gap-3">
+                  <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
+                    Solicita asesoría gratis
+                  </LeadButton>
+                  <span className="text-xs font-mono font-black uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3.5 py-1.5 rounded-full inline-block border border-emerald-200/80 shadow-xs">
+                    🏷️ 5% Descuento Especial
+                  </span>
+                </div>
               </div>
 
               {/* PLAN FULL (DESTACADO / MÁS ELEGIDO) */}
@@ -125,12 +127,9 @@ export default function ShopifyInteractivePlansCarousel() {
                 </div>
 
                 <div>
-                  <div className="flex items-center gap-2 mb-4 mt-2 flex-wrap">
-                    <span className="text-xs font-mono font-bold uppercase tracking-widest text-violet-300 bg-white/10 px-3 py-1 rounded-full inline-block">
+                  <div className="mb-4 mt-2">
+                    <span className="text-xs font-mono font-bold uppercase tracking-widest text-purple-300 bg-white/10 px-3 py-1 rounded-full inline-block">
                       Crecimiento & Automatización
-                    </span>
-                    <span className="text-xs font-mono font-black uppercase tracking-widest text-pink-200 bg-[#FF0085]/40 px-3 py-1 rounded-full inline-block border border-pink-400/50">
-                      🏷️ 8% Descuento Especial
                     </span>
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-black uppercase text-white mb-1 font-heading">Plan Full</h3>
@@ -163,20 +162,22 @@ export default function ShopifyInteractivePlansCarousel() {
                   </p>
                 </div>
 
-                <LeadButton className="w-full py-4 bg-[#FF0085] hover:bg-pink-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-pink-600/30 text-center cursor-pointer">
-                  Solicita asesoría gratis
-                </LeadButton>
+                <div className="flex flex-col items-center gap-3">
+                  <LeadButton className="w-full py-4 bg-[#FF0085] hover:bg-pink-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-pink-600/30 text-center cursor-pointer">
+                    Solicita asesoría gratis
+                  </LeadButton>
+                  <span className="text-xs font-mono font-black uppercase tracking-widest text-pink-100 bg-[#FF0085]/40 px-3.5 py-1.5 rounded-full inline-block border border-pink-400/50 shadow-xs">
+                    🏷️ 8% Descuento Especial
+                  </span>
+                </div>
               </div>
 
               {/* PLAN CONVERSIÓN (COTIZAR) */}
               <div id="plan-conversion" className="bg-white rounded-[2.5rem] p-6 lg:p-8 border border-zinc-200 shadow-lg flex flex-col justify-between relative group">
                 <div>
-                  <div className="flex items-center gap-2 mb-4 flex-wrap">
+                  <div className="mb-4">
                     <span className="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
                       Performance & CRO
-                    </span>
-                    <span className="text-xs font-mono font-black uppercase tracking-widest text-blue-700 bg-blue-100 px-3 py-1 rounded-full inline-block border border-blue-200">
-                      🏷️ 10% Descuento Especial
                     </span>
                   </div>
                   
@@ -217,9 +218,14 @@ export default function ShopifyInteractivePlansCarousel() {
                   </ul>
                 </div>
 
-                <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
-                  Solicita asesoría gratis
-                </LeadButton>
+                <div className="flex flex-col items-center gap-3">
+                  <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
+                    Solicita asesoría gratis
+                  </LeadButton>
+                  <span className="text-xs font-mono font-black uppercase tracking-widest text-blue-700 bg-blue-100 px-3.5 py-1.5 rounded-full inline-block border border-blue-200/80 shadow-xs">
+                    🏷️ 10% Descuento Especial
+                  </span>
+                </div>
               </div>
 
             </div>

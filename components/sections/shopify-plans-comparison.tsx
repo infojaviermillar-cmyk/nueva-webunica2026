@@ -373,11 +373,15 @@ export default function ShopifyPlansComparison() {
                 <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
                   <div className="flex justify-center mb-3"><TrendingUp className="w-7 h-7 text-emerald-500" /></div>
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Prende</h4>
-                  <div className="text-lg lg:text-xl font-black text-zinc-900 mb-2">$580.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
-                  <div className="text-[9px] font-black text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full inline-block mb-4 uppercase">🏷️ 5% Descuento Especial</div>
-                  <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
-                    Solicita asesoría gratis
-                  </LeadButton>
+                  <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">$580.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
+                  <div className="flex flex-col items-center gap-2">
+                    <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
+                      Solicita asesoría gratis
+                    </LeadButton>
+                    <div className="text-[9px] font-black text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full inline-block uppercase border border-emerald-200/80 shadow-xs">
+                      🏷️ 5% Descuento Especial
+                    </div>
+                  </div>
                 </th>
 
                 {/* FULL (Recommended) */}
@@ -386,21 +390,30 @@ export default function ShopifyPlansComparison() {
                   <div className="flex justify-center mb-3 mt-1"><Zap className="w-7 h-7 text-violet-500" /></div>
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Full</h4>
                   <div className="text-lg lg:text-xl font-black text-violet-700 mb-2">$780.000 <span className="text-[10px] text-violet-500 uppercase font-bold">+ IVA</span></div>
-                  <div className="text-[9px] font-black text-[#FF0085] bg-pink-100 px-2.5 py-1 rounded-full inline-block mb-4 uppercase">🏷️ 8% Descuento Especial</div>
-                  <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-[#FF0085] text-white rounded-xl uppercase font-black tracking-wider hover:bg-pink-700 shadow-lg shadow-pink-600/20">
-                    Solicita asesoría gratis
-                  </LeadButton>
+                  <div className="text-[9px] font-black text-violet-600 bg-violet-100 px-2.5 py-1 rounded-full inline-block mb-4">Boleta SII • Envíos</div>
+                  <div className="flex flex-col items-center gap-2">
+                    <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-[#FF0085] text-white rounded-xl uppercase font-black tracking-wider hover:bg-pink-700 shadow-lg shadow-pink-600/20">
+                      Solicita asesoría gratis
+                    </LeadButton>
+                    <div className="text-[9px] font-black text-[#FF0085] bg-pink-100 px-3 py-1 rounded-full inline-block uppercase border border-pink-200/80 shadow-xs">
+                      🏷️ 8% Descuento Especial
+                    </div>
+                  </div>
                 </th>
 
                 {/* CONVERSIÓN */}
                 <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
                   <div className="flex justify-center mb-3"><Rocket className="w-7 h-7 text-blue-500" /></div>
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Conversión</h4>
-                  <div className="text-lg lg:text-xl font-black text-zinc-900 mb-2">A Cotizar</div>
-                  <div className="text-[9px] font-black text-blue-700 bg-blue-100 px-2.5 py-1 rounded-full inline-block mb-4 uppercase">🏷️ 10% Descuento Especial</div>
-                  <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
-                    Solicita asesoría gratis
-                  </LeadButton>
+                  <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">A Cotizar</div>
+                  <div className="flex flex-col items-center gap-2">
+                    <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
+                      Solicita asesoría gratis
+                    </LeadButton>
+                    <div className="text-[9px] font-black text-blue-700 bg-blue-100 px-3 py-1 rounded-full inline-block uppercase border border-blue-200/80 shadow-xs">
+                      🏷️ 10% Descuento Especial
+                    </div>
+                  </div>
                 </th>
 
                 {/* CUSTOM ELITE */}
@@ -408,10 +421,12 @@ export default function ShopifyPlansComparison() {
                   <div className="flex justify-center mb-3"><Crown className="w-7 h-7 text-emerald-500" /></div>
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Custom Elite</h4>
                   <div className="text-lg lg:text-xl font-black text-emerald-700 mb-2">A Cotizar</div>
-                  <div className="text-[9px] font-black text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full inline-block mb-4 uppercase">Diseño Figma desde Cero</div>
-                  <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-emerald-600 text-white rounded-xl uppercase font-black tracking-wider hover:bg-emerald-700 shadow-lg shadow-emerald-600/20">
-                    Solicita asesoría gratis
-                  </LeadButton>
+                  <div className="text-[9px] font-black text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full inline-block mb-4">Diseño Figma desde Cero</div>
+                  <div className="flex flex-col items-center gap-2">
+                    <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-emerald-600 text-white rounded-xl uppercase font-black tracking-wider hover:bg-emerald-700 shadow-lg shadow-emerald-600/20">
+                      Solicita asesoría gratis
+                    </LeadButton>
+                  </div>
                 </th>
               </tr>
             </thead>
