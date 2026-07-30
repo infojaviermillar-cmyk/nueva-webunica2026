@@ -217,8 +217,8 @@ const PLAN_CARDS = [
     icon: <TrendingUp className="w-6 h-6 text-emerald-500" />,
     price: "$580.000",
     subtitle: "+ IVA",
-    badge: "🏷️ 5% Descuento Especial",
-    cta: "Solicita asesoría gratis",
+    cta: "-5% Solicita Asesoría Gratis",
+    savingsText: "Con esta promoción ahorras $29.000",
     ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
     color: "emerald"
   },
@@ -228,9 +228,10 @@ const PLAN_CARDS = [
     icon: <Zap className="w-6 h-6 text-[#FF0085]" />,
     price: "$780.000",
     subtitle: "+ IVA",
-    badge: "🏷️ 8% Descuento Especial • El Más Vendido",
+    badge: "El Más Vendido • Crecimiento & Automatización",
     recommended: true,
-    cta: "Solicita asesoría gratis",
+    cta: "-8% Solicita Asesoría Gratis",
+    savingsText: "Con esta promoción ahorras $62.400",
     ctaClass: "bg-[#FF0085] text-white hover:bg-pink-700 shadow-lg shadow-pink-600/20",
     color: "pink"
   },
@@ -240,8 +241,8 @@ const PLAN_CARDS = [
     icon: <Crown className="w-6 h-6 text-blue-500" />,
     price: "Cotizar",
     subtitle: "Desarrollo a Medida",
-    badge: "🏷️ 10% Descuento Especial",
-    cta: "Solicita asesoría gratis",
+    cta: "-10% Solicita Asesoría Gratis",
+    savingsText: "Con esta promoción ahorras $120.000",
     ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
     color: "blue"
   },
@@ -252,7 +253,7 @@ const PLAN_CARDS = [
     price: "Cotizar",
     subtitle: "Desarrollo 100% a Medida",
     badge: "Diseño Figma desde Cero",
-    cta: "Solicita asesoría gratis",
+    cta: "Solicita Asesoría Gratis",
     ctaClass: "bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-600/20",
     color: "emerald"
   }
@@ -376,11 +377,11 @@ export default function ShopifyPlansComparison() {
                   <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">$580.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
                   <div className="flex flex-col items-center gap-2">
                     <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
-                      Solicita asesoría gratis
+                      -5% Solicita Asesoría Gratis
                     </LeadButton>
-                    <div className="text-[9px] font-black text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full inline-block uppercase border border-emerald-200/80 shadow-xs">
-                      🏷️ 5% Descuento Especial
-                    </div>
+                    <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">
+                      Con esta promoción ahorras $29.000
+                    </p>
                   </div>
                 </th>
 
@@ -393,11 +394,11 @@ export default function ShopifyPlansComparison() {
                   <div className="text-[9px] font-black text-violet-600 bg-violet-100 px-2.5 py-1 rounded-full inline-block mb-4">Boleta SII • Envíos</div>
                   <div className="flex flex-col items-center gap-2">
                     <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-[#FF0085] text-white rounded-xl uppercase font-black tracking-wider hover:bg-pink-700 shadow-lg shadow-pink-600/20">
-                      Solicita asesoría gratis
+                      -8% Solicita Asesoría Gratis
                     </LeadButton>
-                    <div className="text-[9px] font-black text-[#FF0085] bg-pink-100 px-3 py-1 rounded-full inline-block uppercase border border-pink-200/80 shadow-xs">
-                      🏷️ 8% Descuento Especial
-                    </div>
+                    <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">
+                      Con esta promoción ahorras $62.400
+                    </p>
                   </div>
                 </th>
 
@@ -408,11 +409,11 @@ export default function ShopifyPlansComparison() {
                   <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">A Cotizar</div>
                   <div className="flex flex-col items-center gap-2">
                     <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
-                      Solicita asesoría gratis
+                      -10% Solicita Asesoría Gratis
                     </LeadButton>
-                    <div className="text-[9px] font-black text-blue-700 bg-blue-100 px-3 py-1 rounded-full inline-block uppercase border border-blue-200/80 shadow-xs">
-                      🏷️ 10% Descuento Especial
-                    </div>
+                    <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">
+                      Con esta promoción ahorras $120.000
+                    </p>
                   </div>
                 </th>
 
@@ -424,7 +425,7 @@ export default function ShopifyPlansComparison() {
                   <div className="text-[9px] font-black text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-full inline-block mb-4">Diseño Figma desde Cero</div>
                   <div className="flex flex-col items-center gap-2">
                     <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-emerald-600 text-white rounded-xl uppercase font-black tracking-wider hover:bg-emerald-700 shadow-lg shadow-emerald-600/20">
-                      Solicita asesoría gratis
+                      Solicita Asesoría Gratis
                     </LeadButton>
                   </div>
                 </th>

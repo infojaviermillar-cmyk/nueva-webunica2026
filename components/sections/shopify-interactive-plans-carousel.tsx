@@ -110,13 +110,13 @@ export default function ShopifyInteractivePlansCarousel() {
                   </ul>
                 </div>
 
-                <div className="flex flex-col items-center gap-3">
+                <div className="flex flex-col items-center gap-2 text-center">
                   <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
-                    Solicita asesoría gratis
+                    -5% Solicita Asesoría Gratis
                   </LeadButton>
-                  <span className="text-xs font-mono font-black uppercase tracking-widest text-emerald-700 bg-emerald-100 px-3.5 py-1.5 rounded-full inline-block border border-emerald-200/80 shadow-xs">
-                    🏷️ 5% Descuento Especial
-                  </span>
+                  <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">
+                    Con esta promoción ahorras $29.000
+                  </p>
                 </div>
               </div>
 
@@ -162,13 +162,13 @@ export default function ShopifyInteractivePlansCarousel() {
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center gap-3">
+                <div className="flex flex-col items-center gap-2 text-center">
                   <LeadButton className="w-full py-4 bg-[#FF0085] hover:bg-pink-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-pink-600/30 text-center cursor-pointer">
-                    Solicita asesoría gratis
+                    -8% Solicita Asesoría Gratis
                   </LeadButton>
-                  <span className="text-xs font-mono font-black uppercase tracking-widest text-pink-100 bg-[#FF0085]/40 px-3.5 py-1.5 rounded-full inline-block border border-pink-400/50 shadow-xs">
-                    🏷️ 8% Descuento Especial
-                  </span>
+                  <p className="text-[14px] font-bold text-white mt-1 leading-snug">
+                    Con esta promoción ahorras $62.400
+                  </p>
                 </div>
               </div>
 
@@ -218,13 +218,13 @@ export default function ShopifyInteractivePlansCarousel() {
                   </ul>
                 </div>
 
-                <div className="flex flex-col items-center gap-3">
+                <div className="flex flex-col items-center gap-2 text-center">
                   <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
-                    Solicita asesoría gratis
+                    -10% Solicita Asesoría Gratis
                   </LeadButton>
-                  <span className="text-xs font-mono font-black uppercase tracking-widest text-blue-700 bg-blue-100 px-3.5 py-1.5 rounded-full inline-block border border-blue-200/80 shadow-xs">
-                    🏷️ 10% Descuento Especial
-                  </span>
+                  <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">
+                    Con esta promoción ahorras $120.000
+                  </p>
                 </div>
               </div>
 

@@ -21,7 +21,7 @@ interface Plan {
   time: string;
   features: Feature[];
   cta: string;
-  discountBadge?: string;
+  savingsText?: string;
   recommended?: boolean;
   color: string;
   lightColor: string;
@@ -98,8 +98,8 @@ export default function ShopifyPricingSection() {
       price: '$580.000',
       description: 'Ideal para crear una tienda Shopify profesional desde cero o migración inicial, con setup completo y hasta 70 productos.',
       time: 'Entrega en 4 semanas.',
-      cta: 'Solicita asesoría gratis',
-      discountBadge: '🏷️ 5% Descuento Especial',
+      cta: '-5% Solicita Asesoría Gratis',
+      savingsText: 'Con esta promoción ahorras $29.000',
       color: 'bg-fuchsia-600',
       lightColor: 'bg-fuchsia-50',
       textColor: 'text-fuchsia-600',
@@ -122,8 +122,8 @@ export default function ShopifyPricingSection() {
       price: '$780.000',
       description: 'La opción más completa para marcas en crecimiento: Preparado para campañas y crecimiento, Boleta SII, envíos automatizados y hasta 500 productos.',
       time: 'Entrega en 6 semanas.',
-      cta: 'Solicita asesoría gratis',
-      discountBadge: '🏷️ 8% Descuento Especial',
+      cta: '-8% Solicita Asesoría Gratis',
+      savingsText: 'Con esta promoción ahorras $62.400',
       recommended: true,
       color: 'bg-purple-600',
       lightColor: 'bg-purple-50',
@@ -147,8 +147,8 @@ export default function ShopifyPricingSection() {
       price: '$1.200.000',
       description: 'Ideal para marcas que buscan maximizar su tasa de ventas con theme propio para conversión, mejoras CRO en ficha de producto, integración ERP y Klaviyo.',
       time: 'Entrega en 8 semanas.',
-      cta: 'Solicita asesoría gratis',
-      discountBadge: '🏷️ 10% Descuento Especial',
+      cta: '-10% Solicita Asesoría Gratis',
+      savingsText: 'Con esta promoción ahorras $120.000',
       color: 'bg-zinc-900',
       lightColor: 'bg-zinc-100',
       textColor: 'text-zinc-900',
@@ -172,7 +172,7 @@ export default function ShopifyPricingSection() {
       price: 'A cotizar',
       description: 'La solución más completa con diseño desde cero en Figma, migración avanzada e integraciones ERP y georreferenciación.',
       time: 'Entrega A convenir.',
-      cta: 'Solicita asesoría gratis',
+      cta: 'Solicita Asesoría Gratis',
       color: 'bg-emerald-600',
       lightColor: 'bg-emerald-50',
       textColor: 'text-emerald-600',
