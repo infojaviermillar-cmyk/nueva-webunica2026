@@ -18,6 +18,8 @@ export async function sendLeadNotification(leadData: {
   service: string;
   phone: string;
 }) {
+  try {
+    const resend = getResend();
     const serviceLower = (leadData.service || '').toLowerCase();
     let discountCode = 'WEBUNICA10';
     let discountPct = '10% OFF DIRECTO';

@@ -220,7 +220,6 @@ export default function ShopifyInteractivePlansCarousel() {
                 <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
                   Solicita asesoría gratis
                 </LeadButton>
-              </div>         </LeadButton>
               </div>
 
             </div>
