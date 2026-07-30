@@ -18,30 +18,47 @@ export async function sendLeadNotification(leadData: {
   service: string;
   phone: string;
 }) {
-  try {
-    const resend = getResend();
+    const serviceLower = (leadData.service || '').toLowerCase();
+    let discountCode = 'WEBUNICA10';
+    let discountPct = '10% OFF DIRECTO';
+    let discountPlanName = 'tu proyecto';
+
+    if (serviceLower.includes('prende')) {
+      discountCode = 'PRENDE5';
+      discountPct = '5% OFF DIRECTO';
+      discountPlanName = 'tu PLAN PRENDE';
+    } else if (serviceLower.includes('full')) {
+      discountCode = 'FULL8';
+      discountPct = '8% OFF DIRECTO';
+      discountPlanName = 'tu PLAN FULL';
+    } else if (serviceLower.includes('conversion') || serviceLower.includes('conversión')) {
+      discountCode = 'CONVERSION10';
+      discountPct = '10% OFF DIRECTO';
+      discountPlanName = 'tu PLAN CONVERSIÓN';
+    }
+
     // 1. Email para el Cliente (Persuasivo y Mágico)
     await resend.emails.send({
       from: 'Javier de Webunica <consultas@webunica.cl>',
       to: leadData.email,
-      subject: `⚡ Recibimos tu solicitud de ${leadData.service} — ¡Respondemos hoy!`,
+      subject: `⚡ Recibimos tu solicitud de asesoría gratis para ${leadData.service} — ¡Respondemos hoy!`,
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; color: #18181b; border: 1px solid #e4e4e7; border-radius: 24px; overflow: hidden;">
           <div style="background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%); padding: 40px 20px; text-align: center; color: white;">
-            <h1 style="margin: 0; font-size: 28px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.025em;">🚀 ¡Tu proyecto está en buenas manos!</h1>
-            <p style="margin-top: 10px; opacity: 0.9; font-size: 16px;">Estamos listos para elevar tu marca al siguiente nivel.</p>
+            <h1 style="margin: 0; font-size: 26px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.025em;">🚀 ¡Tu Asesoría Gratuita fue Recibida!</h1>
+            <p style="margin-top: 10px; opacity: 0.9; font-size: 16px;">Estamos listos para evaluar tu proyecto e-commerce al siguiente nivel.</p>
           </div>
           
           <div style="padding: 40px 30px; background: white;">
             <p style="font-size: 18px; margin-bottom: 20px;">Hola <strong>${leadData.name}</strong>, 👋</p>
-            <p style="line-height: 1.6; font-size: 16px;">Soy Javier Millar. Recibí tu interés en <strong>${leadData.service}</strong> y déjame decirte algo: has llegado al lugar correcto si buscas resultados fuera de lo común.</p>
+            <p style="line-height: 1.6; font-size: 16px;">Soy Javier Millar. Muchas gracias por solicitar tu <strong>asesoría gratuita</strong> para <strong>${leadData.service}</strong>.</p>
             
-            <p style="line-height: 1.6; font-size: 16px;">⏰ <strong>Respondemos en menos de 2 horas</strong> en horario hábil. Mientras tanto, te cuento que activé un beneficio exclusivo para tu proyecto:</p>
+            <p style="line-height: 1.6; font-size: 16px;">⏰ <strong>Te responderemos en menos de 2 horas</strong> dentro de horario hábil. Además, por haber solicitado tu asesoría gratis en nuestro sitio, dejamos activado este beneficio especial exclusivo para ${discountPlanName}:</p>
             
             <div style="background: #fdf2f8; border: 2px dashed #db2777; padding: 25px; text-align: center; border-radius: 20px; margin: 30px 0;">
-              <p style="margin: 0; font-size: 12px; text-transform: uppercase; font-weight: bold; color: #db2777; letter-spacing: 0.1em;">🎯 Tu Código de Descuento (válido 7 días):</p>
-              <h2 style="margin: 10px 0; font-size: 36px; letter-spacing: 4px; color: #db2777;">WEBUNICA10</h2>
-              <p style="margin: 0; font-size: 14px; font-weight: 600; color: #db2777;">💥 10% OFF DIRECTO EN TU PLAN</p>
+              <p style="margin: 0; font-size: 12px; text-transform: uppercase; font-weight: bold; color: #db2777; letter-spacing: 0.1em;">🎯 Tu Código de Descuento Exclusivo (válido por 7 días):</p>
+              <h2 style="margin: 10px 0; font-size: 34px; letter-spacing: 4px; color: #db2777;">${discountCode}</h2>
+              <p style="margin: 0; font-size: 15px; font-weight: 900; color: #db2777; text-transform: uppercase;">💥 ${discountPct} EN LA CONTRATACIÓN DE TU PLAN</p>
             </div>
 
             <p style="line-height: 1.6; font-size: 16px; margin-bottom: 10px;">🔥 <strong>¿Por qué elegirnos?</strong></p>
