@@ -306,12 +306,12 @@ export default function ShopifyEnChilePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="pt-28 sm:pt-36 lg:pt-44">
+      <div className="pt-20 sm:pt-24 lg:pt-28">
         
         {/* ========================================================= */}
         {/* ZONA 1: HERO (SEDUCIR Y ACLARAR)                          */}
         {/* ========================================================= */}
-        <section id="inicio" className="relative py-12 sm:py-20 lg:py-28 overflow-hidden">
+        <section id="inicio" className="relative py-10 sm:py-16 lg:py-20 overflow-hidden">
           <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-violet-600/10 blur-[130px] rounded-full pointer-events-none -z-10 translate-x-1/3 -translate-y-1/3" />
           <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-pink-500/10 blur-[120px] rounded-full pointer-events-none -z-10 -translate-x-1/3" />
           
