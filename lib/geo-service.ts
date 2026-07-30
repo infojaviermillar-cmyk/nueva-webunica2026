@@ -1,43 +1,102 @@
 import { headers } from 'next/headers';
 
-export async function detectLocationFromIP(): Promise<string> {
+export interface GeoResult {
+  ip: string;
+  city: string;
+  region: string;
+  country: string;
+  isp?: string;
+  fullLocationString: string;
+}
+
+export async function detectGeoAndIP(): Promise<GeoResult> {
+  let detectedIp = '';
+  let city = '';
+  let region = '';
+  let country = 'Chile';
+  let isp = '';
+
   try {
     const headersList = await headers();
 
-    // 1. Vercel GeoIP Headers (100% Instant & Free on Vercel deployment)
+    // 1. Extract IP from request headers
+    const forwardedFor = headersList.get('x-forwarded-for');
+    const realIp = headersList.get('x-forwarded-host') || headersList.get('x-real-ip');
+    if (forwardedFor) {
+      detectedIp = forwardedFor.split(',')[0].trim();
+    } else if (realIp) {
+      detectedIp = realIp.trim();
+    }
+
+    // 2. Extract Vercel GeoIP Headers if available
     const vercelCity = headersList.get('x-vercel-ip-city');
     const vercelRegion = headersList.get('x-vercel-ip-country-region');
     const vercelCountry = headersList.get('x-vercel-ip-country');
 
     if (vercelCity) {
-      const cityClean = decodeURIComponent(vercelCity);
-      const regionClean = vercelRegion ? decodeURIComponent(vercelRegion) : '';
-      return `${cityClean}${regionClean ? `, ${regionClean}` : ''}${vercelCountry ? ` (${vercelCountry})` : ''}`;
+      city = decodeURIComponent(vercelCity);
+    }
+    if (vercelRegion) {
+      region = decodeURIComponent(vercelRegion);
+    }
+    if (vercelCountry) {
+      country = vercelCountry;
     }
 
-    // 2. Cloudflare GeoIP Headers
+    // 3. Cloudflare GeoIP Headers fallback
     const cfCity = headersList.get('cf-ipcity');
     const cfRegion = headersList.get('cf-region');
-    if (cfCity) {
-      return `${cfCity}${cfRegion ? `, ${cfRegion}` : ''}`;
-    }
+    const cfCountry = headersList.get('cf-ipcountry');
 
-    // 3. Fallback: External IP API lookup for non-Vercel or local dev testing
-    const forwardedFor = headersList.get('x-forwarded-for');
-    const ip = forwardedFor ? forwardedFor.split(',')[0].trim() : headersList.get('x-real-ip');
+    if (!city && cfCity) city = cfCity;
+    if (!region && cfRegion) region = cfRegion;
+    if (cfCountry) country = cfCountry;
 
-    if (ip && ip !== '127.0.0.1' && ip !== '::1' && !ip.startsWith('192.168.') && !ip.startsWith('10.')) {
-      const res = await fetch(`https://ipapi.co/${ip}/json/`, { next: { revalidate: 3600 } });
+    // 4. IP API lookup if city is still missing or IP is local/missing
+    const isLocalIp = !detectedIp || detectedIp === '127.0.0.1' || detectedIp === '::1' || detectedIp.startsWith('192.168.') || detectedIp.startsWith('10.');
+    
+    // Query external IP API if city is missing OR IP is local
+    const apiUrl = isLocalIp ? 'http://ip-api.com/json/' : `http://ip-api.com/json/${detectedIp}`;
+    
+    try {
+      const res = await fetch(apiUrl, { cache: 'no-store' });
       if (res.ok) {
-        const data = await res.json();
-        if (data.city) {
-          return `${data.city}${data.region ? `, ${data.region}` : ''}`;
+        const geoData = await res.json();
+        if (geoData.status === 'success') {
+          if (!city && geoData.city) city = geoData.city;
+          if (!region && geoData.regionName) region = geoData.regionName;
+          if (geoData.country) country = geoData.country;
+          if (geoData.isp) isp = geoData.isp;
+          if (isLocalIp && geoData.query) detectedIp = geoData.query;
         }
       }
+    } catch (err) {
+      console.warn('[detectGeoAndIP] External IP lookup error:', err);
     }
+
   } catch (error) {
-    console.error('[detectLocationFromIP] Error:', error);
+    console.error('[detectGeoAndIP] Header error:', error);
   }
 
-  return 'Ubicación no especificada (Chile)';
+  // Fallback defaults
+  if (!city) city = 'Santiago';
+  if (!region) region = 'Región Metropolitana';
+  if (!detectedIp) detectedIp = 'IP no detectada';
+
+  const fullLocationString = `${city}${region ? `, ${region}` : ''}${country ? ` (${country})` : ''}`;
+
+  return {
+    ip: detectedIp,
+    city,
+    region,
+    country,
+    isp,
+    fullLocationString
+  };
+}
+
+// Backward compatibility helper
+export async function detectLocationFromIP(): Promise<string> {
+  const result = await detectGeoAndIP();
+  return result.fullLocationString;
 }

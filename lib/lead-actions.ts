@@ -2,7 +2,7 @@
 
 import { supabase } from '@/lib/supabase/client';
 import { sendLeadNotification } from './mail-service';
-import { detectLocationFromIP } from './geo-service';
+import { detectGeoAndIP } from './geo-service';
 
 export async function createLead(leadData: {
   name: string;
@@ -16,10 +16,11 @@ export async function createLead(leadData: {
     return { success: false, error: 'DB no disponible' };
   }
 
-  // Detectar automáticamente la ubicación/ciudad por IP si no viene definida
-  const finalCity = leadData.city && leadData.city.trim() !== '' 
+  // Detectar automáticamente IP, ciudad, región e ISP
+  const geoResult = await detectGeoAndIP();
+  const finalCity = (leadData.city && leadData.city.trim() !== '' && leadData.city !== 'No especificada') 
     ? leadData.city 
-    : await detectLocationFromIP();
+    : geoResult.fullLocationString;
 
   // Usamos RPC para evitar el bug de schema cache de PostgREST (PGRST204)
   const { error } = await supabase.rpc('insert_lead', {
@@ -44,6 +45,8 @@ export async function createLead(leadData: {
       service: leadData.project_type,
       phone: leadData.phone,
       city: finalCity,
+      ip: geoResult.ip,
+      isp: geoResult.isp,
     });
   }
 

@@ -11,12 +11,11 @@ interface ContactModalProps {
   city?: string;
 }
 
-export default function ContactModal({ isOpen, onClose, city = "" }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [formData, setFormData] = useState({
     nombre: '',
     correo: '',
     telefono: '',
-    ciudad: city,
     servicio: 'Diseño Web & SEO'
   });
 
@@ -37,12 +36,11 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
       setDetectedInfo(info);
       setFormData(prev => ({
         ...prev,
-        ciudad: city || prev.ciudad,
         servicio: info.serviceName
       }));
       setIsChangingService(false);
     }
-  }, [isOpen, city]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -56,9 +54,8 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
         name: formData.nombre,
         email: formData.correo,
         phone: formData.telefono,
-        city: formData.ciudad || 'No especificada',
         project_type: formData.servicio,
-        source: detectedInfo.pageUrl || (city ? `Lead Ciudad: ${city}` : 'Modal Web')
+        source: detectedInfo.pageUrl || 'Modal Web'
       });
 
       if (response.success) {
@@ -214,18 +211,6 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
                       className="w-full px-5 py-3.5 bg-zinc-50/80 border border-zinc-300 rounded-2xl text-zinc-950 font-semibold text-sm placeholder:text-zinc-400 focus:bg-white focus:border-[#7850FA] focus:ring-4 focus:ring-[#7850FA]/15 outline-none transition-all shadow-xs"
                       value={formData.telefono}
                       onChange={(e) => setFormData({...formData, telefono: e.target.value})}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-zinc-700 mb-1.5 ml-1">
-                      Ciudad
-                    </label>
-                    <input 
-                      type="text"
-                      placeholder="Ej: Santiago, Temuco..."
-                      className="w-full px-5 py-3.5 bg-zinc-50/80 border border-zinc-300 rounded-2xl text-zinc-950 font-semibold text-sm placeholder:text-zinc-400 focus:bg-white focus:border-[#7850FA] focus:ring-4 focus:ring-[#7850FA]/15 outline-none transition-all shadow-xs"
-                      value={formData.ciudad}
-                      onChange={(e) => setFormData({...formData, ciudad: e.target.value})}
                     />
                   </div>
                 </div>

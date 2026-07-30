@@ -18,6 +18,8 @@ export async function sendLeadNotification(leadData: {
   service: string;
   phone: string;
   city?: string;
+  ip?: string;
+  isp?: string;
 }) {
   try {
     const resend = getResend();
@@ -114,11 +116,16 @@ export async function sendLeadNotification(leadData: {
               <li style="margin-bottom: 10px;"><strong>Email:</strong> ${leadData.email}</li>
               <li style="margin-bottom: 10px;"><strong>Interés:</strong> ${leadData.service}</li>
               <li style="margin-bottom: 10px;"><strong>Teléfono:</strong> ${leadData.phone || 'No proporcionado'}</li>
-              <li style="margin-bottom: 10px; color: #0284c7;"><strong>📍 Ubicación/Ciudad Detectada por IP:</strong> ${leadData.city || 'No detectada'}</li>
+              <li style="margin-bottom: 10px; color: #0284c7;"><strong>🌐 Dirección IP:</strong> ${leadData.ip || 'No detectada'} ${leadData.isp ? `(${leadData.isp})` : ''}</li>
+              <li style="margin-bottom: 10px; color: #0284c7;"><strong>📍 Ubicación/Ciudad Detectada:</strong> ${leadData.city || 'No detectada'}</li>
             </ul>
           </div>
           <div style="margin-top: 30px; text-align: center;">
             <a href="https://wa.me/56984410379" style="background: #25d366; color: #fff; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-block;">Contactar Lead por WhatsApp</a>
+          </div>
+        </div>
+      `
+    });inline-block;">Contactar Lead por WhatsApp</a>
           </div>
         </div>
       `
