@@ -156,10 +156,6 @@ Mi correo: ${formData.email}
                 <CheckCircle2 className="w-4 h-4 text-[#25d366] shrink-0" />
                 <span>{formData.interest}</span>
               </div>
-              <div className="flex items-center gap-1.5 text-[11px] text-zinc-500 font-mono truncate">
-                <MapPin className="w-3 h-3 text-emerald-600 shrink-0" />
-                <span className="truncate">Origen: {detectedInfo.pagePath || '/'}</span>
-              </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">

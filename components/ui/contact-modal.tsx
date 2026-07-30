@@ -145,10 +145,6 @@ export default function ContactModal({ isOpen, onClose, city = "" }: ContactModa
                   <CheckCircle2 className="w-4 h-4 text-[#7850FA] shrink-0" />
                   <span>{formData.servicio}</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[11px] text-zinc-500 font-mono truncate">
-                  <MapPin className="w-3 h-3 text-purple-500 shrink-0" />
-                  <span className="truncate">Origen: {detectedInfo.pagePath || '/'}</span>
-                </div>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
