@@ -387,7 +387,6 @@ export default function ShopifyPlansComparison() {
 
                 {/* FULL (Recommended) */}
                 <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50 bg-violet-50/50 relative">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-[#FF0085] text-white text-[9px] font-black px-3.5 py-1 rounded-b-lg uppercase tracking-widest">El Más Vendido</div>
                   <div className="flex justify-center mb-3 mt-1"><Zap className="w-7 h-7 text-violet-500" /></div>
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Full</h4>
                   <div className="text-lg lg:text-xl font-black text-violet-700 mb-2">$780.000 <span className="text-[10px] text-violet-500 uppercase font-bold">+ IVA</span></div>

@@ -122,12 +122,8 @@ export default function ShopifyInteractivePlansCarousel() {
 
               {/* PLAN FULL (DESTACADO / MÁS ELEGIDO) */}
               <div id="plan-full" className="bg-gradient-to-b from-violet-900 via-[#2C02A5] to-zinc-950 text-white rounded-[2.5rem] p-6 lg:p-8 border-2 border-[#FF0085] shadow-2xl relative flex flex-col justify-between transform">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FF0085] text-white text-[9px] font-mono font-black px-3.5 py-1.5 rounded-full uppercase tracking-widest shadow-lg text-center whitespace-nowrap z-20">
-                  ★ MÁS ELEGIDO • PREPARADO PARA CAMPAÑAS Y CRECIMIENTO
-                </div>
-
                 <div>
-                  <div className="mb-4 mt-2">
+                  <div className="mb-4">
                     <span className="text-xs font-mono font-bold uppercase tracking-widest text-purple-300 bg-white/10 px-3 py-1 rounded-full inline-block">
                       Crecimiento & Automatización
                     </span>
