@@ -125,10 +125,6 @@ export async function sendLeadNotification(leadData: {
           </div>
         </div>
       `
-    });inline-block;">Contactar Lead por WhatsApp</a>
-          </div>
-        </div>
-      `
     });
 
     return { success: true };
