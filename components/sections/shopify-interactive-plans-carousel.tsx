@@ -111,7 +111,7 @@ export default function ShopifyInteractivePlansCarousel() {
                 </div>
 
                 <div className="flex flex-col items-center gap-2 text-center">
-                  <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
+                  <LeadButton service="Plan Prende" className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
                     -5% Solicita Asesoría Gratis
                   </LeadButton>
                   <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">
@@ -159,7 +159,7 @@ export default function ShopifyInteractivePlansCarousel() {
                 </div>
 
                 <div className="flex flex-col items-center gap-2 text-center">
-                  <LeadButton className="w-full py-4 bg-[#FF0085] hover:bg-pink-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-pink-600/30 text-center cursor-pointer">
+                  <LeadButton service="Plan Full" className="w-full py-4 bg-[#FF0085] hover:bg-pink-600 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all shadow-xl shadow-pink-600/30 text-center cursor-pointer">
                     -8% Solicita Asesoría Gratis
                   </LeadButton>
                   <p className="text-[14px] font-bold text-white mt-1 leading-snug">
@@ -215,7 +215,7 @@ export default function ShopifyInteractivePlansCarousel() {
                 </div>
 
                 <div className="flex flex-col items-center gap-2 text-center">
-                  <LeadButton className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
+                  <LeadButton service="Plan Conversión" className="w-full py-4 bg-zinc-900 hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-widest rounded-2xl transition-all text-center cursor-pointer shadow-md">
                     -10% Solicita Asesoría Gratis
                   </LeadButton>
                   <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">

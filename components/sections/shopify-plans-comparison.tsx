@@ -376,7 +376,7 @@ export default function ShopifyPlansComparison() {
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Prende</h4>
                   <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">$580.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
                   <div className="flex flex-col items-center gap-2">
-                    <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
+                    <LeadButton service="Plan Prende" className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
                       -5% Solicita Asesoría Gratis
                     </LeadButton>
                     <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">
@@ -392,7 +392,7 @@ export default function ShopifyPlansComparison() {
                   <div className="text-lg lg:text-xl font-black text-violet-700 mb-2">$780.000 <span className="text-[10px] text-violet-500 uppercase font-bold">+ IVA</span></div>
                   <div className="text-[9px] font-black text-violet-600 bg-violet-100 px-2.5 py-1 rounded-full inline-block mb-4">Boleta SII • Envíos</div>
                   <div className="flex flex-col items-center gap-2">
-                    <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-[#FF0085] text-white rounded-xl uppercase font-black tracking-wider hover:bg-pink-700 shadow-lg shadow-pink-600/20">
+                    <LeadButton service="Plan Full" className="w-full py-3.5 px-3 text-[10px] bg-[#FF0085] text-white rounded-xl uppercase font-black tracking-wider hover:bg-pink-700 shadow-lg shadow-pink-600/20">
                       -8% Solicita Asesoría Gratis
                     </LeadButton>
                     <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">
@@ -407,7 +407,7 @@ export default function ShopifyPlansComparison() {
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Conversión</h4>
                   <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">A Cotizar</div>
                   <div className="flex flex-col items-center gap-2">
-                    <LeadButton className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
+                    <LeadButton service="Plan Conversión" className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
                       -10% Solicita Asesoría Gratis
                     </LeadButton>
                     <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">

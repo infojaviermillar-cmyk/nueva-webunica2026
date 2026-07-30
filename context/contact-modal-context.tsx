@@ -6,7 +6,7 @@ import WhatsAppModal from '@/components/ui/whatsapp-modal';
 import WhatsAppFloating from '@/components/ui/whatsapp-floating';
 
 interface ContactModalContextType {
-  openModal: (city?: string) => void;
+  openModal: (serviceName?: string) => void;
   closeModal: () => void;
   openWhatsApp: () => void;
   closeWhatsApp: () => void;
@@ -17,10 +17,10 @@ const ContactModalContext = createContext<ContactModalContextType | undefined>(u
 export function ContactModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
-  const [targetCity, setTargetCity] = useState("");
+  const [targetService, setTargetService] = useState("");
 
-  const openModal = (city = "") => {
-    setTargetCity(city);
+  const openModal = (serviceName = "") => {
+    setTargetService(serviceName);
     setIsOpen(true);
   };
 
@@ -38,7 +38,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
       <ContactModal 
         isOpen={isOpen} 
         onClose={closeModal} 
-        city={targetCity} 
+        defaultService={targetService} 
       />
       <WhatsAppModal 
         isOpen={isWhatsAppOpen}

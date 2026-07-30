@@ -25,21 +25,25 @@ export async function sendLeadNotification(leadData: {
     const resend = getResend();
     const serviceLower = (leadData.service || '').toLowerCase();
     let discountCode = 'WEBUNICA10';
-    let discountPct = '10% OFF DIRECTO';
+    let discountPct = 'HASTA 10% OFF DIRECTO';
     let discountPlanName = 'tu proyecto';
+    let savingsText = '¡Con esta promoción ahorras entre $29.000 y $120.000 según el plan que elijas!';
 
     if (serviceLower.includes('prende')) {
       discountCode = 'PRENDE5';
       discountPct = '5% OFF DIRECTO';
       discountPlanName = 'tu PLAN PRENDE';
+      savingsText = '¡Con esta promoción ahorras $29.000 en la contratación!';
     } else if (serviceLower.includes('full')) {
       discountCode = 'FULL8';
       discountPct = '8% OFF DIRECTO';
       discountPlanName = 'tu PLAN FULL';
+      savingsText = '¡Con esta promoción ahorras $62.400 en la contratación!';
     } else if (serviceLower.includes('conversion') || serviceLower.includes('conversión')) {
       discountCode = 'CONVERSION10';
       discountPct = '10% OFF DIRECTO';
       discountPlanName = 'tu PLAN CONVERSIÓN';
+      savingsText = '¡Con esta promoción ahorras $120.000 en la contratación!';
     }
 
     // 1. Email para el Cliente (Persuasivo y Mágico)
@@ -63,7 +67,8 @@ export async function sendLeadNotification(leadData: {
             <div style="background: #fdf2f8; border: 2px dashed #db2777; padding: 25px; text-align: center; border-radius: 20px; margin: 30px 0;">
               <p style="margin: 0; font-size: 12px; text-transform: uppercase; font-weight: bold; color: #db2777; letter-spacing: 0.1em;">🎯 Tu Código de Descuento Exclusivo (válido por 7 días):</p>
               <h2 style="margin: 10px 0; font-size: 34px; letter-spacing: 4px; color: #db2777;">${discountCode}</h2>
-              <p style="margin: 0; font-size: 15px; font-weight: 900; color: #db2777; text-transform: uppercase;">💥 ${discountPct} EN LA CONTRATACIÓN DE TU PLAN</p>
+              <p style="margin: 0 0 8px 0; font-size: 16px; font-weight: 900; color: #db2777; text-transform: uppercase;">💥 ${discountPct}</p>
+              <p style="margin: 0; font-size: 15px; font-weight: 900; color: #18181b;">💰 ${savingsText}</p>
             </div>
 
             <p style="line-height: 1.6; font-size: 16px; margin-bottom: 10px;">🔥 <strong>¿Por qué elegirnos?</strong></p>

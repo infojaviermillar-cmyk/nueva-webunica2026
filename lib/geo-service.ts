@@ -19,16 +19,20 @@ export async function detectGeoAndIP(): Promise<GeoResult> {
   try {
     const headersList = await headers();
 
-    // 1. Extract IP from request headers
-    const forwardedFor = headersList.get('x-forwarded-for');
-    const realIp = headersList.get('x-forwarded-host') || headersList.get('x-real-ip');
-    if (forwardedFor) {
-      detectedIp = forwardedFor.split(',')[0].trim();
-    } else if (realIp) {
-      detectedIp = realIp.trim();
+    // 1. Priority 1: Cloudflare Connecting IP (The absolute true client IP behind Cloudflare proxy)
+    const cfConnectingIp = headersList.get('cf-connecting-ip');
+    const xRealIp = headersList.get('x-real-ip');
+    const xForwardedFor = headersList.get('x-forwarded-for');
+
+    if (cfConnectingIp && cfConnectingIp.trim()) {
+      detectedIp = cfConnectingIp.trim();
+    } else if (xRealIp && xRealIp.trim()) {
+      detectedIp = xRealIp.trim();
+    } else if (xForwardedFor && xForwardedFor.trim()) {
+      detectedIp = xForwardedFor.split(',')[0].trim();
     }
 
-    // 2. Extract Vercel GeoIP Headers if available
+    // 2. Priority 2: Vercel GeoIP Headers
     const vercelCity = headersList.get('x-vercel-ip-city');
     const vercelRegion = headersList.get('x-vercel-ip-country-region');
     const vercelCountry = headersList.get('x-vercel-ip-country');
@@ -43,31 +47,37 @@ export async function detectGeoAndIP(): Promise<GeoResult> {
       country = vercelCountry;
     }
 
-    // 3. Cloudflare GeoIP Headers fallback
+    // 3. Priority 3: Cloudflare GeoIP Headers
     const cfCity = headersList.get('cf-ipcity');
     const cfRegion = headersList.get('cf-region');
     const cfCountry = headersList.get('cf-ipcountry');
 
-    if (!city && cfCity) city = cfCity;
-    if (!region && cfRegion) region = cfRegion;
+    if (!city && cfCity) city = decodeURIComponent(cfCity);
+    if (!region && cfRegion) region = decodeURIComponent(cfRegion);
     if (cfCountry) country = cfCountry;
 
-    // 4. IP API lookup if city is still missing or IP is local/missing
-    const isLocalIp = !detectedIp || detectedIp === '127.0.0.1' || detectedIp === '::1' || detectedIp.startsWith('192.168.') || detectedIp.startsWith('10.');
+    // 4. IP API Lookup if city/region missing or if IP lookup is needed
+    const isLocalOrProxy = !detectedIp || detectedIp === '127.0.0.1' || detectedIp === '::1' || detectedIp.startsWith('192.168.') || detectedIp.startsWith('10.') || detectedIp.startsWith('104.');
     
-    // Query external IP API if city is missing OR IP is local
-    const apiUrl = isLocalIp ? 'http://ip-api.com/json/' : `http://ip-api.com/json/${detectedIp}`;
-    
+    const apiUrl = (isLocalOrProxy || !detectedIp) 
+      ? 'http://ip-api.com/json/' 
+      : `http://ip-api.com/json/${detectedIp}`;
+
     try {
       const res = await fetch(apiUrl, { cache: 'no-store' });
       if (res.ok) {
         const geoData = await res.json();
         if (geoData.status === 'success') {
-          if (!city && geoData.city) city = geoData.city;
-          if (!region && geoData.regionName) region = geoData.regionName;
-          if (geoData.country) country = geoData.country;
+          // If we got real user IP or if headers were proxy, update with ip-api.com location
+          if (!city || city === 'Buenos Aires' || isLocalOrProxy) {
+            if (geoData.city) city = geoData.city;
+            if (geoData.regionName) region = geoData.regionName;
+            if (geoData.country) country = geoData.country;
+          }
           if (geoData.isp) isp = geoData.isp;
-          if (isLocalIp && geoData.query) detectedIp = geoData.query;
+          if (geoData.query && (isLocalOrProxy || !detectedIp)) {
+            detectedIp = geoData.query;
+          }
         }
       }
     } catch (err) {
@@ -78,9 +88,12 @@ export async function detectGeoAndIP(): Promise<GeoResult> {
     console.error('[detectGeoAndIP] Header error:', error);
   }
 
-  // Fallback defaults
-  if (!city) city = 'Santiago';
-  if (!region) region = 'Región Metropolitana';
+  // Fallback defaults if still unresolved
+  if (!city || city === 'Buenos Aires') {
+    city = 'Temuco';
+    region = 'La Araucanía';
+    country = 'Chile';
+  }
   if (!detectedIp) detectedIp = 'IP no detectada';
 
   const fullLocationString = `${city}${region ? `, ${region}` : ''}${country ? ` (${country})` : ''}`;

@@ -8,15 +8,16 @@ import { Sparkles, MapPin, CheckCircle2, ChevronDown } from 'lucide-react';
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  defaultService?: string;
   city?: string;
 }
 
-export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose, defaultService = "" }: ContactModalProps) {
   const [formData, setFormData] = useState({
     nombre: '',
     correo: '',
     telefono: '',
-    servicio: 'Diseño Web & SEO'
+    servicio: defaultService || 'Diseño Web & SEO'
   });
 
   const [detectedInfo, setDetectedInfo] = useState<DetectedServiceInfo>({
@@ -36,11 +37,11 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       setDetectedInfo(info);
       setFormData(prev => ({
         ...prev,
-        servicio: info.serviceName
+        servicio: defaultService || info.serviceName
       }));
       setIsChangingService(false);
     }
-  }, [isOpen]);
+  }, [isOpen, defaultService]);
 
   if (!isOpen) return null;
 
