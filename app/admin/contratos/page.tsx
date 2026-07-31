@@ -875,27 +875,11 @@ export default function ContratoGeneratorPage() {
                     <div className="clause-block">
                       <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">VIGÉSIMO A VIGÉSIMO SEXTO: DISPOSICIONES GENERALES Y JURISDICCIÓN</h3>
                       <p>EL PROVEEDOR podrá mencionar la marca e incluir capturas del sitio en su portafolio sin revelar información confidencial. La responsabilidad acumulada de EL PROVEEDOR no excederá el monto neto efectivamente pagado por el Proyecto, salvo dolo o culpa grave. Ninguna parte responderá por casos de fuerza mayor o eventos imprevisibles fuera de su control razonable. Cualquiera de LAS PARTES podrá poner término anticipado mediante aviso escrito con 30 días de anticipación pagando los hitos ejecutados. LAS PARTES reconocen plena validez a la firma electrónica simple o avanzada, fijan domicilio en la ciudad de Santiago de Chile y se someten a sus Tribunales Ordinarios de Justicia.</p>
-                    </div>
                   </div>
 
-                  {/* FIRMAS FORMALES */}
-                  <div className="pt-10 pb-4 border-t border-black mt-6 grid grid-cols-2 gap-8 text-center">
-                    <div>
-                      <div className="border-b border-black mb-2 pb-14"></div>
-                      <p className="font-bold uppercase text-xs text-black">{data.proveedorRepresentante}</p>
-                      <p className="text-[11px] font-mono text-zinc-700">RUT N.º {data.proveedorRepresentanteRut}</p>
-                      <p className="text-[11px] font-bold uppercase text-black">{data.proveedorRazonSocial}</p>
-                      <p className="text-[10px] text-zinc-600 font-mono uppercase">POR EL PROVEEDOR</p>
-                    </div>
-
-                    <div>
-                      <div className="border-b border-black mb-2 pb-14"></div>
-                      <p className="font-bold uppercase text-xs text-black">{data.clienteRepresentante}</p>
-                      <p className="text-[11px] font-mono text-zinc-700">RUT N.º {data.clienteRepresentanteRut}</p>
-                      <p className="text-[11px] font-bold uppercase text-black">{data.clienteRazonSocial}</p>
-                      <p className="text-[10px] text-zinc-600 font-mono uppercase">POR EL CLIENTE</p>
-                    </div>
-                  </div>
+                  <p className="text-xs font-semibold text-zinc-700 italic border-t border-zinc-300 pt-4 mt-6">
+                    Nota: Los seis (6) anexos se incorporan materialmente a continuación y se entienden aceptados y firmados conjuntamente con el presente contrato principal al final del documento.
+                  </p>
                 </div>
 
                 {/* PIE DE PÁGINA OFICIAL HOJA 3 */}
@@ -1082,6 +1066,30 @@ export default function ContratoGeneratorPage() {
                         ANEXO N.º 6 — CERRADO & GARANTÍA
                       </h4>
                       <p className="text-[11px] leading-snug">Recepción conforme tras 10 días de producción sin observaciones críticas. Garantía de <strong>{data.diasGarantia ?? 90} días corridos</strong> para corrección de código y 6 meses de acompañamiento remoto mensual.</p>
+                    </div>
+                  </div>
+
+                  {/* FIRMAS FORMALES DE LAS PARTES AL FINAL DE TODO EL DOCUMENTO */}
+                  <div className="pt-6 pb-2 border-t border-black mt-4">
+                    <p className="text-center text-[11px] font-bold uppercase mb-4 text-black tracking-tight">
+                      FIRMA DE LAS PARTES — EN SEÑAL DE ACEPTACIÓN DEL CONTRATO Y SUS SEIS ANEXOS INTEGRANTES
+                    </p>
+                    <div className="grid grid-cols-2 gap-8 text-center">
+                      <div>
+                        <div className="border-b border-black mb-2 pb-12"></div>
+                        <p className="font-bold uppercase text-xs text-black">{data.proveedorRepresentante}</p>
+                        <p className="text-[11px] font-mono text-zinc-700">RUT N.º {data.proveedorRepresentanteRut}</p>
+                        <p className="text-[11px] font-bold uppercase text-black">{data.proveedorRazonSocial}</p>
+                        <p className="text-[10px] text-zinc-600 font-mono uppercase font-bold">POR EL PROVEEDOR</p>
+                      </div>
+
+                      <div>
+                        <div className="border-b border-black mb-2 pb-12"></div>
+                        <p className="font-bold uppercase text-xs text-black">{data.clienteRepresentante}</p>
+                        <p className="text-[11px] font-mono text-zinc-700">RUT N.º {data.clienteRepresentanteRut}</p>
+                        <p className="text-[11px] font-bold uppercase text-black">{data.clienteRazonSocial}</p>
+                        <p className="text-[10px] text-zinc-600 font-mono uppercase font-bold">POR EL CLIENTE</p>
+                      </div>
                     </div>
                   </div>
                 </div>
