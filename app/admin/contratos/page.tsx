@@ -875,6 +875,7 @@ export default function ContratoGeneratorPage() {
                     <div className="clause-block">
                       <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">VIGÉSIMO A VIGÉSIMO SEXTO: DISPOSICIONES GENERALES Y JURISDICCIÓN</h3>
                       <p>EL PROVEEDOR podrá mencionar la marca e incluir capturas del sitio en su portafolio sin revelar información confidencial. La responsabilidad acumulada de EL PROVEEDOR no excederá el monto neto efectivamente pagado por el Proyecto, salvo dolo o culpa grave. Ninguna parte responderá por casos de fuerza mayor o eventos imprevisibles fuera de su control razonable. Cualquiera de LAS PARTES podrá poner término anticipado mediante aviso escrito con 30 días de anticipación pagando los hitos ejecutados. LAS PARTES reconocen plena validez a la firma electrónica simple o avanzada, fijan domicilio en la ciudad de Santiago de Chile y se someten a sus Tribunales Ordinarios de Justicia.</p>
+                    </div>
                   </div>
 
                   <p className="text-xs font-semibold text-zinc-700 italic border-t border-zinc-300 pt-4 mt-6">
