@@ -98,9 +98,12 @@ export default function ShopifyInteractivePlansCarousel() {
                       "Carga inicial de hasta 70 productos",
                       "Medios de pago (Webpay / Flow / MP)",
                       "Despacho con tarifas fijas / zonas",
+                      "1 app instalada y configurada",
+                      "1 flujo de correos (bienvenida)",
+                      "2 rondas de revisión de diseño",
                       "Diseño Mobile-First 100%",
                       "Capacitación básica de administración",
-                      "30 días de soporte técnico postlanzamiento"
+                      "1 mes (30 días) de soporte post-entrega"
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-800 font-medium">
                         <Check className="w-4.5 h-4.5 text-emerald-500 shrink-0 mt-0.5" strokeWidth={3} />
@@ -140,11 +143,14 @@ export default function ShopifyInteractivePlansCarousel() {
                     {[
                       "Diseño en plantilla premium + secciones a medida",
                       "Importación o configuración de hasta 500 productos*",
+                      "3 apps instaladas y configuradas",
+                      "3 flujos de correos que venden solos: bienvenida, carrito abandonado y post-compra",
+                      "3 rondas de revisión de diseño",
                       "Integración pasarelas de pago + Despacho local",
                       "Boleta Electrónica SII automática",
                       "SEO Técnico + GA4 + Meta Pixel + Conversion API",
                       "Capacitación avanzada 1 a 1",
-                      "60 días de soporte técnico postlanzamiento"
+                      "3 meses de soporte post-entrega"
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-purple-50 font-medium">
                         <Check className="w-4.5 h-4.5 text-pink-400 shrink-0 mt-0.5" strokeWidth={3} />
@@ -200,11 +206,14 @@ export default function ShopifyInteractivePlansCarousel() {
                     {[
                       "Diseño UX/UI personalizado para máxima conversión",
                       "Importación o migración de hasta 1.000 productos",
+                      "5 apps instaladas y configuradas",
+                      "5 flujos de correos de automatización",
+                      "4 rondas de revisión de diseño",
                       "Integración ERP (Bsale / Obuma / Defontana)",
                       "Email Marketing automático con Klaviyo",
                       "Analítica avanzada & reportes de ventas",
                       "Optimización CRO en ficha de producto",
-                      "90 días de soporte técnico postlanzamiento"
+                      "6 meses de soporte post-entrega"
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-800 font-medium">
                         <Check className="w-4.5 h-4.5 text-blue-500 shrink-0 mt-0.5" strokeWidth={3} />
@@ -266,12 +275,13 @@ export default function ShopifyInteractivePlansCarousel() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                     {[
                       "Diseño UX/UI a medida desde cero en Figma",
-                      "Migración avanzada de catálogo, clientes y datos",
+                      "Migración avanzada de catálogo (1.000+ prods)",
+                      "5 apps instaladas y configuradas",
+                      "5 flujos de correos de automatización",
+                      "4 rondas de revisión de diseño en Figma",
                       "Integración ERP (Bsale / Obuma / Defontana / Laudus)",
                       "Canal B2B / Venta mayorista o funciones especiales",
-                      "SEO Técnico + Analítica avanzada + Conversion API",
-                      "Capacitación ejecutiva 1 a 1 + documentación",
-                      "90 días de soporte técnico VIP prioritario"
+                      "6 meses de soporte post-entrega y acompañamiento"
                     ].map((item, idx) => (
                       <div key={idx} className="flex items-start gap-2.5 text-sm text-zinc-200 font-medium bg-white/5 p-3.5 rounded-xl border border-white/10">
                         <Check className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" strokeWidth={3} />

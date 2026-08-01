@@ -73,16 +73,30 @@ const COMPARISON_DATA: PlanCategory[] = [
         pro: true
       },
       {
+        feature: { name: "Rondas de Revisión de Diseño", description: "Rondas consolidadas de correcciones y ajustes sobre la propuesta de diseño entregada." },
+        prende: "2 Rondas",
+        full: "3 Rondas",
+        pro: "4 Rondas",
+        customElite: "4 Rondas (Figma)"
+      },
+      {
         feature: { name: "Páginas Informativas", description: "Creación de páginas esenciales como Quienes Somos, Contacto, Políticas de Devolución y Términos de Servicio." },
-        prende: "Básicas",
-        full: "Completas",
-        pro: "Ilimitadas"
+        prende: "Básicas (5 págs)",
+        full: "Completas (7 págs)",
+        pro: "Ilimitadas (+8 págs)"
       }
     ]
   },
   {
     category: "Integraciones y Funcionalidad",
     features: [
+      {
+        feature: { name: "Apps Instaladas y Configuradas", description: "Instalación, integración y pruebas de aplicaciones esenciales de Shopify para potenciar tu tienda." },
+        prende: "1 App Instalada",
+        full: "3 Apps Instaladas",
+        pro: "5 Apps Instaladas",
+        customElite: "5+ Apps Corporativas"
+      },
       {
         feature: { name: "Medios de Pago", description: "Configuración de pasarelas de pago para recibir pagos con Tarjetas de Crédito, Débito y Transferencias en Chile." },
         prende: "Mercado Pago",
@@ -118,6 +132,13 @@ const COMPARISON_DATA: PlanCategory[] = [
   {
     category: "Implementación Técnica y Analítica",
     features: [
+      {
+        feature: { name: "Flujos de Correos de Automatización", description: "Configuración de flujos automáticos de Email Marketing (Bienvenida, Recuperación de Carrito Abandonado, Post-Compra)." },
+        prende: "1 Flujo (Bienvenida)",
+        full: "3 Flujos (Bienvenida, Carrito, Post-compra)",
+        pro: "5 Flujos de Automatización (Klaviyo)",
+        customElite: "Flujos Avanzados Klaviyo"
+      },
       {
         feature: { name: "Analítica Web (Google Analytics 4)", description: "Configuración de GA4 para medir visitas, comportamiento de navegación y embudo de conversión." },
         prende: "Básico",
@@ -201,10 +222,11 @@ const COMPARISON_DATA: PlanCategory[] = [
         pro: "Consultoría Estratégica 1 a 1"
       },
       {
-        feature: { name: "Soporte Técnico Postlanzamiento", description: "Atención prioritaria para resolver dudas técnicas y asegurar que la tienda funcione perfectamente tras salir a vivo." },
-        prende: "30 Días de Soporte Técnico",
-        full: "60 Días de Soporte Técnico",
-        pro: "90 Días de Soporte Técnico"
+        feature: { name: "Soporte Técnico Post-Entrega", description: "Atención prioritaria para resolver dudas técnicas y asegurar que la tienda funcione perfectamente tras salir a vivo." },
+        prende: "1 Mes (30 días) de soporte",
+        full: "3 Meses (90 días) de soporte",
+        pro: "6 Meses de soporte y acompañamiento",
+        customElite: "6 Meses de soporte VIP"
       }
     ]
   }
