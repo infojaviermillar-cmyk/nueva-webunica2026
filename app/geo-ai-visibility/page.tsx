@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import LeadButton from '@/components/ui/lead-button';
+import BreadcrumbSchema from '@/components/ui/breadcrumb-schema';
 
 export const metadata: Metadata = {
   title: 'Posicionamiento en Inteligencia Artificial (GEO) | Webunica',
@@ -25,6 +26,10 @@ export default function GEOAIVisibilityPage() {
         <div className="absolute top-[40%] -left-[20%] w-[600px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full" />
       </div>
 
+      <BreadcrumbSchema items={[
+        { name: 'Inicio', url: 'https://webunica.cl' },
+        { name: 'GEO & AI Visibility', url: 'https://webunica.cl/geo-ai-visibility' },
+      ]} />
       <div className="relative z-10 pt-[20vh] pb-32">
         {/* HERO SECTION */}
         <section className="px-6 mx-auto max-w-7xl text-center">

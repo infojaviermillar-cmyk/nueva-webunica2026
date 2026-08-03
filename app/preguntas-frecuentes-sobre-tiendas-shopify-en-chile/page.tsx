@@ -5,6 +5,64 @@ import FAQSection from '@/components/sections/faq-section';
 export const metadata: Metadata = {
   title: 'Preguntas Frecuentes Shopify Chile | Guía Completa 2026',
   description: 'Todo lo que necesitas saber para lanzar tu tienda Shopify en Chile: métodos de pago, costos, envíos, rut de empresa y más.',
+  alternates: {
+    canonical: 'https://webunica.cl/preguntas-frecuentes-sobre-tiendas-shopify-en-chile',
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: '¿Es necesario tener RUT de empresa para vender en Shopify Chile?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'No es obligatorio para empezar, puedes vender como persona natural. Sin embargo, para contratar pasarelas de pago locales (como Flow o Mercado Pago) y emitir boletas/facturas legales, es altamente recomendable tener iniciación de actividades para formalizar tu negocio.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Qué pasarelas de pago funcionan mejor en Chile?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Las más robustas actualmente son Mercado Pago, Flow y Pago Fácil. Todas se integran perfectamente con Shopify y permiten aceptar tarjetas de crédito, débito y transferencias bancarias locales.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cuánto cuesta Shopify mensualmente en Chile?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'El plan Basic cuesta aproximadamente USD $25/mes. A esto debes sumar las comisiones por transacción si no usas Shopify Payments (que aún no está disponible nativamente como procesador local en Chile) y el costo de las apps adicionales que decidas instalar.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cómo se gestionan los envíos con Starken, Blue Express o ChilePost?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Existen aplicaciones chilenas excelentes como Shipit, Enviame o integraciones directas que automatizan la creación de etiquetas y el cálculo de tarifas según la zona de Chile, permitiendo que el cliente vea el costo real en el carrito.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Shopify cobra comisiones adicionales por venta?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Si utilizas pasarelas externas (como Mercado Pago o Flow), Shopify cobra una comisión adicional por transacción (0.5% a 2% según tu plan). Esto se suma a la comisión que te cobre tu pasarela de pago local.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Puedo migrar mi tienda actual de WooCommerce o Wix a Shopify?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sí, es un proceso común. Podemos migrar tus productos, clientes e historial de pedidos. La principal ventaja es que dejarás de preocuparte por servidores caídos o actualizaciones de plugins que rompen tu web.',
+      },
+    },
+  ],
 };
 
 export default function Page() {
@@ -37,6 +95,10 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-white pt-[20vh] pb-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
       {/* Hero FAQ */}
       <section className="max-w-7xl mx-auto px-6 mb-20 text-center">

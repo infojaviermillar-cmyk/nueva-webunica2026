@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
+import BreadcrumbSchema from '@/components/ui/breadcrumb-schema';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
 import ShopifyPricingSection from '@/components/sections/shopify-pricing-section';
 import ViccaTransformationShowcase from '@/components/sections/vicca-transformation-showcase';
@@ -301,6 +302,10 @@ export default function ShopifyEnChilePage() {
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased text-zinc-950 overflow-x-hidden">
+      <BreadcrumbSchema items={[
+        { name: 'Inicio', url: 'https://webunica.cl' },
+        { name: 'Shopify Chile', url: 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile' },
+      ]} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

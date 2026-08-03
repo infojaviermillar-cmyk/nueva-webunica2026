@@ -3,12 +3,16 @@ import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 import ShopifyPlansComparison from '@/components/sections/shopify-plans-comparison';
+import BreadcrumbSchema from '@/components/ui/breadcrumb-schema';
 import { ShieldCheck, Globe, Smartphone, CheckCircle2, Award, Clock, Users, ArrowRight } from 'lucide-react';
 
 export const metadata = {
   title: 'Planes de Desarrollo Shopify en Chile | Desde $580.000 + IVA',
   description: 'Compara nuestros planes de desarrollo Shopify en Chile desde $580.000 + IVA. Incluye plantilla premium, pasarelas de pago local (Webpay, Mercado Pago), despacho y boleta SII.',
   keywords: 'planes shopify chile, precios desarrollo shopify, cuanto cuesta shopify chile, tarifas shopify partner, crear tienda shopify santiago, planes ecommerce chile',
+  alternates: {
+    canonical: 'https://webunica.cl/planes-de-desarrollo-shopify-en-chile',
+  },
 };
 
 export default function PlanesShopifyChilePage() {
@@ -53,6 +57,10 @@ export default function PlanesShopifyChilePage() {
 
   return (
     <div className="min-h-screen bg-white text-zinc-950 font-sans antialiased selection:bg-violet-100 selection:text-violet-900">
+      <BreadcrumbSchema items={[
+        { name: 'Inicio', url: 'https://webunica.cl' },
+        { name: 'Planes Shopify Chile', url: 'https://webunica.cl/planes-de-desarrollo-shopify-en-chile' },
+      ]} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
