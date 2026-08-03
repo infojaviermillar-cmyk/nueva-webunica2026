@@ -56,6 +56,7 @@ export const metadata: Metadata = {
         url: 'https://webunica.cl/og-image.jpg',
         width: 1200,
         height: 630,
+        alt: 'Webunica — Expertos Digitales y Shopify Partners en Chile',
       },
     ],
     locale: 'es_CL',
@@ -66,6 +67,107 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/favicon.webp',
+  },
+};
+
+// ── Global Structured Data (Schema.org JSON-LD) ──────────────────────────────
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://webunica.cl/#organization',
+  name: 'Webunica Chile E.I.R.L.',
+  alternateName: 'Webunica',
+  url: 'https://webunica.cl',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://webunica.cl/logo-webunica.png.webp',
+    width: 200,
+    height: 60,
+  },
+  image: 'https://webunica.cl/og-image.jpg',
+  description: 'Agencia digital chilena especializada en desarrollo de tiendas Shopify, diseño web, e-commerce, Next.js SaaS y posicionamiento en inteligencia artificial (GEO) en Chile.',
+  foundingDate: '2014',
+  founder: {
+    '@type': 'Person',
+    name: 'Javier Millar',
+    url: 'https://webunica.cl/sobre-nosotros',
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'Chile',
+  },
+  knowsAbout: [
+    'Shopify Development',
+    'E-commerce Chile',
+    'Web Design',
+    'WooCommerce',
+    'Next.js',
+    'Generative Engine Optimization (GEO)',
+    'SEO Chile',
+    'E-learning Moodle',
+    'SaaS Development',
+  ],
+  sameAs: [
+    'https://www.instagram.com/webunicachile',
+    'https://www.linkedin.com/company/webunica',
+    'https://www.facebook.com/webunica',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    url: 'https://webunica.cl/contacto',
+    availableLanguage: 'Spanish',
+  },
+};
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://webunica.cl/#localbusiness',
+  name: 'Webunica Chile E.I.R.L.',
+  image: 'https://webunica.cl/logo-webunica.png.webp',
+  url: 'https://webunica.cl',
+  description: 'Agencia de desarrollo web Shopify, diseño web y GEO en Chile. Shopify Partners certificados.',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'CL',
+    addressRegion: 'Región Metropolitana',
+    addressLocality: 'Santiago',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -33.4489,
+    longitude: -70.6693,
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '18:00',
+  },
+  priceRange: '$$',
+  currenciesAccepted: 'CLP',
+  paymentAccepted: 'Transferencia bancaria, Tarjeta de crédito',
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://webunica.cl/#website',
+  name: 'Webunica',
+  url: 'https://webunica.cl',
+  description: 'Expertos en desarrollo Shopify, diseño web, e-commerce y GEO en Chile.',
+  inLanguage: 'es-CL',
+  publisher: {
+    '@id': 'https://webunica.cl/#organization',
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://webunica.cl/blog?q={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
   },
 };
 
@@ -85,10 +187,26 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="es"
+      lang="es-CL"
       className={`${questrial.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${caveat.variable} ${inter.variable} h-full antialiased`}
     >
       <GoogleTagManager gtmId="GTM-TLZXRQCG" />
+      {/* ── Global Schema.org JSON-LD ─────────────────────────────────────── */}
+      <Script
+        id="schema-organization"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <Script
+        id="schema-local-business"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <Script
+        id="schema-website"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-LXMLKX5Y7G'} />
       {(process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || 'xpx6ltmpx6') && (
         <Script id="clarity-tracking" strategy="afterInteractive">

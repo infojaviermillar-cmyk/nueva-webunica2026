@@ -1,5 +1,76 @@
+# robots.txt — Webunica Chile
+# Última actualización: 2026
+
+# ── Crawlers generales ─────────────────────────────────────────────────────────
 User-agent: *
 Allow: /
-Disallow: /admin-blog/
 
+# Rutas privadas — no indexar
+Disallow: /admin/
+Disallow: /admin-blog/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /login
+Disallow: /mi-cuenta
+Disallow: /evaluacion
+Disallow: /finalizar-compra
+Disallow: /carrito
+
+# Sitemap
 Sitemap: https://webunica.cl/sitemap.xml
+
+# ── Crawlers de Inteligencia Artificial (AI) ──────────────────────────────────
+# Permitir a bots de IA indexar contenido público para citaciones
+
+# OpenAI — ChatGPT
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /admin-blog/
+Disallow: /api/
+Disallow: /auth/
+
+# OpenAI — ChatGPT browsing
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic — Claude
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /admin-blog/
+Disallow: /api/
+
+# Anthropic — Claude (Maciej)
+User-agent: anthropic-ai
+Allow: /
+
+# Google AI — Gemini, Bard, AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Microsoft Copilot / Bing Chat
+User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# Common Crawl (fuente de entrenamiento de muchos modelos)
+User-agent: CCBot
+Allow: /
+
+# ── Archivos de contexto para IA ──────────────────────────────────────────────
+# Ver también: /llms.txt y /ai.txt
