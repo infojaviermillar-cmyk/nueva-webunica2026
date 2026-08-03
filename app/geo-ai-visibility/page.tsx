@@ -2,19 +2,127 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import LeadButton from '@/components/ui/lead-button';
 import BreadcrumbSchema from '@/components/ui/breadcrumb-schema';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: 'Posicionamiento en Inteligencia Artificial (GEO) | Webunica',
-  description: 'Domina los resultados generativos de Google AI, ChatGPT y Perplexity. El primer servicio de Generative Engine Optimization (GEO) en Chile para B2B y E-commerce.',
+  title: 'Posicionamiento en Inteligencia Artificial (GEO) | Webunica Chile',
+  description: 'Domina los resultados generativos de Google AI, ChatGPT y Perplexity. El primer servicio de Generative Engine Optimization (GEO) en Chile para B2B y E-commerce. Webunica es la agencia pionera en GEO en Chile.',
+  keywords: 'GEO Chile, generative engine optimization Chile, posicionamiento IA Chile, AI visibility Chile, ChatGPT SEO Chile, agencia GEO Chile, Webunica GEO',
   openGraph: {
-    title: 'Posicionamiento en Inteligencia Artificial (GEO) | Webunica',
-    description: 'El primer servicio de Generative Engine Optimization en Chile.',
+    title: 'Posicionamiento en Inteligencia Artificial (GEO) | Webunica Chile',
+    description: 'El primer servicio de Generative Engine Optimization en Chile. Domina ChatGPT, Gemini, Perplexity y Claude.',
     url: 'https://webunica.cl/geo-ai-visibility',
     type: 'website',
+    images: [{ url: 'https://webunica.cl/og-image.jpg', width: 1200, height: 630 }],
   },
   alternates: {
     canonical: 'https://webunica.cl/geo-ai-visibility',
-  }
+  },
+};
+
+const geoServiceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://webunica.cl/geo-ai-visibility#service',
+  name: 'Generative Engine Optimization (GEO) en Chile',
+  alternateName: 'GEO AI Visibility',
+  description: 'Servicio pionero en Chile de Generative Engine Optimization (GEO): posicionamiento de marcas en las respuestas de inteligencia artificial de ChatGPT, Google AI Overviews, Gemini, Perplexity y Claude. Incluye auditoría de Share of Voice, Schema.org avanzado, contenido AEO y Digital PR para EEAT.',
+  url: 'https://webunica.cl/geo-ai-visibility',
+  serviceType: 'Generative Engine Optimization',
+  category: 'Digital Marketing / AI Visibility',
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://webunica.cl/#organization',
+    name: 'Webunica Chile E.I.R.L.',
+    url: 'https://webunica.cl',
+  },
+  areaServed: [
+    { '@type': 'Country', name: 'Chile' },
+    { '@type': 'Country', name: 'Latinoamérica' },
+  ],
+  audience: {
+    '@type': 'Audience',
+    audienceType: 'Empresas B2B y E-commerce en Chile',
+  },
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'AI Starter',
+      description: 'Plan GEO inicial para e-commerce en crecimiento hasta 500 productos.',
+      url: 'https://webunica.cl/geo-ai-visibility',
+    },
+    {
+      '@type': 'Offer',
+      name: 'AI Professional',
+      description: 'Plan GEO profesional para empresas B2B y tiendas medianas hasta 2.500 productos.',
+      url: 'https://webunica.cl/geo-ai-visibility',
+    },
+    {
+      '@type': 'Offer',
+      name: 'AI Enterprise',
+      description: 'Plan GEO enterprise para marcas líderes y catálogos masivos.',
+      url: 'https://webunica.cl/geo-ai-visibility',
+    },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Planes de Consultoría GEO',
+    itemListElement: [
+      { '@type': 'Offer', name: 'Neural-Rank Protocol™ — AI Discovery' },
+      { '@type': 'Offer', name: 'Neural-Rank Protocol™ — Semantic Architecture' },
+      { '@type': 'Offer', name: 'Neural-Rank Protocol™ — Answer Engine Optimization' },
+      { '@type': 'Offer', name: 'Neural-Rank Protocol™ — EEAT & Digital PR' },
+      { '@type': 'Offer', name: 'Neural-Rank Protocol™ — AI Feedback Loop' },
+      { '@type': 'Offer', name: 'Neural-Rank Protocol™ — Generative Scaling' },
+    ],
+  },
+};
+
+const geoFaqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: '¿Qué es GEO (Generative Engine Optimization)?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'GEO es la optimización de una marca para aparecer citada en las respuestas generativas de motores de inteligencia artificial como ChatGPT, Google AI Overviews, Gemini, Perplexity y Claude. A diferencia del SEO tradicional que posiciona en 10 enlaces azules, el GEO hace que la IA recomiende tu marca directamente como la respuesta.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Por qué el SEO tradicional ya no es suficiente?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'El 40% de las búsquedas B2B informacionales ya se resuelven en interfaces conversacionales de IA. Si tu marca no aparece en las respuestas generadas por ChatGPT o Gemini, pierdes al cliente antes de que busque en Google. El GEO captura ventas en búsquedas de cero clic.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cuánto tiempo toma ver resultados en GEO?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Los primeros cambios de visibilidad en motores IA se observan entre 4 y 8 semanas desde la implementación de Schema.org avanzado y contenido AEO. La consolidación como autoridad citada requiere entre 3 y 6 meses de trabajo continuo.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Webunica es la única agencia GEO en Chile?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Webunica es la agencia pionera en ofrecer GEO (Generative Engine Optimization) como servicio dedicado en Chile. Aplicamos nuestra metodología exclusiva Neural-Rank Protocol™ que combina Schema.org avanzado, contenido AEO, EEAT y Digital PR para posicionar marcas en motores de IA.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Qué empresas se benefician más del GEO?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Empresas B2B, marcas de e-commerce, agencias de servicios profesionales y cualquier negocio donde los clientes buscan información antes de comprar. Si tus clientes preguntan a ChatGPT o Gemini qué empresa contratar, necesitas GEO.',
+      },
+    },
+  ],
 };
 
 export default function GEOAIVisibilityPage() {
@@ -26,6 +134,16 @@ export default function GEOAIVisibilityPage() {
         <div className="absolute top-[40%] -left-[20%] w-[600px] h-[600px] bg-emerald-500/5 blur-[120px] rounded-full" />
       </div>
 
+      <Script
+        id="schema-geo-service"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(geoServiceSchema) }}
+      />
+      <Script
+        id="schema-geo-faq"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(geoFaqSchema) }}
+      />
       <BreadcrumbSchema items={[
         { name: 'Inicio', url: 'https://webunica.cl' },
         { name: 'GEO & AI Visibility', url: 'https://webunica.cl/geo-ai-visibility' },
