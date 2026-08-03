@@ -95,6 +95,9 @@ export default function ShopifyInfiniteCasesCarousel() {
   const [isZoomed100, setIsZoomed100] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollPosRef = useRef<number>(0);
+  const cachedScrollWidth = useRef<number>(0);
+  const cachedClientWidth = useRef<number>(0);
 
   const selectedCase = selectedIndex !== null ? cases[selectedIndex] : null;
 
@@ -123,23 +126,63 @@ export default function ShopifyInfiniteCasesCarousel() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex]);
 
-  // CONTINUOUS INFINITE AUTO-SCROLL LOOP
+  // Cache dimensions on mount and resize to prevent Layout Thrashing
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (scrollRef.current) {
+        cachedScrollWidth.current = scrollRef.current.scrollWidth;
+        cachedClientWidth.current = scrollRef.current.clientWidth;
+      }
+    };
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
+  // Listen to manual scrolling to synchronize the local scrollRef position
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const handleScrollEvent = () => {
+      if (isPaused || selectedIndex !== null) {
+        scrollPosRef.current = el.scrollLeft;
+      }
+    };
+    el.addEventListener('scroll', handleScrollEvent, { passive: true });
+    return () => el.removeEventListener('scroll', handleScrollEvent);
+  }, [isPaused, selectedIndex]);
+
+  // CONTINUOUS INFINITE AUTO-SCROLL LOOP (using requestAnimationFrame for 60fps & background pausing)
   useEffect(() => {
     if (isPaused || selectedIndex !== null) return;
 
-    const interval = setInterval(() => {
-      if (scrollRef.current) {
-        const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-        // If reached end of first set of duplicated items, reset smoothly to beginning
-        if (scrollLeft >= (scrollWidth - clientWidth) * 0.66) {
-          scrollRef.current.scrollLeft = scrollLeft - (scrollWidth / 3);
-        } else {
-          scrollRef.current.scrollLeft += 1.5;
-        }
-      }
-    }, 20);
+    let animationFrameId: number;
+    let lastTime = performance.now();
 
-    return () => clearInterval(interval);
+    const loop = (time: number) => {
+      const el = scrollRef.current;
+      if (el && cachedScrollWidth.current > 0) {
+        const delta = time - lastTime;
+        lastTime = time;
+
+        // Normalize speed to prevent jumping on inactive tabs
+        const timeFactor = Math.min(delta, 100) / 16.666;
+        const speed = 1.0 * timeFactor;
+
+        scrollPosRef.current += speed;
+
+        const maxScroll = (cachedScrollWidth.current - cachedClientWidth.current) * 0.66;
+        if (scrollPosRef.current >= maxScroll) {
+          scrollPosRef.current = scrollPosRef.current - (cachedScrollWidth.current / 3);
+        }
+
+        el.scrollLeft = scrollPosRef.current;
+      }
+      animationFrameId = requestAnimationFrame(loop);
+    };
+
+    animationFrameId = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(animationFrameId);
   }, [isPaused, selectedIndex]);
 
   const handleScroll = (direction: 'left' | 'right') => {
