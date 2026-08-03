@@ -146,6 +146,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/check-list-posicionamiento-seo',
     '/listas-de-verificacion-shopify-cro-basica',
     '/listas-de-verificacion-shopify-cro-pro',
+    '/listas-de-verificacion-shopify-geo',
     '/recursos/conectar-meta-graph-api-shopify-chile',
     '/wireframes-para-el-diseno-y-desarrollo-web',
     '/como-asignar-contacto-tecnico-en-nic-chile-cl',
