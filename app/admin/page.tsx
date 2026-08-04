@@ -11,7 +11,8 @@ import {
   PlusCircle,
   TrendingUp,
   FileText,
-  PenTool
+  PenTool,
+  DollarSign
 } from 'lucide-react';
 
 export default async function AdminDashboard() {
@@ -77,6 +78,15 @@ export default async function AdminDashboard() {
       count: "Feedback",
       color: "bg-fuchsia-50 border-fuchsia-100",
       cta: "Gestionar Proyectos"
+    },
+    {
+      title: "Gastos e Ingresos",
+      desc: "Registra y analiza los gastos diarios y los ingresos de la empresa. Balance mensual, historial y KPIs financieros.",
+      icon: <DollarSign className="w-8 h-8 text-green-600" />,
+      href: "/admin/finanzas",
+      count: "Finanzas",
+      color: "bg-green-50 border-green-100",
+      cta: "Gestionar Finanzas"
     }
   ];
 
