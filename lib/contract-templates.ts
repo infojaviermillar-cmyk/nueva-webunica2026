@@ -28,6 +28,8 @@ export interface ContractData {
   diasGarantia: number;       // Ej: 90
   nombreErp: string;          // Ej: "Nebula", "Bsale", "Obuma"
   sistemaFacturacion: string; // Ej: "Wasabil", "Haulmer", "Lioren"
+  tieneErp: boolean;
+  incluirDistribuidores: boolean;
 
   // Fechas y duracion
   fechaContrato: string; // ISO date 'YYYY-MM-DD'
@@ -79,6 +81,8 @@ export const PACIFIC_COLOR_PRESET: ContractData = {
   diasGarantia: 90,
   nombreErp: "Nebula",
   sistemaFacturacion: "Wasabil",
+  tieneErp: true,
+  incluirDistribuidores: false,
 
   fechaContrato: "2026-08-10",
   duracionSemanas: 6,
@@ -129,6 +133,8 @@ export const PRESET_FULL_SHOPIFY: ContractData = {
   diasGarantia: 60,
   nombreErp: "Bsale",
   sistemaFacturacion: "Wasabil",
+  tieneErp: true,
+  incluirDistribuidores: false,
 
   fechaContrato: new Date().toISOString().split('T')[0],
   duracionSemanas: 3,

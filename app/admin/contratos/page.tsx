@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { 
   FileText, 
@@ -70,11 +70,177 @@ function recalculateGanttDates(startDateStr: string, currentGantt: ContractData[
   });
 }
 
+const DEFAULT_DISTRIBUTORS = [
+  { nombre: "Distribuidora Santiago Centro", direccion: "Av. Libertador Bernardo O'Higgins 1234, Santiago", lat: -33.4443, lon: -70.6558, region: "Metropolitana" },
+  { nombre: "Sucursal Las Condes", direccion: "Av. Apoquindo 4500, Las Condes, Santiago", lat: -33.4125, lon: -70.5783, region: "Metropolitana" },
+  { nombre: "Distribuidor Viña del Mar", direccion: "Av. Libertad 890, Viña del Mar", lat: -33.0153, lon: -71.5501, region: "Valparaíso" },
+  { nombre: "Distribuidor Concepción", direccion: "O'Higgins 567, Concepción", lat: -36.8271, lon: -73.0503, region: "Biobío" },
+  { nombre: "Distribuidor La Serena", direccion: "Balmaceda 456, La Serena", lat: -29.9045, lon: -71.2519, region: "Coquimbo" },
+  { nombre: "Distribuidor Puerto Montt", direccion: "Urmeneta 234, Puerto Montt", lat: -41.4718, lon: -72.9396, region: "Los Lagos" },
+  { nombre: "Distribuidor Antofagasta", direccion: "Av. Grecia 1200, Antofagasta", lat: -23.6464, lon: -70.4002, region: "Antofagasta" }
+];
+
+const SIMULATION_LOCATIONS = [
+  { nombre: "Santiago (Plaza de Armas)", lat: -33.4372, lon: -70.6506 },
+  { nombre: "Las Condes", lat: -33.4125, lon: -70.5783 },
+  { nombre: "Valparaíso", lat: -33.0472, lon: -71.6127 },
+  { nombre: "Concepción", lat: -36.8201, lon: -73.0444 },
+  { nombre: "La Serena", lat: -29.9027, lon: -71.2529 },
+  { nombre: "Puerto Montt", lat: -41.4689, lon: -72.9411 },
+  { nombre: "Antofagasta", lat: -23.6509, lon: -70.3975 }
+];
+
+function deg2rad(deg: number): number {
+  return deg * (Math.PI / 180);
+}
+
+function getDistanceKM(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371; // Radius of the earth in km
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a = 
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+  ; 
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
+  return R * c; // Distance in km
+}
+
 export default function ContratoGeneratorPage() {
   const [data, setData] = useState<ContractData>(PACIFIC_COLOR_PRESET);
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState<'editor' | 'preview'>('preview');
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+
+  // Geolocation and OpenStreetMap State
+  const [userLocation, setUserLocation] = useState({ lat: -33.4372, lon: -70.6506 });
+  const [locationSource, setLocationSource] = useState<'default' | 'gps' | 'simulated'>('default');
+  const [simulatedName, setSimulatedName] = useState('Santiago (Centro)');
+  const [mapReady, setMapReady] = useState(false);
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const mapInstanceRef = useRef<any>(null);
+
+  // Sort distributors dynamically by distance
+  const sortedDistributors = [...DEFAULT_DISTRIBUTORS].map(dist => {
+    const distance = getDistanceKM(userLocation.lat, userLocation.lon, dist.lat, dist.lon);
+    return { ...dist, distance };
+  }).sort((a, b) => a.distance - b.distance);
+
+  // Handle geolocation request
+  const requestGeolocation = () => {
+    if (typeof window !== 'undefined' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude
+          });
+          setLocationSource('gps');
+          setSimulatedName('GPS Dispositivo');
+        },
+        (error) => {
+          console.warn("Geolocation error or permission denied:", error);
+        }
+      );
+    }
+  };
+
+  // Try auto-getting geolocation on mount
+  useEffect(() => {
+    requestGeolocation();
+  }, []);
+
+  // Dynamically load Leaflet CDN script and styles
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if ((window as any).L) {
+      setMapReady(true);
+      return;
+    }
+
+    const leafletCss = document.createElement('link');
+    leafletCss.rel = 'stylesheet';
+    leafletCss.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    document.head.appendChild(leafletCss);
+
+    const leafletJs = document.createElement('script');
+    leafletJs.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    leafletJs.onload = () => {
+      setMapReady(true);
+    };
+    document.head.appendChild(leafletJs);
+  }, []);
+
+  // Initialize and update Leaflet Map
+  useEffect(() => {
+    if (typeof window === 'undefined' || !mapReady || !mapContainerRef.current) return;
+    const L = (window as any).L;
+    if (!L) return;
+
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.remove();
+    }
+
+    const map = L.map(mapContainerRef.current, {
+      zoomControl: true,
+      scrollWheelZoom: false
+    }).setView([userLocation.lat, userLocation.lon], 11);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OSM'
+    }).addTo(map);
+
+    // Custom icons
+    const userMarkerHtml = `
+      <div class="relative flex items-center justify-center">
+        <div class="absolute w-4 h-4 bg-purple-500 rounded-full animate-ping opacity-75"></div>
+        <div class="relative w-3.5 h-3.5 bg-purple-600 rounded-full border-2 border-white shadow-lg"></div>
+      </div>
+    `;
+
+    const userIcon = L.divIcon({
+      html: userMarkerHtml,
+      className: 'custom-div-icon',
+      iconSize: [16, 16],
+      iconAnchor: [8, 8]
+    });
+
+    const distIcon = L.divIcon({
+      html: `
+        <div class="relative flex items-center justify-center">
+          <div class="relative w-3.5 h-3.5 bg-emerald-600 rounded-full border-2 border-white shadow-lg"></div>
+        </div>
+      `,
+      className: 'custom-div-icon',
+      iconSize: [16, 16],
+      iconAnchor: [8, 8]
+    });
+
+    // Add marker for user/center
+    L.marker([userLocation.lat, userLocation.lon], { icon: userIcon })
+      .addTo(map)
+      .bindPopup(`<b>Tu ubicación (${simulatedName})</b>`)
+      .openPopup();
+
+    // Add markers for distributors
+    sortedDistributors.forEach(d => {
+      L.marker([d.lat, d.lon], { icon: distIcon })
+        .addTo(map)
+        .bindPopup(`<b>${d.nombre}</b><br>${d.direccion}<br>A ${d.distance.toFixed(1)} km`);
+    });
+
+    // Fit map bounds to cover everything if possible
+    if (sortedDistributors.length > 0) {
+      const bounds = L.latLngBounds([
+        [userLocation.lat, userLocation.lon],
+        ...sortedDistributors.map(d => [d.lat, d.lon] as [number, number])
+      ]);
+      map.fitBounds(bounds, { padding: [30, 30] });
+    }
+
+    mapInstanceRef.current = map;
+  }, [mapReady, userLocation, simulatedName]);
 
   // Format Spanish date for document header
   const formatDateSpanish = (dateString: string) => {
@@ -227,6 +393,235 @@ export default function ContratoGeneratorPage() {
 
   const totalIva = Math.round(data.valorNeto * (data.ivaPorcentaje / 100));
   const totalConIva = data.valorNeto + totalIva;
+
+  const tieneErp = data.tieneErp ?? true;
+  const nombreErp = data.nombreErp ?? 'Nebula';
+  const sistemaFacturacion = data.sistemaFacturacion ?? 'Wasabil';
+  const totalPages = data.incluirDistribuidores ? 6 : 5;
+
+  const ES_ORDINALS = [
+    'PRIMERO', 'SEGUNDO', 'TERCERO', 'CUARTO', 'QUINTO', 'SEXTO', 'SÉPTIMO',
+    'OCTAVO', 'NOVENO', 'DÉCIMO', 'DÉCIMO PRIMERO', 'DÉCIMO SEGUNDO', 'DÉCIMO TERCERO',
+    'DÉCIMO CUARTO', 'DÉCIMO QUINTO', 'DÉCIMO SEXTO', 'DÉCIMO SÉPTIMO', 'DÉCIMO OCTAVO',
+    'DÉCIMO NOVENO', 'VIGÉSIMO', 'VIGÉSIMO PRIMERO', 'VIGÉSIMO SEGUNDO', 'VIGÉSIMO TERCERO',
+    'VIGÉSIMO CUARTO', 'VIGÉSIMO QUINTO', 'VIGÉSIMO SEXTO'
+  ];
+
+  const clauses = [
+    {
+      id: 'primero',
+      title: 'ANTECEDENTES Y DEFINICIONES',
+      content: (
+        <>
+          <p>EL PROVEEDOR declara contar con experiencia, conocimientos y recursos para diseñar, configurar e implementar soluciones de comercio electrónico sobre Shopify. EL CLIENTE desea desarrollar una nueva tienda de comercio electrónico para la marca {data.nombreMarca || 'su negocio'}, conforme a la Cotización N.º <strong>{data.cotizacionNumero}</strong> y a los anexos de este contrato.</p>
+          <p className="mt-1">
+            Para este contrato se entenderá por: (a) &ldquo;Proyecto&rdquo;, el conjunto de servicios descritos en este instrumento; (b) &ldquo;Entregable&rdquo;, toda pieza de diseño, configuración, desarrollo, migración, integración o documentación sometida a revisión; (c) &ldquo;Día hábil&rdquo;, de lunes a viernes, excluidos feriados legales en Chile; y (d) &ldquo;Integraciones críticas&rdquo;, el checkout, la pasarela de pago acordada, los métodos de despacho acordados, la facturación electrónica incluida
+            {tieneErp ? ' y la conexión estándar con ERP ' : ''}
+            {tieneErp && <strong>{nombreErp}</strong>}
+            , dentro de los límites del alcance contratado.
+          </p>
+        </>
+      )
+    },
+    {
+      id: 'segundo',
+      title: 'OBJETO',
+      content: (
+        <p>
+          EL PROVEEDOR se obliga a diseñar, desarrollar, configurar e implementar una tienda Shopify <strong>{data.planNombre}</strong> para EL CLIENTE, incluyendo diseño UX/UI, implementación responsive, migración de hasta <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas de producto, configuración de comercio electrónico,
+          {tieneErp ? ' integración técnica básica con ERP ' : ''}
+          {tieneErp && <strong>{nombreErp}</strong>}
+          {tieneErp ? ' y con' : ' con'} un sistema de facturación electrónica <strong>{sistemaFacturacion}</strong> o equivalente, analítica, SEO técnico inicial, capacitación y puesta en producción, todo conforme al alcance y exclusiones de este contrato.
+        </p>
+      )
+    },
+    {
+      id: 'tercero',
+      title: 'DOCUMENTOS INTEGRANTES Y PRELACIÓN',
+      content: (
+        <>
+          <p>Forman parte integrante del contrato: el cuerpo principal, el Anexo N.º 1 (Alcance y responsabilidades), el Anexo N.º 2 (Carta Gantt), el Anexo N.º 3 (Cronograma de pagos), el Anexo N.º 4 (Checklist de inicio), el Anexo N.º 5 (Servicios de terceros) y el Anexo N.º 6 (Criterios de aceptación y cierre){data.incluirDistribuidores ? ', y el Anexo N.º 7 (Distribuidores por Zona y Georeferenciación)' : ''}.</p>
+          <p className="mt-1">En caso de contradicción, prevalecerá el cuerpo principal del contrato; luego, los anexos en orden numérico; y finalmente, la Cotización N.º <strong>{data.cotizacionNumero}</strong>. Correos, mensajes, reuniones o documentos anteriores no modificarán el alcance, precio o plazo salvo que consten en un anexo o solicitud de cambio aceptada por escrito por ambas partes.</p>
+        </>
+      )
+    },
+    {
+      id: 'cuarto',
+      title: 'INICIO, DURACIÓN Y CONDICIONES PREVIAS',
+      content: (
+        <>
+          <p>La fecha estimada de inicio operativo será el <strong>{formatDateSpanish(data.fechaContrato)}</strong>. El inicio efectivo quedará condicionado a que concurran conjuntamente: (a) la firma del contrato; (b) el pago íntegro del primer hito; y (c) la entrega de los accesos, información y materiales esenciales indicados en el Anexo N.º 4.</p>
+          <p className="mt-1">El Proyecto tendrá una duración estimada de <strong>{data.duracionSemanas} semanas</strong> de ejecución, más <strong>{data.holguraSemanas} semanas</strong> de holgura operacional. Si alguna condición previa se cumple después del <strong>{formatDateSpanish(data.fechaContrato)}</strong>, la planificación se desplazará proporcionalmente y EL PROVEEDOR podrá reasignar la fecha de inicio según su programación disponible, sin que ello constituya incumplimiento.</p>
+        </>
+      )
+    },
+    {
+      id: 'quinto',
+      title: 'HABILITACIÓN DE SHOPIFY',
+      content: (
+        <p>EL PROVEEDOR creará o administrará inicialmente la tienda mediante su cuenta Shopify Partner y transferirá la propiedad a EL CLIENTE cuando corresponda. EL CLIENTE deberá aceptar la invitación, contratar y mantener un plan Shopify activo, aceptar los términos de Shopify y registrar un medio de pago válido para cobros recurrentes. La demora o rechazo de estas gestiones suspenderá las actividades dependientes.</p>
+      )
+    },
+    {
+      id: 'sexto',
+      title: 'DISEÑO UX/UI, MARCA Y CONTENIDOS',
+      content: (
+        <>
+          <p>EL CLIENTE proporcionará oportunamente logotipos, colores corporativos, manual de marca, tipografías, fotografías, banners, catálogos, referencias visuales, textos legales, información comercial y demás contenidos necesarios. El Proyecto contempla líneas de trabajo paralelas de Diseño UX/UI y Desarrollo Shopify.</p>
+          <p className="mt-1">El diseño comprenderá las vistas y componentes expresamente descritos en el Anexo N.º 1. Se incluyen hasta dos (2) rondas consolidadas de ajustes sobre la propuesta UX/UI presentada. Cambios posteriores a su aprobación, reconstrucciones derivadas de nuevas instrucciones o solicitudes no contempladas constituirán cambio de alcance.</p>
+        </>
+      )
+    },
+    {
+      id: 'septimo',
+      title: 'MIGRACIÓN DE PRODUCTOS',
+      content: (
+        <>
+          <p>La migración comprende hasta <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas principales de producto desde WordPress/WooCommerce u otra fuente acordada, incluyendo las variantes e imágenes que se encuentren correctamente asociadas y disponibles en una exportación estructurada o mediante mecanismos técnicamente accesibles.</p>
+          <p className="mt-1">La migración incluye una importación inicial y una ronda de correcciones de incidencias directamente atribuibles al proceso de importación. No incluye reconstrucción manual masiva, creación de fotografías, edición gráfica individual, traducción, levantamiento de información faltante, depuración comercial, homologación de SKU, normalización compleja de variantes, carga posterior de nuevos productos ni corrección de datos defectuosos en el sistema de origen. EL CLIENTE será responsable de revisar y validar títulos, precios, SKU, inventario, impuestos, descripciones, variantes, imágenes, categorías y datos tributarios antes de la publicación.</p>
+        </>
+      )
+    },
+    {
+      id: 'erp',
+      show: tieneErp,
+      title: `INTEGRACIÓN CON ERP ${nombreErp.toUpperCase()}`,
+      content: (
+        <>
+          <p>EL PROVEEDOR realizará la conexión técnica básica de Shopify con ERP <strong>{nombreErp}</strong> mediante el conector estándar disponible y contratado por EL CLIENTE. La configuración se limitará a las funciones compatibles ofrecidas por dicho conector, tales como sincronización de productos, SKU, precios, inventario y pedidos, según las capacidades efectivamente habilitadas por <strong>{nombreErp}</strong> y Shopify.</p>
+          <p className="mt-1">EL CLIENTE deberá contratar y mantener activo <strong>{nombreErp}</strong> y su conector, entregar credenciales, accesos, documentación, datos maestros y soporte del proveedor cuando sea necesario, además de validar las pruebas de sincronización. No se incluyen desarrollos API a medida, modificaciones internas del ERP, homologaciones especiales, saneamiento de datos, migración histórica, conciliación contable, integraciones con módulos no soportados ni soporte propio del proveedor de ERP. Si el conector estándar no permite una función solicitada, presenta incompatibilidades, requiere certificación, intervención del proveedor o desarrollo personalizado, LAS PARTES evaluarán una cotización y plazo adicionales.</p>
+        </>
+      )
+    },
+    {
+      id: 'facturacion',
+      title: 'FACTURACIÓN ELECTRÓNICA',
+      content: (
+        <>
+          <p>EL PROVEEDOR realizará la instalación o conexión, parametrización inicial y pruebas técnicas de <strong>{sistemaFacturacion}</strong> o de otro sistema de facturación electrónica compatible con Shopify que LAS PARTES acuerden por escrito.</p>
+          <p className="mt-1">EL CLIENTE será responsable de contratar y mantener activo el servicio, entregar sus datos tributarios, certificados, credenciales y autorizaciones, y aprobar los documentos de prueba. No se incluyen licencias, certificaciones ante el SII, regularización tributaria, migración histórica, desarrollo API a medida ni soporte propio del proveedor de facturación.</p>
+        </>
+      )
+    },
+    {
+      id: 'terceros',
+      title: 'SERVICIOS DE TERCEROS',
+      content: (
+        <>
+          <p>Shopify, {tieneErp ? `ERP ${nombreErp}, ` : ''}<strong>{sistemaFacturacion}</strong>, pasarelas de pago, operadores logísticos, aplicaciones, Google, Meta y demás servicios externos son prestados por terceros. Sus precios, políticas, aprobaciones, continuidad, APIs, tiempos de respuesta y funcionalidades pueden cambiar sin intervención de EL PROVEEDOR.</p>
+          <p className="mt-1">Salvo estipulación expresa, los planes, licencias, consumos, transacciones, certificados y costos recurrentes de terceros serán de cargo exclusivo de EL CLIENTE. EL PROVEEDOR no responderá por rechazos de cuentas, bloqueos, interrupciones, modificaciones de API, pérdidas de servicio, cambios tarifarios o errores atribuibles a dichos proveedores.</p>
+        </>
+      )
+    },
+    {
+      id: 'precio',
+      title: 'PRECIO, IMPUESTOS Y FORMA DE PAGO',
+      content: (
+        <>
+          <p>El valor neto del Proyecto asciende a <strong>{formatCLP(data.valorNeto)}</strong>, más IVA (19%) por <strong>{formatCLP(totalIva)}</strong>, totalizando <strong>{formatCLP(totalConIva)} IVA incluido</strong>. El precio se pagará en <strong>{data.hitosPago.length} hitos</strong> conforme al Anexo N.º 3.</p>
+          <p className="mt-1">El primer pago es anticipado y constituye condición para reservar la programación e iniciar actividades. Cada pago posterior deberá efectuarse al cumplirse el hito respectivo, aun cuando existan observaciones menores que no impidan la continuidad del Proyecto. El atraso en cualquier pago facultará a EL PROVEEDOR para suspender inmediatamente los servicios, accesos, publicación, transferencia de propiedad o entrega de archivos y reprogramar los plazos. Los hitos iniciados, ejecutados o aprobados no serán reembolsables.</p>
+        </>
+      )
+    },
+    {
+      id: 'revision',
+      title: 'REVISIÓN Y APROBACIÓN DE ENTREGABLES',
+      content: (
+        <>
+          <p>EL CLIENTE dispondrá de cinco (5) días hábiles desde la entrega para aprobar u observar cada Entregable. Las observaciones deberán remitirse en un único documento o comunicación consolidada, ser concretas, reproducibles y referirse al alcance contratado.</p>
+          <p className="mt-1">Si EL CLIENTE no formula observaciones dentro del plazo, el Entregable se entenderá aprobado de forma definitiva. La utilización, publicación, entrega a terceros o instrucción de continuar con la etapa siguiente también constituirá aprobación.</p>
+        </>
+      )
+    },
+    {
+      id: 'cambios',
+      title: 'CAMBIOS DE ALCANCE',
+      content: (
+        <>
+          <p>Toda solicitud que exceda el alcance, las cantidades, las rondas de revisión, las integraciones o los entregables definidos se gestionará mediante una solicitud de cambio. EL PROVEEDOR informará su impacto en precio y plazo, y solo la ejecutará una vez aceptada por escrito por EL CLIENTE.</p>
+          <p className="mt-1">Se considerarán cambios de alcance, entre otros: nuevas plantillas o vistas; más de <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> productos; reconstrucciones manuales; nuevas integraciones; API a medida; nuevas rondas de diseño; cambios posteriores a una aprobación; funciones no soportadas por Shopify, {tieneErp ? `ERP ${nombreErp}, ` : ''}<strong>{sistemaFacturacion}</strong> o aplicaciones; y tareas solicitadas después de la puesta en producción.</p>
+        </>
+      )
+    },
+    {
+      id: 'garantia',
+      title: 'GARANTÍA Y ACOMPAÑAMIENTO',
+      content: (
+        <>
+          <p>EL PROVEEDOR otorgará una garantía de <strong>{data.diasGarantia ?? 90} días corridos</strong>, contados desde la recepción conforme, exclusivamente para corregir errores reproducibles y directamente atribuibles a los trabajos ejecutados por EL PROVEEDOR dentro del alcance contratado.</p>
+          <p className="mt-1">La garantía no cubre cambios o intervenciones de EL CLIENTE o terceros; errores de contenido o datos; fallas de Shopify, {tieneErp ? `ERP ${nombreErp}, ` : ''}<strong>{sistemaFacturacion}</strong>, aplicaciones, APIs, pagos, logística, Google o Meta; actualizaciones de plataformas; pérdida o rechazo de credenciales; nuevos requerimientos; carga de productos; capacitación adicional; incidentes de seguridad ajenos al código implementado; ni uso distinto del previsto.</p>
+          <p className="mt-1">Adicionalmente, EL PROVEEDOR prestará acompañamiento remoto funcional durante seis (6) meses desde la recepción conforme, limitado a una (1) sesión mensual de hasta cuarenta y cinco (45) minutos, no acumulable, previa coordinación. Este acompañamiento comprende consultas sobre el uso general de la configuración entregada y no incluye ejecución de tareas, soporte de urgencia, nuevos desarrollos, cambios de diseño, carga de contenido, administración comercial ni soporte técnico de terceros.</p>
+        </>
+      )
+    },
+    {
+      id: 'propiedad',
+      title: 'PROPIEDAD INTELECTUAL Y LICENCIAS',
+      content: (
+        <>
+          <p>Una vez pagado íntegramente el precio y los servicios adicionales que correspondan, EL CLIENTE será titular de los desarrollos específicos creados exclusivamente para el Proyecto, en la medida en que sean transferibles.</p>
+          <p className="mt-1">Permanecerán excluidos de la transferencia y bajo la titularidad o licencia de sus respectivos propietarios: Shopify, themes, aplicaciones, conectores, tipografías, fotografías, librerías, código abierto, componentes preexistentes, metodologías, herramientas, plantillas, fragmentos genéricos y componentes reutilizables de EL PROVEEDOR. EL CLIENTE declara contar con derechos suficientes sobre los materiales proporcionados y mantendrá indemne a EL PROVEEDOR frente a reclamaciones derivadas de dichos contenidos.</p>
+        </>
+      )
+    },
+    {
+      id: 'confidencialidad',
+      title: 'CONFIDENCIALIDAD',
+      content: (
+        <p>LAS PARTES mantendrán reserva sobre la información técnica, comercial, financiera, estratégica, de clientes, credenciales y demás información no pública conocida con ocasión del Proyecto, durante la vigencia del contrato y por cinco (5) años desde su término.</p>
+      )
+    },
+    {
+      id: 'datos',
+      title: 'PROTECCIÓN DE DATOS Y SEGURIDAD',
+      content: (
+        <p>Cada parte tratará los datos personales y credenciales a los que acceda únicamente para ejecutar el contrato y conforme a la legislación chilena vigente. EL CLIENTE será responsable de sus políticas de privacidad, textos legales, bases de legitimación, consentimiento y cumplimiento aplicable a su operación comercial. EL PROVEEDOR aplicará medidas razonables de seguridad sobre sus accesos y entregables.</p>
+      )
+    },
+    {
+      id: 'estandar',
+      title: 'ESTÁNDAR TÉCNICO Y RESULTADOS COMALES',
+      content: (
+        <p>EL PROVEEDOR desarrollará el Proyecto aplicando buenas prácticas generalmente aceptadas, vigentes a la fecha de ejecución y pertinentes al alcance contratado, en materias de UX/UI, optimización de conversión (CRO), SEO técnico, rendimiento, seguridad del código implementado y mantenibilidad. Estas obligaciones constituyen un estándar de diligencia técnica y no una garantía de niveles de venta, tasa de conversión, posicionamiento orgánico, tráfico, aprobación de campañas o cuentas, retorno de inversión, disponibilidad absoluta ni puntajes específicos en herramientas automáticas de medición.</p>
+      )
+    },
+    {
+      id: 'recepcion',
+      title: 'RECEPCIÓN CONFORME',
+      content: (
+        <p>La recepción conforme se verificará conforme al Anexo N.º 6. EL CLIENTE dispondrá de diez (10) días hábiles desde la puesta en producción o desde la notificación de disponibilidad para validación final, lo que ocurra primero, para informar observaciones críticas en un único reporte consolidado. Se considerará observación crítica únicamente aquella que impida totalmente el funcionamiento del checkout, el procesamiento de la pasarela acordada, un método de despacho contratado, la emisión tributaria de prueba o una integración crítica expresamente incluida. La operación normal del sitio durante dicho período o la ausencia de observaciones críticas constituirá recepción conforme.</p>
+      )
+    },
+    {
+      id: 'disposiciones',
+      title: '',
+      content: (
+        <p>EL PROVEEDOR podrá mencionar la marca e incluir capturas del sitio en su portafolio sin revelar información confidencial. La responsabilidad acumulada de EL PROVEEDOR no excederá el monto neto efectivamente pagado por el Proyecto, salvo dolo o culpa grave. Ninguna parte responderá por casos de fuerza mayor o eventos imprevisibles fuera de su control razonable. Cualquiera de LAS PARTES podrá poner término anticipado mediante aviso escrito con 30 días de anticipación pagando los hitos ejecutados. LAS PARTES reconocen plena validez a la firma electrónica simple o avanzada, fijan domicilio en la ciudad de Santiago de Chile y se someten a sus Tribunales Ordinarios de Justicia.</p>
+      )
+    }
+  ];
+
+  const visibleClauses = clauses.filter(c => c.show !== false);
+
+  const getClauseFullTitle = (index: number, id: string) => {
+    if (id === 'disposiciones') {
+      const startOrdinal = ES_ORDINALS[index];
+      const endOrdinal = ES_ORDINALS[index + 6];
+      return `${startOrdinal} A ${endOrdinal}: DISPOSICIONES GENERALES Y JURISDICCIÓN`;
+    }
+    return `${ES_ORDINALS[index]}: ${visibleClauses[index].title}`;
+  };
+
+  const renderClause = (clause: typeof clauses[0], index: number) => {
+    return (
+      <div key={clause.id} className="clause-block">
+        <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">
+          {getClauseFullTitle(index, clause.id)}
+        </h3>
+        {clause.content}
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 pb-24 selection:bg-purple-500 selection:text-white print:bg-white print:text-black print:pb-0">
@@ -468,6 +863,61 @@ export default function ContratoGeneratorPage() {
                   <span>Configuración Dinámica del Proyecto</span>
                 </div>
 
+                <div className="grid grid-cols-2 gap-3 bg-zinc-50 p-3 rounded-2xl border border-zinc-200">
+                  <label className="flex items-center gap-2 cursor-pointer select-none">
+                    <input 
+                      type="checkbox" 
+                      checked={data.tieneErp ?? true} 
+                      onChange={(e) => setData({...data, tieneErp: e.target.checked})}
+                      className="w-4 h-4 rounded border-zinc-300 text-[#7850FA] focus:ring-[#7850FA] cursor-pointer"
+                    />
+                    <div className="text-[11px] font-bold uppercase text-zinc-700">Maneja ERP</div>
+                  </label>
+
+                  <label className="flex items-center gap-2 cursor-pointer select-none">
+                    <input 
+                      type="checkbox" 
+                      checked={data.incluirDistribuidores ?? false} 
+                      onChange={(e) => setData({...data, incluirDistribuidores: e.target.checked})}
+                      className="w-4 h-4 rounded border-zinc-300 text-[#7850FA] focus:ring-[#7850FA] cursor-pointer"
+                    />
+                    <div className="text-[11px] font-bold uppercase text-zinc-700">Distribuidores</div>
+                  </label>
+                </div>
+
+                {data.incluirDistribuidores && (
+                  <div className="p-3 bg-zinc-50 rounded-2xl border border-zinc-200 space-y-2">
+                    <div className="text-[10px] font-bold uppercase text-zinc-500">Ubicación Simulada para Distribuidores</div>
+                    <div className="flex gap-2">
+                      <select 
+                        value={`${userLocation.lat},${userLocation.lon}`}
+                        onChange={(e) => {
+                          const [latStr, lonStr] = e.target.value.split(',');
+                          const lat = parseFloat(latStr);
+                          const lon = parseFloat(lonStr);
+                          const found = SIMULATION_LOCATIONS.find(loc => loc.lat === lat && loc.lon === lon);
+                          setUserLocation({ lat, lon });
+                          setLocationSource('simulated');
+                          setSimulatedName(found ? found.nombre : 'Personalizada');
+                        }}
+                        className="flex-1 px-3 py-2 bg-white border border-zinc-300 rounded-xl text-xs text-zinc-900 outline-none"
+                      >
+                        {SIMULATION_LOCATIONS.map((loc) => (
+                          <option key={loc.nombre} value={`${loc.lat},${loc.lon}`}>{loc.nombre}</option>
+                        ))}
+                      </select>
+                      <button
+                        type="button"
+                        onClick={requestGeolocation}
+                        className="px-3 py-2 bg-[#7850FA] text-white rounded-xl text-xs font-bold hover:bg-[#683fe4]"
+                        title="Usar mi ubicación real (GPS)"
+                      >
+                        GPS
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Cant. Productos</label>
@@ -493,18 +943,20 @@ export default function ContratoGeneratorPage() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Nombre del ERP</label>
-                    <input 
-                      type="text" 
-                      value={data.nombreErp ?? 'Nebula'}
-                      onChange={(e) => setData({...data, nombreErp: e.target.value})}
-                      placeholder="Ej: Nebula, Bsale"
-                      className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
-                    />
-                  </div>
+                  {(data.tieneErp ?? true) && (
+                    <div>
+                      <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Nombre del ERP</label>
+                      <input 
+                        type="text" 
+                        value={data.nombreErp ?? 'Nebula'}
+                        onChange={(e) => setData({...data, nombreErp: e.target.value})}
+                        placeholder="Ej: Nebula, Bsale"
+                        className="w-full px-4 py-2.5 bg-zinc-50 border border-zinc-300 rounded-xl text-xs font-semibold text-zinc-900 focus:bg-white focus:border-[#7850FA] outline-none"
+                      />
+                    </div>
+                  )}
 
-                  <div>
+                  <div className={!(data.tieneErp ?? true) ? "col-span-2" : ""}>
                     <label className="block text-[11px] font-bold uppercase text-zinc-600 mb-1">Facturación Elec.</label>
                     <input 
                       type="text" 
@@ -700,7 +1152,7 @@ export default function ContratoGeneratorPage() {
           <div className={`lg:col-span-8 space-y-8 ${activeTab === 'editor' ? 'hidden lg:block' : 'block'}`}>
             <div id="legal-contract-print-area" className="space-y-8 text-black">
               
-              {/* HOJA 1 (PÁGINA 1 DE 5) */}
+              {/* HOJA 1 (PÁGINA 1 DE {totalPages}) */}
               <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
                 <div className="space-y-5">
                   {/* FORMAL DOCUMENT TITLE HEADER */}
@@ -723,56 +1175,18 @@ export default function ContratoGeneratorPage() {
 
                   {/* CLAUSULAS LEGALES 1 A 7 */}
                   <div className="space-y-3.5 text-justify text-black text-xs">
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">PRIMERO: ANTECEDENTES Y DEFINICIONES</h3>
-                      <p>EL PROVEEDOR declara contar con experiencia, conocimientos y recursos para diseñar, configurar e implementar soluciones de comercio electrónico sobre Shopify. EL CLIENTE desea desarrollar una nueva tienda de comercio electrónico para la marca {data.nombreMarca || 'su negocio'}, conforme a la Cotización N.º <strong>{data.cotizacionNumero}</strong> y a los anexos de este contrato.</p>
-                      <p className="mt-1">Para este contrato se entenderá por: (a) &ldquo;Proyecto&rdquo;, el conjunto de servicios descritos en este instrumento; (b) &ldquo;Entregable&rdquo;, toda pieza de diseño, configuración, desarrollo, migración, integración o documentación sometida a revisión; (c) &ldquo;Día hábil&rdquo;, de lunes a viernes, excluidos feriados legales en Chile; y (d) &ldquo;Integraciones críticas&rdquo;, el checkout, la pasarela de pago acordada, los métodos de despacho acordados, la facturación electrónica incluida y la conexión estándar con ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>, dentro de los límites del alcance contratado.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEGUNDO: OBJETO</h3>
-                      <p>EL PROVEEDOR se obliga a diseñar, desarrollar, configurar e implementar una tienda Shopify <strong>{data.planNombre}</strong> para EL CLIENTE, incluyendo diseño UX/UI, implementación responsive, migración de hasta <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas de producto, configuración de comercio electrónico, integración técnica básica con ERP <strong>{data.nombreErp ?? 'Nebula'}</strong> y con un sistema de facturación electrónica <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong> o equivalente, analítica, SEO técnico inicial, capacitación y puesta en producción, todo conforme al alcance y exclusiones de este contrato.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">TERCERO: DOCUMENTOS INTEGRANTES Y PRELACIÓN</h3>
-                      <p>Forman parte integrante del contrato: el cuerpo principal, el Anexo N.º 1 (Alcance y responsabilidades), el Anexo N.º 2 (Carta Gantt), el Anexo N.º 3 (Cronograma de pagos), el Anexo N.º 4 (Checklist de inicio), el Anexo N.º 5 (Servicios de terceros) y el Anexo N.º 6 (Criterios de aceptación y cierre).</p>
-                      <p className="mt-1">En caso de contradicción, prevalecerá el cuerpo principal del contrato; luego, los anexos en orden numérico; y finalmente, la Cotización N.º <strong>{data.cotizacionNumero}</strong>. Correos, mensajes, reuniones o documentos anteriores no modificarán el alcance, precio o plazo salvo que consten en un anexo o solicitud de cambio aceptada por escrito por ambas partes.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">CUARTO: INICIO, DURACIÓN Y CONDICIONES PREVIAS</h3>
-                      <p>La fecha estimada de inicio operativo será el <strong>{formatDateSpanish(data.fechaContrato)}</strong>. El inicio efectivo quedará condicionado a que concurran conjuntamente: (a) la firma del contrato; (b) el pago íntegro del primer hito; y (c) la entrega de los accesos, información y materiales esenciales indicados en el Anexo N.º 4.</p>
-                      <p className="mt-1">El Proyecto tendrá una duración estimada de <strong>{data.duracionSemanas} semanas</strong> de ejecución, más <strong>{data.holguraSemanas} semanas</strong> de holgura operacional. Si alguna condición previa se cumple después del <strong>{formatDateSpanish(data.fechaContrato)}</strong>, la planificación se desplazará proporcionalmente y EL PROVEEDOR podrá reasignar la fecha de inicio según su programación disponible, sin que ello constituya incumplimiento.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">QUINTO: HABILITACIÓN DE SHOPIFY</h3>
-                      <p>EL PROVEEDOR creará o administrará inicialmente la tienda mediante su cuenta Shopify Partner y transferirá la propiedad a EL CLIENTE cuando corresponda. EL CLIENTE deberá aceptar la invitación, contratar y mantener un plan Shopify activo, aceptar los términos de Shopify y registrar un medio de pago válido para cobros recurrentes. La demora o rechazo de estas gestiones suspenderá las actividades dependientes.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SEXTO: DISEÑO UX/UI, MARCA Y CONTENIDOS</h3>
-                      <p>EL CLIENTE proporcionará oportunamente logotipos, colores corporativos, manual de marca, tipografías, fotografías, banners, catálogos, referencias visuales, textos legales, información comercial y demás contenidos necesarios. El Proyecto contempla líneas de trabajo paralelas de Diseño UX/UI y Desarrollo Shopify.</p>
-                      <p className="mt-1">El diseño comprenderá las vistas y componentes expresamente descritos en el Anexo N.º 1. Se incluyen hasta dos (2) rondas consolidadas de ajustes sobre la propuesta UX/UI presentada. Cambios posteriores a su aprobación, reconstrucciones derivadas de nuevas instrucciones o solicitudes no contempladas constituirán cambio de alcance.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">SÉPTIMO: MIGRACIÓN DE PRODUCTOS</h3>
-                      <p>La migración comprende hasta <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas principales de producto desde WordPress/WooCommerce u otra fuente acordada, incluyendo las variantes e imágenes que se encuentren correctamente asociadas y disponibles en una exportación estructurada o mediante mecanismos técnicamente accesibles.</p>
-                      <p className="mt-1">La migración incluye una importación inicial y una ronda de correcciones de incidencias directamente atribuibles al proceso de importación. No incluye reconstrucción manual masiva, creación de fotografías, edición gráfica individual, traducción, levantamiento de información faltante, depuración comercial, homologación de SKU, normalización compleja de variantes, carga posterior de nuevos productos ni corrección de datos defectuosos en el sistema de origen. EL CLIENTE será responsable de revisar y validar títulos, precios, SKU, inventario, impuestos, descripciones, variantes, imágenes, categorías y datos tributarios antes de la publicación.</p>
-                    </div>
+                    {visibleClauses.slice(0, 7).map((c, i) => renderClause(c, i))}
                   </div>
                 </div>
 
                 {/* PIE DE PÁGINA OFICIAL HOJA 1 */}
                 <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
                   <span>Contrato {data.planNombre} • Cotización N.º {data.cotizacionNumero}</span>
-                  <span>Página 1 de 5</span>
+                  <span>Página 1 de {totalPages}</span>
                 </div>
               </div>
 
-              {/* HOJA 2 (PÁGINA 2 DE 5) */}
+              {/* HOJA 2 (PÁGINA 2 DE {totalPages}) */}
               <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
                 <div className="space-y-4">
                   <div className="text-center pb-3 border-b border-black mb-4">
@@ -783,59 +1197,18 @@ export default function ContratoGeneratorPage() {
 
                   {/* CLAUSULAS LEGALES 8 A 14 */}
                   <div className="space-y-3.5 text-justify text-black text-xs">
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">OCTAVO: INTEGRACIÓN CON ERP {(data.nombreErp ?? 'NEBULA').toUpperCase()}</h3>
-                      <p>EL PROVEEDOR realizará la conexión técnica básica de Shopify con ERP <strong>{data.nombreErp ?? 'Nebula'}</strong> mediante el conector estándar disponible y contratado por EL CLIENTE. La configuración se limitará a las funciones compatibles ofrecidas por dicho conector, tales como sincronización de productos, SKU, precios, inventario y pedidos, según las capacidades efectivamente habilitadas por <strong>{data.nombreErp ?? 'Nebula'}</strong> y Shopify.</p>
-                      <p className="mt-1">EL CLIENTE deberá contratar y mantener activo <strong>{data.nombreErp ?? 'Nebula'}</strong> y su conector, entregar credenciales, accesos, documentación, datos maestros y soporte del proveedor cuando sea necesario, además de validar las pruebas de sincronización. No se incluyen desarrollos API a medida, modificaciones internas del ERP, homologaciones especiales, saneamiento de datos, migración histórica, conciliación contable, integraciones con módulos no soportados ni soporte propio del proveedor de ERP. Si el conector estándar no permite una función solicitada, presenta incompatibilidades, requiere certificación, intervención del proveedor o desarrollo personalizado, LAS PARTES evaluarán una cotización y plazo adicionales.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">NOVENO: FACTURACIÓN ELECTRÓNICA</h3>
-                      <p>EL PROVEEDOR realizará la instalación o conexión, parametrización inicial y pruebas técnicas de <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong> o de otro sistema de facturación electrónica compatible con Shopify que LAS PARTES acuerden por escrito.</p>
-                      <p className="mt-1">EL CLIENTE será responsable de contratar y mantener activo el servicio, entregar sus datos tributarios, certificados, credenciales y autorizaciones, y aprobar los documentos de prueba. No se incluyen licencias, certificaciones ante el SII, regularización tributaria, migración histórica, desarrollo API a medida ni soporte propio del proveedor de facturación.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO: SERVICIOS DE TERCEROS</h3>
-                      <p>Shopify, ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>, <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong>, pasarelas de pago, operadores logísticos, aplicaciones, Google, Meta y demás servicios externos son prestados por terceros. Sus precios, políticas, aprobaciones, continuidad, APIs, tiempos de respuesta y funcionalidades pueden cambiar sin intervención de EL PROVEEDOR.</p>
-                      <p className="mt-1">Salvo estipulación expresa, los planes, licencias, consumos, transacciones, certificados y costos recurrentes de terceros serán de cargo exclusivo de EL CLIENTE. EL PROVEEDOR no responderá por rechazos de cuentas, bloqueos, interrupciones, modificaciones de API, pérdidas de servicio, cambios tarifarios o errores atribuibles a dichos proveedores.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO PRIMERO: PRECIO, IMPUESTOS Y FORMA DE PAGO</h3>
-                      <p>El valor neto del Proyecto asciende a <strong>{formatCLP(data.valorNeto)}</strong>, más IVA (19%) por <strong>{formatCLP(totalIva)}</strong>, totalizando <strong>{formatCLP(totalConIva)} IVA incluido</strong>. El precio se pagará en <strong>{data.hitosPago.length} hitos</strong> conforme al Anexo N.º 3.</p>
-                      <p className="mt-1">El primer pago es anticipado y constituye condición para reservar la programación e iniciar actividades. Cada pago posterior deberá efectuarse al cumplirse el hito respectivo, aun cuando existan observaciones menores que no impidan la continuidad del Proyecto. El atraso en cualquier pago facultará a EL PROVEEDOR para suspender inmediatamente los servicios, accesos, publicación, transferencia de propiedad o entrega de archivos y reprogramar los plazos. Los hitos iniciados, ejecutados o aprobados no serán reembolsables.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO SEGUNDO: REVISIÓN Y APROBACIÓN DE ENTREGABLES</h3>
-                      <p>EL CLIENTE dispondrá de cinco (5) días hábiles desde la entrega para aprobar u observar cada Entregable. Las observaciones deberán remitirse en un único documento o comunicación consolidada, ser concretas, reproducibles y referirse al alcance contratado.</p>
-                      <p className="mt-1">Si EL CLIENTE no formula observaciones dentro del plazo, el Entregable se entenderá aprobado de forma definitiva. La utilización, publicación, entrega a terceros o instrucción de continuar con la etapa siguiente también constituirá aprobación.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO TERCERO: CAMBIOS DE ALCANCE</h3>
-                      <p>Toda solicitud que exceda el alcance, las cantidades, las rondas de revisión, las integraciones o los entregables definidos se gestionará mediante una solicitud de cambio. EL PROVEEDOR informará su impacto en precio y plazo, y solo la ejecutará una vez aceptada por escrito por EL CLIENTE.</p>
-                      <p className="mt-1">Se considerarán cambios de alcance, entre otros: nuevas plantillas o vistas; más de <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> productos; reconstrucciones manuales; nuevas integraciones; API a medida; nuevas rondas de diseño; cambios posteriores a una aprobación; funciones no soportadas por Shopify, ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>, <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong> o aplicaciones; y tareas solicitadas después de la puesta en producción.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO CUARTO: GARANTÍA Y ACOMPAÑAMIENTO</h3>
-                      <p>EL PROVEEDOR otorgará una garantía de <strong>{data.diasGarantia ?? 90} días corridos</strong>, contados desde la recepción conforme, exclusivamente para corregir errores reproducibles y directamente atribuibles a los trabajos ejecutados por EL PROVEEDOR dentro del alcance contratado.</p>
-                      <p className="mt-1">La garantía no cubre cambios o intervenciones de EL CLIENTE o terceros; errores de contenido o datos; fallas de Shopify, ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>, <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong>, aplicaciones, APIs, pagos, logística, Google o Meta; actualizaciones de plataformas; pérdida o rechazo de credenciales; nuevos requerimientos; carga de productos; capacitación adicional; incidentes de seguridad ajenos al código implementado; ni uso distinto del previsto.</p>
-                      <p className="mt-1">Adicionalmente, EL PROVEEDOR prestará acompañamiento remoto funcional durante seis (6) meses desde la recepción conforme, limitado a una (1) sesión mensual de hasta cuarenta y cinco (45) minutos, no acumulable, previa coordinación. Este acompañamiento comprende consultas sobre el uso general de la configuración entregada y no incluye ejecución de tareas, soporte de urgencia, nuevos desarrollos, cambios de diseño, carga de contenido, administración comercial ni soporte técnico de terceros.</p>
-                    </div>
+                    {visibleClauses.slice(7, 14).map((c, i) => renderClause(c, i + 7))}
                   </div>
                 </div>
 
                 {/* PIE DE PÁGINA OFICIAL HOJA 2 */}
                 <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
                   <span>Contrato {data.planNombre} • {data.clienteRazonSocial}</span>
-                  <span>Página 2 de 5</span>
+                  <span>Página 2 de {totalPages}</span>
                 </div>
               </div>
 
-              {/* HOJA 3 (PÁGINA 3 DE 5) */}
+              {/* HOJA 3 (PÁGINA 3 DE {totalPages}) */}
               <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
                 <div className="space-y-4">
                   <div className="text-center pb-3 border-b border-black mb-4">
@@ -846,51 +1219,22 @@ export default function ContratoGeneratorPage() {
 
                   {/* CLAUSULAS LEGALES 15 A 26 Y FIRMAS */}
                   <div className="space-y-3.5 text-justify text-black text-xs">
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO QUINTO: PROPIEDAD INTELECTUAL Y LICENCIAS</h3>
-                      <p>Una vez pagado íntegramente el precio y los servicios adicionales que correspondan, EL CLIENTE será titular de los desarrollos específicos creados exclusivamente para el Proyecto, en la medida en que sean transferibles.</p>
-                      <p className="mt-1">Permanecerán excluidos de la transferencia y bajo la titularidad o licencia de sus respectivos propietarios: Shopify, themes, aplicaciones, conectores, tipografías, fotografías, librerías, código abierto, componentes preexistentes, metodologías, herramientas, plantillas, fragmentos genéricos y componentes reutilizables de EL PROVEEDOR. EL CLIENTE declara contar con derechos suficientes sobre los materiales proporcionados y mantendrá indemne a EL PROVEEDOR frente a reclamaciones derivadas de dichos contenidos.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO SEXTO: CONFIDENCIALIDAD</h3>
-                      <p>LAS PARTES mantendrán reserva sobre la información técnica, comercial, financiera, estratégica, de clientes, credenciales y demás información no pública conocida con ocasión del Proyecto, durante la vigencia del contrato y por cinco (5) años desde su término.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO SÉPTIMO: PROTECCIÓN DE DATOS Y SEGURIDAD</h3>
-                      <p>Cada parte tratará los datos personales y credenciales a los que acceda únicamente para ejecutar el contrato y conforme a la legislación chilena vigente. EL CLIENTE será responsable de sus políticas de privacidad, textos legales, bases de legitimación, consentimiento y cumplimiento aplicable a su operación comercial. EL PROVEEDOR aplicará medidas razonables de seguridad sobre sus accesos y entregables.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO OCTAVO: ESTÁNDAR TÉCNICO Y RESULTADOS COMERCIALES</h3>
-                      <p>EL PROVEEDOR desarrollará el Proyecto aplicando buenas prácticas generalmente aceptadas, vigentes a la fecha de ejecución y pertinentes al alcance contratado, en materias de UX/UI, optimización de conversión (CRO), SEO técnico, rendimiento, seguridad del código implementado y mantenibilidad. Estas obligaciones constituyen un estándar de diligencia técnica y no una garantía de niveles de venta, tasa de conversión, posicionamiento orgánico, tráfico, aprobación de campañas o cuentas, retorno de inversión, disponibilidad absoluta ni puntajes específicos en herramientas automáticas de medición.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">DÉCIMO NOVENO: RECEPCIÓN CONFORME</h3>
-                      <p>La recepción conforme se verificará conforme al Anexo N.º 6. EL CLIENTE dispondrá de diez (10) días hábiles desde la puesta en producción o desde la notificación de disponibilidad para validación final, lo que ocurra primero, para informar observaciones críticas en un único reporte consolidado. Se considerará observación crítica únicamente aquella que impida totalmente el funcionamiento del checkout, el procesamiento de la pasarela acordada, un método de despacho contratado, la emisión tributaria de prueba o una integración crítica expresamente incluida. La operación normal del sitio durante dicho período o la ausencia de observaciones críticas constituirá recepción conforme.</p>
-                    </div>
-
-                    <div className="clause-block">
-                      <h3 className="font-bold uppercase text-black text-xs tracking-wider mb-1">VIGÉSIMO A VIGÉSIMO SEXTO: DISPOSICIONES GENERALES Y JURISDICCIÓN</h3>
-                      <p>EL PROVEEDOR podrá mencionar la marca e incluir capturas del sitio en su portafolio sin revelar información confidencial. La responsabilidad acumulada de EL PROVEEDOR no excederá el monto neto efectivamente pagado por el Proyecto, salvo dolo o culpa grave. Ninguna parte responderá por casos de fuerza mayor o eventos imprevisibles fuera de su control razonable. Cualquiera de LAS PARTES podrá poner término anticipado mediante aviso escrito con 30 días de anticipación pagando los hitos ejecutados. LAS PARTES reconocen plena validez a la firma electrónica simple o avanzada, fijan domicilio en la ciudad de Santiago de Chile y se someten a sus Tribunales Ordinarios de Justicia.</p>
-                    </div>
+                    {visibleClauses.slice(14).map((c, i) => renderClause(c, i + 14))}
                   </div>
 
                   <p className="text-xs font-semibold text-zinc-700 italic border-t border-zinc-300 pt-4 mt-6">
-                    Nota: Los seis (6) anexos se incorporan materialmente a continuación y se entienden aceptados y firmados conjuntamente con el presente contrato principal al final del documento.
+                    Nota: Los {data.incluirDistribuidores ? 'siete (7)' : 'seis (6)'} anexos se incorporan materialmente a continuación y se entienden aceptados y firmados conjuntamente con el presente contrato principal al final del documento.
                   </p>
                 </div>
 
                 {/* PIE DE PÁGINA OFICIAL HOJA 3 */}
                 <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
                   <span>Contrato {data.planNombre} • {data.clienteRazonSocial}</span>
-                  <span>Página 3 de 5</span>
+                  <span>Página 3 de {totalPages}</span>
                 </div>
               </div>
 
-              {/* HOJA 4 (PÁGINA 4 DE 5) */}
+              {/* HOJA 4 (PÁGINA 4 DE {totalPages}) */}
               <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
                 <div className="space-y-5">
                   <div className="text-center pb-4 border-b border-black mb-4">
@@ -908,9 +1252,9 @@ export default function ContratoGeneratorPage() {
                       ANEXO N.º 1 — ALCANCE DEL PROYECTO Y RESPONSABILIDADES
                     </h3>
                     <div className="pl-2 space-y-2 text-xs text-black text-justify">
-                      <p><strong>1. Servicios incluidos:</strong> Levantamiento inicial y arquitectura de información; Diseño UX/UI en Figma para Home, colección, ficha de producto, carrito y componentes; Hasta 2 rondas consolidadas de ajustes UX/UI; Implementación responsive; Configuración de dominio, SSL, impuestos y checkout; Migración de hasta <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas de producto con variantes e imágenes importables; Pasarela de pago principal y despacho acordados; Conexión estándar con ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>; Configuración técnica de <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong> o equivalente; GA4, GTM, Meta Pixel, Google Search Console y Merchant Center; SEO técnico inicial; Capacitación remota de 90 min y entrega final.</p>
+                      <p><strong>1. Servicios incluidos:</strong> Levantamiento inicial y arquitectura de información; Diseño UX/UI en Figma para Home, colección, ficha de producto, carrito y componentes; Hasta 2 rondas consolidadas de ajustes UX/UI; Implementación responsive; Configuración de dominio, SSL, impuestos y checkout; Migración de hasta <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas de producto con variantes e imágenes importables; Pasarela de pago principal y despacho acordados; {tieneErp ? 'Conexión estándar con ERP ' : ''}{tieneErp && <strong>{nombreErp}</strong>}{tieneErp ? '; ' : ''}Configuración técnica de <strong>{sistemaFacturacion}</strong> o equivalente; GA4, GTM, Meta Pixel, Google Search Console y Merchant Center; SEO técnico inicial; Capacitación remota de 90 min y entrega final.</p>
                       <p><strong>2. Responsabilidades de EL CLIENTE:</strong> Pagar oportunamente los hitos; Contratar planes y licencias de terceros; Aceptar la propiedad de Shopify; Entregar accesos, credenciales, bases de datos y datos maestros completos; Suministrar logotipos, banners, textos legales y catálogos; Validar títulos, SKU, inventario y documentos tributarios; Emitir aprobaciones en los plazos contractuales.</p>
-                      <p><strong>3. Exclusiones principales:</strong> Más de <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas de producto; Rediseño de identidad de marca o fotografía; Depuración manual masiva o homologación compleja de SKU; Desarrollos API a medida o modificaciones internas de ERP/Facturación; Licencias, comisiones o soporte propio de terceros; Garantías de venta, tráfico o posicionamiento.</p>
+                      <p><strong>3. Exclusiones principales:</strong> Más de <strong>{(data.cantidadProductos ?? 1000).toLocaleString('es-CL')}</strong> fichas de producto; Rediseño de identidad de marca o fotografía; Depuración manual masiva o homologación compleja de SKU; Desarrollos API a medida o modificaciones internas de {tieneErp ? 'ERP/' : ''}Facturación; Licencias, comisiones o soporte propio de terceros; Garantías de venta, tráfico o posicionamiento.</p>
                     </div>
                   </div>
 
@@ -969,11 +1313,11 @@ export default function ContratoGeneratorPage() {
                 {/* PIE DE PÁGINA OFICIAL HOJA 4 */}
                 <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
                   <span>Anexos Integrantes • {data.clienteRazonSocial}</span>
-                  <span>Página 4 de 5</span>
+                  <span>Página 4 de {totalPages}</span>
                 </div>
               </div>
 
-              {/* HOJA 5 (PÁGINA 5 DE 5) */}
+              {/* HOJA 5 (PÁGINA 5 DE {totalPages}) */}
               <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
                 <div className="space-y-6">
                   <div className="text-center pb-3 border-b border-black mb-4">
@@ -1038,13 +1382,15 @@ export default function ContratoGeneratorPage() {
                         <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
                         <span>Accesos WordPress/WooCommerce y hosting</span>
                       </div>
+                      {tieneErp && (
+                        <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
+                          <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
+                          <span>Accesos y conector de ERP {nombreErp}</span>
+                        </div>
+                      )}
                       <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
                         <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
-                        <span>Accesos y conector de ERP {data.nombreErp ?? 'Nebula'}</span>
-                      </div>
-                      <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
-                        <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
-                        <span>Servicio {data.sistemaFacturacion ?? 'Wasabil'} activo y credenciales</span>
+                        <span>Servicio {sistemaFacturacion} activo y credenciales</span>
                       </div>
                       <div className="flex items-center gap-2 p-1.5 bg-zinc-50 border border-black">
                         <span className="w-4 h-4 border border-black flex items-center justify-center text-[10px] font-bold">✓</span>
@@ -1059,7 +1405,7 @@ export default function ContratoGeneratorPage() {
                       <h4 className="font-black uppercase text-[11px] text-black border-b border-black pb-1">
                         ANEXO N.º 5 — TERCEROS
                       </h4>
-                      <p className="text-[11px] leading-snug">Shopify, ERP <strong>{data.nombreErp ?? 'Nebula'}</strong>, <strong>{data.sistemaFacturacion ?? 'Wasabil'}</strong>, pasarelas de pago y operadores logísticos son independientes. Sus planes, consumos y comisiones son de cargo exclusivo de EL CLIENTE.</p>
+                      <p className="text-[11px] leading-snug">Shopify, {tieneErp ? `ERP ${nombreErp}, ` : ''}<strong>{sistemaFacturacion}</strong>, pasarelas de pago y operadores logísticos son independientes. Sus planes, consumos y comisiones son de cargo exclusivo de EL CLIENTE.</p>
                     </div>
 
                     <div className="space-y-1.5 border border-black p-3 bg-zinc-50">
@@ -1073,7 +1419,7 @@ export default function ContratoGeneratorPage() {
                   {/* FIRMAS FORMALES DE LAS PARTES AL FINAL DE TODO EL DOCUMENTO */}
                   <div className="pt-6 pb-2 border-t border-black mt-4">
                     <p className="text-center text-[11px] font-bold uppercase mb-4 text-black tracking-tight">
-                      FIRMA DE LAS PARTES — EN SEÑAL DE ACEPTACIÓN DEL CONTRATO Y SUS SEIS ANEXOS INTEGRANTES
+                      FIRMA DE LAS PARTES — EN SEÑAL DE ACEPTACIÓN DEL CONTRATO Y SUS {data.incluirDistribuidores ? 'SIETE' : 'SEIS'} ANEXOS INTEGRANTES
                     </p>
                     <div className="grid grid-cols-2 gap-8 text-center">
                       <div>
@@ -1098,9 +1444,84 @@ export default function ContratoGeneratorPage() {
                 {/* PIE DE PÁGINA OFICIAL HOJA 5 */}
                 <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
                   <span>Anexos Integrantes • {data.clienteRazonSocial}</span>
-                  <span>Página 5 de 5</span>
+                  <span>Página 5 de {totalPages}</span>
                 </div>
               </div>
+
+              {/* HOJA 6: ANEXO 7 DISTRIBUIDORES POR ZONA (PÁGINA 6 DE 6) */}
+              {data.incluirDistribuidores && (
+                <div className="contract-sheet bg-white p-8 sm:p-12 rounded-2xl border border-black shadow-xl text-black leading-relaxed font-sans text-xs sm:text-sm flex flex-col justify-between min-h-[1050px]">
+                  <div className="space-y-6">
+                    <div className="text-center pb-3 border-b border-black mb-4">
+                      <h2 className="text-lg font-black uppercase tracking-tight text-black">
+                        ANEXO N.º 7 — COBERTURA DE DISTRIBUIDORES POR ZONA Y GEOREFERENCIACIÓN
+                      </h2>
+                      <p className="text-xs font-mono text-zinc-700">
+                        Cotización N.º {data.cotizacionNumero} • {data.clienteRazonSocial}
+                      </p>
+                    </div>
+
+                    <p className="text-xs text-justify text-black">
+                      Con el objetivo de facilitar el despacho, retiro en tienda o atención local de los productos del CLIENTE, se detalla a continuación el listado de distribuidores autorizados por zona. Utilizando tecnología de georeferenciación basada en OpenStreetMap (Open Maps), el sistema detecta de forma dinámica la ubicación del usuario y ordena automáticamente los distribuidores de menor a mayor distancia, facilitando la selección del punto de contacto más cercano.
+                    </p>
+
+                    {/* Leaflet Map Box Container */}
+                    <div className="relative border-2 border-black rounded-2xl overflow-hidden shadow-md">
+                      <div className="bg-zinc-100 px-3 py-2 border-b border-black text-[10px] font-mono font-bold flex justify-between items-center text-black">
+                        <span>MAPA DE DISTRIBUCIÓN GEOGRÁFICA (OPEN STREET MAP)</span>
+                        <span className="text-purple-700">Ubicación: {simulatedName}</span>
+                      </div>
+                      <div 
+                        ref={mapContainerRef} 
+                        style={{ height: '220px', width: '100%' }}
+                        className="bg-zinc-50 z-10" 
+                      />
+                    </div>
+
+                    {/* Closest Distributors List */}
+                    <div className="space-y-3">
+                      <h3 className="font-black text-xs uppercase text-black bg-zinc-100 p-2 border border-black">
+                        DISTRIBUIDORES ORDENADOS POR CERCANÍA (MÁS CERCANOS PRIMERO)
+                      </h3>
+
+                      <div className="grid grid-cols-1 gap-2 text-xs">
+                        {sortedDistributors.slice(0, 4).map((dist, idx) => (
+                          <div 
+                            key={dist.nombre} 
+                            className="p-3 border border-black rounded-xl bg-zinc-50 flex items-center justify-between gap-4"
+                          >
+                            <div className="space-y-1">
+                              <div className="font-bold flex items-center gap-1.5 text-black">
+                                <span className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-mono">
+                                  {idx + 1}
+                                </span>
+                                {dist.nombre}
+                              </div>
+                              <div className="text-zinc-700 text-[11px] pl-6">{dist.direccion}</div>
+                              <div className="text-[10px] text-zinc-500 font-semibold pl-6 uppercase tracking-wider">{dist.region}</div>
+                            </div>
+                            <div className="text-right whitespace-nowrap">
+                              <span className="px-2.5 py-1 bg-purple-100 text-purple-800 rounded-lg text-[10px] font-mono font-bold uppercase border border-purple-200">
+                                {dist.distance < 1 ? `${(dist.distance * 1000).toFixed(0)} m` : `${dist.distance.toFixed(1)} km`}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <p className="text-[10px] text-zinc-500 italic text-justify leading-snug">
+                      * Las distancias son aproximadas y calculadas en línea recta desde la coordenada de consulta ({userLocation.lat.toFixed(4)}, {userLocation.lon.toFixed(4)}). Este anexo se actualiza dinámicamente y el listado de distribuidores mantendrá su validez operativa durante la ejecución del proyecto.
+                    </p>
+                  </div>
+
+                  {/* PIE DE PÁGINA OFICIAL HOJA 6 */}
+                  <div className="border-t border-black pt-3 mt-6 flex items-center justify-between text-[10px] font-mono text-black uppercase">
+                    <span>Anexos Integrantes • {data.clienteRazonSocial}</span>
+                    <span>Página 6 de {totalPages}</span>
+                  </div>
+                </div>
+              )}
 
             </div>
           </div>
