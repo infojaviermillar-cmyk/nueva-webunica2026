@@ -76,7 +76,7 @@ export async function saveCroLead(data: {
             </tr>
             <tr style="background: #f5f3ff;">
               <td style="padding: 12px; font-weight: 700; border-radius: 8px 0 0 8px; font-size: 13px;">⚙️ FULL</td>
-              <td style="padding: 12px; text-align: right; font-weight: 900; border-radius: 0 8px 8px 0; font-size: 13px;"><s style="color:#a1a1aa; font-size:11px;">$780.000</s> $663.000</td>
+              <td style="padding: 12px; text-align: right; font-weight: 900; border-radius: 0 8px 8px 0; font-size: 13px;"><s style="color:#a1a1aa; font-size:11px;">$1.200.000</s> $1.020.000</td>
             </tr>
             <tr>
               <td style="padding: 12px; font-weight: 700; font-size: 13px;">🚀 PRO</td>

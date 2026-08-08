@@ -19,7 +19,7 @@ export default function ShopifyCalculator() {
   const developmentCosts: Record<string, number> = {
     none: 0,
     profesional: 580000,
-    full: 780000,
+    full: 1200000,
     enterprise: 1450000
   };
 

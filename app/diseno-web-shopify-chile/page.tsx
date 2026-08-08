@@ -78,8 +78,8 @@ export default function DisenoWebShopifyPage() {
     },
     {
       name: "Shopify FULL",
-      price: "$780.000",
-      originalPrice: "$980.000",
+      price: "$1.200.000",
+      originalPrice: "$1.400.000",
       highlight: "⚙️ Negocios en crecimiento",
       desc: "Diseño ecommerce Shopify avanzado con integraciones de marketing y optimización SEO.",
       recommended: true,

@@ -143,7 +143,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/planes-de-desarrollo-shopify-en-chile/plan-full" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
-                    Plan Full ($780k)
+                    Plan Full ($1.200k)
                   </Link>
                 </li>
                 <li>

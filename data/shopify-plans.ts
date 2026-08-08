@@ -45,7 +45,7 @@ export const plans: ShopifyPlan[] = [
   {
     id: "full",
     name: "FULL",
-    price: "$780.000",
+    price: "$1.200.000",
     bonus: "Setup GA4 Sin Costo",
     desc: "Negocios en crecimiento.",
     iconName: 'Shield',

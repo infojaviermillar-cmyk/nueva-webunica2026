@@ -6,9 +6,9 @@ import WhatsAppButton from '@/components/ui/whatsapp-button';
 import { CheckCircle2, Zap, ShieldCheck, Clock, ArrowRight, Award, FileText, Truck } from 'lucide-react';
 
 export const metadata = {
-  title: 'Plan Full Shopify Chile | CyberDay Ready & Boleta SII $780.000',
+  title: 'Plan Full Shopify Chile | CyberDay Ready & Boleta SII $1.200.000',
   description: 'Plan Full de desarrollo Shopify en Chile. El más vendido: Boleta electrónica SII automatizada, Carrier Calculated Shipping (CCS) y CyberDay Ready.',
-  keywords: 'plan full shopify chile, shopify boleta sii chile, carrier calculated shipping shopify, desarrollo shopify $780000, shopify cyberday ready',
+  keywords: 'plan full shopify chile, shopify boleta sii chile, carrier calculated shipping shopify, desarrollo shopify $1200000, shopify cyberday ready',
 };
 
 export default function PlanFullPage() {
@@ -29,7 +29,7 @@ export default function PlanFullPage() {
     },
     "offers": {
       "@type": "Offer",
-      "price": "780000",
+      "price": "1200000",
       "priceCurrency": "CLP",
       "availability": "https://schema.org/InStock"
     },
@@ -91,7 +91,7 @@ export default function PlanFullPage() {
             </p>
 
             <div className="bg-violet-50/70 p-6 rounded-2xl border border-violet-100 mb-8 flex items-baseline gap-4">
-              <span className="text-4xl font-black text-violet-900">$780.000</span>
+              <span className="text-4xl font-black text-violet-900">$1.200.000</span>
               <span className="text-sm font-bold text-violet-500 uppercase tracking-widest">+ IVA</span>
               <span className="text-xs text-violet-700 font-extrabold bg-violet-200/70 px-3 py-1 rounded-full">Entrega en 6 semanas</span>
             </div>

@@ -135,7 +135,7 @@ export default function ShopifyInteractivePlansCarousel() {
                   <p className="text-sm text-purple-200 font-medium mb-6">Tienda optimizada para vender, medir y automatizar.</p>
                   
                   <div className="mb-6 pb-6 border-b border-white/15">
-                    <span className="text-3xl sm:text-4xl font-black text-white font-mono">$780.000</span>
+                    <span className="text-3xl sm:text-4xl font-black text-white font-mono">$1.200.000</span>
                     <span className="text-xs font-bold text-purple-300 uppercase ml-2">+ IVA</span>
                   </div>
 

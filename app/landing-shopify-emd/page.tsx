@@ -137,8 +137,8 @@ export default function ShopifyEmdLandingPage() {
     },
     {
       name: "Shopify FULL",
-      price: "$780.000",
-      originalPrice: "$980.000",
+      price: "$1.200.000",
+      originalPrice: "$1.400.000",
       highlight: "⚙️ Para negocios en crecimiento",
       desc: "Automatiza, optimiza y escala tus ventas. Para negocios que necesitan mayor capacidad de productos y herramientas de marketing.",
       recommended: true,
