@@ -7,6 +7,7 @@ import WhatsAppButton from '@/components/ui/whatsapp-button';
 import ShopifyPricingSection from '@/components/sections/shopify-pricing-section';
 import ViccaTransformationShowcase from '@/components/sections/vicca-transformation-showcase';
 import ShopifyStackedHeroCards from '@/components/ui/shopify-stacked-hero-cards';
+import ShopifyHeroWizard from '@/components/sections/shopify-hero-wizard';
 import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
 import ShopifyInfiniteCasesCarousel from '@/components/sections/shopify-infinite-cases-carousel';
 import ShopifyAiAssistantSimulator from '@/components/sections/shopify-ai-assistant-simulator';
@@ -368,9 +369,9 @@ export default function ShopifyEnChilePage() {
                 </div>
               </div>
 
-              {/* Right Mockup Stack Column */}
-              <div className="lg:col-span-5 w-full">
-                <ShopifyStackedHeroCards />
+              {/* Right Wizard Column */}
+              <div className="lg:col-span-5 w-full flex items-center justify-center lg:justify-start">
+                <ShopifyHeroWizard />
               </div>
 
             </div>
