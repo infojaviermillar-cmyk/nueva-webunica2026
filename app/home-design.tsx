@@ -7,6 +7,7 @@ import FeaturedBlogSection from '@/components/sections/featured-blog';
 import TestimonialsSection from '@/components/sections/testimonials';
 import HeroCarousel from '@/components/sections/hero-carousel';
 import MobileCarousel from '@/components/sections/mobile-carousel';
+import HomeHeroSection from '@/components/sections/home-hero-section';
 import HomeFAQ from '@/components/sections/home-faq';
 import PricingPlans from '@/components/sections/pricing-plans';
 import ServicesTabs from '@/components/sections/services-tabs';
@@ -206,60 +207,8 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
       />
       
-      {/* Premium Hero Section */}
-      <section className="relative pt-[22vh] lg:pt-32 pb-24 lg:pb-32 overflow-hidden flex items-start lg:items-center min-h-[100vh] lg:min-h-[95vh]">
-        {/* Background Texture */}
-        <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
-          <Image 
-            src="/bg-01.jpg" 
-            alt="Agencia de Diseño y Desarrollo Web en Chile - Webunica" 
-            fill 
-            className="object-cover object-center" 
-            priority
-            fetchPriority="high"
-            quality={75}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/40 to-white"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-16 items-center">
-            
-            <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 xl:mb-10 bg-white/80 backdrop-blur-sm border border-zinc-100 rounded-full">
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-violet-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-500"></span>
-                </span>
-                <span className="text-[10px] font-black tracking-[0.25em] text-zinc-500 uppercase">Expertos en E-commerce & Shopify Partners</span>
-              </div>
-              
-              <h1 className="text-[2.4rem] xs:text-5xl sm:text-5xl md:text-6xl lg:text-[68px] xl:text-[85px] font-black tracking-tighter leading-[0.85] mb-6 xl:mb-12 uppercase text-zinc-950 break-words">
-                Diseño & <br/>
-                <span className="text-violet-600 font-black">Desarrollo</span> <br/>
-                Sitios Web.
-              </h1>
-              
-              <p className="text-base lg:text-lg xl:text-xl text-zinc-500 max-w-md xl:max-w-xl mx-auto lg:mx-0 mb-8 xl:mb-16 font-light leading-relaxed">
-                Expertos en <strong className="text-zinc-950 font-bold">Next.js</strong> y <strong className="text-zinc-950 font-bold">Shopify Chile</strong>. Construimos ecosistemas digitales de alto rendimiento enfocados en velocidad, SEO y conversión.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 xl:gap-6 items-center justify-center lg:justify-start">
-                <LeadButton className="px-6 sm:px-10 xl:px-14 py-5 xl:py-7 bg-zinc-950 text-white font-black rounded-3xl hover:bg-zinc-800 transition-all shadow-2xl uppercase tracking-widest text-xs flex items-center gap-3 scale-100 hover:scale-105 active:scale-95 group w-full sm:w-auto justify-center">
-                  Cotizar mi Proyecto <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </LeadButton>
-                <Link href="/portafolio" className="px-6 sm:px-10 xl:px-14 py-5 xl:py-7 border border-zinc-200 text-zinc-950 font-black rounded-3xl hover:bg-zinc-50 transition-all uppercase tracking-widest text-xs w-full sm:w-auto text-center">
-                  Ver Portafolio
-                </Link>
-              </div>
-
-              <MobileCarousel projects={projects} />
-            </div>
-
-            <HeroCarousel projects={projects} />
-          </div>
-        </div>
-      </section>
+      {/* Premium Hero Section with Dynamic Dark Mode Transition on Scroll */}
+      <HomeHeroSection projects={projects} />
 
       <section className="py-24 bg-zinc-50 rounded-[3.5rem] mx-4 relative overflow-hidden border border-zinc-200/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
