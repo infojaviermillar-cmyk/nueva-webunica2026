@@ -322,10 +322,10 @@ export default function ShopifyEnChilePage() {
           <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-pink-500/10 blur-[120px] rounded-full pointer-events-none -z-10 -translate-x-1/3" />
           
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               
               {/* Left Content Column */}
-              <div className="lg:col-span-7 text-center lg:text-left">
+              <div className="lg:col-span-6 text-center lg:text-left">
                 {/* Badges Row */}
                 <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-start mb-8">
                   <div className="inline-flex items-center gap-2.5 px-4 py-2 bg-violet-50 border border-violet-200/80 rounded-full shadow-xs">
@@ -369,8 +369,8 @@ export default function ShopifyEnChilePage() {
                 </div>
               </div>
 
-              {/* Right Wizard Column */}
-              <div className="lg:col-span-5 w-full flex items-center justify-center lg:justify-start">
+              {/* Right Wizard Column (Prominent Hero Assistant) */}
+              <div className="lg:col-span-6 w-full flex items-center justify-center lg:justify-end">
                 <ShopifyHeroWizard />
               </div>
 
