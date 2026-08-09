@@ -66,7 +66,11 @@ export const metadata: Metadata = {
     canonical: 'https://webunica.cl',
   },
   icons: {
-    icon: '/favicon.webp',
+    icon: [
+      { url: '/favicon.png', type: 'image/png' },
+    ],
+    shortcut: '/favicon.png',
+    apple: '/apple-icon.png',
   },
 };
 
