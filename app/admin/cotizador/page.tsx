@@ -1141,7 +1141,7 @@ function CotizadorContent() {
                   <div className="text-zinc-500 space-y-0.5 text-xs font-medium">
                     <p className="text-zinc-950 font-black uppercase tracking-wide">Webunica Chile EIRL</p>
                     <p>RUT: 76.371.864-6</p>
-                    <p>Providencia, Santiago, Chile</p>
+                    <p>MERCED 838 A INT OF 117 COMUNA SANTIAGO</p>
                     <p>consultas@webunica.cl · +56 9 8441 0379</p>
                   </div>
                 </div>

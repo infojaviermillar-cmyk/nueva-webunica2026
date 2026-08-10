@@ -188,7 +188,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
     "telephone": "+56912345678",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Av. Providencia",
+      "streetAddress": "MERCED 838 A INT OF 117 COMUNA SANTIAGO",
       "addressLocality": "Santiago",
       "addressRegion": "RM",
       "addressCountry": "CL"
