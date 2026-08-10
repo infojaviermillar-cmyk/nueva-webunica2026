@@ -115,8 +115,8 @@ export default function ShopifyEmdLandingPage() {
     },
     {
       name: "Shopify PRENDE",
-      price: "$580.000",
-      originalPrice: "$650.000",
+      price: "$680.000",
+      originalPrice: "$780.000",
       highlight: "🌟 Ideal para emprendedores que inician",
       desc: "Perfecto para emprendedores que dan sus primeros pasos en el comercio digital. Lanza tu tienda con imagen profesional y optimizada para vender.",
       features: [

@@ -35,7 +35,7 @@ export const plans: ShopifyPlan[] = [
   {
     id: "prende",
     name: "PRENDE",
-    price: "$580.000",
+    price: "$680.000",
     bonus: "Theme Premium Incluido",
     desc: "Emprendedores que inician.",
     iconName: 'Star',

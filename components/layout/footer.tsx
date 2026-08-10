@@ -138,7 +138,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link href="/planes-de-desarrollo-shopify-en-chile/plan-prende" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
-                    Plan Prende ($580k)
+                    Plan Prende ($680k)
                   </Link>
                 </li>
                 <li>

@@ -159,7 +159,7 @@ const PLAN_OPTIONS: PlanOption[] = [
   {
     id: 'prende',
     label: 'Plan Prende',
-    price: 'Desde $580.000 + IVA',
+    price: 'Desde $680.000 + IVA',
     tag: 'Ideal para iniciar rápido y vender en Chile',
     icon: <Rocket className="w-5 h-5 sm:w-6 sm:h-6" />,
     color: 'text-blue-600 bg-blue-50 border-blue-200',

@@ -62,8 +62,8 @@ export default function DisenoWebShopifyPage() {
     },
     {
       name: "Shopify PRENDE",
-      price: "$580.000",
-      originalPrice: "$650.000",
+      price: "$680.000",
+      originalPrice: "$780.000",
       highlight: "🌟 Para nuevos proyectos",
       desc: "Perfecto para crear diseño shopify desde cero con una base sólida y profesional.",
       features: [

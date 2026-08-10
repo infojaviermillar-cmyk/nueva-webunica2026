@@ -6,9 +6,9 @@ import WhatsAppButton from '@/components/ui/whatsapp-button';
 import { CheckCircle2, TrendingUp, ShieldCheck, Clock, ArrowRight, Zap, ShoppingBag, CreditCard, Truck } from 'lucide-react';
 
 export const metadata = {
-  title: 'Plan Prende Shopify Chile | Desarrollo E-commerce $580.000',
+  title: 'Plan Prende Shopify Chile | Desarrollo E-commerce $680.000',
   description: 'Plan Prende de desarrollo Shopify en Chile. Tu tienda online profesional en 4 semanas con Webpay, envíos, boleta y hasta 70 productos incluidos.',
-  keywords: 'plan prende shopify chile, desarrollo shopify $580000, crear tienda shopify chile, ecommerce profesional pymes chile',
+  keywords: 'plan prende shopify chile, desarrollo shopify $680000, crear tienda shopify chile, ecommerce profesional pymes chile',
 };
 
 export default function PlanPrendePage() {
@@ -29,7 +29,7 @@ export default function PlanPrendePage() {
     },
     "offers": {
       "@type": "Offer",
-      "price": "580000",
+      "price": "680000",
       "priceCurrency": "CLP",
       "availability": "https://schema.org/InStock"
     },
@@ -91,7 +91,7 @@ export default function PlanPrendePage() {
             </p>
 
             <div className="bg-zinc-50 p-6 rounded-2xl border border-zinc-100 mb-8 flex items-baseline gap-4">
-              <span className="text-4xl font-black text-zinc-950">$580.000</span>
+              <span className="text-4xl font-black text-zinc-950">$680.000</span>
               <span className="text-sm font-bold text-zinc-400 uppercase tracking-widest">+ IVA</span>
               <span className="text-xs text-emerald-600 font-extrabold bg-emerald-100 px-3 py-1 rounded-full">Entrega en 4 semanas</span>
             </div>
@@ -118,7 +118,7 @@ export default function PlanPrendePage() {
                 "Integración de envíos con tarifas básicas y retiro en tienda",
                 "Diseño 100% Mobile-First optimizado para celulares",
                 "Capacitación de uso básica para gestionar ventas y productos",
-                "Garantía de funcionamiento y soporte post-lanzamiento"
+                "Garantía de funcionamiento y 3 meses de soporte técnico post-lanzamiento"
               ].map((feat, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-zinc-300 font-light">
                   <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />

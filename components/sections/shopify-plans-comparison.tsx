@@ -223,7 +223,7 @@ const COMPARISON_DATA: PlanCategory[] = [
       },
       {
         feature: { name: "Soporte Técnico Post-Entrega", description: "Atención prioritaria para resolver dudas técnicas y asegurar que la tienda funcione perfectamente tras salir a vivo." },
-        prende: "1 Mes (30 días) de soporte",
+        prende: "3 Meses (90 días) de garantía y soporte",
         full: "3 Meses (90 días) de soporte",
         pro: "6 Meses de soporte y acompañamiento",
         customElite: "6 Meses de soporte VIP"
@@ -237,10 +237,10 @@ const PLAN_CARDS = [
     id: "prende",
     name: "Plan Prende",
     icon: <TrendingUp className="w-6 h-6 text-emerald-500" />,
-    price: "$580.000",
+    price: "$680.000",
     subtitle: "+ IVA",
     cta: "-5% Solicita Asesoría Gratis",
-    savingsText: "Con esta promoción ahorras $29.000",
+    savingsText: "Con esta promoción ahorras $34.000",
     ctaClass: "bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-50",
     color: "emerald"
   },
@@ -396,13 +396,13 @@ export default function ShopifyPlansComparison() {
                 <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50">
                   <div className="flex justify-center mb-3"><TrendingUp className="w-7 h-7 text-emerald-500" /></div>
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Prende</h4>
-                  <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">$580.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
+                  <div className="text-lg lg:text-xl font-black text-zinc-900 mb-5">$680.000 <span className="text-[10px] text-zinc-400 uppercase font-bold">+ IVA</span></div>
                   <div className="flex flex-col items-center gap-2">
                     <LeadButton service="Plan Prende" className="w-full py-3.5 px-3 text-[10px] bg-zinc-900 text-white rounded-xl uppercase font-black tracking-wider hover:bg-zinc-800 shadow-md">
                       -5% Solicita Asesoría Gratis
                     </LeadButton>
                     <p className="text-[14px] font-bold text-zinc-950 mt-1 leading-snug">
-                      Con esta promoción ahorras $29.000
+                      Con esta promoción ahorras $34.000
                     </p>
                   </div>
                 </th>

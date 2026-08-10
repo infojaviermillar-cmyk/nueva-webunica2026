@@ -7,8 +7,8 @@ import BreadcrumbSchema from '@/components/ui/breadcrumb-schema';
 import { ShieldCheck, Globe, Smartphone, CheckCircle2, Award, Clock, Users, ArrowRight } from 'lucide-react';
 
 export const metadata = {
-  title: 'Planes de Desarrollo Shopify en Chile | Desde $580.000 + IVA',
-  description: 'Compara nuestros planes de desarrollo Shopify en Chile desde $580.000 + IVA. Incluye plantilla premium, pasarelas de pago local (Webpay, Mercado Pago), despacho y boleta SII.',
+  title: 'Planes de Desarrollo Shopify en Chile | Desde $680.000 + IVA',
+  description: 'Compara nuestros planes de desarrollo Shopify en Chile desde $680.000 + IVA. Incluye plantilla premium, pasarelas de pago local (Webpay, Mercado Pago), despacho y boleta SII.',
   keywords: 'planes shopify chile, precios desarrollo shopify, cuanto cuesta shopify chile, tarifas shopify partner, crear tienda shopify santiago, planes ecommerce chile',
   alternates: {
     canonical: 'https://webunica.cl/planes-de-desarrollo-shopify-en-chile',
@@ -20,7 +20,7 @@ export default function PlanesShopifyChilePage() {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "Planes de Desarrollo Shopify en Chile",
-    "description": "Compara nuestros planes de desarrollo Shopify en Chile desde $580.000 + IVA con integraciones locales.",
+    "description": "Compara nuestros planes de desarrollo Shopify en Chile desde $680.000 + IVA con integraciones locales.",
     "brand": {
       "@type": "Brand",
       "name": "Webunica"
@@ -28,7 +28,7 @@ export default function PlanesShopifyChilePage() {
     "offers": {
       "@type": "AggregateOffer",
       "priceCurrency": "CLP",
-      "lowPrice": "580000",
+      "lowPrice": "680000",
       "offerCount": "3",
       "priceValidUntil": "2027-12-31",
       "availability": "https://schema.org/InStock",

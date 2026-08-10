@@ -88,7 +88,7 @@ export default function ShopifyInteractivePlansCarousel() {
                   <p className="text-sm text-zinc-600 font-medium mb-6">Para empezar a vender con tienda funcional y profesional.</p>
                   
                   <div className="mb-6 pb-6 border-b border-zinc-100">
-                    <span className="text-3xl sm:text-4xl font-black text-zinc-950 font-mono">$580.000</span>
+                    <span className="text-3xl sm:text-4xl font-black text-zinc-950 font-mono">$680.000</span>
                     <span className="text-xs font-bold text-zinc-400 uppercase ml-2">+ IVA</span>
                   </div>
 
@@ -103,7 +103,7 @@ export default function ShopifyInteractivePlansCarousel() {
                       "2 rondas de revisión de diseño",
                       "Diseño Mobile-First 100%",
                       "Capacitación básica de administración",
-                      "1 mes (30 días) de soporte post-entrega"
+                      "3 meses (90 días) de garantía y soporte post-entrega"
                     ].map((item, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-800 font-medium">
                         <Check className="w-4.5 h-4.5 text-emerald-500 shrink-0 mt-0.5" strokeWidth={3} />

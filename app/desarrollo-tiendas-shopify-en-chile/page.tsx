@@ -40,8 +40,8 @@ import {
 } from 'lucide-react';
 
 export const metadata = {
-  title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $580.000 + IVA',
-  description: 'Agencia Partner Shopify en Chile. Desarrollo de tiendas online con planes desde $580.000 + IVA. Incluye pasarelas de pago local (Webpay, Mercado Pago), despacho, boleta SII y soporte.',
+  title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $680.000 + IVA',
+  description: 'Agencia Partner Shopify en Chile. Desarrollo de tiendas online con planes desde $680.000 + IVA. Incluye pasarelas de pago local (Webpay, Mercado Pago), despacho, boleta SII y soporte.',
   keywords: [
     'desarrollo tiendas shopify chile',
     'precios shopify chile',
@@ -59,8 +59,8 @@ export const metadata = {
     canonical: 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile',
   },
   openGraph: {
-    title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $580.000 + IVA',
-    description: 'Creamos tiendas Shopify listas para vender y crecer en Chile. Planes desde $580.000 + IVA con integraciones locales Webpay, Mercado Pago, Starken y Boleta SII.',
+    title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $680.000 + IVA',
+    description: 'Creamos tiendas Shopify listas para vender y crecer en Chile. Planes desde $680.000 + IVA con integraciones locales Webpay, Mercado Pago, Starken y Boleta SII.',
     url: 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile',
     siteName: 'Webunica',
     locale: 'es_CL',
@@ -76,8 +76,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $580.000 + IVA',
-    description: 'Desarrollo e-commerce Shopify profesional en Chile. Planes desde $580.000 + IVA con integraciones locales.',
+    title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $680.000 + IVA',
+    description: 'Desarrollo e-commerce Shopify profesional en Chile. Planes desde $680.000 + IVA con integraciones locales.',
     images: ['https://webunica.cl/clientes-2/vicca.cl.png'],
   },
   robots: {
@@ -180,7 +180,7 @@ export default function ShopifyEnChilePage() {
         "offers": {
           "@type": "AggregateOffer",
           "priceCurrency": "CLP",
-          "lowPrice": "580000",
+          "lowPrice": "680000",
           "offerCount": "3",
           "priceValidUntil": "2027-12-31",
           "availability": "https://schema.org/InStock",
