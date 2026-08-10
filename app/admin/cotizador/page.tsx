@@ -26,7 +26,13 @@ import {
   Sparkles,
   Calendar,
   UserPlus,
-  Loader2
+  Loader2,
+  History,
+  Search,
+  Save,
+  X,
+  RefreshCw,
+  BookmarkCheck
 } from 'lucide-react';
 import { ALL_PLANS, PLANS_BY_CATEGORY, formatCLP, type Plan } from '@/lib/plans-catalog';
 import { createClientUserAccount } from '@/lib/user-actions';
@@ -179,6 +185,30 @@ const OPERATIONAL_COSTS: OpCostItem[] = [
   },
 ];
 
+export interface SavedQuote {
+  id: string;
+  quoteNumber: string;
+  createdAt: string;
+  clientInfo: {
+    name: string;
+    email: string;
+    phone: string;
+    company: string;
+    rut: string;
+  };
+  selectedPlans: Plan[];
+  selectedOpCosts: string[];
+  subtotal: number;
+  tax: number;
+  total: number;
+  showSecondPage: boolean;
+  notes?: string;
+  taxType?: 'factura' | 'boleta' | 'exento';
+  discountPercent?: number;
+  installments?: number;
+  showBankDetails?: boolean;
+}
+
 function CotizadorContent() {
   const searchParams = useSearchParams();
 
@@ -290,9 +320,109 @@ function CotizadorContent() {
   const [endDate, setEndDate] = useState('');
   const [notes, setNotes] = useState('');
   
-  const [quoteNumber] = useState(
+  const [quoteNumber, setQuoteNumber] = useState<string>(
     () => `WU-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 9000) + 1000)}`
   );
+
+  // --- Quote History & Registry States ---
+  const [savedQuotes, setSavedQuotes] = useState<SavedQuote[]>([]);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+  const [historySearch, setHistorySearch] = useState('');
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 3500);
+  };
+
+  // Load quote history from localStorage on mount
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('webunica_quotes_history');
+      if (raw) {
+        setSavedQuotes(JSON.parse(raw));
+      }
+    } catch (err) {
+      console.error('Error reading saved quotes:', err);
+    }
+  }, []);
+
+  const handleSaveQuoteRecord = (customData?: Partial<SavedQuote>) => {
+    if (selectedPlans.length === 0) return;
+
+    const quoteId = customData?.id || `quote_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    const qNum = customData?.quoteNumber || quoteNumber;
+
+    const newQuote: SavedQuote = {
+      id: quoteId,
+      quoteNumber: qNum,
+      createdAt: customData?.createdAt || new Date().toISOString(),
+      clientInfo: customData?.clientInfo || { ...clientInfo },
+      selectedPlans: customData?.selectedPlans || [...selectedPlans],
+      selectedOpCosts: customData?.selectedOpCosts || [...selectedOpCosts],
+      subtotal: customData?.subtotal ?? subtotal,
+      tax: customData?.tax ?? tax,
+      total: customData?.total ?? total,
+      showSecondPage: customData?.showSecondPage ?? showSecondPage,
+      notes: customData?.notes ?? notes,
+      taxType: customData?.taxType ?? taxType,
+      discountPercent: customData?.discountPercent ?? discountPercent,
+      installments: customData?.installments ?? installments,
+      showBankDetails: customData?.showBankDetails ?? showBankDetails,
+    };
+
+    setSavedQuotes(prev => {
+      const filtered = prev.filter(q => q.quoteNumber !== qNum && q.id !== quoteId);
+      const updated = [newQuote, ...filtered];
+      localStorage.setItem('webunica_quotes_history', JSON.stringify(updated));
+      return updated;
+    });
+
+    fetch('/api/cotizaciones', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newQuote),
+    }).catch(err => console.warn('Supabase quote sync:', err));
+
+    showToast(`Cotización ${qNum} guardada en el historial`);
+  };
+
+  const handleLoadQuoteRecord = (quote: SavedQuote) => {
+    setQuoteNumber(quote.quoteNumber);
+    setClientInfo(quote.clientInfo);
+    setSelectedPlans(quote.selectedPlans || []);
+    setSelectedOpCosts(quote.selectedOpCosts || []);
+    setShowSecondPage(quote.showSecondPage ?? false);
+    setNotes(quote.notes || '');
+    if (quote.taxType) setTaxType(quote.taxType);
+    if (quote.discountPercent !== undefined) setDiscountPercent(quote.discountPercent);
+    if (quote.installments !== undefined) setInstallments(quote.installments);
+    if (quote.showBankDetails !== undefined) setShowBankDetails(quote.showBankDetails);
+
+    setIsHistoryOpen(false);
+    showToast(`Cotización ${quote.quoteNumber} cargada en el editor`);
+  };
+
+  const handleDeleteQuoteRecord = (id: string, qNum: string) => {
+    setSavedQuotes(prev => {
+      const updated = prev.filter(q => q.id !== id);
+      localStorage.setItem('webunica_quotes_history', JSON.stringify(updated));
+      return updated;
+    });
+    showToast(`Cotización ${qNum} eliminada`);
+  };
+
+  const filteredQuotes = savedQuotes.filter(q => {
+    if (!historySearch.trim()) return true;
+    const query = historySearch.toLowerCase();
+    return (
+      (q.quoteNumber && q.quoteNumber.toLowerCase().includes(query)) ||
+      (q.clientInfo?.name && q.clientInfo.name.toLowerCase().includes(query)) ||
+      (q.clientInfo?.company && q.clientInfo.company.toLowerCase().includes(query)) ||
+      (q.clientInfo?.email && q.clientInfo.email.toLowerCase().includes(query)) ||
+      (q.clientInfo?.rut && q.clientInfo.rut.toLowerCase().includes(query))
+    );
+  });
 
   const [copiedWhatsApp, setCopiedWhatsApp] = useState(false);
 
@@ -601,6 +731,7 @@ function CotizadorContent() {
 
       const filename = `Cotizacion_${quoteNumber}_${(clientInfo.company || clientInfo.name || 'Cliente').replace(/\s+/g, '_')}.pdf`;
       pdf.save(filename);
+      handleSaveQuoteRecord();
 
     } catch (err: any) {
       console.error('Error generating PDF:', err);
@@ -635,11 +766,28 @@ function CotizadorContent() {
               Genera y optimiza cotizaciones corporativas con exportación instantánea.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <button
+              onClick={() => setIsHistoryOpen(true)}
+              className="flex items-center gap-2 px-5 py-3 bg-white text-violet-700 border border-violet-200 hover:bg-violet-50 rounded-full font-black uppercase tracking-widest text-[10px] transition-all shadow-xs active:scale-95"
+            >
+              <History className="w-4 h-4 text-violet-600" />
+              Historial ({savedQuotes.length})
+            </button>
+
+            <button
+              onClick={() => handleSaveQuoteRecord()}
+              disabled={selectedPlans.length === 0}
+              className="flex items-center gap-2 px-5 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-full font-black uppercase tracking-widest text-[10px] transition-all shadow-md active:scale-95 disabled:opacity-50 disabled:pointer-events-none"
+            >
+              <Save className="w-4 h-4" />
+              Guardar Cotización
+            </button>
+
             <button
               onClick={handleCopyToWhatsApp}
               disabled={selectedPlans.length === 0}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-black uppercase tracking-widest text-[10px] transition-all shadow-md active:scale-95 disabled:opacity-50 disabled:pointer-events-none ${
+              className={`flex items-center gap-2 px-5 py-3 rounded-full font-black uppercase tracking-widest text-[10px] transition-all shadow-md active:scale-95 disabled:opacity-50 disabled:pointer-events-none ${
                 copiedWhatsApp 
                   ? 'bg-emerald-600 text-white hover:bg-emerald-700' 
                   : 'bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100'
@@ -657,6 +805,7 @@ function CotizadorContent() {
                 </>
               )}
             </button>
+            
             <button
               onClick={handleExportPDF}
               disabled={selectedPlans.length === 0 || isGeneratingPDF}
@@ -1542,6 +1691,170 @@ function CotizadorContent() {
           </div>
         </div>
       </div>
+
+      {/* Toast Notification */}
+      {toastMsg && (
+        <div className="fixed bottom-6 right-6 z-50 bg-zinc-950 text-white text-xs font-black uppercase tracking-wider px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-zinc-800 animate-in fade-in slide-in-from-bottom-5">
+          <BookmarkCheck className="w-4 h-4 text-emerald-400" />
+          <span>{toastMsg}</span>
+        </div>
+      )}
+
+      {/* Modal Historial de Cotizaciones */}
+      {isHistoryOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6 print:hidden">
+          <div className="bg-white w-full max-w-4xl max-h-[90vh] rounded-[2rem] shadow-2xl border border-slate-200 overflow-hidden flex flex-col animate-in zoom-in-95 duration-200">
+            
+            {/* Header Modal */}
+            <div className="px-6 py-5 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800 shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-violet-600/30 rounded-xl text-violet-400 border border-violet-500/30">
+                  <History className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black uppercase tracking-tight">Historial de Cotizaciones</h3>
+                  <p className="text-xs text-slate-400 font-medium">
+                    {savedQuotes.length} cotización{savedQuotes.length !== 1 ? 'es' : ''} en el registro
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => setIsHistoryOpen(false)}
+                className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Buscador Modal */}
+            <div className="p-5 bg-slate-50 border-b border-slate-200 shrink-0">
+              <div className="relative">
+                <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Buscar por N° Cotización, Cliente, RUT o Empresa..."
+                  value={historySearch}
+                  onChange={e => setHistorySearch(e.target.value)}
+                  className="w-full pl-11 pr-16 py-3 bg-white border border-slate-200 rounded-xl text-xs font-medium text-slate-900 outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-100 transition-all shadow-xs"
+                />
+                {historySearch && (
+                  <button
+                    onClick={() => setHistorySearch('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs font-bold px-2 py-1 rounded-md"
+                  >
+                    Limpiar
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Lista de Cotizaciones Guardadas */}
+            <div className="p-6 overflow-y-auto space-y-4 flex-1">
+              {filteredQuotes.length === 0 ? (
+                <div className="text-center py-16 text-slate-400 space-y-3">
+                  <FolderOpen className="w-12 h-12 mx-auto text-slate-300 stroke-[1.5]" />
+                  <p className="text-sm font-bold">
+                    {historySearch ? 'No se encontraron cotizaciones coincidentes.' : 'Aún no tienes cotizaciones guardadas.'}
+                  </p>
+                  <p className="text-xs text-slate-400 max-w-sm mx-auto">
+                    Cada vez que guardes o descargues un PDF, la cotización se registrará automáticamente en este historial.
+                  </p>
+                </div>
+              ) : (
+                filteredQuotes.map(q => (
+                  <div
+                    key={q.id}
+                    className="bg-white border border-slate-200 hover:border-violet-300 rounded-2xl p-5 shadow-xs transition-all space-y-4 group"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono font-black text-xs text-violet-700 bg-violet-50 border border-violet-200 px-3 py-1 rounded-lg">
+                          {q.quoteNumber}
+                        </span>
+                        <span className="text-xs text-slate-400 font-medium">
+                          {new Date(q.createdAt).toLocaleDateString('es-CL', {
+                            day: '2-digit',
+                            month: 'short',
+                            year: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                          })}
+                        </span>
+                      </div>
+
+                      <span className="text-base font-black text-slate-900 font-mono">
+                        {formatCLP(q.total)} <span className="text-[10px] text-slate-400 font-bold uppercase">NETO/TOTAL</span>
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-600">
+                      <div>
+                        <p className="font-black text-slate-900 text-sm mb-0.5">{q.clientInfo?.name || 'Cliente sin nombre'}</p>
+                        {q.clientInfo?.company && (
+                          <p className="text-slate-500 font-medium">Empresa: {q.clientInfo.company}</p>
+                        )}
+                        {q.clientInfo?.rut && (
+                          <p className="text-slate-400 font-medium">RUT: {q.clientInfo.rut}</p>
+                        )}
+                      </div>
+                      <div className="sm:text-right space-y-0.5">
+                        {q.clientInfo?.email && <p className="font-medium text-slate-600">Mail: {q.clientInfo.email}</p>}
+                        {q.clientInfo?.phone && <p className="font-medium text-slate-500">Fono: {q.clientInfo.phone}</p>}
+                      </div>
+                    </div>
+
+                    {/* Lista de servicios incluidos */}
+                    {q.selectedPlans && q.selectedPlans.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {q.selectedPlans.map(p => (
+                          <span
+                            key={p.id}
+                            className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md"
+                          >
+                            ✦ {p.name} ({formatCLP(p.price)})
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Acciones */}
+                    <div className="flex flex-wrap items-center justify-end gap-2 pt-2 border-t border-slate-100">
+                      <button
+                        onClick={() => handleLoadQuoteRecord(q)}
+                        className="flex items-center gap-1.5 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-xs"
+                      >
+                        <RefreshCw className="w-3.5 h-3.5" />
+                        Cargar en Editor
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          handleLoadQuoteRecord(q);
+                          setTimeout(handleExportPDF, 250);
+                        }}
+                        className="flex items-center gap-1.5 px-4 py-2 bg-zinc-900 hover:bg-zinc-800 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        Descargar PDF
+                      </button>
+
+                      <button
+                        onClick={() => handleDeleteQuoteRecord(q.id, q.quoteNumber)}
+                        className="flex items-center gap-1.5 px-3 py-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-xl text-xs font-bold transition-all"
+                        title="Eliminar del historial"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
 
       {/* Global CSS overrides for perfect clean PDF printing */}
       <style jsx global>{`
