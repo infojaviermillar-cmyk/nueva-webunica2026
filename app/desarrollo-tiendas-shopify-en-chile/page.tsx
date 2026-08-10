@@ -339,7 +339,7 @@ export default function ShopifyEnChilePage() {
                   </div>
                 </div>
                 
-                <h1 className="text-[2.2rem] xs:text-4xl sm:text-5xl lg:text-[62px] font-black tracking-tighter leading-[0.94] mb-8 uppercase text-zinc-950 font-heading">
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl lg:text-[46px] font-black tracking-tight leading-[1.05] mb-6 uppercase text-zinc-950 font-heading">
                   Creamos tu tienda Shopify <br className="hidden sm:inline" />
                   lista para <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]">vender y crecer</span> en Chile
                 </h1>
