@@ -1327,12 +1327,12 @@ function CotizadorContent() {
               {/* Top Gradient Accent Bar */}
               <div className="h-1.5 w-full bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]" />
 
-              <div className="px-8 py-7 flex flex-col sm:flex-row justify-between items-start gap-6">
+              <div className="px-7 py-5 flex flex-col sm:flex-row justify-between items-start gap-4">
                 <div>
                   <img
                     src="/logo-webunica.png.webp"
                     alt="Webunica"
-                    className="h-8 mb-3 object-contain"
+                    className="h-7 mb-2 object-contain"
                   />
                   <div className="text-zinc-500 space-y-0.5 text-xs font-medium">
                     <p className="text-zinc-950 font-black uppercase tracking-wide">Webunica Chile EIRL</p>
@@ -1343,7 +1343,7 @@ function CotizadorContent() {
                 </div>
                 
                 <div className="text-left sm:text-right">
-                  <h2 className="text-3xl font-black uppercase tracking-widest text-zinc-950 mb-2 leading-none">
+                  <h2 className="text-2xl font-black uppercase tracking-widest text-zinc-950 mb-1.5 leading-none">
                     Cotización
                   </h2>
                   <div className="text-zinc-500 space-y-1 text-xs font-medium">
@@ -1369,11 +1369,11 @@ function CotizadorContent() {
             </div>
 
             {/* Cuerpo del Documento */}
-            <div className="p-8 space-y-8 print:px-0">
+            <div className="p-6 space-y-4 print:px-0">
               
               {/* Información del Destinatario */}
-              <div className="border-b border-slate-100 pb-5 print:pb-4">
-                <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 print:text-zinc-500">
+              <div className="border-b border-slate-100 pb-3.5 print:pb-3">
+                <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1.5 print:text-zinc-500">
                   Preparado para
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-4 text-xs font-medium text-slate-600 print:text-zinc-800">
@@ -1404,10 +1404,10 @@ function CotizadorContent() {
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
                       <tr className="bg-slate-50 border-b border-slate-200 text-[10px] font-black uppercase tracking-widest text-slate-400 print:bg-zinc-100 print:border-zinc-300 print:text-zinc-600">
-                        <th className="px-5 py-3">Plan / Servicio</th>
-                        <th className="px-5 py-3 hidden md:table-cell print:table-cell">Incluye / Entregables</th>
-                        <th className="px-5 py-3 text-right whitespace-nowrap">Monto Neto</th>
-                        <th className="px-3 py-3 w-10 print:hidden" />
+                        <th className="px-4 py-2.5">Plan / Servicio</th>
+                        <th className="px-4 py-2.5 hidden md:table-cell print:table-cell">Incluye / Entregables</th>
+                        <th className="px-4 py-2.5 text-right whitespace-nowrap">Monto Neto</th>
+                        <th className="px-2 py-2.5 w-10 print:hidden" />
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 print:divide-zinc-200">
@@ -1423,7 +1423,7 @@ function CotizadorContent() {
                       ) : (
                         selectedPlans.map(plan => (
                           <tr key={plan.id} className="group align-top">
-                            <td className="px-5 py-4">
+                            <td className="px-4 py-3">
                               <div className="font-extrabold text-slate-900 print:text-zinc-950 text-xs">
                                 <EditableText planId={plan.id} field="name" value={plan.name} className="text-xs font-extrabold text-slate-900" />
                               </div>
@@ -1443,7 +1443,7 @@ function CotizadorContent() {
                                 </div>
                               )}
                             </td>
-                            <td className="px-5 py-4 hidden md:table-cell print:table-cell">
+                            <td className="px-4 py-3 hidden md:table-cell print:table-cell">
                               <ul className="space-y-1">
                                 {plan.features.map((f, i) => (
                                   <li key={i} className="flex items-start gap-1.5 text-[10px] text-slate-600 font-medium print:text-zinc-700">
@@ -1466,7 +1466,7 @@ function CotizadorContent() {
                                 </li>
                               </ul>
                             </td>
-                            <td className="px-5 py-4 text-right">
+                            <td className="px-4 py-3 text-right">
                               <div className="font-extrabold text-slate-900 print:text-zinc-950 text-right">
                                 <EditableText
                                   planId={plan.id}
@@ -1497,8 +1497,8 @@ function CotizadorContent() {
               </div>
 
               {/* Totales y Cálculos */}
-              <div className="flex justify-end pt-3">
-                <div className="w-full max-w-xs space-y-2 bg-slate-50/50 p-5 rounded-2xl border border-slate-100 print:bg-white print:border-none print:p-0">
+              <div className="flex justify-end pt-2">
+                <div className="w-full max-w-xs space-y-1.5 bg-slate-50/50 p-4 rounded-xl border border-slate-100 print:bg-white print:border-none print:p-0">
                   <div className="flex justify-between text-xs font-semibold text-slate-500 print:text-zinc-600">
                     <span>Subtotal Neto:</span>
                     <span className="font-bold">{formatCLP(subtotal)}</span>
@@ -1534,7 +1534,7 @@ function CotizadorContent() {
 
               {/* Datos de Transferencia (Imprimible) */}
               {showBankDetails && (
-                <div className="bg-slate-50 border border-slate-100 rounded-xl p-5 print:bg-white print:border-t-2 print:border-zinc-900 print:border-x-0 print:border-b-0 print:rounded-none">
+                <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 print:bg-white print:border-t-2 print:border-zinc-900 print:border-x-0 print:border-b-0 print:rounded-none">
                   <h4 className="font-extrabold text-slate-900 mb-2.5 flex items-center gap-2 text-xs uppercase tracking-widest print:text-zinc-950">
                     <CreditCard className="w-4 h-4 text-violet-600 print:hidden" /> Datos para Transferencia Bancaria
                   </h4>
