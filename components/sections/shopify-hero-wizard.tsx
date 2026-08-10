@@ -388,26 +388,56 @@ export default function ShopifyHeroWizard() {
 
             {/* ── PASO 1: SELECCIÓN PRINCIPAL ───────────────────────────── */}
             {step === 1 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                {STEP1_OPTIONS.map(opt => (
-                  <button
-                    key={opt.id}
-                    onClick={() => handleSelect1(opt.id)}
-                    className={`group flex items-start sm:flex-col gap-3.5 sm:gap-4 p-4 sm:p-6 rounded-2xl border-2 text-left transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer ${
-                      step1Selected === opt.id
-                        ? 'border-violet-600 bg-violet-50/80 shadow-lg shadow-violet-100'
-                        : 'border-zinc-100 bg-zinc-50/60 hover:border-violet-300 hover:bg-violet-50/40'
-                    }`}
-                  >
-                    <div className="p-2.5 sm:p-3 rounded-2xl bg-white shadow-xs group-hover:scale-110 transition-transform shrink-0">
-                      {opt.icon}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+                {STEP1_OPTIONS.map(opt => {
+                  const themes: Record<string, { ringGradient: string; activeBorder: string; hoverBorder: string }> = {
+                    nueva: { ringGradient: 'from-violet-500 via-purple-500 to-indigo-500', activeBorder: 'border-violet-600 bg-violet-50/90', hoverBorder: 'hover:border-violet-400' },
+                    migracion: { ringGradient: 'from-blue-500 via-cyan-500 to-teal-500', activeBorder: 'border-blue-600 bg-blue-50/90', hoverBorder: 'hover:border-blue-400' },
+                    rediseno: { ringGradient: 'from-pink-500 via-rose-500 to-fuchsia-500', activeBorder: 'border-pink-600 bg-pink-50/90', hoverBorder: 'hover:border-pink-400' },
+                    optimizar: { ringGradient: 'from-amber-500 via-orange-500 to-yellow-500', activeBorder: 'border-amber-600 bg-amber-50/90', hoverBorder: 'hover:border-amber-400' },
+                  };
+                  const theme = themes[opt.id] || themes.nueva;
+
+                  return (
+                    <div key={opt.id} className="relative group/card">
+                      {/* Ambient Animated Gradient Border Glow Ring */}
+                      <div
+                        className={`absolute -inset-[2px] rounded-[1.4rem] bg-gradient-to-r ${theme.ringGradient} opacity-35 group-hover/card:opacity-100 blur-[2px] transition-all duration-500 animate-pulse`}
+                      />
+
+                      <button
+                        onClick={() => handleSelect1(opt.id)}
+                        className={`relative w-full flex items-start sm:flex-col gap-3.5 sm:gap-4 p-4 sm:p-5 rounded-2xl border-2 text-left transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] cursor-pointer overflow-hidden bg-white shadow-xs group-hover/card:shadow-xl ${
+                          step1Selected === opt.id
+                            ? `${theme.activeBorder} shadow-lg`
+                            : `border-zinc-200/90 ${theme.hoverBorder}`
+                        }`}
+                      >
+                        {/* Shimmer light sweep across card */}
+                        <div className="absolute inset-0 -translate-x-full group-hover/card:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/70 to-transparent pointer-events-none" />
+
+                        <div className="flex items-center justify-between w-full">
+                          <div className="p-2.5 sm:p-3 rounded-2xl bg-zinc-50 border border-zinc-100 group-hover/card:scale-110 group-hover/card:bg-white group-hover/card:shadow-md transition-all duration-300 shrink-0">
+                            {opt.icon}
+                          </div>
+
+                          <span className="opacity-0 group-hover/card:opacity-100 transition-all duration-300 text-xs font-bold text-violet-600 flex items-center gap-1">
+                            Seleccionar <ArrowRight className="w-3.5 h-3.5" />
+                          </span>
+                        </div>
+
+                        <div>
+                          <p className="text-base sm:text-lg font-black text-zinc-950 leading-tight mb-0.5 sm:mb-1 font-heading group-hover/card:text-violet-950 transition-colors">
+                            {opt.label}
+                          </p>
+                          <p className="text-xs text-zinc-500 leading-relaxed font-medium group-hover/card:text-zinc-700 transition-colors">
+                            {opt.sublabel}
+                          </p>
+                        </div>
+                      </button>
                     </div>
-                    <div>
-                      <p className="text-base sm:text-lg font-black text-zinc-950 leading-tight mb-0.5 sm:mb-1 font-heading">{opt.label}</p>
-                      <p className="text-xs text-zinc-500 leading-relaxed font-medium">{opt.sublabel}</p>
-                    </div>
-                  </button>
-                ))}
+                  );
+                })}
               </div>
             )}
 
