@@ -688,14 +688,59 @@ function CotizadorContent() {
         const canvas = await html2canvas(el, { scale: 2, useCORS: true, logging: false });
         el.classList.remove('pdf-rendering');
 
+        const mainCtx = canvas.getContext('2d');
         const pxPerPt = canvas.width / CONTENT_W;
         const contentHPx = CONTENT_H * pxPerPt;
-        const pagesNeeded = Math.ceil(canvas.height / contentHPx);
         const slices: { imgData: string; h: number }[] = [];
 
-        for (let p = 0; p < pagesNeeded; p++) {
-          const srcY = Math.round(p * contentHPx);
-          const sliceHPx = Math.min(Math.round(contentHPx), canvas.height - srcY);
+        let currentY = 0;
+        const maxLookbackPx = Math.round(140 * pxPerPt); // Look back up to 140pt for a clean white gap
+
+        while (currentY < canvas.height - 5) {
+          const remainingH = canvas.height - currentY;
+          let sliceHPx = Math.min(Math.round(contentHPx), remainingH);
+
+          // If this is NOT the last slice, search for a clean white gap line to avoid cutting through text/boxes
+          if (remainingH > contentHPx && mainCtx) {
+            const targetY = currentY + sliceHPx;
+            let bestCutY = targetY;
+
+            try {
+              const scanHeight = Math.min(maxLookbackPx, targetY);
+              const imgData = mainCtx.getImageData(0, Math.max(0, targetY - scanHeight), canvas.width, scanHeight);
+              const data = imgData.data;
+
+              for (let row = scanHeight - 1; row >= 0; row--) {
+                let isWhiteRow = true;
+                const rowOffset = row * canvas.width * 4;
+
+                // Sample pixels across document width (excluding outer margins)
+                for (let col = 35; col < canvas.width - 35; col += 4) {
+                  const idx = rowOffset + col * 4;
+                  const r = data[idx];
+                  const g = data[idx + 1];
+                  const b = data[idx + 2];
+                  // If pixel is not white/light background, this row intersects content
+                  if (r < 242 || g < 242 || b < 242) {
+                    isWhiteRow = false;
+                    break;
+                  }
+                }
+
+                if (isWhiteRow) {
+                  bestCutY = (targetY - scanHeight) + row;
+                  break;
+                }
+              }
+            } catch (e) {
+              console.warn('Canvas pixel scan note:', e);
+            }
+
+            // Ensure slice height is at least 35% of page height to prevent tiny slices
+            if (bestCutY - currentY > contentHPx * 0.35) {
+              sliceHPx = bestCutY - currentY;
+            }
+          }
 
           const sliceCanvas = document.createElement('canvas');
           sliceCanvas.width = canvas.width;
@@ -703,9 +748,10 @@ function CotizadorContent() {
           const ctx = sliceCanvas.getContext('2d')!;
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
-          ctx.drawImage(canvas, 0, srcY, canvas.width, sliceHPx, 0, 0, canvas.width, sliceHPx);
+          ctx.drawImage(canvas, 0, currentY, canvas.width, sliceHPx, 0, 0, canvas.width, sliceHPx);
 
           slices.push({ imgData: sliceCanvas.toDataURL('image/jpeg', 0.98), h: sliceHPx / pxPerPt });
+          currentY += sliceHPx;
         }
 
         return slices;
