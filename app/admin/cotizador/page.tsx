@@ -1931,6 +1931,10 @@ function CotizadorContent() {
           padding: 0 !important;
           margin: 0 !important;
         }
+        .pdf-rendering .print\:hidden,
+        .pdf-rendering .pdf-hide {
+          display: none !important;
+        }
         .pdf-rendering .bg-white {
           border-radius: 0 !important;
           border: none !important;
