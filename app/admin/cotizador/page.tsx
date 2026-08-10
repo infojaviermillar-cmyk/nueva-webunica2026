@@ -32,7 +32,8 @@ import {
   Save,
   X,
   RefreshCw,
-  BookmarkCheck
+  BookmarkCheck,
+  FolderOpen
 } from 'lucide-react';
 import { ALL_PLANS, PLANS_BY_CATEGORY, formatCLP, type Plan } from '@/lib/plans-catalog';
 import { createClientUserAccount } from '@/lib/user-actions';
