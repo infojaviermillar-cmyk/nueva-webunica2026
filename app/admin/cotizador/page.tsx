@@ -361,7 +361,7 @@ function CotizadorContent() {
       selectedPlans: customData?.selectedPlans || [...selectedPlans],
       selectedOpCosts: customData?.selectedOpCosts || [...selectedOpCosts],
       subtotal: customData?.subtotal ?? subtotal,
-      tax: customData?.tax ?? tax,
+      tax: customData?.tax ?? taxAmount,
       total: customData?.total ?? total,
       showSecondPage: customData?.showSecondPage ?? showSecondPage,
       notes: customData?.notes ?? notes,
