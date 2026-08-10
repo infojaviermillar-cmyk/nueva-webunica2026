@@ -1127,42 +1127,47 @@ function CotizadorContent() {
             <div id="printable-quote-p1" className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0">
 
             {/* Encabezado Corporativo Premium */}
-            <div className="bg-zinc-950 px-8 py-7 flex flex-col sm:flex-row justify-between items-start gap-6 border-b print:bg-white print:border-b-2 print:border-zinc-900 print:px-0">
-              <div>
-                <img
-                  src="/logo-webunica.png.webp"
-                  alt="Webunica"
-                  className="h-7 brightness-0 invert print:brightness-0 print:invert-0 mb-3"
-                />
-                <div className="text-zinc-400 print:text-zinc-600 space-y-0.5 text-xs font-medium">
-                  <p className="text-white print:text-zinc-900 font-extrabold uppercase tracking-wide">Webunica Chile EIRL</p>
-                  <p>RUT: 76.371.864-6</p>
-                  <p>Providencia, Santiago, Chile</p>
-                  <p>consultas@webunica.cl · +56 9 8441 0379</p>
+            <div className="relative bg-white border-b border-slate-200/80 overflow-hidden print:border-b-2 print:border-zinc-900">
+              {/* Top Gradient Accent Bar */}
+              <div className="h-1.5 w-full bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]" />
+
+              <div className="px-8 py-7 flex flex-col sm:flex-row justify-between items-start gap-6">
+                <div>
+                  <img
+                    src="/logo-webunica.png.webp"
+                    alt="Webunica"
+                    className="h-8 mb-3 object-contain"
+                  />
+                  <div className="text-zinc-500 space-y-0.5 text-xs font-medium">
+                    <p className="text-zinc-950 font-black uppercase tracking-wide">Webunica Chile EIRL</p>
+                    <p>RUT: 76.371.864-6</p>
+                    <p>Providencia, Santiago, Chile</p>
+                    <p>consultas@webunica.cl · +56 9 8441 0379</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="text-left sm:text-right">
-                <h2 className="text-3xl font-black uppercase tracking-widest text-white print:text-zinc-950 mb-1.5 leading-none">
-                  Cotización
-                </h2>
-                <div className="text-zinc-400 print:text-zinc-500 space-y-0.5 text-xs font-medium">
-                  <p>
-                    <span className="font-extrabold text-zinc-300 print:text-zinc-700">N°:</span>{' '}
-                    {quoteNumber}
-                  </p>
-                  <p>
-                    <span className="font-extrabold text-zinc-300 print:text-zinc-700">Fecha:</span>{' '}
-                    {new Date().toLocaleDateString('es-CL', {
-                      day: '2-digit',
-                      month: 'long',
-                      year: 'numeric',
-                    })}
-                  </p>
-                  <p>
-                    <span className="font-extrabold text-zinc-300 print:text-zinc-700">Validez:</span>{' '}
-                    15 días corridos
-                  </p>
+                
+                <div className="text-left sm:text-right">
+                  <h2 className="text-3xl font-black uppercase tracking-widest text-zinc-950 mb-2 leading-none">
+                    Cotización
+                  </h2>
+                  <div className="text-zinc-500 space-y-1 text-xs font-medium">
+                    <p className="flex items-center sm:justify-end gap-1.5">
+                      <span className="font-bold text-zinc-400 uppercase text-[10px]">N°:</span>{' '}
+                      <span className="font-mono font-black text-violet-700 bg-violet-50 border border-violet-100 px-2 py-0.5 rounded-md">{quoteNumber}</span>
+                    </p>
+                    <p>
+                      <span className="font-bold text-zinc-400 uppercase text-[10px]">Fecha:</span>{' '}
+                      <span className="text-zinc-800 font-semibold">{new Date().toLocaleDateString('es-CL', {
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric',
+                      })}</span>
+                    </p>
+                    <p>
+                      <span className="font-bold text-zinc-400 uppercase text-[10px]">Validez:</span>{' '}
+                      <span className="text-zinc-800 font-semibold">15 días corridos</span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1409,25 +1414,29 @@ function CotizadorContent() {
             <div id="printable-quote-p2" className="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden print:border-none print:shadow-none print:rounded-none print:w-full print:mx-0 print:my-0 print:break-before-page html2pdf__page-break">
               
               {/* Encabezado Corporativo Página 2 */}
-              <div className="bg-zinc-950 px-8 py-6 flex flex-col sm:flex-row justify-between items-start gap-4 border-b print:bg-white print:border-b-2 print:border-zinc-900 print:px-0 print:py-4">
-                <div>
-                  <img
-                    src="/logo-webunica.png.webp"
-                    alt="Webunica"
-                    className="h-6 brightness-0 invert print:brightness-0 print:invert-0 mb-2"
-                  />
-                  <div className="text-zinc-400 print:text-zinc-500 text-[10px] font-medium">
-                    <p className="text-white print:text-zinc-900 font-extrabold uppercase tracking-wide">Webunica Chile EIRL</p>
-                    <p>RUT: 76.371.864-6 · consultas@webunica.cl</p>
+              <div className="relative bg-white border-b border-slate-200/80 overflow-hidden print:border-b-2 print:border-zinc-900">
+                <div className="h-1.5 w-full bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]" />
+
+                <div className="px-8 py-6 flex flex-col sm:flex-row justify-between items-start gap-4">
+                  <div>
+                    <img
+                      src="/logo-webunica.png.webp"
+                      alt="Webunica"
+                      className="h-7 mb-2 object-contain"
+                    />
+                    <div className="text-zinc-500 text-[10px] font-medium">
+                      <p className="text-zinc-950 font-extrabold uppercase tracking-wide">Webunica Chile EIRL</p>
+                      <p>RUT: 76.371.864-6 · consultas@webunica.cl</p>
+                    </div>
                   </div>
-                </div>
-                <div className="text-left sm:text-right">
-                  <h2 className="text-xl font-black uppercase tracking-widest text-white print:text-zinc-950 mb-1 leading-none">
-                    Anexo Comercial
-                  </h2>
-                  <p className="text-[10px] text-zinc-400 print:text-zinc-500">
-                    Costos de Operación de Terceros (Estimados)
-                  </p>
+                  <div className="text-left sm:text-right">
+                    <h2 className="text-xl font-black uppercase tracking-widest text-zinc-950 mb-1 leading-none">
+                      Anexo Comercial
+                    </h2>
+                    <p className="text-[10px] text-zinc-500 font-medium">
+                      Costos de Operación de Terceros (Estimados)
+                    </p>
+                  </div>
                 </div>
               </div>
 
