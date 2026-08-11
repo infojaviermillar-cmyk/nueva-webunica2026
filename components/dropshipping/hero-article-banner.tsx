@@ -71,41 +71,41 @@ export function HeroArticleBanner() {
 
       {/* Modal Dialog */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 md:p-8 pt-20 md:pt-24 pb-6 overflow-y-auto">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-slate-950/80 backdrop-blur-md transition-opacity"
+            className="fixed inset-0 bg-slate-950/85 backdrop-blur-md transition-opacity"
             onClick={() => setIsOpen(false)}
           />
 
           {/* Modal Card */}
-          <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-slate-200 z-10 overflow-hidden my-auto max-h-[90vh] flex flex-col animate-in fade-in zoom-in duration-200">
+          <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-slate-200 z-10 overflow-hidden my-auto max-h-[82vh] flex flex-col animate-in fade-in zoom-in duration-200">
             {/* Modal Header */}
-            <div className="p-6 md:p-8 bg-slate-900 text-white relative">
+            <div className="p-6 md:p-8 pt-8 bg-slate-900 text-white relative shrink-0">
               <div className="absolute top-0 right-0 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
               
               <button
                 onClick={() => setIsOpen(false)}
-                className="absolute top-6 right-6 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white flex items-center justify-center transition-all border border-white/10"
+                className="absolute top-5 right-5 md:top-6 md:right-6 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white flex items-center justify-center transition-all border border-white/15 z-20 cursor-pointer shadow-md"
                 aria-label="Cerrar modal"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="flex items-center gap-2 mb-3">
-                <span className="px-3 py-1 bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-extrabold rounded-full uppercase tracking-wider">
+              <div className="flex items-center gap-2 mb-3 pr-12">
+                <span className="px-3 py-1 bg-purple-500/25 text-purple-300 border border-purple-500/30 text-xs font-extrabold rounded-full uppercase tracking-wider">
                   Resumen Ejecutivo
                 </span>
                 <span className="text-slate-400 text-xs font-medium">Lectura rápida: 2 min</span>
               </div>
 
-              <h2 className="text-xl md:text-2xl font-black text-white leading-snug tracking-tight pr-8">
+              <h2 className="text-lg md:text-2xl font-black text-white leading-tight tracking-tight pr-12">
                 Por qué Shopify + Dropi no Garantizan Ventas: La Guía Estratégica para Crear un Ecommerce Rentable en Chile
               </h2>
             </div>
 
             {/* Formula Banner inside Modal */}
-            <div className="bg-purple-950 px-6 py-3 border-b border-purple-800 flex items-center justify-between text-xs text-purple-200 font-mono overflow-x-auto">
+            <div className="bg-purple-950 px-6 py-3 border-b border-purple-800 flex items-center justify-between text-xs text-purple-200 font-mono overflow-x-auto shrink-0">
               <span className="font-bold shrink-0">Ecuación Real:</span>
               <span className="text-purple-300 font-bold shrink-0">
                 Éxito = Producto × Oferta × Creatividad × Tráfico × CRO × Operación
