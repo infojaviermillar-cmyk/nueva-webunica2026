@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
+import { HeroArticleBanner } from '@/components/dropshipping/hero-article-banner';
 import { Metadata } from 'next';
 import { 
   Zap, 
@@ -262,9 +263,12 @@ export default function DropshippingPage() {
                 </span>
               </h1>
               
-              <p className="text-base sm:text-lg lg:text-xl text-zinc-600 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+              <p className="text-base sm:text-lg lg:text-xl text-zinc-600 mb-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
                 La solución definitiva para escalar tu e-commerce. Creamos tu <strong className="text-zinc-950 font-bold">tienda profesional en Shopify</strong> conectada con el catálogo local de <strong className="text-zinc-950 font-bold">Dropi Chile</strong>: productos en bodegas de Santiago, despacho rápido en 24-48 horas y recaudo Pago Contra Entrega (COD).
               </p>
+              
+              {/* Featured Strategic Article Banner & Modal */}
+              <HeroArticleBanner />
               
               {/* Pitch Feature Badges Grid */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto lg:mx-0 mb-10 text-left">
