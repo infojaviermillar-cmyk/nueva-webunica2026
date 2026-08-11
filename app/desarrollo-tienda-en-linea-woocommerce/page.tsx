@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
+import { HeroArticleBanner } from '@/components/dropshipping/hero-article-banner';
 import { Metadata } from 'next';
 import { 
   ShoppingBag, 
@@ -366,6 +367,11 @@ export default function WooCommercePage() {
 
           </div>
         </section>
+
+        {/* Featured Strategic Article Banner */}
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <HeroArticleBanner />
+        </div>
 
         {/* ========================================================= */}
         {/* ZONA 2: LOS 5 PILARES DE WOOCOMMERCE ENTERPRISE           */}

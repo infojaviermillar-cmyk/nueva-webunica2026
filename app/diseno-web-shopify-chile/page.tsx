@@ -3,6 +3,7 @@ import Link from 'next/link';
 import FAQSection from '@/components/sections/faq-section';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
+import { HeroArticleBanner } from '@/components/dropshipping/hero-article-banner';
 import { Star, Palette, Layers, Code, Zap, Heart, ShieldCheck, ShoppingBag, ArrowRight, Layout, PencilRuler, CheckCircle2 } from 'lucide-react';
 
 export const metadata = {
@@ -192,6 +193,11 @@ export default function DisenoWebShopifyPage() {
             </div>
           </div>
         </section>
+
+        {/* Featured Strategic Article Banner */}
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <HeroArticleBanner />
+        </div>
 
         {/* 3 Forms of Design Section */}
         <section className="py-32 bg-zinc-50 relative overflow-hidden">

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
+import { HeroArticleBanner } from '@/components/dropshipping/hero-article-banner';
 
 export const metadata: Metadata = {
   title: 'Shopify Chile: Desarrollo de Tiendas Online | Webunica',
@@ -178,6 +179,11 @@ export default function DesarrolloShopifyChilePage() {
           </ul>
         </div>
       </section>
+
+      {/* Featured Strategic Article Banner */}
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <HeroArticleBanner />
+      </div>
 
       {/* INTRODUCCIÓN */}
       <section className="py-20 px-6 max-w-4xl mx-auto">

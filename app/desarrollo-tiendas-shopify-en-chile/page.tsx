@@ -12,6 +12,7 @@ import ShopifyAppsCarousel from '@/components/sections/shopify-apps-carousel';
 import ShopifyInfiniteCasesCarousel from '@/components/sections/shopify-infinite-cases-carousel';
 import ShopifyAiAssistantSimulator from '@/components/sections/shopify-ai-assistant-simulator';
 import ShopifyInteractivePlansCarousel from '@/components/sections/shopify-interactive-plans-carousel';
+import { HeroArticleBanner } from '@/components/dropshipping/hero-article-banner';
 import { 
   Sparkles, 
   CheckCircle2, 
@@ -378,6 +379,11 @@ export default function ShopifyEnChilePage() {
 
           </div>
         </section>
+
+        {/* Featured Strategic Article Banner */}
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <HeroArticleBanner />
+        </div>
 
         {/* ========================================================= */}
         {/* ZONA 2: FRANJA COMPACTA DE CONFIANZA                      */}

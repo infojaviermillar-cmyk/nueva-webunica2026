@@ -14,6 +14,7 @@ import ServicesTabs from '@/components/sections/services-tabs';
 import WorkProcess from '@/components/sections/work-process';
 import ViccaTransformationShowcase from '@/components/sections/vicca-transformation-showcase';
 import ScrollRevealText from '@/components/ui/scroll-reveal-text';
+import { HeroArticleBanner } from '@/components/dropshipping/hero-article-banner';
 
 export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const projects = [
@@ -209,6 +210,11 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
       
       {/* Premium Hero Section with Dynamic Dark Mode Transition on Scroll */}
       <HomeHeroSection projects={projects} />
+
+      {/* Featured Strategic Article Banner */}
+      <div className="max-w-7xl mx-auto px-6 py-4">
+        <HeroArticleBanner />
+      </div>
 
       <section className="py-24 bg-zinc-50 rounded-[3.5rem] mx-4 relative overflow-hidden border border-zinc-200/60">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
