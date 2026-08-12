@@ -278,6 +278,12 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       </h4>
                       <ul className="flex flex-col gap-1">
                         <li>
+                          <Link href="/brief/nuevo-proyecto" className="group/item flex flex-col p-3 rounded-2xl hover:bg-purple-50 transition-colors bg-purple-50/60 border border-purple-200">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-purple-700 transition-colors flex items-center gap-2">Brief UX/UI Ecommerce <span className="text-[8px] bg-purple-600 text-white px-1.5 py-0.5 rounded-sm uppercase font-black">NUEVO</span></span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Diseño UX/UI en 20 etapas</span>
+                          </Link>
+                        </li>
+                        <li>
                           <Link href="/geo-ai-visibility" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors bg-blue-50/50 border border-blue-100">
                             <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors flex items-center gap-2">GEO AI Visibility <span className="text-[8px] bg-blue-600 text-white px-1.5 py-0.5 rounded-sm uppercase">NUEVO</span></span>
                             <span className="text-[11px] text-zinc-500 font-medium">Posicionamiento en IA</span>
@@ -690,6 +696,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 block mb-4">Herramientas</span>
                   <div className="grid gap-3">
+                    <Link href="/brief/nuevo-proyecto" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-purple-700 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-purple-600" />
+                      Brief UX/UI Ecommerce <span className="text-[9px] bg-purple-600 text-white px-2 py-0.5 rounded-full uppercase font-black">Nuevo</span>
+                    </Link>
                     <Link href="/recursos" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-blue-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
                       Centro de Recursos
