@@ -349,6 +349,115 @@ export interface ProjectDashboard {
   score_history: Array<{ score: number; calculated_at: string }>;
 }
 
+// ─── SERP Rankings (Etapa 3) ─────────────────────────────────────────
+export type SerpFeature =
+  | 'featured_snippet'
+  | 'people_also_ask'
+  | 'local_pack'
+  | 'knowledge_panel'
+  | 'image_pack'
+  | 'video_results'
+  | 'shopping'
+  | 'top_stories'
+  | 'site_links';
+
+export type SerpDataSource = 'ESTIMATED' | 'IMPORTED' | 'MEASURED';
+
+export interface IntelSerpRanking {
+  id: string;
+  project_id: string;
+  keyword: string;
+  keyword_normalized: string;
+  url?: string;                 // URL del proyecto rankeando (si aplica)
+  position?: number;            // 1–100, undefined = sin ranking detectado
+  previous_position?: number;   // para calcular delta ▲/▼
+  serp_features: SerpFeature[];
+  search_engine: string;        // 'google.cl'
+  locale: string;               // 'es-CL'
+  data_source: SerpDataSource;  // SIEMPRE 'ESTIMATED' en MVP sin API externa
+  relevance_score?: number;     // 0-100 score interno de relevancia
+  checked_at: string;
+  created_at: string;
+}
+
+// ─── Schema Audits (Etapa 3) ─────────────────────────────────────────
+export type SchemaType =
+  | 'LocalBusiness'
+  | 'Organization'
+  | 'Product'
+  | 'FAQPage'
+  | 'BreadcrumbList'
+  | 'WebSite'
+  | 'Article'
+  | 'Review'
+  | 'Event'
+  | string; // allow unknown schema types
+
+export interface SchemaIssue {
+  code: string;              // 'MISSING_ADDRESS', 'MISSING_TELEPHONE', etc.
+  severity: 'critical' | 'warning' | 'info';
+  message: string;
+  field?: string;            // campo faltante/inválido
+  schema_type: SchemaType;
+}
+
+export interface DetectedSchema {
+  type: SchemaType;
+  raw: Record<string, unknown>;  // JSON-LD parseado
+  valid_fields: string[];
+  missing_required: string[];
+}
+
+export interface IntelSchemaAudit {
+  id: string;
+  project_id: string;
+  url: string;
+  schemas_found: SchemaType[];
+  detected_schemas?: DetectedSchema[];  // detalle por schema
+  has_local_business: boolean;
+  has_organization: boolean;
+  has_product: boolean;
+  has_faq_page: boolean;
+  has_breadcrumb: boolean;
+  has_website: boolean;
+  issues: SchemaIssue[];
+  score: number;   // 0-100 CALCULATED
+  audited_at: string;
+  created_at: string;
+}
+
+// ─── SERP Dashboard Summary (Etapa 3) ────────────────────────────────
+export interface SerpPositionBand {
+  top3: number;
+  top10: number;
+  top30: number;
+  out_of_range: number;
+  not_found: number;
+}
+
+export interface SerpDashboard {
+  project_id: string;
+  rankings: IntelSerpRanking[];
+  position_bands: SerpPositionBand;
+  schema_audits: IntelSchemaAudit[];
+  schema_summary: {
+    pages_with_schemas: number;
+    has_local_business: number;
+    has_faq_page: number;
+    has_product: number;
+    avg_schema_score: number;
+  };
+  last_checked_at?: string;
+  data_source: SerpDataSource;
+}
+
+// ─── Check SERP Input ─────────────────────────────────────────────────
+export interface CheckSerpInput {
+  project_id: string;
+  keyword_limit?: number;   // default 50
+  page_limit?: number;      // default 20
+}
+
 // ─── API Response Types ───────────────────────────────────────────────
 export interface APISuccess<T> {
   success: true;
