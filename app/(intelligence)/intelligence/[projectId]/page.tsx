@@ -4,7 +4,7 @@ import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import {
   BarChart3, Globe, ChevronRight, TrendingUp, AlertCircle,
-  CheckCircle2, Clock, Zap, Play, FileSearch, Key, Lightbulb, ArrowRight
+  CheckCircle2, Clock, Zap, Play, FileSearch, Key, Lightbulb, ArrowRight, Users
 } from 'lucide-react';
 import StartAnalysisButton from './start-analysis-button';
 
@@ -352,10 +352,11 @@ export default async function ProjectDashboardPage({ params }: PageProps) {
             </div>
 
             {/* Nav to sections */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 { href: `/intelligence/${projectId}/pages`, icon: FileSearch, label: 'Páginas crawleadas', desc: `${latestScore.pages_analyzed} páginas analizadas` },
                 { href: `/intelligence/${projectId}/keywords`, icon: Key, label: 'Keywords detectadas', desc: `${keywordsCount} keywords extraídas` },
+                { href: `/intelligence/${projectId}/competitors`, icon: Users, label: 'Content Gap', desc: 'Análisis de competidores' },
                 { href: `/intelligence/${projectId}/opportunities`, icon: TrendingUp, label: 'Plan de oportunidades', desc: `${latestScore.opportunities_count} oportunidades` },
               ].map(({ href, icon: Icon, label, desc }) => (
                 <Link

@@ -298,6 +298,33 @@ export interface CrawlerConfig {
   user_agent: string;
 }
 
+// ─── Competitors & Content Gap (Etapa 2) ──────────────────────────────
+export interface IntelCompetitor {
+  id: string;
+  project_id: string;
+  domain: string;
+  name?: string;
+  is_direct: boolean;
+  score?: number;
+  pages_analyzed?: number;
+  last_analyzed_at?: string;
+  created_at: string;
+}
+
+export interface IntelKeywordGap {
+  id: string;
+  project_id: string;
+  keyword: string;
+  keyword_normalized: string;
+  intent?: KeywordIntent;
+  project_frequency: number;   // 0 si es missing keyword
+  competitor_domain: string;
+  competitor_frequency: number;
+  gap_type: 'missing' | 'weak' | 'strong' | 'shared';
+  opportunity_score: number;   // 0-100
+  created_at: string;
+}
+
 // ─── Dashboard Summary ────────────────────────────────────────────────
 export interface ProjectDashboard {
   project: IntelProject;
