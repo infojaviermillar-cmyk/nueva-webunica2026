@@ -20,6 +20,7 @@ export default function CompetitorSection({ projectId, initialCompetitors, initi
   const [analyzingDomain, setAnalyzingDomain] = useState<string | null>(null);
   const [filter, setFilter] = useState<'all' | 'missing' | 'weak' | 'strong' | 'shared'>('all');
   const [error, setError] = useState('');
+  const [analyzeError, setAnalyzeError] = useState('');
 
   async function handleAddCompetitor() {
     if (!newDomain.trim()) return;
@@ -50,7 +51,7 @@ export default function CompetitorSection({ projectId, initialCompetitors, initi
 
   async function handleAnalyze(domain: string) {
     setAnalyzingDomain(domain);
-    setError('');
+    setAnalyzeError('');
 
     try {
       const res = await fetch(`/api/intelligence/projects/${projectId}/competitors/analyze`, {
@@ -61,13 +62,13 @@ export default function CompetitorSection({ projectId, initialCompetitors, initi
 
       const data = await res.json();
       if (!data.success) {
-        setError(data.error || 'Error al analizar competidor');
+        setAnalyzeError(data.error || 'Error al analizar competidor');
         return;
       }
 
       router.refresh();
     } catch {
-      setError('Error de conexión durante el análisis');
+      setAnalyzeError('Error de conexión durante el análisis');
     } finally {
       setAnalyzingDomain(null);
     }
@@ -134,6 +135,14 @@ export default function CompetitorSection({ projectId, initialCompetitors, initi
               </div>
             );
           })}
+        </div>
+      )}
+
+      {/* Analyze error banner */}
+      {analyzeError && (
+        <div className="flex items-start gap-2 bg-red-950/40 border border-red-800/50 rounded-xl p-3 text-red-400 text-sm">
+          <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+          <span>{analyzeError}</span>
         </div>
       )}
 
