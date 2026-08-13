@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Plus, BarChart3, Globe, Clock, TrendingUp, AlertCircle, ChevronRight, Zap } from 'lucide-react';
+import DeleteProjectButton from './delete-project-button';
 
 export const dynamic = 'force-dynamic';
 
@@ -177,6 +178,7 @@ export default async function IntelligenceProjectsPage() {
                 href={`/intelligence/${project.id}`}
                 className="group block bg-zinc-900 border border-zinc-800 rounded-2xl p-5 hover:border-violet-500/40 hover:bg-zinc-900/80 transition-all"
               >
+
                 {/* Header */}
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <div className="flex-1 min-w-0">
@@ -188,7 +190,10 @@ export default async function IntelligenceProjectsPage() {
                     </div>
                     <p className="text-zinc-500 text-xs font-mono truncate">{project.domain}</p>
                   </div>
-                  <ChevronRight className="w-4 h-4 text-zinc-600 group-hover:text-violet-400 transition-colors flex-shrink-0 mt-0.5" />
+                  <div className="flex items-center gap-1 flex-shrink-0">
+                    <DeleteProjectButton projectId={project.id} projectName={project.name} />
+                    <ChevronRight className="w-4 h-4 text-zinc-600 group-hover:text-violet-400 transition-colors mt-0.5" />
+                  </div>
                 </div>
 
                 {/* Industry tag */}

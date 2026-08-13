@@ -7,6 +7,7 @@ import {
   CheckCircle2, Clock, Zap, Play, FileSearch, Key, Lightbulb, ArrowRight, Users, Search, Gauge, FileText
 } from 'lucide-react';
 import StartAnalysisButton from './start-analysis-button';
+import DeleteProjectButton from '../projects/delete-project-button';
 
 export const dynamic = 'force-dynamic';
 
@@ -179,11 +180,19 @@ export default async function ProjectDashboardPage({ params }: PageProps) {
               <p className="text-zinc-500 text-sm mt-1">Objetivo: {project.objective}</p>
             )}
           </div>
-          <StartAnalysisButton
-            projectId={projectId}
-            isRunning={isRunning}
-            hasAnalysis={hasAnalysis}
-          />
+          <div className="flex items-center gap-3">
+            <DeleteProjectButton
+              projectId={projectId}
+              projectName={project.name}
+              variant="full"
+              redirectOnDelete={true}
+            />
+            <StartAnalysisButton
+              projectId={projectId}
+              isRunning={isRunning}
+              hasAnalysis={hasAnalysis}
+            />
+          </div>
         </div>
 
         {/* ── No analysis yet ── */}

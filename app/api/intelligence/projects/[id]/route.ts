@@ -162,22 +162,37 @@ export async function DELETE(
     }
 
     const admin = getSupabaseAdmin();
-    // Archive instead of hard delete
+    
+    // Verificar propiedad del proyecto antes de borrar
+    const { data: project } = await admin
+      .from('intel_projects')
+      .select('id, intel_organizations!inner(owner_id)')
+      .eq('id', id)
+      .single();
+
+    if (!project || (project as any).intel_organizations?.owner_id !== user.id) {
+      return NextResponse.json<APIResponse<never>>(
+        { success: false, error: 'Proyecto no encontrado o acceso denegado' },
+        { status: 404 }
+      );
+    }
+
+    // Hard Delete: La restricción ON DELETE CASCADE borrará automáticamente jobs, crawler pages, keywords, scores, etc.
     const { error } = await admin
       .from('intel_projects')
-      .update({ status: 'archived' })
+      .delete()
       .eq('id', id);
 
     if (error) throw error;
 
-    return NextResponse.json<APIResponse<{ archived: true }>>({
+    return NextResponse.json<APIResponse<{ deleted: true }>>({
       success: true,
-      data: { archived: true },
+      data: { deleted: true },
     });
   } catch (err: unknown) {
     console.error('[DELETE /api/intelligence/projects/[id]]', err);
     return NextResponse.json<APIResponse<never>>(
-      { success: false, error: 'Error interno del servidor' },
+      { success: false, error: 'Error interno del servidor al eliminar proyecto' },
       { status: 500 }
     );
   }
