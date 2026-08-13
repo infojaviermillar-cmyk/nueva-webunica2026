@@ -102,9 +102,10 @@ export async function POST(
       { status: 201 }
     );
   } catch (err: unknown) {
-    console.error('[POST competitors]', err);
+    const msg = err instanceof Error ? err.message : JSON.stringify(err);
+    console.error('[POST competitors] ERROR:', msg, err);
     return NextResponse.json<APIResponse<never>>(
-      { success: false, error: 'Error interno del servidor' },
+      { success: false, error: `Error interno del servidor: ${msg}` },
       { status: 500 }
     );
   }
