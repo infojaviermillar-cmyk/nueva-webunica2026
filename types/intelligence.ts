@@ -499,10 +499,33 @@ export interface IntelPageSpeedAudit {
   created_at: string;
 }
 
-export interface PageSpeedDashboardSummary {
-  mobile?: IntelPageSpeedAudit;
-  desktop?: IntelPageSpeedAudit;
-  last_audited_at?: string;
+// ─── White Label PDF Reports (Etapa 5) ───────────────────────────────
+export interface WhiteLabelConfig {
+  agency_name?: string;
+  client_name?: string;
+  logo_url?: string;
+  hide_webunica_branding?: boolean;
+}
+
+export interface CompiledProjectReport {
+  project: IntelProject;
+  score?: IntelScore;
+  recommendations: IntelRecommendation[];
+  keywords: IntelKeyword[];
+  competitor_gaps: IntelKeywordGap[];
+  serp_rankings: IntelSerpRanking[];
+  schema_audits: IntelSchemaAudit[];
+  pagespeed_mobile?: IntelPageSpeedAudit;
+  pagespeed_desktop?: IntelPageSpeedAudit;
+  summary_stats: {
+    total_pages: number;
+    issues_critical: number;
+    issues_warning: number;
+    keywords_count: number;
+    serp_top10_count: number;
+    schemas_count: number;
+  };
+  generated_at: string;
 }
 
 // ─── API Response Types ───────────────────────────────────────────────
