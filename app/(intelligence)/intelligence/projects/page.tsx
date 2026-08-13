@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { Plus, BarChart3, Globe, Clock, TrendingUp, AlertCircle, ChevronRight, Zap } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 interface ProjectWithMeta {
   id: string;
   name: string;

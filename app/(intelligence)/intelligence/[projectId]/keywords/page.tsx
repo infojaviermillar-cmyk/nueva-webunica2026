@@ -4,6 +4,8 @@ import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronRight, Key, ArrowLeft } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 interface PageProps {
   params: Promise<{ projectId: string }>;
 }

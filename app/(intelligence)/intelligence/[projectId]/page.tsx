@@ -8,6 +8,8 @@ import {
 } from 'lucide-react';
 import StartAnalysisButton from './start-analysis-button';
 
+export const dynamic = 'force-dynamic';
+
 interface PageProps {
   params: Promise<{ projectId: string }>;
 }

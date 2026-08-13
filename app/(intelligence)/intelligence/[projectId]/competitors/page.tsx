@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { ChevronRight, Users, ArrowLeft, Target, TrendingUp, AlertCircle, Plus } from 'lucide-react';
 import CompetitorSection from './competitor-section';
 
+export const dynamic = 'force-dynamic';
+
 interface PageProps {
   params: Promise<{ projectId: string }>;
 }
