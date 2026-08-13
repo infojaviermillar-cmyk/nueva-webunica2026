@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Questrial, JetBrains_Mono } from 'next/font/google';
-import '../../../globals.css';
+import '@/app/globals.css';
 
 const questrial = Questrial({
   weight: '400',
