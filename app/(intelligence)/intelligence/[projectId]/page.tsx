@@ -4,7 +4,7 @@ import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import {
   BarChart3, Globe, ChevronRight, TrendingUp, AlertCircle,
-  CheckCircle2, Clock, Zap, Play, FileSearch, Key, Lightbulb, ArrowRight, Users, Search
+  CheckCircle2, Clock, Zap, Play, FileSearch, Key, Lightbulb, ArrowRight, Users, Search, Gauge
 } from 'lucide-react';
 import StartAnalysisButton from './start-analysis-button';
 
@@ -354,11 +354,12 @@ export default async function ProjectDashboardPage({ params }: PageProps) {
             </div>
 
             {/* Nav to sections */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
               {[
                 { href: `/intelligence/${projectId}/pages`, icon: FileSearch, label: 'Páginas crawleadas', desc: `${latestScore.pages_analyzed} páginas analizadas` },
                 { href: `/intelligence/${projectId}/keywords`, icon: Key, label: 'Keywords detectadas', desc: `${keywordsCount} keywords extraídas` },
                 { href: `/intelligence/${projectId}/serp`, icon: Search, label: 'SERP & Visibilidad', desc: 'Posicionamiento google.cl' },
+                { href: `/intelligence/${projectId}/pagespeed`, icon: Gauge, label: 'PageSpeed & Speed', desc: 'Core Web Vitals & Lighthouse' },
                 { href: `/intelligence/${projectId}/competitors`, icon: Users, label: 'Content Gap', desc: 'Análisis de competidores' },
                 { href: `/intelligence/${projectId}/opportunities`, icon: TrendingUp, label: 'Plan de oportunidades', desc: `${latestScore.opportunities_count} oportunidades` },
               ].map(({ href, icon: Icon, label, desc }) => (
@@ -372,7 +373,7 @@ export default async function ProjectDashboardPage({ params }: PageProps) {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-white text-sm font-medium">{label}</p>
-                    <p className="text-zinc-500 text-xs">{desc}</p>
+                    <p className="text-zinc-500 text-xs truncate">{desc}</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-zinc-700 group-hover:text-violet-400 transition-colors" />
                 </Link>

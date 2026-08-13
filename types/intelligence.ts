@@ -458,6 +458,53 @@ export interface CheckSerpInput {
   page_limit?: number;      // default 20
 }
 
+// ─── Core Web Vitals & PageSpeed (Etapa 4) ───────────────────────────
+export type PageSpeedStrategy = 'mobile' | 'desktop';
+
+export interface CoreWebVitals {
+  lcp_ms?: number;   // Largest Contentful Paint (ms)
+  inp_ms?: number;   // Interaction to Next Paint / FID (ms)
+  cls?: number;      // Cumulative Layout Shift
+  fcp_ms?: number;   // First Contentful Paint (ms)
+  tbt_ms?: number;   // Total Blocking Time (ms)
+}
+
+export interface PageSpeedDiagnosticItem {
+  id: string;
+  title: string;
+  description: string;
+  score: number;             // 0-1
+  displayValue?: string;
+  savings_bytes?: number;
+  savings_ms?: number;
+}
+
+export interface IntelPageSpeedAudit {
+  id: string;
+  project_id: string;
+  url: string;
+  strategy: PageSpeedStrategy;
+  performance_score: number;     // 0-100
+  accessibility_score?: number;   // 0-100
+  best_practices_score?: number; // 0-100
+  seo_score?: number;            // 0-100
+  lcp_ms?: number;
+  inp_ms?: number;
+  cls?: number;
+  fcp_ms?: number;
+  tbt_ms?: number;
+  diagnostics: PageSpeedDiagnosticItem[];
+  data_source: 'MEASURED' | 'ESTIMATED';
+  audited_at: string;
+  created_at: string;
+}
+
+export interface PageSpeedDashboardSummary {
+  mobile?: IntelPageSpeedAudit;
+  desktop?: IntelPageSpeedAudit;
+  last_audited_at?: string;
+}
+
 // ─── API Response Types ───────────────────────────────────────────────
 export interface APISuccess<T> {
   success: true;
