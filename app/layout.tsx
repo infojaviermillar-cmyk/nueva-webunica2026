@@ -188,6 +188,7 @@ export default async function RootLayout({
   const domain = headersList.get('host') || '';
   const isDisenoShopify = domain.includes('diseñoshopify') || domain.includes('xn--diseoshopify-dhb');
   const isDesarrolloShopify = domain.includes('desarrolloshopify.cl');
+  const isIntelligence = headersList.get('x-is-intelligence') === 'true' || domain.includes('intelligence');
 
   return (
     <html
@@ -227,14 +228,17 @@ export default async function RootLayout({
         <Suspense fallback={null}>
           <NavigationProgressBar />
         </Suspense>
-        <ContactModalProvider>
-          {isDisenoShopify ? <DisenoShopifyHeader /> : <Header domain={domain} />}
-          <main className="flex-grow">
-            {children}
-          </main>
-          {isDisenoShopify ? <DisenoShopifyFooter /> : isDesarrolloShopify ? <DesarrolloShopifyFooter /> : <Footer />}
-          {/* Botón unificado en ContactModalProvider */}
-        </ContactModalProvider>
+        {isIntelligence ? (
+          children
+        ) : (
+          <ContactModalProvider>
+            {isDisenoShopify ? <DisenoShopifyHeader /> : <Header domain={domain} />}
+            <main className="flex-grow">
+              {children}
+            </main>
+            {isDisenoShopify ? <DisenoShopifyFooter /> : isDesarrolloShopify ? <DesarrolloShopifyFooter /> : <Footer />}
+          </ContactModalProvider>
+        )}
       </body>
     </html>
   );

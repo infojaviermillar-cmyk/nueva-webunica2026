@@ -43,9 +43,18 @@ export default async function middleware(request: NextRequest) {
   }
 
   // 4. Manejo de autenticación global (Supabase)
+  const requestHeaders = new Headers(request.headers);
+  if (
+    hostname === 'intelligence.webunica.cl' ||
+    hostname.includes('intelligence') ||
+    request.nextUrl.pathname.startsWith('/intelligence')
+  ) {
+    requestHeaders.set('x-is-intelligence', 'true');
+  }
+
   let response = NextResponse.next({
     request: {
-      headers: request.headers,
+      headers: requestHeaders,
     },
   });
 
