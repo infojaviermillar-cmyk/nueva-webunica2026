@@ -2,10 +2,10 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export default async function middleware(request: NextRequest) {
-  // 1. Manejo de dominios para EMD (Desarrollo Shopify) y Diseño Shopify
+  // 1. Parse hostname (strip port number)
   const host = request.headers.get('host') || '';
   const forwardedHost = request.headers.get('x-forwarded-host') || '';
-  const hostname = forwardedHost || host;
+  const hostname = (forwardedHost || host).split(':')[0].toLowerCase();
   
   // 1. Manejo de dominios para EMD (Desarrollo Shopify)
   if (
@@ -20,19 +20,29 @@ export default async function middleware(request: NextRequest) {
     }
   }
 
-  // 2. Manejo de dominios para Diseño Shopify
+  // 2. Manejo de dominios para Webunica Intelligence (intelligence.webunica.cl)
   if (
-    hostname.includes('diseñoshopify') || 
-    hostname.includes('xn--diseoshopify-dhb')
+    hostname === 'intelligence.webunica.cl' ||
+    hostname.startsWith('intelligence.') ||
+    hostname.includes('intelligence')
   ) {
     const url = request.nextUrl.clone();
     if (url.pathname === '/') {
-      url.pathname = '/diseno-shopify-cl';
+      url.pathname = '/intelligence';
+      return NextResponse.rewrite(url);
+    }
+    if (
+      !url.pathname.startsWith('/intelligence') &&
+      !url.pathname.startsWith('/api') &&
+      !url.pathname.startsWith('/auth') &&
+      !url.pathname.startsWith('/login')
+    ) {
+      url.pathname = `/intelligence${url.pathname}`;
       return NextResponse.rewrite(url);
     }
   }
 
-  // 2. Manejo de autenticación global (Supabase)
+  // 4. Manejo de autenticación global (Supabase)
   let response = NextResponse.next({
     request: {
       headers: request.headers,
