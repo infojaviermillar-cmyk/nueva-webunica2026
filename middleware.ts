@@ -91,8 +91,8 @@ export default async function middleware(request: NextRequest) {
 
     const { data: { user } } = await supabase.auth.getUser()
 
-    // Protect /admin routes
-    const protectedPaths = ['/admin', '/mi-cuenta']
+    // Protect /admin, /mi-cuenta, and /intelligence routes
+    const protectedPaths = ['/admin', '/mi-cuenta', '/intelligence']
     const isProtectedPath = protectedPaths.some(path => request.nextUrl.pathname.startsWith(path))
 
     if (isProtectedPath && !user) {
