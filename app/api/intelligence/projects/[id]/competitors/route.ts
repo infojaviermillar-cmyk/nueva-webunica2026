@@ -105,7 +105,7 @@ export async function POST(
     const msg = err instanceof Error ? err.message : JSON.stringify(err);
     console.error('[POST competitors] ERROR:', msg, err);
     return NextResponse.json<APIResponse<never>>(
-      { success: false, error: `Error interno del servidor: ${msg}` },
+      { success: false, error: 'Error interno del servidor' },
       { status: 500 }
     );
   }
