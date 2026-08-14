@@ -275,13 +275,21 @@ export function generateRecommendations(input: RecommendationInput) {
   }
 
   // ─── AI-based recommendations ────────────────────────────────────────────────
-  for (const opportunity of aiResult.opportunities.slice(0, 3)) {
+  for (const opportunity of aiResult.opportunities.slice(0, 4)) {
+    // Extract a natural title up to 90 characters on word boundary
+    const trimmedOpp = opportunity.trim();
+    let title = trimmedOpp;
+    if (title.length > 80) {
+      const match = title.slice(0, 80).match(/^(.*)\s+[^\s]*$/);
+      title = match ? match[1] : title.slice(0, 75);
+    }
+
     recs.push({
       category: 'opportunity',
       priority: 'medium',
-      title: opportunity.slice(0, 80),
-      problem: 'Oportunidad identificada mediante análisis de datos e interpretación estratégica.',
-      recommendation: opportunity,
+      title,
+      problem: 'Oportunidad identificada mediante análisis de datos e interpretación estratégica de mercado.',
+      recommendation: trimmedOpp,
       impact: 'Medio',
       effort: 'Medio',
       data_source: 'AI_INFERRED',
@@ -289,13 +297,20 @@ export function generateRecommendations(input: RecommendationInput) {
     });
   }
 
-  for (const priority of aiResult.priorities.slice(0, 3)) {
+  for (const priority of aiResult.priorities.slice(0, 4)) {
+    const trimmedPrio = priority.trim();
+    let title = trimmedPrio;
+    if (title.length > 80) {
+      const match = title.slice(0, 80).match(/^(.*)\s+[^\s]*$/);
+      title = match ? match[1] : title.slice(0, 75);
+    }
+
     recs.push({
       category: 'on_page',
       priority: 'high',
-      title: priority.slice(0, 80),
-      problem: 'Prioridad estratégica identificada mediante análisis IA.',
-      recommendation: priority,
+      title,
+      problem: 'Prioridad estratégica identificada mediante análisis de inteligencia SEO.',
+      recommendation: trimmedPrio,
       impact: 'Alto',
       effort: 'Medio',
       data_source: 'AI_INFERRED',
