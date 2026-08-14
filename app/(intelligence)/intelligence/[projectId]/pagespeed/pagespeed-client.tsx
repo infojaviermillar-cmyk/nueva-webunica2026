@@ -15,6 +15,7 @@ import {
   Clock,
 } from 'lucide-react';
 import { IntelPageSpeedAudit, PageSpeedDiagnosticItem } from '@/types/intelligence';
+import PromptButton from '../../components/prompt-dialog';
 
 /* ══════════════════════════════════════════════════════
    SCORE GAUGE — SVG arc ring
@@ -217,10 +218,28 @@ function DiagnosticItem({ item, index }: { item: PageSpeedDiagnosticItem; index:
         />
       </button>
 
-      {/* Expandable description */}
-      <div className={`overflow-hidden transition-all duration-300 ${open ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+      {/* Expandable description & Prompt action */}
+      <div className={`overflow-hidden transition-all duration-300 ${open ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="px-4 pb-4 pt-0 border-t border-zinc-800/70">
-          <p className="text-zinc-400 text-xs leading-relaxed mt-3">{item.description}</p>
+          <p className="text-zinc-400 text-xs leading-relaxed mt-3 mb-3">{item.description}</p>
+          <div className="pt-2 border-t border-zinc-800/50 flex items-center justify-end">
+            <PromptButton
+              payload={{
+                title: item.title,
+                category: 'Performance & Web Vitals',
+                priority: item.score <= 0.3 ? 'Crítica' : 'Alta',
+                impact: 'Alto',
+                effort: 'Medio',
+                problem: item.description,
+                recommendation: `Optimizar ${item.title}. Ahorro estimado: ${
+                  item.savings_ms ? `${(item.savings_ms / 1000).toFixed(1)}s` : `${(item.savings_bytes ? (item.savings_bytes / 1024).toFixed(0) : 0)} KB`
+                }`,
+                extraContext: `Score Lighthouse: ${Math.round((item.score ?? 0) * 100)}/100`,
+              }}
+              variant="secondary"
+              label="Copiar Prompt IA"
+            />
+          </div>
         </div>
       </div>
     </div>

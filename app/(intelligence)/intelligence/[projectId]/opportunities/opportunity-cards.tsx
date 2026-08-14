@@ -18,6 +18,7 @@ import {
   AlertCircle,
   HelpCircle,
 } from 'lucide-react';
+import PromptButton from '../../components/prompt-dialog';
 
 /* ── Types ───────────────────────────────────────────────────── */
 export interface Recommendation {
@@ -358,20 +359,36 @@ function OpportunityCard({
           </div>
         </div>
 
-        {/* Chevron toggle */}
-        <div className="mt-1 p-1 rounded-lg bg-zinc-800/40 border border-zinc-700/40 text-zinc-400 group-hover:text-white transition-colors">
-          <ChevronDown
-            className={`w-4 h-4 transition-transform duration-300 ${
-              open ? 'rotate-180 text-violet-400' : ''
-            }`}
+        {/* Action and Chevron toggle */}
+        <div className="flex items-center gap-2 mt-1">
+          <PromptButton
+            payload={{
+              title: displayTitle,
+              category: cat.label,
+              priority: priority.label,
+              impact: rec.impact,
+              effort: rec.effort,
+              problem: rec.problem,
+              recommendation: rec.recommendation,
+              affectedUrls: rec.affected_urls,
+            }}
+            variant="secondary"
+            label="Prompt IA"
           />
+          <div className="p-1.5 rounded-xl bg-zinc-800/40 border border-zinc-700/40 text-zinc-400 group-hover:text-white transition-colors">
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-300 ${
+                open ? 'rotate-180 text-violet-400' : ''
+              }`}
+            />
+          </div>
         </div>
       </button>
 
       {/* Expandable body */}
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          open ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
+          open ? 'max-h-[900px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <div className="px-5 pb-5 pt-0 border-t border-zinc-800/70">
@@ -398,7 +415,7 @@ function OpportunityCard({
 
           {/* Affected URLs as interactive pills */}
           {rec.affected_urls && rec.affected_urls.length > 0 && (
-            <div>
+            <div className="mb-4">
               <p className="text-[10px] text-zinc-500 font-mono uppercase tracking-widest mb-2 font-semibold">
                 URLs Afectadas ({rec.affected_urls.length})
               </p>
@@ -427,6 +444,27 @@ function OpportunityCard({
               </div>
             </div>
           )}
+
+          {/* Bottom Action Bar */}
+          <div className="pt-3 border-t border-zinc-800/60 flex items-center justify-between flex-wrap gap-3">
+            <p className="text-xs text-zinc-500">
+              Copia el prompt estructurado para resolver este issue con tu asistente de IA.
+            </p>
+            <PromptButton
+              payload={{
+                title: displayTitle,
+                category: cat.label,
+                priority: priority.label,
+                impact: rec.impact,
+                effort: rec.effort,
+                problem: rec.problem,
+                recommendation: rec.recommendation,
+                affectedUrls: rec.affected_urls,
+              }}
+              variant="primary"
+              label="Copiar Prompt de Solución"
+            />
+          </div>
         </div>
       </div>
     </div>
