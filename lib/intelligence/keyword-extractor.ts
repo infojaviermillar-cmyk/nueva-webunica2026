@@ -6,7 +6,7 @@
 
 import { CrawledPageData, KeywordIntent } from '@/types/intelligence';
 
-// ─── Stop words en español ────────────────────────────────────────────────────
+// ─── Stop words en español y términos de interfaz ─────────────────────────────
 const STOP_WORDS_ES = new Set([
   'a', 'al', 'algo', 'algunas', 'algunos', 'ante', 'antes', 'como', 'con',
   'contra', 'cual', 'cuando', 'de', 'del', 'desde', 'donde', 'durante', 'e',
@@ -19,6 +19,14 @@ const STOP_WORDS_ES = new Set([
   'tú', 'un', 'una', 'unas', 'uno', 'unos', 'usted', 'va', 'vamos', 'van',
   'voy', 'y', 'ya', 'yo', 'él', 'mí', 'nuestro', 'nuestra', 'nuestros',
   'nuestras', 'https', 'http', 'www', 'com', 'cl', 'net', 'org', 'htm', 'html',
+  // HTML entities residuals
+  'ndash', 'mdash', 'nbsp', 'amp', 'quot', 'apos', 'middot', 'bull', 'hellip',
+  'copy', 'reg', 'trade', 'times', 'divide',
+  // Boilerplate UI navigation / eCommerce terms that are not strategic keywords
+  'carrito', 'carrito vacío', 'vacío', 'despacho', 'región', 'país', 'país región',
+  'copyright', 'derechos reservados', 'todos los derechos', 'términos y condiciones',
+  'política de privacidad', 'iniciar sesión', 'cerrar sesión', 'mi cuenta',
+  'menú', 'menu', 'buscar', 'filtros', 'ver más', 'ver mas', 'siguiente', 'anterior',
 ]);
 
 // ─── Intent signal words ──────────────────────────────────────────────────────

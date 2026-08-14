@@ -216,7 +216,11 @@ function extractFromHTML(html: string, url: string, baseOrigin: string): Partial
 }
 
 function stripTags(html: string): string {
-  return html.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim();
+  return html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&(?:[a-z\d]+|#\d+|#x[a-f\d]+);/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function detectPageType(pathname: string, title?: string): PageType {
