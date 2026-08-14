@@ -17,6 +17,7 @@ export function detectServiceFromUrl(customPath?: string): DetectedServiceInfo {
   const pageUrl = window.location.href;
 
   const urlMap: Record<string, string> = {
+    '/desarrollo-web-corporativo': 'Desarrollo Web Corporativo',
     '/rediseno-tienda-shopify': 'Rediseño Tienda Shopify',
     '/tienda-dropshipping-shopify-y-dropi': 'Dropshipping Shopify & Dropi',
     '/desarrollo-tiendas-shopify-en-chile': 'Desarrollo Tienda Shopify',

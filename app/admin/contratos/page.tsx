@@ -25,6 +25,8 @@ import {
   ContractData, 
   PACIFIC_COLOR_PRESET, 
   PRESET_FULL_SHOPIFY, 
+  PRESET_CORP_PERFORMANCE,
+  PRESET_CORP_PROFESIONAL,
   formatCLP 
 } from '@/lib/contract-templates';
 
@@ -645,15 +647,27 @@ export default function ContratoGeneratorPage() {
           {/* Quick Presets */}
           <div className="flex flex-wrap items-center gap-2.5 justify-center">
             <button 
-              onClick={() => setData(PACIFIC_COLOR_PRESET)}
+              onClick={() => setData(PRESET_CORP_PERFORMANCE)}
               className="px-4 py-2.5 bg-purple-900/80 hover:bg-purple-800 text-purple-100 border border-purple-400/50 rounded-2xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-purple-900/40 active:scale-95"
             >
               <Sparkles className="w-4 h-4 text-purple-300" />
-              Contrato Custom Elite (Pacific Color)
+              Web Performance ($1.45M)
+            </button>
+            <button 
+              onClick={() => setData(PRESET_CORP_PROFESIONAL)}
+              className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-95"
+            >
+              Web Profesional ($1.1M)
+            </button>
+            <button 
+              onClick={() => setData(PACIFIC_COLOR_PRESET)}
+              className="px-3.5 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-95"
+            >
+              Shopify Custom Elite
             </button>
             <button 
               onClick={() => setData(PRESET_FULL_SHOPIFY)}
-              className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-95"
+              className="px-3.5 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 rounded-2xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer active:scale-95"
             >
               Shopify Full ($850k)
             </button>

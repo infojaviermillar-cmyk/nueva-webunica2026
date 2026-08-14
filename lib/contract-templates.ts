@@ -152,6 +152,98 @@ export const PRESET_FULL_SHOPIFY: ContractData = {
   ]
 };
 
+export const PRESET_CORP_PERFORMANCE: ContractData = {
+  cotizacionNumero: "WU_2026-CORP-PERF",
+  nombreMarca: "Mi Empresa Corporativa",
+  
+  proveedorRazonSocial: "WEBUNICA CHILE E.I.R.L.",
+  proveedorRut: "76.371.864-6",
+  proveedorRepresentante: "JOSÉ JAVIER MILLAR VELÁSQUEZ",
+  proveedorRepresentanteRut: "12.933.896-2",
+  proveedorDireccion: "Merced 838-A, Oficina 117, Santiago",
+
+  clienteRazonSocial: "EMPRESA CLIENTE SPA",
+  clienteRut: "77.000.000-0",
+  clienteRepresentante: "REPRESENTANTE LEGAL",
+  clienteRepresentanteRut: "15.000.000-0",
+  clienteDireccion: "Av. Apoquindo 4500, Las Condes, Santiago",
+
+  planNombre: "WEB CORPORATIVA PERFORMANCE",
+  planDescripcion: "Desarrollo de sitio web corporativo de alto rendimiento con arquitectura SEO avanzada, SEO Local, marcado Schema.org, optimización de tasa de conversión (CRO), tracking granular GA4/GTM y preparación para campañas.",
+  valorNeto: 1450000,
+  ivaPorcentaje: 19,
+
+  cantidadProductos: 0,
+  diasGarantia: 90,
+  nombreErp: "No aplica",
+  sistemaFacturacion: "No aplica",
+  tieneErp: false,
+  incluirDistribuidores: false,
+
+  fechaContrato: new Date().toISOString().split('T')[0],
+  duracionSemanas: 6,
+  holguraSemanas: 2,
+
+  hitosPago: [
+    { nombre: "Inicio del proyecto y Kickoff (50%)", porcentaje: 50, montoNeto: 725000, montoIva: 137750, montoTotal: 862750 },
+    { nombre: "Puesta en producción y entrega conforme (50%)", porcentaje: 50, montoNeto: 725000, montoIva: 137750, montoTotal: 862750 }
+  ],
+
+  ganttEtapas: [
+    { semana: "1", fechas: "Semana 1", disenoUxUi: "Levantamiento de requerimientos y arquitectura de información", desarrolloShopify: "Setup del entorno de desarrollo Next.js y base técnica", entregable: "Arquitectura de contenidos y mapa de sitio", pagoPct: "50%" },
+    { semana: "2", fechas: "Semana 2", disenoUxUi: "Diseño UX/UI de páginas principales y flujos de conversión", desarrolloShopify: "Maquetación modular responsive mobile-first", entregable: "Prototipo de diseño para revisión", pagoPct: "-" },
+    { semana: "3", fechas: "Semana 3", disenoUxUi: "Ajustes de diseño y optimización visual", desarrolloShopify: "Desarrollo funcional de formularios, WhatsApp y páginas comerciales", entregable: "Plataforma funcional en staging", pagoPct: "-" },
+    { semana: "4", fechas: "Semana 4", disenoUxUi: "Validación de experiencia de usuario", desarrolloShopify: "Implementación de SEO técnico, Schema JSON-LD y SEO Local", entregable: "SEO y marcado estructurado validado", pagoPct: "-" },
+    { semana: "5", fechas: "Semana 5", disenoUxUi: "QA visual multidispositivo", desarrolloShopify: "Configuración y validación de eventos en GA4 y Google Tag Manager", entregable: "Analítica y tracking de conversiones", pagoPct: "-" },
+    { semana: "6", fechas: "Semana 6", disenoUxUi: "Revisión final y entrega de accesos", desarrolloShopify: "Paso a producción en dominio oficial, Search Console y capacitación", entregable: "Publicación oficial y recepción conforme", pagoPct: "50%" }
+  ]
+};
+
+export const PRESET_CORP_PROFESIONAL: ContractData = {
+  cotizacionNumero: "WU_2026-CORP-PRO",
+  nombreMarca: "Mi Empresa",
+  
+  proveedorRazonSocial: "WEBUNICA CHILE E.I.R.L.",
+  proveedorRut: "76.371.864-6",
+  proveedorRepresentante: "JOSÉ JAVIER MILLAR VELÁSQUEZ",
+  proveedorRepresentanteRut: "12.933.896-2",
+  proveedorDireccion: "Merced 838-A, Oficina 117, Santiago",
+
+  clienteRazonSocial: "EMPRESA CLIENTE SPA",
+  clienteRut: "77.000.000-0",
+  clienteRepresentante: "REPRESENTANTE LEGAL",
+  clienteRepresentanteRut: "15.000.000-0",
+  clienteDireccion: "Santiago, Chile",
+
+  planNombre: "WEB CORPORATIVA PROFESIONAL",
+  planDescripcion: "Desarrollo de sitio web corporativo profesional con diseño UX/UI a medida, arquitectura modular hasta 10 páginas, formularios de contacto, WhatsApp directo, SEO técnico inicial y analítica GA4/GTM.",
+  valorNeto: 1100000,
+  ivaPorcentaje: 19,
+
+  cantidadProductos: 0,
+  diasGarantia: 60,
+  nombreErp: "No aplica",
+  sistemaFacturacion: "No aplica",
+  tieneErp: false,
+  incluirDistribuidores: false,
+
+  fechaContrato: new Date().toISOString().split('T')[0],
+  duracionSemanas: 4,
+  holguraSemanas: 1,
+
+  hitosPago: [
+    { nombre: "Inicio del proyecto (50%)", porcentaje: 50, montoNeto: 550000, montoIva: 104500, montoTotal: 654500 },
+    { nombre: "Puesta en producción y entrega (50%)", porcentaje: 50, montoNeto: 550000, montoIva: 104500, montoTotal: 654500 }
+  ],
+
+  ganttEtapas: [
+    { semana: "1", fechas: "Semana 1", disenoUxUi: "Levantamiento de contenidos y estructura", desarrolloShopify: "Configuración de entorno y maquetación base", entregable: "Estructura inicial", pagoPct: "50%" },
+    { semana: "2", fechas: "Semana 2", disenoUxUi: "Diseño UX/UI responsive", desarrolloShopify: "Desarrollo de secciones y formularios", entregable: "Sitio en pruebas", pagoPct: "-" },
+    { semana: "3", fechas: "Semana 3", disenoUxUi: "Ajustes visuales y contenido", desarrolloShopify: "SEO técnico inicial, GA4 y GTM", entregable: "Sitio optimizado", pagoPct: "-" },
+    { semana: "4", fechas: "Semana 4", disenoUxUi: "Revisión final", desarrolloShopify: "Paso a producción, SSL y capacitación", entregable: "Publicación oficial", pagoPct: "50%" }
+  ]
+};
+
 export function formatCLP(amount: number): string {
   return new Intl.NumberFormat('es-CL', {
     style: 'currency',

@@ -1115,11 +1115,92 @@ export const IA_PLANS: Plan[] = [{
   }
 ];
 
+// ════════════════════════════════════════════
+// 🏢 DESARROLLO WEB CORPORATIVO DE ALTO RENDIMIENTO
+// Fuente: /desarrollo-web-corporativo
+// ════════════════════════════════════════════
+export const CORPORATE_WEB_PLANS: Plan[] = [
+  {
+    id: 'corp-profesional',
+    name: 'Web Corporativa Profesional',
+    highlight: 'Presencia Digital Sólida & SEO Inicial',
+    desc: 'Una plataforma web profesional para empresas que necesitan renovar o construir una presencia digital sólida, moderna y preparada para posicionamiento orgánico.',
+    price: 1100000,
+    deliveryDays: '4 a 6 semanas',
+    category: '🏢 Web Corporativa',
+    url: '/desarrollo-web-corporativo',
+    features: [
+      'Diseño UX/UI personalizado',
+      'Desarrollo responsive mobile-first',
+      'Arquitectura profesional modular',
+      'Hasta 10 páginas o secciones principales',
+      'Formularios de contacto de bajo roce',
+      'Integración con WhatsApp directo',
+      'Integración con Google Maps cuando corresponda',
+      'SEO técnico inicial y jerarquía H1-H6',
+      'Metadata SEO, Sitemap XML y Robots.txt',
+      'Optimización de imágenes y rendimiento Core Web Vitals',
+      'Google Analytics 4 y Google Tag Manager',
+      'Configuración de eventos principales de conversión',
+      'Integración con redes sociales',
+      'Certificado de seguridad SSL',
+      'Capacitación y publicación',
+    ],
+  },
+  {
+    id: 'corp-performance',
+    name: 'Web Corporativa Performance',
+    highlight: 'Posicionamiento, Captación & CRO Avanzado',
+    desc: 'Una plataforma web orientada a posicionamiento, captación y conversión, diseñada para empresas que necesitan utilizar su sitio como una herramienta comercial activa.',
+    price: 1450000,
+    recommended: true,
+    deliveryDays: '6 a 8 semanas',
+    category: '🏢 Web Corporativa',
+    url: '/desarrollo-web-corporativo',
+    features: [
+      'Todo lo incluido en el Plan Profesional, más:',
+      'Arquitectura SEO avanzada e investigación de oportunidades de búsqueda',
+      'Arquitectura de páginas comerciales estratégicas',
+      'SEO Local y páginas geolocalizadas cuando corresponda',
+      'Páginas específicas por servicio y ubicación',
+      'Schema JSON-LD avanzado (LocalBusiness, FAQPage, BreadcrumbList)',
+      'Optimización CRO y llamadas a la acción avanzadas',
+      'WhatsApp contextual por servicio',
+      'Tracking avanzado y eventos personalizados GA4/GTM',
+      'Seguimiento integral de formularios, WhatsApp, llamadas y CTAs',
+      'Landing pages estratégicas de alta conversión',
+      'Localizador de sucursales si el proyecto lo requiere',
+      'Optimización avanzada Core Web Vitals (LCP < 2.5s)',
+      'Estrategia de interlinking y configuración Search Console',
+      'Preparación técnica para campañas Google Ads',
+    ],
+  },
+  {
+    id: 'corp-google-ads-addon',
+    name: 'Campaña de Tráfico con Google Ads (Mensual)',
+    highlight: 'Servicio Adicional Opcional',
+    desc: 'Complementa el desarrollo web con una estrategia de tráfico pagado mediante Google Ads para atraer prospectos calificados en búsqueda activa.',
+    price: 350000,
+    category: '📈 Marketing & SEO',
+    url: '/desarrollo-web-corporativo',
+    features: [
+      'Análisis inicial de palabras clave comerciales y negativas',
+      'Estructuración de campañas y grupos de anuncios',
+      'Configuración de conversiones en Google Ads, GA4 y GTM',
+      'Creación de copys y extensiones de anuncios',
+      'Configuración geográfica y definición de audiencias',
+      'Optimización mensual de pujas, términos de búsqueda y calidad',
+      'Reporte mensual de rendimiento y ROI (Inversión publicitaria en medios separada)',
+    ],
+  },
+];
+
 
 // ════════════════════════════════════════════
 // CATÁLOGO COMPLETO (usado en el cotizador)
 // ════════════════════════════════════════════
 export const ALL_PLANS: Plan[] = [
+  ...CORPORATE_WEB_PLANS,
   ...SHOPIFY_PLANS,
   ...SHOPIFY_THEME_PLANS,
   ...WOOCOMMERCE_PLANS,

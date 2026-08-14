@@ -32,6 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/planes-de-desarrollo-shopify-en-chile/plan-custom-elite',
     '/desarrollo-tienda-en-linea-woocommerce',
     '/desarrollo-paginas-web-pymes-chile',
+    '/desarrollo-web-corporativo',
     '/desarrollo-web-nextjs-saas-custom',
     '/servicios-seo-posicionamiento-google',
     '/agencia-de-desarrollo-web-y-ecommerce-en-chile',

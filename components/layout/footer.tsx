@@ -53,7 +53,12 @@ export default function Footer() {
               <h3 id="footer-services-heading" className="text-white font-semibold mb-6 uppercase tracking-wider text-xs">Servicios Digitales</h3>
               <ul className="space-y-4">
                 <li>
-                  <Link href="/desarrollo-web-nextjs-saas-custom" className="text-sm font-bold text-violet-400 hover:text-white transition-colors pb-1 inline-block">
+                  <Link href="/desarrollo-web-corporativo" className="text-sm font-bold text-violet-400 hover:text-white transition-colors pb-1 inline-block">
+                    Web Corporativa Pro & Performance
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/desarrollo-web-nextjs-saas-custom" className="text-sm text-zinc-400 hover:text-white transition-colors pb-1 inline-block">
                     Next.js & SaaS a Medida
                   </Link>
                 </li>

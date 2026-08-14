@@ -42,6 +42,15 @@ import { createClientUserAccount } from '@/lib/user-actions';
 function mapServiceInterestToPlan(serviceParam: string): Plan | undefined {
   const service = serviceParam.toLowerCase();
   
+  if (service.includes('performance') || service.includes('web corporativa performance')) {
+    return ALL_PLANS.find(p => p.id === 'corp-performance');
+  }
+  if (service.includes('web corporativa') || service.includes('desarrollo web') || service.includes('corporativo') || service.includes('corporativa')) {
+    return ALL_PLANS.find(p => p.id === 'corp-profesional');
+  }
+  if (service.includes('google ads') || service.includes('campaña google') || service.includes('paid media')) {
+    return ALL_PLANS.find(p => p.id === 'corp-google-ads-addon') || ALL_PLANS.find(p => p.id === 'mkt-paid-media');
+  }
   if (service.includes('shopify')) {
     return ALL_PLANS.find(p => p.id === 'sh-full');
   }
@@ -58,7 +67,7 @@ function mapServiceInterestToPlan(serviceParam: string): Plan | undefined {
     return ALL_PLANS.find(p => p.id === 'funeral-profesional');
   }
   if (service.includes('inmobiliaria') || service.includes('inmo')) {
-    return ALL_PLANS.find(p => p.id === 'inmo-base');
+    return ALL_PLANS.find(p => p.id === 'inmo-pro');
   }
   if (service.includes('lms') || service.includes('elearning') || service.includes('aula') || service.includes('tutor')) {
     return ALL_PLANS.find(p => p.id === 'lms-business-pro');
@@ -66,7 +75,10 @@ function mapServiceInterestToPlan(serviceParam: string): Plan | undefined {
   if (service.includes('sence')) {
     return ALL_PLANS.find(p => p.id === 'sence-pro');
   }
-  if (service.includes('diseño') || service.includes('diseño web') || service.includes('seo') || service.includes('corporativa')) {
+  if (service.includes('dropshipping') || service.includes('dropi')) {
+    return ALL_PLANS.find(p => p.id === 'drop-avanzado');
+  }
+  if (service.includes('pyme') || service.includes('pymes')) {
     return ALL_PLANS.find(p => p.id === 'web-corporativa-seo');
   }
 

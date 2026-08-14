@@ -157,6 +157,10 @@ export default function ContactModal({ isOpen, onClose, defaultService = "" }: C
                         value={formData.servicio}
                         onChange={(e) => setFormData({...formData, servicio: e.target.value})}
                       >
+                        <option value="Web Corporativa Performance">Web Corporativa Performance ($1.450.000 + IVA)</option>
+                        <option value="Web Corporativa Profesional">Web Corporativa Profesional ($1.100.000 + IVA)</option>
+                        <option value="Desarrollo Web + Google Ads">Desarrollo Web + Google Ads</option>
+                        <option value="Campaña Google Ads">Campaña Google Ads ($350.000/mes)</option>
                         <option value="Rediseño Tienda Shopify">Rediseño Tienda Shopify</option>
                         <option value="Diseño Web & SEO">Diseño Web & SEO</option>
                         <option value="E-commerce Shopify">E-commerce Shopify</option>

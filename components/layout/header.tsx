@@ -90,7 +90,8 @@ export default function Header({ domain = '' }: { domain?: string }) {
     '/complemento-sence-tutor-lms-pro',
     '/sistema-cotizaciones-intranet-wordpress',
     '/servicios-seo-posicionamiento-google',
-    '/tienda-dropshipping-shopify-y-dropi'
+    '/tienda-dropshipping-shopify-y-dropi',
+    '/desarrollo-web-corporativo'
   ];
 
   const isDarkHero = darkPages.includes(pathname);
@@ -259,6 +260,15 @@ export default function Header({ domain = '' }: { domain?: string }) {
                           <Link href="/desarrollo-web-nextjs-saas-custom" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors">
                             <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors">Next.js & SaaS a Medida</span>
                             <span className="text-[11px] text-zinc-500 font-medium">Software Web de Alto Vuelo</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link href="/desarrollo-web-corporativo" className="group/item flex flex-col p-3 rounded-2xl hover:bg-violet-50 transition-colors border border-violet-200/80 bg-violet-50/50">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-violet-600 transition-colors flex items-center gap-2">
+                              Web Corporativa
+                              <span className="text-[8px] bg-violet-600 text-white px-1.5 py-0.5 rounded-sm uppercase font-black">NUEVO</span>
+                            </span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Sitios corporativos de alto rendimiento</span>
                           </Link>
                         </li>
                         <li>
@@ -650,6 +660,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/implementacion-ia-conversacional" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       IA Conversacional <span className="text-[9px] bg-violet-600 text-white px-2 py-0.5 rounded-full uppercase">Nuevo</span>
+                    </Link>
+                    <Link href="/desarrollo-web-corporativo" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
+                      Web Corporativa <span className="text-[9px] bg-violet-600 text-white px-2 py-0.5 rounded-full uppercase font-black">Nuevo</span>
                     </Link>
                     <Link href="/desarrollo-paginas-web-pymes-chile" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
