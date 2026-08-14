@@ -256,6 +256,8 @@ export async function POST(request: NextRequest) {
         affected_urls: r.affected_urls || [],
       }));
       if (recInserts.length > 0) {
+        // Remove previous recommendations for this project to avoid accumulating duplicates
+        await admin.from('intel_recommendations').delete().eq('project_id', body.project_id!);
         await admin.from('intel_recommendations').insert(recInserts);
       }
       await log(jobId, 'info', `${recs.length} recomendaciones generadas`);

@@ -49,13 +49,29 @@ async function getProjectDashboard(projectId: string, userId: string) {
     .order('calculated_at', { ascending: false })
     .limit(6);
 
-  const { data: recs } = await admin
+  let recsQuery = admin
     .from('intel_recommendations')
-    .select('id, priority, category, title, status, data_source')
+    .select('id, priority, category, title, status, data_source, recommendation')
     .eq('project_id', projectId)
-    .eq('status', 'detected')
+    .eq('status', 'detected');
+
+  if (latestJob?.id) {
+    recsQuery = recsQuery.eq('job_id', latestJob.id);
+  }
+
+  const { data: rawRecs } = await recsQuery
     .order('priority', { ascending: true })
-    .limit(6);
+    .limit(12);
+
+  const seenRecTitles = new Set<string>();
+  const recs = (rawRecs || [])
+    .filter((r) => {
+      const key = (r.title || r.recommendation || '').toLowerCase().trim();
+      if (seenRecTitles.has(key)) return false;
+      seenRecTitles.add(key);
+      return true;
+    })
+    .slice(0, 6);
 
   const { data: topPages } = await admin
     .from('intel_crawl_pages')

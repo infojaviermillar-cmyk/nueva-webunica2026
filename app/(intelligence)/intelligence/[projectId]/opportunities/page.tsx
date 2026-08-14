@@ -28,14 +28,37 @@ export default async function ProjectOpportunitiesDetail({ params }: PageProps) 
 
   if (!project || (project as any).intel_organizations?.owner_id !== user.id) notFound();
 
-  // Fetch all recommendations ordered by priority
-  const { data: recs } = await admin
+  // Fetch latest completed job
+  const { data: latestJob } = await admin
+    .from('intel_analysis_jobs')
+    .select('id')
+    .eq('project_id', projectId)
+    .eq('status', 'completed')
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .single();
+
+  // Fetch recommendations (prefer latest job if exists)
+  let query = admin
     .from('intel_recommendations')
     .select('*')
-    .eq('project_id', projectId)
-    .order('priority', { ascending: true });
+    .eq('project_id', projectId);
 
-  const recommendations = recs || [];
+  if (latestJob?.id) {
+    query = query.eq('job_id', latestJob.id);
+  }
+
+  const { data: recs } = await query.order('priority', { ascending: true });
+
+  // Deduplicate in memory by title or normalized title
+  const rawList = recs || [];
+  const seenTitles = new Set<string>();
+  const recommendations = rawList.filter((r) => {
+    const key = (r.title || r.recommendation || '').toLowerCase().trim();
+    if (seenTitles.has(key)) return false;
+    seenTitles.add(key);
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-zinc-950">
