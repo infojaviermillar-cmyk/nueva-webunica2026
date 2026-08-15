@@ -8,6 +8,7 @@ import ProjectChatClient from '@/components/client/project-chat-client'
 import TaskToggle from '@/components/admin/task-toggle'
 import BusinessInfoForm from '@/components/client/business-info-form'
 import AddMeetingTaskModal from '@/components/admin/add-meeting-task-modal'
+import InteractiveGanttView from '@/components/client/interactive-gantt-view'
 import { User, Briefcase, Users } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
@@ -124,62 +125,6 @@ export default async function PublicProyectoPage({
           )}
         </header>
 
-        {/* Timeline & Progress Overview */}
-        <div className="bg-slate-900 text-white rounded-3xl p-8 mb-12 relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(124,58,237,0.25),transparent)] pointer-events-none" />
-          <div className="relative z-10">
-            <h3 className="text-xl font-black mb-6 tracking-tight flex items-center gap-2">
-              <CalendarDays className="w-5 h-5 text-violet-400" />
-              Carta Gantt — Estado del Cronograma
-            </h3>
-
-            {/* Segment bar */}
-            <div className="flex gap-1.5 mb-4 rounded-full overflow-hidden h-3 bg-white/10 p-0.5">
-              {(phases as any[]).map((phase: any, i: number) => {
-                const pTasks = phase.tasks || []
-                const pCompleted = pTasks.filter((t: any) => t.status === 'completado').length
-                const pPct = pTasks.length > 0 ? pCompleted / pTasks.length : 0
-                const colors = ['bg-teal-400', 'bg-violet-400', 'bg-orange-400', 'bg-emerald-400', 'bg-pink-400', 'bg-blue-400']
-                return (
-                  <div key={phase.id} className="flex-1 rounded-full overflow-hidden bg-white/10">
-                    <div
-                      className={`h-full transition-all duration-700 ${colors[i % colors.length]}`}
-                      style={{ width: `${pPct * 100}%` }}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-
-            {/* Phase Labels */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2 mb-6">
-              {(phases as any[]).map((phase: any, i: number) => (
-                <div key={phase.id} className="bg-white/5 rounded-xl p-2.5 text-center">
-                  <strong className="block text-xs text-white">Semana {i + 1}</strong>
-                  <span className="text-[10px] text-slate-300 block truncate mt-0.5">
-                    {phase.title.replace(/Semana \d+: /, '').replace(/Fase \d+: /, '')}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Overall Progress */}
-            <div className="pt-6 border-t border-white/10 flex items-center justify-between flex-wrap gap-4">
-              <div>
-                <div className="text-xs text-slate-400 font-bold uppercase tracking-widest mb-1">Progreso General</div>
-                <div className="text-3xl font-black text-white">{progressPct}%</div>
-                <div className="text-slate-400 text-xs mt-0.5">{completedCount} de {totalCount} tareas completadas</div>
-              </div>
-              {project.deadline && (
-                <div className="text-right">
-                  <div className="text-xs text-slate-400 font-bold uppercase tracking-widest mb-1">Entrega Estimada</div>
-                  <div className="text-xl font-black text-white">{new Date(project.deadline).toLocaleDateString('es-CL', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
         {/* External URLs */}
         {(project.design_url || project.staging_url || project.production_url) && (
           <div className="bg-teal-50 border border-teal-100 rounded-2xl p-6 mb-12 flex flex-col sm:flex-row items-start sm:items-center gap-5">
@@ -217,106 +162,9 @@ export default async function PublicProyectoPage({
         {/* Formulario de Insumos y Datos de la Empresa */}
         <BusinessInfoForm projectId={id} initialDescription={project.description} />
 
-        {/* Fases y Tareas con Toggle Interactivo y Subtítulos */}
-        <div className="space-y-6 mb-16">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
-            <div>
-              <h3 className="text-2xl font-black text-slate-900">Fases del Proyecto y Tareas</h3>
-              <p className="text-xs text-slate-400">Haz clic en cualquier tarea para cambiar su estado</p>
-            </div>
-            <AddMeetingTaskModal
-              projectId={id}
-              phases={(phases as any[]).map((p: any) => ({ id: p.id, phase_number: p.phase_number, title: p.title }))}
-            />
-          </div>
-
-          {(phases as any[]).map((phase: any, phaseIdx: number) => {
-            const phaseTasks = phase.tasks || []
-            const phaseCompleted = phaseTasks.filter((t: any) => t.status === 'completado').length
-            const phaseTotal = phaseTasks.length
-            const gradient = PHASE_GRADIENTS[phaseIdx % PHASE_GRADIENTS.length]
-            const badgeLabel = BADGE_LABELS[phase.badge]
-            const badgeClass = BADGE_CLASSES[phase.badge] || BADGE_CLASSES.normal
-
-            const reunionTasks = phaseTasks.filter((t: any) => t.assigned_to === 'ambos')
-            const clientTasks = phaseTasks.filter((t: any) => t.assigned_to === 'cliente')
-            const agencyTasks = phaseTasks.filter((t: any) => !t.assigned_to || t.assigned_to === 'agencia')
-
-            return (
-              <div key={phase.id} className="bg-white border border-[#e7e5e4] rounded-3xl overflow-hidden shadow-sm">
-                {/* Phase Header */}
-                <div className="flex items-center gap-5 p-7 border-b border-[#e7e5e4]">
-                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${gradient.bg} flex items-center justify-center shrink-0`}>
-                    <span className="text-white font-black text-lg">{phase.phase_number}</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <h2 className="text-lg font-bold text-slate-900">{phase.title}</h2>
-                      {badgeLabel && (
-                        <span className={`px-3 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-widest ${badgeClass}`}>
-                          {badgeLabel}
-                        </span>
-                      )}
-                    </div>
-                    {phase.subtitle && (
-                      <p className="text-xs text-slate-400">{phase.subtitle}</p>
-                    )}
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <div className="text-xl font-black text-slate-900">
-                      {phaseTotal > 0 ? Math.round((phaseCompleted / phaseTotal) * 100) : 0}%
-                    </div>
-                    <div className="text-[10px] text-slate-400">{phaseCompleted}/{phaseTotal} completadas</div>
-                  </div>
-                </div>
-
-                {/* Sub-secciones por Responsabilidad */}
-                <div className="p-6 space-y-6">
-                  {/* Subsección: Reuniones y Coordinación */}
-                  {reunionTasks.length > 0 && (
-                    <div>
-                      <div className="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-lg inline-flex items-center gap-1.5 mb-3">
-                        <Users className="w-3.5 h-3.5" /> 🤝 Reuniones, Minutas y Compromisos Conjuntos ({reunionTasks.length})
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {reunionTasks.map((task: any) => (
-                          <TaskToggle key={task.id} task={task} projectId={id} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Subsección: Entregables del Cliente */}
-                  {clientTasks.length > 0 && (
-                    <div>
-                      <div className="text-[10px] font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-1 rounded-lg inline-flex items-center gap-1.5 mb-3">
-                        <User className="w-3.5 h-3.5" /> 🙋‍♂️ Insumos y Responsabilidades del Cliente ({clientTasks.length})
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {clientTasks.map((task: any) => (
-                          <TaskToggle key={task.id} task={task} projectId={id} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Subsección: Trabajo Webunica */}
-                  {agencyTasks.length > 0 && (
-                    <div>
-                      <div className="text-[10px] font-black uppercase tracking-wider text-violet-800 bg-violet-100 px-3 py-1 rounded-lg inline-flex items-center gap-1.5 mb-3">
-                        <Briefcase className="w-3.5 h-3.5" /> 🚀 Trabajo de Diseño & Desarrollo Webunica ({agencyTasks.length})
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {agencyTasks.map((task: any) => (
-                          <TaskToggle key={task.id} task={task} projectId={id} />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )
-          })}
+        {/* Carta Gantt Interactivas con Pestañas por Semana e Hitos de Pago */}
+        <div className="mb-16">
+          <InteractiveGanttView projectId={id} project={project} phases={phases} />
         </div>
 
         {/* Section: Project Chat / Bitácora */}
