@@ -158,12 +158,6 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           detailed_info: 'Adaptaremos todos los diseños previamente creados a su versión móvil (para celulares), asegurando que la experiencia táctil sea fluida y optimizada.' 
         },
         { 
-          title: 'Revisión diseño con cliente', 
-          description: 'Aprobación del diseño en Figma/Adobe XD', 
-          assigned_to: 'cliente', 
-          detailed_info: 'El cliente debe revisar el enlace de Figma o Adobe XD proporcionado y dejar comentarios sobre cualquier ajuste necesario antes de pasar a la etapa de programación.' 
-        },
-        { 
           title: 'Diseño aprobado → A Desarrollo', 
           description: 'Entrega final al desarrollador', 
           assigned_to: 'agencia', 
@@ -466,12 +460,6 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           description: 'Versión responsive de las pantallas clave', 
           assigned_to: 'agencia', 
           detailed_info: 'Adaptaremos todos los diseños previamente creados a su versión móvil (para celulares), asegurando que la experiencia táctil sea fluida y optimizada.' 
-        },
-        { 
-          title: 'Revisión diseño con cliente', 
-          description: 'Aprobación del diseño en Figma/Adobe XD', 
-          assigned_to: 'cliente', 
-          detailed_info: 'El cliente debe revisar el enlace de Figma o Adobe XD proporcionado y dejar comentarios sobre cualquier ajuste necesario antes de pasar a la etapa de programación.' 
         },
         { 
           title: 'Diseño aprobado → A Desarrollo', 

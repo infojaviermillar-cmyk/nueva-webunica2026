@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { updateTaskStatus, updateTaskNote } from '@/lib/project-actions'
-import { CheckCircle2, Circle, Loader2, User, Briefcase, Users, MessageSquare, X, Save } from 'lucide-react'
+import { updateTaskStatus, updateTaskNote, deleteProjectTask } from '@/lib/project-actions'
+import { CheckCircle2, Circle, Loader2, User, Briefcase, Users, MessageSquare, X, Save, Trash2 } from 'lucide-react'
 
 type Task = {
   id: string
@@ -25,7 +25,11 @@ export default function TaskToggle({ task, projectId }: Props) {
   const [openModal, setOpenModal] = useState(false)
   const [noteText, setNoteText] = useState(task.detailed_info || '')
   const [savingNote, setSavingNote] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const [deleted, setDeleted] = useState(false)
   const [hasNote, setHasNote] = useState(Boolean(task.detailed_info))
+
+  if (deleted) return null
 
   async function toggle(e: React.MouseEvent) {
     e.stopPropagation()
@@ -36,6 +40,21 @@ export default function TaskToggle({ task, projectId }: Props) {
       setStatus(nextStatus)
     }
     setLoading(false)
+  }
+
+  async function handleDelete(e?: React.MouseEvent) {
+    if (e) e.stopPropagation()
+    if (!confirm(`¿Seguro que deseas eliminar la tarea "${task.title}"?`)) return
+
+    setDeleting(true)
+    const res = await deleteProjectTask(task.id, projectId)
+    setDeleting(false)
+    if (res.success) {
+      setDeleted(true)
+      setOpenModal(false)
+    } else {
+      alert(`Error al eliminar tarea: ${res.error}`)
+    }
   }
 
   async function handleSaveNote(e: React.FormEvent) {
@@ -65,10 +84,10 @@ export default function TaskToggle({ task, projectId }: Props) {
       >
         <button
           onClick={toggle}
-          disabled={loading}
+          disabled={loading || deleting}
           className="mt-1 shrink-0 focus:outline-none"
         >
-          {loading ? (
+          {loading || deleting ? (
             <Loader2 className="w-5 h-5 animate-spin text-slate-400" />
           ) : isDone ? (
             <CheckCircle2 className="w-5 h-5 text-emerald-500" />
@@ -123,14 +142,24 @@ export default function TaskToggle({ task, projectId }: Props) {
           )}
         </div>
 
-        {/* Note Trigger Button */}
-        <button
-          onClick={() => setOpenModal(true)}
-          title="Agregar o ver nota / subtarea"
-          className="p-1.5 rounded-xl text-slate-400 hover:text-sky-600 hover:bg-sky-50 transition-colors shrink-0"
-        >
-          <MessageSquare className="w-4 h-4" />
-        </button>
+        {/* Action Buttons */}
+        <div className="flex items-center gap-1 shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+          <button
+            onClick={() => setOpenModal(true)}
+            title="Agregar o ver nota / subtarea"
+            className="p-1.5 rounded-xl text-slate-400 hover:text-sky-600 hover:bg-sky-50 transition-colors"
+          >
+            <MessageSquare className="w-4 h-4" />
+          </button>
+          <button
+            onClick={handleDelete}
+            title="Eliminar tarea"
+            disabled={deleting}
+            className="p-1.5 rounded-xl text-slate-300 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
       {/* Note / Subtask Modal */}

@@ -501,5 +501,32 @@ export async function addCustomProjectTask(
   }
 }
 
+// Delete a single task from a project
+export async function deleteProjectTask(taskId: string, projectId: string) {
+  try {
+    const adminClient = getSupabaseAdmin()
+
+    const { error } = await adminClient
+      .from('project_tasks')
+      .delete()
+      .eq('id', taskId)
+
+    if (error) throw error
+
+    // Recalculate overall project progress
+    await recalculateProgress(projectId)
+
+    revalidatePath(`/admin/proyectos/${projectId}`)
+    revalidatePath(`/mi-cuenta/proyectos/${projectId}`)
+    revalidatePath(`/proyecto/${projectId}`)
+
+    return { success: true }
+  } catch (error: any) {
+    console.error('Error deleting project task:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+
 
 
