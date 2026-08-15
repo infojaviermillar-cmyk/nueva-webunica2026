@@ -279,3 +279,38 @@ async function recalculateProgress(projectId: string) {
     .update({ progress })
     .eq('id', projectId)
 }
+
+// Delete a project and all its phases, tasks and notes
+export async function deleteProject(projectId: string) {
+  try {
+    const adminClient = getSupabaseAdmin()
+
+    // Clean up related records
+    await adminClient.from('project_notes').delete().eq('project_id', projectId)
+
+    const { data: phases } = await adminClient
+      .from('project_phases')
+      .select('id')
+      .eq('project_id', projectId)
+
+    if (phases && phases.length > 0) {
+      const phaseIds = phases.map((p: any) => p.id)
+      await adminClient.from('project_tasks').delete().in('phase_id', phaseIds)
+      await adminClient.from('project_phases').delete().eq('project_id', projectId)
+    }
+
+    const { error } = await adminClient
+      .from('client_projects')
+      .delete()
+      .eq('id', projectId)
+
+    if (error) throw error
+
+    revalidatePath('/admin/proyectos')
+    return { success: true }
+  } catch (error: any) {
+    console.error('Error deleting project:', error)
+    return { success: false, error: error.message }
+  }
+}
+

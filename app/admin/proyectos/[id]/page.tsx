@@ -8,6 +8,7 @@ import TaskToggle from '@/components/admin/task-toggle'
 import DesignSettingsForm from '@/components/admin/design-settings-form'
 import GanttExportButton from '@/components/admin/gantt-chart-pdf'
 import ProjectChat from '@/components/admin/project-chat'
+import DeleteProjectButton from '@/components/admin/delete-project-button'
 
 export const dynamic = 'force-dynamic'
 
@@ -113,6 +114,9 @@ export default async function AdminProyectoDetailPage({
                 className="inline-flex items-center gap-2 px-5 py-3 bg-violet-50 hover:bg-violet-100 rounded-full text-xs font-bold text-violet-700 transition-colors">
                 <ExternalLink className="w-4 h-4" /> Vista del Cliente
               </Link>
+              <div className="pt-2">
+                <DeleteProjectButton projectId={id} projectTitle={project.title} redirectTo="/admin/proyectos" variant="button" />
+              </div>
             </div>
           </div>
 
