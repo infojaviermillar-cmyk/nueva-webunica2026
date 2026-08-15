@@ -98,6 +98,18 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           detailed_info: 'Envía los enlaces exactos de tus perfiles de redes sociales para integrarlos en el pie de página de la tienda y configurar correctamente las etiquetas de metadatos para compartir.' 
         },
         { 
+          title: 'Banners publicitarios y piezas gráficas', 
+          description: 'Imágenes promocionales para el hero slider y portadas', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Entrega o envío de imágenes promocionales en alta resolución y piezas gráficas para el carrusel principal de la portada (hero slider) y banners publicitarios de ofertas.' 
+        },
+        { 
+          title: 'Diseño y maquetación de Banners publicitarios', 
+          description: 'Creación y optimización de banners hero slider (Desktop y Mobile)', 
+          assigned_to: 'agencia', 
+          detailed_info: 'Diseñaremos y adaptaremos los banners publicitarios principales del sitio en versiones Desktop y Mobile con compresión y formato optimizado para carga rápida.' 
+        },
+        { 
           title: 'Wireframes (bocetos)', 
           description: 'Estructura básica de la página principal (Homepage)', 
           assigned_to: 'agencia', 
@@ -396,6 +408,18 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           detailed_info: 'Envía los enlaces exactos de tus perfiles de redes sociales para integrarlos en el pie de página de la tienda y configurar correctamente las etiquetas de metadatos para compartir.' 
         },
         { 
+          title: 'Banners publicitarios y piezas gráficas', 
+          description: 'Imágenes promocionales para el hero slider y portadas', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Entrega o envío de imágenes promocionales en alta resolución y piezas gráficas para el carrusel principal de la portada (hero slider) y banners publicitarios de ofertas.' 
+        },
+        { 
+          title: 'Diseño y maquetación de Banners publicitarios', 
+          description: 'Creación y optimización de banners hero slider (Desktop y Mobile)', 
+          assigned_to: 'agencia', 
+          detailed_info: 'Diseñaremos y adaptaremos los banners publicitarios principales del sitio en versiones Desktop y Mobile con compresión y formato optimizado para carga rápida.' 
+        },
+        { 
           title: 'Wireframes (bocetos)', 
           description: 'Estructura básica de la página principal (Homepage)', 
           assigned_to: 'agencia', 
@@ -647,6 +671,8 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
         { title: 'Credenciales DNS y dominio', description: 'Panel DNS de NIC Chile, GoDaddy o similar', assigned_to: 'cliente' as const, detailed_info: 'Accesos al panel DNS del registrador donde está tu dominio (.cl, .com, etc.) para configurar los nameservers de Shopify cuando sea momento del lanzamiento.' },
         { title: 'Credenciales pasarela de pago', description: 'Mercado Pago, Flow, Transbank — API keys', assigned_to: 'cliente' as const, detailed_info: 'Comparte las API keys (pública y privada) de tu pasarela de pagos, o invítanos como colaboradores. Necesitamos tanto claves de prueba como de producción.' },
         { title: 'Accesos Wasabil (facturación)', description: 'Credenciales del sistema de DTE', assigned_to: 'cliente' as const, detailed_info: 'Usuario y contraseña de tu cuenta Wasabil o del sistema de facturación electrónica elegido. Necesario para configurar la emisión automática de boletas/facturas desde Shopify.' },
+        { title: 'Banners publicitarios y piezas gráficas', description: 'Imágenes promocionales para el hero slider y portadas', assigned_to: 'cliente' as const, detailed_info: 'Entrega o envío de imágenes promocionales en alta resolución y piezas gráficas para el carrusel principal de la portada (hero slider) y banners publicitarios de ofertas.' },
+        { title: 'Diseño y maquetación de Banners publicitarios', description: 'Creación y optimización de banners hero slider (Desktop y Mobile)', assigned_to: 'agencia' as const, detailed_info: 'Diseñaremos y adaptaremos los banners publicitarios principales del sitio en versiones Desktop y Mobile con compresión y formato optimizado para carga rápida.' },
         { title: 'Wireframes y Arquitectura de Información', description: 'Estructura de navegación y flujos de usuario', assigned_to: 'agencia' as const, detailed_info: 'El equipo de UX diseñará los wireframes de baja fidelidad definiendo la jerarquía de contenidos, la navegación, los flujos de compra y las secciones principales.' },
         { title: 'Moodboard + Dirección Visual', description: 'Paleta, tipografías, referencias visuales finales', assigned_to: 'agencia' as const, detailed_info: 'Crearemos un panel de inspiración visual consolidado con la dirección de diseño definitiva para la tienda.' },
         { title: 'Diseño Homepage + Ficha de Producto', description: 'Mockups alta fidelidad en Figma', assigned_to: 'agencia' as const, detailed_info: 'Diseño completo de la página de inicio y la ficha de producto individual, incluyendo versión desktop y mobile.' },
@@ -741,6 +767,8 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
         { title: 'Credenciales: Wasabil, Pasarelas y Envíos', description: 'API keys de DTE, pagos y logística', assigned_to: 'cliente' as const, detailed_info: 'API keys de Wasabil (DTE), credenciales de producción de Mercado Pago/Flow/Transbank, y accesos de la cuenta de Shipit, Envíame u operador logístico.' },
         { title: 'Textos corporativos y legales', description: 'Nosotros, misión, políticas ya redactadas', assigned_to: 'cliente' as const, detailed_info: 'Texto de la página Nosotros, políticas de devolución personalizadas, términos y condiciones, política de privacidad. Si no los tienes, usaremos plantillas que debes validar.' },
         { title: 'Benchmark y Referentes Visuales', description: 'Tiendas o diseños de referencia del cliente', assigned_to: 'cliente' as const, detailed_info: 'El cliente envía 3-5 links de tiendas Shopify o sitios web que le gusten visualmente. Esto guía la dirección de diseño del equipo.' },
+        { title: 'Banners publicitarios y piezas gráficas', description: 'Imágenes promocionales para el hero slider y portadas', assigned_to: 'cliente' as const, detailed_info: 'Entrega o envío de imágenes promocionales en alta resolución y piezas gráficas para el carrusel principal de la portada (hero slider) y banners publicitarios de ofertas.' },
+        { title: 'Diseño y maquetación de Banners publicitarios', description: 'Creación y optimización de banners hero slider (Desktop y Mobile)', assigned_to: 'agencia' as const, detailed_info: 'Diseñaremos y adaptaremos los banners publicitarios principales del sitio en versiones Desktop y Mobile con compresión y formato optimizado para carga rápida.' },
         { title: 'Kickoff Meeting y levantamiento de requerimientos', description: 'Sesión de 90 min con todo el equipo', assigned_to: 'agencia' as const, detailed_info: 'Reunión de inicio donde se revisan los entregables del cliente, se confirman los requerimientos técnicos específicos (custom apps, integraciones, funcionalidades especiales) y se valida el cronograma.' },
         { title: 'Arquitectura de Información y Mapa de Sitio', description: 'Estructura de navegación y páginas', assigned_to: 'agencia' as const, detailed_info: 'Definimos formalmente la estructura de URLs, colecciones, menús de navegación, jerarquía de páginas y flujos de usuario principales (compra, búsqueda, contacto).' },
       ],
@@ -860,6 +888,8 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
         { title: 'Fotos y multimedia', description: 'Fotos del equipo, instalaciones o servicios', assigned_to: 'cliente' as const, detailed_info: 'Fotografías profesionales o de buen detalle del equipo, oficinas, servicios o productos. Adjuntar a una carpeta Google Drive.' },
         { title: 'Credenciales de dominio', description: 'Panel DNS del registrador', assigned_to: 'cliente' as const, detailed_info: 'Accesos al panel DNS de NIC Chile, GoDaddy, Namecheap u otro registrador para conectar el dominio cuando el sitio esté listo.' },
         { title: 'Referencias visuales y benchmark', description: '3-5 sitios web de referencia', assigned_to: 'cliente' as const, detailed_info: 'Links de sitios web (de la industria u otros) que el cliente admire visualmente. Esto orienta la dirección de diseño.' },
+        { title: 'Banners publicitarios y piezas gráficas', description: 'Imágenes promocionales para el hero slider y portadas', assigned_to: 'cliente' as const, detailed_info: 'Entrega o envío de imágenes promocionales en alta resolución y piezas gráficas para el carrusel principal de la portada (hero slider) y banners publicitarios de ofertas.' },
+        { title: 'Diseño y maquetación de Banners publicitarios', description: 'Creación y optimización de banners hero slider (Desktop y Mobile)', assigned_to: 'agencia' as const, detailed_info: 'Diseñaremos y adaptaremos los banners publicitarios principales del sitio en versiones Desktop y Mobile con compresión y formato optimizado para carga rápida.' },
         { title: 'Kickoff y Arquitectura de Información', description: 'Definición de secciones, páginas y flujos', assigned_to: 'agencia' as const, detailed_info: 'Reunión de inicio y posterior entrega del mapa de sitio con todas las páginas, secciones y flujos de usuario del sitio web.' },
       ],
     },

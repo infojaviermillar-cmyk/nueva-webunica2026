@@ -71,13 +71,13 @@ const PLATFORMS = [
 
 const PLATFORM_PHASES: Record<string, { label: string; tasks: number }[]> = {
   shopify: [
-    { label: 'Kick-off & Diseño UX/UI', tasks: 16 },
+    { label: 'Kick-off & Diseño UX/UI', tasks: 18 },
     { label: 'Desarrollo Base + Setup', tasks: 9 },
     { label: 'Catálogo + Páginas', tasks: 8 },
     { label: 'Pagos + Testing + Go Live', tasks: 8 },
   ],
   'shopify-full': [
-    { label: 'Kick-off & Diseño UX/UI', tasks: 14 },
+    { label: 'Kick-off & Diseño UX/UI', tasks: 16 },
     { label: 'Setup Shopify + Base', tasks: 6 },
     { label: 'Catálogo + Páginas', tasks: 6 },
     { label: 'Pagos + DTE Wasabil', tasks: 6 },
@@ -85,7 +85,7 @@ const PLATFORM_PHASES: Record<string, { label: string; tasks: number }[]> = {
     { label: 'Go Live + Cierre', tasks: 6 },
   ],
   'shopify-elite': [
-    { label: 'Kick-off & Arquitectura', tasks: 10 },
+    { label: 'Kick-off & Arquitectura', tasks: 12 },
     { label: 'Diseño UX/UI Alta Fidelidad', tasks: 8 },
     { label: 'Setup Shopify + Base', tasks: 6 },
     { label: 'Desarrollo Avanzado', tasks: 6 },
@@ -95,19 +95,19 @@ const PLATFORM_PHASES: Record<string, { label: string; tasks: number }[]> = {
     { label: 'Holgura + Cierre', tasks: 6 },
   ],
   woocommerce: [
-    { label: 'Kick-off & Diseño UX/UI', tasks: 16 },
+    { label: 'Kick-off & Diseño UX/UI', tasks: 18 },
     { label: 'Desarrollo Base + Setup', tasks: 9 },
     { label: 'Catálogo + Páginas', tasks: 8 },
     { label: 'Pagos + Testing + Go Live', tasks: 8 },
   ],
   wordpress: [
-    { label: 'Kick-off & Diseño UX/UI', tasks: 16 },
+    { label: 'Kick-off & Diseño UX/UI', tasks: 18 },
     { label: 'Desarrollo Base + Setup', tasks: 9 },
     { label: 'Catálogo + Páginas', tasks: 8 },
     { label: 'Pagos + Testing + Go Live', tasks: 8 },
   ],
   corporativo: [
-    { label: 'Kick-off & Levantamiento', tasks: 8 },
+    { label: 'Kick-off & Levantamiento', tasks: 10 },
     { label: 'Diseño UX/UI', tasks: 5 },
     { label: 'Desarrollo + Contenido', tasks: 6 },
     { label: 'SEO Local + Schema + Analytics', tasks: 6 },
