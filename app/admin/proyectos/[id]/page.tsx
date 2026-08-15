@@ -10,6 +10,7 @@ import GanttExportButton from '@/components/admin/gantt-chart-pdf'
 import ProjectChat from '@/components/admin/project-chat'
 import DeleteProjectButton from '@/components/admin/delete-project-button'
 import ShareLinkButton from '@/components/admin/share-link-button'
+import BusinessInfoForm from '@/components/client/business-info-form'
 
 export const dynamic = 'force-dynamic'
 
@@ -150,6 +151,9 @@ export default async function AdminProyectoDetailPage({
           initialDesignUrl={project.design_url} 
           initialDesignTool={project.design_tool} 
         />
+
+        {/* Formulario de Insumos y Datos de la Empresa */}
+        <BusinessInfoForm projectId={id} initialDescription={project.description} />
 
         {/* Phases */}
         <div className="space-y-6">

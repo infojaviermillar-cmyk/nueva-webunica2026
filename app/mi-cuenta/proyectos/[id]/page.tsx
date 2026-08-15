@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ArrowLeft, ExternalLink, Globe, Layout, Palette, PenTool, DollarSign, Clock } from 'lucide-react'
 import TaskCard from '@/components/client/task-card'
 import ProjectChatClient from '@/components/client/project-chat-client'
+import BusinessInfoForm from '@/components/client/business-info-form'
 
 export const dynamic = 'force-dynamic'
 
@@ -221,6 +222,9 @@ export default async function ClientProyectoDetailPage({
         )}
 
 
+
+        {/* Formulario de Insumos y Datos de la Empresa */}
+        <BusinessInfoForm projectId={id} initialDescription={project.description} />
 
         {/* FASE 1: Kick-off & Diseño UX/UI (Special UI) */}
         {phase1 && (() => {

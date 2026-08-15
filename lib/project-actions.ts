@@ -363,3 +363,63 @@ export async function deleteProject(projectId: string) {
   }
 }
 
+// Update business info and brand links for a project
+export async function updateProjectBusinessInfo(
+  projectId: string,
+  data: {
+    address?: string
+    phone?: string
+    email?: string
+    instagram?: string
+    facebook?: string
+    drive_link?: string
+    catalog_link?: string
+  }
+) {
+  try {
+    const adminClient = getSupabaseAdmin()
+
+    const { data: project } = await adminClient
+      .from('client_projects')
+      .select('description')
+      .eq('id', projectId)
+      .single()
+
+    let parsedDesc: any = {}
+    try {
+      if (project?.description && project.description.startsWith('{')) {
+        parsedDesc = JSON.parse(project.description)
+      } else {
+        parsedDesc = { notes: project?.description || '' }
+      }
+    } catch {
+      parsedDesc = { notes: project?.description || '' }
+    }
+
+    const updatedPayload = {
+      ...parsedDesc,
+      business_info: {
+        ...(parsedDesc.business_info || {}),
+        ...data,
+      },
+    }
+
+    const { error } = await adminClient
+      .from('client_projects')
+      .update({ description: JSON.stringify(updatedPayload) })
+      .eq('id', projectId)
+
+    if (error) throw error
+
+    revalidatePath(`/admin/proyectos/${projectId}`)
+    revalidatePath(`/mi-cuenta/proyectos/${projectId}`)
+    revalidatePath(`/proyecto/${projectId}`)
+
+    return { success: true }
+  } catch (error: any) {
+    console.error('Error updating business info:', error)
+    return { success: false, error: error.message }
+  }
+}
+
+

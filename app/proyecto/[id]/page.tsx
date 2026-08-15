@@ -6,6 +6,7 @@ import { ArrowLeft, ExternalLink, Globe, Layout, PenTool, DollarSign, Clock, Cal
 import TaskCard from '@/components/client/task-card'
 import ProjectChatClient from '@/components/client/project-chat-client'
 import TaskToggle from '@/components/admin/task-toggle'
+import BusinessInfoForm from '@/components/client/business-info-form'
 
 export const dynamic = 'force-dynamic'
 
@@ -210,6 +211,9 @@ export default async function PublicProyectoPage({
             </div>
           </div>
         )}
+
+        {/* Formulario de Insumos y Datos de la Empresa */}
+        <BusinessInfoForm projectId={id} initialDescription={project.description} />
 
         {/* Fases y Tareas con Toggle Interactivo */}
         <div className="space-y-6 mb-16">

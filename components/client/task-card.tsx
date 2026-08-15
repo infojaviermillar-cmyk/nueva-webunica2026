@@ -9,7 +9,7 @@ export default function TaskCard({ task }: { task: any }) {
   const isDone = task.status === 'completado'
   const isProgress = task.status === 'en_progreso'
   
-  const assignedToCliente = task.assigned_to === 'cliente'
+  const assignedTo = task.assigned_to || 'agencia'
   
   return (
     <>
@@ -50,10 +50,10 @@ export default function TaskCard({ task }: { task: any }) {
             <div className="p-6 border-b border-slate-100 flex justify-between items-start">
               <div>
                 <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-3 ${
-                  assignedToCliente ? 'bg-amber-100 text-amber-700' : 'bg-violet-100 text-violet-700'
+                  assignedTo === 'cliente' ? 'bg-amber-100 text-amber-700' : assignedTo === 'ambos' ? 'bg-emerald-100 text-emerald-700' : 'bg-violet-100 text-violet-700'
                 }`}>
-                  {assignedToCliente ? <User className="w-3 h-3" /> : <Briefcase className="w-3 h-3" />}
-                  A cargo de: {assignedToCliente ? 'Cliente' : 'Agencia'}
+                  {assignedTo === 'cliente' ? <User className="w-3 h-3" /> : <Briefcase className="w-3 h-3" />}
+                  Responsable: {assignedTo === 'cliente' ? 'Cliente' : assignedTo === 'ambos' ? 'Reunión / Ambos' : 'Webunica'}
                 </div>
                 <h3 className="text-xl font-black text-slate-900 leading-tight">{task.title}</h3>
               </div>

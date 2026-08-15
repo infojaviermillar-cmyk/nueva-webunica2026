@@ -16,14 +16,14 @@ export type ProjectTask = {
   description: string | null
   status: 'pendiente' | 'en_progreso' | 'completado'
   sort_order: number
-  assigned_to: 'cliente' | 'agencia'
+  assigned_to: 'cliente' | 'agencia' | 'ambos'
   detailed_info: string | null
 }
 
 export type TaskTemplate = {
   title: string
   description: string
-  assigned_to: 'cliente' | 'agencia'
+  assigned_to: 'cliente' | 'agencia' | 'ambos'
   detailed_info: string
 }
 
@@ -44,10 +44,22 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       badge: 'critico',
       tasks: [
         { 
+          title: 'Reunión de Kick-off & Coordinación Inicial', 
+          description: 'Sesión virtual de inicio (45-60 min) con cliente y agencia', 
+          assigned_to: 'ambos', 
+          detailed_info: 'Reunión de inicio por Google Meet / Zoom para presentar al equipo de Webunica, repasar los objetivos comerciales, alinear expectativas de diseño y acordar los plazos de entrega de insumos.' 
+        },
+        { 
           title: 'Pago Etapa 1 (25%)', 
           description: 'Pago inicial para comenzar el proyecto', 
           assigned_to: 'cliente', 
           detailed_info: 'Para dar inicio formal al proyecto y reservar las horas del equipo, se debe realizar el primer pago correspondiente al 25% del total del proyecto.' 
+        },
+        { 
+          title: 'Datos de la Empresa & Redes Sociales', 
+          description: 'Dirección, teléfono, WhatsApp, emails y enlaces a redes', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Completar en el formulario de la carta Gantt o enviar: dirección física de la tienda/oficina, teléfono de contacto, email comercial y redes sociales (Instagram, Facebook, TikTok).' 
         },
         { 
           title: 'Logo en alta resolución', 
