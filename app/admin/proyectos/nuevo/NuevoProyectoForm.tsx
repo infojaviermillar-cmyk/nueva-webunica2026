@@ -2,36 +2,119 @@
 
 import React, { useState } from 'react'
 import { createProjectWithTemplate } from '@/lib/project-actions'
-import { ArrowLeft, Loader2, Save, ShoppingBag, ShoppingCart, Code } from 'lucide-react'
+import { ArrowLeft, Loader2, Save, ShoppingBag, ShoppingCart, Code, Zap, Star, Building2 } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 const PLATFORMS = [
   {
     id: 'shopify',
-    label: 'Shopify',
+    label: 'Shopify Básico',
     icon: ShoppingBag,
-    color: 'border-emerald-400 bg-emerald-50',
+    color: 'border-emerald-300 bg-emerald-50',
     activeRing: 'ring-2 ring-emerald-500',
-    desc: 'Tienda en Shopify con theme premium',
+    desc: 'Tienda Shopify 4 semanas',
+    weeks: '4 semanas',
+    weeksBadge: 'bg-emerald-100 text-emerald-700',
+  },
+  {
+    id: 'shopify-full',
+    label: 'Shopify Full',
+    icon: Zap,
+    color: 'border-blue-300 bg-blue-50',
+    activeRing: 'ring-2 ring-blue-500',
+    desc: 'Shopify + DTE Wasabil',
+    weeks: '6 semanas',
+    weeksBadge: 'bg-blue-100 text-blue-700',
+  },
+  {
+    id: 'shopify-elite',
+    label: 'Shopify Custom Elite',
+    icon: Star,
+    color: 'border-violet-300 bg-violet-50',
+    activeRing: 'ring-2 ring-violet-500',
+    desc: 'ERP Nebula + DTE + SEO',
+    weeks: '8 semanas',
+    weeksBadge: 'bg-violet-100 text-violet-700',
   },
   {
     id: 'woocommerce',
     label: 'WooCommerce',
     icon: ShoppingCart,
-    color: 'border-violet-400 bg-violet-50',
-    activeRing: 'ring-2 ring-violet-500',
-    desc: 'WordPress + WooCommerce con Elementor',
+    color: 'border-purple-300 bg-purple-50',
+    activeRing: 'ring-2 ring-purple-500',
+    desc: 'WordPress + WooCommerce',
+    weeks: '4 semanas',
+    weeksBadge: 'bg-purple-100 text-purple-700',
   },
   {
     id: 'wordpress',
     label: 'WordPress',
     icon: Code,
-    color: 'border-blue-400 bg-blue-50',
-    activeRing: 'ring-2 ring-blue-500',
-    desc: 'Sitio web en WordPress sin e-commerce',
+    color: 'border-slate-300 bg-slate-50',
+    activeRing: 'ring-2 ring-slate-500',
+    desc: 'Sitio web sin e-commerce',
+    weeks: '4 semanas',
+    weeksBadge: 'bg-slate-100 text-slate-600',
+  },
+  {
+    id: 'corporativo',
+    label: 'Web Corporativa',
+    icon: Building2,
+    color: 'border-teal-300 bg-teal-50',
+    activeRing: 'ring-2 ring-teal-500',
+    desc: 'Next.js + SEO + GA4',
+    weeks: '6 semanas',
+    weeksBadge: 'bg-teal-100 text-teal-700',
   },
 ]
+
+const PLATFORM_PHASES: Record<string, { label: string; tasks: number }[]> = {
+  shopify: [
+    { label: 'Kick-off & Diseño UX/UI', tasks: 16 },
+    { label: 'Desarrollo Base + Setup', tasks: 9 },
+    { label: 'Catálogo + Páginas', tasks: 8 },
+    { label: 'Pagos + Testing + Go Live', tasks: 8 },
+  ],
+  'shopify-full': [
+    { label: 'Kick-off & Diseño UX/UI', tasks: 14 },
+    { label: 'Setup Shopify + Base', tasks: 6 },
+    { label: 'Catálogo + Páginas', tasks: 6 },
+    { label: 'Pagos + DTE Wasabil', tasks: 6 },
+    { label: 'SEO + Analytics + QA', tasks: 6 },
+    { label: 'Go Live + Cierre', tasks: 6 },
+  ],
+  'shopify-elite': [
+    { label: 'Kick-off & Arquitectura', tasks: 10 },
+    { label: 'Diseño UX/UI Alta Fidelidad', tasks: 8 },
+    { label: 'Setup Shopify + Base', tasks: 6 },
+    { label: 'Desarrollo Avanzado', tasks: 6 },
+    { label: 'ERP Nebula + DTE + Pagos', tasks: 6 },
+    { label: 'SEO + Analytics + QA', tasks: 6 },
+    { label: 'Go Live + Lanzamiento', tasks: 6 },
+    { label: 'Holgura + Cierre', tasks: 6 },
+  ],
+  woocommerce: [
+    { label: 'Kick-off & Diseño UX/UI', tasks: 16 },
+    { label: 'Desarrollo Base + Setup', tasks: 9 },
+    { label: 'Catálogo + Páginas', tasks: 8 },
+    { label: 'Pagos + Testing + Go Live', tasks: 8 },
+  ],
+  wordpress: [
+    { label: 'Kick-off & Diseño UX/UI', tasks: 16 },
+    { label: 'Desarrollo Base + Setup', tasks: 9 },
+    { label: 'Catálogo + Páginas', tasks: 8 },
+    { label: 'Pagos + Testing + Go Live', tasks: 8 },
+  ],
+  corporativo: [
+    { label: 'Kick-off & Levantamiento', tasks: 8 },
+    { label: 'Diseño UX/UI', tasks: 5 },
+    { label: 'Desarrollo + Contenido', tasks: 6 },
+    { label: 'SEO Local + Schema + Analytics', tasks: 6 },
+    { label: 'QA + Testing + Ajustes', tasks: 5 },
+    { label: 'Go Live + Cierre', tasks: 6 },
+  ],
+}
 
 type User = { id: string; email: string }
 
@@ -61,6 +144,9 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
     }
   }
 
+  const selectedPlatform = PLATFORMS.find(p => p.id === platform)
+  const selectedPhases = PLATFORM_PHASES[platform] || []
+
   return (
     <div className="min-h-screen bg-slate-50 pt-[22vh] lg:pt-48 pb-20 font-sans">
       <div className="container mx-auto px-6 max-w-3xl">
@@ -78,7 +164,7 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
           </span>
         </h1>
         <p className="text-slate-500 font-medium mb-10">
-          Las 4 fases y todas las tareas se generarán automáticamente según el tipo de proyecto.
+          Las fases y tareas se generarán automáticamente según el tipo de proyecto elegido.
         </p>
 
         <div className="bg-white border border-slate-200 rounded-[3rem] p-10 lg:p-14 shadow-xl shadow-slate-200/50">
@@ -87,9 +173,9 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
             {/* Tipo de Plataforma */}
             <div>
               <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-4 ml-1">
-                Tipo de Plataforma
+                Tipo de Proyecto y Plantilla
               </label>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {PLATFORMS.map((p) => {
                   const Icon = p.icon
                   const isActive = platform === p.id
@@ -98,11 +184,16 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
                       key={p.id}
                       type="button"
                       onClick={() => setPlatform(p.id)}
-                      className={`p-5 border-2 rounded-3xl text-left transition-all ${p.color} ${isActive ? p.activeRing : 'border-transparent opacity-70 hover:opacity-100'}`}
+                      className={`p-4 border-2 rounded-2xl text-left transition-all ${p.color} ${isActive ? p.activeRing : 'border-transparent opacity-60 hover:opacity-90'}`}
                     >
-                      <Icon className="w-6 h-6 mb-2 text-slate-600" />
-                      <div className="font-black text-slate-900 text-sm">{p.label}</div>
-                      <div className="text-xs text-slate-500 mt-1 leading-tight">{p.desc}</div>
+                      <div className="flex items-start justify-between mb-2">
+                        <Icon className="w-5 h-5 text-slate-600" />
+                        <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${p.weeksBadge}`}>
+                          {p.weeks}
+                        </span>
+                      </div>
+                      <div className="font-black text-slate-900 text-xs">{p.label}</div>
+                      <div className="text-[11px] text-slate-500 mt-0.5 leading-tight">{p.desc}</div>
                     </button>
                   )
                 })}
@@ -237,18 +328,31 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
               />
             </div>
 
-            {/* Preview de tareas generadas */}
+            {/* Preview de fases generadas — dinámico según plantilla */}
             <div className="bg-slate-50 rounded-3xl p-6 border border-slate-100">
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">
-                Se generarán automáticamente
-              </p>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  Se generarán automáticamente
+                </p>
+                <span className="text-[10px] font-bold text-slate-500">
+                  {selectedPhases.length} fases · {selectedPhases.reduce((acc, p) => acc + p.tasks, 0)} tareas
+                </span>
+              </div>
               <div className="flex flex-wrap gap-2">
-                {['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'].map((s) => (
-                  <span key={s} className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-600">
-                    {s} — 8 tareas
+                {selectedPhases.map((phase, i) => (
+                  <span key={i} className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-600">
+                    S{i + 1}: {phase.label} <span className="text-slate-400 font-medium">({phase.tasks})</span>
                   </span>
                 ))}
               </div>
+              {selectedPlatform && (
+                <div className="mt-3 pt-3 border-t border-slate-200 flex items-center gap-2">
+                  <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full ${selectedPlatform.weeksBadge}`}>
+                    {selectedPlatform.weeks}
+                  </span>
+                  <span className="text-[11px] text-slate-400">duración estimada de ejecución</span>
+                </div>
+              )}
             </div>
 
             {/* Submit */}

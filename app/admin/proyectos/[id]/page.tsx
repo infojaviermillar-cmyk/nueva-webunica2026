@@ -1,11 +1,13 @@
 import { getProjectFull } from '@/lib/project-actions'
+import { getProjectNotes } from '@/lib/project-notes-actions'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, ExternalLink, Globe, CheckCircle2, Circle, Clock } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Globe, CheckCircle2, Circle, Clock, CalendarDays } from 'lucide-react'
 import TaskToggle from '@/components/admin/task-toggle'
 import DesignSettingsForm from '@/components/admin/design-settings-form'
 import GanttExportButton from '@/components/admin/gantt-chart-pdf'
+import ProjectChat from '@/components/admin/project-chat'
 
 export const dynamic = 'force-dynamic'
 
@@ -202,7 +204,93 @@ export default async function AdminProyectoDetailPage({
           </div>
         )}
 
+        {/* Gantt Chart — Admin Only */}
+        {phases.length > 0 && project.start_date && (
+          <div className="bg-white border border-slate-200 rounded-[2.5rem] overflow-hidden shadow-sm hidden md:block mt-2">
+            <div className="flex items-center gap-3 p-6 border-b border-slate-100">
+              <div className="w-10 h-10 bg-slate-100 rounded-2xl flex items-center justify-center">
+                <CalendarDays className="w-5 h-5 text-slate-600" />
+              </div>
+              <div>
+                <h3 className="font-black text-slate-900 text-sm uppercase tracking-wider">Carta Gantt — Cronograma de Fases</h3>
+                <p className="text-xs text-slate-400">Calculado desde la fecha de inicio del proyecto</p>
+              </div>
+            </div>
+            <div className="p-6 overflow-x-auto">
+              <div className="min-w-[600px]">
+                {/* Column headers */}
+                <div className="flex gap-1 mb-3">
+                  <div className="w-48 shrink-0" />
+                  {Array.from({ length: (phases as any[]).length + 2 }).map((_, i) => (
+                    <div key={i} className="flex-1 text-center">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase">S{i + 1}</span>
+                    </div>
+                  ))}
+                </div>
+                {/* Phase rows */}
+                {(phases as any[]).map((phase: any, idx: number) => {
+                  const pTasks = phase.tasks || []
+                  const pCompleted = pTasks.filter((t: any) => t.status === 'completado').length
+                  const pPct = pTasks.length > 0 ? Math.round((pCompleted / pTasks.length) * 100) : 0
+                  const totalCols = (phases as any[]).length + 2
+                  const barColors = [
+                    'bg-teal-500', 'bg-violet-500', 'bg-orange-500', 'bg-red-500',
+                    'bg-blue-500', 'bg-emerald-500', 'bg-pink-500', 'bg-amber-500'
+                  ]
+                  const barColor = barColors[idx % barColors.length]
+                  // Calculate start date for this phase (1 week per phase)
+                  const phaseStart = new Date(project.start_date!)
+                  phaseStart.setDate(phaseStart.getDate() + idx * 7)
+                  const phaseEnd = new Date(phaseStart)
+                  phaseEnd.setDate(phaseEnd.getDate() + 6)
+                  const formatShort = (d: Date) => d.toLocaleDateString('es-CL', { day: 'numeric', month: 'short' })
+
+                  return (
+                    <div key={phase.id} className="flex gap-1 mb-2 items-center">
+                      {/* Phase label */}
+                      <div className="w-48 shrink-0 pr-3">
+                        <div className="text-xs font-bold text-slate-700 truncate">{phase.title.replace(/Semana \d+: /, '')}</div>
+                        <div className="text-[10px] text-slate-400">{formatShort(phaseStart)} – {formatShort(phaseEnd)}</div>
+                      </div>
+                      {/* Offset empty columns */}
+                      {Array.from({ length: idx }).map((_, i) => (
+                        <div key={i} className="flex-1" />
+                      ))}
+                      {/* Phase bar — spans 1 column */}
+                      <div className="flex-1 relative h-8 group">
+                        <div className={`absolute inset-0 ${barColor} rounded-lg opacity-20`} />
+                        <div
+                          className={`absolute inset-y-0 left-0 ${barColor} rounded-lg transition-all duration-500`}
+                          style={{ width: `${pPct}%` }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-between px-2">
+                          <span className="text-[10px] font-bold text-white drop-shadow-sm truncate max-w-[60%]">
+                            {phase.title.replace(/Semana \d+: /, '').slice(0, 20)}
+                          </span>
+                          <span className="text-[10px] font-black text-white drop-shadow-sm">{pPct}%</span>
+                        </div>
+                      </div>
+                      {/* Remaining empty columns */}
+                      {Array.from({ length: totalCols - idx - 2 }).map((_, i) => (
+                        <div key={i} className="flex-1" />
+                      ))}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Project Chat / Bitácora */}
+        <ProjectChatWrapper projectId={project.id} />
+
       </div>
     </div>
   )
+}
+
+async function ProjectChatWrapper({ projectId }: { projectId: string }) {
+  const { notes } = await getProjectNotes(projectId)
+  return <ProjectChat projectId={projectId} initialNotes={notes} />
 }

@@ -1,9 +1,11 @@
 import { getProjectPhasesWithTasks } from '@/lib/project-actions'
+import { getProjectNotes } from '@/lib/project-notes-actions'
 import { createClient } from '@/lib/supabase/server'
 import { getSupabaseAdmin } from '@/lib/supabase/admin'
 import Link from 'next/link'
 import { ArrowLeft, ExternalLink, Globe, Layout, Palette, PenTool, DollarSign, Clock } from 'lucide-react'
 import TaskCard from '@/components/client/task-card'
+import ProjectChatClient from '@/components/client/project-chat-client'
 
 export const dynamic = 'force-dynamic'
 
@@ -79,6 +81,7 @@ export default async function ClientProyectoDetailPage({
   }
 
   const { phases } = await getProjectPhasesWithTasks(id)
+  const { notes } = await getProjectNotes(id)
 
   // Calculate stats (ignoring Fase 0 for overall dev progress maybe? For now include all)
   const allTasks = (phases as any[]).flatMap((p: any) => p.tasks || [])
@@ -346,7 +349,7 @@ export default async function ClientProyectoDetailPage({
         )}
 
         {/* Footer CTA */}
-        <div className="mt-16 bg-teal-50 border border-teal-100 rounded-2xl p-7 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+        <div className="mt-10 bg-teal-50 border border-teal-100 rounded-2xl p-7 flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <div className="w-12 h-12 bg-teal-500 rounded-2xl flex items-center justify-center shrink-0">
             <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
@@ -355,20 +358,13 @@ export default async function ClientProyectoDetailPage({
             </svg>
           </div>
           <div>
-            <h4 className="font-bold text-slate-800 mb-1">¿Tienes preguntas sobre tu proyecto?</h4>
-            <p className="text-sm text-slate-500">Contáctanos directamente por WhatsApp o escríbenos.</p>
-          </div>
-          <div className="sm:ml-auto flex gap-3">
-            <a
-              href="https://wa.me/56966198752"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25d366] text-white rounded-full text-xs font-black uppercase tracking-widest hover:bg-[#1fba59] transition-colors"
-            >
-              WhatsApp
-            </a>
+            <h4 className="font-bold text-slate-800 mb-1">Mensajes con el equipo Webunica</h4>
+            <p className="text-sm text-slate-500">Léjanos tus dudas y comentarios sobre el proyecto.</p>
           </div>
         </div>
+
+        {/* Chat Cliente */}
+        <ProjectChatClient projectId={id} initialNotes={notes} />
 
       </div>
     </div>
