@@ -51,6 +51,7 @@ export async function createProjectWithTemplate(formData: FormData) {
     const stagingUrl = formData.get('stagingUrl') as string | null
     const description = formData.get('description') as string | null
     const totalPrice = formData.get('totalPrice') ? parseFloat(formData.get('totalPrice') as string) : 0
+    const addonStoreLocator = formData.get('addon_store_locator') === 'on' || formData.get('addon_store_locator') === 'true'
 
     if (!userId || !title) throw new Error('Faltan datos obligatorios: userId y title')
 
@@ -80,6 +81,7 @@ export async function createProjectWithTemplate(formData: FormData) {
 
     // 2. Create phases and tasks from the appropriate template
     const template = PROJECT_TEMPLATES[platform] || PROJECT_TEMPLATES['shopify']
+    const totalPhasesCount = template.length
 
     for (const phaseTemplate of template) {
       const { data: phase, error: phaseError } = await adminClient
@@ -97,7 +99,53 @@ export async function createProjectWithTemplate(formData: FormData) {
 
       if (phaseError) throw phaseError
 
-      const tasks = phaseTemplate.tasks.map((t, idx) => ({
+      let phaseTasksList = [...phaseTemplate.tasks]
+
+      // Inject Geolocation for Distributors tasks if addon is selected
+      if (addonStoreLocator) {
+        if (phaseTemplate.phase_number === 1) {
+          phaseTasksList.push(
+            {
+              title: 'Planilla de Distribuidores y Puntos de Venta (Excel/CSV)',
+              description: 'Nombres, direcciones, comuna/región, teléfonos, horarios y coordenadas',
+              assigned_to: 'cliente' as const,
+              detailed_info: 'Planilla consolidada con la lista de distribuidores autorizados o puntos de venta. Debe incluir: nombre del local, dirección completa, región/comuna, teléfono, horario de atención y categoría.',
+            },
+            {
+              title: 'Diseño UI Mapa de Distribuidores y Filtros',
+              description: 'Layout visual del localizador de tiendas con buscador y mapa',
+              assigned_to: 'agencia' as const,
+              detailed_info: 'Diseño de interfaz para la sección "Dónde Encontrarnos / Distribuidores", incluyendo buscador por comuna, botón "Cerca de mí", lista de resultados y mapa interactivo.',
+            }
+          )
+        } else if (phaseTemplate.phase_number === Math.min(3, totalPhasesCount)) {
+          phaseTasksList.push(
+            {
+              title: 'Desarrollo Módulo Geolocalización de Distribuidores',
+              description: 'Implementación de mapa interactivo (Google Maps / Leaflet) y buscador',
+              assigned_to: 'agencia' as const,
+              detailed_info: 'Programación del mapa interactivo con pines personalizados, geocodificación de direcciones, cálculo de distancias y filtros por región/comuna.',
+            },
+            {
+              title: 'Carga masiva e indexación de Puntos de Venta',
+              description: 'Importación de la base de datos de distribuidores al sistema',
+              assigned_to: 'agencia' as const,
+              detailed_info: 'Carga e indexación de todos los puntos de venta facilitados por el cliente en el mapa interactivo.',
+            }
+          )
+        } else if (phaseTemplate.phase_number === Math.max(1, totalPhasesCount - 1)) {
+          phaseTasksList.push(
+            {
+              title: 'QA y Pruebas Móviles Módulo Geolocalización',
+              description: 'Testing GPS "Cerca de mí", búsqueda y responsive',
+              assigned_to: 'agencia' as const,
+              detailed_info: 'Pruebas de funcionamiento del mapa en dispositivos móviles (iOS/Android), respuesta del GPS del usuario y experiencia de búsqueda por región.',
+            }
+          )
+        }
+      }
+
+      const tasks = phaseTasksList.map((t, idx) => ({
         phase_id: phase.id,
         title: t.title,
         description: t.description,

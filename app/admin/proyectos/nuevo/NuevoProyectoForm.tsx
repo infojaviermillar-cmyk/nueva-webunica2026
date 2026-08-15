@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { createProjectWithTemplate } from '@/lib/project-actions'
-import { ArrowLeft, Loader2, Save, ShoppingBag, ShoppingCart, Code, Zap, Star, Building2 } from 'lucide-react'
+import { ArrowLeft, Loader2, Save, ShoppingBag, ShoppingCart, Code, Zap, Star, Building2, MapPin } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -121,6 +121,7 @@ type User = { id: string; email: string }
 export default function NuevoProyectoForm({ users }: { users: User[] }) {
   const [submitting, setSubmitting] = useState(false)
   const [platform, setPlatform] = useState('shopify')
+  const [addonStoreLocator, setAddonStoreLocator] = useState(false)
   const router = useRouter()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -129,6 +130,7 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
     try {
       const formData = new FormData(e.currentTarget)
       formData.set('platform', platform)
+      formData.set('addon_store_locator', addonStoreLocator ? 'true' : 'false')
 
       const result = await createProjectWithTemplate(formData)
 
@@ -146,6 +148,7 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
 
   const selectedPlatform = PLATFORMS.find(p => p.id === platform)
   const selectedPhases = PLATFORM_PHASES[platform] || []
+  const extraTasksCount = addonStoreLocator ? 5 : 0
 
   return (
     <div className="min-h-screen bg-slate-50 pt-[22vh] lg:pt-48 pb-20 font-sans">
@@ -328,6 +331,37 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
               />
             </div>
 
+            {/* Componentes Extra / Add-ons */}
+            <div>
+              <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 ml-1">
+                Componentes Extra / Módulos Adicionales (Opcional)
+              </label>
+              <div className="grid grid-cols-1 gap-3">
+                <label className={`flex items-start gap-3.5 p-5 border-2 rounded-3xl cursor-pointer transition-all ${
+                  addonStoreLocator ? 'border-violet-400 bg-violet-50/50 shadow-sm' : 'border-slate-100 bg-slate-50 hover:border-slate-200'
+                }`}>
+                  <input
+                    type="checkbox"
+                    checked={addonStoreLocator}
+                    onChange={(e) => setAddonStoreLocator(e.target.checked)}
+                    className="mt-1 w-4 h-4 text-violet-600 rounded border-slate-300 focus:ring-violet-500 cursor-pointer"
+                  />
+                  <div>
+                    <div className="font-bold text-slate-900 text-sm flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-violet-600" />
+                      Geolocalización para Distribuidores
+                      <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 bg-violet-100 text-violet-700 rounded-full">
+                        +5 tareas Gantt
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                      Mapa interactivo de puntos de venta (Google Maps / Leaflet), buscador por región/comuna, botón GPS "Cerca de mí" y carga masiva de distribuidores.
+                    </p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
             {/* Preview de fases generadas — dinámico según plantilla */}
             <div className="bg-slate-50 rounded-3xl p-6 border border-slate-100">
               <div className="flex items-center justify-between mb-3">
@@ -335,15 +369,18 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
                   Se generarán automáticamente
                 </p>
                 <span className="text-[10px] font-bold text-slate-500">
-                  {selectedPhases.length} fases · {selectedPhases.reduce((acc, p) => acc + p.tasks, 0)} tareas
+                  {selectedPhases.length} fases · {selectedPhases.reduce((acc, p) => acc + p.tasks, 0) + extraTasksCount} tareas
                 </span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {selectedPhases.map((phase, i) => (
-                  <span key={i} className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-600">
-                    S{i + 1}: {phase.label} <span className="text-slate-400 font-medium">({phase.tasks})</span>
-                  </span>
-                ))}
+                {selectedPhases.map((phase, i) => {
+                  const addedInPhase = addonStoreLocator ? (i === 0 ? 2 : (i === Math.min(2, selectedPhases.length - 1) ? 2 : (i === Math.max(0, selectedPhases.length - 2) ? 1 : 0))) : 0
+                  return (
+                    <span key={i} className="px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-bold text-slate-600">
+                      S{i + 1}: {phase.label} <span className="text-slate-400 font-medium">({phase.tasks + addedInPhase})</span>
+                    </span>
+                  )
+                })}
               </div>
               {selectedPlatform && (
                 <div className="mt-3 pt-3 border-t border-slate-200 flex items-center gap-2">
@@ -351,6 +388,11 @@ export default function NuevoProyectoForm({ users }: { users: User[] }) {
                     {selectedPlatform.weeks}
                   </span>
                   <span className="text-[11px] text-slate-400">duración estimada de ejecución</span>
+                  {addonStoreLocator && (
+                    <span className="text-[11px] font-semibold text-violet-600 ml-auto flex items-center gap-1">
+                      <MapPin className="w-3 h-3" /> Con Geolocalización
+                    </span>
+                  )}
                 </div>
               )}
             </div>
