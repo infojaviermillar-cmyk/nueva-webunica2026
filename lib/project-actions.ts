@@ -9,33 +9,34 @@ import { PROJECT_TEMPLATES, type ProjectPhase } from '@/lib/project-types'
 
 // Obtain phases + tasks for a project
 export async function getProjectPhasesWithTasks(projectId: string) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return { success: false, error: 'Unauthorized', phases: [] as ProjectPhase[] }
+  try {
+    const adminClient = getSupabaseAdmin()
 
-  const adminClient = getSupabaseAdmin()
+    const { data: phases, error } = await adminClient
+      .from('project_phases')
+      .select(`
+        *,
+        project_tasks (*)
+      `)
+      .eq('project_id', projectId)
+      .order('phase_number', { ascending: true })
 
-  const { data: phases, error } = await adminClient
-    .from('project_phases')
-    .select(`
-      *,
-      project_tasks (*)
-    `)
-    .eq('project_id', projectId)
-    .order('phase_number', { ascending: true })
+    if (error) {
+      console.error('Error fetching phases:', error)
+      return { success: false, error: error.message, phases: [] as ProjectPhase[] }
+    }
 
-  if (error) {
-    console.error('Error fetching phases:', error)
-    return { success: false, error: error.message, phases: [] as ProjectPhase[] }
+    // Sort tasks by sort_order within each phase
+    const sortedPhases = (phases || []).map((phase: any) => ({
+      ...phase,
+      tasks: (phase.project_tasks || []).sort((a: any, b: any) => a.sort_order - b.sort_order),
+    }))
+
+    return { success: true, phases: sortedPhases as ProjectPhase[] }
+  } catch (err: any) {
+    console.error('Error in getProjectPhasesWithTasks:', err)
+    return { success: false, error: err.message, phases: [] as ProjectPhase[] }
   }
-
-  // Sort tasks by sort_order within each phase
-  const sortedPhases = (phases || []).map((phase: any) => ({
-    ...phase,
-    tasks: (phase.project_tasks || []).sort((a: any, b: any) => a.sort_order - b.sort_order),
-  }))
-
-  return { success: true, phases: sortedPhases as ProjectPhase[] }
 }
 
 // Create a project with auto-generated phases and tasks from template
