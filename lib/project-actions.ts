@@ -196,6 +196,33 @@ export async function updateTaskStatus(
   }
 }
 
+// Update notes / detailed_info for a specific task
+export async function updateTaskNote(
+  taskId: string,
+  detailedInfo: string,
+  projectId: string
+) {
+  try {
+    const adminClient = getSupabaseAdmin()
+
+    const { error } = await adminClient
+      .from('project_tasks')
+      .update({ detailed_info: detailedInfo })
+      .eq('id', taskId)
+
+    if (error) throw error
+
+    revalidatePath(`/admin/proyectos/${projectId}`)
+    revalidatePath(`/mi-cuenta/proyectos/${projectId}`)
+    revalidatePath(`/proyecto/${projectId}`)
+
+    return { success: true }
+  } catch (error: any) {
+    console.error('Error updating task note:', error)
+    return { success: false, error: error.message }
+  }
+}
+
 // Update the status of a phase
 export async function updatePhaseStatus(
   phaseId: string,
@@ -421,5 +448,58 @@ export async function updateProjectBusinessInfo(
     return { success: false, error: error.message }
   }
 }
+
+// Add a custom task or meeting commitment to a phase
+export async function addCustomProjectTask(
+  phaseId: string,
+  projectId: string,
+  title: string,
+  description?: string,
+  assignedTo: 'cliente' | 'agencia' | 'ambos' = 'ambos',
+  detailedInfo?: string
+) {
+  try {
+    const adminClient = getSupabaseAdmin()
+
+    // Get max sort_order for phase
+    const { data: existingTasks } = await adminClient
+      .from('project_tasks')
+      .select('sort_order')
+      .eq('phase_id', phaseId)
+      .order('sort_order', { ascending: false })
+      .limit(1)
+
+    const maxSort = existingTasks && existingTasks.length > 0 ? existingTasks[0].sort_order + 1 : 0
+
+    const { data, error } = await adminClient
+      .from('project_tasks')
+      .insert({
+        phase_id: phaseId,
+        title: title.trim(),
+        description: description?.trim() || null,
+        status: 'pendiente',
+        sort_order: maxSort,
+        assigned_to: assignedTo,
+        detailed_info: detailedInfo?.trim() || null,
+      })
+      .select()
+      .single()
+
+    if (error) throw error
+
+    // Recalculate overall progress
+    await recalculateProgress(projectId)
+
+    revalidatePath(`/admin/proyectos/${projectId}`)
+    revalidatePath(`/mi-cuenta/proyectos/${projectId}`)
+    revalidatePath(`/proyecto/${projectId}`)
+
+    return { success: true, task: data }
+  } catch (error: any) {
+    console.error('Error adding custom project task:', error)
+    return { success: false, error: error.message }
+  }
+}
+
 
 

@@ -11,6 +11,8 @@ import ProjectChat from '@/components/admin/project-chat'
 import DeleteProjectButton from '@/components/admin/delete-project-button'
 import ShareLinkButton from '@/components/admin/share-link-button'
 import BusinessInfoForm from '@/components/client/business-info-form'
+import AddMeetingTaskModal from '@/components/admin/add-meeting-task-modal'
+import { User, Briefcase, Users } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
@@ -155,6 +157,15 @@ export default async function AdminProyectoDetailPage({
         {/* Formulario de Insumos y Datos de la Empresa */}
         <BusinessInfoForm projectId={id} initialDescription={project.description} />
 
+        {/* Header de Fases y Botón de Agregar Compromiso */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <h2 className="text-2xl font-black text-slate-900">Cronograma de Fases y Tareas</h2>
+          <AddMeetingTaskModal
+            projectId={id}
+            phases={(phases as any[]).map((p: any) => ({ id: p.id, phase_number: p.phase_number, title: p.title }))}
+          />
+        </div>
+
         {/* Phases */}
         <div className="space-y-6">
           {(phases as any[]).map((phase: any, phaseIdx: number) => {
@@ -164,6 +175,10 @@ export default async function AdminProyectoDetailPage({
             const phaseProgress = phaseTotal > 0 ? Math.round((phaseCompleted / phaseTotal) * 100) : 0
             const badgeStyle = BADGE_STYLES[phase.badge] || BADGE_STYLES['normal']
             const gradient = PHASE_COLORS[phaseIdx % PHASE_COLORS.length]
+
+            const reunionTasks = phaseTasks.filter((t: any) => t.assigned_to === 'ambos')
+            const clientTasks = phaseTasks.filter((t: any) => t.assigned_to === 'cliente')
+            const agencyTasks = phaseTasks.filter((t: any) => !t.assigned_to || t.assigned_to === 'agencia')
 
             return (
               <div key={phase.id} className="bg-white border border-slate-200 rounded-[2.5rem] overflow-hidden shadow-lg shadow-slate-100/50">
@@ -195,13 +210,52 @@ export default async function AdminProyectoDetailPage({
                   />
                 </div>
 
-                {/* Tasks Grid */}
-                <div className="p-8 grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {phaseTasks.map((task: any) => (
-                    <TaskToggle key={task.id} task={task} projectId={id} />
-                  ))}
+                {/* Sub-secciones por Responsabilidad */}
+                <div className="p-8 space-y-6">
+                  {/* Subsección: Reuniones y Coordinación */}
+                  {reunionTasks.length > 0 && (
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-lg inline-flex items-center gap-1.5 mb-3">
+                        <Users className="w-3.5 h-3.5" /> 🤝 Reuniones, Minutas y Compromisos Conjuntos ({reunionTasks.length})
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {reunionTasks.map((task: any) => (
+                          <TaskToggle key={task.id} task={task} projectId={id} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Subsección: Entregables del Cliente */}
+                  {clientTasks.length > 0 && (
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-1 rounded-lg inline-flex items-center gap-1.5 mb-3">
+                        <User className="w-3.5 h-3.5" /> 🙋‍♂️ Insumos y Responsabilidades del Cliente ({clientTasks.length})
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {clientTasks.map((task: any) => (
+                          <TaskToggle key={task.id} task={task} projectId={id} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Subsección: Trabajo Webunica */}
+                  {agencyTasks.length > 0 && (
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-wider text-violet-800 bg-violet-100 px-3 py-1 rounded-lg inline-flex items-center gap-1.5 mb-3">
+                        <Briefcase className="w-3.5 h-3.5" /> 🚀 Trabajo de Diseño & Desarrollo Webunica ({agencyTasks.length})
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {agencyTasks.map((task: any) => (
+                          <TaskToggle key={task.id} task={task} projectId={id} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {phaseTasks.length === 0 && (
-                    <p className="text-slate-400 text-sm col-span-2 text-center py-4">Sin tareas en esta fase.</p>
+                    <p className="text-slate-400 text-sm text-center py-4">Sin tareas en esta fase.</p>
                   )}
                 </div>
               </div>
