@@ -113,6 +113,7 @@ export default function PlanConversionPage() {
               {[
                 "Personalización completa de Theme Propio enfocado en conversión",
                 "Fichas de Producto avanzadas con metacampos, badges y ofertas CRO",
+                "Carta Gantt en línea & seguimiento transparente por hitos (6 semanas)",
                 "Migración o carga masiva de hasta 300 productos",
                 "Integración con ERP (Bsale, Obuma, Defontana u otro)",
                 "Email Marketing automatizado con Klaviyo (Bienvenida + Carrito)",

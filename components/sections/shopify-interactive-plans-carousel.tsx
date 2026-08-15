@@ -100,6 +100,7 @@ export default function ShopifyInteractivePlansCarousel() {
                       "Despacho con tarifas fijas / zonas",
                       "1 app instalada y configurada",
                       "1 flujo de correos (bienvenida)",
+                      "Carta Gantt en línea & seguimiento por hitos",
                       "2 rondas de revisión de diseño",
                       "Diseño Mobile-First 100%",
                       "Capacitación básica de administración",
@@ -145,6 +146,7 @@ export default function ShopifyInteractivePlansCarousel() {
                       "Importación o configuración de hasta 500 productos*",
                       "3 apps instaladas y configuradas",
                       "3 flujos de correos que venden solos: bienvenida, carrito abandonado y post-compra",
+                      "Carta Gantt en línea & seguimiento por hitos",
                       "3 rondas de revisión de diseño",
                       "Integración pasarelas de pago + Despacho local",
                       "Boleta Electrónica SII automática",
@@ -206,6 +208,7 @@ export default function ShopifyInteractivePlansCarousel() {
                     {[
                       "Diseño UX/UI personalizado para máxima conversión",
                       "Importación o migración de hasta 1.000 productos",
+                      "Carta Gantt en línea & seguimiento por hitos",
                       "5 apps instaladas y configuradas",
                       "5 flujos de correos de automatización",
                       "4 rondas de revisión de diseño",
@@ -275,6 +278,7 @@ export default function ShopifyInteractivePlansCarousel() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                     {[
                       "Diseño UX/UI a medida desde cero en Figma",
+                      "Carta Gantt en línea & seguimiento por hitos",
                       "Migración avanzada de catálogo (1.000+ prods)",
                       "5 apps instaladas y configuradas",
                       "5 flujos de correos de automatización",

@@ -113,6 +113,7 @@ export default function PlanFullPage() {
               {[
                 "Emisión Automática de Boleta Electrónica SII",
                 "Carrier Calculated Shipping (CCS) con transportistas chilenos",
+                "Carta Gantt en línea & seguimiento transparente por hitos",
                 "Optimización de arquitectura CyberDay & Black Friday Ready",
                 "Secciones personalizadas avanzadas para potenciar conversión",
                 "Carga y organización de hasta 120 productos y colecciones",

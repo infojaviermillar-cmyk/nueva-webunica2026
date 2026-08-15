@@ -107,6 +107,7 @@ export default function PlanCustomElitePage() {
               {[
                 "Diseño UX/UI desde cero en Figma (Sin uso de plantillas)",
                 "Prototipado interactivo y refinamiento estético de marca",
+                "Carta Gantt en línea & seguimiento por hitos de cumplimiento (8 semanas)",
                 "Migración avanzada de productos, clientes y contenido de la empresa",
                 "Optimización para conversión CRO en todos los puntos del embudo",
                 "Integración con ERP u otros sistemas internos a medida",
