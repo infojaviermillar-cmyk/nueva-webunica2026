@@ -74,10 +74,17 @@ export default function PricingPlans() {
             className="text-lg sm:text-xl md:text-2xl text-zinc-800 font-light leading-relaxed max-w-3xl mx-auto mb-6"
           />
 
-          <div className="flex items-center justify-center gap-4 text-[11px] font-mono font-bold text-[#7850FA] uppercase tracking-widest">
+          <div className="flex flex-wrap items-center justify-center gap-3 text-[11px] font-mono font-bold text-[#7850FA] uppercase tracking-widest mb-6">
              <span>Valores + IVA</span>
              <span className="w-1.5 h-1.5 bg-purple-300 rounded-full"></span>
              <span>6 cuotas sin interés</span>
+             <span className="w-1.5 h-1.5 bg-purple-300 rounded-full"></span>
+             <span className="text-emerald-600 font-black">Pagos 100% Protegidos por Hitos</span>
+          </div>
+
+          <div className="inline-flex items-center gap-3 bg-emerald-50 border border-emerald-200 px-5 py-3 rounded-2xl text-xs text-emerald-900 font-medium max-w-xl mx-auto shadow-xs">
+            <span className="text-base">🛡️</span>
+            <span><strong>Garantía Webunica:</strong> Todos los planes incluyen panel privado con <strong>Carta Gantt en vivo</strong>. Pagas el anticipo y los saldos se liberan previa aprobación de cada hito.</span>
           </div>
         </div>
         

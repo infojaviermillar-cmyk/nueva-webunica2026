@@ -27,6 +27,25 @@ interface PlanCategory {
 
 const COMPARISON_DATA: PlanCategory[] = [
   {
+    category: "Garantía & Gestión de Proyecto",
+    features: [
+      {
+        feature: { name: "Carta Gantt en Línea en Vivo", description: "Acceso a un portal privado donde puedes seguir el avance semana a semana, ver las responsabilidades clasificadas y chatear con el equipo." },
+        prende: "Incluido (Panel Privado)",
+        full: "Incluido (Panel Privado)",
+        pro: "Incluido (Panel Privado)",
+        customElite: "Incluido (Panel Privado 8s)"
+      },
+      {
+        feature: { name: "Pagos por Cumplimiento de Hitos", description: "Tus pagos se dividen por etapas y se liberan únicamente contra el cumplimiento verificado de los entregables de cada hito." },
+        prende: "50% Inicio - 50% Go Live",
+        full: "Hitos por Semana (50% / 50%)",
+        pro: "4 Hitos (25% / 25% / 25% / 25%)",
+        customElite: "4 Hitos (25% / 25% / 25% / 25%)"
+      }
+    ]
+  },
+  {
     category: "Configuración y Diseño",
     features: [
       {
