@@ -2,6 +2,7 @@ import { getAllProjects } from '@/lib/feedback-admin-actions'
 import Link from 'next/link'
 import { PlusCircle, ArrowLeft, ShoppingBag, ShoppingCart, Code, ExternalLink, Zap, Star, Building2 } from 'lucide-react'
 import DeleteProjectButton from '@/components/admin/delete-project-button'
+import ShareLinkButton from '@/components/admin/share-link-button'
 
 export const dynamic = 'force-dynamic'
 
@@ -98,10 +99,12 @@ export default async function AdminProyectosPage() {
 
                   {/* Actions */}
                   <div className="flex items-center gap-2 border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-4 shrink-0">
+                    <ShareLinkButton projectId={project.id} variant="icon" />
                     <Link
-                      href={`/admin/proyectos/${project.id}`}
+                      href={`/proyecto/${project.id}`}
+                      target="_blank"
                       className="p-2.5 text-slate-400 hover:text-violet-600 hover:bg-violet-50 rounded-xl transition-all"
-                      title="Ver detalle"
+                      title="Ver vista del cliente"
                     >
                       <ExternalLink className="w-4.5 h-4.5" />
                     </Link>

@@ -9,6 +9,7 @@ import DesignSettingsForm from '@/components/admin/design-settings-form'
 import GanttExportButton from '@/components/admin/gantt-chart-pdf'
 import ProjectChat from '@/components/admin/project-chat'
 import DeleteProjectButton from '@/components/admin/delete-project-button'
+import ShareLinkButton from '@/components/admin/share-link-button'
 
 export const dynamic = 'force-dynamic'
 
@@ -94,6 +95,8 @@ export default async function AdminProyectoDetailPage({
 
             {/* URLs and Actions */}
             <div className="flex flex-col gap-3 shrink-0">
+              <ShareLinkButton projectId={id} title="📋 Copiar Link Privado Cliente" variant="button" />
+              
               <GanttExportButton project={project} phases={phases} />
               
               {project.staging_url && (
@@ -110,9 +113,9 @@ export default async function AdminProyectoDetailPage({
                   <ExternalLink className="w-3 h-3 opacity-60" />
                 </a>
               )}
-              <Link href={`/mi-cuenta/proyectos/${id}`} target="_blank"
+              <Link href={`/proyecto/${id}`} target="_blank"
                 className="inline-flex items-center gap-2 px-5 py-3 bg-violet-50 hover:bg-violet-100 rounded-full text-xs font-bold text-violet-700 transition-colors">
-                <ExternalLink className="w-4 h-4" /> Vista del Cliente
+                <ExternalLink className="w-4 h-4" /> Vista Privada del Cliente
               </Link>
               <div className="pt-2">
                 <DeleteProjectButton projectId={id} projectTitle={project.title} redirectTo="/admin/proyectos" variant="button" />

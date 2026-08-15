@@ -43,16 +43,28 @@ export async function addProjectNote(
   try {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
-    if (!user) return { success: false, error: 'No autenticado' }
 
     const adminClient = getSupabaseAdmin()
+
+    let authorEmail = user?.email || null
+    if (!authorEmail && authorType === 'cliente') {
+      const { data: proj } = await adminClient
+        .from('client_projects')
+        .select('client_email')
+        .eq('id', projectId)
+        .single()
+      if (proj?.client_email) {
+        authorEmail = proj.client_email
+      }
+    }
+
     const { data, error } = await adminClient
       .from('project_notes')
       .insert({
         project_id: projectId,
         content: content.trim(),
         author_type: authorType,
-        author_email: user.email || null,
+        author_email: authorEmail,
       })
       .select()
       .single()
@@ -61,6 +73,7 @@ export async function addProjectNote(
 
     revalidatePath(`/admin/proyectos/${projectId}`)
     revalidatePath(`/mi-cuenta/proyectos/${projectId}`)
+    revalidatePath(`/proyecto/${projectId}`)
 
     return { success: true, note: data as ProjectNote }
   } catch (err: any) {
@@ -68,3 +81,4 @@ export async function addProjectNote(
     return { success: false, error: err.message }
   }
 }
+
