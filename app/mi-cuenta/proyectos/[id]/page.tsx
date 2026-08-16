@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { getSupabaseAdmin } from '@/lib/supabase/admin'
 import Link from 'next/link'
 import { ArrowLeft, ExternalLink, Globe, Layout, Palette, PenTool, DollarSign, Clock } from 'lucide-react'
+import { getCleanDescription } from '@/lib/project-types'
 import TaskCard from '@/components/client/task-card'
 import ProjectChatClient from '@/components/client/project-chat-client'
 import BusinessInfoForm from '@/components/client/business-info-form'
@@ -116,8 +117,8 @@ export default async function ClientProyectoDetailPage({
           <h1 className="text-3xl md:text-5xl font-black tracking-tighter leading-tight mb-4 text-slate-900">
             {project.title}
           </h1>
-          {project.description && (
-            <p className="text-slate-500 text-lg max-w-xl mx-auto">{project.description}</p>
+          {getCleanDescription(project.description) && (
+            <p className="text-slate-500 text-lg max-w-xl mx-auto">{getCleanDescription(project.description)}</p>
           )}
 
           {/* Urgency banner if in progress */}

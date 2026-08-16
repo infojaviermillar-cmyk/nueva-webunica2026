@@ -1,5 +1,7 @@
 import { getProjectFull } from '@/lib/project-actions'
 import { getProjectNotes } from '@/lib/project-notes-actions'
+import { getProjectPhasesWithTasks } from '@/lib/project-actions'
+import { getCleanDescription } from '@/lib/project-types'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
@@ -92,8 +94,8 @@ export default async function AdminProyectoDetailPage({
                   {project.client_email && <span className="text-slate-400"> — {project.client_email}</span>}
                 </p>
               )}
-              {project.description && (
-                <p className="text-slate-500 text-sm mt-2 max-w-xl">{project.description}</p>
+              {getCleanDescription(project.description) && (
+                <p className="text-slate-500 text-sm mt-2 max-w-xl">{getCleanDescription(project.description)}</p>
               )}
             </div>
 

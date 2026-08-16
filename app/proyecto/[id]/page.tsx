@@ -9,6 +9,7 @@ import TaskToggle from '@/components/admin/task-toggle'
 import BusinessInfoForm from '@/components/client/business-info-form'
 import AddMeetingTaskModal from '@/components/admin/add-meeting-task-modal'
 import InteractiveGanttView from '@/components/client/interactive-gantt-view'
+import { getCleanDescription } from '@/lib/project-types'
 import { User, Briefcase, Users } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
@@ -120,8 +121,8 @@ export default async function PublicProyectoPage({
           {project.client_name && (
             <p className="text-slate-600 font-semibold mb-2">Cliente: {project.client_name}</p>
           )}
-          {project.description && (
-            <p className="text-slate-500 text-base max-w-2xl mx-auto">{project.description}</p>
+          {getCleanDescription(project.description) && (
+            <p className="text-slate-500 text-base max-w-2xl mx-auto">{getCleanDescription(project.description)}</p>
           )}
         </header>
 

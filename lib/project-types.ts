@@ -9,6 +9,20 @@ export type ProjectPhase = {
   tasks?: ProjectTask[]
 }
 
+export function getCleanDescription(description?: string | null): string {
+  if (!description) return ''
+  const trimmed = description.trim()
+  if (trimmed.startsWith('{')) {
+    try {
+      const parsed = JSON.parse(trimmed)
+      return typeof parsed.notes === 'string' ? parsed.notes : ''
+    } catch {
+      return ''
+    }
+  }
+  return description
+}
+
 export type ProjectTask = {
   id: string
   phase_id: string
