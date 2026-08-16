@@ -20,7 +20,7 @@ export default function BusinessInfoForm({ projectId, initialDescription }: Prop
     parsedInfo = {}
   }
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
 
