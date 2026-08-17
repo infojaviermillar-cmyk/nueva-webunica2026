@@ -430,7 +430,7 @@ export default function ShopifyPlansComparison() {
                 <th className="p-5 lg:p-8 w-1/5 text-center border-b border-zinc-100 border-l border-zinc-50 bg-violet-50/50 relative">
                   <div className="flex justify-center mb-3 mt-1"><Zap className="w-7 h-7 text-violet-500" /></div>
                   <h4 className="text-xl lg:text-2xl font-black text-zinc-900 uppercase tracking-tight mb-1 font-neue-haas">Plan Full</h4>
-                  <div className="text-lg lg:text-xl font-black text-violet-700 mb-2">$780.000 <span className="text-[10px] text-violet-500 uppercase font-bold">+ IVA</span></div>
+                  <div className="text-lg lg:text-xl font-black text-violet-700 mb-2">$1.200.000 <span className="text-[10px] text-violet-500 uppercase font-bold">+ IVA</span></div>
                   <div className="text-[9px] font-black text-violet-600 bg-violet-100 px-2.5 py-1 rounded-full inline-block mb-4">Boleta SII • Envíos</div>
                   <div className="flex flex-col items-center gap-2">
                     <LeadButton service="Plan Full" className="w-full py-3.5 px-3 text-[10px] bg-[#FF0085] text-white rounded-xl uppercase font-black tracking-wider hover:bg-pink-700 shadow-lg shadow-pink-600/20">
