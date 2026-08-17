@@ -1,2 +1,5 @@
+providers = ["node"]
+nixpkgsArchive = "https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-24.05.tar.gz"
+
 [variables]
 NIXPACKS_NODE_VERSION = "20"
