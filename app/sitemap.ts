@@ -37,6 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/servicios-seo-posicionamiento-google',
     '/agencia-de-desarrollo-web-y-ecommerce-en-chile',
     '/agencia-de-embudos-de-venta-chile',
+    '/ley-21719-proteccion-de-datos-personales',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

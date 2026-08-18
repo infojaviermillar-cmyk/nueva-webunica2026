@@ -82,6 +82,11 @@ export default function Footer() {
                     Páginas Web PYMES
                   </Link>
                 </li>
+                <li>
+                  <Link href="/ley-21719-proteccion-de-datos-personales" className="text-sm font-bold text-blue-400 hover:text-white transition-colors pb-1 inline-block">
+                    🛡️ Ley 21.719 Protección Datos
+                  </Link>
+                </li>
               </ul>
             </nav>
 
