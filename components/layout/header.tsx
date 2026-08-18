@@ -91,7 +91,8 @@ export default function Header({ domain = '' }: { domain?: string }) {
     '/sistema-cotizaciones-intranet-wordpress',
     '/servicios-seo-posicionamiento-google',
     '/tienda-dropshipping-shopify-y-dropi',
-    '/desarrollo-web-corporativo'
+    '/desarrollo-web-corporativo',
+    '/ley-21719-proteccion-de-datos-personales'
   ];
 
   const isDarkHero = darkPages.includes(pathname);
@@ -404,6 +405,15 @@ export default function Header({ domain = '' }: { domain?: string }) {
                       </h4>
                       <ul className="flex flex-col gap-1">
                         <li>
+                          <Link href="/ley-21719-proteccion-de-datos-personales" className="group/item flex flex-col p-3 rounded-2xl hover:bg-blue-50 transition-colors bg-blue-50/60 border border-blue-200">
+                            <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-blue-600 transition-colors flex items-center gap-2">
+                              Ley 21.719 Protección Datos
+                              <span className="text-[8px] bg-blue-600 text-white px-1.5 py-0.5 rounded-sm uppercase font-black">NUEVO</span>
+                            </span>
+                            <span className="text-[11px] text-zinc-500 font-medium">Adecuación Web y ARCOP 2026</span>
+                          </Link>
+                        </li>
+                        <li>
                           <Link href="/implementacion-ia-conversacional" className="group/item flex flex-col p-3 rounded-2xl hover:bg-orange-50 transition-colors bg-orange-50/50 border border-orange-100">
                             <span className="text-[15px] font-bold text-zinc-950 group-hover/item:text-orange-600 transition-colors flex items-center gap-2">IA Conversacional <span className="text-[8px] bg-orange-600 text-white px-1.5 py-0.5 rounded-sm uppercase">NUEVO</span></span>
                             <span className="text-[11px] text-zinc-500 font-medium">Chatbots Databot B2B</span>
@@ -668,6 +678,10 @@ export default function Header({ domain = '' }: { domain?: string }) {
                     <Link href="/desarrollo-paginas-web-pymes-chile" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-zinc-800 hover:text-violet-600 flex items-center gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-violet-600" />
                       Sitios Pymes
+                    </Link>
+                    <Link href="/ley-21719-proteccion-de-datos-personales" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-bold text-blue-600 hover:text-blue-700 flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                      Ley 21.719 Protección Datos <span className="text-[9px] bg-blue-600 text-white px-2 py-0.5 rounded-full uppercase font-black">Nuevo</span>
                     </Link>
                   </div>
                 </div>
