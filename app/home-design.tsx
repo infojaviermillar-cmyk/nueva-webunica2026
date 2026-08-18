@@ -14,6 +14,7 @@ import ServicesTabs from '@/components/sections/services-tabs';
 import WorkProcess from '@/components/sections/work-process';
 import ViccaTransformationShowcase from '@/components/sections/vicca-transformation-showcase';
 import GanttShowcaseSection from '@/components/sections/gantt-showcase-section';
+import Ley21719ShowcaseSection from '@/components/sections/ley21719-showcase-section';
 import ScrollRevealText from '@/components/ui/scroll-reveal-text';
 import { HeroArticleBanner } from '@/components/dropshipping/hero-article-banner';
 
@@ -504,6 +505,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
       <ServicesTabs />
       <WorkProcess />
       <GanttShowcaseSection />
+      <Ley21719ShowcaseSection />
       <ViccaTransformationShowcase />
       <PricingPlans />
       <HomeFAQ />

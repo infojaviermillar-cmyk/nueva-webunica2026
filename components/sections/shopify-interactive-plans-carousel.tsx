@@ -209,6 +209,7 @@ export default function ShopifyInteractivePlansCarousel() {
                       "Diseño UX/UI personalizado para máxima conversión",
                       "Importación o migración de hasta 1.000 productos",
                       "Carta Gantt en línea & seguimiento por hitos",
+                      "Adecuación Ley 21.719 & Banner Cookies Consent Mode v2",
                       "5 apps instaladas y configuradas",
                       "5 flujos de correos de automatización",
                       "4 rondas de revisión de diseño",
@@ -279,6 +280,7 @@ export default function ShopifyInteractivePlansCarousel() {
                     {[
                       "Diseño UX/UI a medida desde cero en Figma",
                       "Carta Gantt en línea & seguimiento por hitos",
+                      "Adecuación Ley 21.719 & Banner Cookies Consent Mode v2",
                       "Migración avanzada de catálogo (1.000+ prods)",
                       "5 apps instaladas y configuradas",
                       "5 flujos de correos de automatización",

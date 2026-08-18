@@ -42,6 +42,13 @@ const COMPARISON_DATA: PlanCategory[] = [
         full: "Hitos por Semana (50% / 50%)",
         pro: "4 Hitos (25% / 25% / 25% / 25%)",
         customElite: "4 Hitos (25% / 25% / 25% / 25%)"
+      },
+      {
+        feature: { name: "Adecuación Ley 21.719 (Datos & Cookies)", description: "Cumplimiento de la nueva ley de protección de datos en Chile: consentimientos informados, derechos ARCOP y banner de cookies Consent Mode v2." },
+        prende: "Opcional (+$190k)",
+        full: "Opcional (+$190k)",
+        pro: "✓ Incluido Gratis",
+        customElite: "✓ Incluido Gratis"
       }
     ]
   },
