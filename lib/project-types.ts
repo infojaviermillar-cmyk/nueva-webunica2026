@@ -88,34 +88,10 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           detailed_info: 'Si cuentas con un manual de marca, por favor envíalo. Si no, indícanos cuáles son los colores principales y secundarios que te gustaría usar, junto con las tipografías preferidas. Esto guiará el diseño de la interfaz para mantener coherencia visual.' 
         },
         { 
-          title: 'Fotos de productos', 
-          description: 'Mínimo 3-5 fotos por producto, ideal fondo neutro', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Sube las fotografías de tus productos a una carpeta de Google Drive o similar. Recomendamos que las imágenes principales tengan fondo blanco o neutro para mantener uniformidad, y añadir fotos de estilo de vida para enriquecer la ficha de producto.' 
-        },
-        { 
-          title: 'Catálogo de productos', 
-          description: 'Excel/CSV con nombre, precio, stock, descripción', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Necesitamos una planilla (Excel o CSV) que liste todos los productos a cargar. Debe incluir: Nombre del producto, Precio normal, Precio de oferta (si aplica), SKU, Cantidad en stock, y una breve descripción comercial.' 
-        },
-        { 
-          title: 'Textos "Nosotros"', 
-          description: 'Historia de la marca, misión, equipo, fotos corporativas', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Redacta un texto contando la historia de tu empresa, la misión, visión y quiénes conforman el equipo. Adjunta fotografías reales de la tienda física (si aplica) o del equipo trabajando. Esto genera confianza en los compradores.' 
-        },
-        { 
           title: 'Accesos de dominio', 
           description: 'Panel DNS (NIC Chile, Namecheap, GoDaddy, etc.)', 
           assigned_to: 'cliente', 
           detailed_info: 'Proporciona los accesos (usuario y contraseña) a la plataforma donde compraste tu dominio (.cl, .com, etc.) para poder conectarlo a la nueva tienda cuando estemos listos para el lanzamiento.' 
-        },
-        { 
-          title: 'Cuenta de pagos (Mercado Pago, etc.)', 
-          description: 'Credenciales o acceso de colaborador', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Para recibir dinero, necesitamos que nos compartas las credenciales de prueba y producción de tu pasarela de pagos (Mercado Pago, Flow, Webpay, etc.), o que nos invites como colaboradores a tu cuenta.' 
         },
         { 
           title: 'Redes sociales', 
@@ -172,7 +148,7 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           detailed_info: 'Adaptaremos todos los diseños previamente creados a su versión móvil (para celulares), asegurando que la experiencia táctil sea fluida y optimizada.' 
         },
         { 
-          title: 'Diseño aprobado → A Desarrollo', 
+          title: 'Diseño approved → A Desarrollo', 
           description: 'Entrega final al desarrollador', 
           assigned_to: 'agencia', 
           detailed_info: 'Una vez que el cliente aprueba los diseños sin más cambios, congelamos las maquetas visuales y preparamos todos los archivos (assets) para que el equipo de programación comience a construir.' 
@@ -254,6 +230,36 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           detailed_info: 'Para proceder con la carga de productos, configuraciones avanzadas y construcción de páginas secundarias, se requiere el tercer pago del 25%.' 
         },
         { 
+          title: 'Catálogo de productos (Excel/CSV completo)', 
+          description: 'Hasta 1.000 SKUs con todas sus variantes', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Planilla estructurada con todos los productos a cargar. Debe incluir: nombre, descripción, precio neto, precio con IVA, SKU, stock, categoría y variantes.' 
+        },
+        { 
+          title: 'Fotos de productos en alta calidad', 
+          description: 'Fondo blanco, múltiples ángulos y lifestyle', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Fotografías de productos en alta calidad subidas a Google Drive con fondo neutro y fotos de estilo de vida.' 
+        },
+        { 
+          title: 'Credenciales: Wasabil, Pasarelas y Envíos', 
+          description: 'API keys de DTE Wasabil, pasarelas de pago y logística', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Entrega de accesos y API keys para pasarelas de pago (Mercado Pago, Flow, Transbank), facturación electrónica Wasabil y couriers.' 
+        },
+        { 
+          title: 'Textos corporativos y legales', 
+          description: 'Nosotros, misión, políticas ya redactadas', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Textos de la página Nosotros, historia de la marca, políticas de devolución, términos y condiciones y privacidad.' 
+        },
+        { 
+          title: 'Páginas secundarias: Nosotros, Blog, Contacto', 
+          description: 'Templates de páginas de contenido', 
+          assigned_to: 'agencia', 
+          detailed_info: 'Diseño, construcción y maquetación de la página Nosotros, Blog corporativo y formulario de Contacto.' 
+        },
+        { 
           title: 'Carga de productos (hasta 50 SKUs)', 
           description: 'Fotos, descripciones, precios, variantes', 
           assigned_to: 'agencia', 
@@ -270,24 +276,6 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           description: 'Implementación del diseño de producto', 
           assigned_to: 'agencia', 
           detailed_info: 'Modificaremos la plantilla de producto (Product Page) para que incluya todos los bloques de confianza, acordeones de información (envíos/devoluciones) y un layout enfocado en la conversión.' 
-        },
-        { 
-          title: 'Página Nosotros', 
-          description: 'Historia y equipo de la marca', 
-          assigned_to: 'agencia', 
-          detailed_info: 'Crearemos una página estática (About Us) con el texto y las fotografías proporcionadas por el cliente en la Fase 0, maquetadas de forma atractiva.' 
-        },
-        { 
-          title: 'Página Contacto', 
-          description: 'Formulario + datos de contacto', 
-          assigned_to: 'agencia', 
-          detailed_info: 'Implementaremos un formulario de contacto seguro conectado al correo de la empresa, y un bloque con información adicional (WhatsApp, horarios, dirección física).' 
-        },
-        { 
-          title: 'Políticas legales', 
-          description: 'Términos, privacidad, devoluciones', 
-          assigned_to: 'agencia', 
-          detailed_info: 'Generaremos e integraremos las páginas legales obligatorias para e-commerce. (Nota: el cliente debe proveer el contenido exacto si hay requerimientos legales especiales; nosotros proveemos plantillas base).' 
         },
         { 
           title: 'Configurar filtros y búsqueda', 
@@ -392,34 +380,10 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           detailed_info: 'Si cuentas con un manual de marca, por favor envíalo. Si no, indícanos cuáles son los colores principales y secundarios que te gustaría usar, junto con las tipografías preferidas. Esto guiará el diseño de la interfaz para mantener coherencia visual.' 
         },
         { 
-          title: 'Fotos de productos', 
-          description: 'Mínimo 3-5 fotos por producto, ideal fondo neutro', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Sube las fotografías de tus productos a una carpeta de Google Drive o similar. Recomendamos que las imágenes principales tengan fondo blanco o neutro para mantener uniformidad, y añadir fotos de estilo de vida para enriquecer la ficha de producto.' 
-        },
-        { 
-          title: 'Catálogo de productos', 
-          description: 'Excel/CSV con nombre, precio, stock, descripción', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Necesitamos una planilla (Excel o CSV) que liste todos los productos a cargar. Debe incluir: Nombre del producto, Precio normal, Precio de oferta (si aplica), SKU, Cantidad en stock, y una breve descripción comercial.' 
-        },
-        { 
-          title: 'Textos "Nosotros"', 
-          description: 'Historia de la marca, misión, equipo, fotos corporativas', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Redacta un texto contando la historia de tu empresa, la misión, visión y quiénes conforman el equipo. Adjunta fotografías reales de la tienda física (si aplica) o del equipo trabajando. Esto genera confianza en los compradores.' 
-        },
-        { 
           title: 'Accesos de dominio', 
           description: 'Panel DNS (NIC Chile, Namecheap, GoDaddy, etc.)', 
           assigned_to: 'cliente', 
           detailed_info: 'Proporciona los accesos (usuario y contraseña) a la plataforma donde compraste tu dominio (.cl, .com, etc.) para poder conectarlo a la nueva tienda cuando estemos listos para el lanzamiento.' 
-        },
-        { 
-          title: 'Cuenta de pagos (Mercado Pago, etc.)', 
-          description: 'Credenciales o acceso de colaborador', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Para recibir dinero, necesitamos que nos compartas las credenciales de prueba y producción de tu pasarela de pagos (Mercado Pago, Flow, Webpay, etc.), o que nos invites como colaboradores a tu cuenta.' 
         },
         { 
           title: 'Redes sociales', 
@@ -558,6 +522,36 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           detailed_info: 'Para proceder con la carga final de productos, configuraciones avanzadas y construcción, se requiere el tercer pago del 25%.' 
         },
         { 
+          title: 'Catálogo de productos (Excel/CSV completo)', 
+          description: 'Hasta 1.000 SKUs con todas sus variantes', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Planilla estructurada con todos los productos a cargar. Debe incluir: nombre, descripción, precio neto, precio con IVA, SKU, stock, categoría y variantes.' 
+        },
+        { 
+          title: 'Fotos de productos en alta calidad', 
+          description: 'Fondo blanco, múltiples ángulos y lifestyle', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Fotografías de productos en alta calidad subidas a Google Drive con fondo neutro y fotos de estilo de vida.' 
+        },
+        { 
+          title: 'Credenciales: Wasabil, Pasarelas y Envíos', 
+          description: 'API keys de DTE Wasabil, pasarelas de pago y logística', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Entrega de accesos y API keys para pasarelas de pago (Mercado Pago, Flow, Transbank), facturación electrónica Wasabil y couriers.' 
+        },
+        { 
+          title: 'Textos corporativos y legales', 
+          description: 'Nosotros, misión, políticas ya redactadas', 
+          assigned_to: 'cliente', 
+          detailed_info: 'Textos de la página Nosotros, historia de la marca, políticas de devolución, términos y condiciones y privacidad.' 
+        },
+        { 
+          title: 'Páginas secundarias: Nosotros, Blog, Contacto', 
+          description: 'Templates de páginas de contenido', 
+          assigned_to: 'agencia', 
+          detailed_info: 'Diseño, construcción y maquetación de la página Nosotros, Blog corporativo y formulario de Contacto.' 
+        },
+        { 
           title: 'Desarrollo Homepage', 
           description: 'Implementación del diseño de inicio', 
           assigned_to: 'agencia', 
@@ -586,18 +580,6 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           description: 'Por precio, categoría, disponibilidad', 
           assigned_to: 'agencia', 
           detailed_info: 'Configuraremos filtros AJAX para que el usuario pueda buscar productos sin recargar la página entera (ej. deslizador de precios o atributos).' 
-        },
-        { 
-          title: 'Página Nosotros', 
-          description: 'Historia, equipo, misión', 
-          assigned_to: 'agencia', 
-          detailed_info: 'Construiremos la página estática "Acerca de Nosotros" integrando el copywriting y fotografías de la marca.' 
-        },
-        { 
-          title: 'Página Contacto', 
-          description: 'Formulario + mapa ubicación', 
-          assigned_to: 'agencia', 
-          detailed_info: 'Instalaremos y protegeremos (reCAPTCHA) un formulario de contacto y enlazaremos el mapa de Google si existe una tienda física.' 
         },
         { 
           title: 'Revisión con cliente — Semana 3', 
@@ -656,12 +638,6 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
           detailed_info: 'Haremos una compra de prueba completa, validaremos la velocidad del sitio usando LiteSpeed Cache y revisaremos las meta-etiquetas de SEO Básico con Rank Math.' 
         },
         { 
-          title: 'Revisión final cliente', 
-          description: 'Aprobación final', 
-          assigned_to: 'cliente', 
-          detailed_info: 'Última verificación del cliente en Staging antes de realizar la migración al dominio oficial.' 
-        },
-        { 
           title: '🎉 GO LIVE', 
           description: 'Cambiar DNS + anunciar lanzamiento', 
           assigned_to: 'agencia', 
@@ -680,11 +656,7 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
         { title: 'Pago Etapa 1 (50%)', description: 'Anticipo para inicio de diseño y desarrollo', assigned_to: 'cliente' as const, detailed_info: 'El proyecto inicia formalmente con el pago del 50% del total. Este pago reserva la programación del equipo y da inicio a todas las actividades de la Semana 1.' },
         { title: 'Logo en alta resolución', description: 'PNG transparente, SVG o PDF vectorial', assigned_to: 'cliente' as const, detailed_info: 'Necesitamos el logotipo en formato vectorial (SVG, AI, PDF) o PNG transparente de al menos 1000px de ancho. Esto se usará en header, footer, emails y favicón.' },
         { title: 'Manual de marca / Colores', description: 'Paleta de colores, tipografías y directrices visuales', assigned_to: 'cliente' as const, detailed_info: 'Envíanos tu manual de marca completo o, si no lo tienes, indica los colores HEX principales y secundarios y las fuentes que representan tu marca.' },
-        { title: 'Catálogo de productos (Excel/CSV)', description: 'Nombre, precio, SKU, stock, descripción, variantes', assigned_to: 'cliente' as const, detailed_info: 'Planilla estructurada con todos los productos a cargar (hasta 1.000 SKUs incluidos). Debe incluir columnas de: nombre, descripción, precio neto, precio con IVA, SKU, stock, categoría, variantes y URL de imágenes si están disponibles.' },
-        { title: 'Fotografías de productos', description: 'Mínimo 3-5 fotos por producto en fondo neutro', assigned_to: 'cliente' as const, detailed_info: 'Sube las fotos a Google Drive. Recomendamos fondo blanco para consistencia. El equipo de diseño puede hacer una selección y retoque básico.' },
         { title: 'Credenciales DNS y dominio', description: 'Panel DNS de NIC Chile, GoDaddy o similar', assigned_to: 'cliente' as const, detailed_info: 'Accesos al panel DNS del registrador donde está tu dominio (.cl, .com, etc.) para configurar los nameservers de Shopify cuando sea momento del lanzamiento.' },
-        { title: 'Credenciales pasarela de pago', description: 'Mercado Pago, Flow, Transbank — API keys', assigned_to: 'cliente' as const, detailed_info: 'Comparte las API keys (pública y privada) de tu pasarela de pagos, o invítanos como colaboradores. Necesitamos tanto claves de prueba como de producción.' },
-        { title: 'Accesos Wasabil (facturación)', description: 'Credenciales del sistema de DTE', assigned_to: 'cliente' as const, detailed_info: 'Usuario y contraseña de tu cuenta Wasabil o del sistema de facturación electrónica elegido. Necesario para configurar la emisión automática de boletas/facturas desde Shopify.' },
         { title: 'Banners publicitarios y piezas gráficas', description: 'Imágenes promocionales para el hero slider y portadas', assigned_to: 'cliente' as const, detailed_info: 'Entrega o envío de imágenes promocionales en alta resolución y piezas gráficas para el carrusel principal de la portada (hero slider) y banners publicitarios de ofertas.' },
         { title: 'Diseño y maquetación de Banners publicitarios', description: 'Creación y optimización de banners hero slider (Desktop y Mobile)', assigned_to: 'agencia' as const, detailed_info: 'Diseñaremos y adaptaremos los banners publicitarios principales del sitio en versiones Desktop y Mobile con compresión y formato optimizado para carga rápida.' },
         { title: 'Wireframes y Arquitectura de Información', description: 'Estructura de navegación y flujos de usuario', assigned_to: 'agencia' as const, detailed_info: 'El equipo de UX diseñará los wireframes de baja fidelidad definiendo la jerarquía de contenidos, la navegación, los flujos de compra y las secciones principales.' },
@@ -715,10 +687,14 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       subtitle: 'Importación de productos, páginas comerciales y maquetación avanzada',
       badge: 'intenso' as const,
       tasks: [
+        { title: 'Catálogo de productos (Excel/CSV completo)', description: 'Hasta 1.000 SKUs con todas sus variantes', assigned_to: 'cliente' as const, detailed_info: 'Planilla con todos los campos: nombre, descripción larga, precio, precio tachado, SKU, código de barras, peso, variantes, stock por sucursal si aplica, URL de imágenes.' },
+        { title: 'Fotos de productos en alta calidad', description: 'Fondo blanco, múltiples ángulos y lifestyle', assigned_to: 'cliente' as const, detailed_info: 'Al menos 3 fotos de fondo blanco + 1-2 fotos de lifestyle por producto estrella. Organizadas en carpetas por SKU en Google Drive.' },
+        { title: 'Credenciales: Wasabil, Pasarelas y Envíos', description: 'API keys de DTE Wasabil, pagos y logística', assigned_to: 'cliente' as const, detailed_info: 'API keys de Wasabil (DTE), credenciales de producción de Mercado Pago/Flow/Transbank, y accesos de la cuenta de Shipit, Envíame u operador logístico.' },
+        { title: 'Textos corporativos y legales', description: 'Nosotros, misión, políticas ya redactadas', assigned_to: 'cliente' as const, detailed_info: 'Texto de la página Nosotros, políticas de devolución personalizadas, términos y condiciones, política de privacidad.' },
+        { title: 'Páginas secundarias: Nosotros, Blog, Contacto', description: 'Templates de páginas de contenido', assigned_to: 'agencia' as const, detailed_info: 'Construcción de las páginas secundarias principales incluyendo la estructura del blog con template de artículo individual y contacto.' },
         { title: 'Importación de catálogo (hasta 1.000 SKUs)', description: 'Carga masiva CSV con validación', assigned_to: 'agencia' as const, detailed_info: 'Importamos el catálogo completo usando el importer de Shopify. Validamos precios, variantes, imágenes y colecciones. Se hace una ronda de correcciones de incidencias directas de la importación.' },
         { title: 'Desarrollo Homepage', description: 'Implementación del diseño de inicio', assigned_to: 'agencia' as const, detailed_info: 'Programamos todas las secciones del Homepage: hero, banners rotantes, colecciones destacadas, productos nuevos, testimonios y footer.' },
         { title: 'Desarrollo Ficha de Producto', description: 'Template de PDP optimizado para conversión', assigned_to: 'agencia' as const, detailed_info: 'Implementamos el template de producto con galería mejorada, selector de variantes, acordeones de info, íconos de confianza y CTA optimizado.' },
-        { title: 'Páginas: Nosotros, Contacto y Legales', description: 'Contenido estático y formulario de contacto', assigned_to: 'agencia' as const, detailed_info: 'Construimos la página "Acerca de Nosotros" con el contenido del cliente, página de contacto con formulario seguro y las políticas legales obligatorias (devoluciones, privacidad, términos).' },
         { title: 'Configurar filtros y búsqueda', description: 'Faceted search por precio, categoría y variante', assigned_to: 'agencia' as const, detailed_info: 'Activamos y configuramos el sistema de búsqueda y los filtros en páginas de colección para facilitar la navegación del catálogo.' },
         { title: 'Validación catálogo por cliente', description: 'Revisar descripciones, precios y variantes', assigned_to: 'cliente' as const, detailed_info: 'El cliente debe revisar exhaustivamente al menos el 20% de los productos importados, verificando precios, stocks, variantes y descripciones. Notificar errores en una lista consolidada.' },
       ],
@@ -775,11 +751,7 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       tasks: [
         { title: 'Pago Etapa 1 (25%)', description: 'Anticipo para inicio formal del proyecto', assigned_to: 'cliente' as const, detailed_info: 'El 25% inicial asegura la reserva de las horas del equipo de diseño y desarrollo senior. Sin este pago el proyecto no puede iniciar.' },
         { title: 'Logo y manual de marca completo', description: 'Vectores, paleta, tipografías y directrices', assigned_to: 'cliente' as const, detailed_info: 'Manual de marca completo o guía visual con logotipo en SVG/AI, colores HEX/RGB, tipografías usadas (con licencias si son pagas) y cualquier restricción de uso de marca.' },
-        { title: 'Catálogo de productos (Excel/CSV completo)', description: 'Hasta 1.000 SKUs con todas sus variantes', assigned_to: 'cliente' as const, detailed_info: 'Planilla con todos los campos: nombre, descripción larga, precio, precio tachado, SKU, código de barras, peso, variantes, stock por sucursal si aplica, URL de imágenes.' },
-        { title: 'Fotos de productos en alta calidad', description: 'Fondo blanco, múltiples ángulos y lifestyle', assigned_to: 'cliente' as const, detailed_info: 'Al menos 3 fotos de fondo blanco + 1-2 fotos de lifestyle por producto estrella. Organizadas en carpetas por SKU en Google Drive.' },
         { title: 'Credenciales: DNS, Shopify, ERP Nebula', description: 'Accesos a todos los sistemas involucrados', assigned_to: 'cliente' as const, detailed_info: 'Proporcionar accesos al registrador de dominio, invitación de colaborador Shopify (si ya tiene cuenta), y accesos API/partner de ERP Nebula para la integración.' },
-        { title: 'Credenciales: Wasabil, Pasarelas y Envíos', description: 'API keys de DTE, pagos y logística', assigned_to: 'cliente' as const, detailed_info: 'API keys de Wasabil (DTE), credenciales de producción de Mercado Pago/Flow/Transbank, y accesos de la cuenta de Shipit, Envíame u operador logístico.' },
-        { title: 'Textos corporativos y legales', description: 'Nosotros, misión, políticas ya redactadas', assigned_to: 'cliente' as const, detailed_info: 'Texto de la página Nosotros, políticas de devolución personalizadas, términos y condiciones, política de privacidad. Si no los tienes, usaremos plantillas que debes validar.' },
         { title: 'Benchmark y Referentes Visuales', description: 'Tiendas o diseños de referencia del cliente', assigned_to: 'cliente' as const, detailed_info: 'El cliente envía 3-5 links de tiendas Shopify o sitios web que le gusten visualmente. Esto guía la dirección de diseño del equipo.' },
         { title: 'Banners publicitarios y piezas gráficas', description: 'Imágenes promocionales para el hero slider y portadas', assigned_to: 'cliente' as const, detailed_info: 'Entrega o envío de imágenes promocionales en alta resolución y piezas gráficas para el carrusel principal de la portada (hero slider) y banners publicitarios de ofertas.' },
         { title: 'Diseño y maquetación de Banners publicitarios', description: 'Creación y optimización de banners hero slider (Desktop y Mobile)', assigned_to: 'agencia' as const, detailed_info: 'Diseñaremos y adaptaremos los banners publicitarios principales del sitio en versiones Desktop y Mobile con compresión y formato optimizado para carga rápida.' },
@@ -798,7 +770,6 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
         { title: 'Diseño PDP (Ficha de Producto)', description: 'Template de producto optimizado para conversión', assigned_to: 'agencia' as const, detailed_info: 'Diseño del template de producto con galería de imágenes con zoom, selector de variantes visual, accordion de info, íconos de garantías/envío y área de reviews.' },
         { title: 'Diseño PLP (Listado de Colección)', description: 'Página de categoría con filtros y grid', assigned_to: 'agencia' as const, detailed_info: 'Layout de la página de colección/categoría con barra de filtros lateral o superior, grid de productos configurable (2-4 columnas), ordenamiento y paginación/infinite scroll.' },
         { title: 'Diseño Checkout Personalizado', description: 'Pasos de checkout con branding completo', assigned_to: 'agencia' as const, detailed_info: 'Diseño de los pasos de checkout (carrito, datos del cliente, envío, pago, confirmación) con el branding de la marca aplicado mediante Shopify checkout customization.' },
-        { title: 'Páginas secundarias: Nosotros, Blog, Contacto', description: 'Templates de páginas de contenido', assigned_to: 'agencia' as const, detailed_info: 'Diseño de las páginas secundarias principales incluyendo la estructura del blog con template de artículo individual.' },
         { title: 'Aprobación de diseños — Ronda 1', description: 'Feedback consolidado del cliente sobre mockups', assigned_to: 'cliente' as const, detailed_info: 'El cliente revisa todos los diseños en Figma y envía un único documento consolidado con todos sus comentarios y ajustes. Solo se hace una ronda de ajustes estructurales.' },
         { title: 'Ajustes de diseño y aprobación final', description: 'Correcciones y cierre de diseño', assigned_to: 'agencia' as const, detailed_info: 'Incorporamos los ajustes consolidados de la Ronda 1 y entregamos la versión final de todos los diseños. Una vez aprobados, se congelan y pasan a desarrollo.' },
       ],
@@ -810,6 +781,11 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       badge: 'intenso' as const,
       tasks: [
         { title: 'Pago Etapa 2 (25%)', description: 'Segundo pago para inicio del desarrollo', assigned_to: 'cliente' as const, detailed_info: 'Con el diseño aprobado, se requiere el segundo pago del 25% para iniciar la etapa de programación y configuración técnica.' },
+        { title: 'Catálogo de productos (Excel/CSV completo)', description: 'Hasta 1.000 SKUs con todas sus variantes', assigned_to: 'cliente' as const, detailed_info: 'Planilla con todos los campos: nombre, descripción larga, precio, precio tachado, SKU, código de barras, peso, variantes, stock por sucursal si aplica, URL de imágenes.' },
+        { title: 'Fotos de productos en alta calidad', description: 'Fondo blanco, múltiples ángulos y lifestyle', assigned_to: 'cliente' as const, detailed_info: 'Al menos 3 fotos de fondo blanco + 1-2 fotos de lifestyle por producto estrella. Organizadas en carpetas por SKU en Google Drive.' },
+        { title: 'Credenciales: Wasabil, Pasarelas y Envíos', description: 'API keys de DTE Wasabil, pagos y logística', assigned_to: 'cliente' as const, detailed_info: 'API keys de Wasabil (DTE), credenciales de producción de Mercado Pago/Flow/Transbank, y accesos de la cuenta de Shipit, Envíame u operador logístico.' },
+        { title: 'Textos corporativos y legales', description: 'Nosotros, misión, políticas ya redactadas', assigned_to: 'cliente' as const, detailed_info: 'Texto de la página Nosotros, políticas de devolución personalizadas, términos y condiciones, política de privacidad.' },
+        { title: 'Páginas secundarias: Nosotros, Blog, Contacto', description: 'Templates de páginas de contenido', assigned_to: 'agencia' as const, detailed_info: 'Diseño y maquetación de las páginas secundarias principales incluyendo la estructura del blog con template de artículo individual y contacto.' },
         { title: 'Setup Shopify Partner + Plan', description: 'Tienda configurada con plan y datos fiscales', assigned_to: 'agencia' as const, detailed_info: 'Creamos la tienda Shopify, configuramos el plan elegido, completamos los datos de la empresa, moneda CLP, zona horaria Chile e idioma.' },
         { title: 'Instalación de tema premium + Staging', description: 'Tema base + URL de revisión protegida', assigned_to: 'agencia' as const, detailed_info: 'Instalamos el tema premium acordado como base de desarrollo y habilitamos la URL de staging con contraseña para revisiones del cliente.' },
         { title: 'Implementación del Sistema de Diseño', description: 'Colores, tipografías, espaciados en código', assigned_to: 'agencia' as const, detailed_info: 'Trasladamos todos los tokens del sistema de diseño al código: variables CSS, configuración del editor de temas, fuentes de Google Fonts o tipografías locales.' },
@@ -898,8 +874,6 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
         { title: 'Pago Etapa 1 (50%)', description: 'Anticipo para inicio de diseño y desarrollo', assigned_to: 'cliente' as const, detailed_info: 'El pago inicial del 50% inicia formalmente el proyecto y reserva las horas del equipo de diseño y desarrollo.' },
         { title: 'Logo en alta resolución', description: 'SVG, AI o PNG transparente', assigned_to: 'cliente' as const, detailed_info: 'Logo vectorial para uso en header, footer, favicón y Open Graph. Si no tienes logo, cuéntanos para coordinar.' },
         { title: 'Manual de marca o guía de estilo', description: 'Colores, tipografías y directrices visuales', assigned_to: 'cliente' as const, detailed_info: 'Manual de marca completo o descripción detallada de colores (HEX), tipografías y estilo visual de la empresa.' },
-        { title: 'Textos y contenidos del sitio', description: 'Copys de todas las secciones y páginas', assigned_to: 'cliente' as const, detailed_info: 'Textos para la página de inicio (hero, propuesta de valor, servicios, CTA), página Nosotros, página de Servicios/Productos, y Contacto. Pueden ser borradores que el equipo edita.' },
-        { title: 'Fotos y multimedia', description: 'Fotos del equipo, instalaciones o servicios', assigned_to: 'cliente' as const, detailed_info: 'Fotografías profesionales o de buen detalle del equipo, oficinas, servicios o productos. Adjuntar a una carpeta Google Drive.' },
         { title: 'Credenciales de dominio', description: 'Panel DNS del registrador', assigned_to: 'cliente' as const, detailed_info: 'Accesos al panel DNS de NIC Chile, GoDaddy, Namecheap u otro registrador para conectar el dominio cuando el sitio esté listo.' },
         { title: 'Referencias visuales y benchmark', description: '3-5 sitios web de referencia', assigned_to: 'cliente' as const, detailed_info: 'Links de sitios web (de la industria u otros) que el cliente admire visualmente. Esto orienta la dirección de diseño.' },
         { title: 'Banners publicitarios y piezas gráficas', description: 'Imágenes promocionales para el hero slider y portadas', assigned_to: 'cliente' as const, detailed_info: 'Entrega o envío de imágenes promocionales en alta resolución y piezas gráficas para el carrusel principal de la portada (hero slider) y banners publicitarios de ofertas.' },
@@ -915,7 +889,6 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       tasks: [
         { title: 'Sistema de Diseño y Moodboard', description: 'Tokens visuales, componentes base y referentes', assigned_to: 'agencia' as const, detailed_info: 'Definimos el sistema de diseño completo: paleta de colores, tipografía, espaciados, botones, formularios y componentes reutilizables.' },
         { title: 'Diseño Homepage (Desktop + Mobile)', description: 'Página de inicio con todas las secciones', assigned_to: 'agencia' as const, detailed_info: 'Mockup completo de la página de inicio incluyendo hero, sección de servicios, valor diferencial, CTA, testimonios, casos de éxito y footer.' },
-        { title: 'Diseño páginas interiores', description: 'Nosotros, Servicios, Contacto y Blog', assigned_to: 'agencia' as const, detailed_info: 'Templates para las páginas secundarias principales con coherencia visual respecto al homepage.' },
         { title: 'Revisión de diseños — Feedback cliente', description: 'Comentarios consolidados en Figma', assigned_to: 'cliente' as const, detailed_info: 'El cliente revisa todos los diseños en Figma y envía comentarios consolidados en una sola ronda de feedback.' },
         { title: 'Ajustes finales y aprobación de diseño', description: 'Cierre del proceso de diseño', assigned_to: 'agencia' as const, detailed_info: 'Incorporamos los ajustes de la ronda de feedback y entregamos la versión final. Con la aprobación se congelan los diseños y pasan a desarrollo.' },
       ],
@@ -927,8 +900,12 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
       badge: 'intenso' as const,
       tasks: [
         { title: 'Setup Next.js + Hosting + Staging', description: 'Entorno de desarrollo y URL de revisión', assigned_to: 'agencia' as const, detailed_info: 'Configuramos el proyecto Next.js en el servidor de staging con HTTPS, CI/CD básico y URL de revisión para el cliente.' },
+        { title: 'Catálogo de productos (Excel/CSV completo)', description: 'Hasta 1.000 SKUs con todas sus variantes', assigned_to: 'cliente' as const, detailed_info: 'Planilla con todos los campos: nombre, descripción larga, precio, SKU, stock, categoría y variantes.' },
+        { title: 'Fotos de productos en alta calidad', description: 'Fondo blanco, múltiples ángulos y lifestyle', assigned_to: 'cliente' as const, detailed_info: 'Fotografías en alta resolución de productos, equipo o servicios.' },
+        { title: 'Credenciales: Wasabil, Pasarelas y Envíos', description: 'API keys de DTE Wasabil, pagos y logística', assigned_to: 'cliente' as const, detailed_info: 'API keys de Wasabil (DTE), credenciales de producción de Mercado Pago/Flow/Transbank y transportistas.' },
+        { title: 'Textos corporativos y legales', description: 'Nosotros, misión, políticas ya redactadas', assigned_to: 'cliente' as const, detailed_info: 'Texto de la página Nosotros, historia de la marca, políticas de devolución, términos y condiciones y privacidad.' },
+        { title: 'Páginas secundarias: Nosotros, Blog, Contacto', description: 'Templates de páginas de contenido', assigned_to: 'agencia' as const, detailed_info: 'Desarrollo de las páginas interiores y secundarias: Nosotros, Blog corporativo y formulario de Contacto.' },
         { title: 'Implementación Homepage responsive', description: 'Todas las secciones en código', assigned_to: 'agencia' as const, detailed_info: 'Programamos el homepage completo con todas las secciones del diseño, animaciones de scroll y experiencia responsive en todos los dispositivos.' },
-        { title: 'Páginas interiores y formulario de contacto', description: 'Nosotros, Servicios, Contacto', assigned_to: 'agencia' as const, detailed_info: 'Desarrollamos las páginas interiores y el formulario de contacto con validación, protección anti-spam y envío a email corporativo.' },
         { title: 'Integración WhatsApp y CTAs', description: 'Botón flotante WhatsApp y CTAs de conversión', assigned_to: 'agencia' as const, detailed_info: 'Implementamos el botón flotante de WhatsApp con mensaje predefinido y todos los CTAs del sitio con tracking de clics para analítica.' },
         { title: 'Carga y revisión de contenido', description: 'Textos, fotos y multimedia del cliente', assigned_to: 'agencia' as const, detailed_info: 'Cargamos todos los textos y fotografías del cliente en el sitio, hacemos ajustes de edición básica (recorte, optimización) y entregamos para revisión.' },
         { title: 'Check-in cliente — Semana 3', description: 'Revisión del sitio en staging', assigned_to: 'cliente' as const, detailed_info: 'El cliente revisa el sitio en staging e indica correcciones de contenido o ajustes menores en listas consolidadas.' },
