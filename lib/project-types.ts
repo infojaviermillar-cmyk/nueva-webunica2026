@@ -219,7 +219,7 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
     },
     {
       phase_number: 3,
-      title: 'Semana 3: Catálogo + Páginas',
+      title: 'Semana 3: Setup Shopify + Desarrollo Base',
       subtitle: 'Fichas de productos, páginas secundarias, desarrollo de interfaces',
       badge: 'intenso',
       tasks: [
@@ -683,7 +683,7 @@ export const PROJECT_TEMPLATES: Record<string, PhaseTemplate[]> = {
     },
     {
       phase_number: 3,
-      title: 'Semana 3: Catálogo + Páginas Secundarias',
+      title: 'Semana 3: Setup Shopify + Desarrollo Base',
       subtitle: 'Importación de productos, páginas comerciales y maquetación avanzada',
       badge: 'intenso' as const,
       tasks: [
