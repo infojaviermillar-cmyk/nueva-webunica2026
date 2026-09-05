@@ -82,6 +82,11 @@ Mi correo: ${formData.email}
       const encodedMessage = encodeURIComponent(message);
       const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
       
+      if (typeof window !== 'undefined') {
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({ event: 'whatsapp_click' });
+      }
+
       const win = window.open(whatsappUrl, '_blank');
       if (win) {
         win.focus();
@@ -91,6 +96,10 @@ Mi correo: ${formData.email}
       onClose();
     } catch (err) {
       console.error('Error saving lead:', err);
+      if (typeof window !== 'undefined') {
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({ event: 'whatsapp_click' });
+      }
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola Webunica, me interesa ${formData.interest} (vengo desde ${detectedInfo.pageUrl})`)}`, '_blank');
       onClose();
     } finally {

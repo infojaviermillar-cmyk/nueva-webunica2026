@@ -271,6 +271,10 @@ export default function ShopifyHeroWizard() {
   }
 
   function openWhatsApp() {
+    if (typeof window !== 'undefined') {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({ event: 'whatsapp_click' });
+    }
     const msg = encodeURIComponent(
       `Hola Webunica 👋 Me llamo ${form.name || leadName}. Completé el asistente interactivo:\n` +
       `• Necesidad: ${step1Item?.label || ''}\n` +
