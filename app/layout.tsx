@@ -8,7 +8,6 @@ import DisenoShopifyFooter from '@/components/layout/diseno-shopify-footer';
 import DesarrolloShopifyFooter from '@/components/layout/desarrollo-shopify-footer';
 import FloatingWhatsApp from '@/components/layout/floating-whatsapp';
 import { ContactModalProvider } from '@/context/contact-modal-context';
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import Script from 'next/script';
 
 const questrial = Questrial({
@@ -190,41 +189,64 @@ export default async function RootLayout({
   const isDesarrolloShopify = domain.includes('desarrolloshopify.cl');
   const isIntelligence = headersList.get('x-is-intelligence') === 'true' || domain.includes('intelligence');
 
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID || 'GTM-NXPC9XFN';
+
   return (
     <html
       lang="es-CL"
       className={`${questrial.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} ${caveat.variable} ${inter.variable} h-full antialiased`}
     >
-      <GoogleTagManager gtmId="GTM-TLZXRQCG" />
-      {/* ── Global Schema.org JSON-LD ─────────────────────────────────────── */}
-      <Script
-        id="schema-organization"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      <Script
-        id="schema-local-business"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
-      <Script
-        id="schema-website"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-LXMLKX5Y7G'} />
-      {(process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || 'xpx6ltmpx6') && (
-        <Script id="clarity-tracking" strategy="afterInteractive">
-          {`
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window,document,"clarity","script","${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || 'xpx6ltmpx6'}");
-          `}
-        </Script>
-      )}
+      <head>
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmId}');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
+        {/* ── Global Schema.org JSON-LD ─────────────────────────────────────── */}
+        <Script
+          id="schema-organization"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <Script
+          id="schema-local-business"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <Script
+          id="schema-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        {(process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || 'xpx6ltmpx6') && (
+          <Script id="clarity-tracking" strategy="afterInteractive">
+            {`
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window,document,"clarity","script","${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID || 'xpx6ltmpx6'}");
+            `}
+          </Script>
+        )}
+      </head>
       <body className="font-sans min-h-full flex flex-col bg-white text-zinc-900 overflow-x-hidden">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <Suspense fallback={null}>
           <NavigationProgressBar />
         </Suspense>
