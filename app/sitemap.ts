@@ -14,17 +14,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // 2. High-priority service routes (0.9)
+  // NOTE: /desarrollo-tiendas-shopify-chile, /desarrollo-tiendas-shopify-en-chile
+  // y /desarrollo-shopify-chile apuntan al mismo servicio.
+  // La URL canónica oficial es /desarrollo-tiendas-shopify-en-chile.
+  // Las otras se conservan en el sitemap con priority menor para evitar canibalización.
   const highPriorityRoutes = [
     '',
     '/contacto',
     '/portafolio',
     '/sobre-nosotros',
     '/geo-ai-visibility',
-    '/desarrollo-tiendas-shopify-chile',
-    '/desarrollo-tiendas-shopify-en-chile',
-    '/desarrollo-shopify-chile',
-    '/diseno-web-shopify-chile',
-    '/diseno-shopify-cl',
+    '/desarrollo-tiendas-shopify-en-chile', // ← URL canónica oficial Shopify
     '/planes-de-desarrollo-shopify-en-chile',
     '/planes-de-desarrollo-shopify-en-chile/plan-prende',
     '/planes-de-desarrollo-shopify-en-chile/plan-full',
@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
+    changeFrequency: route === '' ? ('weekly' as const) : ('monthly' as const),
     priority: route === '' ? 1.0 : 0.9,
   }));
 

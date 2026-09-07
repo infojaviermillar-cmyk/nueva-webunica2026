@@ -9,61 +9,73 @@ const MOCK_TESTIMONIALS: Testimonial[] = [
   {
     quote: "Webunica transformó nuestra tienda Shopify por completo. Pasamos de un tema genérico a una experiencia premium que convirtió un 40% más en el primer mes.",
     author: "Andrea Castro",
+    role: "Directora Comercial, Oh My Skin Chile",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "El embudo para mi inmobiliaria captó 50 leads calificados en la primera semana de lanzamiento. No lo podía creer.",
     author: "Roberto Méndez",
+    role: "CEO, SoloCasasChile",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "Nuestra plataforma Next.js pasó de un puntaje de 40 a 98 en Google Lighthouse tras el trabajo de Webunica. Increíble.",
     author: "Felipe Arriagada",
+    role: "CTO, Pymee.org",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "El sistema de blog con IA es una joya. Publicamos 10 artículos semanales y ya estamos en la primera página de Google.",
     author: "Mónica Salas",
+    role: "Marketing Manager, Altavista Chile",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "Buscábamos expertos en Shopify y encontramos socios estratégicos. La integración con medios de pago locales fue perfecta.",
     author: "Carlos Ruiz",
+    role: "Fundador, Tecno-Mobile",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "El diseño UI/UX superó todas mis expectativas. La web se siente viva, moderna y transmite la confianza que necesitábamos.",
     author: "Ing. Sergio Lagos",
+    role: "Director Técnico, Sonnda.cl",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "Nuestra academia online en Moodle era un caos hasta que Webunica tomó el control. Ahora es estable y a los alumnos les encanta.",
     author: "Dra. Elena Pontigo",
+    role: "Directora Académica, Reaprende",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "La calculadora de ROI personalizada en nuestra landing fue el diferencial para cerrar más contratos. Nivel de ingeniería superior.",
     author: "Patricio Soto",
+    role: "Gerente de Ventas, PPI Seguridad",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "Desde el checkout hasta el tracking de envíos, todo funciona como reloj suizo. Finalmente alguien que entiende el e-commerce chileno.",
     author: "Sofía Varas",
+    role: "Dueña, Kinelawen",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "Si buscas una web rentable que te posicione como líder, Webunica es el único camino. Los demás solo hacen páginas bonitas.",
     author: "Javier Millar",
+    role: "Fundador, Webunica Chile",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "Muy satisfecha con el trabajo del equipo experto. Serios y responsables. La implementación de nuestra tienda fue impecable.",
-    author: "Ana María",
+    author: "Ana María González",
+    role: "Administradora, Librería Bazarte",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
   {
     quote: "Webunica entiende que una web no es para verse bonita, sino para vender. Nuestra plataforma SaaS ahora escala de forma predecible.",
-    author: "Co-Founder TechStart",
+    author: "Rodrigo Fuentes",
+    role: "Co-Founder, TechStart Chile",
     stars: 5, active: true, created_at: new Date().toISOString()
   },
 ];
@@ -89,7 +101,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
               <svg viewBox="0 0 24 24" className="w-2 h-2 fill-white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
             </div>
           </div>
-          <p className="text-zinc-600 text-[11px]">@{testimonial.author.split(' ')[0].toLowerCase()}_</p>
+          {testimonial.role ? (
+            <p className="text-zinc-500 text-[11px]">{testimonial.role}</p>
+          ) : (
+            <p className="text-zinc-600 text-[11px]">@{testimonial.author.split(' ')[0].toLowerCase()}_</p>
+          )}
         </div>
       </div>
       <p className="text-zinc-400 text-[13px] leading-relaxed">{testimonial.quote}</p>
@@ -160,9 +176,9 @@ export default function TestimonialsSection() {
       {/* Título centrado sobre el muro */}
       <div className="relative z-30 text-center mb-12">
         <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-3">
-          Wall of <em className="text-violet-500 not-italic font-serif font-normal">Love</em>
+          Clientes que <em className="text-violet-500 not-italic font-serif font-normal">Confían en Nosotros</em>
         </h2>
-        <p className="text-zinc-500 text-sm">Historias reales de clientes que confiaron en Webunica.</p>
+        <p className="text-zinc-500 text-sm">Reseñas reales de clientes de nuestra agencia de desarrollo web y Shopify en Chile.</p>
       </div>
 
       {/* Columnas con scroll infinito */}

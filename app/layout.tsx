@@ -130,12 +130,15 @@ const localBusinessSchema = {
   name: 'Webunica Chile E.I.R.L.',
   image: 'https://webunica.cl/logo-webunica.png.webp',
   url: 'https://webunica.cl',
+  telephone: '+56966198752',
   description: 'Agencia de desarrollo web Shopify, diseño web y GEO en Chile. Shopify Partners certificados.',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Merced 838-A, Oficina 117',
     addressCountry: 'CL',
     addressRegion: 'Región Metropolitana',
     addressLocality: 'Santiago',
+    postalCode: '8320000',
   },
   geo: {
     '@type': 'GeoCoordinates',
@@ -151,6 +154,12 @@ const localBusinessSchema = {
   priceRange: '$$',
   currenciesAccepted: 'CLP',
   paymentAccepted: 'Transferencia bancaria, Tarjeta de crédito',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    bestRating: '5',
+    ratingCount: '48',
+  },
 };
 
 const websiteSchema = {

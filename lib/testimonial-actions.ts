@@ -7,6 +7,7 @@ export interface Testimonial {
   id?: string;
   quote: string;
   author: string;
+  role?: string;
   stars: number;
   active: boolean;
   user_id?: string;

@@ -47,11 +47,20 @@ export default function CompaniesCarousel() {
 
   return (
     <div className="bg-[#f8f9fb] py-10 border-t border-zinc-200">
+      {/* H2 semántico visible para Google — texto secundario para lectores de pantalla */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8">
-        <p className="text-[#8ba2bf] text-[10px] uppercase font-bold tracking-[0.15em]">
-          Empresas que confiaron en nuestra ingeniería
-        </p>
+        <h2 className="text-[#8ba2bf] text-[10px] uppercase font-bold tracking-[0.15em]">
+          Empresas que confían en nuestra agencia de desarrollo web y Shopify en Chile
+        </h2>
       </div>
+      {/* Lista indexable para crawlers (invisible en pantalla) */}
+      <noscript>
+        <ul aria-label="Clientes de Webunica Chile">
+          {COMPANIES.map((c) => (
+            <li key={c.name}>{c.name} — {c.type}</li>
+          ))}
+        </ul>
+      </noscript>
       <div className="overflow-hidden relative max-w-[1400px] mx-auto">
         {/* Fades */}
         <div className="absolute inset-y-0 left-0 w-24 md:w-32 bg-gradient-to-r from-[#f8f9fb] to-transparent z-10 pointer-events-none" />

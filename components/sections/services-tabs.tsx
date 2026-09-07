@@ -65,7 +65,7 @@ const serviceData = [
       'Diseño de Funnels de Venta',
       'Consultoría de Crecimiento (Growth)'
     ],
-    image: '/tab-pymes.png', // Reuse or add another
+    image: '/seo_performance_dashboard_premium_1776268863414.png',
     link: '/servicios-seo-posicionamiento-google',
     icon: <BarChart3 className="w-6 h-6" />
   },
@@ -255,7 +255,7 @@ export default function ServicesTabs() {
             </div>
             
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-zinc-950 tracking-tighter uppercase leading-[0.95] mb-6 font-heading">
-              Centros de <span className="text-[#7850FA]">Ingeniería Web</span>
+              Soluciones en <span className="text-[#7850FA]">Shopify, SaaS, SEO y E-commerce</span>
             </h2>
             
             <ScrollRevealText 

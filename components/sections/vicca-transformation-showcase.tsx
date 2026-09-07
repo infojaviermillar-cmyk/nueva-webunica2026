@@ -11,6 +11,7 @@ type ShowcaseStep = {
   stepNumber: string;
   badge: string;
   title: string;
+  alt: string;
   description: string;
   image: string;
   icon: any;
@@ -24,6 +25,7 @@ const steps: ShowcaseStep[] = [
     stepNumber: '01',
     badge: 'UX & Arquitectura',
     title: 'Wireframe & Estructura',
+    alt: 'Wireframe UX de tienda Shopify desarrollado por Webunica Chile — arquitectura de zonas de conversión',
     description: 'Diagramación de zonas de conversión, jerarquía de información y experiencia de navegación antes de aplicar estilos.',
     image: '/vicca-layout--wireframe-001.png',
     icon: Layout,
@@ -35,6 +37,7 @@ const steps: ShowcaseStep[] = [
     stepNumber: '02',
     badge: 'Branding & Color',
     title: 'Carta de Colores & Estilo',
+    alt: 'Carta de colores y paleta cromática para tienda Shopify Vicca — diseño de identidad visual por Webunica Chile',
     description: 'Definición de la paleta cromática, contrastes accesibles y la identidad visual representativa de la marca Vicca.',
     image: '/vicca-carta-colores.png',
     icon: Palette,
@@ -46,6 +49,7 @@ const steps: ShowcaseStep[] = [
     stepNumber: '03',
     badge: 'Shopify Live',
     title: 'Resultado Final Tienda',
+    alt: 'Resultado final de tienda Shopify Vicca — diseño web de alto rendimiento desarrollado por Webunica Chile',
     description: 'Integración completa en Shopify con theme optimizado, carga ultra-rápida y adaptable a dispositivos móviles.',
     image: '/vicca-layout-001.png',
     icon: Sparkles,
@@ -128,7 +132,7 @@ export default function ViccaTransformationShowcase() {
                   >
                     <Image
                       src={step.image}
-                      alt={step.title}
+                      alt={step.alt}
                       fill
                       className="object-cover object-top transition-transform duration-700 group-hover/img:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"

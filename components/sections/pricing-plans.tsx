@@ -53,8 +53,47 @@ const plans = [
 ];
 
 export default function PricingPlans() {
+  const pricingSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Planes de Desarrollo Web y Shopify en Chile — Webunica",
+    "description": "Planes de desarrollo web, tiendas Shopify y sitios para PYMES en Chile con precios transparentes.",
+    "itemListElement": plans.map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "Product",
+        "name": p.name,
+        "description": p.desc,
+        "brand": { "@type": "Brand", "name": "Webunica" },
+        "offers": {
+          "@type": "Offer",
+          "price": p.price.replace(/\./g, '').replace(/\$/g, '').replace(/\s/g, '').replace(/CLP/g, '').trim(),
+          "priceCurrency": "CLP",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": p.price.replace(/\./g, '').replace(/\$/g, '').replace(/\s/g, '').replace(/CLP/g, '').trim(),
+            "priceCurrency": "CLP",
+            "valueAddedTaxIncluded": false,
+          },
+          "availability": "https://schema.org/InStock",
+          "url": "https://webunica.cl/#planes",
+          "seller": {
+            "@type": "Organization",
+            "name": "Webunica Chile",
+            "url": "https://webunica.cl",
+          },
+        },
+      },
+    })),
+  };
+
   return (
     <section className="py-32 bg-zinc-50 relative overflow-hidden" id="planes">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pricingSchema) }}
+      />
       {/* Decorative background */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-100/40 blur-[120px] rounded-full -z-0"></div>
       
@@ -66,7 +105,7 @@ export default function PricingPlans() {
           </div>
           
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black mb-6 uppercase tracking-tighter text-zinc-950 font-heading">
-            Planes de <span className="text-[#7850FA]">Ingeniería Web</span>
+            Precios de <span className="text-[#7850FA]">Diseño Web y Shopify en Chile</span>
           </h2>
           
           <ScrollRevealText 

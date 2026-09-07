@@ -74,3 +74,5 @@ Allow: /
 
 # ── Archivos de contexto para IA ──────────────────────────────────────────────
 # Ver también: /llms.txt y /ai.txt
+LLMs: https://webunica.cl/llms.txt
+AI: https://webunica.cl/ai.txt

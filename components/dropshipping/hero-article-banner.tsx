@@ -44,7 +44,7 @@ export function HeroArticleBanner() {
                 <span className="text-purple-300 text-xs font-mono font-medium">Recomendado para Emprendedores</span>
               </div>
               <h3 className="text-sm md:text-base font-bold text-white leading-snug">
-                Por qué Shopify + Dropi no Garantizan Ventas: La Guía Real para Chile
+                ¿Shopify + Dropi Garantizan Ventas en Chile? La Guía Real de E-commerce Rentable
               </h3>
             </div>
           </div>

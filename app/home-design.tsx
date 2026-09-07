@@ -185,13 +185,13 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
   const businessJsonLd = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "Webunica - Expertos en E-commerce y Desarrollo Digital",
+    "name": "Webunica - Agencia de Diseño Web y Shopify Partners en Chile",
     "image": "https://webunica.cl/logo-webunica.png.webp",
     "url": "https://webunica.cl",
     "telephone": "+56912345678",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "MERCED 838 A INT OF 117 COMUNA SANTIAGO",
+      "streetAddress": "Merced 838-A, Oficina 117",
       "addressLocality": "Santiago",
       "addressRegion": "RM",
       "addressCountry": "CL"
@@ -200,6 +200,14 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
       "@type": "GeoCoordinates",
       "latitude": -33.4372,
       "longitude": -70.6506
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "48",
+      "reviewCount": "48"
     }
   };
 
@@ -228,7 +236,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
               Alta Ingeniería de Rendimiento
             </div>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-zinc-950 tracking-tighter uppercase font-heading mb-4">
-              Tecnología que <span className="text-[#7850FA]">impulsa tu negocio</span>
+              Servicios de <span className="text-[#7850FA]">Desarrollo Web y E-commerce en Chile</span>
             </h2>
             <ScrollRevealText 
               text="Portafolio de soluciones especializadas para vender, automatizar e integrar tu empresa en Chile. En el entorno digital actual, tu sitio web tiene menos de 3 segundos para capturar la atención, proyectar máxima autoridad y comunicar tu propuesta de valor antes de perder una oportunidad. Desarrollamos sitios web y e-commerce de alto rendimiento diseñados estratégicamente para causar un impacto inmediato en esa primera impresión crucial y convertir visitas en clientes reales."
@@ -513,10 +521,27 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
       <FeaturedBlogSection posts={posts} />
 
       <section className="py-32 px-6">
-        <div className="max-w-6xl mx-auto bg-gradient-to-br from-violet-600 to-indigo-700 rounded-[5rem] p-12 lg:p-24 text-center text-white relative overflow-hidden shadow-3xl">
+        <div className="max-w-6xl mx-auto">
+
+          {/* Bloque de señales de autoridad indexables — Punto 15 */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+            {[
+              { num: '+40', label: 'Tiendas Shopify lanzadas en Chile' },
+              { num: '+10', label: 'Años de experiencia en desarrollo web' },
+              { num: '98', label: 'Puntaje Lighthouse promedio en proyectos' },
+              { num: '100%', label: 'Proyectos entregados con Carta Gantt' },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center p-6 bg-violet-50 rounded-3xl border border-violet-100">
+                <strong className="block text-4xl font-black text-violet-600 tracking-tighter">{stat.num}</strong>
+                <span className="text-xs text-zinc-500 font-medium leading-tight mt-2 block">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-gradient-to-br from-violet-600 to-indigo-700 rounded-[5rem] p-12 lg:p-24 text-center text-white relative overflow-hidden shadow-3xl">
           <div className="relative z-10">
             <h2 className="text-5xl lg:text-8xl font-black mb-10 tracking-tighter uppercase leading-[0.85]">
-              Tu éxito digital <br/><span className="italic font-serif lowercase font-light text-violet-100">comienza aquí.</span>
+              Diseña tu Tienda Shopify <br/><span className="italic font-serif lowercase font-light text-violet-100">o sitio web en Chile.</span>
             </h2>
             <p className="text-xl text-violet-100 mb-14 max-w-2xl mx-auto font-light leading-relaxed">
               Expertos en <strong className="text-white">Posicionamiento Web</strong> y <strong className="text-white">Desarrollo Shopify</strong>. Agenda tu consultoría gratuita hoy mismo.
@@ -525,6 +550,7 @@ export default function HomeDesign({ posts }: { posts: BlogPost[] }) {
               <LeadButton className="px-14 py-7 bg-white text-violet-600 rounded-3xl font-black uppercase tracking-widest text-xs shadow-2xl hover:scale-105 transition-all">
                 Cotizar Proyecto Web
               </LeadButton>
+            </div>
             </div>
           </div>
         </div>

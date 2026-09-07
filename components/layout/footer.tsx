@@ -216,8 +216,15 @@ export default function Footer() {
           <div className="border-t border-zinc-800/50 pt-8 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
               <p className="text-zinc-500 text-sm">
-                © {new Date().getFullYear()} WebUnica. Todos los derechos reservados.
+                © {new Date().getFullYear()} Webunica Chile E.I.R.L. Todos los derechos reservados.
               </p>
+              <a
+                href="tel:+56966198752"
+                className="text-zinc-500 hover:text-white text-sm transition-colors"
+                aria-label="Llamar a Webunica Chile"
+              >
+                +56 9 6619 8752
+              </a>
             </div>
             
             <div className="flex flex-wrap gap-x-8 gap-y-2">

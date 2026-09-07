@@ -340,7 +340,7 @@ export default function WorkProcess() {
         {/* Header */}
         <div className="max-w-7xl mx-auto px-6 text-center mb-24">
           <h2 className="text-5xl lg:text-7xl font-black text-zinc-950 tracking-tighter uppercase leading-none mb-6">
-            Proceso de <span className="text-violet-600">Trabajo</span>
+            Cómo Desarrollamos tu <span className="text-violet-600">Tienda Shopify o Sitio Web</span>
           </h2>
           <p className="text-xl text-zinc-500 font-light uppercase tracking-widest text-sm">
             Paso a paso hacia el lanzamiento exitoso.
