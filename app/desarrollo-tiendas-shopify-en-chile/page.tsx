@@ -45,19 +45,23 @@ export const metadata = {
   description: 'Agencia Partner Shopify en Chile. Desarrollo de tiendas online con planes desde $680.000 + IVA. Incluye pasarelas de pago local (Webpay, Mercado Pago), despacho, boleta SII y soporte.',
   keywords: [
     'desarrollo tiendas shopify chile',
+    'crear tienda shopify chile',
+    'agencia shopify partner chile',
     'precios shopify chile',
     'cuanto cuesta tienda shopify chile',
-    'agencia shopify partner chile',
     'diseño tienda shopify chile',
-    'crear tienda shopify chile',
     'pasarelas de pago shopify chile',
-    'factura electronica shopify',
-    'integracion erp shopify',
+    'factura electronica shopify chile',
+    'integracion erp shopify chile',
     'expertos shopify chile',
-    'migrar a shopify chile'
-  ].join(', '),
+    'migrar a shopify chile',
+    'tienda online chile shopify',
+  ],
   alternates: {
     canonical: 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile',
+    languages: {
+      'es-CL': 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile',
+    },
   },
   openGraph: {
     title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $680.000 + IVA',
@@ -68,10 +72,10 @@ export const metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://webunica.cl/clientes-2/vicca.cl.png',
+        url: 'https://webunica.cl/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Desarrollo de Tiendas Shopify en Chile - Webunica',
+        alt: 'Webunica — Desarrollo de Tiendas Shopify en Chile, Agencia Partner Certificada',
       },
     ],
   },
@@ -79,7 +83,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Desarrollo de Tiendas Shopify en Chile | Planes desde $680.000 + IVA',
     description: 'Desarrollo e-commerce Shopify profesional en Chile. Planes desde $680.000 + IVA con integraciones locales.',
-    images: ['https://webunica.cl/clientes-2/vicca.cl.png'],
+    images: ['https://webunica.cl/og-image.jpg'],
   },
   robots: {
     index: true,
@@ -88,6 +92,7 @@ export const metadata = {
       index: true,
       follow: true,
       'max-image-preview': 'large',
+      'max-snippet': 160,
     },
   },
 };
@@ -135,20 +140,22 @@ export default function ShopifyEnChilePage() {
         "@type": "ProfessionalService",
         "@id": "https://webunica.cl/#agencia",
         "name": "Webunica - Agencia Desarrollo Shopify Chile",
-        "url": "https://webunica.cl/desarrollo-tiendas-shopify-en-chile",
+        "url": "https://webunica.cl",
         "logo": "https://webunica.cl/logo-webunica.png.webp",
-        "image": "https://webunica.cl/clientes-2/vicca.cl.png",
+        "image": "https://webunica.cl/og-image.jpg",
         "priceRange": "$$",
-        "telephone": "+56991089527",
+        "telephone": "+56966198752",
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "Merced 838-A, Oficina 117",
           "addressLocality": "Santiago",
           "addressRegion": "Región Metropolitana",
+          "postalCode": "8320000",
           "addressCountry": "CL"
         },
         "aggregateRating": {
           "@type": "AggregateRating",
-          "ratingValue": "5.0",
+          "ratingValue": "4.9",
           "reviewCount": "48",
           "bestRating": "5",
           "worstRating": "1"
@@ -199,6 +206,62 @@ export default function ShopifyEnChilePage() {
             "text": faq.answer
           }
         }))
+      },
+      {
+        "@type": "HowTo",
+        "@id": "https://webunica.cl/desarrollo-tiendas-shopify-en-chile/#howto",
+        "name": "Cómo desarrollamos tu tienda Shopify en Chile",
+        "description": "Proceso y elementos clave que Webunica implementa en cada tienda Shopify en Chile para garantizar ventas y rendimiento.",
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": "1",
+            "name": "Diseño CRO que convierte",
+            "text": "Estructuramos tu tienda para guiar al cliente hasta la compra, eliminando fricción y aumentando la tasa de conversión."
+          },
+          {
+            "@type": "HowToStep",
+            "position": "2",
+            "name": "Pagos y facturación automática en Chile",
+            "text": "Integramos Webpay, Flow, Mercado Pago y conectamos la emisión de boletas y facturas electrónicas ante el SII."
+          },
+          {
+            "@type": "HowToStep",
+            "position": "3",
+            "name": "Despachos en Chile en tiempo real",
+            "text": "Conectamos Starken, BlueExpress, Chilexpress y multi-couriers para configurar tarifas dinámicas según dirección, peso y cobertura."
+          },
+          {
+            "@type": "HowToStep",
+            "position": "4",
+            "name": "Sincronización ERP",
+            "text": "Sincronizamos inventario y ventas con tu ERP (Bsale, Obuma, Defontana, Laudus) para automatizar tu operación."
+          },
+          {
+            "@type": "HowToStep",
+            "position": "5",
+            "name": "Analítica y campañas publicitarias",
+            "text": "Medición confiable con GA4, Meta Pixel, Conversion API y Merchant Center para tomar decisiones comerciales reales."
+          },
+          {
+            "@type": "HowToStep",
+            "position": "6",
+            "name": "SEO técnico de alto rendimiento",
+            "text": "Estructura optimizada, código limpio, metadatos y velocidad mobile-first para ser rastreada, indexada y ganar tráfico orgánico desde su lanzamiento."
+          }
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://webunica.cl/desarrollo-tiendas-shopify-en-chile/#features",
+        "name": "Garantías y diferenciadores de Webunica para Shopify en Chile",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "+100 Tiendas Shopify desarrolladas en Chile" },
+          { "@type": "ListItem", "position": 2, "name": "Shopify Partner verificado y certificado" },
+          { "@type": "ListItem", "position": 3, "name": "Diseño Mobile-First 100% adaptado a Chile" },
+          { "@type": "ListItem", "position": 4, "name": "Soporte post lanzamiento y capacitación incluida" },
+          { "@type": "ListItem", "position": 5, "name": "Analítica GA4, Meta Pixel y SEO técnico incluidos" }
+        ]
       }
     ]
   };
@@ -306,7 +369,7 @@ export default function ShopifyEnChilePage() {
     <div className="min-h-screen bg-white font-sans antialiased text-zinc-950 overflow-x-hidden">
       <BreadcrumbSchema items={[
         { name: 'Inicio', url: 'https://webunica.cl' },
-        { name: 'Shopify Chile', url: 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile' },
+        { name: 'Desarrollo de Tiendas Shopify en Chile', url: 'https://webunica.cl/desarrollo-tiendas-shopify-en-chile' },
       ]} />
       <script
         type="application/ld+json"
@@ -341,8 +404,8 @@ export default function ShopifyEnChilePage() {
                 </div>
                 
                 <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-[54px] font-black tracking-tight leading-[1.02] mb-6 uppercase text-zinc-950 font-heading">
-                  Tu tienda Shopify <br className="hidden sm:inline" />
-                  lista para <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]">vender en Chile</span>
+                  Desarrollo de Tiendas Shopify en Chile{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-purple-600 to-[#FF0085]">listas para vender</span>
                 </h1>
                 
                 <p className="text-lg sm:text-xl lg:text-2xl text-zinc-600 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
@@ -359,7 +422,7 @@ export default function ShopifyEnChilePage() {
                     href="#planes" 
                     className="px-8 py-5 border-2 border-[#FF0085]/30 bg-pink-50/50 text-[#FF0085] font-black rounded-2xl hover:bg-pink-100/50 hover:border-[#FF0085]/60 transition-all uppercase tracking-widest text-xs text-center w-full sm:w-auto shadow-sm"
                   >
-                    Ver Planes con desc. -5%, -8%, -10%
+                    Ver planes de desarrollo Shopify (-5%, -8%, -10%)
                   </a>
                 </div>
 
@@ -431,7 +494,7 @@ export default function ShopifyEnChilePage() {
                 <CheckCircle2 className="w-3.5 h-3.5" /> Diagnóstico Comercial
               </div>
               <h2 className="text-3xl sm:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
-                ¿Qué necesitas resolver con tu tienda Shopify?
+                ¿Qué necesitas para crear tu tienda Shopify en Chile?
               </h2>
               <p className="text-zinc-600 text-base sm:text-lg font-light mt-3">
                 Identifica en qué etapa está tu negocio y descubre qué solución Shopify necesitas.
@@ -568,7 +631,7 @@ export default function ShopifyEnChilePage() {
                 <Tag className="w-3.5 h-3.5" /> Inversión Transparente
               </div>
               <h2 className="text-3xl sm:text-5xl font-black text-zinc-950 tracking-tighter uppercase font-heading">
-                Elige el plan ideal para tu proyecto
+                Planes de Desarrollo Shopify en Chile — Precios 2026
               </h2>
               <p className="text-zinc-600 text-base sm:text-lg font-light mt-3">
                 Tres alternativas estandarizadas listas para despegar + opción Enterprise Custom Elite a medida.
@@ -583,7 +646,7 @@ export default function ShopifyEnChilePage() {
         {/* COMPARACIÓN TÉCNICA EXTENSA DESPLEGABLE */}
         <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <details className="group bg-zinc-50 rounded-3xl border border-zinc-200/80 p-6 lg:p-8">
+            <details className="group bg-zinc-50 rounded-3xl border border-zinc-200/80 p-6 lg:p-8" open>
               <summary className="flex items-center justify-between cursor-pointer list-none select-none">
                 <div>
                   <span className="text-xs font-mono font-bold uppercase tracking-widest text-violet-600 block mb-1">
@@ -617,7 +680,7 @@ export default function ShopifyEnChilePage() {
                 Garantía & Transparencia
               </span>
               <h3 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight font-heading">
-                Tu tienda queda lista, documentada y bajo tu control
+                Tu tienda Shopify queda lista, documentada y bajo tu control
               </h3>
               <p className="text-zinc-200 font-normal text-lg sm:text-xl mt-4 leading-relaxed">
                 Nos aseguramos de que el proceso sea transparente, seguro y sin imprevistos desde el primer día:
@@ -663,8 +726,8 @@ export default function ShopifyEnChilePage() {
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <FAQSection 
               faqs={shopifyFaqs} 
-              title="Preguntas Frecuentes sobre Shopify en Chile"
-              description="Respuestas claras a las dudas más comunes sobre costos, integraciones, migraciones y tiempos de desarrollo."
+              title="Preguntas Frecuentes — Cómo Crear una Tienda Shopify en Chile"
+              description="Respuestas claras sobre costos, integraciones, migraciones, pagos locales y tiempos de desarrollo de tu tienda Shopify."
             />
           </div>
         </section>
@@ -678,8 +741,8 @@ export default function ShopifyEnChilePage() {
             
             <div className="relative z-10">
               <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black mb-6 tracking-tighter uppercase leading-[0.95] font-heading">
-                Cuéntanos qué tienda <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-indigo-200">Shopify necesitas</span>
+                Desarrollamos tu Tienda Shopify <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-200 to-indigo-200">en Chile, lista para vender</span>
               </h2>
               
               <p className="text-purple-100 text-base sm:text-xl mb-10 max-w-2xl mx-auto font-light leading-relaxed">
