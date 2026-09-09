@@ -142,6 +142,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/costos-asociados-a-tienda-shopify-chile',
     '/comparacion-woocommerce-o-shopify-para-chile',
     '/como-instalar-mercado-pago-en-shopify-paso-a-paso-guia-2025',
+    '/como-quitar-decimales-precios-shopify',
     '/como-estructurar-ficha-de-producto-shopify',
     '/comisiones-plataformas-de-pago-para-shopify-chile',
     '/carta-gantt-proyecto-tienda-en-linea',
