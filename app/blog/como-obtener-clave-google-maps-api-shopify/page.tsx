@@ -94,18 +94,18 @@ export default function PostGoogleMapsApiShopify() {
       },
       {
         '@type': 'HowToStep',
-        name: 'Vincular una cuenta de facturación',
-        text: 'Asocia una tarjeta de crédito o débito para activar el crédito mensual gratuito de $200 USD de Google.'
+        name: 'Vincular una cuenta de facturación y fijar alertas',
+        text: 'Asocia una tarjeta de crédito o débito para activar el crédito mensual gratuito de $200 USD de Google y configura una alerta de presupuesto a $0 o $1 USD para total tranquilidad.'
       },
       {
         '@type': 'HowToStep',
-        name: 'Habilitar las 4 APIs de Google Maps',
-        text: 'Activa Maps JavaScript API, Places API, Geocoding API y Distance Matrix API desde la biblioteca.'
+        name: 'Habilitar las APIs requeridas (incluyendo Places API New)',
+        text: 'Activa Maps JavaScript API, Places API (New), Geocoding API y Distance Matrix API desde la biblioteca de Google Cloud.'
       },
       {
         '@type': 'HowToStep',
-        name: 'Generar y restringir la clave de API',
-        text: 'Crea la API Key y establece restricciones por referentes HTTP de tu dominio y por tipo de API para máxima seguridad.'
+        name: 'Generar y aplicar doble capa de restricción a la clave',
+        text: 'Crea la API Key y establece restricciones por referentes HTTP (*tudominio.cl/*, *.myshopify.com/*, admin.shopify.com/*) y restricciones de API para máxima seguridad.'
       },
       {
         '@type': 'HowToStep',
@@ -124,15 +124,15 @@ export default function PostGoogleMapsApiShopify() {
         name: '¿Tiene costo usar Google Maps API en Shopify?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Google otorga mensualmente $200 USD de crédito gratuito a todas las cuentas de Google Cloud. Para la mayoría de las tiendas online, este crédito cubre ampliamente miles de visualizaciones de mapas y búsquedas sin generar cobros reales.'
+          text: 'Google otorga mensualmente $200 USD de crédito gratuito a todas las cuentas de Google Cloud. Para la mayoría de las tiendas online, este crédito cubre ampliamente miles de visualizaciones de mapas y búsquedas sin generar cobros reales. Además, puedes fijar una alerta de presupuesto a $0 o $1 USD para monitoreo.'
         }
       },
       {
         '@type': 'Question',
-        name: '¿Por qué es obligatorio ingresar una tarjeta de crédito en Google Cloud?',
+        name: '¿Por qué habilitar Places API (New) en vez de la versión clásica?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Google Cloud exige una cuenta de facturación válida para verificar la identidad del usuario y prevenir el abuso del servicio, aunque no realizará cobros mientras el consumo esté cubierto por el crédito mensual de $200 USD.'
+          text: 'Places API (New) es la versión moderna y recomendada por Google Maps Platform con field masking y optimización de costos. Si tu tema o app de Shopify utiliza el SDK anterior, puedes habilitar ambas para compatibilidad total.'
         }
       },
       {
@@ -140,7 +140,7 @@ export default function PostGoogleMapsApiShopify() {
         name: '¿Cuáles son las 4 APIs obligatorias para que el mapa funcione con rutas y búsqueda?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Debes habilitar Maps JavaScript API (renderizado visual), Places API (autocompletado de direcciones), Geocoding API (conversión de dirección a coordenadas) y Distance Matrix API (cálculo de distancias y tiempos de viaje).'
+          text: 'Debes habilitar Maps JavaScript API (renderizado visual), Places API (New) (autocompletado de direcciones), Geocoding API (conversión de dirección a coordenadas) y Distance Matrix API (cálculo de distancias y tiempos de viaje).'
         }
       },
       {
@@ -148,7 +148,7 @@ export default function PostGoogleMapsApiShopify() {
         name: '¿Cómo proteger la API Key para que no la usen en otros sitios web?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'En la sección de credenciales de Google Cloud, aplica Restricciones de Aplicación seleccionando Referentes HTTP y agregando tus dominios (ejemplo: https://tudominio.cl/* y https://*.myshopify.com/*).'
+          text: 'Aplica una doble capa de seguridad: 1) Restricciones por Referentes HTTP con los comodines *tudominio.cl/*, *.myshopify.com/* y admin.shopify.com/*; 2) Restricciones de API limitando la clave únicamente a las 4 APIs de Google Maps utilizadas.'
         }
       }
     ]
@@ -379,6 +379,13 @@ export default function PostGoogleMapsApiShopify() {
                     <strong>Garantía de uso:</strong> Google solicita la tarjeta exclusivamente para verificar tu cuenta y activar la infraestructura de APIs. Mientras tu tráfico esté dentro del volumen mensual habitual, el saldo mensual gratuito de <strong>$200 USD</strong> absorberá la totalidad del consumo.
                   </div>
                 </div>
+
+                <div className="bg-purple-50 border border-purple-200 rounded-2xl p-4 text-xs md:text-sm text-purple-900 flex items-start gap-3 mt-3">
+                  <Sparkles className="w-5 h-5 text-brand-purple shrink-0 mt-0.5" />
+                  <div>
+                    <strong>Tip de tranquilidad (Alerta de presupuesto):</strong> En <em>Facturación &gt; Presupuestos y alertas</em>, puedes fijar una alerta de presupuesto a $0 o $1 USD. Google te enviará un correo automático si el consumo mensual llegase a aproximarse al límite del crédito base, garantizando control y cero sorpresas.
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -410,9 +417,9 @@ export default function PostGoogleMapsApiShopify() {
                   <div className="bg-white border border-slate-200 rounded-2xl p-4">
                     <div className="font-bold text-slate-900 text-sm flex items-center gap-2 mb-1">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      Places API
+                      Places API (New)
                     </div>
-                    <p className="text-xs text-slate-500">Permite el autocompletado y búsqueda predictiva de comunas, ciudades y locales.</p>
+                    <p className="text-xs text-slate-500">Versión moderna para autocompletado y búsqueda predictiva con field masking y costos optimizados.</p>
                   </div>
 
                   <div className="bg-white border border-slate-200 rounded-2xl p-4">
@@ -431,6 +438,13 @@ export default function PostGoogleMapsApiShopify() {
                     <p className="text-xs text-slate-500">Calcula distancias reales en kilómetros por calle y tiempos estimados de llegada.</p>
                   </div>
                 </div>
+
+                <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs md:text-sm text-amber-900 flex items-start gap-3">
+                  <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <strong>Nota sobre Places API (New) vs Legacy:</strong> Google Maps Platform destaca actualmente <strong>Places API (New)</strong>. Si tu tema de Shopify o app utiliza una librería o SDK anterior, puedes habilitar ambas (<em>Places API</em> clásica y <em>Places API (New)</em>) para garantizar 100% de compatibilidad.
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -441,7 +455,7 @@ export default function PostGoogleMapsApiShopify() {
                   04
                 </span>
                 <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
-                  Paso 4: Generar y Proteger la API Key
+                  Paso 4: Generar y Proteger la API Key (Doble Capa de Seguridad)
                 </h2>
               </div>
 
@@ -457,40 +471,52 @@ export default function PostGoogleMapsApiShopify() {
                     Se generará un código alfanumérico (ej: <code className="bg-slate-200 text-slate-800 px-2 py-0.5 rounded font-mono text-xs">AIzaSyD...</code>). <strong>Cópialo en un lugar seguro</strong>.
                   </li>
                   <li>
-                    Para evitar que terceros usen tu clave fuera de tu tienda, haz clic en <strong>&quot;Editar clave de API&quot;</strong> (icono de lápiz) y ajusta los siguientes candados de seguridad:
+                    Para evitar que terceros usen tu clave fuera de tu tienda, haz clic en <strong>&quot;Editar clave de API&quot;</strong> (icono de lápiz) y aplica la <strong>doble capa de protección</strong>:
                   </li>
                 </ol>
 
-                <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 mt-2">
-                  <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-                    <Lock className="w-4 h-4 text-brand-purple" />
-                    A. Restricciones de Aplicación (Referentes HTTP)
-                  </div>
-                  <p className="text-xs text-slate-600">
-                    Selecciona <strong>&quot;Referentes HTTP (sitios web)&quot;</strong> y agrega tus dominios con comodines para permitir subpáginas y el editor interno de Shopify:
-                  </p>
-
-                  <div className="space-y-2">
-                    {[
-                      'https://tudominio.cl/*',
-                      'https://www.tudominio.cl/*',
-                      'https://*.myshopify.com/*'
-                    ].map((domain, idx) => (
-                      <div key={idx} className="flex items-center justify-between bg-slate-900 text-slate-100 px-3.5 py-2 rounded-xl font-mono text-xs">
-                        <code>{domain}</code>
-                        <CopySnippetButton textToCopy={domain} />
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="border-t border-slate-200 pt-4">
-                    <div className="flex items-center gap-2 text-slate-900 font-bold text-sm mb-2">
+                <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-5 mt-2">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
                       <Lock className="w-4 h-4 text-brand-purple" />
-                      B. Restricciones de API
+                      1. Restricciones de Aplicación (Referentes HTTP)
                     </div>
                     <p className="text-xs text-slate-600">
-                      Selecciona <strong>&quot;Restringir clave&quot;</strong> y marca únicamente las 4 APIs habilitadas: <em>Maps JavaScript API, Places API, Geocoding API y Distance Matrix API</em>.
+                      Selecciona <strong>&quot;Referentes HTTP (sitios web)&quot;</strong> y agrega los dominios oficiales con la sintaxis de comodines recomendada por Google (permite raíz, subdominios, rutas y el editor administrativo unificado de Shopify):
                     </p>
+
+                    <div className="space-y-2">
+                      {[
+                        '*tudominio.cl/*',
+                        '*.myshopify.com/*',
+                        'admin.shopify.com/*'
+                      ].map((domain, idx) => (
+                        <div key={idx} className="flex items-center justify-between bg-slate-900 text-slate-100 px-3.5 py-2 rounded-xl font-mono text-xs">
+                          <div>
+                            <code>{domain}</code>
+                            <span className="text-[10px] text-slate-400 block font-sans mt-0.5">
+                              {idx === 0 && 'Cubre con/sin www, subdominios y todas las URLs de tu tienda'}
+                              {idx === 1 && 'Cubre la previsualización del subdominio myshopify'}
+                              {idx === 2 && 'Vital para previsualización en vivo en el nuevo editor de Shopify'}
+                            </span>
+                          </div>
+                          <CopySnippetButton textToCopy={domain} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="border-t border-slate-200 pt-5 space-y-3">
+                    <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
+                      <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                      2. Restricciones de API (Segunda Capa de Seguridad)
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      En la pestaña inferior <strong>&quot;Restricciones de API&quot;</strong>, selecciona <strong>&quot;Restringir clave&quot;</strong> y marca <strong>únicamente</strong> las 4 APIs que habilitaste (<em>Maps JavaScript API, Places API (New), Geocoding API y Distance Matrix API</em>).
+                    </p>
+                    <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-[11px] text-emerald-900">
+                      <strong>¿Por qué es indispensable?</strong> Esta restricción asegura que, si la clave llega a ser leída en el código frontend de la tienda, nadie podrá utilizarla para consumir otros servicios de pago de Google Cloud (IA, Vertex AI, Cloud Storage, etc.).
+                    </div>
                   </div>
                 </div>
 
