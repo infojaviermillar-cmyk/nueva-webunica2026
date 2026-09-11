@@ -48,6 +48,26 @@ const FALLBACK_POSTS: BlogPost[] = [
     seo_description: '¿Tienes una tienda Shopify con Dropi en Chile y no vendes? Descubre la estrategia real de marketing, CRO y productos para crear un ecommerce rentable.',
     created_at: '2026-08-11T10:00:00.000Z',
     updated_at: '2026-08-11T10:00:00.000Z'
+  },
+  {
+    id: 'f12e5df9-512d-4ba5-9c63-fb5c615e0140',
+    title: 'Cómo Obtener y Configurar la Clave de Google Maps API para tu Tienda Shopify',
+    slug: 'como-obtener-clave-google-maps-api-shopify',
+    content: '',
+    excerpt: 'Guía paso a paso para crear un proyecto en Google Cloud Console, habilitar Maps JavaScript, Places, Geocoding y Distance Matrix API, proteger tus credenciales e integrarlas en Shopify.',
+    cover_image: null,
+    cover_image_alt: 'Configurar Google Maps API Key en Shopify',
+    category_id: 'a789bcba-60c7-4c36-a852-947239548471',
+    category: {
+      name: 'Shopify Chile',
+      slug: 'shopify-chile'
+    },
+    status: 'published',
+    published_at: '2026-09-11T10:00:00.000Z',
+    seo_title: 'Cómo Obtener y Configurar Google Maps API Key en Shopify | Webunica',
+    seo_description: 'Guía paso a paso para crear, habilitar y configurar la clave de Google Maps API en tu tienda Shopify con autocompletado, rutas y crédito gratuito.',
+    created_at: '2026-09-11T10:00:00.000Z',
+    updated_at: '2026-09-11T10:00:00.000Z'
   }
 ];
 

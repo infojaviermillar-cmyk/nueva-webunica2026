@@ -25,6 +25,7 @@ export default function Page() {
         { title: "Guía: Dropshipping Local con Dropi", href: "/tienda-dropshipping-shopify-y-dropi" },
         { title: "Guía 2026: Cómo Instalar Mercado Pago", href: "/como-instalar-mercado-pago-en-shopify-paso-a-paso-guia-2025" },
         { title: "Cómo Quitar Decimales en Shopify (Formato Chile)", href: "/como-quitar-decimales-precios-shopify", tag: "Tutorial" },
+        { title: "Guía: Obtener y Configurar Google Maps API Key", href: "/blog/como-obtener-clave-google-maps-api-shopify", tag: "Guía API" },
         { title: "Guía Práctica: Estructurar Ficha de Producto en Shopify", href: "/como-estructurar-ficha-de-producto-shopify", tag: "Guía CRO" },
         { title: "Preguntas Frecuentes sobre Shopify", href: "/preguntas-frecuentes-sobre-tiendas-shopify-en-chile" },
         { title: "Guía: Conectar Meta Graph API (Autopublicación)", href: "/recursos/conectar-meta-graph-api-shopify-chile", tag: "Guía" },
