@@ -16,7 +16,11 @@ import {
   HelpCircle,
   Copy,
   Lock,
-  Globe
+  Globe,
+  ClipboardList,
+  CreditCard,
+  UserCheck,
+  Store
 } from 'lucide-react';
 import LeadButton from '@/components/ui/lead-button';
 import WhatsAppButton from '@/components/ui/whatsapp-button';
@@ -73,6 +77,15 @@ export default function PostGoogleMapsApiShopify() {
     '@type': 'HowTo',
     name: 'Cómo obtener y configurar la clave de Google Maps API en Shopify',
     description: 'Tutorial técnico para integrar Google Maps API con autocompletado y cálculo de rutas en tiendas Shopify.',
+    supply: [
+      { '@type': 'HowToSupply', name: 'Cuenta Google corporativa' },
+      { '@type': 'HowToSupply', name: 'Tarjeta de crédito o débito para facturación' },
+      { '@type': 'HowToSupply', name: 'Dominio activo de la tienda Shopify' }
+    ],
+    tool: [
+      { '@type': 'HowToTool', name: 'Google Cloud Console' },
+      { '@type': 'HowToTool', name: 'Panel de Administración de Shopify' }
+    ],
     step: [
       {
         '@type': 'HowToStep',
@@ -250,6 +263,65 @@ export default function PostGoogleMapsApiShopify() {
                 A continuación tienes la guía paso a paso detallada para crear tu proyecto, habilitar los servicios indispensables, proteger tu clave contra uso no autorizado e insertarla en tu plantilla de <Link href="/desarrollo-tiendas-shopify-en-chile" className="text-brand-purple font-semibold underline hover:text-purple-700">Shopify</Link>.
               </p>
             </div>
+
+            {/* Requisitos Previos Section */}
+            <section className="bg-gradient-to-br from-purple-950/20 via-slate-900 to-slate-900 border-2 border-brand-purple/40 rounded-3xl p-6 md:p-8 text-white shadow-xl space-y-6">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-brand-purple flex items-center justify-center text-white shrink-0">
+                  <ClipboardList className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-xl md:text-2xl font-black text-white tracking-tight">
+                    📋 Requisitos previos antes de comenzar
+                  </h2>
+                  <p className="text-xs md:text-sm text-purple-200">
+                    Asegúrate de contar con los siguientes elementos listos antes de iniciar el proceso:
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-2">
+                  <div className="flex items-center gap-2.5 text-purple-300 font-bold text-sm">
+                    <UserCheck className="w-4 h-4 text-emerald-400" />
+                    <span>1. Cuenta Google Corporativa</span>
+                  </div>
+                  <p className="text-xs text-slate-300 font-light leading-relaxed">
+                    Recomendamos usar un correo institucional o de la empresa (ej: <code className="bg-slate-900 px-1.5 py-0.5 rounded text-purple-200 text-[11px]">contacto@tuempresa.cl</code>) en lugar de una cuenta personal, para mantener la titularidad del proyecto centralizada.
+                  </p>
+                </div>
+
+                <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-2">
+                  <div className="flex items-center gap-2.5 text-purple-300 font-bold text-sm">
+                    <CreditCard className="w-4 h-4 text-emerald-400" />
+                    <span>2. Tarjeta de Crédito o Débito Activa</span>
+                  </div>
+                  <p className="text-xs text-slate-300 font-light leading-relaxed">
+                    Requisito obligatorio de Google Cloud para validar la identidad y activar la facturación. Recuerda que con el cupo de <strong>$200 USD/mes gratis</strong> no habrá cobros para volúmenes estándar.
+                  </p>
+                </div>
+
+                <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-2">
+                  <div className="flex items-center gap-2.5 text-purple-300 font-bold text-sm">
+                    <Store className="w-4 h-4 text-emerald-400" />
+                    <span>3. Acceso Administrador a Shopify</span>
+                  </div>
+                  <p className="text-xs text-slate-300 font-light leading-relaxed">
+                    Permisos de administrador en tu tienda Shopify para ingresar a <em>Tienda online &gt; Temas &gt; Personalizar</em> y acceder a las secciones del mapa o localizador.
+                  </p>
+                </div>
+
+                <div className="bg-slate-800/80 border border-slate-700 rounded-2xl p-5 space-y-2">
+                  <div className="flex items-center gap-2.5 text-purple-300 font-bold text-sm">
+                    <Globe className="w-4 h-4 text-emerald-400" />
+                    <span>4. Dominios de la Tienda Identificados</span>
+                  </div>
+                  <p className="text-xs text-slate-300 font-light leading-relaxed">
+                    Tener claras las URLs de tu tienda (<code className="bg-slate-900 px-1.5 py-0.5 rounded text-purple-200 text-[11px]">tudominio.cl</code> y <code className="bg-slate-900 px-1.5 py-0.5 rounded text-purple-200 text-[11px]">*.myshopify.com</code>) para aplicar los candados de seguridad HTTP a la clave.
+                  </p>
+                </div>
+              </div>
+            </section>
 
             {/* Step 1 */}
             <section className="bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8 space-y-4">
